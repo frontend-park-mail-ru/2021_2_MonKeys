@@ -1,0 +1,215 @@
+body {
+  background: linear-gradient(135deg, #e700ff, #00d0ff, #0600ff, #ff00bd, #e700ff);
+  background-size: 1000% 1000%;
+}
+
+@-webkit-keyframes AnimationName {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes AnimationName {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.card {
+  position: absolute;
+  background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.2) 0%, rgba(0, 165, 245, 0) 100%);
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;
+  border-radius: 35px;
+  width: 95%;
+  height: 80%;
+  left: 0;
+  right: 0;
+  top: 5%;
+  margin-left: auto;
+  overflow: hidden;
+  margin-right: auto;
+}
+
+.card2 {
+  position: absolute;
+  background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.2) 0%, rgba(0, 165, 245, 0) 100%);
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;
+  border-radius: 35px;
+  width: 90%;
+  height: 75%;
+  left: 0;
+  right: 0;
+  top: 12%;
+  margin-left: auto;
+  overflow: hidden;
+  margin-right: auto;
+}
+
+.card3 {
+  position: absolute;
+  background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.2) 0%, rgba(0, 165, 245, 0) 100%);
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;
+  border-radius: 35px;
+  width: 85%;
+  height: 70%;
+  left: 0;
+  right: 0;
+  top: 19%;
+  margin-left: auto;
+  overflow: hidden;
+  margin-right: auto;
+}
+
+.tapbar-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: absolute;
+  width: 90%;
+  height: 5%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  bottom: 3%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.name {
+  color: white;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 300%;
+}
+
+.bottom-panel {
+  position: absolute;
+  background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.2) 0%, rgba(0, 165, 245, 0) 100%);
+  width: 95%;
+  height: 20%;
+  bottom: 3%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;
+  border-bottom-left-radius: 35px;
+  border-bottom-right-radius: 35px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.actions-container {
+  width: 50%;
+  height: 10%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  left: 0;
+  right: 0;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-main {
+  border-radius: 35px;
+  width: 95%;
+  height: 95%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 35px;
+}
+
+.menu-icon {
+  border: 0px solid black;
+  background-color: transparent;
+}
+
+@-webkit-keyframes spin2 {
+  0% {
+  }
+  100% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+  }
+}
+
+@keyframes spin2 {
+  0% {
+  }
+  100% {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+  }
+}
+
+@-webkit-keyframes liked {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.01;
+  }
+}
+
+@keyframes liked {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.01;
+  }
+}
+/*# sourceMappingURL=main.css.map */
