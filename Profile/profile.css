@@ -1,0 +1,92 @@
+.lol{
+    background: linear-gradient(166.25deg, #2C2836 -7.7%, #23288F 106.2%);
+}
+.mainRec{
+    position: absolute;
+    width: 355px;
+    height: 651px;
+    left: 10px;
+    top: 38px;
+    background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.2) 0%, rgba(0, 165, 245, 0) 100%);
+    backdrop-filter: blur(20px);
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
+    border-radius: 35px;
+}
+.mainRec2{
+    position: absolute;
+    width: 321px;
+    height: 645px;
+    left: 24px;
+    top: 58px;
+    background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.2) 0%, rgba(0, 165, 245, 0) 100%);
+    backdrop-filter: blur(20px);
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
+    border-radius: 35px;
+}
+.mainRec3{
+    position: absolute;
+    width: 291px;
+    height: 635px;
+    left: 36px;
+    top: 78px;
+    background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.2) 0%, rgba(0, 165, 245, 0) 100%);
+    backdrop-filter: blur(20px);
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
+    border-radius: 35px;
+}
+.NameAge{
+    position: fixed;
+    left: 6%;
+    top: 47%;
+
+    width: 87%;
+    font-family: Futura Now Headline;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    letter-spacing: 0.05em;
+
+    color: #FFFFFF;
+
+    border-bottom: 4px solid rgba(255, 255, 255, 0.5);
+}
+.forEdit{
+    position: fixed;
+    bottom: 10px;
+    left: 43%;
+}
+.forDrop{
+    position: fixed;
+    bottom: 10px;
+    left: 7%;
+}
+.forLike{
+    position: fixed;
+    bottom: 10px;
+    left: 30%;
+}
+.forMessage{
+    position: fixed;
+    bottom: 10px;
+    left: 53%;
+}
+.forProfile{
+    position: fixed;
+    bottom: 10px;
+    left: 76%;
+}
+.profileImg{
+    position: fixed;
+    width: 88%;
+    left: 6%;
+    top: 1%;
+
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 40px;
+}
