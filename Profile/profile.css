@@ -46,7 +46,6 @@
     top: 47%;
 
     width: 87%;
-    font-family: Futura Now Headline;
     font-style: normal;
     font-weight: bold;
     font-size: 36px;
@@ -60,6 +59,7 @@
     position: fixed;
     bottom: 10px;
     left: 43%;
+    background: rgba(0, 0, 0, 0);
 }
 .forDrop{
     position: fixed;
