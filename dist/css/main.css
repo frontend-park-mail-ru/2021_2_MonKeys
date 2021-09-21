@@ -1,5 +1,5 @@
 body {
-  background: linear-gradient(120deg, #e700ff, #0600ff);
+  background: linear-gradient(100deg, #e700ff, #0600ff);
 }
 
 @-webkit-keyframes AnimationName {
@@ -37,11 +37,10 @@ body {
   border-radius: 35px;
   width: 95%;
   height: 80%;
+  top: 5%;
   left: 0;
   right: 0;
-  top: 5%;
   margin-left: auto;
-  overflow: hidden;
   margin-right: auto;
 }
 
@@ -56,11 +55,10 @@ body {
   border-radius: 35px;
   width: 90%;
   height: 75%;
+  top: 12%;
   left: 0;
   right: 0;
-  top: 12%;
   margin-left: auto;
-  overflow: hidden;
   margin-right: auto;
 }
 
@@ -75,11 +73,10 @@ body {
   border-radius: 35px;
   width: 85%;
   height: 70%;
+  top: 19%;
   left: 0;
   right: 0;
-  top: 19%;
   margin-left: auto;
-  overflow: hidden;
   margin-right: auto;
 }
 
@@ -94,21 +91,37 @@ body {
   position: absolute;
   width: 90%;
   height: 5%;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
   bottom: 3%;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .name {
   color: white;
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 300%;
+  font-size: 200%;
+  overflow: hidden;
+  font-weight: 500;
+}
+
+.name-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 5%;
+}
+
+.age {
+  color: white;
+  margin-left: 2%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 200%;
+  overflow: hidden;
 }
 
 .bottom-panel {
@@ -121,8 +134,8 @@ body {
   right: 0;
   margin-left: auto;
   margin-right: auto;
-  -webkit-backdrop-filter: blur(5px);
-          backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px) brightness(80%);
+          backdrop-filter: blur(5px) brightness(80%);
   border-style: solid;
   border-color: white;
   border-width: 1px;
@@ -148,7 +161,7 @@ body {
   display: flex;
   left: 0;
   right: 0;
-  margin-top: 0px;
+  margin-top: 3%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -159,8 +172,10 @@ body {
   height: 95%;
   left: 0;
   right: 0;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 10px;
+  overflow: hidden;
 }
 
 .profile-image {
@@ -209,6 +224,56 @@ body {
   }
   100% {
     opacity: 0.01;
+  }
+}
+
+@-webkit-keyframes appearance {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes appearance {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes shrinkSecondary {
+  100% {
+    width: 90%;
+    height: 75%;
+    top: 12%;
+  }
+}
+
+@keyframes shrinkSecondary {
+  100% {
+    width: 90%;
+    height: 75%;
+    top: 12%;
+  }
+}
+
+@-webkit-keyframes shrinkThird {
+  100% {
+    width: 85%;
+    height: 70%;
+    top: 19%;
+  }
+}
+
+@keyframes shrinkThird {
+  100% {
+    width: 85%;
+    height: 70%;
+    top: 19%;
   }
 }
 /*# sourceMappingURL=main.css.map */
