@@ -4,7 +4,6 @@ document.addEventListener('touchstart', handleTouchStart, false);
 document.addEventListener('touchmove', handleTouchMove, false);
 document.addEventListener('touchend', handleTouchEnd, false);
 
-let body = document.querySelector('body');
 let counter = 0;
 let sample = [{
         'firstName': 'Elon',
@@ -38,67 +37,93 @@ let sample = [{
 
 
 
+let body = document.querySelector('body');
+
+let createActionElement = (icon) => {
+
+    let actionElement = document.createElement('button');
+    actionElement.className = 'menu-icon';
+
+    let Icon = document.createElement('img');
+    Icon.src = icon;
+    Icon.width = 40;
+    Icon.height = 40;
+
+    actionElement.appendChild(Icon);
+
+    return actionElement;
+}
+
+let createElementWithClass = (tag, className) => {
+    const element = document.createElement(tag);
+    element.className = className;
+    return element
+}
+
+let addMenu = () => {
+    let menu = createElementWithClass('div', 'tapbar-container');
+    menu.appendChild(createActionElement('dist/icons/tapbar_feed_white_selected.svg'));
+    menu.appendChild(createActionElement('dist/icons/tapbar_likes_white_deselected.svg'));
+    menu.appendChild(createActionElement('dist/icons/tapbar_chat_white_deselected.svg'));
+    menu.appendChild(createActionElement('dist/icons/tapbar_user_white_deselected.svg'));
+    body.appendChild(menu);
+}
+
+addMenu();
+
+
 function nextCharacter() {
     const currentobj = sample[counter];
     counter++;
-    let elonInside = `
-    <div class="class card-main">
-    <img src="${currentobj.photoSrc}" class="profile-image">
-            <div class="bottom-panel">
-                <div class="name-container">
-                    <div class="name">
-                        ${currentobj.firstName}
-                        </div>    
-                    <div class="age"> ${currentobj.age} </div>
-                </div>
-                <div class="class actions-container">
-                    <button class="menu-icon">
-                        <img src="dist/icons/button_dislike_white.svg" width="40px" height="40px" alt="drop">           
-                    </button>
-                    <button class="menu-icon">
-                        <img src="dist/icons/button_expand_white.svg" width="40px" height="40px" alt="drop">           
-                    </button>
-                    <button class="menu-icon">
-                        <img src="dist/icons/tapbar_likes_white_selected.svg" width="40px" height="40px" alt="drop">           
-                    </button>
-                </div>
-            </div>
-        </div>
-    `;
-    // body.style.background = `linear-gradient(120deg, ${currentobj.colorFrom}, ${currentobj.colorTo})`;
-    let card1new = document.getElementsByClassName("card2")[0]
-    card1new.className = "card"
-    card1new.innerHTML = elonInside;
-    let card3new = document.getElementsByClassName("card3")[1]
-    card3new.className = "card2"
-    let cardOld = document.getElementsByClassName("card")[1];
-    body.removeChild(cardOld)
-    let nextCard = document.createElement('div');
-    nextCard.className = 'card3'
-    let temp = body.innerHTML
-    let newBody = '<div class="card3"></div>' + temp;
-    body.innerHTML = newBody;
-    currentCard = document.getElementsByClassName("card")[0]
+    let card = createElementWithClass('div', 'card-main');
+    let image = document.createElement('img');
+    image.src = currentobj.photoSrc;
+    image.className = 'profile-image';
+    card.appendChild(image);
+    let bottomPanel = createElementWithClass('div', 'bottom-panel');
+    let nameContainer = createElementWithClass('div', 'name-container');
+    let name = createElementWithClass('div', 'name')
+    name.innerText = currentobj.firstName;
+    let age = createElementWithClass('div', 'age');
+    age.innerText = currentobj.age;
+    nameContainer.appendChild(name)
+    nameContainer.appendChild(age)
+    bottomPanel.appendChild(nameContainer);
+    let actionsContainer = createElementWithClass('div', 'actions-container');
+    actionsContainer.appendChild(createActionElement('dist/icons/button_dislike_white.svg'));
+    actionsContainer.appendChild(createActionElement('dist/icons/button_expand_white.svg'));
+    actionsContainer.appendChild(createActionElement('dist/icons/tapbar_likes_white_selected.svg'));
+    bottomPanel.appendChild(actionsContainer)
+    card.appendChild(bottomPanel)
+    body.appendChild(card)
 
+    let mainCard = document.getElementsByClassName("card2")[0]
+    mainCard.className = "card"
+    mainCard.appendChild(card)
+
+    document.getElementsByClassName("card3")[1].className = "card2";
+    body.removeChild(document.getElementsByClassName("card")[1])
+
+    let newBody = '<div class="card3"></div>' + body.innerHTML;
+    body.innerHTML = newBody;
+
+    currentCard = document.getElementsByClassName("card")[0]
     previousCard = document.getElementsByClassName("card2")[0]
     previousCard2 = document.getElementsByClassName("card3")[1]
-    currentCard.style.animation = "appearance 0.3s linear 1";
-    x1 = null;
-    y1 = null;
+    document.getElementsByClassName('card-main')[0].style.animation = "appearance 0.3s linear 1";
 
-    x = null;
-    y = null;
 }
 
-let nextCard = document.createElement('div');
-nextCard.className = 'card3'
+
 let temp = body.innerHTML
 let newBody = '<div class="card3"></div>' + temp;
 body.innerHTML = newBody;
-let currentCard = document.getElementsByClassName("card")[0]
+let currentCard;
+let previousCard;
+let previousCard2;
 
-let previousCard = document.getElementsByClassName("card2")[0]
-let previousCard2 = document.getElementsByClassName("card3")[1]
+
+nextCharacter();
 
 let x1 = null;
 let y1 = null;
@@ -117,6 +142,7 @@ function handleTouchStart(event) {
     y1 = touches[0].clientY;
 
 }
+
 
 function moveRight(element, diffX, diffY) {
     var elStyle = window.getComputedStyle(element);
@@ -150,7 +176,7 @@ function moveRight(element, diffX, diffY) {
         previousCard2.style.width = `${widthScale2}%`;
     }
 
-    console.log(topScale, heightScale, widthScale)
+
 
     element.style.transform += `rotateZ(${(diffX/10)}deg)`;
 }
@@ -167,6 +193,8 @@ function handleTouchMove(event) {
     moveRight(currentCard, x - x1, y - y1);
 
 }
+
+
 
 function returnToStart() {
     currentCard.style.transform = "translate(0px, 0px)";
