@@ -3,6 +3,16 @@ body {
     background: linear-gradient(100deg, #e700ff, #0600ff);
 }
 
+@media (min-width: 500px) {
+    body {
+        max-width: 500px;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
 @keyframes AnimationName {
     0% {
         background-position: 0% 50%
@@ -47,6 +57,8 @@ body {
 .card3 {
     @include card-default(85%, 70%, 19%)
 }
+
+
 
 .tapbar-container {
     display: flex;
@@ -133,6 +145,7 @@ body {
         transform: translate(0px, 0px);
     }
 }
+
 
 @keyframes liked {
     0% {

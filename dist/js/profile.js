@@ -83,7 +83,7 @@ function fillCardMain() {
       }
 }
 
-function profileRender() {
+export default function profileRender() {
     const divMain = document.getElementById('main');
 
     const divCrad = document.createElement('div');
