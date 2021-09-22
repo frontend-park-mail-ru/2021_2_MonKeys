@@ -1,11 +1,5 @@
 'use strict';
 
-// document.addEventListener('touchstart', handleTouchStart, false);
-// document.addEventListener('touchmove', handleTouchMove, false);
-// document.addEventListener('touchend', handleTouchEnd, false);
-
-// let body = document.querySelector('body');
-// let counter = 0;
 let sample = [{
         'name': 'Elon',
         'age': '25',
