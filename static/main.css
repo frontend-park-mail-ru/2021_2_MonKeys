@@ -1,0 +1,14 @@
+input {
+    background: beige;
+    border-radius: 7px;
+    height: 32px;
+    padding: 0 7px;
+}
+.go {
+    position: relative;
+    cursor: pointer;
+    /* width: 177px; */
+    /* height: 160px; */
+    /* left: 100px; */
+    /* transition: left 1.5s cubic-bezier(0.25, 0.1, 0.25, 1.0); */
+  }
