@@ -1,47 +1,6 @@
 'use strict';
 
-let sample = [{
-        'name': 'Elon',
-        'age': '25',
-        'photoSrc': 'dist\\img\\Elon_Musk_2015.jpg',
-        'text': `Инст: @elonmask<br>
-        Всем привет меня зовут Илон Маск. Люблю играть в
-        геншин импакт, обажаю гаремники. 
-        Просто не могу жить без иссекаев,
-        мое любимое аниме это конечно же Ван Пис ахахах)
-        Я посмотрел все 1000+ серий
-        так же у меня есть краш, поэтому ищу ТОЛЬКО ДРУГА
-        в общем буду твоим сенпаем, писать в инсту, 
-        а то drip лагает ахахахах)`,
-        'tags' : [
-            'anime',
-            'IT',
-            'music',
-            'soccer',
-        ]
-    },
-    {
-        'name': 'Michail',
-        'age': '20',
-        'photoSrc': 'dist\\img\\Elon_Musk_2015.jpg',
-        'text': `
-        Инст: @marvin<br>
-        Тг: @Marvin<br>
-        Првиет я Миша мне 2 года
-        люблю сосать члены, господи как же я люблю хуи
-        по жизни пассив конченный
-        обоссанцец. Обожаю играть в геншин
-        `,
-        'tags' : [
-            'banana',
-            'fullstack',
-            'gay',
-            'anal',
-        ]
-    },
-]
-
-function fillCardMain() {
+function fillUserProfile() {
 
     const cardMain = document.getElementById('cardMainID')
 
@@ -83,7 +42,7 @@ function fillCardMain() {
       }
 }
 
-export default function profileRender() {
+function userProfileRender() {
     const divMain = document.getElementById('main');
 
     const divCrad = document.createElement('div');
@@ -96,11 +55,10 @@ export default function profileRender() {
     divTapBar.className = 'tapbar-container';
     divMain.appendChild(divTapBar);
 
-    fillCard();
-    fillTapBar();
+    fillUser();
 }
 
-function fillCard() {
+function fillUser() {
     const divCrad = document.getElementById('cardID')
 
     const divCardMain = document.createElement('div');
@@ -108,7 +66,7 @@ function fillCard() {
     divCardMain.className = 'card-main';
     divCrad.appendChild(divCardMain);
 
-    fillCardMain();
+    fillUserProfile();
 
     const divEdit = document.createElement('div');
     divEdit.id = 'editID';
@@ -132,48 +90,5 @@ function fillEdit() {
     buttonEdit.appendChild(imgEdit);
 }
 
-function fillTapBar() {
-    const divTapBar = document.getElementById('tapbarID');
 
-    const buttonDropDesel = document.createElement('button');
-    buttonDropDesel .className = 'menu-icon';
-    divTapBar.appendChild(buttonDropDesel)
-    const imgDropDesel = document.createElement('img');
-    imgDropDesel.src = 'dist/icons/tapbar_feed_white_deselected.svg';
-    imgDropDesel.style.width = '50px';
-    imgDropDesel.style.height = '50px';
-    imgDropDesel.alt = 'drop';
-    buttonDropDesel.appendChild(imgDropDesel);
-
-    const buttonLikeDesel = document.createElement('button');
-    buttonLikeDesel .className = 'menu-icon';
-    divTapBar.appendChild(buttonLikeDesel)
-    const imgLikeDesel = document.createElement('img');
-    imgLikeDesel.src = 'dist/icons/tapbar_likes_white_deselected.svg';
-    imgLikeDesel.style.width = '50px';
-    imgLikeDesel.style.height = '50px';
-    imgLikeDesel.alt = 'like';
-    buttonLikeDesel.appendChild(imgLikeDesel);
-
-    const buttonMessageDesel = document.createElement('button');
-    buttonMessageDesel .className = 'menu-icon';
-    divTapBar.appendChild(buttonMessageDesel)
-    const imgMessageDesel = document.createElement('img');
-    imgMessageDesel.src = 'dist/icons/tapbar_chat_white_deselected.svg';
-    imgMessageDesel.style.width = '50px';
-    imgMessageDesel.style.height = '50px';
-    imgMessageDesel.alt = 'drop';
-    buttonMessageDesel.appendChild(imgMessageDesel);
-
-    const buttonProfileSelec = document.createElement('button');
-    buttonProfileSelec .className = 'menu-icon';
-    divTapBar.appendChild(buttonProfileSelec)
-    const imgProfileSelec = document.createElement('img');
-    imgProfileSelec.src = 'dist/icons/tapbar_user_white_selected.svg';
-    imgProfileSelec.style.width = '50px';
-    imgProfileSelec.style.height = '50px';
-    imgProfileSelec.alt = 'drop';
-    buttonProfileSelec.appendChild(imgProfileSelec); 
-}
-
-profileRender();
+userProfileRender();

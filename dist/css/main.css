@@ -51,6 +51,14 @@ body {
   }
 }
 
+.forEdit {
+    position: fixed;
+    width: 90%;
+    height: 5%;
+    left: 41%;
+    bottom: 2%;
+  }
+
 @keyframes AnimationName {
   0% {
     background-position: 0% 50%;
