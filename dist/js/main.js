@@ -1,35 +1,101 @@
 'use strict';
 
 
+let root = document.getElementById('root');
+
+
+
+
+const configApp = {
+    'menu-feed': {
+        link: '/feed',
+        name: 'feed',
+        open: renderFeed,
+    },
+    'menu-profile': {
+        link: '/profile',
+        name: 'profile',
+        open: userProfileRender,
+    },
+    'expand-card': {
+        link: '/feed',
+        name: 'feed',
+        open: profileRender,
+    },
+    'shrink-card': {
+        link: '/feed',
+        name: 'feed',
+        open: renderFeed,
+    },
+    'menu-likes': {
+        link: '/likes',
+        name: 'likes',
+        open: notDoneYet,
+    },
+    'menu-chat': {
+        link: '/likes',
+        name: 'chat',
+        open: notDoneYet,
+    },
+
+}
+
+
+function clickButtons(event) {
+    const { target } = event;
+    if (configApp[target.className]) {
+        clearRoot();
+        configApp[target.className].open();
+        addMenu(configApp[target.className].name);
+    }
+}
+
+function notDoneYet() {
+    root.innerHTML = 'Not done Yet';
+}
+
+
+
+
+let currentCard;
+let previousCard;
+let previousCard2;
+
+
+
+// START 
+renderFeed();
+
+
 function fillCardMain() {
 
     const cardMain = document.getElementById('cardMainID')
 
     const lol = sample[counter];
-    
+
     const img = document.createElement('img');
     img.src = `${lol.photoSrc}`;
     img.className = 'card-el profile-image-expand';
     cardMain.appendChild(img);
-    
+
     const divName = document.createElement('div');
     divName.className = 'name';
     divName.textContent = `${lol.firstName}, ${lol.age}`;
     cardMain.appendChild(divName);
-    
+
     const divBord = document.createElement('div');
     divBord.className = 'card-el bord';
     cardMain.appendChild(divBord);
-    
+
     const divDesc = document.createElement('div');
     divDesc.className = 'card-el desc';
     divDesc.innerHTML = `${lol.text}`;
     cardMain.appendChild(divDesc);
-    
+
     const divBord2 = document.createElement('div');
     divBord2.className = 'card-el bord';
     cardMain.appendChild(divBord2);
-    
+
     const divTags = document.createElement('div');
     divTags.id = 'tagsID'
     divTags.className = 'card-el tags-container';
@@ -40,24 +106,23 @@ function fillCardMain() {
         buttonTag.className = 'tag';
         buttonTag.innerHTML = `${lol.tags[tag]}`;
         divTags.appendChild(buttonTag)
-      }
+    }
 }
 
 function profileRender() {
-    const divMain = document.getElementById('main');
 
     const divCrad = document.createElement('div');
     divCrad.id = 'cardID';
     divCrad.className = 'card-expand';
-    divMain.appendChild(divCrad);
+    root.appendChild(divCrad);
 
     const divTapBar = document.createElement('div');
     divTapBar.id = 'tapbarID';
     divTapBar.className = 'tapbar-container';
-    divMain.appendChild(divTapBar);
+    root.appendChild(divTapBar);
 
     fillCard();
-    
+
 }
 
 
@@ -65,31 +130,31 @@ function fillUserProfile() {
 
     const cardMain = document.getElementById('cardMainID')
 
-    const lol = sample[0];
-    
+    const lol = user;
+
     const img = document.createElement('img');
     img.src = `${lol.photoSrc}`;
     img.className = 'card-el profile-image-expand';
     cardMain.appendChild(img);
-    
+
     const divName = document.createElement('div');
     divName.className = 'name';
-    divName.textContent = `${lol.FirstName}, ${lol.age}`;
+    divName.textContent = `${lol.firstName}, ${lol.age}`;
     cardMain.appendChild(divName);
-    
+
     const divBord = document.createElement('div');
     divBord.className = 'card-el bord';
     cardMain.appendChild(divBord);
-    
+
     const divDesc = document.createElement('div');
     divDesc.className = 'card-el desc';
     divDesc.innerHTML = `${lol.text}`;
     cardMain.appendChild(divDesc);
-    
+
     const divBord2 = document.createElement('div');
     divBord2.className = 'card-el bord';
     cardMain.appendChild(divBord2);
-    
+
     const divTags = document.createElement('div');
     divTags.id = 'tagsID'
     divTags.className = 'card-el tags-container';
@@ -100,21 +165,20 @@ function fillUserProfile() {
         buttonTag.className = 'tag';
         buttonTag.innerHTML = `${lol.tags[tag]}`;
         divTags.appendChild(buttonTag)
-      }
+    }
 }
 
 function userProfileRender() {
-    const divMain = document.getElementById('main');
 
     const divCrad = document.createElement('div');
     divCrad.id = 'cardID';
     divCrad.className = 'card-expand';
-    divMain.appendChild(divCrad);
+    root.appendChild(divCrad);
 
     const divTapBar = document.createElement('div');
     divTapBar.id = 'tapbarID';
     divTapBar.className = 'tapbar-container';
-    divMain.appendChild(divTapBar);
+    root.appendChild(divTapBar);
 
     fillUser();
 }
@@ -190,130 +254,14 @@ function fillshrink() {
 
 
 
-function clickButtons(event) {
-    const {target} = event;
-    
-    if(target.className === 'expand-card'){
-       clearFeed();
-       profileRender();
-       addMenu('feed');
-    }
-    if(target.className === 'menu-profile'){
-        
-        clearFeed();
-        userProfileRender();
-        addMenu('profile');
-    }
-    if(target.className === 'menu-feed'){
-        clearFeed();
-        renderFeed();
-        addMenu('feed');
-    }
-    if (target.alt === 'shrink')
-    {
-       
-        clearFeed();
-         renderFeed();
-         addMenu('feed');
-    }
-
-}
-
-
-let expandHandler;
-
-let counter = 0;
-let sample = [{
-        'firstName': 'Elon',
-        'age': "25",
-        'photoSrc': "dist/img/Elon_Musk_2015.jpg",
-        'colorFrom': 'grey',
-        'colorTo': 'black',
-        'text': `
-        Инст: @marvin<br>
-        Тг: @Marvin<br>
-        Првиет я Миша мне 2 года
-        люблю сосать члены, господи как же я люблю хуи
-        по жизни пассив конченный
-        обоссанцец. Обожаю играть в геншин
-        `,
-        'tags' : [
-            'banana',
-            'fullstack',
-            'gay',
-            'anal',
-        ]
-    },
-    {
-        'firstName': 'Ilyagu',
-        'age': "20",
-        'photoSrc': "dist/img/kUoqFCTbj0Y.jpg",
-        'colorFrom': 'white',
-        'colorTo': 'red',
-        'text': `
-        Инст: @marvin<br>
-        Тг: @Marvin<br>
-        Првиет я Миша мне 2 года
-        люблю сосать члены, господи как же я люблю хуи
-        по жизни пассив конченный
-        обоссанцец. Обожаю играть в геншин
-        `,
-        'tags' : [
-            'banana',
-            'fullstack',
-            'gay',
-            'anal',
-        ]
-    },
-    {
-        'firstName': 'Ilyagu2',
-        'age': "21",
-        'photoSrc': "dist/img/aj1-V9h9GGM.jpg",
-        'colorFrom': 'pink',
-        'colorTo': 'red',
-        'text': `
-        Инст: @marvin<br>
-        Тг: @Marvin<br>
-        Првиет я Миша мне 2 года
-        люблю сосать члены, господи как же я люблю хуи
-        по жизни пассив конченный
-        обоссанцец. Обожаю играть в геншин
-        `,
-        'tags' : [
-            'banana',
-            'fullstack',
-            'gay',
-            'anal',
-        ]
-    },
-    {
-        'firstName': 'Ilyagu3',
-        'age': "22",
-        'photoSrc': "dist/img/kUoqFCTbj0Y.jpg",
-        'colorFrom': 'white',
-        'colorTo': 'red',
-        'text': `
-        Инст: @marvin<br>
-        Тг: @Marvin<br>
-        Првиет я Миша мне 2 года
-        люблю сосать члены, господи как же я люблю хуи
-        по жизни пассив конченный
-        обоссанцец. Обожаю играть в геншин
-        `,
-        'tags' : [
-            'banana',
-            'fullstack',
-            'gay',
-            'anal',
-        ]
-    }
-]
 
 
 
-let body = document.querySelector('body');
 
-let createActionElement = (icon, action) => {
+
+
+
+function createActionElement(icon, action) {
 
     let actionElement = document.createElement('button');
     actionElement.className = 'menu-icon';
@@ -328,63 +276,63 @@ let createActionElement = (icon, action) => {
     return actionElement;
 }
 
-let createElementWithClass = (tag, className) => {
+function createElementWithClass(tag, className) {
     const element = document.createElement(tag);
     element.className = className;
     return element
 }
 
-let addMenu = (activeItem) => {
+function addMenu(activeItem) {
     let menu = createElementWithClass('div', 'tapbar-container');
-    if(activeItem==='feed') {
-        menu.appendChild(createActionElement('dist/icons/tapbar_feed_white_selected.svg','menu-feed'));
+    if (activeItem === 'feed') {
+        menu.appendChild(createActionElement('dist/icons/tapbar_feed_white_selected.svg', 'menu-feed'));
     } else {
-        menu.appendChild(createActionElement('dist/icons/tapbar_feed_white_deselected.svg','menu-feed'));
-    } 
-    if(activeItem==='likes') {
-        menu.appendChild(createActionElement('dist/icons/tapbar_likes_white_selected.svg','menu-likes'));
-    }else {
-        menu.appendChild(createActionElement('dist/icons/tapbar_likes_white_deselected.svg','menu-likes'));
+        menu.appendChild(createActionElement('dist/icons/tapbar_feed_white_deselected.svg', 'menu-feed'));
     }
-    if(activeItem==='chat') {
-        menu.appendChild(createActionElement('dist/icons/tapbar_chat_white_selected.svg','menu-chat'));
-    }else {
-        menu.appendChild(createActionElement('dist/icons/tapbar_chat_white_deselected.svg','menu-chat'));
-    }
-    if(activeItem==='profile') {
-        menu.appendChild(createActionElement('dist/icons/tapbar_user_white_selected.svg','menu-profile'));
+    if (activeItem === 'likes') {
+        menu.appendChild(createActionElement('dist/icons/tapbar_likes_white_selected.svg', 'menu-likes'));
     } else {
-        menu.appendChild(createActionElement('dist/icons/tapbar_user_white_deselected.svg','menu-profile'));
+        menu.appendChild(createActionElement('dist/icons/tapbar_likes_white_deselected.svg', 'menu-likes'));
     }
-    
-    body.appendChild(menu);
+    if (activeItem === 'chat') {
+        menu.appendChild(createActionElement('dist/icons/tapbar_chat_white_selected.svg', 'menu-chat'));
+    } else {
+        menu.appendChild(createActionElement('dist/icons/tapbar_chat_white_deselected.svg', 'menu-chat'));
+    }
+    if (activeItem === 'profile') {
+        menu.appendChild(createActionElement('dist/icons/tapbar_user_white_selected.svg', 'menu-profile'));
+    } else {
+        menu.appendChild(createActionElement('dist/icons/tapbar_user_white_deselected.svg', 'menu-profile'));
+    }
+
+    root.appendChild(menu);
 }
 
 
 
 
-function clearFeed() {
-    document.getElementById('main').innerHTML='';
-    document.removeEventListener('touchstart',handleTouchStart);
-    document.removeEventListener('touchmove',handleTouchMove);
-    document.removeEventListener('touchend',handleTouchEnd);
-   
+function clearRoot() {
+    root.innerHTML = '';
+    document.removeEventListener('touchstart', handleTouchStart);
+    document.removeEventListener('touchmove', handleTouchMove);
+    document.removeEventListener('touchend', handleTouchEnd);
 }
 
 
-document.addEventListener('click', clickButtons,false);
+document.addEventListener('click', clickButtons, false);
 document.addEventListener('touchstart', handleTouchStart, false);
 document.addEventListener('touchmove', handleTouchMove, false);
 document.addEventListener('touchend', handleTouchEnd, false);
 addMenu('feed');
+
 function renderFeed() {
-    
-    document.addEventListener('click', clickButtons,false);
+
+    document.addEventListener('click', clickButtons, false);
     document.addEventListener('touchstart', handleTouchStart, false);
     document.addEventListener('touchmove', handleTouchMove, false);
     document.addEventListener('touchend', handleTouchEnd, false);
     const currentobj = sample[counter];
-   
+
     let card = createElementWithClass('div', 'card-main');
     let image = document.createElement('img');
     image.src = currentobj.photoSrc;
@@ -400,37 +348,37 @@ function renderFeed() {
     nameContainer.appendChild(age)
     bottomPanel.appendChild(nameContainer);
     let actionsContainer = createElementWithClass('div', 'actions-container');
-    
-    
-    actionsContainer.appendChild(createActionElement('dist/icons/button_dislike_white.svg','dislike-card'));
 
-    actionsContainer.appendChild(createActionElement('dist/icons/button_expand_white.svg','expand-card'));
 
-    actionsContainer.appendChild(createActionElement('dist/icons/tapbar_likes_white_selected.svg','like-card'));
+    actionsContainer.appendChild(createActionElement('dist/icons/button_dislike_white.svg', 'dislike-card'));
+
+    actionsContainer.appendChild(createActionElement('dist/icons/button_expand_white.svg', 'expand-card'));
+
+    actionsContainer.appendChild(createActionElement('dist/icons/tapbar_likes_white_selected.svg', 'like-card'));
 
 
     bottomPanel.appendChild(actionsContainer)
     card.appendChild(bottomPanel)
-  
-    
 
-    body.appendChild(createElementWithClass('div', 'card3'));
-    body.appendChild(createElementWithClass('div', 'card3'));
-    body.appendChild(createElementWithClass('div', 'card2'));
+
+
+    root.appendChild(createElementWithClass('div', 'card3'));
+    root.appendChild(createElementWithClass('div', 'card3'));
+    root.appendChild(createElementWithClass('div', 'card2'));
     let cardNew = createElementWithClass('div', 'card');
     cardNew.appendChild(card);
-    body.appendChild(cardNew);
+    root.appendChild(cardNew);
 
     currentCard = document.getElementsByClassName("card")[0]
     previousCard = document.getElementsByClassName("card2")[0]
     previousCard2 = document.getElementsByClassName("card3")[1]
     let cardMain = document.getElementsByClassName('card-main')[0]
-  
+
 }
 
 function nextCharacter() {
     const currentobj = sample[counter];
-   
+
     let card = createElementWithClass('div', 'card-main');
     let image = document.createElement('img');
     image.src = currentobj.photoSrc;
@@ -446,21 +394,21 @@ function nextCharacter() {
     nameContainer.appendChild(age)
     bottomPanel.appendChild(nameContainer);
     let actionsContainer = createElementWithClass('div', 'actions-container');
-    
-    
-    actionsContainer.appendChild(createActionElement('dist/icons/button_dislike_white.svg','dislike-card'));
 
-    actionsContainer.appendChild(createActionElement('dist/icons/button_expand_white.svg','expand-card'));
 
-    actionsContainer.appendChild(createActionElement('dist/icons/tapbar_likes_white_selected.svg','like-card'));
+    actionsContainer.appendChild(createActionElement('dist/icons/button_dislike_white.svg', 'dislike-card'));
+
+    actionsContainer.appendChild(createActionElement('dist/icons/button_expand_white.svg', 'expand-card'));
+
+    actionsContainer.appendChild(createActionElement('dist/icons/tapbar_likes_white_selected.svg', 'like-card'));
 
 
     bottomPanel.appendChild(actionsContainer)
     card.appendChild(bottomPanel)
-    body.appendChild(card)
+    root.appendChild(card)
 
     let mainCard = document.getElementsByClassName("card2")[0]
-    if(mainCard){
+    if (mainCard) {
         mainCard.className = "card"
         mainCard.appendChild(card)
     } else {
@@ -470,35 +418,29 @@ function nextCharacter() {
     }
 
     let card3old = document.getElementsByClassName("card3")[1]
-    if(card3old) {
+    if (card3old) {
         card3old.className = "card2";
     }
     let card1 = document.getElementsByClassName("card")[0]
-    if(card1) {
-        body.removeChild(document.getElementsByClassName("card")[1])
+    if (card1) {
+        root.removeChild(document.getElementsByClassName("card")[1])
     }
-    
 
-    let newBody = '<div class="card3"></div>' + body.innerHTML;
-    body.innerHTML = newBody;
+
+    let newroot = '<div class="card3"></div>' + root.innerHTML;
+    root.innerHTML = newroot;
 
     currentCard = document.getElementsByClassName("card")[0]
     previousCard = document.getElementsByClassName("card2")[0]
     previousCard2 = document.getElementsByClassName("card3")[1]
     let cardMain = document.getElementsByClassName('card-main')[0]
-    if(cardMain) {
+    if (cardMain) {
         cardMain.style.animation = "appearance 0.3s linear 1";
     }
 }
 
 
 
-let temp = body.innerHTML
-let newBody = '<div class="card3"></div>' + temp;
-body.innerHTML = newBody;
-let currentCard;
-let previousCard;
-let previousCard2;
 
 
 nextCharacter();
@@ -590,38 +532,38 @@ function handleTouchEnd(event) {
     if (!x1 || !y1) {
         return false;
     }
-    console.log(`x1: ${x1} x: ${x}`)
-    if(x===null) {
-        x=x1;
+
+    if (x === null) {
+        x = x1;
     }
     if (x1 - x < -200) {
         currentCard.style.animation = "liked 1s ease 1";
         setTimeout(remove, 1000);
         setTimeout(nextCharacter, 1000);
         counter++;
-        
-        x1=null;
-        x=null;
-        
+
+        x1 = null;
+        x = null;
+
     } else if (x1 - x > 200) {
         currentCard.style.animation = "liked 1s ease 1";
 
         setTimeout(remove, 1000);
         setTimeout(nextCharacter, 1000);
         counter++;
-        x1=null;
-        x=null;
-      
+        x1 = null;
+        x = null;
+
     } else {
-        const {target} = event;
-        if(!(target.class==='expand-class' || target.alt==='shrink')) {
+        const { target } = event;
+        if (!(target.class === 'expand-class' || target.alt === 'shrink')) {
             previousCard.style.animation = "shrinkSecondary 1s linear 1";
             previousCard2.style.animation = "shrinkThird 1s linear 1";
             currentCard.style.animation = "spin2 1s linear 1";
             setTimeout(returnToStart, 1000);
-            
+
         }
-        
-        
+
+
     }
 }
