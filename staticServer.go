@@ -61,5 +61,5 @@ func main() {
 		ReadTimeout:  http.DefaultClient.Timeout,
 	}
 
-	log.Fatal(srv.ListenAndServeTLS("../monkeys-drip.com+3.pem", "../monkeys-drip.com+3-key.pem"))
+	log.Fatal(srv.ListenAndServeTLS("monkeys-drip.com+3.pem", "monkeys-drip.com+3-key.pem"))
 }
