@@ -6,6 +6,7 @@ module.exports = {
   'extends': [
     'google',
   ],
+  'parser': 'babel-eslint',
   'parserOptions': {
     'ecmaVersion': 12,
     'sourceType': 'module',

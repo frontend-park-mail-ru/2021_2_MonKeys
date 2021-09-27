@@ -1,2 +1,2 @@
 npm install
-npx eslint dist/js/**
+npx eslint static/js/**
