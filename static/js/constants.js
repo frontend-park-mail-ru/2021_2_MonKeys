@@ -1,6 +1,6 @@
 // Deploy-server
 // eslint-disable-next-line no-unused-vars
-const serverAddress = 'https://95.84.192.140:8080';
+const serverAddress = 'https://api.ijia.me';
 
 
 // Data-validation
