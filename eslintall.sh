@@ -1,2 +1,2 @@
 npm install
-npx eslint static/js/**
+npx eslint static/js/** --fix

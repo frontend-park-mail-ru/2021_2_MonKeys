@@ -1,10 +1,10 @@
 
 
 export default class LoginComponent {
-  #parent
-  #data
+  _parent
+  _data
 
-  #createInput(type, text, name) {
+  _createInput(type, text, name) {
     const input = document.createElement('input');
     input.type = type;
     input.name = name;
@@ -13,7 +13,7 @@ export default class LoginComponent {
 
     return input;
   }
-  #createCenterContainer() {
+  _createCenterContainer() {
     const divContainer = document.createElement('div');
     divContainer.classList.add('center-container');
 
@@ -21,27 +21,27 @@ export default class LoginComponent {
   }
 
 
-  #createElementWithClass(tag, className) {
+  _createElementWithClass(tag, className) {
     const element = document.createElement(tag);
     element.className = className;
     return element;
   }
   constructor(parent) {
-    this.#parent = parent;
+    this._parent = parent;
   }
 
   set data(data) {
-    this.#data = data;
+    this._data = data;
   }
 
-  #renderDOM() {
+  _renderDOM() {
     root.innerHTML = '';
 
     // --------------------------------------------------------
 
     // --------------------------------------------------------
 
-    const header = this.#createCenterContainer();
+    const header = this._createCenterContainer();
 
     const headerText = document.createElement('span');
     headerText.textContent = 'Войти';
@@ -52,7 +52,7 @@ export default class LoginComponent {
 
     const form = document.createElement('form');
     form.classList.add('login-form');
-    const emailInput = this.#createInput('email', 'Почта', 'email');
+    const emailInput = this._createInput('email', 'Почта', 'email');
     emailInput.className = 'form-field-valid';
     emailInput.addEventListener('input', () => {
       const test = emailInput.value.length === 0 || emailRegExp.test(emailInput.value);
@@ -63,7 +63,7 @@ export default class LoginComponent {
       }
     });
 
-    const passwordInput = this.#createInput('password', 'Пароль', 'password');
+    const passwordInput = this._createInput('password', 'Пароль', 'password');
     passwordInput.addEventListener('input', () => {
       const test = passwordInput.value.length === 0 || passwordRegExp.test(passwordInput.value);
 
@@ -86,7 +86,7 @@ export default class LoginComponent {
     submitButton.type = 'submit';
     submitButton.classList.add('login-button');
 
-    const buttonFilling = this.#createCenterContainer();
+    const buttonFilling = this._createCenterContainer();
     const buttonText = document.createElement('span');
     buttonText.textContent = 'Войти';
     buttonText.classList.add('login-button-text');
@@ -114,11 +114,11 @@ export default class LoginComponent {
     const logoBg = document.createElement('div');
     logoBg.classList.add('drip-logo-bg');
 
-    const formContainer = this.#createCenterContainer();
+    const formContainer = this._createCenterContainer();
 
-    const errorEmail = this.#createElementWithClass('div', 'login-error');
+    const errorEmail = this._createElementWithClass('div', 'login-error');
     errorEmail.innerHTML = 'Введите пароль в формате example@drip.com';
-    const errorPassword = this.#createElementWithClass('div', 'login-error');
+    const errorPassword = this._createElementWithClass('div', 'login-error');
     errorPassword.innerHTML = 'Пароль должен состоять из больших, маленьких латинских символов, цифр и спец символа';
 
     emailFieldWithIcon.appendChild(emailInput);
@@ -131,7 +131,7 @@ export default class LoginComponent {
     logoBg.appendChild(passwordFieldWithIcon);
     logoBg.appendChild(errorPassword);
 
-    const errorField = this.#createElementWithClass('div', 'login-error');
+    const errorField = this._createElementWithClass('div', 'login-error');
     errorField.innerHTML = 'Вы еще не зарегистрированы';
 
     form.appendChild(logoBg);
@@ -140,7 +140,7 @@ export default class LoginComponent {
 
     formContainer.appendChild(form);
 
-    const regLinkContainer = this.#createCenterContainer();
+    const regLinkContainer = this._createCenterContainer();
     const regLink = document.createElement('a');
     regLink.classList.add('reg-link');
     regLink.href = '/signup';
@@ -211,6 +211,6 @@ export default class LoginComponent {
   }
 
   render() {
-    this.#renderDOM();
+    this._renderDOM();
   }
 }

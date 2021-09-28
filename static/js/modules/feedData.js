@@ -8,25 +8,25 @@ const noop = () => {};
 
 
 class Feed {
-  #counter = 0;
-  #feedData = [];
+  _counter = 0;
+  _feedData = [];
 
 
-  #addProfile(data) {
-    this.#feedData[this.#counter] = Object();
-    this.#feedData[this.#counter].id=data.id;
-    this.#feedData[this.#counter].firstName=data.name;
-    this.#feedData[this.#counter].age=data.age;
-    this.#feedData[this.#counter].photoSrc=data.imgSrc;
-    this.#feedData[this.#counter].colorFrom='grey';
-    this.#feedData[this.#counter].colorTo='black';
-    this.#feedData[this.#counter].text=data.description;
-    this.#feedData[this.#counter].tags=data.tags;
-    this.#counter++;
+  _addProfile(data) {
+    this._feedData[this._counter] = Object();
+    this._feedData[this._counter].id=data.id;
+    this._feedData[this._counter].firstName=data.name;
+    this._feedData[this._counter].age=data.age;
+    this._feedData[this._counter].photoSrc=data.imgSrc;
+    this._feedData[this._counter].colorFrom='grey';
+    this._feedData[this._counter].colorTo='black';
+    this._feedData[this._counter].text=data.description;
+    this._feedData[this._counter].tags=data.tags;
+    this._counter++;
   }
 
   getCurrentProfile() {
-    return this.#feedData[this.#counter-1];
+    return this._feedData[this._counter-1];
   }
 
 
@@ -49,12 +49,12 @@ class Feed {
           status: response.status,
         })).then((res) => {
           if (res.data.status === 200) {
-            console.log(res.data.body)
-            this.#addProfile(res.data.body);
+            console.log(res.data.body);
+            this._addProfile(res.data.body);
 
             callback(res.data, res.status);
           } else if (res.data.status === 404) {
-            this.#counter++;
+            this._counter++;
           }
 
 
