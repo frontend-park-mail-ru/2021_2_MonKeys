@@ -1,17 +1,17 @@
 
 export default class ProfileComponent {
-    #parent
-    #data
+    _parent
+    _data
 
     constructor(parent) {
-      this.#parent = parent;
+      this._parent = parent;
     }
 
     set data(data) {
-      this.#data = data;
+      this._data = data;
     }
 
-    #renderDOM() {
+    _renderDOM() {
       root.innerHTML = '';
       const divCrad = document.createElement('div');
       divCrad.id = 'cardID';
@@ -115,6 +115,6 @@ export default class ProfileComponent {
     }
 
     render() {
-      this.#renderDOM();
+      this._renderDOM();
     }
 }
