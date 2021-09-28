@@ -104,7 +104,7 @@ editProfile(name, date, description, tags) {
           status: response.status,
         })).then((res) => {
           if (res.status === 200 && res.data.status === 200) {
-            this.#setUserProfile(res.data.body);
+	    this.#setUserProfile(res.data.body);
             window.location.reload();
           } else if (res.data.status === 404) {
           }
