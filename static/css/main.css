@@ -558,25 +558,8 @@ a {
 .out-of-cards-svg {
     position: absolute;
     top: 15%;
-    width: 600px;
-    height: 600px;
-}
-
-.out-of-cards {
-  
-    color: #7D219D;
-    font-family: 'Futura Now Headline Bold';
-    font-size: 24px;
-    position: absolute;
-    text-align: center;
-
-    top: 52%;
-
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-
-    margin: 0;
+    width: 350px;
+    height: 350px;
 }
 
 .profile-image {
