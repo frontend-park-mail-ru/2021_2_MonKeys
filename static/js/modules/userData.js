@@ -83,6 +83,34 @@ loginWithCredentials(email, password, callback=noop) {
         })).catch((error) => console.log(error));
 }
 
+editProfile(name, date, description, tags) {
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      'name': name,
+      'date': date,
+      'description': description,
+      'tags': tags,
+    }),
+    credentials: 'include',
+  };
+  fetch(`${serverAddress}/api/v1/edit`, requestOptions)
+      .then((response) =>
+        response.json().then((data) => ({
+          data: data,
+          status: response.status,
+        })).then((res) => {
+          if (res.status === 200 && res.data.status === 200) {
+            this.#setUserProfile(res.data.body);
+            window.location.reload();
+          } else if (res.data.status === 404) {
+          }
+          console.log(res.data.status)
+        })).catch((error) => console.log(error));
+}
 
 logoutCookie(callback=noop) {
   const requestOptions = {
