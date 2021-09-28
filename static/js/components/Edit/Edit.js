@@ -1,17 +1,17 @@
 
 export default class EditComponent {
-  #parent
-  #data
+  _parent
+  _data
 
   constructor(parent) {
-    this.#parent = parent;
+    this._parent = parent;
   }
 
   set data(data) {
-    this.#data = data;
+    this._data = data;
   }
 
-  #renderDOM() {
+  _renderDOM() {
     function createInputEdit(type, name, place, className, value) {
       const input = document.createElement('input');
       input.type = type;
@@ -21,7 +21,7 @@ export default class EditComponent {
 
       return input;
     }
-    this.#parent.innerHTML ='';
+    this._parent.innerHTML ='';
 
     const form = document.createElement('form');
     form.className = 'edit-form';
@@ -45,11 +45,11 @@ export default class EditComponent {
 
     const divDate = document.createElement('div');
     divDate.className = 'inputEdit';
-    const inputDate = document.createElement('input')
-    inputDate.type = 'date'
-    inputDate.className = 'form-field text-with-icon'
-    inputDate.value = user.date
-    console.log(user.date)
+    const inputDate = document.createElement('input');
+    inputDate.type = 'date';
+    inputDate.className = 'form-field text-with-icon';
+    inputDate.value = user.date;
+    console.log(user.date);
     inputDate.addEventListener('input', () => {
       const test = inputDate.value.toString().length === 0;
       if (test) {
@@ -150,7 +150,6 @@ export default class EditComponent {
       tag.className = 'tag-edit';
       tag.textContent = item;
       TagsContainer.appendChild(tag);
-
     });
 
     const selectBox = document.createElement('select');
@@ -168,7 +167,7 @@ export default class EditComponent {
 
     selectBox.onchange = function() {
       divSelect.innerHTML = '';
-      const {value} = selectBox;
+      const { value } = selectBox;
       if (existsSelectBoxItems.indexOf(value) != -1 || value === 'Тэги') {
         return;
       }
@@ -207,11 +206,10 @@ export default class EditComponent {
       const date = inputDate.value.trim();
       const description = desc.value.trim();
 
-      window.User.editProfile(name, date, description, existsSelectBoxItems)
-
+      window.User.editProfile(name, date, description, existsSelectBoxItems);
     };
 
-    this.#parent.addEventListener('click', function(e) {
+    this._parent.addEventListener('click', function(e) {
       e.preventDefault();
       const {
         target,
@@ -224,12 +222,11 @@ export default class EditComponent {
         divSelect.appendChild(selectBox);
       }
     });
-    this.#parent.appendChild(form);
+    this._parent.appendChild(form);
 
     form.appendChild(buttonSave);
-
   }
   render() {
-    this.#renderDOM();
+    this._renderDOM();
   }
 }

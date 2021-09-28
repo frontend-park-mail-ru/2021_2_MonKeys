@@ -1,17 +1,17 @@
 
 export default class FeedExpandedComponent {
-    #parent
-    #data
+    _parent
+    _data
 
     constructor(parent) {
-      this.#parent = parent;
+      this._parent = parent;
     }
 
     set data(data) {
-      this.#data = data;
+      this._data = data;
     }
 
-    #renderDOM() {
+    _renderDOM() {
       root.innerHTML = '';
 
       const divCrad = document.createElement('div');
@@ -25,7 +25,7 @@ export default class FeedExpandedComponent {
       root.appendChild(divTapBar);
 
       fillCard();
-      
+
       function fillCard() {
         const divCrad = document.getElementById('cardID');
 
@@ -108,6 +108,6 @@ export default class FeedExpandedComponent {
     }
 
     render() {
-      this.#renderDOM();
+      this._renderDOM();
     }
 }

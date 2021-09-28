@@ -1,17 +1,17 @@
 
 export default class SignupComponent {
-  #parent
-  #data
+  _parent
+  _data
 
   constructor(parent) {
-    this.#parent = parent;
+    this._parent = parent;
   }
 
   set data(data) {
-    this.#data = data;
+    this._data = data;
   }
 
-  #renderDOM() {
+  _renderDOM() {
     function createCenterContainer() {
       const divContainer = document.createElement('div');
       divContainer.classList.add('center-container');
@@ -205,10 +205,10 @@ export default class SignupComponent {
     });
 
     root.appendChild(formContainer);
-    root.appendChild(buttonBackContainer)
+    root.appendChild(buttonBackContainer);
   }
 
   render() {
-    this.#renderDOM();
+    this._renderDOM();
   }
 }
