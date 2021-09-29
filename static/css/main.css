@@ -12,8 +12,17 @@ textarea:focus, input:focus{
 
 body {
 	margin: 0px;
+	overflow: hidden;
 }
 
+
+.card-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
 
 .login-error {
     color: red;

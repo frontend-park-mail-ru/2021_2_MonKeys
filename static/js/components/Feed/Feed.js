@@ -91,7 +91,7 @@ export default class FeedComponent {
         container.appendChild(this._createElementWithClass('div', 'card2'));
         const cardNew = this._createElementWithClass('div', 'card');
         cardNew.appendChild(card);
-        conatiner.appendChild(cardNew);
+        container.appendChild(cardNew);
         root.appendChild(container);
     }
     render() {

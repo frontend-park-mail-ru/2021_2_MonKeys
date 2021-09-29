@@ -226,7 +226,7 @@ function handleTouchEnd(event) {
   if (x === null) {
     x = x1;
   }
-  if (x1 - x < -200) {
+  if (x1 - x < -100) {
     currentCard.style.animation = 'liked 1s ease 1';
     const cardToRemove = currentCard;
     setTimeout(remove(cardToRemove), 1000);
@@ -239,7 +239,7 @@ function handleTouchEnd(event) {
 
     x1 = null;
     x = null;
-  } else if (x1 - x > 200) {
+  } else if (x1 - x > 100) {
     currentCard.style.animation = 'liked 1s ease 1';
     const cardToRemove = currentCard;
     setTimeout(remove(cardToRemove), 1000);
