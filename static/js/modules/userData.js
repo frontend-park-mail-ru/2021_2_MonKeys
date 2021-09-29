@@ -105,6 +105,7 @@
                     })).then((res) => {
                         if (res.status === 200 && res.data.status === 200) {
                             this._setUserProfile(res.data.body);
+                            window.Feed.getNextUser(this._userData.id);
                             callback()
                         } else if (res.data.status === 404) {}
                         console.log(res.data.status)
