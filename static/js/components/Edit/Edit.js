@@ -1,5 +1,5 @@
 import ProfileComponent from '../Profile/Profile.js'
-
+import MenuComponent from '../Tapbar/Tapbar.js';
 
 
 
@@ -213,6 +213,9 @@ export default class EditComponent {
             window.User.editProfile(name, date, description, existsSelectBoxItems, () => {
                 const profilePage = new ProfileComponent();
                 profilePage.render();
+                const menu = new MenuComponent();
+                menu.activeItem = 'menu-profile';
+                menu.render();
             });
         };
 
