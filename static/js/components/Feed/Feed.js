@@ -43,7 +43,7 @@ export default class FeedComponent {
             return actionElement;
         }
         root.innerHTML = '';
-
+        root.style.overflow = 'hidden';
 
         const currentobj = window.Feed.getCurrentProfile();
 

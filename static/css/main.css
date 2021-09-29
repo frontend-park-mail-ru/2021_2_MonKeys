@@ -6,22 +6,21 @@ html {
     background-size: cover;
 }
 
-textarea:focus, input:focus{
+textarea:focus,
+input:focus {
     outline: none;
 }
 
 body {
-	margin: 0px;
-	overflow: hidden;
+    margin: 0px;
 }
 
-
 .card-container {
-	position: fixed;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
 }
 
 .login-error {
@@ -151,7 +150,7 @@ div.center-container {
     position: absolute;
     top: 50%;
     left: 14%;
-    transform: translateY( );
+    transform: translateY();
     height: 32px;
     width: 32px;
 }
@@ -199,7 +198,7 @@ div.center-container {
     position: absolute;
     top: 50%;
     right: 15%;
-    transform: translateY( );
+    transform: translateY();
     height: 32px;
     width: 32px;
 }
@@ -249,7 +248,7 @@ a {
     position: absolute;
     top: 50%;
     left: 4%;
-    transform: translateY( );
+    transform: translateY();
     height: 20px;
     width: 20px;
 }
@@ -541,7 +540,6 @@ a {
     right: 0;
     margin-left: auto;
     margin-right: auto;
-   
 }
 
 .card-main {
@@ -555,7 +553,6 @@ a {
     margin-top: 10px;
     overflow: hidden;
 }
-
 
 .card-main-profile {
     border-radius: 35px;
@@ -611,9 +608,6 @@ a {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
 }
-
-
-
 
 .tag {
     margin-right: 5%;
@@ -719,20 +713,16 @@ a {
 
 /*# sourceMappingURL=main.css.map */
 
-
 .im-container {
     width: 324px;
     height: 75px;
     left: 15px;
     top: 67px;
-
     background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(17, 0, 255, 0.274) 0%, rgba(0, 165, 245, 0) 100%);
     backdrop-filter: blur(5px);
     backdrop-filter: contrast(60%);
-
     border-radius: 20px;
     border-width: 0;
-
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -753,11 +743,9 @@ a {
     font-weight: bold;
     font-size: 18px;
     color: #FFFFFF;
-
     background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(17, 0, 255, 0.274) 0%, rgba(0, 165, 245, 0) 100%);
     backdrop-filter: blur(5px);
     backdrop-filter: contrast(60%);
-
     border: 0;
     border-radius: 10px;
     -webkit-appearance: none;
@@ -779,11 +767,9 @@ a {
     font-style: normal;
     font-weight: bold;
     font-size: 18px;
-
     background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(17, 0, 255, 0.274) 0%, rgba(0, 165, 245, 0) 100%);
     backdrop-filter: blur(5px);
     backdrop-filter: contrast(60%);
-
     border: 0;
     border-radius: 10px;
     -webkit-appearance: none;
@@ -809,7 +795,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin-top: 15% !important;
 }
 
-
 .im {
     width: 50px;
     height: 50px;
@@ -830,7 +815,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     height: 85px;
     left: 15px;
     top: 67px;
-
     background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(17, 0, 255, 0.274) 0%, rgba(0, 165, 245, 0) 100%);
     backdrop-filter: blur(5px);
     backdrop-filter: contrast(60%);
@@ -843,11 +827,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     height: 45px;
     left: 15px;
     top: 67px;
-
     background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(17, 0, 255, 0.274) 0%, rgba(0, 165, 245, 0) 100%);
     backdrop-filter: blur(5px);
     backdrop-filter: contrast(60%);
-
     border-radius: 20px;
     border-width: 0;
 }
@@ -857,11 +839,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     height: 45px;
     left: 15px;
     top: 67px;
-
     background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.4) 0%, rgba(255, 0, 0, 0.289583) 25.52%, rgba(0, 165, 245, 0) 100%);
     backdrop-filter: blur(5px);
     backdrop-filter: contrast(60%);
-
     border-radius: 20px;
     border-width: 0;
 }
@@ -890,20 +870,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     bottom: 4;
     border: 1px solid #000000;
 }
+
 .edit-button-text {
     position: absolute;
-
     left: 10%;
-
     font-family: 'Futura Now Headline Bold';
     font-style: normal;
     font-weight: bold;
     font-size: 36px;
     line-height: 59px;
-
     color: #000000;
 }
-
 
 .svg-next-edit {
     position: absolute;
@@ -939,7 +916,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-size: 18px;
     padding-top: 2%;
     padding-left: 3%;
-
     color: #FFFFFF;
 }
 
@@ -960,14 +936,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     height: 50px;
     left: 15px;
     top: 67px;
-
     background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(17, 0, 255, 0.274) 0%, rgba(0, 165, 245, 0) 100%);
     backdrop-filter: blur(5px);
     backdrop-filter: contrast(60%);
-
     border-radius: 20px;
     border-width: 0;
-
     /* display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -979,7 +952,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     -webkit-box-orient: horizontal;
     overflow-x: auto;
 }
-
 
 .tag-edit {
     background: linear-gradient(96.78deg, rgba(196, 196, 196, 0.4) -7.45%, rgba(196, 196, 196, 0) 105.39%);
