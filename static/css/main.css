@@ -11,7 +11,7 @@ input:focus {
     outline: none;
 }
 
-body {
+body{
     margin: 0px;
 }
 
@@ -66,8 +66,8 @@ div.center-container {
 
 .login-header {
     margin: 0;
-    margin-top: 20%;
-    margin-bottom: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
     font-family: 'Futura Now Headline Bold';
     font-style: normal;
     font-weight: bold;
@@ -81,7 +81,7 @@ div.center-container {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 90%;
     height: 398px;
     background: url(../svg/drip.svg) no-repeat center center;
 }
