@@ -1,62 +1,61 @@
 (function() {
-        const noop = () => {};
+    const noop = () => {};
 
 
-        class User {
-            // eslint-disable-next-line
-            _userData = {};
+    class User {
+        // eslint-disable-next-line
+        _userData = {};
 
-            _setUserProfile(data) {
-                this._userData = Object();
-                this._userData.id = data.id;
-                this._userData.firstName = data.name;
-                this._userData.age = data.age;
-                this._userData.text = data.description;
-                this._userData.photoSrc = data.imgSrc;
-                this._userData.tags = data.tags;
-            }
+        _setUserProfile(data) {
+            this._userData = Object();
+            this._userData.id = data.id;
+            this._userData.firstName = data.name;
+            this._userData.age = data.age;
+            this._userData.text = data.description;
+            this._userData.photoSrc = data.imgSrc;
+            this._userData.tags = data.tags;
+        }
 
-            getUserData() {
-                return this._userData;
-            }
+        getUserData() {
+            return this._userData;
+        }
 
-            loginWithCookie(callback = noop) {
-                const requestOptions = {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    credentials: 'include',
-                };
-
-
-                fetch(`${serverAddress}/api/v1/currentuser`, requestOptions)
-                    .then((response) =>
-                        response.json().then((data) => ({
-                            data: data,
-                            status: response.status,
-                        })).then((res) => {
-                                if (res.status === 200 && res.data.status === 200) {
-                                    this._setUserProfile(res.data.body);
-
-                                    window.Feed.getNextUser(this._userData.id);
+        loginWithCookie(callback = noop) {
+            const requestOptions = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            };
 
 
-                                    // !!! cring
+            fetch(`${serverAddress}/api/v1/currentuser`, requestOptions)
+                .then((response) =>
+                    response.json().then((data) => ({
+                        data: data,
+                        status: response.status,
+                    })).then((res) => {
+                        if (res.status === 200 && res.data.status === 200) {
+                            this._setUserProfile(res.data.body);
+
+                            window.Feed.getNextUser(this._userData.id);
 
 
-                                    setTimeout(callback, 100);
-                                    // swipeUser(user.id)
-                                    // userProfileRender();
-                                } else(res.data.status == 404) {
-                                    window.location.reload();
-                                }
-                            }
-                            // if (res.data.status === 'ok') {
-                            //     profilePage();
-                            // }
-                            // console.log(res.data.status)
-                        })).catch((error) => console.log(error));
+                            // !!! cring
+
+
+                            setTimeout(callback, 100);
+                            // swipeUser(user.id)
+                            // userProfileRender();
+                        } else if (res.data.status === 404) {
+                            window.location.reload();
+                        }
+                        // if (res.data.status === 'ok') {
+                        //     profilePage();
+                        // }
+                        // console.log(res.data.status)
+                    })).catch((error) => console.log(error));
         }
 
         loginWithCredentials(email, password, callback = noop) {
