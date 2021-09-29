@@ -10,6 +10,11 @@ textarea:focus, input:focus{
     outline: none;
 }
 
+body {
+	margin: 0px;
+}
+
+
 .login-error {
     color: red;
     visibility: hidden;
@@ -614,6 +619,7 @@ a {
 
 .menu-icon {
     border: 0px solid black;
+    height: 40px;
     background-color: transparent;
 }
 
