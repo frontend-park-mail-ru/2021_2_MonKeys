@@ -562,7 +562,9 @@ a {
 }
 
 .shrink-card {
-    bottom: 25%;
+    bottom: 10%;
+    
+    position: fixed;
 }
 
 .actions-container {
