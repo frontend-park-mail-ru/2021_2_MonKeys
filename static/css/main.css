@@ -82,8 +82,8 @@ div.center-container {
     align-items: center;
     justify-content: center;
     width: 90%;
-    height: 398px;
-    background: url(../svg/drip.svg) no-repeat center center;
+    height: 300px;
+    background: url(../icons/drip.svg) no-repeat center center;
 }
 
 .login-form {
