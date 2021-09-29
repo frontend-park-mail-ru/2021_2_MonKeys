@@ -85,7 +85,7 @@ export default class SignupComponent {
         // кнопка зарегестрироваться
         const submitButton = document.createElement('button');
         submitButton.type = 'submit';
-        submitButton.classList.add('login-button');
+        submitButton.classList.add('signup-button');
 
         const buttonFilling = createCenterContainer();
         const buttonText = document.createElement('span');
