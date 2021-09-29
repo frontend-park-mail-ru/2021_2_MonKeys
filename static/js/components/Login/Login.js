@@ -162,15 +162,18 @@ export default class LoginComponent {
         errorPassword.className = 'login-error-active';
         passwordInput.className = 'form-field-novalid';
       }
+      
       if (!testEmail || !testPassword) {
         return;
       }
+
+      errorEmail.className = 'login-error';
+      errorPassword.className = 'login-error';
 
       const email = emailInput.value.trim();
       const password = passwordInput.value.trim();
 
       // /!!!!!!!!!!!!!!!!!!!!!!!!!
-
 
       const requestOptions = {
         method: 'POST',
