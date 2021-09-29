@@ -15,12 +15,26 @@ body {
     margin: 0px;
 }
 
-.card-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
+@media (min-width: 500px) {
+    .card-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 25%;
+        margin-left: 37.5%;
+        margin-right: 37.5%;
+    }
+}
+
+@media (max-width: 500px) {
+    .card-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+    }
 }
 
 .login-error {
@@ -52,8 +66,8 @@ div.center-container {
 
 .login-header {
     margin: 0;
-    margin-top: 20%;
-    margin-bottom: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
     font-family: 'Futura Now Headline Bold';
     font-style: normal;
     font-weight: bold;
@@ -67,9 +81,9 @@ div.center-container {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 398px;
-    background: url(../svg/drip.svg) no-repeat center center;
+    width: 90%;
+    height: 300px;
+    background: url(../icons/drip.svg) no-repeat center center;
 }
 
 .login-form {
@@ -157,6 +171,17 @@ div.center-container {
 
 .login-button {
     margin-top: 5%;
+    width: 70%;
+    height: 54px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(4px);
+    border-width: 0;
+    border-radius: 35px;
+}
+
+.signup-button {
+    margin-top: 20%;
     width: 70%;
     height: 54px;
     background: #FFFFFF;
@@ -382,25 +407,50 @@ a {
     margin-right: auto;
 }
 
-.tapbar-container {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    position: absolute;
-    width: 90%;
-    height: 5%;
-    bottom: 3%;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
+@media (max-width: 500px) {
+    .tapbar-container {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        position: absolute;
+        width: 90%;
+        height: 5%;
+        bottom: 3%;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (min-width: 500px) {
+    .tapbar-container {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        position: absolute;
+        width: 20%;
+        height: 5%;
+        bottom: 3%;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        left: 0;
+        right: 0;
+        margin-left: 40%;
+        margin-right: 40%;
+    }
 }
 
 .name {
@@ -509,6 +559,12 @@ a {
     height: 5%;
     left: 41%;
     bottom: 2%;
+}
+
+.shrink-card {
+    bottom: 10%;
+    
+    position: fixed;
 }
 
 .actions-container {

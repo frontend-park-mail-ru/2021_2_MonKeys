@@ -34,7 +34,7 @@ export default class LoginComponent {
 
     _renderDOM() {
         root.innerHTML = '';
-
+        const container = this._createElementWithClass('div', 'card-container');
         // --------------------------------------------------------
 
         // --------------------------------------------------------
@@ -46,7 +46,7 @@ export default class LoginComponent {
         headerText.classList.add('login-header');
 
         header.appendChild(headerText);
-        root.appendChild(header);
+        container.appendChild(header);
 
         const form = document.createElement('form');
         form.classList.add('login-form');
@@ -207,10 +207,15 @@ export default class LoginComponent {
             // /!!!!!!!!!!!!!!!!!!!!!!!
         });
 
-        root.appendChild(formContainer);
-        root.appendChild(regLinkContainer);
+        container.appendChild(formContainer);
+        container.appendChild(regLinkContainer);
+        root.appendChild(container);
     }
-
+    _createElementWithClass(tag, className) {
+        const element = document.createElement(tag);
+        element.className = className;
+        return element;
+    }
     render() {
         this._renderDOM();
     }
