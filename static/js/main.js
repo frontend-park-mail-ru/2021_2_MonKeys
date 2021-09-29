@@ -313,7 +313,7 @@ function loginPage() {
  * Функция для страницы с регистрацией
  */
 function signupPage() {
-  const signup = new SignupComponent();
+  const signup = new SignupComponent(root);
   signup.render();
 }
 

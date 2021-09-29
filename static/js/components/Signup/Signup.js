@@ -11,12 +11,6 @@ export default class SignupComponent {
     this._data = data;
   }
 
-  _createElementWithClass(tag, className) {
-    const element = document.createElement(tag);
-    element.className = className;
-    return element;
-  }
-
   _renderDOM() {
     function createCenterContainer() {
       const divContainer = document.createElement('div');
@@ -127,27 +121,11 @@ export default class SignupComponent {
     repeatPasswordFieldWithIcon.appendChild(repeatPasswordInput);
     repeatPasswordFieldWithIcon.appendChild(repeatPasswordIcon);
 
-    // error messages
-    const errorEmail = this._createElementWithClass('div', 'login-error');
-    errorEmail.innerHTML = 'Введите пароль в формате example@drip.com';
-    const errorPassword = this._createElementWithClass('div', 'login-error');
-    errorPassword.innerHTML = 'Пароль должен состоять из больших, маленьких латинских символов, цифр и спец символа';
-    const errorRepeatPassword = this._createElementWithClass('div', 'login-error');
-    errorRepeatPassword.innerHTML = 'Пароли не совпадают';
-
     logoBg.appendChild(emailFieldWithIcon);
-    logoBg.appendChild(errorEmail);
     logoBg.appendChild(passwordFieldWithIcon);
-    logoBg.appendChild(errorPassword);
     logoBg.appendChild(repeatPasswordFieldWithIcon);
-    logoBg.appendChild(errorRepeatPassword);
-
-        // error message for request
-        const errorField = this._createElementWithClass('div', 'login-error');
-        errorField.innerHTML = 'Пользователь с такой почтой уже зарегистрирован';
 
     form.appendChild(logoBg);
-    form.appendChild(errorField);
     form.appendChild(submitButton);
 
     formContainer.appendChild(form);
@@ -177,27 +155,20 @@ export default class SignupComponent {
       const testPasswordRepeat = passwordInput.value === repeatPasswordInput.value;
 
       if (!testEmail) {
-        errorEmail.className = 'login-error-active';
         emailInput.className = 'form-field-novalid';
       }
 
       if (!testPassword) {
-        errorPassword.className = 'login-error-active';
         passwordInput.className = 'form-field-novalid';
       }
 
       if (!testPasswordRepeat) {
-        errorRepeatPassword.className = 'login-error-active';
         repeatPasswordInput.className = 'form-field-novalid';
       }
 
       if (!testEmail || !testPassword || !testPasswordRepeat) {
         return;
       }
-
-      errorEmail.className = 'login-error';
-      errorPassword.className = 'login-error';
-      errorRepeatPassword.className = 'login-error';
 
       const email = emailInput.value.trim();
       const password = passwordInput.value.trim();
@@ -221,12 +192,14 @@ export default class SignupComponent {
               status: response.status,
             })).then((res) => {
               if (res.status === 200 && res.data.status === 200) {
-                errorField.className = 'login-error';
                 window.User.loginWithCredentials(email, password, ()=> {
                   window.location.reload();
                 });
-              } else if (res.data.status === 1001) {
-                errorField.className = 'login-error-active';
+              } else if (res.data.status === 404) {
+                const userNotFound = document.createElement('span');
+                userNotFound.textContent = 'Вы уже зарегестрированы';
+                userNotFound.style.marginTop = '10px';
+                form.appendChild(userNotFound);
               }
             })).catch((error) => console.log(error));
     });
