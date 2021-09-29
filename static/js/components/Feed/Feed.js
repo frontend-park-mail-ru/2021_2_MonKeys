@@ -51,7 +51,7 @@ export default class FeedComponent {
             root.innerHTML = '';
             const outOfCardsContainer = this._createElementWithClass('div', 'center-container');
             const outOfCardsSVG = this._createElementWithClass('img', 'out-of-cards-svg');
-            outOfCardsSVG.src = './svg/heart.svg';
+            outOfCardsSVG.src = 'icons/heart.svg';
             outOfCardsContainer.appendChild(outOfCardsSVG);
             root.appendChild(outOfCardsContainer);
 
