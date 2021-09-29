@@ -561,6 +561,10 @@ a {
     bottom: 2%;
 }
 
+.shrink-card {
+    bottom: 25%;
+}
+
 .actions-container {
     width: 50%;
     height: 10%;
