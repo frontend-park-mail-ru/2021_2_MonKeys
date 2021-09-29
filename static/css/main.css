@@ -22,6 +22,8 @@ body {
         left: 0;
         height: 100%;
         width: 25%;
+        margin-left: 37.5%;
+        margin-right: 37.5%;
     }
 }
 
@@ -394,25 +396,50 @@ a {
     margin-right: auto;
 }
 
-.tapbar-container {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    position: absolute;
-    width: 90%;
-    height: 5%;
-    bottom: 3%;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
+@media (max-width: 500px) {
+    .tapbar-container {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        position: absolute;
+        width: 90%;
+        height: 5%;
+        bottom: 3%;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (min-width: 500px) {
+    .tapbar-container {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        position: absolute;
+        width: 20%;
+        height: 5%;
+        bottom: 3%;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        left: 0;
+        right: 0;
+        margin-left: 40%;
+        margin-right: 40%;
+    }
 }
 
 .name {
