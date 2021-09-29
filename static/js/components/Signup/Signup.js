@@ -36,7 +36,7 @@ export default class SignupComponent {
             return input;
         }
         this._parent.innerHTML = '';
-
+        const container = this._createElementWithClass('div', 'card-container');
         const header = createCenterContainer();
 
         const headerText = document.createElement('span');
@@ -44,7 +44,7 @@ export default class SignupComponent {
         headerText.classList.add('login-header');
 
         header.appendChild(headerText);
-        this._parent.appendChild(header);
+        container.appendChild(header);
 
         const form = document.createElement('form');
         form.classList.add('login-form');
@@ -235,8 +235,14 @@ export default class SignupComponent {
                     })).catch((error) => console.log(error));
         });
 
-        this._parent.appendChild(formContainer);
-        this._parent.appendChild(buttonBackContainer);
+        container.appendChild(formContainer);
+        container.appendChild(buttonBackContainer);
+        this._parent.appendChild(container);
+    }
+    _createElementWithClass(tag, className) {
+        const element = document.createElement(tag);
+        element.className = className;
+        return element;
     }
 
     render() {
