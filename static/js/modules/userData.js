@@ -1,6 +1,3 @@
-import ProfileComponent from 'static/js/components/Profile/Profile.js'
-
-
 (function() {
     const noop = () => {};
 
@@ -86,7 +83,7 @@ import ProfileComponent from 'static/js/components/Profile/Profile.js'
                     })).catch((error) => console.log(error));
         }
 
-        editProfile(name, date, description, tags) {
+        editProfile(name, date, description, tags, callback) {
             const requestOptions = {
                 method: 'POST',
                 headers: {
@@ -108,8 +105,7 @@ import ProfileComponent from 'static/js/components/Profile/Profile.js'
                     })).then((res) => {
                         if (res.status === 200 && res.data.status === 200) {
                             this._setUserProfile(res.data.body);
-                            const profilePage = new ProfileComponent();
-                            profilePage.render();
+                            callback()
                         } else if (res.data.status === 404) {}
                         console.log(res.data.status)
                     })).catch((error) => console.log(error));

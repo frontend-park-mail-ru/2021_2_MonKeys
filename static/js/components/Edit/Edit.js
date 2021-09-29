@@ -1,3 +1,8 @@
+import ProfileComponent from 'static/js/components/Profile/Profile.js'
+
+
+
+
 export default class EditComponent {
     _parent
     _data
@@ -205,7 +210,10 @@ export default class EditComponent {
             const date = inputDate.value.trim();
             const description = desc.value.trim();
 
-            window.User.editProfile(name, date, description, existsSelectBoxItems);
+            window.User.editProfile(name, date, description, existsSelectBoxItems, () => {
+                const profilePage = new ProfileComponent();
+                profilePage.render();
+            });
         };
 
         this._parent.addEventListener('click', function(e) {

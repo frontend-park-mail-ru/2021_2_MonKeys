@@ -227,7 +227,7 @@ export default class SignupComponent {
                             const edit = new EditComponent(this._parent);
                             edit.render();
                             //                 window.User.loginWithCredentials(email, password, ()=> {
-                            //                   window.location.reload();
+                            //          
                             //                 });
                         } else if (res.data.status === 1001) {
                             errorField.className = 'login-error-active';
