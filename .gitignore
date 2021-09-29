@@ -1,0 +1,16 @@
+node_modules
+
+
+.idea
+
+
+
+ijia.me.crt
+ijia.me.key
+
+
+.vscode
+
+package-lock.json
+
+go.sum
