@@ -1,4 +1,4 @@
-import ProfileComponent from 'static/js/components/Profile/Profile.js'
+import ProfileComponent from '../Profile/Profile.js'
 
 
 
