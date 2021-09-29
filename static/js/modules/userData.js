@@ -49,7 +49,7 @@
                             // swipeUser(user.id)
                             // userProfileRender();
                         } else if (res.data.status === 404) {
-                            window.location.reload();
+                            // window.location.reload();
                         }
                         // if (res.data.status === 'ok') {
                         //     profilePage();
