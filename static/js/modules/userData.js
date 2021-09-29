@@ -1,3 +1,6 @@
+import ProfileComponent from 'static/js/components/Profile/Profile.js'
+
+
 (function() {
     const noop = () => {};
 
@@ -49,7 +52,7 @@
                             // swipeUser(user.id)
                             // userProfileRender();
                         } else if (res.data.status === 404) {
-                            // window.location.reload();
+                            // w
                         }
                         // if (res.data.status === 'ok') {
                         //     profilePage();
@@ -105,7 +108,8 @@
                     })).then((res) => {
                         if (res.status === 200 && res.data.status === 200) {
                             this._setUserProfile(res.data.body);
-                            window.location.reload();
+                            const profilePage = new ProfileComponent();
+                            profilePage.render();
                         } else if (res.data.status === 404) {}
                         console.log(res.data.status)
                     })).catch((error) => console.log(error));

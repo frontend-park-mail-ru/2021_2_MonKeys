@@ -199,12 +199,6 @@ export default class LoginComponent {
                         }
                     })).catch((error) => console.log(error));
 
-            // window.User.loginWithCredentials(email, password, ()=> {
-            //   window.location.reload();
-            // });
-
-
-            // /!!!!!!!!!!!!!!!!!!!!!!!
         });
 
         container.appendChild(formContainer);
