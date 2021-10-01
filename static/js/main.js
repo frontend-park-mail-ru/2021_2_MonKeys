@@ -308,11 +308,11 @@ function loginPage() {
   login.render();
 
   login.checkSubmit( (email, password)=> {
-      window.User.loginWithCredentials(email, password,()=> {
-        feedPage();
-        addMenu('feed');
-      }
-      )
+    window.User.loginWithCredentials(email, password, ()=> {
+      feedPage();
+      addMenu('feed');
+    },
+    );
   });
   login.checkPasswordInput();
   login.checkEmailInput();

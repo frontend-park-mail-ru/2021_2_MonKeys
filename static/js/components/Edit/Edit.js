@@ -15,15 +15,6 @@ export default class EditComponent {
     }
 
     _renderDOM() {
-      function createInputEdit(type, name, place, className, value) {
-        const input = document.createElement('input');
-        input.type = type;
-        input.name = name;
-        input.placeholder = place;
-        input.className = className;
-
-        return input;
-      }
       this._parent.innerHTML = '';
 
       const form = document.createElement('form');

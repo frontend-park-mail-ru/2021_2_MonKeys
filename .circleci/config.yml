@@ -1,0 +1,19 @@
+version: 2.1
+jobs:
+  eslint:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Run eslint
+          command: npx eslint static/js/** 
+workflows:
+  version: 2
+  check:
+    jobs:
+      - eslint
