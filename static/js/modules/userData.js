@@ -59,6 +59,7 @@
         }
 
         loginWithCredentials(email, password, callback = noop) {
+            console.log(email, password,callback)
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -78,8 +79,9 @@
                             this.loginWithCookie(callback);
                         } else if (res.data.status === 404) {
 
-                            // loginPageError("User not found")
+                            
                         }
+                        
                     })).catch((error) => console.log(error));
         }
 

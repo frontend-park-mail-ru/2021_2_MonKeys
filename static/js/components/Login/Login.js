@@ -2,7 +2,7 @@
 const emailRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 // eslint-disable-next-line no-unused-vars
-const passwordRegExp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 
 export default class LoginComponent {
     _parent
@@ -40,8 +40,10 @@ export default class LoginComponent {
         if (test) {
           this._passwordInput.className = 'form-field-valid';
         } else {
+         
           this._passwordInput.className = 'form-field-novalid';
           this._errorPassword.className = 'login-error-active';
+        
         }
       });
     }
@@ -56,8 +58,10 @@ export default class LoginComponent {
           this._emailInput.className = 'form-field-novalid';
         }
         if (!testPassword) {
+         
           this._errorPassword.className = 'login-error-active';
           this._emailInput.className = 'form-field-novalid';
+     
         }
         if (!testEmail || !testPassword) {
           return;
@@ -65,8 +69,8 @@ export default class LoginComponent {
         this._errorEmail.className = 'login-error';
         this._errorPassword.className = 'login-error';
         const email = this._emailInput.value.trim();
-        const password = this._emailInput.value.trim();
-   
+        const password = this._passwordInput.value.trim();
+       
         callback(email,password);
       });
     }
