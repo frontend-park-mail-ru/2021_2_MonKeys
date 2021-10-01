@@ -30,7 +30,7 @@
             };
 
 
-            fetch(`${serverAddress}/api/v1/currentuser`, requestOptions)
+            fetch(`${serverAddress}${profileURL}`, requestOptions)
                 .then((response) =>
                     response.json().then((data) => ({
                         data: data,
@@ -68,7 +68,7 @@
                 }),
                 credentials: 'include',
             };
-            fetch(`${serverAddress}/api/v1/login`, requestOptions)
+            fetch(`${serverAddress}${authURL}`, requestOptions)
                 .then((response) =>
                     response.json().then((data) => ({
                         data: data,
@@ -85,7 +85,7 @@
 
         editProfile(name, date, description, tags, callback) {
             const requestOptions = {
-                method: 'POST',
+                method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -97,7 +97,7 @@
                 }),
                 credentials: 'include',
             };
-            fetch(`${serverAddress}/api/v1/edit`, requestOptions)
+            fetch(`${serverAddress}${profileURL}`, requestOptions)
                 .then((response) =>
                     response.json().then((data) => ({
                         data: data,
@@ -114,11 +114,11 @@
 
         logoutCookie(callback = noop) {
             const requestOptions = {
-                method: 'GET',
+                method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
             };
-            fetch(`${serverAddress}/api/v1/logout`, requestOptions).then((response) => {
+            fetch(`${serverAddress}${authURL}`, requestOptions).then((response) => {
                 callback();
             }, );
         }

@@ -32,7 +32,7 @@
 
         getNextUser(id, callback = noop) {
             const requestOptions = {
-                method: 'POST',
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -42,7 +42,7 @@
                 credentials: 'include',
             };
 
-            fetch(`${serverAddress}/api/v1/nextswipeuser`, requestOptions)
+            fetch(`${serverAddress}${feedURL}`, requestOptions)
                 .then((response) =>
                     response.json().then((data) => ({
                         data: data,
