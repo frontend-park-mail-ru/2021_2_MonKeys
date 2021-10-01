@@ -304,9 +304,14 @@ function logout() {
  * Функция для страницы с логином
  */
 function loginPage() {
-  root.innerHTML = '';
   const login = new LoginComponent(root);
   login.render();
+
+  login.checkSubmit( (email, password)=> {
+      window.User.loginWithCredentials(feedPage())
+  });
+  login.checkPasswordInput();
+  login.checkEmailInput();
 }
 
 /**

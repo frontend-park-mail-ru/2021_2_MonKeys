@@ -1,23 +1,23 @@
 (function() {
-    const noop = () => {};
+  const noop = () => {};
 
 
-    class User {
+  class User {
         // eslint-disable-next-line
         _userData = {};
 
         _setUserProfile(data) {
-            this._userData = Object();
-            this._userData.id = data.id;
-            this._userData.firstName = data.name;
-            this._userData.age = data.age;
-            this._userData.text = data.description;
-            this._userData.photoSrc = data.imgSrc;
-            this._userData.tags = data.tags;
+          this._userData = Object();
+          this._userData.id = data.id;
+          this._userData.firstName = data.name;
+          this._userData.age = data.age;
+          this._userData.text = data.description;
+          this._userData.photoSrc = data.imgSrc;
+          this._userData.tags = data.tags;
         }
 
         getUserData() {
-            return this._userData;
+          return this._userData;
         }
 
         loginWithCookie(callback = noop) {
@@ -121,7 +121,8 @@
             fetch(`${serverAddress}${authURL}`, requestOptions).then((response) => {
                 callback();
             }, );
+
         }
-    }
-    window.User = new User();
+  }
+  window.User = new User();
 })();
