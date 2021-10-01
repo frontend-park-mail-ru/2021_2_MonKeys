@@ -1,0 +1,15 @@
+arch: amd64
+os: linux
+dist: trusty
+
+language: node_js
+node_js:
+  - "7"
+
+
+
+install:
+  - npm install
+
+script:
+  - npx eslint static/js/**
