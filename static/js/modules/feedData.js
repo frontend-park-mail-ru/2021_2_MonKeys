@@ -32,7 +32,7 @@
 
         getNextUser(id, callback = noop) {
             const requestOptions = {
-                method: 'GET',
+                method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -54,6 +54,7 @@
 
                             callback(res.data, res.status);
                         } else if (res.data.status === 404) {
+                            console.log(res.data.body);
                             this._counter++;
                             callback();
                         }
