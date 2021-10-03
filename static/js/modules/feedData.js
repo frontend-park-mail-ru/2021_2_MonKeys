@@ -28,7 +28,9 @@
         getCurrentProfile() {
             return this._feedData[this._counter];
         }
-
+        next(){
+            this._counter++;
+        }
         getFeed(){
             const requestOptions = {
                 method: 'GET',
@@ -58,7 +60,7 @@
             this._feedData = [{
                 'name': 'Elon',
                 'age': '25',
-                'photoSrc': 'img/Elon_Musk_2015.jpg',
+                'img': 'img/Elon_Musk_2015.jpg',
                 'text': `Инст: @elonmask<br>
                 Всем привет меня зовут Илон Маск. Люблю играть в
                 геншин импакт, обажаю гаремники. 
@@ -78,7 +80,7 @@
             {
                 'name': 'Michail',
                 'age': '20',
-                'photoSrc': 'img/Elon_Musk_2015.jpg',
+                'img': 'img/Elon_Musk_2015.jpg',
                 'text': `
                 Инст: @marvin<br>
                 Тг: @Marvin<br>

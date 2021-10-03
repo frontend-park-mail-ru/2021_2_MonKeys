@@ -6,6 +6,26 @@ html {
     background-size: cover;
 }
 
+.like-card{
+    width: 40px;
+    height: 40px;
+}
+
+
+.expand-card{
+    width: 40px;
+    height: 40px;
+}
+
+
+.dislike-card{
+    width: 40px;
+    height: 40px;
+}
+
+
+
+
 textarea:focus,
 input:focus {
     outline: none;
@@ -331,6 +351,7 @@ a {
         background-position: 0% 50%;
     }
 }
+
 
 .forEdit {
     position: fixed;
@@ -687,6 +708,26 @@ a {
     100% {
         -webkit-transform: translate(0px, 0px);
         transform: translate(0px, 0px);
+    }
+}
+
+@keyframes swipedRight {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(400px,0px) rotate(20deg);
+        opacity: 0.01;
+    }
+}
+
+@keyframes swipedLeft {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-400px,0px) rotate(-20deg);
+        opacity: 0.01;
     }
 }
 
