@@ -13,11 +13,10 @@ export default class LoginComponent {
     _form
 
     checkEmailInput() {
-     
       this._emailInput.addEventListener('input', () => {
         const test = this._emailInput.value.length === 0 || emailRegExp.test(this._emailInput.value);
-        (test) ? this._emailInput.className = 'form-field-valid'
-           :  this._emailInput.className = 'form-field-novalid';
+            (test) ? this._emailInput.className = 'form-field-valid':
+                this._emailInput.className = 'form-field-novalid';
       });
       this._emailInput.addEventListener('focusout', () => {
         const test = this._emailInput.value.length === 0 || emailRegExp.test(this._emailInput.value);
@@ -32,18 +31,16 @@ export default class LoginComponent {
     checkPasswordInput() {
       this._passwordInput.addEventListener('input', () => {
         const test = this._passwordInput.value.length === 0 || passwordRegExp.test(this._passwordInput.value);
-        (test) ? this._passwordInput.className = 'form-field-valid' 
-               : this._passwordInput.className = 'form-field-novalid';
+            (test) ? this._passwordInput.className = 'form-field-valid':
+                this._passwordInput.className = 'form-field-novalid';
       });
       this._passwordInput.addEventListener('focusout', () => {
         const test = this._passwordInput.value.length === 0 || passwordRegExp.test(this._passwordInput.value);
         if (test) {
           this._passwordInput.className = 'form-field-valid';
         } else {
-         
           this._passwordInput.className = 'form-field-novalid';
           this._errorPassword.className = 'login-error-active';
-        
         }
       });
     }
@@ -58,10 +55,8 @@ export default class LoginComponent {
           this._emailInput.className = 'form-field-novalid';
         }
         if (!testPassword) {
-         
           this._errorPassword.className = 'login-error-active';
           this._emailInput.className = 'form-field-novalid';
-     
         }
         if (!testEmail || !testPassword) {
           return;
@@ -70,8 +65,8 @@ export default class LoginComponent {
         this._errorPassword.className = 'login-error';
         const email = this._emailInput.value.trim();
         const password = this._passwordInput.value.trim();
-       
-        callback(email,password);
+
+        callback(email, password);
       });
     }
 
@@ -90,9 +85,9 @@ export default class LoginComponent {
 
     _renderDOM() {
       this._parent.innerHTML = '';
-      const renderedHTML = Handlebars.templates['Login']();
-      this._parent.innerHTML = renderedHTML
-      this._getElems()
+      const renderedHTML = Handlebars.templates['login'];
+      this._parent.innerHTML = renderedHTML();
+      this._getElems();
     }
     _createElementWithClass(tag, className) {
       const element = document.createElement(tag);
