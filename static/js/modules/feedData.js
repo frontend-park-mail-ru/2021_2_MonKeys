@@ -26,13 +26,82 @@
         }
 
         getCurrentProfile() {
-            return this._feedData[this._counter - 1];
+            return this._feedData[this._counter];
         }
 
-
-        getNextUser(id, callback = noop) {
+        getFeed(){
             const requestOptions = {
-                method: 'PATCH',
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            };
+
+            // fetch(`${serverAddress}${feedURL}`, requestOptions)
+            //     .then((response) =>
+            //         response.json().then((data) => ({
+            //             data: data,
+            //             status: response.status,
+            //         })).then((res) => {
+            //             if (res.data.status === 200) {
+            //                 console.log(res.data.body);
+            //                 this._addProfile(res.data.body);
+
+            //                 callback(res.data, res.status);
+            //             } else if (res.data.status === 404) {
+            //                 console.log(res.data.body);
+            //                 this._counter++;
+            //                 callback();
+            //             }
+            //         })).catch((error) => console.log(error));
+            this._feedData = [{
+                'name': 'Elon',
+                'age': '25',
+                'photoSrc': 'img/Elon_Musk_2015.jpg',
+                'text': `Инст: @elonmask<br>
+                Всем привет меня зовут Илон Маск. Люблю играть в
+                геншин импакт, обажаю гаремники. 
+                Просто не могу жить без иссекаев,
+                мое любимое аниме это конечно же Ван Пис ахахах)
+                Я посмотрел все 1000+ серий
+                так же у меня есть краш, поэтому ищу ТОЛЬКО ДРУГА
+                в общем буду твоим сенпаем, писать в инсту, 
+                а то drip лагает ахахахах)`,
+                'tags' : [
+                    'anime',
+                    'IT',
+                    'music',
+                    'soccer',
+                ]
+            },
+            {
+                'name': 'Michail',
+                'age': '20',
+                'photoSrc': 'img/Elon_Musk_2015.jpg',
+                'text': `
+                Инст: @marvin<br>
+                Тг: @Marvin<br>
+                Првиет я Миша мне 2 года
+                люблю сосать члены, господи как же я люблю хуи
+                по жизни пассив конченный
+                обоссанцец. Обожаю играть в геншин
+                `,
+                'tags' : [
+                    'banana',
+                    'fullstack',
+                    'gay',
+                    'anal',
+                ]
+            },
+        ]
+        
+
+        }
+        getNextUser(id, callback = noop) {
+            alert(1)
+            const requestOptions = {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },

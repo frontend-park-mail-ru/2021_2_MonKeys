@@ -1,6 +1,21 @@
 export default class FeedComponent {
     _parent
-    _data
+    _data = {
+      actions: [
+        {
+          actionIcon: "",
+          actionClass: "",
+        },
+        {
+          actionIcon: "",
+          actionClass: "",
+        },
+        {
+          actionIcon: "",
+          actionClass: "",
+        },
+      ]
+    }
 
 
     constructor(parent) {
@@ -84,8 +99,6 @@ export default class FeedComponent {
 
       bottomPanel.appendChild(actionsContainer);
       card.appendChild(bottomPanel);
-
-
       container.appendChild(this._createElementWithClass('div', 'card3'));
       container.appendChild(this._createElementWithClass('div', 'card3'));
       container.appendChild(this._createElementWithClass('div', 'card2'));
