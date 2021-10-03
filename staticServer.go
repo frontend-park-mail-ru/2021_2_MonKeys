@@ -51,26 +51,26 @@ func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	port:= flag.String("p",":443","server port");
-	ssl:= flag.Bool("ssl", true, "HTTPS/HTTP");
-	flag.Parse();
-	
+	port := flag.String("p", ":443", "server port")
+	ssl := flag.Bool("ssl", true, "HTTPS/HTTP")
+	flag.Parse()
+
 	mux := mux.NewRouter()
 
 	spa := spaHandler{staticPath: "static", indexPath: "index.html"}
 	mux.PathPrefix("/").Handler(spa)
 
 	srv := &http.Server{
-		Handler: mux,
+		Handler:      mux,
 		Addr:         *port,
 		WriteTimeout: http.DefaultClient.Timeout,
 		ReadTimeout:  http.DefaultClient.Timeout,
 	}
-	fmt.Printf("Running server at port %v ssl=%t", *port,*ssl);
+	fmt.Printf("Running server at port %v ssl=%t", *port, *ssl)
 	// log.Fatal(srv.ListenAndServe())
-	if (*ssl) {
+	if *ssl {
 		log.Fatal(srv.ListenAndServeTLS("ijia.me.crt", "ijia.me.key"))
 	} else {
-		srv.ListenAndServe();
+		srv.ListenAndServe()
 	}
 }

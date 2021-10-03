@@ -82,7 +82,6 @@ const configApp = {
 
 /**
  * Функция отрисовки страницы редактирования профиля
- * Сделал - Ильягу Нагдимаев
  */
 function editPage() {
   const edit = new EditComponent(root);
@@ -185,7 +184,7 @@ function feedPage() {
   window.Feed.getFeed();
   alert(1);
   feed.render();
-  
+
   document.addEventListener('touchstart', handleTouchStart, false);
   document.addEventListener('touchmove', handleTouchMove, false);
   document.addEventListener('touchend', handleTouchEnd, false);
@@ -327,6 +326,16 @@ function loginPage() {
 function signupPage() {
   const signup = new SignupComponent(root);
   signup.render();
+
+  signup.checkSubmit( (email, password)=> {
+    window.User.loginWithCredentials(email, password, ()=> {
+      editPage();
+    },
+    );
+  });
+  signup.checkEmailInput();
+  signup.checkPasswordInput();
+  signup.checkRepeatPasswordInput();
 }
 
 
