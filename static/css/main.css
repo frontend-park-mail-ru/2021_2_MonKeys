@@ -63,6 +63,7 @@ body {
 }
 
 .login-error-active {
+    margin-top: 5%;
     width: 65%;
     padding-top: 3%;
     font-family: 'Futura Now Headline Bold';
@@ -201,7 +202,7 @@ div.center-container {
 }
 
 .signup-button {
-    margin-top: 20%;
+    margin-top: 5%;
     width: 70%;
     height: 54px;
     background: #FFFFFF;
