@@ -122,31 +122,29 @@ export default class SignupComponent {
 
     _signupUser(email, password, callback) {
       const requestOptions = {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-              'email': email,
-              'password': password,
-          }),
-          credentials: 'include',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          'email': email,
+          'password': password,
+        }),
+        credentials: 'include',
       };
       fetch(`${serverAddress}${profileURL}`, requestOptions)
           .then((response) =>
-              response.json().then((data) => ({
-                  data: data,
-                  status: response.status,
-              })).then((res) => {
-                  if (res.status === 200 && res.data.status === 200) {
-                      errorForm.className = 'login-error';
-                      errorForm.textContent = '';
-                      callback();
-                  } else if (res.data.status === 1001) {
-                      errorForm.className = 'login-error-active';
-                      errorForm.textContent = errorForm;
-                  }
-              })).catch((error) => console.log(error));
+            response.json().then((data) => ({
+              data: data,
+              status: response.status,
+            })).then((res) => {
+              if (res.status === 200 && res.data.status === 200) {
+                callback();
+              } else if (res.data.status === 1001) {
+                errorForm.className = 'login-error-active';
+                errorForm.textContent = errorForm;
+              }
+            })).catch((error) => console.log(error));
     }
 
     constructor(parent) {

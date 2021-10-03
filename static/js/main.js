@@ -249,7 +249,9 @@ function signupPage() {
   const signup = new SignupComponent(root);
   signup.render();
 
-  signup.checkSubmit(editPage());
+  signup.checkSubmit(()=> {
+    editPage();
+  });
 
   signup.checkEmailInput();
   signup.checkPasswordInput();
