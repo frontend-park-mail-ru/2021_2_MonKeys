@@ -3,5 +3,5 @@
 	for f in $FILES
 	do
 		echo "Processing $f file..."
-		handlebars templates/$f -f templates/$f.tpl.js
+		handlebars $f -f $f.tpl.js
 	done

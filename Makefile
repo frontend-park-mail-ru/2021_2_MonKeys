@@ -11,4 +11,4 @@ run-local:
 	go run server -p=:80 -ssl=false
 
 render-handlebars:
-	./handlebars.sh
+	bash handlebars.sh
