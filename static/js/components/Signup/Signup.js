@@ -141,8 +141,8 @@ export default class SignupComponent {
               if (res.status === 200 && res.data.status === 200) {
                 callback();
               } else if (res.data.status === 1001) {
-                errorForm.className = 'login-error-active';
-                errorForm.textContent = errorForm;
+                this._errorForm.className = 'login-error-active';
+                this._errorForm.textContent = errorForm;
               }
             })).catch((error) => console.log(error));
     }
