@@ -95,10 +95,7 @@ function profilePage() {
 /**
  * Функция отрисовки страницы расширенного профиля
  */
-function feedExpandedPage() {
-  const feedExpanded = new FeedExpandedComponent(root);
-  feedExpanded.render();
-}
+
 /**
  * Функция страницы с лентой
  */

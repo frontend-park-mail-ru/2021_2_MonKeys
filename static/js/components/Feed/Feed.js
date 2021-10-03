@@ -37,7 +37,9 @@ export default class FeedComponent {
   set data(data) {
     this._data = data;
   }
-
+  _expandCard(){
+    
+  }
   _likeCard(){
     // ЗАПРОС НА ЛАЙК
     window.Feed.next();
