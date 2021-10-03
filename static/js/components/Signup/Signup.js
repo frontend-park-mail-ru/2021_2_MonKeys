@@ -216,7 +216,7 @@ export default class SignupComponent {
           }),
           credentials: 'include',
         };
-        fetch(`${serverAddress}/api/v1/signup`, requestOptions)
+        fetch(`${serverAddress}${signupURL}`, requestOptions)
             .then((response) =>
               response.json().then((data) => ({
                 data: data,

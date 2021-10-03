@@ -1,5 +1,5 @@
 #!/bin/bash
-	FILES="templates/*"
+	FILES="templates/*.handlebars"
 	for f in $FILES
 	do
 		echo "Processing $f file..."

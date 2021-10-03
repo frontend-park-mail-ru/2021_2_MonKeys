@@ -3,6 +3,7 @@ const serverAddress = 'https://api.ijia.me';
 const profileURL = '/api/v1/profile'
 const authURL = '/api/v1/session'
 const feedURL = '/api/v1/feed'
+const signupURL = '/api/v1/profile'
 
 // Data-validation
 
