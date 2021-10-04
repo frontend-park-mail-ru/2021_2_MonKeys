@@ -91,7 +91,7 @@ export default class EditComponent {
       for (let i = 0; i < 3; i++) {
         this._dropDownMenuElements[i].addEventListener('click', ()=> {
           console.log(i);
-          this._inputTags.innerText += this._dropDownMenuElements[i].value;
+          this._inputTags.innerText += this._dropDownMenuElements[i].innerText;
         });
       }
       // $('.dropdown .dropdown-menu li').click(function () {
