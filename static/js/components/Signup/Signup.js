@@ -204,10 +204,14 @@ export default class SignupComponent {
         const email = emailInput.value.trim();
         const password = passwordInput.value.trim();
         const passwordRepeat = repeatPasswordInput.value.trim();
+
+        let csrfToken = document.getElementsByName("gorilla.csrf.Token")[0].value
+
         const requestOptions = {
           method: 'POST',
-          headers: {
+          headers: { 
             'Content-Type': 'application/json',
+            'X-CSRF-Token': csrfToken,
           },
           body: JSON.stringify({
             'email': email,

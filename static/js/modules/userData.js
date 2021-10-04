@@ -1,6 +1,7 @@
 (function() {
   const noop = () => {};
 
+  let csrfToken = document.getElementsByName("gorilla.csrf.Token")[0].value
 
   class User {
         // eslint-disable-next-line
@@ -62,7 +63,10 @@
           console.log(email, password, callback);
           const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': csrfToken,
+            },
             body: JSON.stringify({
               'email': email,
               'password': password,
@@ -89,6 +93,7 @@
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
+              'X-CSRF-Token': csrfToken,
             },
             body: JSON.stringify({
               'name': name,
@@ -114,9 +119,13 @@
         }
 
         logoutCookie(callback = noop) {
+          
           const requestOptions = {
             method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': csrfToken,
+            },
             credentials: 'include',
           };
           fetch(`${serverAddress}${authURL}`, requestOptions).then((response) => {
