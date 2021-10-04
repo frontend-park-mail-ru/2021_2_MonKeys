@@ -1066,7 +1066,7 @@ span.choose {
     z-index: 9
 }
 .dropdown .dropdown-menu.active {
-    visibility: visible;
+    display: inline;
 }
 .dropdown .dropdown-menu li {
     padding: 10px;
