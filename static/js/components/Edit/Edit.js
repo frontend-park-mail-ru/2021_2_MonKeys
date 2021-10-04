@@ -101,8 +101,11 @@ export default class EditComponent {
     _renderDOM() {
       this._parent.innerHTML = '';
       const renderedHTML = Handlebars.templates['edit'];
+      console.log(this);
       this._parent.innerHTML = renderedHTML(this._data);
+      console.log(this);
       this._getElems();
+      console.log(this);
       this._dropDownMenu();
       // this._addEventListeners();
     }
