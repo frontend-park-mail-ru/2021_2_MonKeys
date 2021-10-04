@@ -1,0 +1,50 @@
+<body id="root">
+    <form class="edit-form">
+        {{#each fields}}
+        <div class="inputEdit">
+            <input type="{{fieldType}}" class="{{fieldClass}}">
+            {{!-- <input type="text" class="form-field text-without-icon">
+        </div>
+        <div class="inputEdit">
+            <input type="date" class="form-field text-with-icon">
+        </div>
+        <div class="inputEdit">
+            <input type="text" class="form-field-desc text-desc"> --}}
+        </div>
+        {{/each}}
+        <div class="inputEdit">
+            <div class="tag-container-edit" id="tagsID">
+
+            </div>
+            <button id="addID" class="add">
+
+            </button>
+        </div>
+        <div class="selectBox">
+
+        </div>
+        <div class="inputEdit">
+            <div class="im-container">
+                <div style="position: relative;">
+                    <img src="../img/Elon_Musk_2015.jpg" class="im">
+                    <button class="removeImg"></button>
+                </div>
+                <div style="position: relative;">
+                    <img src="../img/Elon_Musk_2015.jpg" class="im">
+                    <button class="removeImg"></button>
+                </div>
+                <div style="position: relative;">
+                    <img src="../img/Elon_Musk_2015.jpg" class="im">
+                    <button class="removeImg"></button>
+                </div>
+            </div>
+            <button class="add"></button>
+        </div>
+        <button type="submit" class="login-button">
+            <div class="center-container">
+                <span class="edit-button-text">Сохранить</span>
+                <img src="../icons/button_next_black.svg" class="svg-next-edit">
+            </div>
+        </button>
+    </form>
+</body>
