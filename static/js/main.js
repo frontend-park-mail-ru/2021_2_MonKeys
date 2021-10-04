@@ -235,10 +235,12 @@ function loginPage() {
   //   },
   //   );
   // });
-  login.checkSubmit(window.User.loginWithCredentials(email, password, ()=> {
-    feedPage();
-    addMenu('feed');
-  }));
+  login.checkSubmit((email, password)=> {
+    window.User.loginWithCredentials(email, password, ()=> {
+      feedPage();
+      addMenu('feed');
+    });
+  });
   login.checkPasswordInput();
   login.checkEmailInput();
 }
@@ -250,9 +252,11 @@ function signupPage() {
   const signup = new SignupComponent(root);
   signup.render();
 
-  signup.checkSubmit(window.User.loginWithCredentials(email, password, ()=> {
-    editPage();
-  }));
+  signup.checkSubmit((email, password)=> {
+    window.User.loginWithCredentials(email, password, ()=> {
+      editPage();
+    });
+  });
 
   signup.checkEmailInput();
   signup.checkPasswordInput();
