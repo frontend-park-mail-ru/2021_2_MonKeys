@@ -1002,12 +1002,24 @@ span.choose {
 }
 .container {
   width: 500px;
-  margin: 50px auto 0;
   text-align: center
 }
 
 /*Styling Selectbox*/
-.dropdown {
+.dropdown-disactive {
+  width: 300px;
+  display: none;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgb(204, 204, 204);
+  transition: all .5s ease;
+  position: relative;
+  font-size: 14px;
+  color: #474747;
+  height: 100%;
+  text-align: left;
+}
+.dropdown-active {
   width: 300px;
   display: inline-block;
   background-color: #fff;
@@ -1018,7 +1030,7 @@ span.choose {
   font-size: 14px;
   color: #474747;
   height: 100%;
-  text-align: left
+  text-align: left;
 }
 .dropdown .select {
     display: block;
@@ -1142,7 +1154,7 @@ span.choose {
     color: #FFFFFF;
 }
 
-.add {
+.add-active {
     /* position: absolute;
     backdrop-filter: blur(50px);
     background: url("../icons/button_add_white.svg");
@@ -1152,6 +1164,7 @@ span.choose {
     bottom: -5px;
     right: -5px;
     border: 1px solid #000000; */
+    display: inline-block;
     backdrop-filter: blur(50px);
     background: url(../icons/button_add_white.svg) no-repeat center center;
     width: 32px;
@@ -1161,6 +1174,10 @@ span.choose {
     bottom: -5px;
     right: -5px;
     border: 1px solid #ffffff;
+}
+
+.add-disactive {
+    display: none;
 }
 
 .tag-container-edit {
