@@ -228,12 +228,16 @@ function loginPage() {
   const login = new LoginComponent(root);
   login.render();
 
-  login.checkSubmit( (email, password)=> {
-    window.User.loginWithCredentials(email, password, ()=> {
-      feedPage();
-      addMenu('feed');
-    },
-    );
+  // login.checkSubmit( (email, password)=> {
+  //   window.User.loginWithCredentials(email, password, ()=> {
+  //     feedPage();
+  //     addMenu('feed');
+  //   },
+  //   );
+  // });
+  login.checkSubmit(()=> {
+    feedPage();
+    addMenu('feed');
   });
   login.checkPasswordInput();
   login.checkEmailInput();
