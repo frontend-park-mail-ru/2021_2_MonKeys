@@ -139,7 +139,7 @@ export default class SignupComponent {
               status: response.status,
             })).then((res) => {
               if (res.status === 200 && res.data.status === 200) {
-                callback();
+                callback(email, password);
               } else if (res.data.status === 1001) {
                 this._errorForm.className = 'login-error-active';
                 this._errorForm.textContent = errorForm;

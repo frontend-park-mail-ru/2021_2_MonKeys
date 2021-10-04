@@ -105,7 +105,7 @@ export default class LoginComponent {
               status: response.status,
             })).then((res) => {
               if (res.status === 200 && res.data.status === 200) {
-                callback();
+                callback(email, password);
                 // this.loginWithCookie(callback);
               } else if (res.data.status === 404) {
                 this._errorForm.className = 'login-error-active';
