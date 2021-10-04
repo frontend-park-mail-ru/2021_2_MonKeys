@@ -88,7 +88,7 @@ export default class EditComponent {
       //   this_.removeClass('active');
       //   this_.find('.dropdown-menu').slideUp(300);
       // });
-      for (i = 0; i < 3; i++) {
+      for (let i = 0; i < 3; i++) {
         this._dropDownMenuElements[i].addEventListener('click', ()=> {
           this._inputTags.innerText += this_._dropDownMenuElements[i].value;
         });
