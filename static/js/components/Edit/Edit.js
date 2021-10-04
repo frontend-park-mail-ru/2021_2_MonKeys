@@ -35,6 +35,8 @@ export default class EditComponent {
     _inputDate
     _inputDesc
     _inputTags
+    _dropDown
+    _dropDownMenu
 
     constructor(parent) {
       this._parent = parent;
@@ -58,20 +60,35 @@ export default class EditComponent {
     //   existsSelectBoxItems.push(value);
     // };
 
+    _getElems() {
+      this._dropDown = document.getElementsByClassName('dropdown')[0];
+      this._dropDownMenu = document.getElementsByClassName('dropdown-menu')[0];
+    }
+
     _dropDownMenu() {
-      $('.dropdown').click(function() {
-        this_.attr('tabindex', 1).focus();
-        this_.toggleClass('active');
-        this_.find('.dropdown-menu').slideToggle(300);
+      this._dropDown.addEventListener('click', ()=> {
+        this._dropDown.attr('tabindex', 1).focus();
+        this._dropDown.toogleClass('active');
+        this._dropDownMenu.slideToggle(300);
       });
-      $('.dropdown').focusout(function() {
-        this_.removeClass('active');
-        this_.find('.dropdown-menu').slideUp(300);
+      // $('.dropdown').click(function() {
+      //   this_.attr('tabindex', 1).focus();
+      //   this_.toggleClass('active');
+      //   this_.find('.dropdown-menu').slideToggle(300);
+      // });
+      this._dropDown.addEventListener('focusout', ()=> {
+        this._dropDown.removeClass('active');
+        this._dropDownMenu.slideUp(300);
       });
-      $('.dropdown .dropdown-menu li').click(function () {
-        this_.parents('.dropdown').find('span').text($(this).text());
-        this_.parents('.dropdown').find('input').attr('value', $(this).attr('id'));
-      });
+      // $('.dropdown').focusout(function() {
+      //   this_.removeClass('active');
+      //   this_.find('.dropdown-menu').slideUp(300);
+      // });
+
+      // $('.dropdown .dropdown-menu li').click(function () {
+      //   this_.parents('.dropdown').find('span').text($(this).text());
+      //   this_.parents('.dropdown').find('input').attr('value', $(this).attr('id'));
+      // });
     }
 
 
