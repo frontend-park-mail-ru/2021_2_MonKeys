@@ -50,8 +50,9 @@ export default class MenuComponent {
 
     _renderDOM() {
       const renderedHTML = Handlebars.templates["tapbar"];
-     
-      this._parent.innerHTML += renderedHTML(this._actionsMenu);
+      const element = document.createElement('div');
+      element.innerHTML = renderedHTML(this._actionsMenu);
+      this._parent.appendChild(element);
     }
 
     render() {

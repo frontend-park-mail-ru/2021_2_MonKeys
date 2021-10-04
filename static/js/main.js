@@ -18,16 +18,14 @@ window.addEventListener('load', (e) => {
   e.preventDefault();
   window.User.loginWithCookie(() => {
     feedPage();
-    addMenu('feed');
+    addMenu('menu-feed');
   });
 });
 
 document.addEventListener('click', clickButtons, false);
 
 
-// loginPAge()
-feedPage();
-addMenu('menu-feed');
+loginPage()
 
 const configApp = {
   'login': {
@@ -296,7 +294,8 @@ function notDoneYet() {
  * @param {String} activeItem - текущая страница в меню
  */
 function addMenu(activeItem) {
-  const menu = new MenuComponent(root);
+  const CardContainer=document.getElementsByClassName('card-container')[0];
+  const menu = new MenuComponent(CardContainer);
   menu.activeItem = activeItem;
   menu.render();
 }

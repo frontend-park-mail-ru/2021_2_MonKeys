@@ -101,7 +101,7 @@
 
         }
         getNextUser(id, callback = noop) {
-            alert(1)
+          
             const requestOptions = {
                 method: 'PUT',
                 headers: {

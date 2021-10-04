@@ -83,7 +83,6 @@ export default class FeedComponent {
     currentCard.innerHTML = "";
     currentCard.style="";
     thisIsNeverThat._data.actions= thisIsNeverThat._expandedActions;
-    console.log(thisIsNeverThat._data.actions);
     thisIsNeverThat._data.card = window.Feed.getCurrentProfile();
     const renderedHTML = Handlebars.templates["feedExpanded"];
     currentCard.innerHTML = renderedHTML(thisIsNeverThat._data);
@@ -114,13 +113,11 @@ export default class FeedComponent {
     const { touches } = event;
     this._x = touches[0].clientX;
     this._y = touches[0].clientY;
-    console.log(this._x, this._y);
     if (window.innerHeight < this._y || window.innerWidth < this._x || this._y < 0 || this._x < 0) {
       return;
     }
     const diffX= this._x - this._x1
     const diffY= this._y - this._y1;
-    console.log(previousCard, currentCard)
     if(diffX<280){
       const diffBig = Math.abs(diffX / 40);
       const diffSmall = Math.abs(diffX / 56); 
