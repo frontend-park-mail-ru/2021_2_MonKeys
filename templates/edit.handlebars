@@ -3,25 +3,36 @@
         {{#each fields}}
         <div class="inputEdit">
             <input type="{{fieldType}}" class="{{fieldClass}}">
-            {{!-- <input type="text" class="form-field text-without-icon">
-        </div>
-        <div class="inputEdit">
-            <input type="date" class="form-field text-with-icon">
-        </div>
-        <div class="inputEdit">
-            <input type="text" class="form-field-desc text-desc"> --}}
         </div>
         {{/each}}
-        <div class="inputEdit">
-            <div class="tag-container-edit" id="tagsID">
-
-            </div>
+        <div class="edit-tags">
+            Tags:
             <button id="addID" class="add">
-
             </button>
+            
+        </div>
+        <div class="inputEdit">
+            {{!-- <div class="tag-container-edit" id="tagsID">
+            </div> --}}
+            <div class="container">
+                <span class="choose">Choose Gender</span>
+            
+                <div class="dropdown">
+                    <div class="select">
+                        <span>Select Tags</span>
+                    </div>
+                    <input type="hidden" name="gender">
+                    <ul class="dropdown-menu">
+                        {{#each tags}}
+                            <li>tagText</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            
+            <span class="msg"></span>
+            </div>
         </div>
         <div class="selectBox">
-
         </div>
         <div class="inputEdit">
             <div class="im-container">

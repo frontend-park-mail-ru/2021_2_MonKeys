@@ -19,7 +19,22 @@ export default class EditComponent {
           fieldClass: 'form-field-desc text-desc',
         },
       },
+      tags: {
+        1: {
+          tagText: 'anime',
+        },
+        2: {
+          tagText: 'netflix',
+        },
+        3: {
+          tagText: 'walks',
+        },
+      },
     }
+    _inputName
+    _inputDate
+    _inputDesc
+    _inputTags
 
     constructor(parent) {
       this._parent = parent;
@@ -33,9 +48,47 @@ export default class EditComponent {
       this._parent.innerHTML = '';
       const renderedHTML = Handlebars.templates['edit'];
       this._parent.innerHTML = renderedHTML(this._data);
-      // this._getElems();
+      this._getElems();
       // this._addEventListeners();
     }
+
+    checkSubmit(callback) {
+      this._form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const testName = inputName.value.length !== 0;
+        const testDate = inputDate.value.toString().length === 10;
+        const testDesc = desc.value.length !== 0;
+
+        if (!testName) {
+          inputName.className = 'form-field-edit-novalid text-without-icon';
+        }
+
+        if (!testDate) {
+          inputDate.className = 'form-field-edit-novalid text-with-icon';
+        }
+
+        if (!testDesc) {
+          desc.className = 'form-field-edit-novalid text-desc';
+        }
+
+        if (!testName || !testDate || !testDesc) {
+          return;
+        }
+
+        const name = inputName.value.trim();
+        const date = inputDate.value.trim();
+        const description = desc.value.trim();
+
+        window.User.editProfile(name, date, description, existsSelectBoxItems, () => {
+          const profilePage = new ProfileComponent();
+          profilePage.render();
+          const menu = new MenuComponent();
+          menu.activeItem = 'menu-profile';
+          menu.render();
+        });
+      });
+    }
+
     //   this._parent.innerHTML = '';
 
     //   const form = document.createElement('form');
