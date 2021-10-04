@@ -71,6 +71,9 @@ export default class EditComponent {
     }
 
     _animateDropDownMenu() {
+      if (this._dropDown === undefined) {
+        return;
+      }
       this._dropDown.addEventListener('click', ()=> {
         this._dropDown.focus();
         this._dropDownMenu.classList.toggle('active');
@@ -108,6 +111,7 @@ export default class EditComponent {
       this._getElems();
       console.log(this);
       this._animateDropDownMenu();
+      this._clickTagsButton();
       // this._addEventListeners();
     }
 
