@@ -65,6 +65,7 @@ export default class EditComponent {
       this._dropDown = document.getElementsByClassName('dropdown')[0];
       this._dropDownMenu = document.getElementsByClassName('dropdown-menu')[0];
       this._dropDownMenuElements = document.getElementsByTagName('li');
+      this._inputTags = document.getElementsByClassName('msg')[0];
       console.log(this._dropDownMenuElements);
     }
 
@@ -87,7 +88,11 @@ export default class EditComponent {
       //   this_.removeClass('active');
       //   this_.find('.dropdown-menu').slideUp(300);
       // });
-      this._dropDownMenu.addEventListener
+      for (i = 0; i < 3; i++) {
+        this._dropDownMenuElements[i].addEventListener('click', ()=> {
+          this._inputTags.innerText += this_._dropDownMenuElements[i].value;
+        });
+      }
       // $('.dropdown .dropdown-menu li').click(function () {
       //   this_.parents('.dropdown').find('span').text($(this).text());
       //   this_.parents('.dropdown').find('input').attr('value', $(this).attr('id'));
