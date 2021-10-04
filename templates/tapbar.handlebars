@@ -1,0 +1,19 @@
+<div class="tapbar-container">
+    {{#each actions}}
+        {{#if selected}}
+            <button class="menu-icon">
+                <img
+                    src="{{iconSelected}}"
+                    class="{{className}}"
+                >
+            </button>
+        {{else}}
+            <button class="menu-icon">
+                <img
+                    src="{{iconDeselected}}"
+                    class="{{className}}"
+                >
+            </button>
+        {{/if}}
+    {{/each}}
+</div>

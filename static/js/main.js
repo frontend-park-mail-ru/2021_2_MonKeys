@@ -24,7 +24,10 @@ window.addEventListener('load', (e) => {
 
 document.addEventListener('click', clickButtons, false);
 
-loginPage();
+
+// loginPAge()
+feedPage();
+addMenu('menu-feed');
 
 const configApp = {
   'login': {
@@ -39,22 +42,22 @@ const configApp = {
   },
   'menu-feed': {
     link: '/feed',
-    name: 'feed',
+    name: 'menu-feed',
     open: feedPage,
   },
   'menu-profile': {
     link: '/profile',
-    name: 'profile',
+    name: 'menu-profile',
     open: profilePage,
   },
   'menu-likes': {
     link: '/likes',
-    name: 'likes',
+    name: 'menu-likes',
     open: notDoneYet,
   },
   'menu-chat': {
     link: '/likes',
-    name: 'chat',
+    name: 'menu-chat',
     open: notDoneYet,
   },
   'profile-edit': {
@@ -293,7 +296,7 @@ function notDoneYet() {
  * @param {String} activeItem - текущая страница в меню
  */
 function addMenu(activeItem) {
-  const menu = new MenuComponent();
+  const menu = new MenuComponent(root);
   menu.activeItem = activeItem;
   menu.render();
 }

@@ -114,12 +114,13 @@ export default class FeedComponent {
     const { touches } = event;
     this._x = touches[0].clientX;
     this._y = touches[0].clientY;
+    console.log(this._x, this._y);
     if (window.innerHeight < this._y || window.innerWidth < this._x || this._y < 0 || this._x < 0) {
       return;
     }
     const diffX= this._x - this._x1
     const diffY= this._y - this._y1;
-  
+    console.log(previousCard, currentCard)
     if(diffX<280){
       const diffBig = Math.abs(diffX / 40);
       const diffSmall = Math.abs(diffX / 56); 
@@ -179,6 +180,7 @@ export default class FeedComponent {
           currentCard.style="";
           currentCard.style.transform = "translate(0px, 0px)";
           previousCard.style.width = "90%";
+        
           previousCard.style.height = "75%";
           previousCard.style.top = "12%";
           previousCard.style.animation = "";
@@ -193,6 +195,7 @@ export default class FeedComponent {
   }
 
   _handleTouchStart(event) {
+  
     const { touches } = event;
     this._x1 = touches[0].clientX;
     this._y1 = touches[0].clientY;
