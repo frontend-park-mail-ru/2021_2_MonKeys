@@ -68,7 +68,7 @@ export default class EditComponent {
     _animateDropDownMenu() {
       this._dropDown.addEventListener('click', ()=> {
         this._dropDown.focus();
-        this._dropDown.classList.toggle('active');
+        this._dropDownMenu.classList.toggle('active');
         // this._dropDownMenu.slideToggle(300);
       });
       // $('.dropdown').click(function() {

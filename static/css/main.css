@@ -1065,6 +1065,9 @@ span.choose {
     overflow-y: auto;
     z-index: 9
 }
+.dropdown .dropdown-menu.active {
+    visibility: visible;
+}
 .dropdown .dropdown-menu li {
     padding: 10px;
     transition: all .2s ease-in-out;
