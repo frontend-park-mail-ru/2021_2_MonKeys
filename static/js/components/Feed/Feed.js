@@ -1,3 +1,6 @@
+import FeedExpandedComponent from './FeedExpanded.js';
+
+
 let currentCard
 let previousCard 
 let previousCard2
@@ -10,23 +13,43 @@ export default class FeedComponent {
   _y;
   _x1;
   _y1;
-  _data = {
-    actions: {
+  _expandedActions = 
+    {
       "dislike-card": {
         actionIcon: "icons/button_dislike_white.svg",
         actionClass: "dislike-card",
         function: this._dislikeCard
       },
-      "expand-card": {
-        actionIcon: "icons/button_expand_white.svg",
-        actionClass: "expand-card",
+      "shrink-card": {
+        actionIcon: "icons/button_shrink_white.svg",
+        actionClass: "shrink-card",
+        function: this._shrinkCard
       },
       "like-card": {
         actionIcon: "icons/tapbar_likes_white_selected.svg",
         actionClass: "like-card",
         function: this._likeCard
       },
+    }
+  _shrinkActions = {
+    "dislike-card": {
+      actionIcon: "icons/button_dislike_white.svg",
+      actionClass: "dislike-card",
+      function: this._dislikeCard
     },
+    "expand-card": {
+      actionIcon: "icons/button_expand_white.svg",
+      actionClass: "expand-card",
+      function: this._expandCard
+    },
+    "like-card": {
+      actionIcon: "icons/tapbar_likes_white_selected.svg",
+      actionClass: "like-card",
+      function: this._likeCard
+    },
+  }
+  _data = {
+    actions: this._shrinkActions,
     card: {},
   };
 
@@ -37,7 +60,16 @@ export default class FeedComponent {
   set data(data) {
     this._data = data;
   }
-
+  _expandCard() {
+    let expandCard = document.getElementsByClassName('expand-card')[0]
+    let profileImage = document.getElementsByClassName('profile-image')[0]
+    let bottomPanel = document.getElementsByClassName('bottom-panel')[0]
+    profileImage.style.animation="shrink-profile-img 1s ease 1";
+    expandCard.style.animation="rotate180 1s ease 1";
+   
+    bottomPanel.style.animation="shrink-profile-bottom-panel 1s ease 1";
+    setTimeout(thisIsNeverThat._expandMainCard, 1000);
+  }
   _likeCard(){
     // ЗАПРОС НА ЛАЙК
     window.Feed.next();
@@ -47,7 +79,26 @@ export default class FeedComponent {
     currentCard.style.animation = "swipedRight 1s ease 1";
     setTimeout(thisIsNeverThat._reRenderMainCard, 1000);
   }
-
+  _expandMainCard(){
+    currentCard.innerHTML = "";
+    currentCard.style="";
+    thisIsNeverThat._data.actions= thisIsNeverThat._expandedActions;
+    console.log(thisIsNeverThat._data.actions);
+    thisIsNeverThat._data.card = window.Feed.getCurrentProfile();
+    const renderedHTML = Handlebars.templates["feedExpanded"];
+    currentCard.innerHTML = renderedHTML(thisIsNeverThat._data);
+  }
+  _shrinkCard(){
+    let shrinkCard = document.getElementsByClassName('shrink-card')[0]
+    let profileImage = document.getElementsByClassName('profile-image-expand')[0]
+    let bottomPanel = document.getElementsByClassName('actions-container')[0]
+    profileImage.style.animation="expand-profile-img 1s ease 1";
+    shrinkCard.style.animation="rotate180 1s ease 1";
+    bottomPanel.style.animation="shrink-profile-bottom-panel 1s ease 1";
+    thisIsNeverThat._data.actions= thisIsNeverThat._shrinkActions;
+    
+    setTimeout(thisIsNeverThat._reRenderMainCard, 1000);
+  }
   _dislikeCard(){
     // ЗАПРОС НА ДИЗЛАЙК
     window.Feed.next();
@@ -89,10 +140,10 @@ export default class FeedComponent {
    */
 
   _reRenderMainCard() {
-    console.log()
     currentCard.innerHTML = "";
     currentCard.style="";
     const renderedHTML = Handlebars.templates["feedCard"];
+    thisIsNeverThat._data.actions= thisIsNeverThat._shrinkActions;
     thisIsNeverThat._data.card = window.Feed.getCurrentProfile();
     currentCard.innerHTML = renderedHTML(thisIsNeverThat._data);
   }

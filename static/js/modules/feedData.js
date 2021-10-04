@@ -58,10 +58,10 @@
             //             }
             //         })).catch((error) => console.log(error));
             this._feedData = [{
-                'name': 'Elon',
-                'age': '25',
-                'img': 'img/Elon_Musk_2015.jpg',
-                'text': `Инст: @elonmask<br>
+                'name': 'Ye',
+                'age': '69',
+                'img': 'img/stare-dont-blink.gif',
+                'description': `Инст: @elonmask<br>
                 Всем привет меня зовут Илон Маск. Люблю играть в
                 геншин импакт, обажаю гаремники. 
                 Просто не могу жить без иссекаев,
@@ -78,10 +78,10 @@
                 ]
             },
             {
-                'name': 'Michail',
-                'age': '20',
-                'img': 'img/Elon_Musk_2015.jpg',
-                'text': `
+                'name': 'Drake',
+                'age': '21',
+                'img': 'img/drake-peeking.gif',
+                'description': `
                 Инст: @marvin<br>
                 Тг: @Marvin<br>
                 Првиет я Миша мне 2 года
