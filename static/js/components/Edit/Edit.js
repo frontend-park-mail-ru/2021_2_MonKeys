@@ -44,11 +44,49 @@ export default class EditComponent {
       this._data = data;
     }
 
+    // selectBox.onchange = function() {
+    //   divSelect.innerHTML = '';
+    //   const { value } = selectBox;
+    //   if (existsSelectBoxItems.indexOf(value) != -1 || value === 'Тэги') {
+    //     return;
+    //   }
+    //   const tag = document.createElement('div');
+    //   tag.className = 'tag-edit';
+    //   tag.textContent = value;
+    //   TagsContainer.appendChild(tag);
+    //   tag.disabled = true;
+    //   existsSelectBoxItems.push(value);
+    // };
+
+    _dropDownMenu() {
+      $('.dropdown').click(function() {
+        this_.attr('tabindex', 1).focus();
+        this_.toggleClass('active');
+        this_.find('.dropdown-menu').slideToggle(300);
+      });
+      $('.dropdown').focusout(function() {
+        this_.removeClass('active');
+        this_.find('.dropdown-menu').slideUp(300);
+      });
+      $('.dropdown .dropdown-menu li').click(function () {
+        this_.parents('.dropdown').find('span').text($(this).text());
+        this_.parents('.dropdown').find('input').attr('value', $(this).attr('id'));
+      });
+    }
+
+
+    // $('.dropdown-menu li').click(function () {
+    // var input = '<strong>' + $(this).parents('.dropdown').find('input').val() + '</strong>',
+    // msg = '<span class="msg">Hidden input value: ';
+    // $('.msg').html(msg + input + '</span>');
+    // }); 
+
     _renderDOM() {
       this._parent.innerHTML = '';
       const renderedHTML = Handlebars.templates['edit'];
       this._parent.innerHTML = renderedHTML(this._data);
-      this._getElems();
+      this._dropDownMenu();
+      // this._getElems();
       // this._addEventListeners();
     }
 
