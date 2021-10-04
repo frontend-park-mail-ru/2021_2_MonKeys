@@ -37,6 +37,7 @@ export default class EditComponent {
     _inputTags
     _dropDown
     _dropDownMenu
+    _dropDownMenuElements
 
     constructor(parent) {
       this._parent = parent;
@@ -63,6 +64,8 @@ export default class EditComponent {
     _getElems() {
       this._dropDown = document.getElementsByClassName('dropdown')[0];
       this._dropDownMenu = document.getElementsByClassName('dropdown-menu')[0];
+      this._dropDownMenuElements = document.getElementsByTagName('li');
+      console.log(this._dropDownMenuElements);
     }
 
     _animateDropDownMenu() {
@@ -78,13 +81,13 @@ export default class EditComponent {
       // });
       this._dropDown.addEventListener('focusout', ()=> {
         this._dropDown.removeClass('active');
-        this._dropDownMenu.slideUp(300);
+        // this._dropDownMenu.slideUp(300);
       });
       // $('.dropdown').focusout(function() {
       //   this_.removeClass('active');
       //   this_.find('.dropdown-menu').slideUp(300);
       // });
-
+      this._dropDownMenu.addEventListener
       // $('.dropdown .dropdown-menu li').click(function () {
       //   this_.parents('.dropdown').find('span').text($(this).text());
       //   this_.parents('.dropdown').find('input').attr('value', $(this).attr('id'));

@@ -1021,14 +1021,12 @@ span.choose {
   text-align: left
 }
 .dropdown .select {
-    cursor: pointer;
     display: block;
     padding: 10px
 }
 .dropdown .select > i {
     font-size: 13px;
     color: #888;
-    cursor: pointer;
     transition: all .3s ease-in-out;
     float: right;
     line-height: 20px
