@@ -1,0 +1,16 @@
+<div class="card-container">
+    {{#each match}}
+    <div class="likes-card">
+        <img src="{{img}}" class="likes-img">
+        <div class="name-container">
+          <div class="name">{{name}}</div>
+          <div class="age">{{age}}</div>
+        </div>
+        <div class="likes-data">
+        
+            You matched on {{date}}
+        
+        </div>
+    </div>
+    {{/each}}
+</div>

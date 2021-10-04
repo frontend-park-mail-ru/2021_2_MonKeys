@@ -1,16 +1,11 @@
 import LoginComponent from './components/Login/Login.js';
-
 import FeedComponent from './components/Feed/Feed.js';
-
 import ProfileComponent from './components/Profile/Profile.js';
-
-import FeedExpandedComponent from './components/Feed/FeedExpanded.js';
-
 import SignupComponent from './components/Signup/Signup.js';
-
 import MenuComponent from './components/Tapbar/Tapbar.js';
-
 import EditComponent from './components/Edit/Edit.js';
+import LikesComponent from './components/Likes/Likes.js';
+import ChatComponent from './components/Chat/Chat.js';
 
 const root = document.getElementById('root');
 
@@ -24,8 +19,7 @@ window.addEventListener('load', (e) => {
 
 document.addEventListener('click', clickButtons, false);
 
-
-loginPage()
+loginPage();
 
 const configApp = {
   'login': {
@@ -51,12 +45,12 @@ const configApp = {
   'menu-likes': {
     link: '/likes',
     name: 'menu-likes',
-    open: notDoneYet,
+    open: likesPage,
   },
   'menu-chat': {
     link: '/likes',
     name: 'menu-chat',
-    open: notDoneYet,
+    open: chatPage,
   },
   'profile-edit': {
     link: '/profile/edit',
@@ -69,6 +63,17 @@ const configApp = {
     open: logout,
   },
 };
+
+
+function likesPage() {
+  const likes = new LikesComponent(root);
+  likes.render();
+}
+
+function chatPage() {
+  const chat = new ChatComponent(root);
+  chat.render();
+}
 
 
 /**
@@ -88,13 +93,7 @@ function profilePage() {
   profile.render();
 }
 
-/**
- * Функция отрисовки страницы расширенного профиля
- */
-function feedExpandedPage() {
-  const feedExpanded = new FeedExpandedComponent(root);
-  feedExpanded.render();
-}
+
 /**
  * Функция страницы с лентой
  */
@@ -109,96 +108,9 @@ function feedPage() {
  * чистит лишние обработчики событий, которые были на ленте
  */
 function clearEventListeners() {
-  document.removeEventListener('touchstart', handleTouchStart, false);
-  document.removeEventListener('touchmove', handleTouchMove, false);
-  document.removeEventListener('touchend', handleTouchEnd, false);
-}
-
-let currentCard;
-let previousCard;
-let previousCard2;
-
-let x;
-let y;
-let x1;
-let y1;
-
-/**
- * Здесь фиксируется, что пользователь сделал с карточкой в ленте:
- *  1) Лайкнул
- *  2) Дизлайкнул
- *  3) Покрутил  по приколу
- * @param {Event} event - событие
- */
-function handleTouchEnd(event) {
-  if (!x1 || !y1) {
-    return;
-  }
-
-  if (x === null) {
-    x = x1;
-  }
-  if (x1 - x < -100) {
-    currentCard.style.animation = 'liked 1s ease 1';
-    const cardToRemove = currentCard;
-    setTimeout(remove(cardToRemove), 1000);
-
-    const { id } = window.Feed.getCurrentProfile();
-    window.Feed.getNextUser(id, () => {
-      feedPage();
-      addMenu('feed');
-    });
-
-    x1 = null;
-    x = null;
-  } else if (x1 - x > 100) {
-    currentCard.style.animation = 'liked 1s ease 1';
-    const cardToRemove = currentCard;
-    setTimeout(remove(cardToRemove), 1000);
-    const { id } = window.Feed.getCurrentProfile();
-
-    window.Feed.getNextUser(id, () => {
-      feedPage();
-      addMenu('feed');
-    });
-
-    x1 = null;
-    x = null;
-  } else {
-    const { target } = event;
-    if (!(target.class === 'expand-class' || target.alt === 'shrink')) {
-      if (previousCard) {
-        previousCard.style.animation = 'shrinkSecondary 1s linear 1';
-      }
-      if (previousCard2) {
-        previousCard2.style.animation = 'shrinkThird 1s linear 1';
-      }
-      if (currentCard) {
-        currentCard.style.animation = 'spin2 1s linear 1';
-      }
-      setTimeout(returnToStart, 1000);
-    }
-  }
-}
-
-
-/**
- * @param {HTMLElement} cardToRemove - карточка которую необходимо скрыть
- */
-function remove(cardToRemove) {
-  cardToRemove.style.opacity = 0;
-}
-
-
-/**
- * Функция обработки начала свайпа карточки в ленте
- * @param {Event} event - событие
- */
-function handleTouchStart(event) {
-  const { touches } = event;
-  currentCard.style.animation = '';
-  x1 = touches[0].clientX;
-  y1 = touches[0].clientY;
+  document.removeEventListener('touchstart');
+  document.removeEventListener('touchmove');
+  document.removeEventListener('touchend');
 }
 
 
@@ -222,7 +134,7 @@ function loginPage() {
   login.checkSubmit( (email, password)=> {
     window.User.loginWithCredentials(email, password, ()=> {
       feedPage();
-      addMenu('feed');
+      addMenu('menu-feed');
     },
     );
   });
@@ -283,12 +195,6 @@ function clickButtons(event) {
   }
 }
 
-/**
- * Функция, которая рендерит несделанные страницы
- */
-function notDoneYet() {
-  root.innerHTML = 'Not done Yet';
-}
 
 /**
  * @param {String} activeItem - текущая страница в меню

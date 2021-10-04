@@ -28,10 +28,10 @@
         getCurrentProfile() {
             return this._feedData[this._counter];
         }
-        next(){
+        next() {
             this._counter++;
         }
-        getFeed(){
+        getFeed() {
             const requestOptions = {
                 method: 'GET',
                 headers: {
@@ -70,12 +70,12 @@
                 так же у меня есть краш, поэтому ищу ТОЛЬКО ДРУГА
                 в общем буду твоим сенпаем, писать в инсту, 
                 а то drip лагает ахахахах)`,
-                'tags' : [
+                'tags': [
                     'anime',
                     'IT',
                     'music',
                     'soccer',
-                ]
+                ],
             },
             {
                 'name': 'Drake',
@@ -89,19 +89,16 @@
                 по жизни пассив конченный
                 обоссанцец. Обожаю играть в геншин
                 `,
-                'tags' : [
+                'tags': [
                     'banana',
                     'fullstack',
                     'gay',
                     'anal',
-                ]
+                ],
             },
-        ]
-        
-
+        ];
         }
         getNextUser(id, callback = noop) {
-          
             const requestOptions = {
                 method: 'PUT',
                 headers: {

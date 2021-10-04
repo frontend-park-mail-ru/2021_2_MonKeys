@@ -1,9 +1,6 @@
-import FeedExpandedComponent from './FeedExpanded.js';
-
-
-let currentCard
-let previousCard 
-let previousCard2
+let currentCard;
+let previousCard;
+let previousCard2;
 
 let thisIsNeverThat;
 
@@ -13,39 +10,39 @@ export default class FeedComponent {
   _y;
   _x1;
   _y1;
-  _expandedActions = 
+  _expandedActions =
     {
-      "dislike-card": {
-        actionIcon: "icons/button_dislike_white.svg",
-        actionClass: "dislike-card",
-        function: this._dislikeCard
+      'dislike-card': {
+        actionIcon: 'icons/button_dislike_white.svg',
+        actionClass: 'dislike-card',
+        function: this._dislikeCard,
       },
-      "shrink-card": {
-        actionIcon: "icons/button_shrink_white.svg",
-        actionClass: "shrink-card",
-        function: this._shrinkCard
+      'shrink-card': {
+        actionIcon: 'icons/button_shrink_white.svg',
+        actionClass: 'shrink-card',
+        function: this._shrinkCard,
       },
-      "like-card": {
-        actionIcon: "icons/tapbar_likes_white_selected.svg",
-        actionClass: "like-card",
-        function: this._likeCard
+      'like-card': {
+        actionIcon: 'icons/tapbar_likes_white_selected.svg',
+        actionClass: 'like-card',
+        function: this._likeCard,
       },
     }
   _shrinkActions = {
-    "dislike-card": {
-      actionIcon: "icons/button_dislike_white.svg",
-      actionClass: "dislike-card",
-      function: this._dislikeCard
+    'dislike-card': {
+      actionIcon: 'icons/button_dislike_white.svg',
+      actionClass: 'dislike-card',
+      function: this._dislikeCard,
     },
-    "expand-card": {
-      actionIcon: "icons/button_expand_white.svg",
-      actionClass: "expand-card",
-      function: this._expandCard
+    'expand-card': {
+      actionIcon: 'icons/button_expand_white.svg',
+      actionClass: 'expand-card',
+      function: this._expandCard,
     },
-    "like-card": {
-      actionIcon: "icons/tapbar_likes_white_selected.svg",
-      actionClass: "like-card",
-      function: this._likeCard
+    'like-card': {
+      actionIcon: 'icons/tapbar_likes_white_selected.svg',
+      actionClass: 'like-card',
+      function: this._likeCard,
     },
   }
   _data = {
@@ -61,54 +58,54 @@ export default class FeedComponent {
     this._data = data;
   }
   _expandCard() {
-    let expandCard = document.getElementsByClassName('expand-card')[0]
-    let profileImage = document.getElementsByClassName('profile-image')[0]
-    let bottomPanel = document.getElementsByClassName('bottom-panel')[0]
-    profileImage.style.animation="shrink-profile-img 1s ease 1";
-    expandCard.style.animation="rotate180 1s ease 1";
-   
-    bottomPanel.style.animation="shrink-profile-bottom-panel 1s ease 1";
+    const expandCard = document.getElementsByClassName('expand-card')[0];
+    const profileImage = document.getElementsByClassName('profile-image')[0];
+    const bottomPanel = document.getElementsByClassName('bottom-panel')[0];
+    profileImage.style.animation='shrink-profile-img 1s ease 1';
+    expandCard.style.animation='rotate180 1s ease 1';
+
+    bottomPanel.style.animation='shrink-profile-bottom-panel 1s ease 1';
     setTimeout(thisIsNeverThat._expandMainCard, 1000);
   }
-  _likeCard(){
+  _likeCard() {
     // ЗАПРОС НА ЛАЙК
     window.Feed.next();
-      
+
     this._x1 = null;
     this._x = null;
-    currentCard.style.animation = "swipedRight 1s ease 1";
+    currentCard.style.animation = 'swipedRight 1s ease 1';
     setTimeout(thisIsNeverThat._reRenderMainCard, 1000);
   }
-  _expandMainCard(){
-    currentCard.innerHTML = "";
-    currentCard.style="";
+  _expandMainCard() {
+    currentCard.innerHTML = '';
+    currentCard.style='';
     thisIsNeverThat._data.actions= thisIsNeverThat._expandedActions;
     thisIsNeverThat._data.card = window.Feed.getCurrentProfile();
-    const renderedHTML = Handlebars.templates["feedExpanded"];
+    const renderedHTML = Handlebars.templates['feedExpanded'];
     currentCard.innerHTML = renderedHTML(thisIsNeverThat._data);
   }
-  _shrinkCard(){
-    let shrinkCard = document.getElementsByClassName('shrink-card')[0]
-    let profileImage = document.getElementsByClassName('profile-image-expand')[0]
-    let bottomPanel = document.getElementsByClassName('actions-container')[0]
-    profileImage.style.animation="expand-profile-img 1s ease 1";
-    shrinkCard.style.animation="rotate180 1s ease 1";
-    bottomPanel.style.animation="shrink-profile-bottom-panel 1s ease 1";
+  _shrinkCard() {
+    const shrinkCard = document.getElementsByClassName('shrink-card')[0];
+    const profileImage = document.getElementsByClassName('profile-image-expand')[0];
+    const bottomPanel = document.getElementsByClassName('actions-container')[0];
+    profileImage.style.animation='expand-profile-img 1s ease 1';
+    shrinkCard.style.animation='rotate180 1s ease 1';
+    bottomPanel.style.animation='shrink-profile-bottom-panel 1s ease 1';
     thisIsNeverThat._data.actions= thisIsNeverThat._shrinkActions;
-    
+
     setTimeout(thisIsNeverThat._reRenderMainCard, 1000);
   }
-  _dislikeCard(){
+  _dislikeCard() {
     // ЗАПРОС НА ДИЗЛАЙК
     window.Feed.next();
-      
+
     this._x1 = null;
     this._x = null;
-    currentCard.style.animation = "swipedLeft 1s ease 1";
+    currentCard.style.animation = 'swipedLeft 1s ease 1';
     setTimeout(thisIsNeverThat._reRenderMainCard, 1000);
-  } 
+  }
 
-  
+
   _handleTouchMove(event) {
     const { touches } = event;
     this._x = touches[0].clientX;
@@ -116,14 +113,14 @@ export default class FeedComponent {
     if (window.innerHeight < this._y || window.innerWidth < this._x || this._y < 0 || this._x < 0) {
       return;
     }
-    const diffX= this._x - this._x1
+    const diffX= this._x - this._x1;
     const diffY= this._y - this._y1;
-    if(diffX<280){
+    if (diffX<280) {
       const diffBig = Math.abs(diffX / 40);
-      const diffSmall = Math.abs(diffX / 56); 
+      const diffSmall = Math.abs(diffX / 56);
       previousCard.style.top = `${12 - diffSmall}%`;
       previousCard.style.height = `${75 + diffSmall}%`;
-      previousCard.style.width = `${90 + diffSmall}%`
+      previousCard.style.width = `${90 + diffSmall}%`;
       previousCard2.style.top = `${19 - diffBig }%`;
       previousCard2.style.height = `${70 + diffBig}%`;
       previousCard2.style.width = `${85 + diffBig}%`;
@@ -132,15 +129,15 @@ export default class FeedComponent {
     currentCard.style.transform += `rotateZ(${diffX / 10}deg)`;
   }
 
-  
+
   /**
    * Сбрасывает стили на всех карточках
    */
 
   _reRenderMainCard() {
-    currentCard.innerHTML = "";
-    currentCard.style="";
-    const renderedHTML = Handlebars.templates["feedCard"];
+    currentCard.innerHTML = '';
+    currentCard.style='';
+    const renderedHTML = Handlebars.templates['feedCard'];
     thisIsNeverThat._data.actions= thisIsNeverThat._shrinkActions;
     thisIsNeverThat._data.card = window.Feed.getCurrentProfile();
     currentCard.innerHTML = renderedHTML(thisIsNeverThat._data);
@@ -150,18 +147,18 @@ export default class FeedComponent {
       return;
     }
     if (this._x1 - this._x < -100) {
-      currentCard.style.animation = "liked 1s ease 1";
+      currentCard.style.animation = 'liked 1s ease 1';
       // ЗАПРОС НА ЛАЙК
       window.Feed.next();
-      
+
       this._x1 = null;
       this._x = null;
- 
+
       setTimeout(thisIsNeverThat._reRenderMainCard, 1000);
     } else if (this._x1 - this._x > 100) {
-      currentCard.style.animation = "liked 1s ease 1";
+      currentCard.style.animation = 'liked 1s ease 1';
       // ЗАПРОС НА ДИЗЛАЙК
-   
+
 
       window.Feed.next();
       this._x1 = null;
@@ -169,36 +166,34 @@ export default class FeedComponent {
       setTimeout(thisIsNeverThat._reRenderMainCard, 1000);
     } else {
       const { target } = event;
-      if (!(target.class === "expand-class" || target.alt === "shrink")) {
-        previousCard.style.animation = "shrinkSecondary 1s linear 1";
-        previousCard2.style.animation = "shrinkThird 1s linear 1";
-        currentCard.style.animation = "spin2 1s linear 1";
+      if (!(target.class === 'expand-class' || target.alt === 'shrink')) {
+        previousCard.style.animation = 'shrinkSecondary 1s linear 1';
+        previousCard2.style.animation = 'shrinkThird 1s linear 1';
+        currentCard.style.animation = 'spin2 1s linear 1';
         setTimeout( () => {
-          currentCard.style="";
-          currentCard.style.transform = "translate(0px, 0px)";
-          previousCard.style.width = "90%";
-        
-          previousCard.style.height = "75%";
-          previousCard.style.top = "12%";
-          previousCard.style.animation = "";
-          previousCard2.style.width = "85%";
-          previousCard2.style.height = "70%";
-          previousCard2.style.top = "19%";
-          previousCard2.style.animation = "";
-          
+          currentCard.style='';
+          currentCard.style.transform = 'translate(0px, 0px)';
+          previousCard.style.width = '90%';
+
+          previousCard.style.height = '75%';
+          previousCard.style.top = '12%';
+          previousCard.style.animation = '';
+          previousCard2.style.width = '85%';
+          previousCard2.style.height = '70%';
+          previousCard2.style.top = '19%';
+          previousCard2.style.animation = '';
         }, 1000);
       }
     }
   }
 
   _handleTouchStart(event) {
-  
     const { touches } = event;
     this._x1 = touches[0].clientX;
     this._y1 = touches[0].clientY;
   }
 
-      /**
+  /**
        * чистит лишние обработчики событий, которые были на ленте
        */
   _clearEventListeners() {
@@ -208,26 +203,25 @@ export default class FeedComponent {
   }
   _handleClicks(event) {
     const { target } = event;
-    
-    if(thisIsNeverThat._data.actions[target.className]){
-  
+
+    if (thisIsNeverThat._data.actions[target.className]) {
       thisIsNeverThat._data.actions[target.className].function();
     }
   }
   _addEventListeners() {
-    document.addEventListener("click", this._handleClicks,false);
-    document.addEventListener("touchstart", this._handleTouchStart, false);
-    document.addEventListener("touchmove", this._handleTouchMove, false);
-    document.addEventListener("touchend", this._handleTouchEnd, false);
+    document.addEventListener('click', this._handleClicks, false);
+    document.addEventListener('touchstart', this._handleTouchStart, false);
+    document.addEventListener('touchmove', this._handleTouchMove, false);
+    document.addEventListener('touchend', this._handleTouchEnd, false);
   }
-  _getElems() {   
-    currentCard = document.getElementsByClassName("card")[0];
-    previousCard = document.getElementsByClassName("card2")[0];
-    previousCard2 = document.getElementsByClassName("card3")[1];
+  _getElems() {
+    currentCard = document.getElementsByClassName('card')[0];
+    previousCard = document.getElementsByClassName('card2')[0];
+    previousCard2 = document.getElementsByClassName('card3')[1];
   }
   _renderDOM() {
-    this._parent.innerHTML = "";
-    const renderedHTML = Handlebars.templates["feed"];
+    this._parent.innerHTML = '';
+    const renderedHTML = Handlebars.templates['feed'];
     this._data.card = window.Feed.getCurrentProfile();
     this._parent.innerHTML = renderedHTML(this._data);
     this._getElems();

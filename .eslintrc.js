@@ -16,5 +16,6 @@ module.exports = {
         'max-len': [2, 120, 2],
         'object-curly-spacing': ['error', 'always'],
         "require-jsdoc": 0,
+        "no-invalid-this": 0,
     },
 };
