@@ -90,7 +90,7 @@ export default class EditComponent {
       // });
       for (let i = 0; i < 3; i++) {
         this._dropDownMenuElements[i].addEventListener('click', ()=> {
-          this._inputTags.innerText += this_._dropDownMenuElements[i].value;
+          this._inputTags.innerText += this._dropDownMenuElements[i].value;
         });
       }
       // $('.dropdown .dropdown-menu li').click(function () {
