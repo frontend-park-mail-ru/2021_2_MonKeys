@@ -67,9 +67,9 @@ export default class EditComponent {
 
     _animateDropDownMenu() {
       this._dropDown.addEventListener('click', ()=> {
-        // this._dropDown.focus();
-        this._dropDown.toogleClass('active');
-        this._dropDownMenu.slideToggle(300);
+        this._dropDown.focus();
+        this._dropDown.classList.toogle('active');
+        // this._dropDownMenu.slideToggle(300);
       });
       // $('.dropdown').click(function() {
       //   this_.attr('tabindex', 1).focus();
