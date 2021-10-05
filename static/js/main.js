@@ -1,24 +1,21 @@
 import LoginComponent from './components/Login/Login.js';
-
 import FeedComponent from './components/Feed/Feed.js';
-
 import ProfileComponent from './components/Profile/Profile.js';
-
-import FeedExpandedComponent from './components/Feed/FeedExpanded.js';
-
 import SignupComponent from './components/Signup/Signup.js';
-
 import MenuComponent from './components/Tapbar/Tapbar.js';
-
 import EditComponent from './components/Edit/Edit.js';
+import LikesComponent from './components/Likes/Likes.js';
+import ChatComponent from './components/Chat/Chat.js';
 
 const root = document.getElementById('root');
+
+let currentComponent;
 
 window.addEventListener('load', (e) => {
   e.preventDefault();
   window.User.loginWithCookie(() => {
     feedPage();
-    addMenu('feed');
+    addMenu('menu-feed');
   });
 });
 
@@ -39,28 +36,23 @@ const configApp = {
   },
   'menu-feed': {
     link: '/feed',
-    name: 'feed',
+    name: 'menu-feed',
     open: feedPage,
   },
   'menu-profile': {
     link: '/profile',
-    name: 'profile',
+    name: 'menu-profile',
     open: profilePage,
-  },
-  'shrink-card': {
-    link: '/feed',
-    name: 'feed',
-    open: feedPage,
   },
   'menu-likes': {
     link: '/likes',
-    name: 'likes',
-    open: notDoneYet,
+    name: 'menu-likes',
+    open: likesPage,
   },
   'menu-chat': {
     link: '/likes',
-    name: 'chat',
-    open: notDoneYet,
+    name: 'menu-chat',
+    open: chatPage,
   },
   'profile-edit': {
     link: '/profile/edit',
@@ -75,12 +67,26 @@ const configApp = {
 };
 
 
+function likesPage() {
+  const likes = new LikesComponent(root);
+  currentComponent = likes;
+  likes.render();
+}
+
+function chatPage() {
+  const chat = new ChatComponent(root);
+  currentComponent = chat;
+  chat.render();
+}
+
+
 /**
  * Функция отрисовки страницы редактирования профиля
  */
 
 function editPage() {
   const edit = new EditComponent(root);
+  currentComponent = edit;
   edit.render();
   edit.checkSubmit();
 }
@@ -89,14 +95,11 @@ function editPage() {
  * Функия страницы с профилем
  */
 function profilePage() {
-  root.innerHTML = '';
   const profile = new ProfileComponent(root);
+  currentComponent = profile
   profile.render();
 }
 
-/**
- * Функция отрисовки страницы расширенного профиля
- */
 
 /**
  * Функция страницы с лентой
@@ -104,6 +107,7 @@ function profilePage() {
 function feedPage() {
   const feed = new FeedComponent(root);
   window.Feed.getFeed();
+  currentComponent = feed;
   feed.render();
 
   document.addEventListener('touchstart', handleTouchStart, false);
@@ -212,7 +216,6 @@ function handleTouchStart(event) {
   y1 = touches[0].clientY;
 }
 
-
 /**
  * Функция для выхода из профиля, посылает запрос на выход
  */
@@ -240,8 +243,9 @@ function loginPage() {
   login.checkSubmit((email, password)=> {
     window.User.loginWithCredentials(email, password, ()=> {
       feedPage();
-      addMenu('feed');
-    });
+      addMenu('menu-feed');
+    },
+    );
   });
   login.checkPasswordInput();
   login.checkEmailInput();
@@ -253,7 +257,6 @@ function loginPage() {
 function signupPage() {
   const signup = new SignupComponent(root);
   signup.render();
-
   signup.checkSubmit((email, password)=> {
     window.User.loginWithCredentials(email, password, ()=> {
       editPage();
@@ -266,21 +269,7 @@ function signupPage() {
 }
 
 
-/**
- * Обработчик нажатий на кнопки в меню
- */
-root.addEventListener('click', (e) => {
-  const { target } = e;
-  if (configApp[target.className]) {
-    configApp[target.className].open();
-    addMenu(configApp[target.className].name);
-  }
-  if (target instanceof HTMLAnchorElement) {
-    e.preventDefault();
 
-    configApp[target.dataset.section].open();
-  }
-});
 
 /**
     Обрабатывает нажатия
@@ -289,31 +278,20 @@ root.addEventListener('click', (e) => {
 function clickButtons(event) {
   const { target } = event;
   if (configApp[target.className]) {
+    if(currentComponent.clearEventListeners){
+      currentComponent.clearEventListeners();
+    }
     configApp[target.className].open();
     addMenu(configApp[target.className].name);
-    if (
-      target.className === 'menu-profile' ||
-      target.className === 'expand-card' ||
-      target.className === 'menu-chat' ||
-      target.className === 'menu-likes'
-    ) {
-      clearEventListeners();
-    }
   }
-}
-
-/**
- * Функция, которая рендерит несделанные страницы
- */
-function notDoneYet() {
-  root.innerHTML = 'Not done Yet';
 }
 
 /**
  * @param {String} activeItem - текущая страница в меню
  */
 function addMenu(activeItem) {
-  const menu = new MenuComponent();
+  const CardContainer=document.getElementsByClassName('card-container')[0];
+  const menu = new MenuComponent(CardContainer);
   menu.activeItem = activeItem;
   menu.render();
 }

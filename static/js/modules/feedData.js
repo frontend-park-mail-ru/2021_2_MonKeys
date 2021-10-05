@@ -28,10 +28,10 @@
         getCurrentProfile() {
             return this._feedData[this._counter];
         }
-        next(){
+        next() {
             this._counter++;
         }
-        getFeed(){
+        getFeed() {
             const requestOptions = {
                 method: 'GET',
                 headers: {
@@ -58,10 +58,10 @@
             //             }
             //         })).catch((error) => console.log(error));
             this._feedData = [{
-                'name': 'Elon',
-                'age': '25',
-                'img': 'img/Elon_Musk_2015.jpg',
-                'text': `Инст: @elonmask<br>
+                'name': 'Ye',
+                'age': '69',
+                'img': 'img/stare-dont-blink.gif',
+                'description': `Инст: @elonmask<br>
                 Всем привет меня зовут Илон Маск. Люблю играть в
                 геншин импакт, обажаю гаремники. 
                 Просто не могу жить без иссекаев,
@@ -70,18 +70,18 @@
                 так же у меня есть краш, поэтому ищу ТОЛЬКО ДРУГА
                 в общем буду твоим сенпаем, писать в инсту, 
                 а то drip лагает ахахахах)`,
-                'tags' : [
+                'tags': [
                     'anime',
                     'IT',
                     'music',
                     'soccer',
-                ]
+                ],
             },
             {
-                'name': 'Michail',
-                'age': '20',
-                'img': 'img/Elon_Musk_2015.jpg',
-                'text': `
+                'name': 'Drake',
+                'age': '21',
+                'img': 'img/drake-peeking.gif',
+                'description': `
                 Инст: @marvin<br>
                 Тг: @Marvin<br>
                 Првиет я Миша мне 2 года
@@ -89,19 +89,16 @@
                 по жизни пассив конченный
                 обоссанцец. Обожаю играть в геншин
                 `,
-                'tags' : [
+                'tags': [
                     'banana',
                     'fullstack',
                     'gay',
                     'anal',
-                ]
+                ],
             },
-        ]
-        
-
+        ];
         }
         getNextUser(id, callback = noop) {
-            alert(1)
             const requestOptions = {
                 method: 'PUT',
                 headers: {
