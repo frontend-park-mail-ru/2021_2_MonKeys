@@ -1,3 +1,5 @@
+import { HTTPSuccess, HTTPEMailNotFound } from '../../constants/HTTPStatus.js';
+
 // eslint-disable-next-line no-unused-vars
 const emailRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -166,9 +168,9 @@ export default class SignupComponent {
               data: data,
               status: response.status,
             })).then((res) => {
-              if (res.status === 200 && res.data.status === 200) {
+              if (res.status === HTTPSuccess && res.data.status === HTTPSuccess) {
                 callback(email, password);
-              } else if (res.data.status === 1001) {
+              } else if (res.data.status === HTTPEMailNotFound) {
                 this._errorForm.className = 'login-error-active';
                 this._errorForm.textContent = errorForm;
               }

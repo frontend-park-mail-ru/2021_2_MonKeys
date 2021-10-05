@@ -1,3 +1,4 @@
+import { dateLength } from '../../constants/validatation.js';
 import ProfileComponent from '../Profile/Profile.js';
 import MenuComponent from '../Tapbar/Tapbar.js';
 
@@ -159,7 +160,7 @@ export default class EditComponent {
       this._form.addEventListener('submit', (e) => {
         e.preventDefault();
         const testName = this._inputName.value.length !== 0;
-        const testDate = this._inputDate.value.toString().length === 10;
+        const testDate = this._inputDate.value.toString().length === dateLength;
 
         if (!testName) {
           this._inputName.className = 'form-field-edit-novalid text-without-icon';

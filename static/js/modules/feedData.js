@@ -1,9 +1,12 @@
+import { HTTPNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
 /* eslint-disable indent */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prefer-const */
 
-
-(function() {
+/**
+ * Иницализирует синглтон Feed для ленты
+ */
+export default function initFeed() {
     const noop = () => {};
 
     /**
@@ -64,12 +67,12 @@
             //             data: data,
             //             status: response.status,
             //         })).then((res) => {
-            //             if (res.data.status === 200) {
+            //             if (res.data.status === HTTPSuccess) {
             //                 console.log(res.data.body);
             //                 this._addProfile(res.data.body);
 
             //                 callback(res.data, res.status);
-            //             } else if (res.data.status === 404) {
+            //             } else if (res.data.status === HTTPNotFound) {
             //                 console.log(res.data.body);
             //                 this._counter++;
             //                 callback();
@@ -140,12 +143,12 @@
                         data: data,
                         status: response.status,
                     })).then((res) => {
-                        if (res.data.status === 200) {
+                        if (res.data.status === HTTPSuccess) {
                             console.log(res.data.body);
                             this._addProfile(res.data.body);
 
                             callback(res.data, res.status);
-                        } else if (res.data.status === 404) {
+                        } else if (res.data.status === HTTPNotFound) {
                             console.log(res.data.body);
                             this._counter++;
                             callback();
@@ -154,12 +157,12 @@
 
                         // cringe
 
-                        // if (res.data.status === 200) {
+                        // if (res.data.status === HTTPSuccess) {
                         //   // root.innerHTML = '';
                         //   // addProfile(res.data.body)
                         //   // renderFeed();
                         //   // addMenu('feed');
-                        // } else if (res.data.status === 404) {
+                        // } else if (res.data.status === HTTPNotFound) {
                         //   root.innerHTML = '';
                         //   renderFeed();
                         //   addMenu('feed');
@@ -168,4 +171,4 @@
         }
     }
     window.Feed = new Feed();
-})();
+};

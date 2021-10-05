@@ -1,3 +1,20 @@
+import { oneSecond } from '../../constants/time.js';
+
+import {
+  maxDiffXTouchscreen,
+  bigDiffDelimeter,
+  smallDiffDelimeter,
+  previousCard2StartHeight,
+  previousCard2StartTop,
+  previousCard2StartWidth,
+  previousCardStartHeight,
+  previousCardStartTop,
+  previousCardStartWidth,
+  currentCardRotationScale,
+  likeDiffValue,
+  dislikeDiffValue,
+} from '../../constants/feed.js';
+
 let currentCard;
 let previousCard;
 let previousCard2;
@@ -79,7 +96,7 @@ export default class FeedComponent {
     expandCard.style.animation='rotate180 1s ease 1';
 
     bottomPanel.style.animation='shrink-profile-bottom-panel 1s ease 1';
-    setTimeout(thisIsNeverThat._expandMainCard, 1000);
+    setTimeout(thisIsNeverThat._expandMainCard, oneSecond);
   }
   /**
    * Отрисовка расширенной карты
@@ -104,7 +121,7 @@ export default class FeedComponent {
     this._x1 = null;
     this._x = null;
     currentCard.style.animation = 'swipedRight 1s ease 1';
-    setTimeout(thisIsNeverThat._reRenderMainCard, 1000);
+    setTimeout(thisIsNeverThat._reRenderMainCard, oneSecond);
   }
 
   /**
@@ -118,7 +135,7 @@ export default class FeedComponent {
     this._x1 = null;
     this._x = null;
     currentCard.style.animation = 'swipedLeft 1s ease 1';
-    setTimeout(thisIsNeverThat._reRenderMainCard, 1000);
+    setTimeout(thisIsNeverThat._reRenderMainCard, oneSecond);
   }
 
 
@@ -134,7 +151,7 @@ export default class FeedComponent {
     bottomPanel.style.animation='shrink-profile-bottom-panel 1s ease 1';
     thisIsNeverThat._data.actions= thisIsNeverThat._shrinkActions;
 
-    setTimeout(thisIsNeverThat._reRenderMainCard, 1000);
+    setTimeout(thisIsNeverThat._reRenderMainCard, oneSecond);
   }
 
   /**
@@ -159,18 +176,18 @@ export default class FeedComponent {
     }
     const diffX= this._x - this._x1;
     const diffY= this._y - this._y1;
-    if (diffX<280) {
-      const diffBig = Math.abs(diffX / 40);
-      const diffSmall = Math.abs(diffX / 56);
-      previousCard.style.top = `${12 - diffSmall}%`;
-      previousCard.style.height = `${75 + diffSmall}%`;
-      previousCard.style.width = `${90 + diffSmall}%`;
-      previousCard2.style.top = `${19 - diffBig }%`;
-      previousCard2.style.height = `${70 + diffBig}%`;
-      previousCard2.style.width = `${85 + diffBig}%`;
+    if (diffX<maxDiffXTouchscreen) {
+      const diffBig = Math.abs(diffX / bigDiffDelimeter);
+      const diffSmall = Math.abs(diffX / smallDiffDelimeter);
+      previousCard.style.top = `${previousCardStartTop - diffSmall}%`;
+      previousCard.style.height = `${previousCardStartHeight + diffSmall}%`;
+      previousCard.style.width = `${previousCardStartWidth + diffSmall}%`;
+      previousCard2.style.top = `${previousCard2StartTop - diffBig }%`;
+      previousCard2.style.height = `${previousCard2StartHeight + diffBig}%`;
+      previousCard2.style.width = `${previousCard2StartWidth + diffBig}%`;
     }
     currentCard.style.transform = `translate(${diffX}px, ${diffY}px)`;
-    currentCard.style.transform += `rotateZ(${diffX / 10}deg)`;
+    currentCard.style.transform += `rotateZ(${diffX / currentCardRotationScale}deg)`;
   }
 
   /**
@@ -200,7 +217,7 @@ export default class FeedComponent {
       return;
     }
     console.log(this._x, this._x1);
-    if (this._x1 - this._x < -100) {
+    if (this._x1 - this._x < likeDiffValue) {
       currentCard.style.animation = 'liked 1s ease 1';
       // ЗАПРОС НА ЛАЙК
       window.Feed.next();
@@ -208,8 +225,8 @@ export default class FeedComponent {
       this._x1 = null;
       this._x = null;
 
-      setTimeout(thisIsNeverThat._reRenderMainCard, 1000);
-    } else if (this._x1 - this._x > 100) {
+      setTimeout(thisIsNeverThat._reRenderMainCard, oneSecond);
+    } else if (this._x1 - this._x > dislikeDiffValue) {
       currentCard.style.animation = 'liked 1s ease 1';
       // ЗАПРОС НА ДИЗЛАЙК
 
@@ -217,7 +234,7 @@ export default class FeedComponent {
       window.Feed.next();
       this._x1 = null;
       this._x = null;
-      setTimeout(thisIsNeverThat._reRenderMainCard, 1000);
+      setTimeout(thisIsNeverThat._reRenderMainCard, oneSecond);
     } else {
       const { target } = event;
       if (!(target.class === 'expand-class' || target.alt === 'shrink')) {
@@ -236,7 +253,7 @@ export default class FeedComponent {
           previousCard2.style.height = '70%';
           previousCard2.style.top = '19%';
           previousCard2.style.animation = '';
-        }, 1000);
+        }, oneSecond);
         this._x1 = null;
         this._x = null;
       }

@@ -6,6 +6,11 @@ import MenuComponent from './components/Tapbar/Tapbar.js';
 import EditComponent from './components/Edit/Edit.js';
 import LikesComponent from './components/Likes/Likes.js';
 import ChatComponent from './components/Chat/Chat.js';
+import initFeed from './modules/feedData.js';
+import initUser from './modules/userData.js';
+
+initUser();
+initFeed();
 
 const root = document.getElementById('root');
 

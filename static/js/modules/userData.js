@@ -1,4 +1,11 @@
-(function() {
+import { HTTPNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
+import { hundredMS } from '../constants/time.js';
+
+
+/**
+ * Иницализирует синглтон User для пользователя
+ */
+export default function initUser() {
   const noop = () => {};
 
   /**
@@ -50,7 +57,7 @@
                   data: data,
                   status: response.status,
                 })).then((res) => {
-                  if (res.status === 200 && res.data.status === 200) {
+                  if (res.status === HTTPSuccess && res.data.status === HTTPSuccess) {
                     this._setUserProfile(res.data.body);
 
                     window.Feed.getNextUser(this._userData.id);
@@ -59,10 +66,10 @@
                     // !!! cring
 
 
-                    setTimeout(callback, 100);
+                    setTimeout(callback, hundredMS);
                     // swipeUser(user.id)
                     // userProfileRender();
-                  } else if (res.data.status === 404) {
+                  } else if (res.data.status === HTTPNotFound) {
                     // w
                   }
                   // if (res.data.status === 'ok') {
@@ -95,9 +102,9 @@
                   data: data,
                   status: response.status,
                 })).then((res) => {
-                  if (res.status === 200 && res.data.status === 200) {
+                  if (res.status === HTTPSuccess && res.data.status === HTTPSuccess) {
                     this.loginWithCookie(callback);
-                  } else if (res.data.status === 404) {
+                  } else if (res.data.status === HTTPNotFound) {
 
 
                   }
@@ -132,11 +139,11 @@
                   data: data,
                   status: response.status,
                 })).then((res) => {
-                  if (res.status === 200 && res.data.status === 200) {
+                  if (res.status === HTTPSuccess && res.data.status === HTTPSuccess) {
                     this._setUserProfile(res.data.body);
                     window.Feed.getNextUser(this._userData.id);
                     callback();
-                  } else if (res.data.status === 404) {}
+                  } else if (res.data.status === HTTPNotFound) {}
                   console.log(res.data.status);
                 })).catch((error) => console.log(error));
         }
@@ -157,4 +164,4 @@
         }
   }
   window.User = new User();
-})();
+};
