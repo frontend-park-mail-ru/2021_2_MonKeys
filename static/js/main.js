@@ -129,13 +129,13 @@ function loginPage() {
   const login = new LoginComponent(root);
   login.render();
 
-   login.checkSubmit( (email, password)=> {
-     window.User.loginWithCredentials(email, password, ()=> {
-       feedPage();
-       addMenu('menu-feed');
-     },
-     );
-   });
+  login.checkSubmit( (email, password)=> {
+    window.User.loginWithCredentials(email, password, ()=> {
+      feedPage();
+      addMenu('menu-feed');
+    },
+    );
+  });
   login.checkSubmit((email, password)=> {
     window.User.loginWithCredentials(email, password, ()=> {
       feedPage();
@@ -151,7 +151,6 @@ function loginPage() {
  * Функция для страницы с регистрацией
  */
 function signupPage() {
-
   const signup = new SignupComponent(root);
   signup.render();
   signup.checkSubmit((email, password)=> {
