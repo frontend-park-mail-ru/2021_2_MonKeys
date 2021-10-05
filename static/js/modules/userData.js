@@ -1,11 +1,17 @@
 (function() {
   const noop = () => {};
 
-
+  /**
+   * Класс для работы с данными пользователя
+   */
   class User {
         // eslint-disable-next-line
         _userData = {};
 
+        /**
+         * Устанавливает данные пользователя
+         * @param {Object} data - данные пользователя
+         */
         _setUserProfile(data) {
           this._userData = Object();
           this._userData.id = data.id;
@@ -16,10 +22,18 @@
           this._userData.tags = data.tags;
         }
 
+        /**
+         * Геттер для данных пользователя
+         * @return {Object} - данные пользователя
+         */
         getUserData() {
           return this._userData;
         }
 
+        /**
+         * Функция логина с помощью куки
+         * @param {function} callback - функция, которая вызовется в случае успеха
+         */
         loginWithCookie(callback = noop) {
           const requestOptions = {
             method: 'GET',
@@ -58,6 +72,12 @@
                 })).catch((error) => console.log(error));
         }
 
+        /**
+         * Функция логина с помощью логина и пароля
+         * @param {string} email - EMail пользователя
+         * @param {string} password - Пароль пользователя
+         * @param {function} callback - функция, которая вызовется в случае успеха
+         */
         loginWithCredentials(email, password, callback = noop) {
           console.log(email, password, callback);
           const requestOptions = {
@@ -84,6 +104,14 @@
                 })).catch((error) => console.log(error));
         }
 
+        /**
+         * Функция с запросов на редактирование профиля
+         * @param {String} name - Имя пользователя
+         * @param {String} date - Дата рождения
+         * @param {String} description - Описание
+         * @param {String[]} tags - Выбранные тэги
+         * @param {function} callback - функция, которая вызовется в случае успеха
+         */
         editProfile(name, date, description, tags, callback) {
           const requestOptions = {
             method: 'PUT',
@@ -113,6 +141,10 @@
                 })).catch((error) => console.log(error));
         }
 
+        /**
+         * посылает запрос на завершение сессии (logout)
+         * @param {function} callback - функция, которая вызовется в случае успеха
+         */
         logoutCookie(callback = noop) {
           const requestOptions = {
             method: 'DELETE',

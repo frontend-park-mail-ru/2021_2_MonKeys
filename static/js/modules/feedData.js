@@ -6,12 +6,19 @@
 (function() {
     const noop = () => {};
 
-
+    /**
+     * Класс для хранения данных ленты
+     * и запросов на обновление ленты
+     */
     class Feed {
         _counter = 0;
         _feedData = [];
 
 
+        /**
+         * Добавление нового профиля в ленту
+         * @param {Object} data - Данные нового профиля в ленте
+         */
         _addProfile(data) {
             this._feedData[this._counter] = Object();
             this._feedData[this._counter].id = data.id;
@@ -25,12 +32,23 @@
             this._counter++;
         }
 
+        /**
+         * Геттер текущего профиля в ленте
+         * @return {Object} Текущий профиль в ленте
+         */
         getCurrentProfile() {
             return this._feedData[this._counter];
         }
+        /**
+         * Переход к следующему профилю в ленте
+         */
         next() {
             this._counter++;
         }
+
+        /**
+         * Запрос на ленту на бекенд
+         */
         getFeed() {
             const requestOptions = {
                 method: 'GET',
@@ -98,6 +116,12 @@
             },
         ];
         }
+
+        /**
+         * не законченная штука
+         * @param {int} id - id лайкнутого пользователя
+         * @param {function} callback - Функция, которая вызовется в результате запроса
+         */
         getNextUser(id, callback = noop) {
             const requestOptions = {
                 method: 'PUT',

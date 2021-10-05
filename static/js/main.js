@@ -65,13 +65,18 @@ const configApp = {
   },
 };
 
-
+/**
+ * Функция отрисовки страницы с мэтчами
+ */
 function likesPage() {
   const likes = new LikesComponent(root);
   currentComponent = likes;
   likes.render();
 }
 
+/**
+ * Функция отрисовки страницы чатов
+ */
 function chatPage() {
   const chat = new ChatComponent(root);
   currentComponent = chat;
@@ -82,7 +87,6 @@ function chatPage() {
 /**
  * Функция отрисовки страницы редактирования профиля
  */
-
 function editPage() {
   const edit = new EditComponent(root);
   currentComponent = edit;

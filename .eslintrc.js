@@ -15,7 +15,7 @@ module.exports = {
   'rules': {
     'max-len': [2, 120, 2],
     'object-curly-spacing': ['error', 'always'],
-    'no-magic-numbers': 2,
+    'no-magic-numbers': ['error', { 'ignore': [0, 1, 2, 3] }],
     'no-invalid-this': 0,
   },
 };

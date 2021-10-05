@@ -11,6 +11,10 @@ const errorPasswordMsg = 'Пароль должен состоять из бол
 // eslint-disable-next-line no-unused-vars
 const errorForm = 'Такой пользователь еще не зарегистрирован';
 
+
+/**
+ * Компонент с логином
+ */
 export default class LoginComponent {
     _parent
     _emailInput
@@ -20,6 +24,11 @@ export default class LoginComponent {
     _errorForm
     _form
 
+
+    /**
+     * Обработчик события ввода/фокусаута для поля EMail, проверяет корректность ввода
+     * и меняет стили в случае невалидных данных
+     */
     checkEmailInput() {
       this._emailInput.addEventListener('input', () => {
         const test = this._emailInput.value.length === 0 || emailRegExp.test(this._emailInput.value);
@@ -39,6 +48,10 @@ export default class LoginComponent {
       });
     }
 
+    /**
+     * Обработчик события ввода/фокусаута для поля пароля, проверяет корректность ввода
+     * и меняет стили в случае невалидных данных
+     */
     checkPasswordInput() {
       this._passwordInput.addEventListener('input', () => {
         const test = this._passwordInput.value.length === 0 || passwordRegExp.test(this._passwordInput.value);
@@ -58,6 +71,10 @@ export default class LoginComponent {
       });
     }
 
+    /**
+     *
+     * @param {function} callback - функция, вызываемая в случае корректных данных
+     */
     checkSubmit(callback) {
       this._form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -88,6 +105,12 @@ export default class LoginComponent {
       });
     }
 
+    /**
+     * Функция входа по логину и паролю
+     * @param {string} email - Почта
+     * @param {string} password - Пароль
+     * @param {function} callback - функция, вызываемая в случае успешного входа
+     */
     _loginUserWithCredentials(email, password, callback) {
       const requestOptions = {
         method: 'POST',
@@ -114,11 +137,17 @@ export default class LoginComponent {
             })).catch((error) => console.log(error));
     }
 
+    /**
+   *
+   * @param {HTMLElement} parent - Родительский элемент, в который будет рендерится страница
+   */
     constructor(parent) {
       this._parent = parent;
     }
 
-
+    /**
+   * Находит элементы для их будущей анимации
+   */
     _getElems() {
       this._form = document.getElementsByClassName('login-form')[0];
       this._emailInput = document.getElementsByTagName('input')[0];
@@ -128,17 +157,20 @@ export default class LoginComponent {
       this._errorForm = document.getElementsByClassName('login-error')[2];
     }
 
+
+    /**
+   * Функция отрисовки
+   */
     _renderDOM() {
       this._parent.innerHTML = '';
       const renderedHTML = Handlebars.templates['login'];
       this._parent.innerHTML = renderedHTML();
       this._getElems();
     }
-    _createElementWithClass(tag, className) {
-      const element = document.createElement(tag);
-      element.className = className;
-      return element;
-    }
+
+    /**
+   * Функция отрисовки ленты
+   */
     render() {
       this._renderDOM();
     }

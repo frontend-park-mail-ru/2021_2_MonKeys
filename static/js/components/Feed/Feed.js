@@ -4,6 +4,9 @@ let previousCard2;
 
 let thisIsNeverThat;
 
+/**
+ * Компонент с лентой
+ */
 export default class FeedComponent {
   _parent;
   _x;
@@ -50,13 +53,24 @@ export default class FeedComponent {
     card: {},
   };
 
+  /**
+   *
+   * @param {HTMLElement} parent - Родительский элемент, в который будет рендерится страница
+   */
   constructor(parent) {
     this._parent = parent;
   }
 
+  /**
+   * @param {data} data - Данные для отрисовки
+   */
   set data(data) {
     this._data = data;
   }
+
+  /**
+   * Функция обработки события расширения карты в ленте, начинает анимации расширения
+   */
   _expandCard() {
     const expandCard = document.getElementsByClassName('expand-card')[0];
     const profileImage = document.getElementsByClassName('profile-image')[0];
@@ -67,6 +81,21 @@ export default class FeedComponent {
     bottomPanel.style.animation='shrink-profile-bottom-panel 1s ease 1';
     setTimeout(thisIsNeverThat._expandMainCard, 1000);
   }
+  /**
+   * Отрисовка расширенной карты
+   */
+  _expandMainCard() {
+    currentCard.innerHTML = '';
+    currentCard.style='';
+    thisIsNeverThat._data.actions= thisIsNeverThat._expandedActions;
+    thisIsNeverThat._data.card = window.Feed.getCurrentProfile();
+    const renderedHTML = Handlebars.templates['feedExpanded'];
+    currentCard.innerHTML = renderedHTML(thisIsNeverThat._data);
+  }
+
+  /**
+   * Обработчик события лайка карты в ленте
+   */
   _likeCard() {
     // ЗАПРОС НА ЛАЙК
     console.log('liked');
@@ -77,25 +106,10 @@ export default class FeedComponent {
     currentCard.style.animation = 'swipedRight 1s ease 1';
     setTimeout(thisIsNeverThat._reRenderMainCard, 1000);
   }
-  _expandMainCard() {
-    currentCard.innerHTML = '';
-    currentCard.style='';
-    thisIsNeverThat._data.actions= thisIsNeverThat._expandedActions;
-    thisIsNeverThat._data.card = window.Feed.getCurrentProfile();
-    const renderedHTML = Handlebars.templates['feedExpanded'];
-    currentCard.innerHTML = renderedHTML(thisIsNeverThat._data);
-  }
-  _shrinkCard() {
-    const shrinkCard = document.getElementsByClassName('shrink-card')[0];
-    const profileImage = document.getElementsByClassName('profile-image-expand')[0];
-    const bottomPanel = document.getElementsByClassName('actions-container')[0];
-    profileImage.style.animation='expand-profile-img 1s ease 1';
-    shrinkCard.style.animation='rotate180 1s ease 1';
-    bottomPanel.style.animation='shrink-profile-bottom-panel 1s ease 1';
-    thisIsNeverThat._data.actions= thisIsNeverThat._shrinkActions;
 
-    setTimeout(thisIsNeverThat._reRenderMainCard, 1000);
-  }
+  /**
+   * Обработчик события дизлайка карты
+   */
   _dislikeCard() {
     console.log('disliked');
     // ЗАПРОС НА ДИЗЛАЙК
@@ -108,6 +122,26 @@ export default class FeedComponent {
   }
 
 
+  /**
+   * Обработчик события сжатия карты, здесь начинаются анимации перед переходом к сжатию
+   */
+  _shrinkCard() {
+    const shrinkCard = document.getElementsByClassName('shrink-card')[0];
+    const profileImage = document.getElementsByClassName('profile-image-expand')[0];
+    const bottomPanel = document.getElementsByClassName('actions-container')[0];
+    profileImage.style.animation='expand-profile-img 1s ease 1';
+    shrinkCard.style.animation='rotate180 1s ease 1';
+    bottomPanel.style.animation='shrink-profile-bottom-panel 1s ease 1';
+    thisIsNeverThat._data.actions= thisIsNeverThat._shrinkActions;
+
+    setTimeout(thisIsNeverThat._reRenderMainCard, 1000);
+  }
+
+  /**
+   * Обрыботчик события свайпа в процессе 'touchmove'
+   * @param {Event} event - событие
+   *
+   */
   _handleTouchMove(event) {
     if (!this._x1 || !this._y1) {
       return;
@@ -139,11 +173,9 @@ export default class FeedComponent {
     currentCard.style.transform += `rotateZ(${diffX / 10}deg)`;
   }
 
-
   /**
-   * Сбрасывает стили на всех карточках
+   * рендер основной (сжатой) карты в ленте
    */
-
   _reRenderMainCard() {
     currentCard.innerHTML = '';
     currentCard.style='';
@@ -152,6 +184,16 @@ export default class FeedComponent {
     thisIsNeverThat._data.card = window.Feed.getCurrentProfile();
     currentCard.innerHTML = renderedHTML(thisIsNeverThat._data);
   }
+
+  /**
+   * Обработчик окончания свайпа - фиксирует событие и вызывает его обработчик
+   * Либо произошёл:
+   * 1) Лайк
+   * 2) Дизлайк
+   * 3) Карту просто подёргали
+   * @param {Event} event - событие 'touchend'
+   *
+   */
   _handleTouchEnd(event) {
     console.log('END');
     if (!this._x1 || !this._y1 || !this._x || !this._y) {
@@ -201,6 +243,10 @@ export default class FeedComponent {
     }
   }
 
+  /**
+   * Обработчик события 'touchstart'
+   * @param {Even} event - событие 'touchstart'
+   */
   _handleTouchStart(event) {
     const { touches } = event;
     if (event.touches) {
@@ -226,6 +272,13 @@ export default class FeedComponent {
     // document.removeEventListener('mousemove', this._handleTouchMove, false);
     // document.removeEventListener('mouseup', this._handleTouchEnd, false);
   }
+
+  /**
+   * Обработчик кликов, здесь фиксируется произошёл ли клик
+   * по кнопке, чтобы вызвать обработчик
+   * Сжатия карты, расширения карты, лайка карты и т.д.
+   * @param {Event} event - событие клика
+   */
   _handleClicks(event) {
     const { target } = event;
 
@@ -233,6 +286,10 @@ export default class FeedComponent {
       thisIsNeverThat._data.actions[target.className].function();
     }
   }
+
+  /**
+   * Добавляет необходимые для Feed EventListener-ы
+   */
   _addEventListeners() {
     document.addEventListener('click', this._handleClicks, false);
     document.addEventListener('touchstart', this._handleTouchStart, false);
@@ -242,11 +299,19 @@ export default class FeedComponent {
     document.addEventListener('touchend', this._handleTouchEnd, false);
     // document.addEventListener('mouseup', this._handleTouchEnd, false);
   }
+
+  /**
+   * Находит элементы для их будущей анимации
+   */
   _getElems() {
     currentCard = document.getElementsByClassName('card')[0];
     previousCard = document.getElementsByClassName('card2')[0];
     previousCard2 = document.getElementsByClassName('card3')[1];
   }
+
+  /**
+   * Функция отрисовки
+   */
   _renderDOM() {
     this._parent.innerHTML = '';
     const renderedHTML = Handlebars.templates['feed'];
@@ -256,6 +321,9 @@ export default class FeedComponent {
     this._addEventListeners();
     thisIsNeverThat = this;
   }
+  /**
+   * Функция отрисовки ленты
+   */
   render() {
     this._renderDOM();
   }
