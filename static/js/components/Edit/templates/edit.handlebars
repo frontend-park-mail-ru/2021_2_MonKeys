@@ -2,7 +2,11 @@
     <form class="edit-form">
         {{#each fields}}
         <div class="inputEdit">
-            <{{fieldTag}} type="{{fieldType}}" class="{{fieldClass}}" placeholder="{{fieldPlaceholder}}"></{{fieldTag}}>
+            {{#if fieldInput}}
+            <{{fieldTag}} type="{{fieldType}}" class="{{fieldClass}}" placeholder="{{fieldPlaceholder}}" value="{{fieldValue}}"></{{fieldTag}}>
+            {{else}}
+            <{{fieldTag}} type="{{fieldType}}" class="{{fieldClass}}" placeholder="{{fieldPlaceholder}}">{{fieldValue}}</{{fieldTag}}>
+            {{/if}}
         </div>
         {{/each}}
         <div class="tag-container">
@@ -11,7 +15,11 @@
                 <div class="center-container">
                     {{#each tags}}
                     <label class="checkbox-btn">
+                        {{#if tagActive}}
+                        <input type="checkbox" class="tag-checkbox" checked>
+                        {{else}}
                         <input type="checkbox" class="tag-checkbox">
+                        {{/if}}
                         <span>{{tagText}}</span>
                     </label>
                     {{/each}}
@@ -22,23 +30,22 @@
             <div class="im-container">
                 <div style="position: relative;">
                     <img src="../img/Elon_Musk_2015.jpg" class="im">
-                    <button class="removeImg"></button>
+                    <button type="button" class="removeImg"></button>
                 </div>
                 <div style="position: relative;">
                     <img src="../img/Elon_Musk_2015.jpg" class="im">
-                    <button class="removeImg"></button>
+                    <button type="button" class="removeImg"></button>
                 </div>
                 <div style="position: relative;">
                     <img src="../img/Elon_Musk_2015.jpg" class="im">
-                    <button class="removeImg"></button>
+                    <button type="button" class="removeImg"></button>
                 </div>
             </div>
-            <button class="add"></button>
+            <button type="button" class="add"></button>
         </div>
         <button type="submit" class="login-button">
             <div class="center-container">
                 <span class="edit-button-text">Сохранить</span>
-                <img src="../icons/button_next_black.svg" class="svg-next-edit">
             </div>
         </button>
     </form>

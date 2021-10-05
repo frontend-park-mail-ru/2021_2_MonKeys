@@ -24,7 +24,6 @@ window.addEventListener('load', (e) => {
   });
 });
 
-
 loginPage();
 
 const configApp = {
@@ -96,7 +95,6 @@ function editPage() {
   const edit = new EditComponent(root);
   currentComponent = edit;
   edit.render();
-  edit.checkSubmit();
 }
 
 /**
@@ -179,7 +177,9 @@ root.addEventListener('click', (e) => {
       currentComponent.clearEventListeners();
     }
     configApp[target.className].open();
-    addMenu(configApp[target.className].name);
+    if (target.className!== 'profile-logout' && target.className!== 'profile-edit') {
+      addMenu(configApp[target.className].name);
+    }
   }
   if (target instanceof HTMLAnchorElement) {
     e.preventDefault();
