@@ -7,16 +7,19 @@ export default class EditComponent {
     _data = {
       fields: {
         'name': {
-          fieldType: 'text',
+          fieldTag: 'textarea',
           fieldClass: 'form-field text-without-icon',
+          fieldPlaceholder: 'Имя',
         },
         'birthDate': {
+          fieldTag: 'input',
           fieldType: 'date',
           fieldClass: 'form-field text-with-icon',
         },
         'desc': {
-          fieldType: 'text',
+          fieldTag: 'textarea',
           fieldClass: 'form-field-desc text-desc',
+          fieldPlaceholder: 'Расскажите о себе',
         },
       },
       tags: {
@@ -35,10 +38,10 @@ export default class EditComponent {
     _inputDate
     _inputDesc
     _inputTags
-    _dropDown
-    _dropDownMenu
-    _dropDownMenuElements
-    _tagsButton
+    _tagsButtons
+    _tagsCheckboxes
+    _form
+
 
     constructor(parent) {
       this._parent = parent;
@@ -66,83 +69,92 @@ export default class EditComponent {
       this._dropDown = document.getElementsByClassName('dropdown')[0];
       this._dropDownMenu = document.getElementsByClassName('dropdown-menu')[0];
       this._dropDownMenuElements = document.getElementsByTagName('li');
-      this._inputTags = document.getElementsByClassName('msg')[0];
-      this._tagsButton = document.getElementsByClassName('add-active')[0];
+      this._tagsButtons = document.getElementsByClassName('checkbox-btn');
+      this._tagsCheckboxes = document.getElementsByClassName('tag-checkbox');
+      this._form = document.getElementsByClassName('edit-form')[0];
+      this._inputName = document.getElementsByClassName('form-field')[0];
+      this._inputDate = document.getElementsByClassName('form-field')[1];
+      this._inputDesc = document.getElementsByClassName('form-field-desc')[0];
     }
 
-    _animateDropDownMenu() {
-      if (this._dropDown === undefined) {
-        return;
-      }
-      this._dropDown.addEventListener('click', ()=> {
-        this._dropDown.focus();
-        this._dropDownMenu.classList.toggle('active');
-      });
-      this._dropDown.addEventListener('focusout', ()=> {
-        this._dropDown.removeClass('active');
-      });
-      for (let i = 0; i < 3; i++) {
-        this._dropDownMenuElements[i].addEventListener('click', ()=> {
-          this._inputTags.innerText += this._dropDownMenuElements[i].innerText;
-        });
-      }
-    }
+    // _animateDropDownMenu() {
+    //   if (this._dropDown === undefined) {
+    //     return;
+    //   }
+    //   this._dropDown.addEventListener('click', ()=> {
+    //     this._dropDown.focus();
+    //     this._dropDownMenu.classList.toggle('active');
+    //   });
+    //   this._dropDown.addEventListener('focusout', ()=> {
+    //     this._dropDown.removeClass('active');
+    //   });
+    //   for (let i = 0; i < 3; i++) {
+    //     this._dropDownMenuElements[i].addEventListener('click', ()=> {
+    //       this._inputTags.innerText += this._dropDownMenuElements[i].innerText;
+    //     });
+    //   }
+    // }
 
-    _clickTagsButton() {
-      this._tagsButton.addEventListener('click', ()=> {
-        this._dropDown.className('dropdown-active');
-        this._tagsButton.className('add-disactive')
-      });
-    }
-
-
-    // $('.dropdown-menu li').click(function () {
-    // var input = '<strong>' + $(this).parents('.dropdown').find('input').val() + '</strong>',
-    // msg = '<span class="msg">Hidden input value: ';
-    // $('.msg').html(msg + input + '</span>');
-    // }); 
+    // _clickTagsButton() {
+    //   if (this._dropDown === undefined) {
+    //     return;
+    //   }
+    //   this._tagsButton.addEventListener('click', ()=> {
+    //     this._dropDown.classList.toggle('active');
+    //     this._tagsButton.removeClass('active');
+    //   });
+    // }
 
     _renderDOM() {
       this._parent.innerHTML = '';
       const renderedHTML = Handlebars.templates['edit'];
-      console.log(this);
       this._parent.innerHTML = renderedHTML(this._data);
-      console.log(this);
       this._getElems();
-      console.log(this);
-      this._animateDropDownMenu();
-      this._clickTagsButton();
-      // this._addEventListeners();
+      this._clickTags();
     }
 
-    checkSubmit(callback) {
+    _clickTags() {
+      const tagsArr = new Set();
+      for (let j = 0; j < 3; j++) {
+        this._tagsCheckboxes[j].addEventListener('change', ()=> {
+          for (let i = 0; i < 3; i++) {
+            if (this._tagsButtons[i].children[0] === this._tagsCheckboxes[j]) {
+              if (this._tagsButtons[i].children[0].checked) {
+                tagsArr.add(this._tagsButtons[i].children[1].innerText);
+              } else {
+                tagsArr.delete(this._tagsButtons[i].children[1].innerText);
+              }
+            }
+          }
+          this._inputTags = tagsArr;
+        });
+      }
+    }
+
+    checkSubmit() {
       this._form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const testName = inputName.value.length !== 0;
-        const testDate = inputDate.value.toString().length === 10;
-        const testDesc = desc.value.length !== 0;
+        const testName = this._inputName.value.length !== 0;
+        const testDate = this._inputDate.value.toString().length === 10;
 
         if (!testName) {
-          inputName.className = 'form-field-edit-novalid text-without-icon';
+          this._inputName.className = 'form-field-edit-novalid text-without-icon';
         }
 
         if (!testDate) {
-          inputDate.className = 'form-field-edit-novalid text-with-icon';
+          this._inputDate.className = 'form-field-edit-novalid text-with-icon';
         }
 
-        if (!testDesc) {
-          desc.className = 'form-field-edit-novalid text-desc';
-        }
-
-        if (!testName || !testDate || !testDesc) {
+        if (!testName || !testDate) {
           return;
         }
 
-        const name = inputName.value.trim();
-        const date = inputDate.value.trim();
-        const description = desc.value.trim();
+        const name = this._inputName.value.trim();
+        const date = this._inputDate.value.trim();
+        const description = this._inputDesc.value.trim();
+        const tags = this._inputTags;
 
-        window.User.editProfile(name, date, description, existsSelectBoxItems, () => {
+        window.User.editProfile(name, date, description, tags, () => {
           const profilePage = new ProfileComponent();
           profilePage.render();
           const menu = new MenuComponent();

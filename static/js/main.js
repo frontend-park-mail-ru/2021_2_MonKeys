@@ -1,317 +1,323 @@
-import LoginComponent from './components/Login/Login.js';
+// import LoginComponent from './components/Login/Login.js';
 
-import FeedComponent from './components/Feed/Feed.js';
+// import FeedComponent from './components/Feed/Feed.js';
 
-import ProfileComponent from './components/Profile/Profile.js';
+// import ProfileComponent from './components/Profile/Profile.js';
 
-import FeedExpandedComponent from './components/Feed/FeedExpanded.js';
+// import FeedExpandedComponent from './components/Feed/FeedExpanded.js';
 
-import SignupComponent from './components/Signup/Signup.js';
+// import SignupComponent from './components/Signup/Signup.js';
 
-import MenuComponent from './components/Tapbar/Tapbar.js';
+// import MenuComponent from './components/Tapbar/Tapbar.js';
 
 import EditComponent from './components/Edit/Edit.js';
 
-const root = document.getElementById('root');
+// const root = document.getElementById('root');
 
-window.addEventListener('load', (e) => {
-  e.preventDefault();
-  window.User.loginWithCookie(() => {
-    feedPage();
-    addMenu('feed');
-  });
-});
+// window.addEventListener('load', (e) => {
+//   e.preventDefault();
+//   window.User.loginWithCookie(() => {
+//     feedPage();
+//     addMenu('feed');
+//   });
+// });
 
-document.addEventListener('click', clickButtons, false);
+// document.addEventListener('click', clickButtons, false);
 
-loginPage();
+// loginPage();
 
-const configApp = {
-  'login': {
-    href: '/login',
-    name: 'Авторизация',
-    open: loginPage,
-  },
-  'signup': {
-    href: '/signup',
-    name: 'Регистрация',
-    open: signupPage,
-  },
-  'menu-feed': {
-    link: '/feed',
-    name: 'feed',
-    open: feedPage,
-  },
-  'menu-profile': {
-    link: '/profile',
-    name: 'profile',
-    open: profilePage,
-  },
-  'shrink-card': {
-    link: '/feed',
-    name: 'feed',
-    open: feedPage,
-  },
-  'menu-likes': {
-    link: '/likes',
-    name: 'likes',
-    open: notDoneYet,
-  },
-  'menu-chat': {
-    link: '/likes',
-    name: 'chat',
-    open: notDoneYet,
-  },
-  'profile-edit': {
-    link: '/profile/edit',
-    name: 'edit profile',
-    open: editPage,
-  },
-  'profile-logout': {
-    link: '/',
-    name: 'logging out',
-    open: logout,
-  },
-};
-
-
-/**
- * Функция отрисовки страницы редактирования профиля
- */
-function editPage() {
-  const edit = new EditComponent(root);
-  edit.render();
-}
-
-/**
- * Функия страницы с профилем
- */
-function profilePage() {
-  root.innerHTML = '';
-  const profile = new ProfileComponent(root);
-  profile.render();
-}
-
-/**
- * Функция отрисовки страницы расширенного профиля
- */
-
-/**
- * Функция страницы с лентой
- */
-function feedPage() {
-  const feed = new FeedComponent(root);
-  window.Feed.getFeed();
-  feed.render();
-
-  document.addEventListener('touchstart', handleTouchStart, false);
-  document.addEventListener('touchmove', handleTouchMove, false);
-  document.addEventListener('touchend', handleTouchEnd, false);
-  currentCard = document.getElementsByClassName('card')[0];
-
-  previousCard = document.getElementsByClassName('card2')[0];
-  previousCard2 = document.getElementsByClassName('card3')[1];
-}
+// const configApp = {
+//   'login': {
+//     href: '/login',
+//     name: 'Авторизация',
+//     open: loginPage,
+//   },
+//   'signup': {
+//     href: '/signup',
+//     name: 'Регистрация',
+//     open: signupPage,
+//   },
+//   'menu-feed': {
+//     link: '/feed',
+//     name: 'feed',
+//     open: feedPage,
+//   },
+//   'menu-profile': {
+//     link: '/profile',
+//     name: 'profile',
+//     open: profilePage,
+//   },
+//   'shrink-card': {
+//     link: '/feed',
+//     name: 'feed',
+//     open: feedPage,
+//   },
+//   'menu-likes': {
+//     link: '/likes',
+//     name: 'likes',
+//     open: notDoneYet,
+//   },
+//   'menu-chat': {
+//     link: '/likes',
+//     name: 'chat',
+//     open: notDoneYet,
+//   },
+//   'profile-edit': {
+//     link: '/profile/edit',
+//     name: 'edit profile',
+//     open: editPage,
+//   },
+//   'profile-logout': {
+//     link: '/',
+//     name: 'logging out',
+//     open: logout,
+//   },
+// };
 
 
-/**
- * чистит лишние обработчики событий, которые были на ленте
- */
-function clearEventListeners() {
-  document.removeEventListener('touchstart', handleTouchStart, false);
-  document.removeEventListener('touchmove', handleTouchMove, false);
-  document.removeEventListener('touchend', handleTouchEnd, false);
-}
+// /**
+//  * Функция отрисовки страницы редактирования профиля
+//  */
 
-let currentCard;
-let previousCard;
-let previousCard2;
+// function editPage() {
+//   const edit = new EditComponent(root);
+//   edit.render();
+// }
 
-let x;
-let y;
-let x1;
-let y1;
+// /**
+//  * Функия страницы с профилем
+//  */
+// function profilePage() {
+//   root.innerHTML = '';
+//   const profile = new ProfileComponent(root);
+//   profile.render();
+// }
 
-/**
- * Здесь фиксируется, что пользователь сделал с карточкой в ленте:
- *  1) Лайкнул
- *  2) Дизлайкнул
- *  3) Покрутил  по приколу
- * @param {Event} event - событие
- */
-function handleTouchEnd(event) {
-  if (!x1 || !y1) {
-    return;
-  }
+// /**
+//  * Функция отрисовки страницы расширенного профиля
+//  */
 
-  if (x === null) {
-    x = x1;
-  }
-  if (x1 - x < -100) {
-    currentCard.style.animation = 'liked 1s ease 1';
-    const cardToRemove = currentCard;
-    setTimeout(remove(cardToRemove), 1000);
+// /**
+//  * Функция страницы с лентой
+//  */
+// function feedPage() {
+//   const feed = new FeedComponent(root);
+//   window.Feed.getFeed();
+//   feed.render();
 
-    const { id } = window.Feed.getCurrentProfile();
-    window.Feed.getNextUser(id, () => {
-      feedPage();
-      addMenu('feed');
-    });
+//   document.addEventListener('touchstart', handleTouchStart, false);
+//   document.addEventListener('touchmove', handleTouchMove, false);
+//   document.addEventListener('touchend', handleTouchEnd, false);
+//   currentCard = document.getElementsByClassName('card')[0];
 
-    x1 = null;
-    x = null;
-  } else if (x1 - x > 100) {
-    currentCard.style.animation = 'liked 1s ease 1';
-    const cardToRemove = currentCard;
-    setTimeout(remove(cardToRemove), 1000);
-    const { id } = window.Feed.getCurrentProfile();
-
-    window.Feed.getNextUser(id, () => {
-      feedPage();
-      addMenu('feed');
-    });
-
-    x1 = null;
-    x = null;
-  } else {
-    const { target } = event;
-    if (!(target.class === 'expand-class' || target.alt === 'shrink')) {
-      if (previousCard) {
-        previousCard.style.animation = 'shrinkSecondary 1s linear 1';
-      }
-      if (previousCard2) {
-        previousCard2.style.animation = 'shrinkThird 1s linear 1';
-      }
-      if (currentCard) {
-        currentCard.style.animation = 'spin2 1s linear 1';
-      }
-      setTimeout(returnToStart, 1000);
-    }
-  }
-}
+//   previousCard = document.getElementsByClassName('card2')[0];
+//   previousCard2 = document.getElementsByClassName('card3')[1];
+// }
 
 
-/**
- * @param {HTMLElement} cardToRemove - карточка которую необходимо скрыть
- */
-function remove(cardToRemove) {
-  cardToRemove.style.opacity = 0;
-}
+// /**
+//  * чистит лишние обработчики событий, которые были на ленте
+//  */
+// function clearEventListeners() {
+//   document.removeEventListener('touchstart', handleTouchStart, false);
+//   document.removeEventListener('touchmove', handleTouchMove, false);
+//   document.removeEventListener('touchend', handleTouchEnd, false);
+// }
+
+// let currentCard;
+// let previousCard;
+// let previousCard2;
+
+// let x;
+// let y;
+// let x1;
+// let y1;
+
+// /**
+//  * Здесь фиксируется, что пользователь сделал с карточкой в ленте:
+//  *  1) Лайкнул
+//  *  2) Дизлайкнул
+//  *  3) Покрутил  по приколу
+//  * @param {Event} event - событие
+//  */
+// function handleTouchEnd(event) {
+//   if (!x1 || !y1) {
+//     return;
+//   }
+
+//   if (x === null) {
+//     x = x1;
+//   }
+//   if (x1 - x < -100) {
+//     currentCard.style.animation = 'liked 1s ease 1';
+//     const cardToRemove = currentCard;
+//     setTimeout(remove(cardToRemove), 1000);
+
+//     const { id } = window.Feed.getCurrentProfile();
+//     window.Feed.getNextUser(id, () => {
+//       feedPage();
+//       addMenu('feed');
+//     });
+
+//     x1 = null;
+//     x = null;
+//   } else if (x1 - x > 100) {
+//     currentCard.style.animation = 'liked 1s ease 1';
+//     const cardToRemove = currentCard;
+//     setTimeout(remove(cardToRemove), 1000);
+//     const { id } = window.Feed.getCurrentProfile();
+
+//     window.Feed.getNextUser(id, () => {
+//       feedPage();
+//       addMenu('feed');
+//     });
+
+//     x1 = null;
+//     x = null;
+//   } else {
+//     const { target } = event;
+//     if (!(target.class === 'expand-class' || target.alt === 'shrink')) {
+//       if (previousCard) {
+//         previousCard.style.animation = 'shrinkSecondary 1s linear 1';
+//       }
+//       if (previousCard2) {
+//         previousCard2.style.animation = 'shrinkThird 1s linear 1';
+//       }
+//       if (currentCard) {
+//         currentCard.style.animation = 'spin2 1s linear 1';
+//       }
+//       setTimeout(returnToStart, 1000);
+//     }
+//   }
+// }
 
 
-/**
- * Функция обработки начала свайпа карточки в ленте
- * @param {Event} event - событие
- */
-function handleTouchStart(event) {
-  const { touches } = event;
-  currentCard.style.animation = '';
-  x1 = touches[0].clientX;
-  y1 = touches[0].clientY;
-}
+// /**
+//  * @param {HTMLElement} cardToRemove - карточка которую необходимо скрыть
+//  */
+// function remove(cardToRemove) {
+//   cardToRemove.style.opacity = 0;
+// }
 
 
-/**
- * Функция для выхода из профиля, посылает запрос на выход
- */
-function logout() {
-  window.User.logoutCookie(() => {
-    loginPage();
-  });
-}
+// /**
+//  * Функция обработки начала свайпа карточки в ленте
+//  * @param {Event} event - событие
+//  */
+// function handleTouchStart(event) {
+//   const { touches } = event;
+//   currentCard.style.animation = '';
+//   x1 = touches[0].clientX;
+//   y1 = touches[0].clientY;
+// }
 
 
-/**
- * Функция для страницы с логином
- */
-function loginPage() {
-  const login = new LoginComponent(root);
-  login.render();
-
-  // login.checkSubmit( (email, password)=> {
-  //   window.User.loginWithCredentials(email, password, ()=> {
-  //     feedPage();
-  //     addMenu('feed');
-  //   },
-  //   );
-  // });
-  login.checkSubmit((email, password)=> {
-    window.User.loginWithCredentials(email, password, ()=> {
-      feedPage();
-      addMenu('feed');
-    });
-  });
-  login.checkPasswordInput();
-  login.checkEmailInput();
-}
-
-/**
- * Функция для страницы с регистрацией
- */
-function signupPage() {
-  const signup = new SignupComponent(root);
-  signup.render();
-
-  signup.checkSubmit((email, password)=> {
-    window.User.loginWithCredentials(email, password, ()=> {
-      editPage();
-    });
-  });
-
-  signup.checkEmailInput();
-  signup.checkPasswordInput();
-  signup.checkRepeatPasswordInput();
-}
+// /**
+//  * Функция для выхода из профиля, посылает запрос на выход
+//  */
+// function logout() {
+//   window.User.logoutCookie(() => {
+//     loginPage();
+//   });
+// }
 
 
-/**
- * Обработчик нажатий на кнопки в меню
- */
-root.addEventListener('click', (e) => {
-  const { target } = e;
-  if (configApp[target.className]) {
-    configApp[target.className].open();
-    addMenu(configApp[target.className].name);
-  }
-  if (target instanceof HTMLAnchorElement) {
-    e.preventDefault();
+// /**
+//  * Функция для страницы с логином
+//  */
+// function loginPage() {
+//   const login = new LoginComponent(root);
+//   login.render();
 
-    configApp[target.dataset.section].open();
-  }
-});
+//   // login.checkSubmit( (email, password)=> {
+//   //   window.User.loginWithCredentials(email, password, ()=> {
+//   //     feedPage();
+//   //     addMenu('feed');
+//   //   },
+//   //   );
+//   // });
+//   login.checkSubmit((email, password)=> {
+//     window.User.loginWithCredentials(email, password, ()=> {
+//       feedPage();
+//       addMenu('feed');
+//     });
+//   });
+//   login.checkPasswordInput();
+//   login.checkEmailInput();
+// }
 
-/**
-    Обрабатывает нажатия
- * @param {event} event - Событие
- */
-function clickButtons(event) {
-  const { target } = event;
-  if (configApp[target.className]) {
-    configApp[target.className].open();
-    addMenu(configApp[target.className].name);
-    if (
-      target.className === 'menu-profile' ||
-      target.className === 'expand-card' ||
-      target.className === 'menu-chat' ||
-      target.className === 'menu-likes'
-    ) {
-      clearEventListeners();
-    }
-  }
-}
+// /**
+//  * Функция для страницы с регистрацией
+//  */
+// function signupPage() {
+//   const signup = new SignupComponent(root);
+//   signup.render();
 
-/**
- * Функция, которая рендерит несделанные страницы
- */
-function notDoneYet() {
-  root.innerHTML = 'Not done Yet';
-}
+//   signup.checkSubmit((email, password)=> {
+//     window.User.loginWithCredentials(email, password, ()=> {
+//       editPage();
+//     });
+//   });
 
-/**
- * @param {String} activeItem - текущая страница в меню
- */
-function addMenu(activeItem) {
-  const menu = new MenuComponent();
-  menu.activeItem = activeItem;
-  menu.render();
-}
+//   signup.checkEmailInput();
+//   signup.checkPasswordInput();
+//   signup.checkRepeatPasswordInput();
+// }
+
+
+// /**
+//  * Обработчик нажатий на кнопки в меню
+//  */
+// root.addEventListener('click', (e) => {
+//   const { target } = e;
+//   if (configApp[target.className]) {
+//     configApp[target.className].open();
+//     addMenu(configApp[target.className].name);
+//   }
+//   if (target instanceof HTMLAnchorElement) {
+//     e.preventDefault();
+
+//     configApp[target.dataset.section].open();
+//   }
+// });
+
+// /**
+//     Обрабатывает нажатия
+//  * @param {event} event - Событие
+//  */
+// function clickButtons(event) {
+//   const { target } = event;
+//   if (configApp[target.className]) {
+//     configApp[target.className].open();
+//     addMenu(configApp[target.className].name);
+//     if (
+//       target.className === 'menu-profile' ||
+//       target.className === 'expand-card' ||
+//       target.className === 'menu-chat' ||
+//       target.className === 'menu-likes'
+//     ) {
+//       clearEventListeners();
+//     }
+//   }
+// }
+
+// /**
+//  * Функция, которая рендерит несделанные страницы
+//  */
+// function notDoneYet() {
+//   root.innerHTML = 'Not done Yet';
+// }
+
+// /**
+//  * @param {String} activeItem - текущая страница в меню
+//  */
+// function addMenu(activeItem) {
+//   const menu = new MenuComponent();
+//   menu.activeItem = activeItem;
+//   menu.render();
+// }
+
+const edit = new EditComponent(root);
+edit.render();
+edit.checkSubmit();
+// edit.clickTags();

@@ -2,33 +2,21 @@
     <form class="edit-form">
         {{#each fields}}
         <div class="inputEdit">
-            <input type="{{fieldType}}" class="{{fieldClass}}">
+            <{{fieldTag}} type="{{fieldType}}" class="{{fieldClass}}" placeholder="{{fieldPlaceholder}}"></{{fieldTag}}>
         </div>
         {{/each}}
-        <div class="edit-tags">
-            Tags:
-            <button type="button" id="addID" class="add-active">
-            </button>
-            <span class="msg"></span> 
-        </div>
-        <div class="inputEdit">
-            {{!-- <div class="tag-container-edit" id="tagsID">
-            </div> --}}
-            <div class="container">   
-                <div class="dropdown-disactive">
-                    <div class="select">
-                        <span>Select Tags</span>
-                    </div>
-                    {{!-- <input type="hidden" name="gender"> --}}
-                    <ul class="dropdown-menu">
-                        {{#each tags}}
-                            <li>{{tagText}}</li>
-                        {{/each}}
-                    </ul>
+        <div class="tag-container">
+            <div class="column-container">
+                <span class="tags-header">Tags</span>
+                <div class="center-container">
+                    {{#each tags}}
+                    <label class="checkbox-btn">
+                        <input type="checkbox" class="tag-checkbox">
+                        <span>{{tagText}}</span>
+                    </label>
+                    {{/each}}
                 </div>
             </div>
-        </div>
-        <div class="selectBox">
         </div>
         <div class="inputEdit">
             <div class="im-container">
