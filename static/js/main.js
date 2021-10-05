@@ -21,10 +21,11 @@ window.addEventListener('load', (e) => {
   window.User.loginWithCookie(() => {
     feedPage();
     addMenu('menu-feed');
+  }, ()=>{
+    loginPage();
   });
 });
 
-loginPage();
 
 const configApp = {
   'login': {

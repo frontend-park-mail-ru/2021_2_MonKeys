@@ -1,5 +1,4 @@
 import { HTTPNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
-import { hundredMS } from '../constants/time.js';
 
 
 /**
@@ -40,9 +39,10 @@ export default function initUser() {
 
         /**
          * Функция логина с помощью куки
-         * @param {function} callback - функция, которая вызовется в случае успеха
+         * @param {function} callbackSuccess - функция, которая вызовется в случае успеха
+         * @param {function} callbackFailure - функция, которая вызовется в случае неудачи
          */
-        loginWithCookie(callback = noop) {
+        loginWithCookie(callbackSuccess = noop, callbackFailure = noop) {
           const requestOptions = {
             method: 'GET',
             headers: {
@@ -63,15 +63,11 @@ export default function initUser() {
 
                     window.Feed.getNextUser(this._userData.id);
 
-
-                    // !!! cring
-
-
-                    setTimeout(callback, hundredMS);
+                    callbackSuccess();
                     // swipeUser(user.id)
                     // userProfileRender();
                   } else if (res.data.status === HTTPNotFound) {
-                    // w
+                    callbackFailure();
                   }
                   // if (res.data.status === 'ok') {
                   //     profilePage();
