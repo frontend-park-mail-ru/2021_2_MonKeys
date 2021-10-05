@@ -86,7 +86,7 @@
 
         editProfile(name, date, description, tags, callback) {
           const requestOptions = {
-            method: 'PATCH',
+            method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
             },
