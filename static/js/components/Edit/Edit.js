@@ -1,7 +1,10 @@
+import { HTTPNotFound, HTTPSuccess } from '../../constants/HTTPStatus.js';
+import { dateLength } from '../../constants/validatation.js';
 import ProfileComponent from '../Profile/Profile.js';
 import MenuComponent from '../Tapbar/Tapbar.js';
-
-
+/**
+ * Компонент с редактированием
+ */
 export default class EditComponent {
     _parent
     _data = {
@@ -35,10 +38,18 @@ export default class EditComponent {
     _tagsCount
 
 
+    /**
+   *
+   * @param {HTMLElement} parent - Родительский элемент, в который будет рендерится страница
+   */
     constructor(parent) {
       this._parent = parent;
     }
 
+    /**
+     * Установка данных необходимых для отрисовки
+     * @param {Object} data - данные
+     */
     set data(data) {
       this._data = data;
     }
@@ -147,11 +158,11 @@ export default class EditComponent {
               data: data,
               status: response.status,
             })).then((res) => {
-              if (res.status === 200 && res.data.status === 200) {
+              if (res.status === HTTPSuccess && res.data.status === HTTPSuccess) {
                 this._data.tags = res.data.body.allTags;
                 this._tagsCount = res.data.body.tagsCount;
                 resolve();
-              } else if (res.data.status === 404) {
+              } else if (res.data.status === HTTPNotFound) {
                 // something
 
               }
@@ -165,7 +176,7 @@ export default class EditComponent {
       this._form.addEventListener('submit', (e) => {
         e.preventDefault();
         const testName = this._inputName.value.length !== 0;
-        const testDate = this._inputDate.value.toString().length === 10;
+        const testDate = this._inputDate.value.toString().length === dateLength;
 
         if (!testName) {
           this._inputName.className = 'form-field-edit-novalid text-without-icon';
@@ -188,10 +199,9 @@ export default class EditComponent {
         }
         console.log(tags);
         window.User.editProfile(name, date, description, tags, () => {
-          console.log(11111);
-          const profilePage = new ProfileComponent();
+          const profilePage = new ProfileComponent(root);
           profilePage.render();
-          const menu = new MenuComponent();
+          const menu = new MenuComponent(root);
           menu.activeItem = 'menu-profile';
           menu.render();
         });

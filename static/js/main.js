@@ -6,6 +6,11 @@ import MenuComponent from './components/Tapbar/Tapbar.js';
 import EditComponent from './components/Edit/Edit.js';
 import LikesComponent from './components/Likes/Likes.js';
 import ChatComponent from './components/Chat/Chat.js';
+import initFeed from './modules/feedData.js';
+import initUser from './modules/userData.js';
+
+initUser();
+initFeed();
 
 const root = document.getElementById('root');
 
@@ -64,13 +69,18 @@ const configApp = {
   },
 };
 
-
+/**
+ * Функция отрисовки страницы с мэтчами
+ */
 function likesPage() {
   const likes = new LikesComponent(root);
   currentComponent = likes;
   likes.render();
 }
 
+/**
+ * Функция отрисовки страницы чатов
+ */
 function chatPage() {
   const chat = new ChatComponent(root);
   currentComponent = chat;
@@ -81,7 +91,6 @@ function chatPage() {
 /**
  * Функция отрисовки страницы редактирования профиля
  */
-
 function editPage() {
   const edit = new EditComponent(root);
   currentComponent = edit;
@@ -164,8 +173,13 @@ function signupPage() {
 root.addEventListener('click', (e) => {
   const { target } = e;
   if (configApp[target.className]) {
+    if (currentComponent.clearEventListeners) {
+      currentComponent.clearEventListeners();
+    }
     configApp[target.className].open();
-    addMenu(configApp[target.className].name);
+    if (target.className!== 'profile-logout' && target.className!== 'profile-edit') {
+      addMenu(configApp[target.className].name);
+    }
   }
   if (target instanceof HTMLAnchorElement) {
     e.preventDefault();

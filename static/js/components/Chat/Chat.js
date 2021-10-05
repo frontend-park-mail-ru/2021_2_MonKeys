@@ -1,3 +1,7 @@
+
+/**
+ * Компонент с чатами
+ */
 export default class ChatComponent {
     _parent
     _data = {
@@ -23,14 +27,24 @@ export default class ChatComponent {
       ],
     }
 
+    /**
+     * Родительский элемент в который всё будет рисоваться
+     * @param {HTMLElement} parent
+     */
     constructor(parent) {
       this._parent = parent;
     }
+    /**
+     * Функция отрисовки
+     */
     _renderDOM() {
       this._parent.innerHTML = '';
       const renderedHTML = Handlebars.templates['likes'];
       this._parent.innerHTML = renderedHTML(this._data);
     }
+    /**
+     * Функция отрисовки
+     */
     render() {
       this._renderDOM();
     }

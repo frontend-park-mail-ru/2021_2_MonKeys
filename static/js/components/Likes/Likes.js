@@ -1,3 +1,6 @@
+/**
+ * Компонент с мэтчами
+ */
 export default class LikesComponent {
     _parent
     _data = {
@@ -24,14 +27,26 @@ export default class LikesComponent {
       ],
     }
 
+    /**
+   *
+   * @param {HTMLElement} parent - Родительский элемент, в который будет рендерится страница
+   */
     constructor(parent) {
       this._parent = parent;
     }
+
+    /**
+   * Функция отрисовки
+   */
     _renderDOM() {
       this._parent.innerHTML = '';
       const renderedHTML = Handlebars.templates['likes'];
       this._parent.innerHTML = renderedHTML(this._data);
     }
+
+    /**
+   * Функция отрисовки ленты
+   */
     render() {
       this._renderDOM();
     }

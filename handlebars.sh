@@ -1,7 +1,11 @@
 #!/bin/bash
-	FILES="templates/*.handlebars"
-	for f in $FILES
+	COMPONENTS="static/js/components/*"
+	for c in $COMPONENTS
 	do
-		echo "Processing $f file..."
-		handlebars $f -f $f.tpl.js
+		TEMPLATES="$c/templates/*.handlebars"
+		for t in $TEMPLATES
+			do
+				echo "Processing $t file..."
+				handlebars $t -f $t.tpl.js
+			done
 	done
