@@ -1,2 +1,0 @@
-MAILTO=root
-30 * * * * sudo go run server
