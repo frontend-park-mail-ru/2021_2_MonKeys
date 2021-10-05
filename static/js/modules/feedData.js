@@ -1,17 +1,27 @@
+import { HTTPNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
 /* eslint-disable indent */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prefer-const */
 
-
-(function() {
+/**
+ * Иницализирует синглтон Feed для ленты
+ */
+export default function initFeed() {
     const noop = () => {};
 
-
+    /**
+     * Класс для хранения данных ленты
+     * и запросов на обновление ленты
+     */
     class Feed {
         _counter = 0;
         _feedData = [];
 
 
+        /**
+         * Добавление нового профиля в ленту
+         * @param {Object} data - Данные нового профиля в ленте
+         */
         _addProfile(data) {
             this._feedData[this._counter] = Object();
             this._feedData[this._counter].id = data.id;
@@ -25,12 +35,23 @@
             this._counter++;
         }
 
+        /**
+         * Геттер текущего профиля в ленте
+         * @return {Object} Текущий профиль в ленте
+         */
         getCurrentProfile() {
             return this._feedData[this._counter];
         }
+        /**
+         * Переход к следующему профилю в ленте
+         */
         next() {
             this._counter++;
         }
+
+        /**
+         * Запрос на ленту на бекенд
+         */
         getFeed() {
             const requestOptions = {
                 method: 'GET',
@@ -46,12 +67,12 @@
             //             data: data,
             //             status: response.status,
             //         })).then((res) => {
-            //             if (res.data.status === 200) {
+            //             if (res.data.status === HTTPSuccess) {
             //                 console.log(res.data.body);
             //                 this._addProfile(res.data.body);
 
             //                 callback(res.data, res.status);
-            //             } else if (res.data.status === 404) {
+            //             } else if (res.data.status === HTTPNotFound) {
             //                 console.log(res.data.body);
             //                 this._counter++;
             //                 callback();
@@ -98,6 +119,12 @@
             },
         ];
         }
+
+        /**
+         * не законченная штука
+         * @param {int} id - id лайкнутого пользователя
+         * @param {function} callback - Функция, которая вызовется в результате запроса
+         */
         getNextUser(id, callback = noop) {
             const requestOptions = {
                 method: 'PUT',
@@ -116,12 +143,12 @@
                         data: data,
                         status: response.status,
                     })).then((res) => {
-                        if (res.data.status === 200) {
+                        if (res.data.status === HTTPSuccess) {
                             console.log(res.data.body);
                             this._addProfile(res.data.body);
 
                             callback(res.data, res.status);
-                        } else if (res.data.status === 404) {
+                        } else if (res.data.status === HTTPNotFound) {
                             console.log(res.data.body);
                             this._counter++;
                             callback();
@@ -130,12 +157,12 @@
 
                         // cringe
 
-                        // if (res.data.status === 200) {
+                        // if (res.data.status === HTTPSuccess) {
                         //   // root.innerHTML = '';
                         //   // addProfile(res.data.body)
                         //   // renderFeed();
                         //   // addMenu('feed');
-                        // } else if (res.data.status === 404) {
+                        // } else if (res.data.status === HTTPNotFound) {
                         //   root.innerHTML = '';
                         //   renderFeed();
                         //   addMenu('feed');
@@ -144,4 +171,4 @@
         }
     }
     window.Feed = new Feed();
-})();
+};

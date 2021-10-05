@@ -1,3 +1,6 @@
+/**
+ * Компонент с меню
+ */
 export default class MenuComponent {
     _parent
     _activeItem
@@ -36,11 +39,19 @@ export default class MenuComponent {
         },
       ],
     }
+    /**
+   *
+   * @param {HTMLElement} parent - Родительский элемент, в который будет рендерится страница
+   */
     constructor(parent) {
       this._activeItem='menu-feed';
       this._parent = parent;
     }
 
+    /**
+     * Смена активного компонента меню
+     * @param {string} data - Выбранный элемент для подсветки
+     */
     set activeItem(data) {
       this._actionsMenu.actions[this._table[this._activeItem]].selected='';
       this._activeItem = data;
@@ -48,6 +59,9 @@ export default class MenuComponent {
       this._actionsMenu.actions[this._table[this._activeItem]].selected='y';
     }
 
+    /**
+   * Функция отрисовки
+   */
     _renderDOM() {
       const renderedHTML = Handlebars.templates['tapbar'];
       const element = document.createElement('div');
@@ -55,6 +69,9 @@ export default class MenuComponent {
       this._parent.appendChild(element);
     }
 
+    /**
+   * Функция отрисовки ленты
+   */
     render() {
       this._renderDOM();
     }

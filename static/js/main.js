@@ -6,6 +6,11 @@ import MenuComponent from './components/Tapbar/Tapbar.js';
 import EditComponent from './components/Edit/Edit.js';
 import LikesComponent from './components/Likes/Likes.js';
 import ChatComponent from './components/Chat/Chat.js';
+import initFeed from './modules/feedData.js';
+import initUser from './modules/userData.js';
+
+initUser();
+initFeed();
 
 const root = document.getElementById('root');
 
@@ -18,7 +23,6 @@ window.addEventListener('load', (e) => {
     addMenu('menu-feed');
   });
 });
-
 
 
 loginPage();
@@ -66,13 +70,18 @@ const configApp = {
   },
 };
 
-
+/**
+ * Функция отрисовки страницы с мэтчами
+ */
 function likesPage() {
   const likes = new LikesComponent(root);
   currentComponent = likes;
   likes.render();
 }
 
+/**
+ * Функция отрисовки страницы чатов
+ */
 function chatPage() {
   const chat = new ChatComponent(root);
   currentComponent = chat;
@@ -83,7 +92,6 @@ function chatPage() {
 /**
  * Функция отрисовки страницы редактирования профиля
  */
-
 function editPage() {
   const edit = new EditComponent(root);
   currentComponent = edit;
@@ -96,7 +104,7 @@ function editPage() {
  */
 function profilePage() {
   const profile = new ProfileComponent(root);
-  currentComponent = profile
+  currentComponent = profile;
   profile.render();
 }
 
@@ -109,7 +117,6 @@ function feedPage() {
   window.Feed.getFeed();
   currentComponent = feed;
   feed.render();
-
 }
 
 /**
@@ -168,6 +175,9 @@ function signupPage() {
 root.addEventListener('click', (e) => {
   const { target } = e;
   if (configApp[target.className]) {
+    if (currentComponent.clearEventListeners) {
+      currentComponent.clearEventListeners();
+    }
     configApp[target.className].open();
     addMenu(configApp[target.className].name);
   }

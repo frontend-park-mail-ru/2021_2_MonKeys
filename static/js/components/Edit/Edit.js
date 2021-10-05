@@ -1,7 +1,10 @@
+import { dateLength } from '../../constants/validatation.js';
 import ProfileComponent from '../Profile/Profile.js';
 import MenuComponent from '../Tapbar/Tapbar.js';
 
-
+/**
+ * Компонент с редактированием
+ */
 export default class EditComponent {
     _parent
     _data = {
@@ -43,10 +46,18 @@ export default class EditComponent {
     _form
 
 
+    /**
+   *
+   * @param {HTMLElement} parent - Родительский элемент, в который будет рендерится страница
+   */
     constructor(parent) {
       this._parent = parent;
     }
 
+    /**
+     * Установка данных необходимых для отрисовки
+     * @param {Object} data - данные
+     */
     set data(data) {
       this._data = data;
     }
@@ -65,6 +76,10 @@ export default class EditComponent {
     //   existsSelectBoxItems.push(value);
     // };
 
+
+    /**
+   * Находит элементы для их будущей анимации
+   */
     _getElems() {
       this._dropDown = document.getElementsByClassName('dropdown')[0];
       this._dropDownMenu = document.getElementsByClassName('dropdown-menu')[0];
@@ -105,6 +120,9 @@ export default class EditComponent {
     //   });
     // }
 
+    /**
+   * Функция отрисовки
+   */
     _renderDOM() {
       this._parent.innerHTML = '';
       const renderedHTML = Handlebars.templates['edit'];
@@ -113,6 +131,9 @@ export default class EditComponent {
       this._clickTags();
     }
 
+    /**
+     * Обработка нажатий на тэги
+     */
     _clickTags() {
       const tagsArr = new Set();
       for (let j = 0; j < 3; j++) {
@@ -131,11 +152,15 @@ export default class EditComponent {
       }
     }
 
+    /**
+     * Обработчик submit в форме
+     * проверяет данные
+     */
     checkSubmit() {
       this._form.addEventListener('submit', (e) => {
         e.preventDefault();
         const testName = this._inputName.value.length !== 0;
-        const testDate = this._inputDate.value.toString().length === 10;
+        const testDate = this._inputDate.value.toString().length === dateLength;
 
         if (!testName) {
           this._inputName.className = 'form-field-edit-novalid text-without-icon';
@@ -376,6 +401,9 @@ export default class EditComponent {
     //   form.appendChild(buttonSave);
     // }
 
+    /**
+   * Функция отрисовки
+   */
     render() {
       this._renderDOM();
     }
