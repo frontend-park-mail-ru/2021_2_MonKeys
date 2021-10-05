@@ -19,7 +19,7 @@ window.addEventListener('load', (e) => {
   });
 });
 
-document.addEventListener('click', clickButtons, false);
+
 
 loginPage();
 
@@ -110,110 +110,6 @@ function feedPage() {
   currentComponent = feed;
   feed.render();
 
-  document.addEventListener('touchstart', handleTouchStart, false);
-  document.addEventListener('touchmove', handleTouchMove, false);
-  document.addEventListener('touchend', handleTouchEnd, false);
-  currentCard = document.getElementsByClassName('card')[0];
-
-  previousCard = document.getElementsByClassName('card2')[0];
-  previousCard2 = document.getElementsByClassName('card3')[1];
-}
-
-
-/**
- * чистит лишние обработчики событий, которые были на ленте
- */
-function clearEventListeners() {
-  document.removeEventListener('touchstart', handleTouchStart, false);
-  document.removeEventListener('touchmove', handleTouchMove, false);
-  document.removeEventListener('touchend', handleTouchEnd, false);
-}
-
-let currentCard;
-let previousCard;
-let previousCard2;
-
-let x;
-let y;
-let x1;
-let y1;
-
-/**
- * Здесь фиксируется, что пользователь сделал с карточкой в ленте:
- *  1) Лайкнул
- *  2) Дизлайкнул
- *  3) Покрутил  по приколу
- * @param {Event} event - событие
- */
-function handleTouchEnd(event) {
-  if (!x1 || !y1) {
-    return;
-  }
-
-  if (x === null) {
-    x = x1;
-  }
-  if (x1 - x < -100) {
-    currentCard.style.animation = 'liked 1s ease 1';
-    const cardToRemove = currentCard;
-    setTimeout(remove(cardToRemove), 1000);
-
-    const { id } = window.Feed.getCurrentProfile();
-    window.Feed.getNextUser(id, () => {
-      feedPage();
-      addMenu('feed');
-    });
-
-    x1 = null;
-    x = null;
-  } else if (x1 - x > 100) {
-    currentCard.style.animation = 'liked 1s ease 1';
-    const cardToRemove = currentCard;
-    setTimeout(remove(cardToRemove), 1000);
-    const { id } = window.Feed.getCurrentProfile();
-
-    window.Feed.getNextUser(id, () => {
-      feedPage();
-      addMenu('feed');
-    });
-
-    x1 = null;
-    x = null;
-  } else {
-    const { target } = event;
-    if (!(target.class === 'expand-class' || target.alt === 'shrink')) {
-      if (previousCard) {
-        previousCard.style.animation = 'shrinkSecondary 1s linear 1';
-      }
-      if (previousCard2) {
-        previousCard2.style.animation = 'shrinkThird 1s linear 1';
-      }
-      if (currentCard) {
-        currentCard.style.animation = 'spin2 1s linear 1';
-      }
-      setTimeout(returnToStart, 1000);
-    }
-  }
-}
-
-
-/**
- * @param {HTMLElement} cardToRemove - карточка которую необходимо скрыть
- */
-function remove(cardToRemove) {
-  cardToRemove.style.opacity = 0;
-}
-
-
-/**
- * Функция обработки начала свайпа карточки в ленте
- * @param {Event} event - событие
- */
-function handleTouchStart(event) {
-  const { touches } = event;
-  currentCard.style.animation = '';
-  x1 = touches[0].clientX;
-  y1 = touches[0].clientY;
 }
 
 /**
@@ -236,7 +132,7 @@ function loginPage() {
    login.checkSubmit( (email, password)=> {
      window.User.loginWithCredentials(email, password, ()=> {
        feedPage();
-       addMenu('feed');
+       addMenu('menu-feed');
      },
      );
    });
@@ -255,6 +151,7 @@ function loginPage() {
  * Функция для страницы с регистрацией
  */
 function signupPage() {
+
   const signup = new SignupComponent(root);
   signup.render();
   signup.checkSubmit((email, password)=> {
@@ -269,22 +166,19 @@ function signupPage() {
 }
 
 
-
-
-/**
-    Обрабатывает нажатия
- * @param {event} event - Событие
- */
-function clickButtons(event) {
-  const { target } = event;
+root.addEventListener('click', (e) => {
+  const { target } = e;
   if (configApp[target.className]) {
-    if(currentComponent.clearEventListeners){
-      currentComponent.clearEventListeners();
-    }
     configApp[target.className].open();
     addMenu(configApp[target.className].name);
   }
-}
+  if (target instanceof HTMLAnchorElement) {
+    e.preventDefault();
+
+    configApp[target.dataset.section].open();
+  }
+});
+
 
 /**
  * @param {String} activeItem - текущая страница в меню
