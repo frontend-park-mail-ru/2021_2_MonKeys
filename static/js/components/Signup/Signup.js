@@ -168,11 +168,13 @@ export default class SignupComponent {
       this._parent.innerHTML = renderedHTML();
       this._getElems();
     }
+
     _createElementWithClass(tag, className) {
       const element = document.createElement(tag);
       element.className = className;
       return element;
     }
+
     render() {
       this._renderDOM();
     }

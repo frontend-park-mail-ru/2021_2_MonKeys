@@ -142,6 +142,7 @@ div.center-container {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 @font-face {
@@ -790,6 +791,7 @@ a {
     bottom: 3%;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
+    flex-wrap: wrap;
 }
 
 .tag {
@@ -1128,7 +1130,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .edit-button-text {
     position: absolute;
-    left: 10%;
     font-family: 'Futura Now Headline Bold';
     font-style: normal;
     font-weight: bold;

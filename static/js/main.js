@@ -19,8 +19,6 @@ window.addEventListener('load', (e) => {
   });
 });
 
-
-
 loginPage();
 
 const configApp = {
@@ -88,7 +86,6 @@ function editPage() {
   const edit = new EditComponent(root);
   currentComponent = edit;
   edit.render();
-  edit.checkSubmit();
 }
 
 /**
@@ -96,7 +93,7 @@ function editPage() {
  */
 function profilePage() {
   const profile = new ProfileComponent(root);
-  currentComponent = profile
+  currentComponent = profile;
   profile.render();
 }
 
@@ -109,7 +106,6 @@ function feedPage() {
   window.Feed.getFeed();
   currentComponent = feed;
   feed.render();
-
 }
 
 /**

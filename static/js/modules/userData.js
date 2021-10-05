@@ -11,6 +11,7 @@
           this._userData.id = data.id;
           this._userData.firstName = data.name;
           this._userData.age = data.age;
+          this._userData.date = data.date;
           this._userData.text = data.description;
           this._userData.photoSrc = data.imgSrc;
           this._userData.tags = data.tags;
