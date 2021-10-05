@@ -52,7 +52,7 @@ func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	port := flag.String("p", ":443", "server port")
-	ssl := flag.Bool("ssl", false, "HTTPS/HTTP")
+	ssl := flag.Bool("ssl", true, "HTTPS/HTTP")
 	flag.Parse()
 
 	mux := mux.NewRouter()
