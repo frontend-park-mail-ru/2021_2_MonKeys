@@ -1,0 +1,45 @@
+<body id="root">
+    <form class="edit-form">
+        {{#each fields}}
+        <div class="inputEdit">
+            <{{fieldTag}} type="{{fieldType}}" class="{{fieldClass}}" placeholder="{{fieldPlaceholder}}"></{{fieldTag}}>
+        </div>
+        {{/each}}
+        <div class="tag-container">
+            <div class="column-container">
+                <span class="tags-header">Tags</span>
+                <div class="center-container">
+                    {{#each tags}}
+                    <label class="checkbox-btn">
+                        <input type="checkbox" class="tag-checkbox">
+                        <span>{{tagText}}</span>
+                    </label>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="inputEdit">
+            <div class="im-container">
+                <div style="position: relative;">
+                    <img src="../img/Elon_Musk_2015.jpg" class="im">
+                    <button class="removeImg"></button>
+                </div>
+                <div style="position: relative;">
+                    <img src="../img/Elon_Musk_2015.jpg" class="im">
+                    <button class="removeImg"></button>
+                </div>
+                <div style="position: relative;">
+                    <img src="../img/Elon_Musk_2015.jpg" class="im">
+                    <button class="removeImg"></button>
+                </div>
+            </div>
+            <button class="add"></button>
+        </div>
+        <button type="submit" class="login-button">
+            <div class="center-container">
+                <span class="edit-button-text">Сохранить</span>
+                <img src="../icons/button_next_black.svg" class="svg-next-edit">
+            </div>
+        </button>
+    </form>
+</body>

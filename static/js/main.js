@@ -83,10 +83,12 @@ function chatPage() {
 /**
  * Функция отрисовки страницы редактирования профиля
  */
+
 function editPage() {
   const edit = new EditComponent(root);
   currentComponent = edit;
   edit.render();
+  edit.checkSubmit();
 }
 
 /**
@@ -107,6 +109,111 @@ function feedPage() {
   window.Feed.getFeed();
   currentComponent = feed;
   feed.render();
+
+  document.addEventListener('touchstart', handleTouchStart, false);
+  document.addEventListener('touchmove', handleTouchMove, false);
+  document.addEventListener('touchend', handleTouchEnd, false);
+  currentCard = document.getElementsByClassName('card')[0];
+
+  previousCard = document.getElementsByClassName('card2')[0];
+  previousCard2 = document.getElementsByClassName('card3')[1];
+}
+
+
+/**
+ * чистит лишние обработчики событий, которые были на ленте
+ */
+function clearEventListeners() {
+  document.removeEventListener('touchstart', handleTouchStart, false);
+  document.removeEventListener('touchmove', handleTouchMove, false);
+  document.removeEventListener('touchend', handleTouchEnd, false);
+}
+
+let currentCard;
+let previousCard;
+let previousCard2;
+
+let x;
+let y;
+let x1;
+let y1;
+
+/**
+ * Здесь фиксируется, что пользователь сделал с карточкой в ленте:
+ *  1) Лайкнул
+ *  2) Дизлайкнул
+ *  3) Покрутил  по приколу
+ * @param {Event} event - событие
+ */
+function handleTouchEnd(event) {
+  if (!x1 || !y1) {
+    return;
+  }
+
+  if (x === null) {
+    x = x1;
+  }
+  if (x1 - x < -100) {
+    currentCard.style.animation = 'liked 1s ease 1';
+    const cardToRemove = currentCard;
+    setTimeout(remove(cardToRemove), 1000);
+
+    const { id } = window.Feed.getCurrentProfile();
+    window.Feed.getNextUser(id, () => {
+      feedPage();
+      addMenu('feed');
+    });
+
+    x1 = null;
+    x = null;
+  } else if (x1 - x > 100) {
+    currentCard.style.animation = 'liked 1s ease 1';
+    const cardToRemove = currentCard;
+    setTimeout(remove(cardToRemove), 1000);
+    const { id } = window.Feed.getCurrentProfile();
+
+    window.Feed.getNextUser(id, () => {
+      feedPage();
+      addMenu('feed');
+    });
+
+    x1 = null;
+    x = null;
+  } else {
+    const { target } = event;
+    if (!(target.class === 'expand-class' || target.alt === 'shrink')) {
+      if (previousCard) {
+        previousCard.style.animation = 'shrinkSecondary 1s linear 1';
+      }
+      if (previousCard2) {
+        previousCard2.style.animation = 'shrinkThird 1s linear 1';
+      }
+      if (currentCard) {
+        currentCard.style.animation = 'spin2 1s linear 1';
+      }
+      setTimeout(returnToStart, 1000);
+    }
+  }
+}
+
+
+/**
+ * @param {HTMLElement} cardToRemove - карточка которую необходимо скрыть
+ */
+function remove(cardToRemove) {
+  cardToRemove.style.opacity = 0;
+}
+
+
+/**
+ * Функция обработки начала свайпа карточки в ленте
+ * @param {Event} event - событие
+ */
+function handleTouchStart(event) {
+  const { touches } = event;
+  currentCard.style.animation = '';
+  x1 = touches[0].clientX;
+  y1 = touches[0].clientY;
 }
 
 /**
@@ -126,7 +233,14 @@ function loginPage() {
   const login = new LoginComponent(root);
   login.render();
 
-  login.checkSubmit( (email, password)=> {
+   login.checkSubmit( (email, password)=> {
+     window.User.loginWithCredentials(email, password, ()=> {
+       feedPage();
+       addMenu('feed');
+     },
+     );
+   });
+  login.checkSubmit((email, password)=> {
     window.User.loginWithCredentials(email, password, ()=> {
       feedPage();
       addMenu('menu-feed');
@@ -143,15 +257,17 @@ function loginPage() {
 function signupPage() {
   const signup = new SignupComponent(root);
   signup.render();
-
-  signup.checkSubmit(()=> {
-    editPage();
+  signup.checkSubmit((email, password)=> {
+    window.User.loginWithCredentials(email, password, ()=> {
+      editPage();
+    });
   });
 
   signup.checkEmailInput();
   signup.checkPasswordInput();
   signup.checkRepeatPasswordInput();
 }
+
 
 
 
