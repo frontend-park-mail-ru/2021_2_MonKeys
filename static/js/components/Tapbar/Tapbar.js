@@ -29,8 +29,8 @@ export default class MenuComponent {
           selected: '',
         },
         {
-          iconDeselected: 'icons/tapbar_chat_white_deselected.svg',
-          iconSelected: 'icons/tapbar_chat_white_selected.svg',
+          iconDeselected: 'icons/tapbar_user_white_deselected.svg',
+          iconSelected: 'icons/tapbar_user_white_selected.svg',
           className: 'menu-profile',
           selected: '',
         },

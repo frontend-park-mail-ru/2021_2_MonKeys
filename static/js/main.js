@@ -9,6 +9,8 @@ import ChatComponent from './components/Chat/Chat.js';
 
 const root = document.getElementById('root');
 
+let currentComponent;
+
 window.addEventListener('load', (e) => {
   e.preventDefault();
   window.User.loginWithCookie(() => {
@@ -67,11 +69,13 @@ const configApp = {
 
 function likesPage() {
   const likes = new LikesComponent(root);
+  currentComponent = likes;
   likes.render();
 }
 
 function chatPage() {
   const chat = new ChatComponent(root);
+  currentComponent = chat;
   chat.render();
 }
 
@@ -81,6 +85,7 @@ function chatPage() {
  */
 function editPage() {
   const edit = new EditComponent(root);
+  currentComponent = edit;
   edit.render();
 }
 
@@ -88,8 +93,8 @@ function editPage() {
  * Функия страницы с профилем
  */
 function profilePage() {
-  root.innerHTML = '';
   const profile = new ProfileComponent(root);
+  currentComponent = profile
   profile.render();
 }
 
@@ -100,19 +105,9 @@ function profilePage() {
 function feedPage() {
   const feed = new FeedComponent(root);
   window.Feed.getFeed();
+  currentComponent = feed;
   feed.render();
 }
-
-
-/**
- * чистит лишние обработчики событий, которые были на ленте
- */
-function clearEventListeners() {
-  document.removeEventListener('touchstart');
-  document.removeEventListener('touchmove');
-  document.removeEventListener('touchend');
-}
-
 
 /**
  * Функция для выхода из профиля, посылает запрос на выход
@@ -159,21 +154,6 @@ function signupPage() {
 }
 
 
-/**
- * Обработчик нажатий на кнопки в меню
- */
-root.addEventListener('click', (e) => {
-  const { target } = e;
-  if (configApp[target.className]) {
-    configApp[target.className].open();
-    addMenu(configApp[target.className].name);
-  }
-  if (target instanceof HTMLAnchorElement) {
-    e.preventDefault();
-
-    configApp[target.dataset.section].open();
-  }
-});
 
 /**
     Обрабатывает нажатия
@@ -182,19 +162,13 @@ root.addEventListener('click', (e) => {
 function clickButtons(event) {
   const { target } = event;
   if (configApp[target.className]) {
+    if(currentComponent.clearEventListeners){
+      currentComponent.clearEventListeners();
+    }
     configApp[target.className].open();
     addMenu(configApp[target.className].name);
-    if (
-      target.className === 'menu-profile' ||
-      target.className === 'expand-card' ||
-      target.className === 'menu-chat' ||
-      target.className === 'menu-likes'
-    ) {
-      clearEventListeners();
-    }
   }
 }
-
 
 /**
  * @param {String} activeItem - текущая страница в меню

@@ -1,6 +1,7 @@
 export default class LikesComponent {
     _parent
     _data = {
+      'count': 3,
       'match': [
         {
           'img': '/img/aj1-V9h9GGM.jpg',

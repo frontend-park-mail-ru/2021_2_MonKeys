@@ -1,15 +1,21 @@
 <div class="card-container">
+    <div class="likes-count">
+        You have {{count}} matches!
+    </div>
     {{#each match}}
     <div class="likes-card">
-        <img src="{{img}}" class="likes-img">
-        <div class="name-container">
-          <div class="name">{{name}}</div>
-          <div class="age">{{age}}</div>
-        </div>
-        <div class="likes-data">
-        
-            You matched on {{date}}
-        
+        <div class="likes-card-inside">
+            <img src="{{img}}" class="likes-img">
+            <div class="likes-name-date">
+            <div class="name-container">
+            <div class="name">{{name}}</div>
+            <div class="age">{{age}}</div>
+            </div>
+            <div class="likes-data">
+            
+                You matched on {{date}}
+            </div>
+            </div>
         </div>
     </div>
     {{/each}}
