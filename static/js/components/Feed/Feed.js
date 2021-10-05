@@ -69,6 +69,7 @@ export default class FeedComponent {
   }
   _likeCard() {
     // ЗАПРОС НА ЛАЙК
+    console.log('liked');
     window.Feed.next();
 
     this._x1 = null;
@@ -96,6 +97,7 @@ export default class FeedComponent {
     setTimeout(thisIsNeverThat._reRenderMainCard, 1000);
   }
   _dislikeCard() {
+    console.log('disliked');
     // ЗАПРОС НА ДИЗЛАЙК
     window.Feed.next();
 
@@ -111,7 +113,7 @@ export default class FeedComponent {
       return;
     }
     const { touches } = event;
-    if(event.touches){
+    if (event.touches) {
       this._x = touches[0].clientX;
       this._y = touches[0].clientY;
     } else {
@@ -151,15 +153,16 @@ export default class FeedComponent {
     currentCard.innerHTML = renderedHTML(thisIsNeverThat._data);
   }
   _handleTouchEnd(event) {
-    console.log("END")
-    if (!this._x1 || !this._y1) {
+    console.log('END');
+    if (!this._x1 || !this._y1 || !this._x || !this._y) {
       return;
     }
+    console.log(this._x, this._x1);
     if (this._x1 - this._x < -100) {
       currentCard.style.animation = 'liked 1s ease 1';
       // ЗАПРОС НА ЛАЙК
       window.Feed.next();
-
+      console.log('liked');
       this._x1 = null;
       this._x = null;
 
@@ -168,7 +171,7 @@ export default class FeedComponent {
       currentCard.style.animation = 'liked 1s ease 1';
       // ЗАПРОС НА ДИЗЛАЙК
 
-
+      console.log('disliked');
       window.Feed.next();
       this._x1 = null;
       this._x = null;
@@ -200,7 +203,7 @@ export default class FeedComponent {
 
   _handleTouchStart(event) {
     const { touches } = event;
-    if(event.touches){
+    if (event.touches) {
       this._x1 = touches[0].clientX;
       this._y1 = touches[0].clientY;
     } else {
@@ -214,10 +217,14 @@ export default class FeedComponent {
        * чистит лишние обработчики событий, которые были на ленте
        */
   clearEventListeners() {
+    console.log('removing');
     document.removeEventListener('click', this._handleClicks, false);
-    document.removeEventListener('touchstart mousedown', this._handleTouchStart, false);
-    document.removeEventListener('touchmove mousemove', this._handleTouchMove, false);
-    document.removeEventListener('touchend mouseup', this._handleTouchEnd, false);
+    document.removeEventListener('touchstart', this._handleTouchStart, false);
+    document.removeEventListener('touchmove', this._handleTouchMove, false);
+    document.removeEventListener('touchend', this._handleTouchEnd, false);
+    // document.removeEventListener('mousedown', this._handleTouchStart, false);
+    // document.removeEventListener('mousemove', this._handleTouchMove, false);
+    // document.removeEventListener('mouseup', this._handleTouchEnd, false);
   }
   _handleClicks(event) {
     const { target } = event;
@@ -229,11 +236,11 @@ export default class FeedComponent {
   _addEventListeners() {
     document.addEventListener('click', this._handleClicks, false);
     document.addEventListener('touchstart', this._handleTouchStart, false);
-    document.addEventListener('mousedown', this._handleTouchStart, false);
+    // document.addEventListener('mousedown', this._handleTouchStart, false);
     document.addEventListener('touchmove', this._handleTouchMove, false);
-    document.addEventListener('mousemove', this._handleTouchMove, false);
+    // document.addEventListener('mousemove', this._handleTouchMove, false);
     document.addEventListener('touchend', this._handleTouchEnd, false);
-    document.addEventListener('mouseup', this._handleTouchEnd, false);
+    // document.addEventListener('mouseup', this._handleTouchEnd, false);
   }
   _getElems() {
     currentCard = document.getElementsByClassName('card')[0];

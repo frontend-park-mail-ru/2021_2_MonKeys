@@ -20,7 +20,6 @@ window.addEventListener('load', (e) => {
 });
 
 
-
 loginPage();
 
 const configApp = {
@@ -96,7 +95,7 @@ function editPage() {
  */
 function profilePage() {
   const profile = new ProfileComponent(root);
-  currentComponent = profile
+  currentComponent = profile;
   profile.render();
 }
 
@@ -109,7 +108,6 @@ function feedPage() {
   window.Feed.getFeed();
   currentComponent = feed;
   feed.render();
-
 }
 
 /**
@@ -129,13 +127,13 @@ function loginPage() {
   const login = new LoginComponent(root);
   login.render();
 
-   login.checkSubmit( (email, password)=> {
-     window.User.loginWithCredentials(email, password, ()=> {
-       feedPage();
-       addMenu('menu-feed');
-     },
-     );
-   });
+  login.checkSubmit( (email, password)=> {
+    window.User.loginWithCredentials(email, password, ()=> {
+      feedPage();
+      addMenu('menu-feed');
+    },
+    );
+  });
   login.checkSubmit((email, password)=> {
     window.User.loginWithCredentials(email, password, ()=> {
       feedPage();
@@ -151,7 +149,6 @@ function loginPage() {
  * Функция для страницы с регистрацией
  */
 function signupPage() {
-
   const signup = new SignupComponent(root);
   signup.render();
   signup.checkSubmit((email, password)=> {
@@ -169,6 +166,9 @@ function signupPage() {
 root.addEventListener('click', (e) => {
   const { target } = e;
   if (configApp[target.className]) {
+    if (currentComponent.clearEventListeners) {
+      currentComponent.clearEventListeners();
+    }
     configApp[target.className].open();
     addMenu(configApp[target.className].name);
   }

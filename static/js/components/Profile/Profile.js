@@ -13,7 +13,7 @@ export default class ProfileComponent {
           icon: 'icons/button_edit_white.svg',
           className: 'profile-edit',
         },
-      ]
+      ],
     }
 
     constructor(parent) {
@@ -29,7 +29,7 @@ export default class ProfileComponent {
       const renderedHTML = Handlebars.templates['profile'];
       this._parent.innerHTML = renderedHTML(this._data);
     }
-    
+
     render() {
       this._renderDOM();
     }
