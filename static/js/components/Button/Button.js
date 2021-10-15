@@ -1,5 +1,0 @@
-/**
- * 
- * PARAMETRI---->>>> HTML COD KNOPKI
- *
- */

@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "jsx": "react",
+      "module": "es6",
+      "target": "es2017",
+      "moduleResolution": "node",
+      "jsxFactory": "MonkeysVirtualDOM.jsxFactory",
+      "allowJs": true,
+      "outDir": "./static/js",
+      "baseUrl": "source",
+      "paths" : {
+        "virtualDOM/*": [
+          "virtualDOM/*"
+        ]
+      }
+    }
+}

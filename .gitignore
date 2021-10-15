@@ -11,3 +11,5 @@ ijia.me.key
 package-lock.json
 
 go.sum
+
+static/js/**
