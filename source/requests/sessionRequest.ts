@@ -1,4 +1,4 @@
-import RequestBase from "./requestBase";
+import RequestBase from "../utils/httpRequest";
 import { serverAddress, sessionURL } from "../constants/urls";
 
 /**
