@@ -1,5 +1,5 @@
-import RequestBase from "../utils/httpRequest";
-import { serverAddress, sessionURL } from "../constants/urls";
+import RequestBase from "../utils/httpRequest.js";
+import { serverAddress, sessionURL } from "../constants/urls.js";
 
 /**
  * login

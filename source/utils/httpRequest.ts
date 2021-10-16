@@ -1,4 +1,4 @@
-import { HTTPSuccess } from "../constants/HTTPStatus"
+import { HTTPSuccess } from "../constants/HTTPStatus.js"
 
 export default class RequestBase {
     _requestOptions

@@ -1,4 +1,4 @@
-import { MonkeysVirtualDOM } from "../virtualDOM/virtualDOM";
+import { MonkeysVirtualDOM } from "../virtualDOM/virtualDOM.js";
 
 
 export default class ViewBase {
