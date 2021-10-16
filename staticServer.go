@@ -17,13 +17,13 @@ type spaHandler struct {
 
 func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r.URL.Path)
-	if (r.URL.Path == "/VirtualDOM/VirtualDOM") {
-		fmt.Println("!!!!!!!!!!!!");
+	if r.URL.Path == "/js/*" {
+		fmt.Println("!!!!!!!!!!!!")
 		r.URL.Path = "/VirtualDOM/VirtualDOM.js"
 	}
 	path, err := filepath.Abs(r.URL.Path)
-	
-	fmt.Println(path ,err)
+
+	fmt.Println(path, err)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -48,7 +48,7 @@ func main() {
 	mux.PathPrefix("/").Handler(spa)
 
 	srv := &http.Server{
-		Handler: mux,
+		Handler:      mux,
 		Addr:         ":80",
 		WriteTimeout: http.DefaultClient.Timeout,
 		ReadTimeout:  http.DefaultClient.Timeout,
