@@ -89,5 +89,5 @@ export default class EditView extends ViewBase {
             </form>
             {Tapbar(this._data.tapbar)}
         </div>
-);
+    );
 }
