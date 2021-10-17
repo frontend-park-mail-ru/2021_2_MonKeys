@@ -1,87 +1,21 @@
-import { HTTPSuccess } from '../constants/HTTPStatus';
-
-/*export default class RequestBase {
-    _requestOptions
-
-    constructor(body, headers, method, credentials = 'include') {
-      this._requestOptions = {
-        method: method,
-        headers: headers,
-        credentials: credentials,
-        body: JSON.stringify(body),
-      };
-    }
-
-    /!**
-     *
-     * @param {String} url - ссылка
-     * @param {Function} resolve - callback(data)
-     *!/
-    send(url, resolve) {
-      fetch(url, this._requestOptions)
-          .then((response) => response.json()
-          .then((data) => ({
-            data: data,
-            status: response.status,
-        })
-          )
-        .then((result) => {
-          if (result.status === HTTPSuccess) {
-            resolve(result.data);
-          } else {
-            console.error(result.status);
-          }
-        })).catch((error) => console.log(error));
-    }
-}*/
-
-
+/** Class representing a http request. */
 class Http {
-  __ajax(url, method, data) {
-    const options = {
+  /**
+   * Делает запрос
+   * @param {string} url - Запрос по url.
+   * @param {string} method - Метод запроса
+   * @param {Headers} headers - Заголовки запроса
+   * @param {string} body - Тело запроса
+   * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
+   */
+  async _request({ url = '/', method = 'GET', headers = new Headers(), body = '' }) {
+    const response = await fetch(url, {
       method: method,
+      headers: headers,
+      body: body,
       mode: 'cors',
-      credentials: 'include'
-    };
-
-    const csrf = customSessionStorage.get('csrf');
-    if (csrf) {
-      options['headers'] = {'X-CSRF-Token': csrf};
-    }
-
-    if (data) {
-      options['body'] = data;
-    }
-
-    return new Request(url, options);
-  }
-
-  async get(url) {
-    const response = await fetch(this.__ajax(url, 'GET', null));
-
-    const csrf = response.headers.get('X-CSRF-Token');
-    if (csrf) {
-      customSessionStorage.set('csrf', csrf);
-    }
-
-    const responseData = await response.json();
-
-    return {
-      status: response.status,
-      data: responseData
-    };
-  }
-
-  async post(url, {
-    login: login,
-    password: password,
-  }) {
-    const response = await fetch(this.__ajax(url, 'POST', JSON.stringify(data)));
-
-    const csrf = response.headers.get('X-CSRF-Token');
-    if (csrf) {
-      customSessionStorage.set('csrf', csrf);
-    }
+      credentials: 'include',
+    });
 
     const responseData = await response.json();
 
@@ -91,12 +25,53 @@ class Http {
     };
   }
 
-  async delete(url) {
-    const response = await fetch(this.__ajax(url, 'POST', ''));
-    return {
-      status: response.status,
-      data: '',
-    };
+  /**
+   * Делает GET запрос
+   * @param {string} url - Запрос по url.
+   * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
+   */
+  get(url) {
+    return this._request({ url: url });
+  }
+
+  /**
+   * Делает POST запрос
+   * @param {string} url - Запрос по url.
+   * @param {Object} data - Данные для отправки.
+   * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
+   */
+  post(url, data) {
+    return this._request({
+      url: url,
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  /**
+   * Делает DELETE запрос
+   * @param {string} url - Запрос по url.
+   * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
+   */
+  delete(url) {
+    return this._request({
+      url: url,
+      method: 'DELETE',
+    });
+  }
+
+  /**
+   * Делает PUT запрос
+   * @param {string} url - Запрос по url.
+   * @param {Object} data - Данные для отправки.
+   * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
+   */
+  put(url, data) {
+    return this._request({
+      url: url,
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
   }
 }
 
