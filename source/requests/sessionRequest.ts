@@ -1,9 +1,9 @@
 import { serverAddress, sessionURL } from '../constants/urls';
 import { http } from '../utils/http';
 
-const loginRequest = (login, password) => {
+const loginRequest = ({ email, password }) => {
   return http.post(`${serverAddress}${sessionURL}`, {
-    login: login,
+    email: email,
     password: password,
   });
 };

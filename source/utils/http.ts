@@ -1,5 +1,12 @@
 /** Class representing a http request. */
 class Http {
+  /** Базовый URL. */
+  private _baseURL = '';
+
+  public set baseURL(baseURL: string) {
+    this._baseURL = baseURL;
+  }
+
   /**
    * Делает запрос
    * @param {string} url - Запрос по url.
@@ -8,8 +15,8 @@ class Http {
    * @param {string} body - Тело запроса
    * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
    */
-  async _request({ url = '/', method = 'GET', headers = new Headers(), body = '' }) {
-    const response = await fetch(url, {
+  private async _request({ url = '/', method = 'GET', headers = new Headers(), body = '' }) {
+    const response = await fetch(this._baseURL + url, {
       method: method,
       headers: headers,
       body: body,
@@ -30,7 +37,7 @@ class Http {
    * @param {string} url - Запрос по url.
    * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
    */
-  get(url) {
+  public get(url) {
     return this._request({ url: url });
   }
 
@@ -40,7 +47,7 @@ class Http {
    * @param {Object} data - Данные для отправки.
    * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
    */
-  post(url, data) {
+  public post(url, data) {
     return this._request({
       url: url,
       method: 'POST',
@@ -53,7 +60,7 @@ class Http {
    * @param {string} url - Запрос по url.
    * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
    */
-  delete(url) {
+  public delete(url) {
     return this._request({
       url: url,
       method: 'DELETE',
@@ -66,7 +73,7 @@ class Http {
    * @param {Object} data - Данные для отправки.
    * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
    */
-  put(url, data) {
+  public put(url, data) {
     return this._request({
       url: url,
       method: 'PUT',

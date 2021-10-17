@@ -22,8 +22,8 @@ export default class SessionService extends Observer {
       'Method': 'DELETE',
     });
   }*/
-  login(login, password) {
-    return loginRequest(login, password)
+  login(email, password) {
+    return loginRequest(email, password)
         .then(() => {
           this.emit('login', '');
         });
