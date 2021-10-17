@@ -1,19 +1,19 @@
-import { serverAddress, profileURL } from '../constants/urls';
-import { http } from '../utils/http';
+import { profileURL } from '../constants/urls';
+import http from '../utils/http';
 
-const createProfile = ({ email, password }) => {
-  return http.post(`${serverAddress}${profileURL}`, {
+const createProfile = (email, password) => {
+  return http.post(profileURL, {
     email: email,
     password: password,
   });
 };
 
-const getProfile = (login, password) => {
-  return http.get(`${serverAddress}${profileURL}`);
+const getProfile = () => {
+  return http.get(profileURL);
 };
 
-const editProfile = ({ name, date, description, /* imgSrc,*/ tags }) => {
-  return http.put(`${serverAddress}${profileURL}`, {
+const editProfile = (name, date, description, /* imgSrc,*/ tags) => {
+  return http.put(profileURL, {
     name: name,
     date: date,
     description: description,

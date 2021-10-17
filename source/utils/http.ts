@@ -3,7 +3,7 @@ class Http {
   /** Базовый URL. */
   private _baseURL = '';
 
-  public set baseURL(baseURL: string) {
+  public set baseURL(baseURL) {
     this._baseURL = baseURL;
   }
 
@@ -82,4 +82,4 @@ class Http {
   }
 }
 
-export const http = new Http();
+export default new Http();
