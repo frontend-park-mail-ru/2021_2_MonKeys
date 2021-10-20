@@ -7,7 +7,8 @@ class Router {
         this.routes = routes;
     }
 
-    go(route: string, $root: HTMLElement){
+    go(route: string){
+        const $root = document.getElementById('app');
         const location = route;
         if(this.routes[location]){
             console.log(this.routes[location]);

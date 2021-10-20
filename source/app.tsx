@@ -9,13 +9,13 @@ import http from './utils/http.js';
 import { serverAddress } from './constants/urls.js';
 import EventBus from './dispatcher/eventBus.js';
 import router from './route/router.js';
+import { InitBus } from './dispatcher/events.js';
 
+InitBus();
 
-
-const $root = document.getElementById('app');
 
 window.onload = () => {
-    router.go(window.location.pathname, $root);
+    router.go(window.location.pathname);
 }
 
 

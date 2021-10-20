@@ -33,7 +33,7 @@ export default class LoginView extends ViewBase {
                 type: 'button',
                 text: 'Войти',
                 class: 'login',
-                onclick: "EventBus.dispatch<string>('user:logged-in', 'Ilyagu');",
+                onclick: () => { EventBus.dispatch<string>('login:login-button', 'Idsaodksa');},
             },
         },
         'links': {
@@ -41,6 +41,7 @@ export default class LoginView extends ViewBase {
                 text: 'Зарегистрироваться',
                 class: 'signup-link',
                 dataSection: 'signup',
+                route: '/signup'
             },
         },
         'errorMsgs': {
