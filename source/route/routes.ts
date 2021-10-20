@@ -22,7 +22,7 @@ export const Routes = {
     '/': {
         name: 'Drip',
         auth: false,
-        view: SignupView,
+        view: LoginView,
     },
     '/login': {
         name: 'Вход',

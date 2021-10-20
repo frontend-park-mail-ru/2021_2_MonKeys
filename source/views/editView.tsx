@@ -50,11 +50,13 @@ export default class EditView extends ViewBase {
                 type: 'button',
                 text: '',
                 class: 'add',
+                onclick: ()=>{},
             },
             'saveButton': {
                 type: 'submit',
                 text: 'Сохранить',
                 class: 'edit',
+                onclick: ()=>{},
             }
         },
         'tapbar': {

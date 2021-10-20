@@ -19,18 +19,18 @@ window.onload = () => {
 }
 
 
-// const event = EventBus.register('check-event', (name: string) => {
-//     if(name)
-//         console.log(`Hello ${name}`);
-//     else
-//         console.log('Hello, world!');
-// })
+const event = EventBus.register('check-event', (name: string) => {
+    if(name)
+        console.log(`Hello ${name}`);
+    else
+        console.log('Hello, world!');
+})
 
-// EventBus.dispatch<string>('check-event', 'Ilyagu');
-// EventBus.dispatch<string>('check-event');
+EventBus.dispatch<string>('check-event', 'Ilyagu');
+EventBus.dispatch<string>('check-event');
 
 // event.unregister();
-// EventBus.dispatch<string>('check-event');
+EventBus.dispatch<string>('check-event');
 
 
 

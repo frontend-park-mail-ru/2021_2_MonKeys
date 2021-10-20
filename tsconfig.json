@@ -2,7 +2,7 @@
     "compilerOptions": {
       "jsx": "react",
       "module": "es6",
-      "target": "es2017",
+      "target": "es2019",
       "moduleResolution": "node",
       "jsxFactory": "MonkeysVirtualDOM.jsxFactory",
       "allowJs": true,

@@ -5,6 +5,7 @@ import { Button } from "../components/button.js";
 import { Link } from "../components/link.js";
 import { ErrorMsg } from "../components/errorMsg.js";
 import { errorEmailMsg, errorPasswordMsg, errorLoginFormMsg } from "../constants/errorMsg.js";
+import EventBus from "../dispatcher/eventBus.js"
 
 
 export default class LoginView extends ViewBase {
@@ -29,9 +30,10 @@ export default class LoginView extends ViewBase {
         },
         'buttons': {
             'loginButton': {
-                type: 'submit',
+                type: 'button',
                 text: 'Войти',
                 class: 'login',
+                onclick: "EventBus.dispatch<string>('user:logged-in', 'Ilyagu');",
             },
         },
         'links': {

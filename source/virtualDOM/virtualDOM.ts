@@ -22,7 +22,7 @@ export namespace MonkeysVirtualDOM {
             }, []),
         };
     };
-  
+    
     export const createElement = (virtualNode) => {
         if (typeof virtualNode === 'string') {
           return document.createTextNode(virtualNode);

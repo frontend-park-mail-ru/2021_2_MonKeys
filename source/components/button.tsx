@@ -4,6 +4,7 @@ export interface ButtonProps {
   type: string;
   text: string;
   class: string;
+  onclick;
 }
 
 export const Button = (props: ButtonProps) => {
@@ -27,11 +28,13 @@ export const Button = (props: ButtonProps) => {
   
   const withText = (props.text === undefined) ? false : true;
   const textClassName = className + '-text';
-  return (
-    <button type={props.type} class={className}>
+  let button = (
+    <button onclick={props.onclick} type={props.type} class={className}>
       <div class="center-container">
         <span class={textClassName}>{props.text}</span>
       </div>
     </button>
   );
+  // button.addEventListner('click',()=>{alert(1);});
+  return button;
 }

@@ -40,6 +40,7 @@ export default class SignupView extends ViewBase {
                 type: 'submit',
                 text: 'Зарегистрироваться',
                 class: 'signup',
+                onclick: ()=>{},
             },
         },
         'links': {
