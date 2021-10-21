@@ -8,6 +8,6 @@ export interface errorMsgProps {
 export const ErrorMsg = (props: errorMsgProps) => {
     const className = props.isVisiable ? "login-error-active" : "login-error"; 
     return (
-      <div class={className}>props.text</div>
+      <div name="error" class={className}>{props.text}</div>
   );
 };

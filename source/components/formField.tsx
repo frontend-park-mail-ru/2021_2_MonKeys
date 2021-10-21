@@ -8,6 +8,8 @@ export interface formFieldProps {
   name: string;
   iconSrc?: string;
   class: string;
+  oninput?: Function;
+  onfocusout?: Function;
 }
 
 export const FormField = (props: formFieldProps) => {
@@ -20,6 +22,8 @@ export const FormField = (props: formFieldProps) => {
         if (props.value !== undefined) {
           field = (
             <input
+              oninput={props.oninput}
+              onfocusout={props.onfocusout}
               type={props.type}
               name={props.name}
               placeholder={props.placeholder}
@@ -30,6 +34,8 @@ export const FormField = (props: formFieldProps) => {
         } else {
           field = (
             <input
+              oninput={props.oninput}
+              onfocusout={props.onfocusout}
               type={props.type}
               name={props.name}
               placeholder={props.placeholder}

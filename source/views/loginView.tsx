@@ -5,6 +5,7 @@ import { Button } from "../components/button.js";
 import { Link } from "../components/link.js";
 import { ErrorMsg } from "../components/errorMsg.js";
 import { errorEmailMsg, errorPasswordMsg, errorLoginFormMsg } from "../constants/errorMsg.js";
+import { emailRegExp, passwordRegExp } from "../constants/validation.js";
 import EventBus from "../dispatcher/eventBus.js"
 
 
@@ -18,6 +19,8 @@ export default class LoginView extends ViewBase {
                 name: 'email',
                 iconSrc: 'icons/email.svg',
                 class: 'form-field-valid',
+                oninput: () => { EventBus.dispatch<string>('login:email-input'); },
+                onfocusout: () => { EventBus.dispatch<string>('login:email-focusout'); },
             },
             'password': {
                 tag: 'input',
@@ -26,6 +29,8 @@ export default class LoginView extends ViewBase {
                 name: 'password',
                 iconSrc: 'icons/password.svg',
                 class: 'form-field-valid',
+                oninput: () => { EventBus.dispatch<string>('login:password-input'); },
+                onfocusout: () => { EventBus.dispatch<string>('login:password-focusout'); },
             },
         },
         'buttons': {
@@ -33,7 +38,7 @@ export default class LoginView extends ViewBase {
                 type: 'button',
                 text: 'Войти',
                 class: 'login',
-                onclick: () => { EventBus.dispatch<string>('login:login-button', 'Idsaodksa');},
+                onclick: () => { EventBus.dispatch<string>('login:login-button'); },
             },
         },
         'links': {
@@ -60,23 +65,23 @@ export default class LoginView extends ViewBase {
         }
     }
     _template = (
-    <div class="form-container">
-        <div class="center-container">
-            <span class="login-header">Войти</span>
+        <div class="form-container">
+            <div class="center-container">
+                <span class="login-header">Войти</span>
+            </div>
+            <div class="center-container">
+                <form class="login-form">
+                    <div class="drip-logo-bg">
+                        {FormField(this._data.fields.email)}
+                        {ErrorMsg(this._data.errorMsgs.emailError)}
+                        {FormField(this._data.fields.password)}
+                        {ErrorMsg(this._data.errorMsgs.passwordError)}
+                    </div>
+                    {ErrorMsg(this._data.errorMsgs.formError)}
+                    {Button(this._data.buttons.loginButton)}
+                </form>
+            </div>
+            {Link(this._data.links.signup)}
         </div>
-        <div class="center-container">
-            <form class="login-form">
-                <div class="drip-logo-bg">
-                    {FormField(this._data.fields.email)}
-                    {ErrorMsg(this._data.errorMsgs.emailError)}
-                    {FormField(this._data.fields.password)}
-                    {ErrorMsg(this._data.errorMsgs.passwordError)}
-                </div>
-                {ErrorMsg(this._data.errorMsgs.formError)}
-                {Button(this._data.buttons.loginButton)}
-            </form>
-        </div>
-        {Link(this._data.links.signup)}
-    </div>
-);
+    );
 }
