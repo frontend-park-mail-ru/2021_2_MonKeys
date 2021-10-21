@@ -1,7 +1,7 @@
-import { sessionURL } from '../constants/urls';
-import http from '../utils/http';
+import { sessionURL } from '../constants/urls.js';
+import http from '../utils/http.js';
 
-const loginRequest = (email, password) => {
+const loginRequest = (email: string, password: string) => {
   return http.post(sessionURL, {
     email: email,
     password: password,

@@ -4,7 +4,7 @@ export interface ButtonProps {
   type: string;
   text: string;
   class: string;
-  onclick;
+  onclick: Function;
 }
 
 export const Button = (props: ButtonProps) => {
@@ -35,6 +35,5 @@ export const Button = (props: ButtonProps) => {
       </div>
     </button>
   );
-  // button.addEventListner('click',()=>{alert(1);});
   return button;
 }

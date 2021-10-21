@@ -11,13 +11,13 @@ export default class ViewBase {
     }
 
     render() {
-        if(window.currentDOM){    
-           
+        if (window.currentDOM){
             MonkeysVirtualDOM.update(
                 this._parent,
                 window.currentDOM,
                 this._template);
             window.currentDOM = this._template;
+
         } else {
             window.currentDOM = this._template;
             this._parent.appendChild(

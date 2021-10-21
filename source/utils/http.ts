@@ -20,7 +20,7 @@ class Http {
       method: method,
       headers: headers,
       body: body,
-      mode: 'cors',
+      // mode: 'cors',
       credentials: 'include',
     });
 
