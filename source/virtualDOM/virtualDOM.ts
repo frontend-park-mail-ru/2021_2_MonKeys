@@ -30,7 +30,7 @@ export namespace MonkeysVirtualDOM {
         return document.createTextNode(virtualNode);
       }
       const rootElement = document.createElement(virtualNode.type);
-      if(virtualNode.type==='ilyagu-router'){
+      if(virtualNode.type==='mon-router'){
         rootElement.addEventListener('click',()=> {
           router.go(virtualNode.props['route']);
         })

@@ -13,6 +13,11 @@ import { InitBus } from './dispatcher/events.js';
 
 InitBus();
 
+declare global {
+    interface Window {
+        currentDOM:any;
+    }
+}
 
 window.onload = () => {
     router.go(window.location.pathname);

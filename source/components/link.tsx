@@ -10,9 +10,9 @@ export interface LinkProps {
 export const Link = (props: LinkProps) => {
     return (
         <div class="center-container">
-            <ilyagu-router route={props.route}>
+            <mon-router route={props.route}>
             <a class={props.class} data-section={props.dataSection}>{props.text}</a>
-            </ilyagu-router>
+            </mon-router>
         </div>
     )
 }

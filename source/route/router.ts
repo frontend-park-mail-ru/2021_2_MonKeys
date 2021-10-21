@@ -13,6 +13,7 @@ class Router {
         if(this.routes[location]){
             console.log(this.routes[location]);
             const currentView = new this.routes[location].view($root);
+            
             currentView.render()
         } else {
             console.log(this.routes['/404'])

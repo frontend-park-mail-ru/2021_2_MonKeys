@@ -33,7 +33,7 @@ export default class FeedView extends ViewBase {
             },
         },
         'tapbar': {
-            class: 'menu-feed',
+            class: 'menu-chat',
         },
     }
     _template = (

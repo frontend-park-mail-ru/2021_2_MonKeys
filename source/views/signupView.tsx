@@ -45,9 +45,10 @@ export default class SignupView extends ViewBase {
         },
         'links': {
             'login': {
-                text: 'вернуться назад',
+                text: 'Вход',
                 class: 'login-link',
                 dataSection: 'login',
+                route: '/login'
             },
         },
         'errorMsgs': {
