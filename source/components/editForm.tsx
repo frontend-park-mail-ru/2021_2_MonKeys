@@ -31,8 +31,8 @@ export const EditForm = (props: EditFormProps) => {
             </div>
         </div>
         <div class="inputEdit">
-            {ImgField()}
-            {Button(props.buttons.imgAddButton)}
+            {/* {ImgField()} */}
+            {/* {Button(props.buttons.imgAddButton)} */}
         </div>
         {Button(props.buttons.saveButton)}
     </form>

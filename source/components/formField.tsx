@@ -7,7 +7,7 @@ export interface formFieldProps {
   value?: string;
   name: string;
   iconSrc?: string;
-  class: string;
+  class?: string;
   oninput?: Function;
   onfocusout?: Function;
 }
@@ -48,6 +48,7 @@ export const FormField = (props: formFieldProps) => {
         if (props.value !== undefined) {
           field = (
             <textarea
+              oninput={props.oninput}
               name={props.name}
               placeholder={props.placeholder}
               class={props.class}
@@ -57,6 +58,7 @@ export const FormField = (props: formFieldProps) => {
         } else {
           field = (
             <textarea
+            oninput={props.oninput}
               name={props.name}
               placeholder={props.placeholder}
               class={props.class}

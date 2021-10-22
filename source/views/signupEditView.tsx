@@ -1,11 +1,31 @@
 import ViewBase from "./viewBase.js";
 import { MonkeysVirtualDOM } from "../virtualDOM/virtualDOM.js";
 import { EditForm } from "../components/editForm.js";
+import EventBus from "../dispatcher/eventBus.js"
+import { EditStore } from "../store/editStore.js";
 import { ErrorMsg } from "../components/errorMsg.js";
 import { errorEmailMsg, errorPasswordMsg, errorRepeatPasswordMsg, errorSignupFormMsg } from "../constants/errorMsg.js";
 
 
 export default class SignupEditView extends ViewBase {
+    constructor(parent: HTMLElement) {
+        super(parent);
+        EditStore.subscribe((data) => {
+            this._data.editForm.fields.name.class = data.nameFieldClass;
+            this._data.editForm.fields.birthDate.class = data.birthDateFieldClass;
+            this._template = (
+                <div>
+                    {EditForm(this._data.editForm)}
+                </div>
+            );
+            console.log('tyt');
+            this.render();
+        })
+        console.log(EditStore.get().nameFieldClass);
+        this._data.editForm.fields.name.class = EditStore.get().nameFieldClass;
+        this._data.editForm.fields.birthDate.class = EditStore.get().birthDateFieldClass;
+    }
+
     _data = {
         'editForm': {
             'fields': {
@@ -13,13 +33,14 @@ export default class SignupEditView extends ViewBase {
                     tag: 'textarea',
                     placeholder: 'Имя',
                     name: 'userName',
-                    class: 'form-field text-without-icon',
+                    class: EditStore.get().nameFieldClass,
+                    oninput: () => { EventBus.dispatch<string>('edit:name-input'); },
                 },
                 'birthDate': {
                     tag: 'input',
                     type: 'date',
+                    class: '',
                     name: 'birthDate',
-                    class: 'form-field text-with-icon',
                 },
                 'description': {
                     tag: 'textarea',
@@ -50,15 +71,12 @@ export default class SignupEditView extends ViewBase {
                     onclick: ()=>{},
                 },
                 'saveButton': {
-                    type: 'submit',
+                    type: 'button',
                     text: 'Сохранить',
                     class: 'edit',
-                    onclick: ()=>{},
+                    onclick: ()=>{ EventBus.dispatch<string>('signup-edit:save-button'); },
                 }
             },
-        },
-        'tapbar': {
-            class: 'menu-profile',
         },
     }
     _template = (

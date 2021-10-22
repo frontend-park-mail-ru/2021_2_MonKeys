@@ -8,6 +8,7 @@ import { feedRequest } from "../requests/feedRequest.js";
 import { createProfile } from "../requests/profileRequest.js";
 import { loginEventRegister } from "./loginEvents.js";
 import { signupEventRegister } from "./signupEvents.js";
+import { SignupEditEventRegister } from "./editEvents.js";
 const $root = document.getElementById('app');
 
 export const InitBus = () => {
@@ -16,5 +17,5 @@ export const InitBus = () => {
     // -------------------------signup----------------------------
     signupEventRegister();
     // -------------------edit-after-signup-----------------------
-    
+    SignupEditEventRegister();
 }
