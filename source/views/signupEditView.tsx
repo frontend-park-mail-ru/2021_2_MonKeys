@@ -1,12 +1,11 @@
 import ViewBase from "./viewBase.js";
 import { MonkeysVirtualDOM } from "../virtualDOM/virtualDOM.js";
-import { Tapbar } from "../components/tapbar.js";
 import { EditForm } from "../components/editForm.js";
 import { ErrorMsg } from "../components/errorMsg.js";
 import { errorEmailMsg, errorPasswordMsg, errorRepeatPasswordMsg, errorSignupFormMsg } from "../constants/errorMsg.js";
 
 
-export default class EditView extends ViewBase {
+export default class SignupEditView extends ViewBase {
     _data = {
         'editForm': {
             'fields': {
@@ -65,7 +64,6 @@ export default class EditView extends ViewBase {
     _template = (
         <div>
             {EditForm(this._data.editForm)}
-            {Tapbar(this._data.tapbar)}
         </div>
     );
 }
