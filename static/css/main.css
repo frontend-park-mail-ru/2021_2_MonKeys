@@ -135,10 +135,11 @@ body {
 
 .login-error {
     color: red;
-    visibility: hidden;
+    display: none;
 }
 
 .login-error-active {
+    display: block;
     margin-top: 5%;
     width: 65%;
     padding-top: 3%;

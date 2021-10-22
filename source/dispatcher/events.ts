@@ -9,7 +9,7 @@ import { createProfile } from "../requests/profileRequest.js";
 const $root = document.getElementById('app');
 
 export const InitBus = () => {
-    // login
+    // -------------------------login-----------------------------
     EventBus.register('login:login-button', (payload?: string) => {
         
         // ТОТАЛЬНЕЙШИЙ КРИНЖ ЭТО ДОЛЖНО БЫТЬ ЧЕРЕЗ ВИРТУАЛДОМ ПОТОМ 
@@ -63,7 +63,7 @@ export const InitBus = () => {
                         console.log('server internal error');
                     }
                 }
-            )
+            ).catch((error) => console.log(error));
     });
 
     EventBus.register('login:email-input', (payload?: string) => {
@@ -115,7 +115,7 @@ export const InitBus = () => {
 
     
 
-    // signup
+    // -------------------------signup-----------------------------
     EventBus.register('signup:signup-button', (payload?: string) => {
         
         // ТОТАЛЬНЕЙШИЙ КРИНЖ ЭТО ДОЛЖНО БЫТЬ ЧЕРЕЗ ВИРТУАЛДОМ ПОТОМ 
@@ -170,7 +170,7 @@ export const InitBus = () => {
                         console.log('server internal error');
                     }
                 }
-            )
+            ).catch((error) => console.log(error));
     });
 
     EventBus.register('signup:email-input', (payload?: string) => {
