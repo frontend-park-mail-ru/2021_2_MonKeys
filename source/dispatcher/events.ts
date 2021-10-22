@@ -3,6 +3,7 @@ import { loginRequest } from "../requests/sessionRequest.js";
 import router from '../route/router.js';
 import { emailRegExp, passwordRegExp } from "../constants/validation.js";
 import { HTTPNotFound, HTTPSuccess } from "../constants/HTTPStatus.js";
+import { ProfileStore } from "../store/profileStore.js";
 const $root = document.getElementById('app');
 
 export const InitBus = () => {
@@ -42,8 +43,7 @@ export const InitBus = () => {
                 (response)=> {
                     if (response.status === HTTPSuccess) {
                         if (response.data.status === HTTPSuccess) {
-                            // надо ли запрос через куки???
-                            // занести в стор данные юзера
+                            ProfileStore.set(response.data.body);
                             router.go('/feed');
                         } else if (response.data.status === HTTPNotFound) {
                             // занести в стор данные об ошибке
@@ -53,7 +53,6 @@ export const InitBus = () => {
                         // server internal error
                         console.log('server internal error');
                     }
-                    console.log(response);
                 }
         )
         
