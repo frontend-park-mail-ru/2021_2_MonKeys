@@ -1,5 +1,5 @@
-import { profileURL } from '../constants/urls';
-import http from '../utils/http';
+import { profileURL } from '../constants/urls.js';
+import http from '../utils/http.js';
 
 const createProfile = (email, password) => {
   return http.post(profileURL, {

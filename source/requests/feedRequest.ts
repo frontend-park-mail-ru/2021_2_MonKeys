@@ -1,5 +1,5 @@
-import { feedURL } from '../constants/urls';
-import http from '../utils/http';
+import { feedURL } from '../constants/urls.js';
+import http from '../utils/http.js';
 
 const feedRequest = () => {
   return http.get(feedURL);

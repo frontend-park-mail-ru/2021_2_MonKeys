@@ -25,10 +25,10 @@ window.onload = () => {
 
 
 const event = EventBus.register('check-event', (name: string) => {
-    if(name)
-        console.log(`Hello ${name}`);
-    else
-        console.log('Hello, world!');
+    // if(name)
+    //     console.log(`Hello ${name}`);
+    // else
+    //     console.log('Hello, world!');
 })
 
 EventBus.dispatch<string>('check-event', 'Ilyagu');

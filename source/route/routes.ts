@@ -5,6 +5,7 @@
 
 import LoginView from '../views/loginView.js';
 import SignupView from "../views/signupView.js";
+import EditView from '../views/editView.js';
 import ProfileView from "../views/profileView.js";
 import LikesView from "../views/likesView.js";
 import FeedView from "../views/feedView.js";
@@ -35,6 +36,12 @@ export const Routes = {
         path: '/signup',
         auth: false,
         view: SignupView,
+    },
+    '/edit': {
+        name: 'Редактирование',
+        path: '/edit',
+        auth: true,
+        view: EditView,
     },
     '/feed': {
         name: 'Лента',

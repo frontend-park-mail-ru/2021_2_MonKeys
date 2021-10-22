@@ -40,7 +40,7 @@ export namespace MonkeysVirtualDOM {
       
         if(/^on/.test(key)){
           
-          console.log(key.slice(2), virtualNode.props[key]);
+          // console.log(key.slice(2), virtualNode.props[key]);
           rootElement.addEventListener(key.slice(2), virtualNode.props[key]);
         } else {
           rootElement.setAttribute(key, virtualNode.props[key]);
@@ -96,7 +96,7 @@ export namespace MonkeysVirtualDOM {
     }
     updateElement($rootElement, currNode, nextNode, index);
     
-    console.log(manipulationMapStack);
+    // console.log(manipulationMapStack);
 
     manipulationMapStack.map((manipulation) => {
       switch (manipulation.method){

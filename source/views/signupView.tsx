@@ -5,6 +5,7 @@ import { Button } from "../components/button.js";
 import { Link } from "../components/link.js";
 import { ErrorMsg } from "../components/errorMsg.js";
 import { errorEmailMsg, errorPasswordMsg, errorRepeatPasswordMsg, errorSignupFormMsg } from "../constants/errorMsg.js";
+import EventBus from "../dispatcher/eventBus.js"
 
 
 export default class SignupView extends ViewBase {
@@ -17,6 +18,8 @@ export default class SignupView extends ViewBase {
                 name: 'email',
                 iconSrc: 'icons/email.svg',
                 class: 'form-field-valid',
+                oninput: () => { EventBus.dispatch<string>('signup:email-input'); },
+                onfocusout: () => { EventBus.dispatch<string>('signup:email-focusout'); },
             },
             'password': {
                 tag: 'input',
@@ -25,6 +28,8 @@ export default class SignupView extends ViewBase {
                 name: 'password',
                 iconSrc: 'icons/password.svg',
                 class: 'form-field-valid',
+                oninput: () => { EventBus.dispatch<string>('signup:password-input'); },
+                onfocusout: () => { EventBus.dispatch<string>('signup:password-focusout'); },
             },
             'repeatPassword': {
                 tag: 'input',
@@ -33,14 +38,16 @@ export default class SignupView extends ViewBase {
                 name: 'password',
                 iconSrc: 'icons/password.svg',
                 class: 'form-field-valid',
+                oninput: () => { EventBus.dispatch<string>('signup:repeat-password-input'); },
+                onfocusout: () => { EventBus.dispatch<string>('signup:repeat-password-focusout'); },
             },
         },
         'buttons': {
             'signupButton': {
-                type: 'submit',
+                type: 'button',
                 text: 'Зарегистрироваться',
                 class: 'signup',
-                onclick: ()=>{},
+                onclick: ()=>{ EventBus.dispatch<string>('signup:signup-button'); },
             },
         },
         'links': {
