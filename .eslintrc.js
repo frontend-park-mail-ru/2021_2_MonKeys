@@ -4,14 +4,17 @@ module.exports = {
     'es2021': true,
   },
   'extends': [
-    'google',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
-  'parser': 'babel-eslint',
+  'parser': '@typescript-eslint/parser',
   'parserOptions': {
     'ecmaVersion': 12,
     'sourceType': 'module',
   },
-  'ignorePatterns': ['*.tpl.js'],
+  'plugins': [
+    '@typescript-eslint',
+  ],
   'rules': {
     'max-len': [2, 120, 2],
     'object-curly-spacing': ['error', 'always'],

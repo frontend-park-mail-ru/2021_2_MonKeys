@@ -10,6 +10,6 @@ export interface ProfileData {
     tags?: Set<string>;
 }
 
-let ProfileStore = new BaseStore<ProfileData>();
+const ProfileStore = new BaseStore<ProfileData>();
 
 export { ProfileStore };

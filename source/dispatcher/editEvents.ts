@@ -140,6 +140,7 @@ export const SignupEditEventRegister = () => {
         }
         ProfileStore.set(newUserData);
 
+
         console.log(ProfileStore.get());
     });
 }

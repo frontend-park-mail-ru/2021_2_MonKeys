@@ -6,7 +6,7 @@ export interface EditData {
     tags?: any;
 }
 
-let EditStore = new BaseStore<EditData>();
+const EditStore = new BaseStore<EditData>();
 
 const initData = {
     nameFieldClass: 'form-field text-without-icon',

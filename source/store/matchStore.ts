@@ -10,6 +10,6 @@ export interface MatchData {
     matchesTotal: number;
 } 
 
-let MatchStore = new BaseStore<MatchData>();
+const MatchStore = new BaseStore<MatchData>();
 
 export { MatchStore }

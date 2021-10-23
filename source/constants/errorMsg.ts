@@ -5,4 +5,4 @@ const errorSignupFormMsg = 'Пользователь с такой почтой 
 const errorRepeatPasswordMsg = 'Пароли не совпадают';
 
 
-export {errorEmailMsg, errorPasswordMsg, errorLoginFormMsg, errorSignupFormMsg, errorRepeatPasswordMsg };
+export { errorEmailMsg, errorPasswordMsg, errorLoginFormMsg, errorSignupFormMsg, errorRepeatPasswordMsg };
