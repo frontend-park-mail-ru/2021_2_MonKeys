@@ -13,17 +13,12 @@ export default class SignupEditView extends ViewBase {
         EditStore.subscribe((data) => {
             this._data.editForm.fields.name.class = data.nameFieldClass;
             this._data.editForm.fields.birthDate.class = data.birthDateFieldClass;
-            this._template = (
-                <div>
-                    {EditForm(this._data.editForm)}
-                </div>
-            );
-            console.log('tyt');
+            this._template = this._createTmpl(this._data);
+            parent.onload = () => { EventBus.dispatch<string>('signup-edit:load'); };
             this.render();
         })
-        console.log(EditStore.get().nameFieldClass);
-        this._data.editForm.fields.name.class = EditStore.get().nameFieldClass;
-        this._data.editForm.fields.birthDate.class = EditStore.get().birthDateFieldClass;
+        this._template = this._createTmpl(this._data);
+        parent.onload = () => { EventBus.dispatch<string>('signup-edit:load'); };
     }
 
     _data = {
@@ -34,12 +29,11 @@ export default class SignupEditView extends ViewBase {
                     placeholder: 'Имя',
                     name: 'userName',
                     class: EditStore.get().nameFieldClass,
-                    oninput: () => { EventBus.dispatch<string>('edit:name-input'); },
                 },
                 'birthDate': {
                     tag: 'input',
                     type: 'date',
-                    class: '',
+                    class: EditStore.get().birthDateFieldClass,
                     name: 'birthDate',
                 },
                 'description': {
@@ -79,9 +73,12 @@ export default class SignupEditView extends ViewBase {
             },
         },
     }
-    _template = (
-        <div>
-            {EditForm(this._data.editForm)}
-        </div>
-    );
+
+    _createTmpl(data: any) {
+        return (
+            <div>
+                {EditForm(this._data.editForm)}
+            </div>
+        );
+    }
 }

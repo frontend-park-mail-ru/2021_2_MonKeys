@@ -7,7 +7,7 @@ import { loginRequest } from "../requests/sessionRequest.js";
 import { feedRequest } from "../requests/feedRequest.js";
 import { LoginStore } from "../store/loginStore.js";
 
-export const loginEventRegister = () => {
+export const LoginEventRegister = () => {
     EventBus.register('login:login-button', (payload?: string) => {
         // ТОТАЛЬНЕЙШИЙ КРИНЖ ЭТО ДОЛЖНО БЫТЬ ЧЕРЕЗ ВИРТУАЛДОМ ПОТОМ 
         // НО ПОКА ТАК ААААААААААААААА

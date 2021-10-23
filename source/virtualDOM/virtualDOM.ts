@@ -58,9 +58,7 @@ export namespace MonkeysVirtualDOM {
   const changedProps = (nodeA, nodeB): boolean => {
     let a = false;
     nodeA.props && nodeB.props && Object.keys(nodeA.props).forEach((key) => {
-      // console.log(nodeA.props['oninput'], nodeB.props['oninput']);
       if(nodeA.props[key]!==nodeB.props[key]){
-        // console.log('lol');
         a = true;
       }
     });
@@ -111,7 +109,7 @@ export namespace MonkeysVirtualDOM {
     }
     updateElement($rootElement, currNode, nextNode, index);
     
-    console.log(manipulationMapStack);
+    // console.log(manipulationMapStack);
 
     manipulationMapStack.map((manipulation) => {
       switch (manipulation.method){
@@ -130,7 +128,6 @@ export namespace MonkeysVirtualDOM {
         case 'updateProps':{
           manipulation.oldChildVirtual.props && Object.keys(manipulation.oldChildVirtual.props).forEach((key)=>{
             if(/^on/.test(key)) {
-              console.log(key);
               manipulation.oldChild.removeEventListener(key.slice(2), manipulation.oldChildVirtual.props[key]);
             } else {
               manipulation.oldChild.removeAttribute(key);
