@@ -6,6 +6,7 @@ import router from '../route/router.js';
 import { loginRequest } from "../requests/sessionRequest.js";
 import { feedRequest } from "../requests/feedRequest.js";
 import { editProfile } from "../requests/profileRequest.js";
+import { tagsRequest } from "../requests/tagsRequest.js";
 import { emailRegExp, passwordRegExp } from "../constants/validation.js";
 import { EditStore } from "../store/editStore.js";
 
@@ -50,17 +51,21 @@ export const SignupEditEventRegister = () => {
         const name = _nameInput.value.trim();
         const date = _dateInput.value.trim();
         const description = _descriptionInput.value.trim();
-        const tags = [];
-        // for (const tag of this._inputTags) {
-        //   tags.push(tag);
-        // }
+        let tags: string[];
+        if (ProfileStore.get() !== undefined) {
+            const userTags = ProfileStore.get().tags;
+            for (const tag of userTags) {
+                tags.push(tag);
+            }
+        }
         editProfile(name, date, description, tags)
             .then(
                 (response) => {
                     if (response.status === HTTPSuccess) {
                         if (response.data.status === HTTPSuccess) {
-                            console.log('succes');
+                            router.go('/profile')
                         } else if (response.data.status === HTTPNotFound) {
+                            /// ????
                             console.log('xz');
                         }
                     } else {
@@ -72,6 +77,69 @@ export const SignupEditEventRegister = () => {
     });
 
     EventBus.register('signup-edit:load', (payload?: string) => {
+        tagsRequest()
+            .then(
+                (response) => {
+                    if (response.status === HTTPSuccess) {
+                        if (response.data.status === HTTPSuccess) {
+                            let storeData = EditStore.get();
+                            storeData.tags = response.data.body;
+                            Object.keys(storeData.tags.allTags)
+                                .map(item=>
+                                    storeData.tags.allTags[item].onchange = ()=>
+                                    { EventBus.dispatch<string>('signup-edit:change-tag-condition', storeData.tags.allTags[item].tagText); });
+                            EditStore.set(storeData);
+                            console.log(storeData);
+                        } else if (response.data.status === HTTPNotFound) {
+                            console.log('xz');
+                        }
+                    } else {
+                        // server internal error
+                        console.log('server internal error');
+                    }
 
+                    console.log(ProfileStore.get());
+                    // выставляем теги, которые уже есть у пользователя
+                    // if (ProfileStore.get() !== undefined) {
+                    //     const userTags = ProfileStore.get().tags;
+                    //     // if (userTags === undefined) {
+                    //     //     return;
+                    //     // }
+                    //     let storeData = EditStore.get();
+                    //     const tagsArr = new Set();
+                    //     for (let i = 0; i < userTags.length; i++) {
+                    //         for (let j = 0; j < response.data.body.tagsCount; j++) {
+                    //         if (userTags[i] === storeData.tags.allTags[j].tagText) {
+                    //             storeData.tags.allTags[i + 1].isVisiable = true;
+                    //             tagsArr.add(userTags[i]);
+                    //         }
+                    //         }
+                    //     }
+                    //     console.log(tagsArr);
+                    //     // this._inputTags = tagsArr;
+                    // }
+                }
+            ).catch((error) => console.log(error));
+    });
+
+    EventBus.register('signup-edit:change-tag-condition', (payload?: string) => {
+        let userData = ProfileStore.get();
+        let tagsSet = new Set<string>();
+        if (userData !== undefined) {
+            tagsSet = userData.tags;
+        }
+
+        if (tagsSet.has(payload)) {
+            tagsSet.delete(payload);
+        } else {
+            tagsSet.add(payload);
+        }
+
+        const newUserData = {
+            tags: tagsSet,
+        }
+        ProfileStore.set(newUserData);
+
+        console.log(ProfileStore.get());
     });
 }

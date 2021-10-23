@@ -6,19 +6,22 @@ import { EditStore } from "../store/editStore.js";
 import { ErrorMsg } from "../components/errorMsg.js";
 import { errorEmailMsg, errorPasswordMsg, errorRepeatPasswordMsg, errorSignupFormMsg } from "../constants/errorMsg.js";
 
-
 export default class SignupEditView extends ViewBase {
+    
+
     constructor(parent: HTMLElement) {
         super(parent);
         EditStore.subscribe((data) => {
             this._data.editForm.fields.name.class = data.nameFieldClass;
             this._data.editForm.fields.birthDate.class = data.birthDateFieldClass;
+            this._data.editForm.tags = data.tags;
+            console.log(this._data);
             this._template = this._createTmpl(this._data);
-            parent.onload = () => { EventBus.dispatch<string>('signup-edit:load'); };
+            // window.onload = ()=>{ EventBus.dispatch<string>('signup-edit:load'); };
             this.render();
         })
         this._template = this._createTmpl(this._data);
-        parent.onload = () => { EventBus.dispatch<string>('signup-edit:load'); };
+        // window.onload = ()=>{ EventBus.dispatch<string>('signup-edit:load'); };
     }
 
     _data = {
@@ -43,21 +46,15 @@ export default class SignupEditView extends ViewBase {
                     class: 'form-field-desc text-desc',
                 }
             },
-            'tags': {
-                1: {
-                    text: 'anime',
-                    isActive: false,
-                },
-                2: {
-                    text: 'BMSTU',
-                    isActive: false,
-                },
-                3: {
-                    text: 'films',
-                    isActive: false,
-                }
-            },
+            'tags': EditStore.get().tags,
             'buttons': {
+                // как то сделать на лоад страницы
+                'tagsButton': {
+                    type: 'button',
+                    text: 'tags',
+                    clas: '',
+                    onclick: ()=>{ EventBus.dispatch<string>('signup-edit:load'); },
+                },
                 'imgAddButton': {
                     type: 'button',
                     text: '',
