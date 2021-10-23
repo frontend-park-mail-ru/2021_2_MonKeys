@@ -9,6 +9,10 @@ import { createProfile } from "../requests/profileRequest.js";
 import { loginEventRegister } from "./loginEvents.js";
 import { signupEventRegister } from "./signupEvents.js";
 import { SignupEditEventRegister } from "./editEvents.js";
+import { ProfileEventsRegister } from "./profileEvents.js";
+import { LikesEventsRegister } from "./likesEvents.js";
+import { FeedEventsRegister } from "./feedEvents.js";
+import { ChatEventsRegister } from "./chatEvents.js";
 const $root = document.getElementById('app');
 
 export const InitBus = () => {
@@ -18,4 +22,12 @@ export const InitBus = () => {
     signupEventRegister();
     // -------------------edit-after-signup-----------------------
     SignupEditEventRegister();
+     // ----------------------------profile-----------------------
+    ProfileEventsRegister();
+    // ----------------------likes--------------------------------
+    LikesEventsRegister();
+    // -------------------feed------------------------------------
+    FeedEventsRegister();
+    // -------------------chat------------------------------------
+    ChatEventsRegister();
 }
