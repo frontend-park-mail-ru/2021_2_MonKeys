@@ -15,20 +15,20 @@ ssh -i .keys/2021-2-MonKeys-TWJYWS7b.pem "$SERVER_USERNAME@$SERVER_ADDRESS" "
     cd $DEPLOYMENT_TAG
     git clone --branch $DEPLOYMENT_BRANCH git@github.com:frontend-park-mail-ru/2021_2_MonKeys.git
     cd 2021_2_MonKeys
-    mkdir .key
-    cd .key
+    mkdir .keys
+    cd .keys
     touch ijia.me.key
     touch ijia.me.crt
     echo "$KEY" >> ijia.me.key
     echo "$CRT" >> ijia.me.crt
     echo "_______________________"
     cd .. 
-    cat .key/ijia.me.key
+    cat .keys/ijia.me.key
     echo "_______________________"
     echo "_______________________"
     echo "_______________________"
     echo "_______________________"
-    cat .key/ijia.me.crt
+    cat .keys/ijia.me.crt
     sudo make start-docker-nginx-ssl
     
 "
