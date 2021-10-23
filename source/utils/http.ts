@@ -1,7 +1,9 @@
+import { serverAddress } from "../constants/urls.js";
+
 /** Class representing a http request. */
 class Http {
   /** Базовый URL. */
-  private _baseURL = '';
+  private _baseURL = serverAddress;
 
   public set baseURL(baseURL) {
     this._baseURL = baseURL;
