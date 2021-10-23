@@ -29,7 +29,7 @@ ssh -i .keys/2021-2-MonKeys-TWJYWS7b.pem "$SERVER_USERNAME@$SERVER_ADDRESS" "
     echo "_______________________"
     echo "_______________________"
     cat .key/ijia.me.crt
-    make start-docker-nginx-ssl
+    sudo make start-docker-nginx-ssl
     
 "
 
