@@ -22,8 +22,9 @@ ssh -i .keys/2021-2-MonKeys-TWJYWS7b.pem "$SERVER_USERNAME@$SERVER_ADDRESS" "
     cp ../../../ijia.me.crt ijia.me.crt
     cp ../../../ijia.me.key ijia.me.key
     cd ..
-    npm install
+    sudo npm install -g typescript
     make build-typescript
+    sudo docker stop $(sudo docker ps -a -q)
     sudo make start-docker-nginx-ssl
     
 "
