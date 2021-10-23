@@ -1,10 +1,9 @@
-import LoginView from "views/loginView.js";
 import BaseStore from "./storeBase.js";
 
 export interface EditData {
     nameFieldClass: string;
     birthDateFieldClass: string;
-    tags?: Array<string>;
+    tags?: any;
 }
 
 const EditStore = new BaseStore<EditData>();

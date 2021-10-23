@@ -17,7 +17,6 @@ export default class ViewBase {
                 window.currentDOM,
                 this._template);
             window.currentDOM = this._template;
-
         } else {
             window.currentDOM = this._template;
             this._parent.appendChild(

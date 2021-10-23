@@ -6,8 +6,8 @@ import { HTTPEMailNotFound, HTTPNotFound, HTTPSuccess } from "../constants/HTTPS
 import { ProfileStore } from "../store/profileStore.js";
 import { feedRequest } from "../requests/feedRequest.js";
 import { createProfile } from "../requests/profileRequest.js";
-import { loginEventRegister } from "./loginEvents.js";
-import { signupEventRegister } from "./signupEvents.js";
+import { LoginEventRegister } from "./loginEvents.js";
+import { SignupEventRegister } from "./signupEvents.js";
 import { SignupEditEventRegister } from "./editEvents.js";
 import { ProfileEventsRegister } from "./profileEvents.js";
 import { LikesEventsRegister } from "./likesEvents.js";
@@ -17,11 +17,13 @@ const $root = document.getElementById('app');
 
 export const InitBus = () => {
     // -------------------------login-----------------------------
-    loginEventRegister();
+    LoginEventRegister();
     // -------------------------signup----------------------------
-    signupEventRegister();
+    SignupEventRegister();
     // -------------------edit-after-signup-----------------------
     SignupEditEventRegister();
+    // ---------------------------edit----------------------------
+    
      // ----------------------------profile-----------------------
     ProfileEventsRegister();
     // ----------------------likes--------------------------------

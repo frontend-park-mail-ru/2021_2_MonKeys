@@ -11,6 +11,23 @@ export interface EditFormProps {
 }
 
 export const EditForm = (props: EditFormProps) => {
+  const tagsExists = props.tags !== undefined ? true : false;
+  let tagField: HTMLCollection;
+  if (tagsExists) {
+      tagField = (
+        <div class="column-container">
+            <span class="tags-header">Tags</span>
+            <div class="center-container">
+                {Object.keys(props.tags.allTags).map(item => TagField(props.tags.allTags[item]))}
+            </div>
+        </div>
+      )
+  } else {
+        tagField = (
+            <div class="column-container">
+            </div>
+        )
+  }
   return (
     <form class="edit-form">
         <div class="inputEdit">
@@ -23,12 +40,8 @@ export const EditForm = (props: EditFormProps) => {
             {FormField(props.fields.description)}
         </div>
         <div class="tag-container">
-            <div class="column-container">
-                <span class="tags-header">Tags</span>
-                <div class="center-container">
-                    {Object.keys(props.tags).map(item => TagField(props.tags[item]))}
-                </div>
-            </div>
+            {Button(props.buttons.tagsButton)}
+            {tagField}
         </div>
         <div class="inputEdit">
             {/* {ImgField()} */}

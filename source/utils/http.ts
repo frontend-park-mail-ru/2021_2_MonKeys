@@ -17,7 +17,7 @@ class Http {
    * @param {string} body - Тело запроса
    * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
    */
-  private async _request({ url = '/', method = 'GET', headers = new Headers(), body = '' }) {
+  private async _request({ url = '/', method = 'GET', headers = new Headers(), body = null }) {
     const response = await fetch(this._baseURL + url, {
       method: method,
       headers: headers,
