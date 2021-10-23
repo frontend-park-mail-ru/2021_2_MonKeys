@@ -58,9 +58,8 @@ export namespace MonkeysVirtualDOM {
 
   const changedProps = (nodeA, nodeB): boolean => {
     let a = false;
-    nodeA.props && Object.keys(nodeA.props).forEach((key) => {
+    nodeA.props && nodeB.props && Object.keys(nodeA.props).forEach((key) => {
       if(nodeA.props[key]!==nodeB.props[key]){
-        
         a = true;
       }
     });
@@ -132,7 +131,12 @@ export namespace MonkeysVirtualDOM {
             manipulation.oldChild.removeAttribute(key);
           })
           manipulation.newChild.props && Object.keys(manipulation.newChild.props).forEach((key)=>{
-            manipulation.oldChild.setAttribute(key,manipulation.newChild.props[key])
+            if(/^on/.test(key)){
+              manipulation.oldChild.addEventListener(key.slice(2), manipulation.newChild.props[key]);
+            } else {
+              manipulation.oldChild.setAttribute(key, manipulation.newChild.props[key]);
+            }
+            // manipulation.oldChild.setAttribute(key,manipulation.newChild.props[key])
           })
       }
       }

@@ -21,6 +21,7 @@ export const signupEventRegister = () => {
         const testEmail = emailRegExp.test(_emailInput.value);
         const testPassword = passwordRegExp.test(_passwordInput.value);
         const testRepeatPassword = _passwordInput.value === _repeatPasswordInput.value;
+        console.log(_passwordInput.value, _repeatPasswordInput.value);
         if (!testEmail) {
           _emailInput.className = 'form-field-novalid';
           _emailError.className = 'login-error-active';
@@ -33,6 +34,7 @@ export const signupEventRegister = () => {
             _passwordInput.className = 'form-field-novalid';
             _passwordError.className = 'login-error-active';
         }
+        console.log(testRepeatPassword);
         if (!testEmail || !testPassword || !testRepeatPassword) {
           return;
         }
@@ -50,7 +52,9 @@ export const signupEventRegister = () => {
                     console.log(response);
                     if (response.status === HTTPSuccess) {
                         if (response.data.status === HTTPSuccess) {
+                            console.log('do');
                             router.go('/signup-edit');
+                            console.log('posle');
                         } else if (response.data.status === HTTPEMailNotFound) {
                             _formError.className = 'login-error-active';
                         }
