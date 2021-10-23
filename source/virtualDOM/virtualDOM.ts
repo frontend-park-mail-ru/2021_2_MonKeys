@@ -1,6 +1,5 @@
-import router from "../route/router.js";
-
-  
+import router from "../route/router.js"; 
+ 
 export namespace MonkeysVirtualDOM {  
   export type Props = { [key: string]: any };
   export const jsxFactory = (
@@ -24,7 +23,7 @@ export namespace MonkeysVirtualDOM {
           }, []),
       };
   };
-  
+
   export const createElement = (virtualNode) => {
       if (typeof virtualNode === 'string') {
         return document.createTextNode(virtualNode);
@@ -36,11 +35,8 @@ export namespace MonkeysVirtualDOM {
         })
       }
       virtualNode.props && Object.keys(virtualNode.props).forEach((key) => {
-       
-      
+        
         if(/^on/.test(key)){
-          
-          // console.log(key.slice(2), virtualNode.props[key]);
           rootElement.addEventListener(key.slice(2), virtualNode.props[key]);
         } else {
           rootElement.setAttribute(key, virtualNode.props[key]);
@@ -56,9 +52,19 @@ export namespace MonkeysVirtualDOM {
       return (
         typeof nodeA !== typeof nodeB ||
         typeof nodeA === 'string' && nodeA !== nodeB ||
-        nodeA.type !== nodeB.type ||
-        nodeA.props !== nodeB.props
+        nodeA.type !== nodeB.type 
     );
+  }
+
+  const changedProps = (nodeA, nodeB): boolean => {
+    let a = false;
+    nodeA.props && Object.keys(nodeA.props).forEach((key) => {
+      if(nodeA.props[key]!==nodeB.props[key]){
+        console.log('AAAA');
+        a = true;
+      }
+    });
+    return a;
   }
 
   export const update = ($rootElement: string | HTMLElement, currNode,nextNode, index: number = 0) => {
@@ -81,7 +87,17 @@ export namespace MonkeysVirtualDOM {
             'parent': $rootElement,
             'method': 'replace',
             'oldChild': $rootElement.childNodes[index],
-            'newChild': createElement(nextNode),
+            'newChild': createElement(nextNode)
+          })
+        } else if (changedProps(currNode,nextNode)){
+          console.log(currNode.props);
+          console.log(nextNode.props);
+          manipulationMapStack.push({
+            'parent': $rootElement,
+            'method': 'updateProps',
+            'oldChild': $rootElement.childNodes[index],
+            'newChild': nextNode,
+            'oldChildVirtual': currNode,
           })
         } else if (nextNode.type) {
           for (let i = 0; i < nextNode.children.length || i < currNode.children.length; i++) {
@@ -96,7 +112,7 @@ export namespace MonkeysVirtualDOM {
     }
     updateElement($rootElement, currNode, nextNode, index);
     
-    // console.log(manipulationMapStack);
+    console.log(manipulationMapStack);
 
     manipulationMapStack.map((manipulation) => {
       switch (manipulation.method){
@@ -112,7 +128,34 @@ export namespace MonkeysVirtualDOM {
           manipulation.parent.replaceChild(manipulation.newChild,manipulation.oldChild)
           break;
       }
+        case 'updateProps':{
+          manipulation.oldChildVirtual.props && Object.keys(manipulation.oldChildVirtual.props).forEach((key)=>{
+            manipulation.oldChild.removeAttribute(key);
+          })
+          manipulation.newChild.props && Object.keys(manipulation.newChild.props).forEach((key)=>{
+            manipulation.oldChild.setAttribute(key,manipulation.newChild.props[key])
+          })
+      }
       }
     });
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
