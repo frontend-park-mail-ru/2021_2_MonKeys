@@ -10,6 +10,6 @@ export interface ProfileData {
     tags: string[];
 }
 
-let ProfileStore = new BaseStore<ProfileData>();
+const ProfileStore = new BaseStore<ProfileData>();
 
 export { ProfileStore };

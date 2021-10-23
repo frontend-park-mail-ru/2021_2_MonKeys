@@ -1,9 +1,7 @@
 import { ProfileData } from "./profileStore.js";
 import BaseStore from "./storeBase.js";
 
-export interface FeedCardData extends ProfileData {
-    // Maybe later
-}
+export type FeedCardData = ProfileData
 
 export interface FeedData {
     profiles: FeedCardData[];

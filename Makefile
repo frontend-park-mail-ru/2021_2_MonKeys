@@ -1,7 +1,15 @@
 
 PORT:= 80
 
+eslint-tslint:
+	sudo bash scripts/eslint-tslint.sh
 
+build-docker-nginx-ssl:
+	docker build -t nginx -f docker/nginx-ssl.dockerfile .
+
+start-docker-nginx-ssl:
+	make build-docker-nginx-ssl
+	docker run -i --rm -p 443:443 nginx
 
 build-docker-nginx:
 	docker build -t nginx -f docker/nginx.dockerfile .

@@ -67,8 +67,8 @@ export namespace MonkeysVirtualDOM {
     return a;
   }
 
-  export const update = ($rootElement: string | HTMLElement, currNode,nextNode, index: number = 0) => {
-    let manipulationMapStack = [];
+  export const update = ($rootElement: string | HTMLElement, currNode,nextNode, index = 0) => {
+    const manipulationMapStack = [];
     const updateElement = ($rootElement, currNode, nextNode, index=0) => {
         if (!nextNode) {
           manipulationMapStack.push({

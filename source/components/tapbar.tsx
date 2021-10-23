@@ -157,5 +157,5 @@ export const Tapbar = (props: tapbarProps) => {
                     </mon-router>
                 </div>
             );
-    };
+    }
 };

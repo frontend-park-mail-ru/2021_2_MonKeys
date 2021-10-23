@@ -75,7 +75,7 @@ export const SignupEditEventRegister = () => {
         const _emailInput = document.getElementsByTagName('textarea')[0];
         console.log(_emailInput);
 
-        let curClassName = EditStore.get();
+        const curClassName = EditStore.get();
 
         const test = _emailInput.value.length === 0 || emailRegExp.test(_emailInput.value);
             (test)
