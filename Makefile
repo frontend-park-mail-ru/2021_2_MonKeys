@@ -4,6 +4,9 @@ PORT:= 80
 eslint-tslint:
 	sudo bash scripts/eslint-tslint.sh
 
+build-typescript:
+	tsc --build
+
 build-docker-nginx-ssl:
 	docker build -t nginx -f docker/nginx-ssl.dockerfile .
 
