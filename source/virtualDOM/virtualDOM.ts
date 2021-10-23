@@ -35,7 +35,6 @@ export namespace MonkeysVirtualDOM {
         })
       }
       virtualNode.props && Object.keys(virtualNode.props).forEach((key) => {
-        
         if(/^on/.test(key)){
           rootElement.addEventListener(key.slice(2), virtualNode.props[key]);
         } else {
@@ -59,7 +58,9 @@ export namespace MonkeysVirtualDOM {
   const changedProps = (nodeA, nodeB): boolean => {
     let a = false;
     nodeA.props && nodeB.props && Object.keys(nodeA.props).forEach((key) => {
+      // console.log(nodeA.props['oninput'], nodeB.props['oninput']);
       if(nodeA.props[key]!==nodeB.props[key]){
+        // console.log('lol');
         a = true;
       }
     });
@@ -128,7 +129,12 @@ export namespace MonkeysVirtualDOM {
       }
         case 'updateProps':{
           manipulation.oldChildVirtual.props && Object.keys(manipulation.oldChildVirtual.props).forEach((key)=>{
-            manipulation.oldChild.removeAttribute(key);
+            if(/^on/.test(key)) {
+              console.log(key);
+              manipulation.oldChild.removeEventListener(key.slice(2), manipulation.oldChildVirtual.props[key]);
+            } else {
+              manipulation.oldChild.removeAttribute(key);
+            }
           })
           manipulation.newChild.props && Object.keys(manipulation.newChild.props).forEach((key)=>{
             if(/^on/.test(key)){
@@ -136,7 +142,6 @@ export namespace MonkeysVirtualDOM {
             } else {
               manipulation.oldChild.setAttribute(key, manipulation.newChild.props[key]);
             }
-            // manipulation.oldChild.setAttribute(key,manipulation.newChild.props[key])
           })
       }
       }

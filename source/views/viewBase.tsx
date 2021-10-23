@@ -17,12 +17,13 @@ export default class ViewBase {
                 window.currentDOM,
                 this._template);
             window.currentDOM = this._template;
-
+            console.log(window.currentDOM);
         } else {
             window.currentDOM = this._template;
             this._parent.appendChild(
                 MonkeysVirtualDOM.createElement(this._template)
             );
+            console.log(window.currentDOM);
         }
     }
 }

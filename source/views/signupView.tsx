@@ -6,18 +6,35 @@ import { Link } from "../components/link.js";
 import { ErrorMsg } from "../components/errorMsg.js";
 import { errorEmailMsg, errorPasswordMsg, errorRepeatPasswordMsg, errorSignupFormMsg } from "../constants/errorMsg.js";
 import EventBus from "../dispatcher/eventBus.js"
+import { SignupStore } from "../store/signupStore.js";
 
 
 export default class SignupView extends ViewBase {
+    constructor(parent: HTMLElement) {
+        super(parent);
+        SignupStore.subscribe((data) => {
+            this._data.fields.email.class = data.emailFieldClass;
+            this._data.fields.password.class = data.passwordFieldClass;
+            this._data.fields.repeatPassword.class = data.repeatPasswordFieldClass;
+            this._data.errorMsgs.emailError.class = data.emailErrorClass;
+            this._data.errorMsgs.passwordError.class = data.passwordErrorClass;
+            this._data.errorMsgs.repeatPasswordError.class = data.repeatPasswordErrorClass;
+            this._data.errorMsgs.formError.class = data.formErrorClass;
+            this._template = this._createTmpl(this._data);
+            this.render();
+        })
+        this._template = this._createTmpl(this._data);
+    }
+
     _data = {
         'fields': {
             'email': {
                 tag: 'input',
-                type: 'email',
+                type: 'text',
                 placeholder: 'Почта',
                 name: 'email',
                 iconSrc: 'icons/email.svg',
-                class: 'form-field-valid',
+                class: SignupStore.get().emailFieldClass,
                 oninput: () => { EventBus.dispatch<string>('signup:email-input'); },
                 onfocusout: () => { EventBus.dispatch<string>('signup:email-focusout'); },
             },
@@ -27,7 +44,7 @@ export default class SignupView extends ViewBase {
                 placeholder: 'Пароль',
                 name: 'password',
                 iconSrc: 'icons/password.svg',
-                class: 'form-field-valid',
+                class: SignupStore.get().passwordFieldClass,
                 oninput: () => { EventBus.dispatch<string>('signup:password-input'); },
                 onfocusout: () => { EventBus.dispatch<string>('signup:password-focusout'); },
             },
@@ -37,7 +54,7 @@ export default class SignupView extends ViewBase {
                 placeholder: 'Повторите пароль',
                 name: 'password',
                 iconSrc: 'icons/password.svg',
-                class: 'form-field-valid',
+                class: SignupStore.get().repeatPasswordFieldClass,
                 oninput: () => { EventBus.dispatch<string>('signup:repeat-password-input'); },
                 onfocusout: () => { EventBus.dispatch<string>('signup:repeat-password-focusout'); },
             },
@@ -61,42 +78,45 @@ export default class SignupView extends ViewBase {
         'errorMsgs': {
             'emailError': {
                 text: errorEmailMsg,
-                isVisiable: false,
+                class: SignupStore.get().emailErrorClass,
             },
             'passwordError': {
                 text: errorPasswordMsg,
-                isVisiable: false,
+                class: SignupStore.get().passwordErrorClass,
             },
             'repeatPasswordError': {
                 text: errorRepeatPasswordMsg,
-                isVisiable: false,
+                class: SignupStore.get().repeatPasswordErrorClass,
             },
             'formError': {
                 text: errorSignupFormMsg,
-                isVisiable: false,
+                class: SignupStore.get().formErrorClass,
             },
         },
     }
-    _template = (
-    <div class="form-container">
-        <div class="center-container">
-            <span class="login-header">Регистрация</span>
-        </div>
-        <div class="center-container">
-            <form class="login-form">
-                <div class="drip-logo-bg">
-                    {FormField(this._data.fields.email)}
-                    {ErrorMsg(this._data.errorMsgs.emailError)}
-                    {FormField(this._data.fields.password)}
-                    {ErrorMsg(this._data.errorMsgs.passwordError)}
-                    {FormField(this._data.fields.repeatPassword)}
-                    {ErrorMsg(this._data.errorMsgs.repeatPasswordError)}
+
+    _createTmpl(data: any) {
+        return (
+            <div class="form-container">
+                <div class="center-container">
+                    <span class="login-header">Регистрация</span>
                 </div>
-                {ErrorMsg(this._data.errorMsgs.formError)}
-                {Button(this._data.buttons.signupButton)}
-            </form>
-        </div>
-        {Link(this._data.links.login)}
-    </div>
-);
+                <div class="center-container">
+                    <form class="login-form">
+                        <div class="drip-logo-bg">
+                            {FormField(this._data.fields.email)}
+                            {ErrorMsg(this._data.errorMsgs.emailError)}
+                            {FormField(this._data.fields.password)}
+                            {ErrorMsg(this._data.errorMsgs.passwordError)}
+                            {FormField(this._data.fields.repeatPassword)}
+                            {ErrorMsg(this._data.errorMsgs.repeatPasswordError)}
+                        </div>
+                        {ErrorMsg(this._data.errorMsgs.formError)}
+                        {Button(this._data.buttons.signupButton)}
+                    </form>
+                </div>
+                {Link(this._data.links.login)}
+            </div>
+        );
+    }
 }
