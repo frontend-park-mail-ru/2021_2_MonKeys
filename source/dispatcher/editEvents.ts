@@ -51,7 +51,7 @@ export const SignupEditEventRegister = () => {
         const name = _nameInput.value.trim();
         const date = _dateInput.value.trim();
         const description = _descriptionInput.value.trim();
-        let tags: string[];
+        let tags = new Array<string>();
         if (ProfileStore.get() !== undefined) {
             const userTags = ProfileStore.get().tags;
             for (const tag of userTags) {
