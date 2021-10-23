@@ -60,7 +60,7 @@ export namespace MonkeysVirtualDOM {
     let a = false;
     nodeA.props && Object.keys(nodeA.props).forEach((key) => {
       if(nodeA.props[key]!==nodeB.props[key]){
-        console.log('AAAA');
+        
         a = true;
       }
     });
@@ -89,17 +89,16 @@ export namespace MonkeysVirtualDOM {
             'oldChild': $rootElement.childNodes[index],
             'newChild': createElement(nextNode)
           })
-        } else if (changedProps(currNode,nextNode)){
-          console.log(currNode.props);
-          console.log(nextNode.props);
-          manipulationMapStack.push({
-            'parent': $rootElement,
-            'method': 'updateProps',
-            'oldChild': $rootElement.childNodes[index],
-            'newChild': nextNode,
-            'oldChildVirtual': currNode,
-          })
-        } else if (nextNode.type) {
+        } else if (nextNode.type || (changedProps(currNode,nextNode))) {
+          if (changedProps(currNode,nextNode)){
+            manipulationMapStack.push({
+              'parent': $rootElement,
+              'method': 'updateProps',
+              'oldChild': $rootElement.childNodes[index],
+              'newChild': nextNode,
+              'oldChildVirtual': currNode,
+            })
+          }
           for (let i = 0; i < nextNode.children.length || i < currNode.children.length; i++) {
             updateElement(
               $rootElement.childNodes[index], 
