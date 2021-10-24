@@ -1,16 +1,20 @@
 import { profilePhotoURL } from '../constants/urls.js';
-import http from '../utils/http.js';
+import http, { parseJSON } from '../utils/http.js';
 
 const addPhotoToProfile = (photo) => {
-  return http.post(profilePhotoURL, photo);
+  const body = new FormData();
+  body.append('photo', photo[0]);
+
+  return http.post(profilePhotoURL, body);
 };
 
-const getProfilePhoto = () => {
-  return http.get(profilePhotoURL);
+const deleteProfilePhoto = (photo) => {
+  const body = JSON.stringify({
+    photo: photo,
+  });
+
+  return http.delete(profilePhotoURL, body)
+      .then(parseJSON);
 };
 
-const deleteProfilePhoto = () => {
-  return http.delete(profilePhotoURL);
-};
-
-export { addPhotoToProfile, getProfilePhoto, deleteProfilePhoto };
+export { addPhotoToProfile, deleteProfilePhoto };
