@@ -1,5 +1,5 @@
 import { MonkeysVirtualDOM } from "../virtualDOM/virtualDOM.js";
-import { TagField } from "./tagField.js";
+import { TagButton } from "./tagButton.js";
 import { FormField } from "./formField.js";
 import { ImgField } from "./imgField.js";
 import { Button } from "./button.js";
@@ -18,7 +18,7 @@ export const EditForm = (props: EditFormProps) => {
         <div class="column-container">
             <span class="tags-header">Tags</span>
             <div class="center-container">
-                {Object.keys(props.tags.allTags).map(item => TagField(props.tags.allTags[item]))}
+                {Object.keys(props.tags.allTags).map(item => TagButton(props.tags.allTags[item]))}
             </div>
         </div>
       )

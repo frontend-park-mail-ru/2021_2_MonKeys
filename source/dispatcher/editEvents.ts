@@ -10,7 +10,6 @@ import { tagsRequest } from "../requests/tagsRequest.js";
 import { emailRegExp, passwordRegExp } from "../constants/validation.js";
 import { EditStore } from "../store/editStore.js";
 
-
 export const SignupEditEventRegister = () => {
     EventBus.register('signup-edit:save-button', (payload?: string) => {
         // ТОТАЛЬНЕЙШИЙ КРИНЖ ЭТО ДОЛЖНО БЫТЬ ЧЕРЕЗ ВИРТУАЛДОМ ПОТОМ 
@@ -63,7 +62,7 @@ export const SignupEditEventRegister = () => {
                 (response) => {
                     if (response.status === HTTPSuccess) {
                         if (response.data.status === HTTPSuccess) {
-                            router.go('/profile')
+                            router.go('/profile');
                         } else if (response.data.status === HTTPNotFound) {
                             /// ????
                             console.log('xz');
@@ -98,26 +97,31 @@ export const SignupEditEventRegister = () => {
                         console.log('server internal error');
                     }
 
-                    console.log(ProfileStore.get());
                     // выставляем теги, которые уже есть у пользователя
-                    // if (ProfileStore.get() !== undefined) {
-                    //     const userTags = ProfileStore.get().tags;
-                    //     // if (userTags === undefined) {
-                    //     //     return;
-                    //     // }
-                    //     let storeData = EditStore.get();
-                    //     const tagsArr = new Set();
-                    //     for (let i = 0; i < userTags.length; i++) {
-                    //         for (let j = 0; j < response.data.body.tagsCount; j++) {
-                    //         if (userTags[i] === storeData.tags.allTags[j].tagText) {
-                    //             storeData.tags.allTags[i + 1].isVisiable = true;
-                    //             tagsArr.add(userTags[i]);
-                    //         }
-                    //         }
-                    //     }
-                    //     console.log(tagsArr);
-                    //     // this._inputTags = tagsArr;
-                    // }
+                    if (ProfileStore.get() !== undefined) {
+                        const userTags = ProfileStore.get().tags;
+                        // if (userTags === undefined) {
+                        //     return;
+                        // }
+                        let storeData = EditStore.get();
+                        for (const tag of userTags) {
+                            for (let j = 0; j < response.data.body.tagsCount; j++) {
+                                if (tag === storeData.tags.allTags[j].tagText) {
+                                    storeData.tags.allTags[j].isActive = true;
+                                    EditStore.set(storeData);
+                                }
+                            }
+                        }
+                        // for (let i = 0; i < userTags.length; i++) {
+                        //     for (let j = 0; j < response.data.body.tagsCount; j++) {
+                        //         if (userTags[i] === storeData.tags.allTags[j].tagText) {
+                        //             storeData.tags.allTags[i + 1].isVisiable = true;
+                        //             tagsArr.add(userTags[i]);
+                        //         }
+                        //     }
+                        // }
+                        // this._inputTags = tagsArr;
+                    }
                 }
             ).catch((error) => console.log(error));
     });
@@ -126,7 +130,9 @@ export const SignupEditEventRegister = () => {
         let userData = ProfileStore.get();
         let tagsSet = new Set<string>();
         if (userData !== undefined) {
-            tagsSet = userData.tags;
+            for (const userTag of userData.tags) {
+                tagsSet.add(userTag)
+            }
         }
 
         if (tagsSet.has(payload)) {
@@ -135,12 +141,17 @@ export const SignupEditEventRegister = () => {
             tagsSet.add(payload);
         }
 
-        const newUserData = {
-            tags: tagsSet,
+        if (userData === undefined) {
+            const newUserData = {
+                tags: tagsSet,
+            }
+            ProfileStore.set(newUserData);
+        } else {
+            userData.tags = tagsSet;
+            // for (const tag of tagsSet) {
+            //     userData.tags.add(tag);
+            // }
+            ProfileStore.set(userData);
         }
-        ProfileStore.set(newUserData);
-
-
-        console.log(ProfileStore.get());
     });
 }

@@ -7,15 +7,12 @@ import { ErrorMsg } from "../components/errorMsg.js";
 import { errorEmailMsg, errorPasswordMsg, errorRepeatPasswordMsg, errorSignupFormMsg } from "../constants/errorMsg.js";
 
 export default class SignupEditView extends ViewBase {
-    
-
     constructor(parent: HTMLElement) {
         super(parent);
         EditStore.subscribe((data) => {
             this._data.editForm.fields.name.class = data.nameFieldClass;
             this._data.editForm.fields.birthDate.class = data.birthDateFieldClass;
             this._data.editForm.tags = data.tags;
-            console.log(this._data);
             this._template = this._createTmpl(this._data);
             // window.onload = ()=>{ EventBus.dispatch<string>('signup-edit:load'); };
             this.render();

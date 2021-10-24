@@ -51,14 +51,16 @@ export const LoginEventRegister = () => {
                         if (response.data.status === HTTPSuccess) {
                             ProfileStore.set(response.data.body);
                             console.log(ProfileStore.get());
-                            feedRequest()
-                                .then(
-                                    (feedResponse)=> {
-                                        console.log(1);
-                                        console.log(feedResponse);
-                                        router.go('/feed');
-                                    }
-                                )
+                            router.go('/feed');
+                            console.log(ProfileStore.get());
+                            // feedRequest()
+                            //     .then(
+                            //         (feedResponse)=> {
+                            //             console.log(1);
+                            //             console.log(feedResponse);
+                            //             router.go('/feed');
+                            //         }
+                            //     )
                         } else if (response.data.status === HTTPNotFound) {
                             storeData.formErrorClass = 'login-error-active';
                             LoginStore.set(storeData);

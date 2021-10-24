@@ -13,9 +13,7 @@ export interface formFieldProps {
 }
 
 export const FormField = (props: formFieldProps) => {
-    // const className = props.isValid ? "form-field-valid" : "form-field-novalid";
-
-    let field: any;
+    let field: HTMLElement;
 
     switch (props.tag) {
       case 'input':
@@ -52,13 +50,12 @@ export const FormField = (props: formFieldProps) => {
               name={props.name}
               placeholder={props.placeholder}
               class={props.class}
-              defaultValue={props.value}
-            />
+            >{props.value}</textarea>
           );
         } else {
           field = (
             <textarea
-            oninput={props.oninput}
+              oninput={props.oninput}
               name={props.name}
               placeholder={props.placeholder}
               class={props.class}
