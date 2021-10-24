@@ -26,7 +26,6 @@ export const Button = (props: ButtonProps) => {
       break;
   }
   
-  const withText = (props.text === undefined) ? false : true;
   const textClassName = className + '-text';
   const button = (
     <button onclick={props.onclick} type={props.type} class={className}>

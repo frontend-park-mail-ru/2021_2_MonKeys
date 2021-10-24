@@ -1,5 +1,5 @@
 import { MonkeysVirtualDOM } from "../virtualDOM/virtualDOM.js";
-import { TagField } from "./tagField.js";
+import { Tag } from "./tag.js";
 import { IconButton } from "./iconButton.js";
 
 export interface CardExpendedProps {
@@ -22,7 +22,7 @@ export const CardExpended = (props: CardExpendedProps) => {
             <div class="card-el desc">{props.userData.description}</div>
             <div class="card-el bord"></div>
             <div id="tagsID" class="card-el tags-container">
-                {/* {Object.keys(props.tags).map(item => TagField(props.tags[item]))} */}
+                {Object.keys(props.tags).map(item => Tag(props.tags[item]))}
             </div>
         </div>
         <div id="editID" class="actions-container-profile">
