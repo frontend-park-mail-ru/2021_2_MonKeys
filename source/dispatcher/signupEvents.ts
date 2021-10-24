@@ -6,7 +6,7 @@ import { createProfile } from "../requests/profileRequest.js";
 import { SignupStore } from "../store/signupStore.js";
 
 
-export const signupEventRegister = () => {
+export const SignupEventRegister = () => {
     EventBus.register('signup:signup-button', (payload?: string) => {
         // ТОТАЛЬНЕЙШИЙ КРИНЖ ЭТО ДОЛЖНО БЫТЬ ЧЕРЕЗ ВИРТУАЛДОМ ПОТОМ 
         // НО ПОКА ТАК ААААААААААААААА

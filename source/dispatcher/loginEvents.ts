@@ -7,7 +7,7 @@ import { loginRequest } from "../requests/sessionRequest.js";
 import { feedRequest } from "../requests/feedRequest.js";
 import { LoginStore } from "../store/loginStore.js";
 
-export const loginEventRegister = () => {
+export const LoginEventRegister = () => {
     EventBus.register('login:login-button', (payload?: string) => {
         // ТОТАЛЬНЕЙШИЙ КРИНЖ ЭТО ДОЛЖНО БЫТЬ ЧЕРЕЗ ВИРТУАЛДОМ ПОТОМ 
         // НО ПОКА ТАК ААААААААААААААА
@@ -50,14 +50,17 @@ export const loginEventRegister = () => {
                     if (response.status === HTTPSuccess) {
                         if (response.data.status === HTTPSuccess) {
                             ProfileStore.set(response.data.body);
-                            feedRequest()
-                                .then(
-                                    (feedResponse)=> {
-                                        console.log(1);
-                                        console.log(feedResponse);
-                                        router.go('/feed');
-                                    }
-                                )
+                            console.log(ProfileStore.get());
+                            router.go('/feed');
+                            console.log(ProfileStore.get());
+                            // feedRequest()
+                            //     .then(
+                            //         (feedResponse)=> {
+                            //             console.log(1);
+                            //             console.log(feedResponse);
+                            //             router.go('/feed');
+                            //         }
+                            //     )
                         } else if (response.data.status === HTTPNotFound) {
                             storeData.formErrorClass = 'login-error-active';
                             LoginStore.set(storeData);

@@ -14,62 +14,57 @@ export interface formFieldProps {
 }
 
 export const FormField = (props: formFieldProps) => {
-  // const className = props.isValid ? "form-field-valid" : "form-field-novalid";
+    let field: HTMLElement;
 
-  let field: any;
-
-  switch (props.tag) {
-    case 'input':
-      if (props.value !== undefined) {
-        field = (
-          <input
-            oninput={props.oninput}
-            onfocusout={props.onfocusout}
-            onchange={props.onchange}
-            type={props.type}
-            name={props.name}
-            placeholder={props.placeholder}
-            class={props.class}
-            value={props.value}
-          />
-        );
-      } else {
-        field = (
-          <input
-            oninput={props.oninput}
-            onfocusout={props.onfocusout}
-            onchange={props.onchange}
-            type={props.type}
-            name={props.name}
-            placeholder={props.placeholder}
-            class={props.class}
-          />
-        );
-      }
-      break;
-    case 'textarea':
-      if (props.value !== undefined) {
-        field = (
-          <textarea
-            oninput={props.oninput}
-            name={props.name}
-            placeholder={props.placeholder}
-            class={props.class}
-            defaultValue={props.value}
-          />
-        );
-      } else {
-        field = (
-          <textarea
-            oninput={props.oninput}
-            name={props.name}
-            placeholder={props.placeholder}
-            class={props.class}
-          />
-        );
-      }
-      break;
-  }
+    switch (props.tag) {
+      case 'input':
+        if (props.value !== undefined) {
+          field = (
+            <input
+              oninput={props.oninput}
+              onfocusout={props.onfocusout}
+              type={props.type}
+              name={props.name}
+              placeholder={props.placeholder}
+              class={props.class}
+              value={props.value}
+            />
+          );
+        } else {
+          field = (
+            <input
+              oninput={props.oninput}
+              onfocusout={props.onfocusout}
+              type={props.type}
+              name={props.name}
+              placeholder={props.placeholder}
+              class={props.class}
+            />
+          );
+        }
+        break;
+      case 'textarea':
+        if (props.value !== undefined) {
+          field = (
+            <textarea
+              oninput={props.oninput}
+              name={props.name}
+              placeholder={props.placeholder}
+              class={props.class}
+            >{props.value}</textarea>
+          );
+        } else {
+          field = (
+            <textarea
+              oninput={props.oninput}
+              name={props.name}
+              placeholder={props.placeholder}
+              class={props.class}
+            />
+          );
+        }
+        break;
+    }
 
   let fieldTmpl: any;
   if (props.iconSrc !== undefined) {

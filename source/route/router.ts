@@ -12,6 +12,7 @@ class Router {
         const location = route;
         if(this.routes[location]){
             // console.log(this.routes[location]);
+            console.log($root)
             const currentView = new this.routes[location].view($root);
             
             currentView.render()

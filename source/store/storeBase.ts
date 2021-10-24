@@ -11,10 +11,12 @@ export default class BaseStore<type>{
         this.observers.push(callback);
     }
     public unsubscribe(callback: {(data: type): void}) {
+        console.log(this.observers);
         this.observers = this.observers.filter(
             (subscriber)=> {
             return subscriber!==callback
         });
+        console.log(this.observers);
     }
     public get(): type{
         return this.data

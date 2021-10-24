@@ -18,7 +18,7 @@ export interface route {
     readonly path: string,
     readonly view?,
     readonly auth: boolean,
-};
+}
 
 export const Routes = {
     '/': {

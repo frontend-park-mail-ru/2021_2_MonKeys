@@ -58,17 +58,15 @@ export namespace MonkeysVirtualDOM {
   const changedProps = (nodeA, nodeB): boolean => {
     let a = false;
     nodeA.props && nodeB.props && Object.keys(nodeA.props).forEach((key) => {
-      // console.log(nodeA.props['oninput'], nodeB.props['oninput']);
       if(nodeA.props[key]!==nodeB.props[key]){
-        // console.log('lol');
         a = true;
       }
     });
     return a;
   }
 
-  export const update = ($rootElement: string | HTMLElement, currNode,nextNode, index: number = 0) => {
-    let manipulationMapStack = [];
+  export const update = ($rootElement: string | HTMLElement, currNode,nextNode, index = 0) => {
+    const manipulationMapStack = [];
     const updateElement = ($rootElement, currNode, nextNode, index=0) => {
         if (!nextNode) {
           manipulationMapStack.push({
@@ -130,7 +128,6 @@ export namespace MonkeysVirtualDOM {
         case 'updateProps':{
           manipulation.oldChildVirtual.props && Object.keys(manipulation.oldChildVirtual.props).forEach((key)=>{
             if(/^on/.test(key)) {
-              console.log(key);
               manipulation.oldChild.removeEventListener(key.slice(2), manipulation.oldChildVirtual.props[key]);
             } else {
               manipulation.oldChild.removeAttribute(key);
@@ -148,22 +145,3 @@ export namespace MonkeysVirtualDOM {
     });
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

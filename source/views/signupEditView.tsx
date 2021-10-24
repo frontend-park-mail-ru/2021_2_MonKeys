@@ -6,24 +6,19 @@ import { EditStore } from "../store/editStore.js";
 import { ErrorMsg } from "../components/errorMsg.js";
 import { errorEmailMsg, errorPasswordMsg, errorRepeatPasswordMsg, errorSignupFormMsg } from "../constants/errorMsg.js";
 
-
 export default class SignupEditView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
         EditStore.subscribe((data) => {
             this._data.editForm.fields.name.class = data.nameFieldClass;
             this._data.editForm.fields.birthDate.class = data.birthDateFieldClass;
-            this._template = (
-                <div>
-                    {EditForm(this._data.editForm)}
-                </div>
-            );
-            console.log('tyt');
+            this._data.editForm.tags = data.tags;
+            this._template = this._createTmpl(this._data);
+            // window.onload = ()=>{ EventBus.dispatch<string>('signup-edit:load'); };
             this.render();
         })
-        console.log(EditStore.get().nameFieldClass);
-        this._data.editForm.fields.name.class = EditStore.get().nameFieldClass;
-        this._data.editForm.fields.birthDate.class = EditStore.get().birthDateFieldClass;
+        this._template = this._createTmpl(this._data);
+        // window.onload = ()=>{ EventBus.dispatch<string>('signup-edit:load'); };
     }
 
     _data = {
@@ -34,12 +29,11 @@ export default class SignupEditView extends ViewBase {
                     placeholder: 'Имя',
                     name: 'userName',
                     class: EditStore.get().nameFieldClass,
-                    oninput: () => { EventBus.dispatch<string>('edit:name-input'); },
                 },
                 'birthDate': {
                     tag: 'input',
                     type: 'date',
-                    class: '',
+                    class: EditStore.get().birthDateFieldClass,
                     name: 'birthDate',
                 },
                 'description': {
@@ -49,21 +43,15 @@ export default class SignupEditView extends ViewBase {
                     class: 'form-field-desc text-desc',
                 }
             },
-            'tags': {
-                1: {
-                    text: 'anime',
-                    isActive: false,
-                },
-                2: {
-                    text: 'BMSTU',
-                    isActive: false,
-                },
-                3: {
-                    text: 'films',
-                    isActive: false,
-                }
-            },
+            'tags': EditStore.get().tags,
             'buttons': {
+                // как то сделать на лоад страницы
+                'tagsButton': {
+                    type: 'button',
+                    text: 'tags',
+                    clas: '',
+                    onclick: ()=>{ EventBus.dispatch<string>('signup-edit:load'); },
+                },
                 'imgAddButton': {
                     type: 'button',
                     text: '',
@@ -79,9 +67,12 @@ export default class SignupEditView extends ViewBase {
             },
         },
     }
-    _template = (
-        <div>
-            {EditForm(this._data.editForm)}
-        </div>
-    );
+
+    _createTmpl(data: any) {
+        return (
+            <div>
+                {EditForm(this._data.editForm)}
+            </div>
+        );
+    }
 }

@@ -26,9 +26,8 @@ export const Button = (props: ButtonProps) => {
       break;
   }
   
-  const withText = (props.text === undefined) ? false : true;
   const textClassName = className + '-text';
-  let button = (
+  const button = (
     <button onclick={props.onclick} type={props.type} class={className}>
       <div class="center-container">
         <span class={textClassName}>{props.text}</span>

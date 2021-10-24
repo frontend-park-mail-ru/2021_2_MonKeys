@@ -16,11 +16,13 @@ InitBus();
 declare global {
     interface Window {
         currentDOM:any;
+        currentView: any;
     }
 }
 
 window.onload = () => {
     router.go(window.location.pathname);
+    // EventBus.dispatch<string>('user:logged-in');
 }
 
 
