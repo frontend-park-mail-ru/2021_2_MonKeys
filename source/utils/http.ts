@@ -52,12 +52,14 @@ class Http {
   /**
    * Делает DELETE запрос
    * @param {string} url - Запрос по url.
+   * @param {Object} body - Данные для отправки.
    * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
    */
-  public delete(url) {
+  public delete(url, body = null) {
     return this._request({
       url: url,
       method: 'DELETE',
+      body: body,
     });
   }
 
