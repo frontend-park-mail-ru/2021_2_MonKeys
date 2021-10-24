@@ -18,6 +18,7 @@ export default class ViewBase {
                 this._template);
             window.currentDOM = this._template;
         } else {
+            console.log(this._template);
             window.currentDOM = this._template;
             this._parent.appendChild(
                 MonkeysVirtualDOM.createElement(this._template)

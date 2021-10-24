@@ -6,6 +6,36 @@ export type FeedCardData = ProfileData
 export interface FeedData {
     profiles: FeedCardData[];
     counter: number;
+    outOfCards: boolean;
+    expanded: boolean;
 }
 
-export default new BaseStore<FeedData>();
+let feedStore = new BaseStore<FeedData>()
+
+feedStore.set( 
+    {
+    profiles: [
+        {
+        id: '1',
+        name: 'Ilyagy',
+        age: '10',
+        date: '01.01.2000',
+        description: 'mda kone4no',
+        imgSrc: 'img/drake-peeking.gif',
+        },
+        {
+            id: "2",
+            name: "Ilyagy22",
+            age: "12",
+            date: "01.01.2000",
+            description: "mda kone4no",
+            imgSrc: "img/stare-dont-blink.gif",
+        },
+    ],
+    counter: 0,
+    outOfCards: false,
+    expanded: false,
+}
+    );
+
+export default feedStore;
