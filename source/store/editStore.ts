@@ -4,7 +4,7 @@ export interface EditData {
     nameFieldClass: string;
     birthDateFieldClass: string;
     addImgFieldClass?: string;
-    tags?: Array<string>;
+    tags?: any;
 }
 
 const EditStore = new BaseStore<EditData>();
