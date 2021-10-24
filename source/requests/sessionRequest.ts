@@ -1,5 +1,5 @@
 import { sessionURL } from '../constants/urls.js';
-import http, { parseJSON } from '../utils/http.js';
+import http from '../utils/http.js';
 
 const loginRequest = (email: string, password: string) => {
   const body = JSON.stringify({
@@ -7,13 +7,11 @@ const loginRequest = (email: string, password: string) => {
     password: password,
   });
 
-  return http.post(sessionURL, body)
-      .then(parseJSON);
+  return http.post(sessionURL, body);
 };
 
 const logoutRequest = () => {
-  return http.delete(sessionURL)
-      .then(parseJSON);
+  return http.delete(sessionURL);
 };
 
 export { loginRequest, logoutRequest };

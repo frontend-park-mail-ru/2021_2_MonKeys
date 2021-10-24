@@ -1,5 +1,5 @@
 import { profileURL } from '../constants/urls.js';
-import http, { parseJSON } from '../utils/http.js';
+import http from '../utils/http.js';
 
 const createProfile = (email, password) => {
   const body = JSON.stringify({
@@ -7,26 +7,23 @@ const createProfile = (email, password) => {
     password: password,
   });
 
-  return http.post(profileURL, body)
-      .then(parseJSON);
+  return http.post(profileURL, body);
 };
 
 const getProfile = () => {
-  return http.get(profileURL)
-      .then(parseJSON);
+  return http.get(profileURL);
 };
 
-const editProfile = (name, date, description, photoPaths, tags) => {
+const editProfile = (name, date, description, /*photoPaths,*/ tags) => {
   const body = JSON.stringify({
     name: name,
     date: date,
     description: description,
-    photoPaths: photoPaths,
+  /*  photoPaths: photoPaths,*/
     tags: tags,
   });
 
-  return http.put(profileURL, body)
-      .then(parseJSON);
+  return http.put(profileURL, body);
 };
 
 export { createProfile, getProfile, editProfile };

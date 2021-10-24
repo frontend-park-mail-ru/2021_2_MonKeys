@@ -18,12 +18,19 @@ class Http {
    * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
    */
   private async _request({ url = '/', method = 'GET', headers = new Headers(), body = null }) {
-    return await fetch(this._baseURL + url, {
+    const response = await fetch(this._baseURL + url, {
       method: method,
       headers: headers,
       body: body,
       credentials: 'include',
     });
+
+    const responseData = await response.json();
+
+    return {
+      status: response.status,
+      data: responseData,
+    };
   }
 
   /**
@@ -76,14 +83,6 @@ class Http {
       body: body,
     });
   }
-}
-
-export function parseJSON(response) {
-  const responseData = response.json();
-  return {
-    status: response.status,
-    data: responseData,
-  };
 }
 
 export default new Http();

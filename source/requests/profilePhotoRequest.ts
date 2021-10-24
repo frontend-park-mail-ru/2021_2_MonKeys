@@ -1,5 +1,5 @@
 import { profilePhotoURL } from '../constants/urls.js';
-import http, { parseJSON } from '../utils/http.js';
+import http from '../utils/http.js';
 
 const addPhotoToProfile = (photo) => {
   const body = new FormData();
@@ -13,8 +13,7 @@ const deleteProfilePhoto = (photo) => {
     photo: photo,
   });
 
-  return http.delete(profilePhotoURL, body)
-      .then(parseJSON);
+  return http.delete(profilePhotoURL, body);
 };
 
 export { addPhotoToProfile, deleteProfilePhoto };
