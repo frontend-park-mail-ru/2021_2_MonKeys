@@ -1,4 +1,4 @@
-import { MonkeysVirtualDOM } from "../virtualDOM/virtualDOM.js";
+import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 
 export interface formFieldProps {
   tag: string;
@@ -10,6 +10,7 @@ export interface formFieldProps {
   class?: string;
   oninput?: Function;
   onfocusout?: Function;
+  onchange?: Function;
 }
 
 export const FormField = (props: formFieldProps) => {
@@ -65,22 +66,22 @@ export const FormField = (props: formFieldProps) => {
         break;
     }
 
-    let fieldTmpl: any;
-    if (props.iconSrc !== undefined) {
-      fieldTmpl = (
-        <div class="input-with-icon">
-          {field}
-          <img src={props.iconSrc} 
-              class="input-icon" />
-        </div>
-      );
-    } else {
-      fieldTmpl = (
-        <div class="input-with-icon">
-          {field}
-        </div>
-      );
-    }
+  let fieldTmpl: any;
+  if (props.iconSrc !== undefined) {
+    fieldTmpl = (
+      <div class="input-with-icon">
+        {field}
+        <img src={props.iconSrc}
+          class="input-icon" />
+      </div>
+    );
+  } else {
+    fieldTmpl = (
+      <div class="input-with-icon">
+        {field}
+      </div>
+    );
+  }
 
-    return fieldTmpl;
+  return fieldTmpl;
 };

@@ -1,15 +1,19 @@
 import { sessionURL } from '../constants/urls.js';
-import http from '../utils/http.js';
+import http, { parseJSON } from '../utils/http.js';
 
 const loginRequest = (email: string, password: string) => {
-  return http.post(sessionURL, {
+  const body = JSON.stringify({
     email: email,
     password: password,
   });
+
+  return http.post(sessionURL, body)
+      .then(parseJSON);
 };
 
 const logoutRequest = () => {
-  return http.delete(sessionURL);
+  return http.delete(sessionURL)
+      .then(parseJSON);
 };
 
 export { loginRequest, logoutRequest };

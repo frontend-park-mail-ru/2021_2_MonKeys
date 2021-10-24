@@ -1,8 +1,9 @@
 import { tagsURL } from '../constants/urls.js';
-import http from '../utils/http.js';
+import http, { parseJSON } from '../utils/http.js';
 
 const tagsRequest = () => {
-  return http.get(tagsURL);
+  return http.get(tagsURL)
+      .then(parseJSON);
 };
 
 export { tagsRequest };

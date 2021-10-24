@@ -1,8 +1,9 @@
-import EventBus from "./eventBus.js"
-import { dateLength } from "../constants/validation.js";
-import { HTTPNotFound, HTTPSuccess } from "../constants/HTTPStatus.js";
-import { ProfileStore } from "../store/profileStore.js";
+import EventBus from './eventBus.js';
+import { dateLength } from '../constants/validation.js';
+import { HTTPNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
+import { ProfileStore } from '../store/profileStore.js';
 import router from '../route/router.js';
+import { addPhotoToProfile } from '../requests/profilePhotoRequest.js';
 import { loginRequest } from "../requests/sessionRequest.js";
 import { feedRequest } from "../requests/feedRequest.js";
 import { editProfile } from "../requests/profileRequest.js";
@@ -153,5 +154,18 @@ export const SignupEditEventRegister = () => {
             // }
             ProfileStore.set(userData);
         }
+    });
+    EventBus.register('editProfile:img-input', (event) => {
+      const files = event.target.files;
+      const formData = new FormData();
+      formData.append('myFile', files[0]);
+
+      addPhotoToProfile(formData)
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
     });
 }
