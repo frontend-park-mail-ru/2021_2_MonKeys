@@ -12,7 +12,7 @@ export const CardExpended = (props: CardExpendedProps) => {
   return (
     <div id="cardID" class="card-expand">
         <div id="cardMainID" class="card-main-profile">
-            <img src={props.userData.photoSrc}
+            <img src={props.userData.imgSrc}
                 class="card-el profile-image-expand" />
             <div class="name-container">
                 <div class="name">{props.userData.name}</div>

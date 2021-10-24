@@ -7,10 +7,11 @@ export interface CardFeedProps {
 }
 
 export const CardFeed = (props: CardFeedProps) => {
+  console.log(props.userData.imgSrc);
   return (
     <div class="card">
         <div class="card-main">
-            <img src={props.userData.photoSrc} class="profile-image"/>
+            <img src={props.userData.imgSrc} class="profile-image"/>
             <div class="bottom-panel">
                 <div class="name-container">
                     <div class="name">{props.userData.name}</div>
