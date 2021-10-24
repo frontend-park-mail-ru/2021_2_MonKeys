@@ -18,19 +18,12 @@ class Http {
    * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
    */
   private async _request({ url = '/', method = 'GET', headers = new Headers(), body = null }) {
-    const response = await fetch(this._baseURL + url, {
+    return await fetch(this._baseURL + url, {
       method: method,
       headers: headers,
       body: body,
       credentials: 'include',
     });
-
-    const responseData = await response.json();
-
-    return {
-      status: response.status,
-      data: responseData,
-    };
   }
 
   /**
@@ -45,14 +38,14 @@ class Http {
   /**
    * Делает POST запрос
    * @param {string} url - Запрос по url.
-   * @param {Object} data - Данные для отправки.
+   * @param {Object} body - Данные для отправки.
    * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
    */
-  public post(url, data) {
+  public post(url, body) {
     return this._request({
       url: url,
       method: 'POST',
-      body: JSON.stringify(data),
+      body: body,
     });
   }
 
@@ -71,16 +64,24 @@ class Http {
   /**
    * Делает PUT запрос
    * @param {string} url - Запрос по url.
-   * @param {Object} data - Данные для отправки.
-   * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
+   * @param {Object} body - Данные для отправки.
+   * @return {Promise<{status: number, body: any}>} - Возвращает Promise со статусом ответа и данными.
    */
-  public put(url, data) {
+  public put(url, body) {
     return this._request({
       url: url,
       method: 'PUT',
-      body: JSON.stringify(data),
+      body: body,
     });
   }
+}
+
+export function parseJSON(response) {
+  const responseData = response.json();
+  return {
+    status: response.status,
+    data: responseData,
+  };
 }
 
 export default new Http();

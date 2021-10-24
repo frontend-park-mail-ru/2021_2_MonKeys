@@ -1,11 +1,14 @@
 import { likesURL } from '../constants/urls';
-import http from '../utils/http';
+import http, { parseJSON } from '../utils/http';
 
 const likesRequest = (id, reaction) => {
-  return http.post(likesURL, {
+  const body = JSON.stringify({
     id: id,
     reaction: reaction,
   });
+
+  return http.post(likesURL, body)
+      .then(parseJSON);
 };
 
 export { likesRequest };

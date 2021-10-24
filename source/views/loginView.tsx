@@ -114,6 +114,10 @@ export default class LoginView extends ViewBase {
                 {FormField(data.fields.password)}
                 {ErrorMsg(data.errorMsgs.passwordError)}
                 {FormField(data.fields.img)}
+                // Короче надо сначала исправить все запросы, файл http JSON
+                // обработчик отправки картинки
+                // Что с урлом?
+                // Что возвращаем
               </div>
               {ErrorMsg(data.errorMsgs.formError)}
               {Button(data.buttons.loginButton)}
