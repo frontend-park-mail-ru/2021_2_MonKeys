@@ -8,7 +8,7 @@ class Router {
         this.routes = routes;
     }
 
-    go(route: string){
+    go(route: string) {
         if (route) {
             window.history.pushState({},'',route);
         }
