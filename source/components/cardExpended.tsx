@@ -9,6 +9,7 @@ export interface CardExpendedProps {
 }
 
 export const CardExpended = (props: CardExpendedProps) => {
+  console.log(props);
   return (
     <div id="cardID" class="card-expand">
         <div id="cardMainID" class="card-main-profile">
@@ -21,9 +22,7 @@ export const CardExpended = (props: CardExpendedProps) => {
             <div class="card-el bord"></div>
             <div class="card-el desc">{props.userData.description}</div>
             <div class="card-el bord"></div>
-            <div id="tagsID" class="card-el tags-container">
-                {Object.keys(props.tags).map(item => Tag(props.tags[item]))}
-            </div>
+            
         </div>
         <div id="editID" class="actions-container-profile">
             {Object.keys(props.buttons).map(item => IconButton(props.buttons[item]))}

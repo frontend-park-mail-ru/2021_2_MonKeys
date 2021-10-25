@@ -22,6 +22,7 @@ feedStore.set(
         date: '01.01.2000',
         description: 'mda kone4no',
         imgSrc: 'img/drake-peeking.gif',
+        tags: new Set(['Rap', 'Dota 2']),
         },
         {
             id: "2",
@@ -30,6 +31,7 @@ feedStore.set(
             date: "01.01.2000",
             description: "mda kone4no",
             imgSrc: "img/stare-dont-blink.gif",
+            tags: new Set(['Yeezy', 'Wyoming'])
         },
     ],
     counter: 0,

@@ -20,10 +20,11 @@ declare global {
     }
 }
 
-window.onload = () => {
-    router.go(window.location.pathname);
+window.onpopstate = () => {
+    router.go(window.location.pathname); 
     // EventBus.dispatch<string>('user:logged-in');
 }
+router.go(window.location.pathname); 
 
 
 const event = EventBus.register('check-event', (name: string) => {

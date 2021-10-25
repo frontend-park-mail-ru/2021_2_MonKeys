@@ -16,10 +16,10 @@ export default class ViewBase {
         //         console.log(window.currentView.unsubscribe);
         //     }
         // }
-        console.log(window.currentView, this);
+       
         
         if (window.currentView && window.currentView !== this && window.currentView.unsubscribe) {
-            console.log(this);
+            
             window.currentView.unsubscribe();
         }
         window.currentView = this;
@@ -33,7 +33,7 @@ export default class ViewBase {
                 this._template);
             window.currentDOM = this._template;
         } else {
-            console.log(this._template);
+           
             window.currentDOM = this._template;
             this._parent.appendChild(
                 MonkeysVirtualDOM.createElement(this._template)
