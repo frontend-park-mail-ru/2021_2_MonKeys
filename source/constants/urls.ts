@@ -1,4 +1,4 @@
-const serverAddress = 'http://localhost:8000';
+const serverAddress = 'http://127.0.0.1:80';
 const profileURL = '/api/v1/profile';
 const tagsURL = '/api/v1/tags';
 const sessionURL = '/api/v1/session';
