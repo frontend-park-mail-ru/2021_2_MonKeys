@@ -18,7 +18,7 @@ export default class ProfileView extends ViewBase {
         'cardData': {
             'userData': {
                 name: ProfileStore.get().name,
-                age: ProfileStore.get().age.toString(),
+                age: ProfileStore.get().age,
                 description: ProfileStore.get().description,
                 imgSrc: ProfileStore.get().imgSrc,
             },
@@ -60,8 +60,7 @@ export default class ProfileView extends ViewBase {
 
     private subcribtionCallback(data, view) {
         view._data.cardData.userData.name = data.name;
-        // console.log(data);
-        // this._data.cardData.userData.age = data.age;
+        view._data.cardData.userData.age = data.age;
         view._data.cardData.userData.description = data.description;
         view._data.cardData.tags = data.tags;
         view._template = view._createTmpl(view._data);
