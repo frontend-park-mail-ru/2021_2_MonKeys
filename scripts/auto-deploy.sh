@@ -24,7 +24,7 @@ ssh -i .keys/2021-2-MonKeys-TWJYWS7b.pem "$SERVER_USERNAME@$SERVER_ADDRESS" "
     cd ..
     sudo npm install -g typescript
     make build-typescript
-    sudo docker stop $(sudo docker ps -a -q)
+    sudo docker system prune -y
     sudo make start-docker-nginx-ssl
     
 "
