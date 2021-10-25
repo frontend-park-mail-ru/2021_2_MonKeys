@@ -41,10 +41,10 @@ export const CardExpended = (props: CardExpendedProps) => {
   return (
     <div id="cardID" class="card-expand">
         <div id="cardMainID" class="card-main-profile">
-            <img src={props.userData.imgSrc.forEach(element => {
+            {/* <img src={props.userData.imgSrc.forEach(element => {
               return element
-            })}
-                class="card-el profile-image-expand" />
+            })} */}
+                {/* class="card-el profile-image-expand" /> */}
             <div class="name-container">
                 <div class="name">{props.userData.name}</div>
                 <div class="age">{props.userData.age}</div>
