@@ -40,8 +40,10 @@ export const InitBus = () => {
     LoginEventRegister();
     // -------------------------signup----------------------------
     SignupEventRegister();
+
     // --------------------------edit-----------------------------
     EditEventRegister();
+
      // ----------------------------profile-----------------------
     ProfileEventsRegister();
     // ----------------------likes--------------------------------

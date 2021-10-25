@@ -45,40 +45,42 @@ class Http {
   /**
    * Делает POST запрос
    * @param {string} url - Запрос по url.
-   * @param {Object} data - Данные для отправки.
+   * @param {Object} body - Данные для отправки.
    * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
    */
-  public post(url, data) {
+  public post(url, body) {
     return this._request({
       url: url,
       method: 'POST',
-      body: JSON.stringify(data),
+      body: body,
     });
   }
 
   /**
    * Делает DELETE запрос
    * @param {string} url - Запрос по url.
+   * @param {Object} body - Данные для отправки.
    * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
    */
-  public delete(url) {
+  public delete(url, body = null) {
     return this._request({
       url: url,
       method: 'DELETE',
+      body: body,
     });
   }
 
   /**
    * Делает PUT запрос
    * @param {string} url - Запрос по url.
-   * @param {Object} data - Данные для отправки.
-   * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
+   * @param {Object} body - Данные для отправки.
+   * @return {Promise<{status: number, body: any}>} - Возвращает Promise со статусом ответа и данными.
    */
-  public put(url, data) {
+  public put(url, body) {
     return this._request({
       url: url,
       method: 'PUT',
-      body: JSON.stringify(data),
+      body: body,
     });
   }
 }

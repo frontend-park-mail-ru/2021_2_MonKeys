@@ -9,7 +9,7 @@ import { LoginStore } from "../store/loginStore.js";
 
 export const LoginEventRegister = () => {
     EventBus.register('login:login-button', (payload?: string) => {
-        // ТОТАЛЬНЕЙШИЙ КРИНЖ ЭТО ДОЛЖНО БЫТЬ ЧЕРЕЗ ВИРТУАЛДОМ ПОТОМ 
+        // ТОТАЛЬНЕЙШИЙ КРИНЖ ЭТО ДОЛЖНО БЫТЬ ЧЕРЕЗ ВИРТУАЛДОМ ПОТОМ
         // НО ПОКА ТАК ААААААААААААААА
         // ПОЛНЫЙ КРИНЖ АААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА
         const _emailInput = document.getElementsByTagName('input')[0];
@@ -75,10 +75,11 @@ export const LoginEventRegister = () => {
 
     EventBus.register('login:email-input', (payload?: string) => {
         const _emailInput = document.getElementsByTagName('input')[0];
-        
+
         let storeData = LoginStore.get();
 
         const test = _emailInput.value.length === 0 || emailRegExp.test(_emailInput.value);
+
         (test)
             ? storeData.emailFieldClass = 'form-field-valid'
             : storeData.emailFieldClass = 'form-field-novalid';
@@ -90,6 +91,7 @@ export const LoginEventRegister = () => {
         if (storeData.formErrorClass === 'login-error-active') {
             storeData.formErrorClass = 'login-error';
         }
+
 
         LoginStore.set(storeData);
     });

@@ -9,6 +9,7 @@ export interface CardExpendedProps {
 }
 
 export const CardExpended = (props: CardExpendedProps) => {
+
   const tagsExists = props.tags !== undefined ? true : false;
   let tagField: HTMLCollection;
   if (tagsExists) {
@@ -36,6 +37,7 @@ export const CardExpended = (props: CardExpendedProps) => {
       <div class="card-el desc"></div>
     );
   }
+
   return (
     <div id="cardID" class="card-expand">
         <div id="cardMainID" class="card-main-profile">
@@ -48,9 +50,11 @@ export const CardExpended = (props: CardExpendedProps) => {
             <div class="card-el bord"></div>
             {descField}
             <div class="card-el bord"></div>
+
             <div id="tagsID" class="card-el tags-container">
               {tagField}
             </div>
+
         </div>
         <div id="editID" class="actions-container-profile">
             {Object.keys(props.buttons).map(item => IconButton(props.buttons[item]))}
