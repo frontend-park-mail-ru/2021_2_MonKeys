@@ -6,7 +6,7 @@ export interface ProfileData {
     age?: string;
     date?: string;
     description?: string;
-    imgSrc?: Set<string>;
+    imgSrc?: string[];
     tags?: Set<string>;
 }
 

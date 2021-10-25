@@ -18,7 +18,7 @@ export default class ProfileView extends ViewBase {
         'cardData': {
             'userData': {
                 name: ProfileStore.get().name,
-                age: ProfileStore.get().age.toString(),
+                age: ProfileStore.get().age,
                 description: ProfileStore.get().description,
                 imgSrc: ProfileStore.get().imgSrc,
             },

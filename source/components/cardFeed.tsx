@@ -11,7 +11,7 @@ export const CardFeed = (props: CardFeedProps) => {
   return (
     <div class="card">
         <div class="card-main">
-            <img src={props.userData.imgSrc} class="profile-image"/>
+            <img src={props.userData.imgSrc[0]} class="profile-image"/>
             <div class="bottom-panel">
                 <div class="name-container">
                     <div class="name">{props.userData.name}</div>

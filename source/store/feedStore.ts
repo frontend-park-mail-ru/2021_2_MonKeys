@@ -12,16 +12,16 @@ export interface FeedData {
 
 let feedStore = new BaseStore<FeedData>()
 
-feedStore.set( 
+feedStore.set(
     {
     profiles: [
         {
-        id: '1',
-        name: 'Ilyagy',
-        age: '10',
-        date: '01.01.2000',
-        description: 'mda kone4no',
-        imgSrc: 'img/drake-peeking.gif',
+            id: '1',
+            name: 'Ilyagy',
+            age: '10',
+            date: '01.01.2000',
+            description: 'mda kone4no',
+            imgSrc: ['img/drake-peeking.gif'],
         },
         {
             id: "2",
@@ -29,7 +29,7 @@ feedStore.set(
             age: "12",
             date: "01.01.2000",
             description: "mda kone4no",
-            imgSrc: "img/stare-dont-blink.gif",
+            imgSrc: ['img/stare-dont-blink.gif'],
         },
     ],
     counter: 0,

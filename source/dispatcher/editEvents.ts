@@ -10,7 +10,7 @@ import { editProfile } from "../requests/profileRequest.js";
 import { tagsRequest } from "../requests/tagsRequest.js";
 import { emailRegExp, passwordRegExp } from "../constants/validation.js";
 import { EditStore } from "../store/editStore.js";
-import {validImgType} from "../validation/edit.js";
+import { validImgType } from "../validation/edit.js";
 
 export const SignupEditEventRegister = () => {
     EventBus.register('signup-edit:save-button', (payload?: string) => {
@@ -165,16 +165,16 @@ export const SignupEditEventRegister = () => {
 
           if (validImgType(photo)) {
               addPhotoToProfile(photo)
-                .then((respons) => {
-                    console.log(respons);
+                .then((response) => {
+                    console.log(response);
 
-                    if (respons.status !== HTTPSuccess) {
+                    if (response.status !== HTTPSuccess) {
                         throw 'jopa';
                     }
 
                     // изменения стора должно повлечь изменение вьюхи
                     let userData = ProfileStore.get();
-                    userData.imgSrc.add(respons.data.imgPath);
+                    userData.imgSrc.push(response.data.imgPath);
                     ProfileStore.set(userData);
                 })
                 .catch((error) => {
