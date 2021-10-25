@@ -50,9 +50,9 @@ export const LoginEventRegister = () => {
                     if (response.status === HTTPSuccess) {
                         if (response.data.status === HTTPSuccess) {
                             ProfileStore.set(response.data.body);
-                            console.log(ProfileStore.get());
+                            // console.log(ProfileStore.get());
                             router.go('/feed');
-                            console.log(ProfileStore.get());
+                            // console.log(ProfileStore.get());
                             // feedRequest()
                             //     .then(
                             //         (feedResponse)=> {
@@ -79,10 +79,18 @@ export const LoginEventRegister = () => {
         let storeData = LoginStore.get();
 
         const test = _emailInput.value.length === 0 || emailRegExp.test(_emailInput.value);
-            (test)
-                ? storeData.emailFieldClass = 'form-field-valid'
-                : storeData.emailFieldClass = 'form-field-novalid';
+        (test)
+            ? storeData.emailFieldClass = 'form-field-valid'
+            : storeData.emailFieldClass = 'form-field-novalid';
+
+        if (test && storeData.emailErrorClass === 'login-error-active') {
+            storeData.emailErrorClass = 'login-error';
+        }
         
+        if (storeData.formErrorClass === 'login-error-active') {
+            storeData.formErrorClass = 'login-error';
+        }
+
         LoginStore.set(storeData);
     });
 
@@ -109,9 +117,17 @@ export const LoginEventRegister = () => {
         let storeData = LoginStore.get();
 
         const test = _passwordInput.value.length === 0 || passwordRegExp.test(_passwordInput.value);
-            (test)
-                ? storeData.passwordFieldClass = 'form-field-valid'
-                : storeData.passwordFieldClass = 'form-field-novalid';
+        (test)
+            ? storeData.passwordFieldClass = 'form-field-valid'
+            : storeData.passwordFieldClass = 'form-field-novalid';
+
+        if (test && storeData.passwordErrorClass === 'login-error-active') {
+            storeData.passwordErrorClass = 'login-error';
+        }
+
+        if (storeData.formErrorClass === 'login-error-active') {
+            storeData.formErrorClass = 'login-error';
+        }
 
         LoginStore.set(storeData);
     });

@@ -36,9 +36,9 @@ export const FeedEventsRegister = () => {
     
     // send req w/ reacID
 
-    console.log(reactionID);
+    // console.log(reactionID);
     let data = feedStore.get();
-    console.log(data);
+    // console.log(data);
     data.counter++;
     if(data.profiles[data.counter]){
       data.outOfCards=false;

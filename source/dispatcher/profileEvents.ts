@@ -7,6 +7,7 @@ export const ProfileEventsRegister = () =>{
     EventBus.register('profile:edit-button',()=>{
         router.go('/edit');
     })
+
     EventBus.register('profile:logout-button',()=>{
         logoutRequest()
             .then(

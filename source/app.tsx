@@ -1,10 +1,10 @@
 import { MonkeysVirtualDOM } from 'virtualDOM/virtualDOM';
-import LoginView from './views/loginView.js';
-import SignupView from "./views/signupView.js";
-import EditView from "./views/editView.js";
-import ProfileView from "./views/profileView.js";
-import LikesView from "./views/likesView.js";
-import FeedView from "./views/feedView.js";
+// import LoginView from './views/loginView.js';
+// import SignupView from "./views/signupView.js";
+// import EditView from "./views/editView.js";
+// import ProfileView from "./views/profileView.js";
+// import LikesView from "./views/likesView.js";
+// import FeedView from "./views/feedView.js";
 import http from './utils/http.js';
 import { serverAddress } from './constants/urls.js';
 import EventBus from './dispatcher/eventBus.js';

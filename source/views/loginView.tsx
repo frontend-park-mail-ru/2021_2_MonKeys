@@ -12,15 +12,7 @@ import { LoginStore } from "../store/loginStore.js";
 export default class LoginView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
-        LoginStore.subscribe((data) => {
-            this._data.fields.email.class = data.emailFieldClass;
-            this._data.fields.password.class = data.passwordFieldClass;
-            this._data.errorMsgs.emailError.class = data.emailErrorClass;
-            this._data.errorMsgs.passwordError.class = data.passwordErrorClass;
-            this._data.errorMsgs.formError.class = data.formErrorClass;
-            this._template = this._createTmpl(this._data);
-            this.render();
-        })
+        LoginStore.subscribe(this.subscribtionCallback, this);
         this._template = this._createTmpl(this._data);
     }
 
@@ -100,5 +92,19 @@ export default class LoginView extends ViewBase {
                 {Link(data.links.signup)}
             </div>
         );
+    }
+
+    public unsubscribe() {
+        LoginStore.unsubscribe(this.subscribtionCallback);
+    }
+
+    private subscribtionCallback(data, view) {
+        view._data.fields.email.class = data.emailFieldClass;
+        view._data.fields.password.class = data.passwordFieldClass;
+        view._data.errorMsgs.emailError.class = data.emailErrorClass;
+        view._data.errorMsgs.passwordError.class = data.passwordErrorClass;
+        view._data.errorMsgs.formError.class = data.formErrorClass;
+        view._template = view._createTmpl(view._data);
+        view.render();
     }
 }

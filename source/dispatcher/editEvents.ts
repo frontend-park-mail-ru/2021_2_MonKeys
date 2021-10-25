@@ -10,16 +10,16 @@ import { tagsRequest } from "../requests/tagsRequest.js";
 import { emailRegExp, passwordRegExp } from "../constants/validation.js";
 import { EditStore } from "../store/editStore.js";
 
-export const SignupEditEventRegister = () => {
-    EventBus.register('signup-edit:save-button', (payload?: string) => {
+export const EditEventRegister = () => {
+    EventBus.register('edit:save-button', (payload?: string) => {
         // ТОТАЛЬНЕЙШИЙ КРИНЖ ЭТО ДОЛЖНО БЫТЬ ЧЕРЕЗ ВИРТУАЛДОМ ПОТОМ 
         // НО ПОКА ТАК ААААААААААААААА
         // ПОЛНЫЙ КРИНЖ АААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА
         const _nameInput = document.getElementsByTagName('textarea')[0];
         const _dateInput = document.getElementsByTagName('input')[0];
         const _descriptionInput = document.getElementsByTagName('textarea')[1];
-        const _tagsButtons = document.getElementsByClassName('checkbox-btn');
-        const _tagsCheckboxes = document.getElementsByClassName('tag-checkbox');
+        // const _tagsButtons = document.getElementsByClassName('checkbox-btn');
+        // const _tagsCheckboxes = document.getElementsByClassName('tag-checkbox');
         // const _emailError = document.getElementsByName('error')[0];
         // const _passwordError = document.getElementsByName('error')[1];
         // const _formError = document.getElementsByName('error')[2];
@@ -40,28 +40,33 @@ export const SignupEditEventRegister = () => {
         }
 
         if (!testName || !testDate) {
+          storeData.formErrorClass = 'login-error-active';
+          EditStore.set(storeData);
           return;
         }
 
         storeData.nameFieldClass = 'form-field text-without-icon';
         storeData.birthDateFieldClass = 'form-field text-with-icon';
+        storeData.formErrorClass = 'login-error';
         EditStore.set(storeData);
 
         const name = _nameInput.value.trim();
         const date = _dateInput.value.trim();
         const description = _descriptionInput.value.trim();
         let tags = new Array<string>();
-        if (ProfileStore.get() !== undefined) {
+        if (ProfileStore.get() !== undefined && ProfileStore.get().tags !== undefined) {
             const userTags = ProfileStore.get().tags;
             for (const tag of userTags) {
                 tags.push(tag);
             }
         }
+
         editProfile(name, date, description, tags)
             .then(
                 (response) => {
                     if (response.status === HTTPSuccess) {
                         if (response.data.status === HTTPSuccess) {
+                            ProfileStore.set(response.data.body);
                             router.go('/profile');
                         } else if (response.data.status === HTTPNotFound) {
                             /// ????
@@ -75,7 +80,7 @@ export const SignupEditEventRegister = () => {
             ).catch((error) => console.log(error));
     });
 
-    EventBus.register('signup-edit:load', (payload?: string) => {
+    EventBus.register('edit:open-tags', (payload?: string) => {
         tagsRequest()
             .then(
                 (response) => {
@@ -86,9 +91,8 @@ export const SignupEditEventRegister = () => {
                             Object.keys(storeData.tags.allTags)
                                 .map(item=>
                                     storeData.tags.allTags[item].onchange = ()=>
-                                    { EventBus.dispatch<string>('signup-edit:change-tag-condition', storeData.tags.allTags[item].tagText); });
+                                    { EventBus.dispatch<string>('edit:change-tag-condition', storeData.tags.allTags[item].tagText); });
                             EditStore.set(storeData);
-                            console.log(storeData);
                         } else if (response.data.status === HTTPNotFound) {
                             console.log('xz');
                         }
@@ -100,9 +104,9 @@ export const SignupEditEventRegister = () => {
                     // выставляем теги, которые уже есть у пользователя
                     if (ProfileStore.get() !== undefined) {
                         const userTags = ProfileStore.get().tags;
-                        // if (userTags === undefined) {
-                        //     return;
-                        // }
+                        if (userTags === undefined) {
+                            return;
+                        }
                         let storeData = EditStore.get();
                         for (const tag of userTags) {
                             for (let j = 0; j < response.data.body.tagsCount; j++) {
@@ -112,24 +116,15 @@ export const SignupEditEventRegister = () => {
                                 }
                             }
                         }
-                        // for (let i = 0; i < userTags.length; i++) {
-                        //     for (let j = 0; j < response.data.body.tagsCount; j++) {
-                        //         if (userTags[i] === storeData.tags.allTags[j].tagText) {
-                        //             storeData.tags.allTags[i + 1].isVisiable = true;
-                        //             tagsArr.add(userTags[i]);
-                        //         }
-                        //     }
-                        // }
-                        // this._inputTags = tagsArr;
                     }
                 }
             ).catch((error) => console.log(error));
     });
 
-    EventBus.register('signup-edit:change-tag-condition', (payload?: string) => {
+    EventBus.register('edit:change-tag-condition', (payload?: string) => {
         let userData = ProfileStore.get();
         let tagsSet = new Set<string>();
-        if (userData !== undefined) {
+        if (userData && userData.tags) {
             for (const userTag of userData.tags) {
                 tagsSet.add(userTag)
             }
@@ -148,10 +143,42 @@ export const SignupEditEventRegister = () => {
             ProfileStore.set(newUserData);
         } else {
             userData.tags = tagsSet;
-            // for (const tag of tagsSet) {
-            //     userData.tags.add(tag);
-            // }
             ProfileStore.set(userData);
         }
+    });
+
+    EventBus.register('edit:name-input', (payload?: string) => {
+        const _nameInput = document.getElementsByTagName('textarea')[0];
+
+        let storeData = EditStore.get();
+
+        const test = _nameInput.value.length !== 0;
+
+        (test)
+            ? storeData.nameFieldClass = 'form-field text-without-icon'
+            : storeData.nameFieldClass = 'form-field-edit-novalid text-without-icon';
+
+        if (storeData.formErrorClass === 'login-error-active') {
+            storeData.formErrorClass = 'login-error';
+        }
+
+        EditStore.set(storeData);
+    });
+
+    EventBus.register('edit:birth-date-input', (payload?: string) => {
+        const _dateInput = document.getElementsByTagName('input')[0];
+
+        let storeData = EditStore.get();
+
+        const test = _dateInput.value.toString().length === dateLength;
+        (test)
+            ? storeData.birthDateFieldClass = 'form-field text-with-icon'
+            : storeData.birthDateFieldClass = 'form-field-edit-novalid text-with-icon';
+
+        if (storeData.formErrorClass === 'login-error-active') {
+            storeData.formErrorClass = 'login-error';
+        }
+
+        EditStore.set(storeData);
     });
 }
