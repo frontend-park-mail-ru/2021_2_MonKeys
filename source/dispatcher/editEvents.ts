@@ -182,7 +182,7 @@ export const EditEventRegister = () => {
         }
 
         EditStore.set(storeData);
-
+    });
     EventBus.register('editProfile:img-input', (event) => {
       const files = event.target.files;
       const formData = new FormData();
