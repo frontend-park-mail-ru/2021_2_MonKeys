@@ -21,7 +21,7 @@ feedStore.set(
         age: '10',
         date: '01.01.2000',
         description: 'mda kone4no',
-        imgSrc: 'img/drake-peeking.gif',
+        imgSrc: new Set(['img/drake-peeking.gif']),
         tags: new Set(['Rap', 'Dota 2']),
         },
         {
@@ -30,7 +30,7 @@ feedStore.set(
             age: "12",
             date: "01.01.2000",
             description: "mda kone4no",
-            imgSrc: "img/stare-dont-blink.gif",
+            imgSrc: new Set(["img/stare-dont-blink.gif"]),
             tags: new Set(['Yeezy', 'Wyoming'])
         },
     ],
