@@ -3,6 +3,7 @@ import { TagButton } from "./tagButton.js";
 import { FormField } from "./formField.js";
 import { ImgField } from "./imgField.js";
 import { Button } from "./button.js";
+import { AddImg } from "./addImg.js";
 
 export interface EditFormProps {
   fields: any;
@@ -44,8 +45,8 @@ export const EditForm = (props: EditFormProps) => {
             {tagField}
         </div>
         <div class="inputEdit">
-            {/* {ImgField()} */}
-            {/* {Button(props.buttons.imgAddButton)} */}
+             {/*{ImgField()} */}
+             {AddImg(props.buttons.imgAddButton)}
         </div>
         {Button(props.buttons.saveButton)}
     </form>

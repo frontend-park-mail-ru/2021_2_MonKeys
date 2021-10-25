@@ -3,7 +3,7 @@ import http from '../utils/http.js';
 
 const addPhotoToProfile = (photo) => {
   const body = new FormData();
-  body.append('photo', photo[0]);
+  body.append('photo', photo);
 
   return http.post(profilePhotoURL, body);
 };

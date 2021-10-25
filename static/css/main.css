@@ -1273,30 +1273,30 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-family: 'Futura Now Headline Bold';
     color: #ffffff;
 }
- 
+
 /* Checked */
 .checkbox-btn input[type=checkbox]:checked + span {
     background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(17, 0, 255, 0.274) 0%, rgba(0, 165, 245, 0) 100%);
 	/* background: #ffe0a6; */
 }
- 
+
 /* Focus */
 .focused span {
 	box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
- 
+
 /* Hover */
 .checkbox-btn:hover {
 	color: #666;
 }
- 
+
 /* Active */
 .checkbox-btn input[type=checkbox]:active:not(:disabled) + span {
 	/* background: #d2c5ac; */
     background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(17, 0, 255, 0.274) 0%, rgba(0, 165, 245, 0) 100%);
 	color: #ffffff;
 }
- 
+
 /* Disabled */
 .checkbox-btn input[type=checkbox]:disabled + span {
 	background: #efefef;

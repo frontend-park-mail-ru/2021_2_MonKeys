@@ -60,10 +60,8 @@ export default class EditView extends ViewBase {
                     onclick: ()=>{ EventBus.dispatch<string>('signup-edit:load'); },
                 },
                 'imgAddButton': {
-                    type: 'button',
-                    text: '',
                     class: 'add',
-                    onclick: ()=>{},
+                    onchange: (event)=>{ EventBus.dispatch<string>('editProfile:img-input', event); },
                 },
                 'saveButton': {
                     type: 'button',

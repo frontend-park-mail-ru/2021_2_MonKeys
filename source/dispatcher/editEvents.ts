@@ -10,10 +10,11 @@ import { editProfile } from "../requests/profileRequest.js";
 import { tagsRequest } from "../requests/tagsRequest.js";
 import { emailRegExp, passwordRegExp } from "../constants/validation.js";
 import { EditStore } from "../store/editStore.js";
+import {validImgType} from "../validation/edit.js";
 
 export const SignupEditEventRegister = () => {
     EventBus.register('signup-edit:save-button', (payload?: string) => {
-        // ТОТАЛЬНЕЙШИЙ КРИНЖ ЭТО ДОЛЖНО БЫТЬ ЧЕРЕЗ ВИРТУАЛДОМ ПОТОМ 
+        // ТОТАЛЬНЕЙШИЙ КРИНЖ ЭТО ДОЛЖНО БЫТЬ ЧЕРЕЗ ВИРТУАЛДОМ ПОТОМ
         // НО ПОКА ТАК ААААААААААААААА
         // ПОЛНЫЙ КРИНЖ АААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА
         const _nameInput = document.getElementsByTagName('textarea')[0];
@@ -155,17 +156,31 @@ export const SignupEditEventRegister = () => {
             ProfileStore.set(userData);
         }
     });
+
     EventBus.register('editProfile:img-input', (event) => {
       const files = event.target.files;
-      const formData = new FormData();
-      formData.append('myFile', files[0]);
 
-      addPhotoToProfile(formData)
-          .then((data) => {
-            console.log(data);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+      if (files.length !== 0) {
+          const photo = files[0];
+
+          if (validImgType(photo)) {
+              addPhotoToProfile(photo)
+                .then((respons) => {
+                    console.log(respons);
+
+                    if (respons.status !== HTTPSuccess) {
+                        throw 'jopa';
+                    }
+
+                    // изменения стора должно повлечь изменение вьюхи
+                    let userData = ProfileStore.get();
+                    userData.imgSrc.add(respons.data.imgPath);
+                    ProfileStore.set(userData);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+          }
+      }
     });
 }
