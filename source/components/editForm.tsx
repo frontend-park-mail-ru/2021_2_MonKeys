@@ -2,12 +2,14 @@ import { MonkeysVirtualDOM } from "../virtualDOM/virtualDOM.js";
 import { TagButton } from "./tagButton.js";
 import { FormField } from "./formField.js";
 import { ImgField } from "./imgField.js";
+import { ErrorMsg } from "./errorMsg.js";
 import { Button } from "./button.js";
 
 export interface EditFormProps {
   fields: any;
   tags: any;
   buttons: any;
+  errorMsgs: any;
 }
 
 export const EditForm = (props: EditFormProps) => {
@@ -47,6 +49,7 @@ export const EditForm = (props: EditFormProps) => {
             {/* {ImgField()} */}
             {/* {Button(props.buttons.imgAddButton)} */}
         </div>
+        {ErrorMsg(props.errorMsgs.formError)}
         {Button(props.buttons.saveButton)}
     </form>
   );

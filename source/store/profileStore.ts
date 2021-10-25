@@ -12,5 +12,4 @@ export interface ProfileData {
 
 const ProfileStore = new BaseStore<ProfileData>();
 
-
 export { ProfileStore };

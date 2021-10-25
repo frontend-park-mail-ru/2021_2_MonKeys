@@ -1,22 +1,22 @@
 export default class BaseStore<type>{
     private data: type;
-    private observers: { (data: type): void; } [];
+    private view: any;
+    private observers: { (data: type, curView): void; } [];
     constructor(){
         this.observers=[];
     }
     /**
      * subscribe
      */
-    public subscribe(callback: {(data: type): void}) {
+    public subscribe(callback: {(data: type, curView): void}, view) {
+        this.view = view;
         this.observers.push(callback);
     }
-    public unsubscribe(callback: {(data: type): void}) {
-        console.log(this.observers);
+    public unsubscribe(callback: {(data: type, curView): void}) {
         this.observers = this.observers.filter(
             (subscriber)=> {
             return subscriber!==callback
         });
-        console.log(this.observers);
     }
     public get(): type{
         return this.data
@@ -27,7 +27,7 @@ export default class BaseStore<type>{
     }
     public broadcast() {
         this.observers.forEach((subscriber)=> {
-            subscriber(this.data);
+            subscriber(this.data, this.view);
         });
     }
 }

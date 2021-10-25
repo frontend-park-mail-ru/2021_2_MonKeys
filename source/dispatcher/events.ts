@@ -9,7 +9,7 @@ import { getProfile } from "../requests/profileRequest.js";
 // import { cookieRequest } from "../requests/sessionRequest.js";
 import { LoginEventRegister } from "./loginEvents.js";
 import { SignupEventRegister } from "./signupEvents.js";
-import { SignupEditEventRegister } from "./editEvents.js";
+import { EditEventRegister } from "./editEvents.js";
 import { ProfileEventsRegister } from "./profileEvents.js";
 import { LikesEventsRegister } from "./likesEvents.js";
 import { FeedEventsRegister } from "./feedEvents.js";
@@ -40,11 +40,10 @@ export const InitBus = () => {
     LoginEventRegister();
     // -------------------------signup----------------------------
     SignupEventRegister();
-    // -------------------edit-after-signup-----------------------
 
-    SignupEditEventRegister();
-    // ---------------------------edit----------------------------
-    
+    // --------------------------edit-----------------------------
+    EditEventRegister();
+
      // ----------------------------profile-----------------------
     ProfileEventsRegister();
     // ----------------------likes--------------------------------

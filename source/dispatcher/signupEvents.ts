@@ -55,7 +55,7 @@ export const SignupEventRegister = () => {
         createProfile(_email, _password)
             .then(
                 (response)=> {
-                    console.log(response);
+                    // console.log(response);
                     if (response.status === HTTPSuccess) {
                         if (response.data.status === HTTPSuccess) {
                             router.go('/signup-edit');
@@ -80,6 +80,14 @@ export const SignupEventRegister = () => {
             (test)
                 ? storeData.emailFieldClass = 'form-field-valid'
                 : storeData.emailFieldClass = 'form-field-novalid';
+
+        if (test && storeData.emailErrorClass === 'login-error-active') {
+            storeData.emailErrorClass = 'login-error';
+        }
+        
+        if (storeData.formErrorClass === 'login-error-active') {
+            storeData.formErrorClass = 'login-error';
+        }
 
         SignupStore.set(storeData);
     });
@@ -111,6 +119,14 @@ export const SignupEventRegister = () => {
                 ? storeData.passwordFieldClass = 'form-field-valid'
                 : storeData.passwordFieldClass = 'form-field-novalid';
 
+        if (test && storeData.passwordErrorClass === 'login-error-active') {
+            storeData.passwordErrorClass = 'login-error';
+        }
+
+        if (storeData.formErrorClass === 'login-error-active') {
+            storeData.formErrorClass = 'login-error';
+        }
+
         SignupStore.set(storeData);
     });
 
@@ -141,6 +157,14 @@ export const SignupEventRegister = () => {
             (test)
                 ? storeData.repeatPasswordFieldClass = 'form-field-valid'
                 : storeData.repeatPasswordFieldClass = 'form-field-novalid';
+
+        if (test && storeData.repeatPasswordErrorClass === 'login-error-active') {
+            storeData.repeatPasswordErrorClass = 'login-error';
+        }
+
+        if (storeData.formErrorClass === 'login-error-active') {
+            storeData.formErrorClass = 'login-error';
+        }
 
         SignupStore.set(storeData);
     });

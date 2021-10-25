@@ -10,7 +10,7 @@ import eventBus from "../dispatcher/eventBus.js";
 export default class ProfileView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
-        ProfileStore.subscribe(this.subcribtionCallback);
+        ProfileStore.subscribe(this.subcribtionCallback, this);
         this._template = this._createTmpl(this._data);
     }
 
@@ -55,17 +55,16 @@ export default class ProfileView extends ViewBase {
     }
 
     public unsubscribe() {
-        console.log("ahah");
         ProfileStore.unsubscribe(this.subcribtionCallback);
     }
 
-    private subcribtionCallback(data) {
-        this._data.cardData.userData.name = data.name;
-        console.log(data);
+    private subcribtionCallback(data, view) {
+        view._data.cardData.userData.name = data.name;
+        // console.log(data);
         // this._data.cardData.userData.age = data.age;
-        this._data.cardData.userData.description = data.description;
-        this._data.cardData.tags = data.tags;
-        this._template = this._createTmpl(this._data);
-        this.render();
+        view._data.cardData.userData.description = data.description;
+        view._data.cardData.tags = data.tags;
+        view._template = view._createTmpl(view._data);
+        view.render();
     }
 }
