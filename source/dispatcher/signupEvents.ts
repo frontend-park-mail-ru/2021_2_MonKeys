@@ -4,7 +4,8 @@ import { HTTPEMailNotFound, HTTPSuccess } from "../constants/HTTPStatus.js";
 import router from '../route/router.js';
 import { createProfile } from "../requests/profileRequest.js";
 import { SignupStore } from "../store/signupStore.js";
-
+import AuthStore from "../store/authStore.js";
+import { userStatus } from "../constants/userStatus.js";
 
 export const SignupEventRegister = () => {
     EventBus.register('signup:signup-button', (payload?: string) => {
@@ -52,6 +53,11 @@ export const SignupEventRegister = () => {
         const _password = _passwordInput.value.trim();
 
         //запрос
+        AuthStore.set(
+            {
+                loggedIn: userStatus.Signup
+            }
+        )
         createProfile(_email, _password)
             .then(
                 (response)=> {

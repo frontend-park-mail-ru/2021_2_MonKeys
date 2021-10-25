@@ -1,17 +1,18 @@
 
+import { userStatus } from "../constants/userStatus.js";
 import BaseStore from "./storeBase.js";
 
 
 export interface AuthData {
-    loggedIn: boolean;
+    loggedIn: number;
 }
 
 let AuthStore = new BaseStore<AuthData>()
 
 AuthStore.set( 
     { 
-        loggedIn: true
+        loggedIn: userStatus.notlLoggedIn
     }
 );
-
+console.log(AuthStore)
 export default AuthStore;

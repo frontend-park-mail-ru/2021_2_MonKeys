@@ -12,72 +12,73 @@ import LikesView from "../views/likesView.js";
 import FeedView from "../views/feedView.js";
 import ChatView from "../views/chatView.js"
 import PageNotFoundView from "../views/pageNotFoundView.js";
+import { userStatus } from '../constants/userStatus.js';
 
 export interface route {
     readonly name: string,
     readonly path: string,
     readonly view?,
-    readonly auth: boolean,
+    readonly auth: number,
 }
 
 export const Routes = {
     '/': {
         name: 'Drip',
-        auth: false,
+        auth: userStatus.notlLoggedIn,
         view: LoginView,
     },
     '/login': {
         name: 'Вход',
-        path: '/login',
+        path: userStatus.notlLoggedIn,
         auth: false,
         view: LoginView,
     },
     '/signup': {
         name: 'Регистрация',
-        path: '/signup',
+        path: userStatus.notlLoggedIn,
         auth: false,
         view: SignupView,
     },
     '/edit': {
         name: 'Редактирование',
         path: '/edit',
-        auth: true,
+        auth: userStatus.loggedIn,
         view: EditView,
     },
     '/signup-edit': {
         name: 'Редактирование',
         path: '/signup-edit',
-        auth: true,
+        auth: userStatus.Signup,
         view: SignupEditView,
     },
     '/feed': {
         name: 'Лента',
         path: '/feed',
-        auth: true,
+        auth: userStatus.loggedIn,
         view: FeedView,
     },
     '/matches': {
         name: 'Мэтчи',
         path: '/matches',
-        auth: true,
+        auth: userStatus.loggedIn,
         view: LikesView,
     },
     '/profile': {
         name: 'Профиль',
         path: '/profile',
-        auth: true,
+        auth: userStatus.loggedIn,
         view: ProfileView,
     },
     '/chat': {
         name: 'Чаты',
         path: '/chat',
-        auth: true,
+        auth: userStatus.loggedIn,
         view: ChatView,
     },
     '/404': {
         name: 'Страница не найдена',
         path: '/404',
-        auth: false,
+        auth: userStatus.loggedIn,
         view: PageNotFoundView,
     },
 }

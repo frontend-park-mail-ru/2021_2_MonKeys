@@ -116,7 +116,7 @@ export default class FeedView extends ViewBase {
 
   private subscribtionCallback(data, view) {
     const cardData = feedStore.get();
-    this.updateDataTemaplate(cardData);
-    this.render();
+    view.updateDataTemaplate(cardData);
+    view.render();
   }
 }

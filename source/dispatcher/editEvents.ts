@@ -11,22 +11,17 @@ import { tagsRequest } from "../requests/tagsRequest.js";
 import { emailRegExp, passwordRegExp } from "../constants/validation.js";
 import { EditStore } from "../store/editStore.js";
 import {validImgType} from "../validation/edit.js";
+import AuthStore from '../store/authStore.js';
+import { userStatus } from '../constants/userStatus.js';
 
 
 export const EditEventRegister = () => {
     EventBus.register('edit:save-button', (payload?: string) => {
-        // ТОТАЛЬНЕЙШИЙ КРИНЖ ЭТО ДОЛЖНО БЫТЬ ЧЕРЕЗ ВИРТУАЛДОМ ПОТОМ 
-
-        // НО ПОКА ТАК ААААААААААААААА
-        // ПОЛНЫЙ КРИНЖ АААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА
+       
         const _nameInput = document.getElementsByTagName('textarea')[0];
         const _dateInput = document.getElementsByTagName('input')[0];
         const _descriptionInput = document.getElementsByTagName('textarea')[1];
-        // const _tagsButtons = document.getElementsByClassName('checkbox-btn');
-        // const _tagsCheckboxes = document.getElementsByClassName('tag-checkbox');
-        // const _emailError = document.getElementsByName('error')[0];
-        // const _passwordError = document.getElementsByName('error')[1];
-        // const _formError = document.getElementsByName('error')[2];
+        
 
         const testName = _nameInput.value.length !== 0;
         const testDate = _dateInput.value.toString().length === dateLength;
@@ -64,13 +59,18 @@ export const EditEventRegister = () => {
                 tags.push(tag);
             }
         }
-
+        
         editProfile(name, date, description, tags)
             .then(
                 (response) => {
                     if (response.status === HTTPSuccess) {
                         if (response.data.status === HTTPSuccess) {
                             ProfileStore.set(response.data.body);
+                            AuthStore.set(
+                                {
+                                    loggedIn: userStatus.loggedIn
+                                }
+                            )
                             router.go('/profile');
                         } else if (response.data.status === HTTPNotFound) {
                             /// ????
