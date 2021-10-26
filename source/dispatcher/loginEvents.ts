@@ -50,7 +50,7 @@ export const LoginEventRegister = () => {
                     if (response.status === HTTPSuccess) {
                         if (response.data.status === HTTPSuccess) {
                             ProfileStore.set(response.data.body);
-                            // console.log(ProfileStore.get());
+                            EventBus.dispatch<string>('user:cookie-requests');
                             router.go('/feed');
                             // console.log(ProfileStore.get());
                             // feedRequest()

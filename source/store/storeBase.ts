@@ -25,6 +25,9 @@ export default class BaseStore<type>{
         this.data = data;
         this.broadcast();
     }
+    public clean() {
+        this.data = undefined;
+    }
     public broadcast() {
         this.observers.forEach((subscriber)=> {
             subscriber(this.data, this.view);

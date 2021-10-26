@@ -2,6 +2,7 @@ import { route, Routes } from './routes.js'
 import AuthStore from '../store/authStore.js'
 import { userStatus } from '../constants/userStatus.js';
 
+
 class Router {
     private routes: route[]
 
