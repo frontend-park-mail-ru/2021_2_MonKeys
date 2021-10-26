@@ -1,13 +1,20 @@
-node_modules
-
+# JetBrains settings
 .idea
 
+# Deplayoment keys
 ijia.me.crt
 ijia.me.key
+.keys/
 
-
+# VSCode project settings
 .vscode
 
+# Node.js 
 package-lock.json
+node_modules
 
+# Golang
 go.sum
+
+# Builded files
+static/js/**

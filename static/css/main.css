@@ -135,10 +135,11 @@ body {
 
 .login-error {
     color: red;
-    visibility: hidden;
+    display: none;
 }
 
 .login-error-active {
+    display: block;
     margin-top: 5%;
     width: 65%;
     padding-top: 3%;
@@ -288,6 +289,17 @@ div.center-container {
     border-radius: 35px;
 }
 
+.edit-button {
+    margin-top: 5%;
+    width: 70%;
+    height: 54px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(4px);
+    border-width: 0;
+    border-radius: 35px;
+}
+
 .login-button-text {
     padding-bottom: 10%;
     width: 134px;
@@ -335,20 +347,33 @@ a {
     transition: .3s ease-in-out;
 }
 
-.reg-link {
+.signup-link {
     font-family: 'Futura Now Headline Bold';
     padding-top: 5%;
     color: #ffffff;
     text-shadow: 1px 1px 1px #555555;
 }
 
-.reg-link:hover {
+.signup-link:hover {
     position: relative;
     top: 2px;
     left: 2px;
 }
 
-.back-link {
+.login-link {
+    font-family: 'Futura Now Headline Bold';
+    padding-top: 5%;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px #555555;
+}
+
+.login-link:hover {
+    position: relative;
+    top: 2px;
+    left: 2px;
+}
+
+/* .back-link {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -380,7 +405,7 @@ a {
     padding-top: 15px;
     height: 32px;
     width: 200px;
-}
+} */
 
 @media (min-width: 500px) {
     /* html {
@@ -781,6 +806,7 @@ a {
     -o-object-fit: cover;
     object-fit: cover;
     border-radius: 35px;
+   
 }
 
 .tags-container {
@@ -1248,30 +1274,30 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-family: 'Futura Now Headline Bold';
     color: #ffffff;
 }
- 
+
 /* Checked */
 .checkbox-btn input[type=checkbox]:checked + span {
     background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(17, 0, 255, 0.274) 0%, rgba(0, 165, 245, 0) 100%);
 	/* background: #ffe0a6; */
 }
- 
+
 /* Focus */
 .focused span {
 	box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
- 
+
 /* Hover */
 .checkbox-btn:hover {
 	color: #666;
 }
- 
+
 /* Active */
 .checkbox-btn input[type=checkbox]:active:not(:disabled) + span {
 	/* background: #d2c5ac; */
     background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(17, 0, 255, 0.274) 0%, rgba(0, 165, 245, 0) 100%);
 	color: #ffffff;
 }
- 
+
 /* Disabled */
 .checkbox-btn input[type=checkbox]:disabled + span {
 	background: #efefef;
@@ -1313,4 +1339,71 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding-left: 10px;
     padding-right: 10px;
     width: 324px;
+}
+
+.carousel-track {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.carousel-slide {
+    position: absolute;
+    height: 95%;
+    width: 95%;
+}
+.carousel-slide-expand {
+    position: absolute;
+    height: 80%;
+    width: 95%;
+}
+
+.carousel-button-right {
+    width: 30px;
+    height: 30px;
+    
+    position: absolute;
+    right: 10px;
+}
+
+
+.carousel-button-left {
+    width: 30px;
+    height: 30px;
+  
+    position: absolute;
+    left: 10px;
+}
+
+.side-big{
+    top: 50%
+}
+
+.side-small{
+    top: 20%;
+}
+.carousel-button-nav {
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    left: 0px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.carousel-button-nav.current-slide {
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    left: 0px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.carousel-nav {
+    position: absolute;
+    top: 20px;
+    width: 95%;
+    display: flex;
+    justify-content: center;
 }
