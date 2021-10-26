@@ -4,6 +4,7 @@ import { logoutRequest } from "../requests/sessionRequest.js"
 import { HTTPNotFound, HTTPSuccess } from "../constants/HTTPStatus.js";
 import AuthStore from "../store/authStore.js";
 import { userStatus } from "../constants/userStatus.js";
+import { ProfileStore } from "../store/profileStore.js";
 
 export const ProfileEventsRegister = () =>{
     EventBus.register('profile:edit-button',()=>{
@@ -21,6 +22,7 @@ export const ProfileEventsRegister = () =>{
                 (response) => {
                     if (response.status === HTTPSuccess) {
                         if (response.data.status === HTTPSuccess) {
+                            ProfileStore.clean();
                             router.go('/login');
                         } else if (response.data.status === HTTPNotFound) {
                             /// ????
