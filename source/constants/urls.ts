@@ -5,7 +5,7 @@ const sessionURL = '/api/v1/session';
 const feedURL = '/api/v1/feed';
 const likesURL = '/api/v1/likes';
 const matchURL = '/api/v1/match';
-const profilePhotoURL = '/api/v1/profilePhoto';
+const profilePhotoURL = '/api/v1/profile/photo';
 
 export {
   serverAddress,
