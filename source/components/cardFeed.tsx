@@ -1,5 +1,6 @@
 import { MonkeysVirtualDOM } from "../virtualDOM/virtualDOM.js";
 import { IconButton } from "./iconButton.js";
+import { ImgCarousel } from "./imgCarousel.js";
 
 export interface CardFeedProps {
   userData: any;
@@ -7,14 +8,11 @@ export interface CardFeedProps {
 }
 
 export const CardFeed = (props: CardFeedProps) => {
-  console.log(props.userData.imgSrc.values());
+  
   return (
     <div class="card">
         <div class="card-main">
-            <img src={props.userData.imgSrc.forEach(element => {
-              
-              return element
-            })} class="profile-image"/>
+            {ImgCarousel(props.userData.imgSrc,false)}
             <div class="bottom-panel">
                 <div class="name-container">
                     <div class="name">{props.userData.name}</div>

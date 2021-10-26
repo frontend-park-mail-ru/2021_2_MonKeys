@@ -204,7 +204,7 @@ export const EditEventRegister = () => {
 
                     // изменения стора должно повлечь изменение вьюхи
                     let userData = ProfileStore.get();
-                    userData.imgSrc.add(respons.data.imgPath);
+                    userData.imgSrc.push(respons.data.imgPath);
                     ProfileStore.set(userData);
                 })
                 .catch((error) => {

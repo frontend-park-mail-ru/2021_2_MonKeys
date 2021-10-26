@@ -11,7 +11,7 @@ let AuthStore = new BaseStore<AuthData>()
 
 AuthStore.set( 
     { 
-        loggedIn: userStatus.notlLoggedIn
+        loggedIn: userStatus.loggedIn
     }
 );
 console.log(AuthStore)

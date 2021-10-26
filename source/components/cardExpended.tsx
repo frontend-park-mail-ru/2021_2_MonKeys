@@ -1,6 +1,7 @@
 import { MonkeysVirtualDOM } from "../virtualDOM/virtualDOM.js";
 import { Tag } from "./tag.js";
 import { IconButton } from "./iconButton.js";
+import { ImgCarousel } from "./imgCarousel.js";
 
 export interface CardExpendedProps {
   userData: any;
@@ -41,10 +42,7 @@ export const CardExpended = (props: CardExpendedProps) => {
   return (
     <div id="cardID" class="card-expand">
         <div id="cardMainID" class="card-main-profile">
-            {/* <img src={props.userData.imgSrc.forEach(element => {
-              return element
-            })} */}
-                {/* class="card-el profile-image-expand" /> */}
+            {ImgCarousel(props.userData.imgSrc,true)}
             <div class="name-container">
                 <div class="name">{props.userData.name}</div>
                 <div class="age">{props.userData.age}</div>

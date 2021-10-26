@@ -14,6 +14,11 @@ class Router {
             window.history.pushState({},'',route);
             
         }
+        AuthStore.set( 
+            { 
+                loggedIn: userStatus.loggedIn
+            }
+        );
         const $root = document.getElementById('app');
         const location = route;
         console.log('dsdsdsds')
