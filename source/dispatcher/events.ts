@@ -1,31 +1,51 @@
-import EventBus from "./eventBus.js"
-import { loginRequest } from "../requests/sessionRequest.js";
+
+
 import router from '../route/router.js';
-import { emailRegExp, passwordRegExp } from "../constants/validation.js";
+
 import { HTTPEMailNotFound, HTTPNotFound, HTTPSuccess } from "../constants/HTTPStatus.js";
 import { ProfileStore } from "../store/profileStore.js";
 import { feedRequest } from "../requests/feedRequest.js";
 import { getProfile } from "../requests/profileRequest.js";
-// import { cookieRequest } from "../requests/sessionRequest.js";
+
 import { LoginEventRegister } from "./loginEvents.js";
 import { SignupEventRegister } from "./signupEvents.js";
-import { SignupEditEventRegister } from "./editEvents.js";
+import { EditEventRegister } from "./editEvents.js";
 import { ProfileEventsRegister } from "./profileEvents.js";
 import { LikesEventsRegister } from "./likesEvents.js";
 import { FeedEventsRegister } from "./feedEvents.js";
 import { ChatEventsRegister } from "./chatEvents.js";
 import eventBus from "./eventBus.js";
+import AuthStore from "../store/authStore.js";
+import { userStatus } from '../constants/userStatus.js';
 const $root = document.getElementById('app');
 
 export const InitBus = () => {
-    eventBus.register('user:logged-in', (payload?:string) => {
+    eventBus.register('user:cookie-requests', (payload?:string) => {
+        // 1) получить профиль 
+        // 2) получить мэтчи
+        // 3) получить ленту
+        // ... получить чаты 
         getProfile()
             .then(
                 (response) => {
                     if (response.status === HTTPSuccess) {
                         if (response.data.status === HTTPSuccess) {
+                            if(response.data.body.name){
+                                AuthStore.set(
+                                    {
+                                        loggedIn: userStatus.loggedIn
+                                    }
+                                )
+                            } else {
+                                AuthStore.set(
+                                    {
+                                        loggedIn: userStatus.Signup
+                                    }
+                                )
+                            }
+                            console.log(response);
                             ProfileStore.set(response.data.body);
-                            router.go('/matches');
+                            router.go('/feed');
                         } else {
                             console.log('error');
                         }
@@ -40,11 +60,10 @@ export const InitBus = () => {
     LoginEventRegister();
     // -------------------------signup----------------------------
     SignupEventRegister();
-    // -------------------edit-after-signup-----------------------
 
-    SignupEditEventRegister();
-    // ---------------------------edit----------------------------
-    
+    // --------------------------edit-----------------------------
+    EditEventRegister();
+
      // ----------------------------profile-----------------------
     ProfileEventsRegister();
     // ----------------------likes--------------------------------

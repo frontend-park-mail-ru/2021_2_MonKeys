@@ -5,24 +5,14 @@ import { EditForm } from "../components/editForm.js";
 import { EditStore } from "../store/editStore.js";
 import { ProfileStore } from "../store/profileStore.js";
 import EventBus from "../dispatcher/eventBus.js"
-import { ErrorMsg } from "../components/errorMsg.js";
-import { errorEmailMsg, errorPasswordMsg, errorRepeatPasswordMsg, errorSignupFormMsg } from "../constants/errorMsg.js";
+import { errorEditFormMsg } from "../constants/errorMsg.js";
 
 
 export default class EditView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
-        EditStore.subscribe((data) => {
-            this._data.editForm.fields.name.class = data.nameFieldClass;
-            this._data.editForm.fields.birthDate.class = data.birthDateFieldClass;
-            this._data.editForm.tags = data.tags;
-            this._template = this._createTmpl(this._data);
-            // console.log(this._data);
-            // window.onload = ()=>{ EventBus.dispatch<string>('signup-edit:load'); };
-            this.render();
-        })
+        EditStore.subscribe(this.subcribtionCallback, this);
         this._template = this._createTmpl(this._data);
-        // window.onload = ()=>{ EventBus.dispatch<string>('signup-edit:load'); };
     }
 
     _data = {
@@ -34,6 +24,7 @@ export default class EditView extends ViewBase {
                     value: ProfileStore.get().name,
                     name: 'userName',
                     class: EditStore.get().nameFieldClass,
+                    oninput: () => { EventBus.dispatch<string>('edit:name-input'); },
                 },
                 'birthDate': {
                     tag: 'input',
@@ -41,6 +32,7 @@ export default class EditView extends ViewBase {
                     value: ProfileStore.get().date,
                     class: EditStore.get().birthDateFieldClass,
                     name: 'birthDate',
+                    oninput: () => { EventBus.dispatch<string>('edit:birth-date-input'); },
                 },
                 'description': {
                     tag: 'textarea',
@@ -52,12 +44,11 @@ export default class EditView extends ViewBase {
             },
             'tags': EditStore.get().tags,
             'buttons': {
-                // как то сделать на лоад страницы
                 'tagsButton': {
                     type: 'button',
                     text: 'tags',
                     clas: '',
-                    onclick: ()=>{ EventBus.dispatch<string>('signup-edit:load'); },
+                    onclick: ()=>{ EventBus.dispatch<string>('edit:open-tags'); },
                 },
                 'imgAddButton': {
                     class: 'add',
@@ -67,8 +58,14 @@ export default class EditView extends ViewBase {
                     type: 'button',
                     text: 'Сохранить',
                     class: 'edit',
-                    onclick: ()=>{ EventBus.dispatch<string>('signup-edit:save-button'); },
+                    onclick: ()=>{ EventBus.dispatch<string>('edit:save-button'); },
                 }
+            },
+            'errorMsgs': {
+                'formError': {
+                    text: errorEditFormMsg,
+                    class: EditStore.get().formErrorClass,
+                },
             },
         },
         'tapbar': {
@@ -83,5 +80,22 @@ export default class EditView extends ViewBase {
                 {Tapbar(this._data.tapbar)}
             </div>
         );
+    }
+
+    public unsubscribe() {
+        EditStore.unsubscribe(this.subcribtionCallback);
+    }
+
+    private subcribtionCallback(data, view) {
+        view._data.editForm.fields.name.class = data.nameFieldClass;
+        view._data.editForm.fields.birthDate.class = data.birthDateFieldClass;
+        console.log(data);
+        view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
+        view._data.editForm.tags = data.tags;
+        view._data.editForm.fields.name.value = ProfileStore.get().name;
+        view._data.editForm.fields.birthDate.value = ProfileStore.get().date;
+        view._data.editForm.fields.description.value = ProfileStore.get().description;
+        view._template = view._createTmpl(view._data);
+        view.render();
     }
 }

@@ -48,6 +48,7 @@ export const FormField = (props: formFieldProps) => {
           field = (
             <textarea
               oninput={props.oninput}
+              onfocusout={props.onfocusout}
               name={props.name}
               placeholder={props.placeholder}
               class={props.class}
@@ -57,6 +58,7 @@ export const FormField = (props: formFieldProps) => {
           field = (
             <textarea
               oninput={props.oninput}
+              onfocusout={props.onfocusout}
               name={props.name}
               placeholder={props.placeholder}
               class={props.class}

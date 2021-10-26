@@ -29,7 +29,8 @@ feedStore.set(
             age: "12",
             date: "01.01.2000",
             description: "mda kone4no",
-            imgSrc: ['img/stare-dont-blink.gif'],
+            imgSrc: ['img/drake-peeking.gif'],
+            tags: new Set(['Yeezy', 'Wyoming'])
         },
     ],
     counter: 0,

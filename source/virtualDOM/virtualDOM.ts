@@ -109,7 +109,7 @@ export namespace MonkeysVirtualDOM {
     }
     updateElement($rootElement, currNode, nextNode, index);
     
-    console.log(manipulationMapStack);
+    // console.log(manipulationMapStack);
 
     manipulationMapStack.map((manipulation) => {
       switch (manipulation.method){
@@ -127,6 +127,11 @@ export namespace MonkeysVirtualDOM {
       }
         case 'updateProps':{
           manipulation.oldChildVirtual.props && Object.keys(manipulation.oldChildVirtual.props).forEach((key)=>{
+            if(key==='route'){
+              manipulation.oldChild.removeEventListener('click',()=> {
+                router.go( manipulation.oldChildVirtual.props[key]);
+              })
+            }
             if(/^on/.test(key)) {
               manipulation.oldChild.removeEventListener(key.slice(2), manipulation.oldChildVirtual.props[key]);
             } else {
@@ -134,6 +139,11 @@ export namespace MonkeysVirtualDOM {
             }
           })
           manipulation.newChild.props && Object.keys(manipulation.newChild.props).forEach((key)=>{
+            if(key==='route'){
+              manipulation.oldChild.addEventListener('click',()=> {
+                router.go(manipulation.newChild.props[key]);
+              })
+            }
             if(/^on/.test(key)){
               manipulation.oldChild.addEventListener(key.slice(2), manipulation.newChild.props[key]);
             } else {

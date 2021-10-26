@@ -11,7 +11,6 @@ export const TagButton = (props: tagButtonProps) => {
     if (props.isActive === undefined) {
         tag = <input onchange={props.onchange} type="checkbox" class="tag-checkbox"></input>
     } else {
-        console.log(props.tagText, props.isActive);
         tag = (props.isActive)
         ? <input onchange={props.onchange} type="checkbox" class="tag-checkbox" checked="checked"></input>
         : <input onchange={props.onchange} type="checkbox" class="tag-checkbox"></input>

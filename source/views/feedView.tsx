@@ -13,16 +13,12 @@ export default class FeedView extends ViewBase {
     super(parent);
     const cardData = feedStore.get();
     this.updateDataTemaplate(cardData);
-    feedStore.subscribe((data) => {
-      const cardData = feedStore.get();
-      this.updateDataTemaplate(cardData);
-      this.render();
-    });
+    feedStore.subscribe(this.subscribtionCallback, this);
   }
   private updateDataTemaplate(cardData){
     if (!cardData.outOfCards) {
         this._data.cardData.userData = cardData.profiles[cardData.counter];
-        console.log(cardData.profiles[cardData.counter]);
+
         this._template = this._createTmpl(this._data, cardData.expanded);
       } else {
         this._template = (
@@ -112,5 +108,15 @@ export default class FeedView extends ViewBase {
         </div>
       );
     }
+  }
+
+  public unsubscribe() {
+    feedStore.unsubscribe(this.subscribtionCallback);
+  }
+
+  private subscribtionCallback(data, view) {
+    const cardData = feedStore.get();
+    view.updateDataTemaplate(cardData);
+    view.render();
   }
 }
