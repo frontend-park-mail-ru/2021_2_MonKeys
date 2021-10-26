@@ -193,7 +193,9 @@ export const EditEventRegister = () => {
       if (files.length !== 0) {
           const photo = files[0];
 
+          console.log("1");
           if (validImgType(photo)) {
+            console.log("2");
               addPhotoToProfile(photo)
                 .then((response) => {
                     console.log(response);

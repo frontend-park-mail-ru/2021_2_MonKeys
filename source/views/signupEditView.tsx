@@ -45,10 +45,8 @@ export default class SignupEditView extends ViewBase {
                     onclick: ()=>{ EventBus.dispatch<string>('edit:open-tags'); },
                 },
                 'imgAddButton': {
-                    type: 'button',
-                    text: '',
                     class: 'add',
-                    onclick: ()=>{},
+                    onchange: (event)=>{ EventBus.dispatch<string>('editProfile:img-input', event); },
                 },
                 'saveButton': {
                     type: 'button',
