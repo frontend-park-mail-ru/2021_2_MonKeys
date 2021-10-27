@@ -17,8 +17,8 @@ class Router {
         }
         const $root = document.getElementById('app');
         const location = route;
-        console.log('dsdsdsds')
-        console.log(AuthStore.get().loggedIn);
+        // console.log('dsdsdsds')
+        // console.log(AuthStore.get().loggedIn);
         if(this.routes[location]){
             if(this.routes[location].auth === AuthStore.get().loggedIn){
                 const currentView = new this.routes[location].view($root);

@@ -14,5 +14,5 @@ AuthStore.set(
         loggedIn: userStatus.notlLoggedIn
     }
 );
-console.log(AuthStore)
+// console.log(AuthStore)
 export default AuthStore;
