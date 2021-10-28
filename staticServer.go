@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -16,14 +15,9 @@ type spaHandler struct {
 }
 
 func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r.URL.Path)
-	if r.URL.Path == "/js/*" {
-		fmt.Println("!!!!!!!!!!!!")
-		r.URL.Path = "/VirtualDOM/VirtualDOM.js"
-	}
+	
 	path, err := filepath.Abs(r.URL.Path)
 
-	fmt.Println(path, err)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -49,7 +43,7 @@ func main() {
 
 	srv := &http.Server{
 		Handler:      mux,
-		Addr:         ":80",
+		Addr:         ":8080",
 		WriteTimeout: http.DefaultClient.Timeout,
 		ReadTimeout:  http.DefaultClient.Timeout,
 	}

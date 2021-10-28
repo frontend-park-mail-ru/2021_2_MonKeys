@@ -10,7 +10,7 @@ export interface FeedData {
     expanded: boolean;
 }
 
-let feedStore = new BaseStore<FeedData>();
+const feedStore = new BaseStore<FeedData>();
 
 feedStore.set({
     profiles: [

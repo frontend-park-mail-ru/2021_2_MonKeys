@@ -10,12 +10,12 @@ export const FeedEventsRegister = () => {
         EventBus.dispatch('feed:reaction', reactions.dislike);
     });
     EventBus.register('feed:expand-button', () => {
-        let data = feedStore.get();
+        const data = feedStore.get();
         data.expanded = true;
         feedStore.set(data);
     });
     EventBus.register('feed:shrink-button', () => {
-        let data = feedStore.get();
+        const data = feedStore.get();
         data.expanded = false;
         feedStore.set(data);
     });
@@ -32,7 +32,7 @@ export const FeedEventsRegister = () => {
         // send req w/ reacID
 
         // console.log(reactionID);
-        let data = feedStore.get();
+        const data = feedStore.get();
         // console.log(data);
         data.counter++;
         if (data.profiles[data.counter]) {

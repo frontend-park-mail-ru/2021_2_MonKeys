@@ -1,6 +1,6 @@
 import router from '../route/router.js';
 
-import { HTTPEMailNotFound, HTTPNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
+import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileStore } from '../store/profileStore.js';
 import { feedRequest } from '../requests/feedRequest.js';
 import { getProfile } from '../requests/profileRequest.js';
@@ -17,10 +17,9 @@ import eventBus from './eventBus.js';
 import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
 import feedStore from '../store/feedStore.js';
-const $root = document.getElementById('app');
 
 export const InitBus = () => {
-    eventBus.register('user:cookie-requests', (payload?: string) => {
+    eventBus.register('user:cookie-requests', () => {
         // 1) получить профиль
         // 2) получить мэтчи
         // 3) получить ленту
@@ -41,7 +40,7 @@ export const InitBus = () => {
                     ProfileStore.set(response.data.body);
                     feedRequest().then((feedResponse) => {
                         console.log(feedResponse);
-                        let profileData = feedStore.get();
+                        const profileData = feedStore.get();
                         profileData.profiles = feedResponse.data.body;
                         feedStore.set(profileData);
                         router.go('/feed');

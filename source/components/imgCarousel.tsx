@@ -2,7 +2,7 @@ import eventBus from '../dispatcher/eventBus.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { IconButton } from './iconButton.js';
 
-let LButtonProps = {
+const LButtonProps = {
     type: 'button',
     class: 'carousel-button-left',
     src: 'icons/button_previous_black.svg',
@@ -11,7 +11,7 @@ let LButtonProps = {
     },
 };
 
-let RButtonProps = {
+const RButtonProps = {
     type: 'button',
     class: 'carousel-button-right',
     src: 'icons/button_next_black.svg',
@@ -24,14 +24,13 @@ const NavButtonProps = {
     type: 'button',
     class: 'carousel-button-nav',
     src: 'icons/button_selector_deselected.svg',
-    onclick: () => {},
 };
 
 const NavButtonPropsSelected = {
     type: 'button',
     class: 'carousel-button-nav current-slide',
     src: 'icons/button_selector_deselected.svg',
-    onclick: () => {},
+   
 };
 
 declare global {

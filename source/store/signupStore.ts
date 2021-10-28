@@ -10,7 +10,7 @@ export interface SignupData {
     formErrorClass: string;
 }
 
-let SignupStore = new BaseStore<SignupData>();
+const SignupStore = new BaseStore<SignupData>();
 
 const initData = {
     emailFieldClass: 'form-field-valid',

@@ -5,7 +5,7 @@ export interface AuthData {
     loggedIn: number;
 }
 
-let AuthStore = new BaseStore<AuthData>();
+const AuthStore = new BaseStore<AuthData>();
 
 AuthStore.set({
     loggedIn: userStatus.loggedIn,

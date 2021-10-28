@@ -1,5 +1,4 @@
 import EventBus from './eventBus.js';
-import feedStore from '../store/feedStore.js';
 
 export const CarouselEventsRegister = () => {
     EventBus.register('carousel:next', () => {

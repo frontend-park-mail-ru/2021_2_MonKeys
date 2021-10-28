@@ -20,7 +20,7 @@ export const SignupEventRegister = () => {
         const testPassword = passwordRegExp.test(_passwordInput.value);
         const testRepeatPassword = _passwordInput.value === _repeatPasswordInput.value;
 
-        let storeData = SignupStore.get();
+        const storeData = SignupStore.get();
 
         if (!testEmail) {
             storeData.emailFieldClass = 'form-field-novalid';
@@ -77,7 +77,7 @@ export const SignupEventRegister = () => {
     EventBus.register('signup:email-input', (payload?: string) => {
         const _emailInput = document.getElementsByTagName('input')[0];
 
-        let storeData = SignupStore.get();
+        const storeData = SignupStore.get();
 
         const test = _emailInput.value.length === 0 || emailRegExp.test(_emailInput.value);
         test ? (storeData.emailFieldClass = 'form-field-valid') : (storeData.emailFieldClass = 'form-field-novalid');
@@ -96,7 +96,7 @@ export const SignupEventRegister = () => {
     EventBus.register('signup:email-focusout', (payload?: string) => {
         const _emailInput = document.getElementsByTagName('input')[0];
 
-        let storeData = SignupStore.get();
+        const storeData = SignupStore.get();
 
         const test = _emailInput.value.length === 0 || emailRegExp.test(_emailInput.value);
         if (test) {
@@ -113,7 +113,7 @@ export const SignupEventRegister = () => {
     EventBus.register('signup:password-input', (payload?: string) => {
         const _passwordInput = document.getElementsByTagName('input')[1];
 
-        let storeData = SignupStore.get();
+        const storeData = SignupStore.get();
 
         const test = _passwordInput.value.length === 0 || passwordRegExp.test(_passwordInput.value);
         test
@@ -134,7 +134,7 @@ export const SignupEventRegister = () => {
     EventBus.register('signup:password-focusout', (payload?: string) => {
         const _passwordInput = document.getElementsByTagName('input')[1];
 
-        let storeData = SignupStore.get();
+        const storeData = SignupStore.get();
 
         const test = _passwordInput.value.length === 0 || passwordRegExp.test(_passwordInput.value);
         if (test) {
@@ -152,7 +152,7 @@ export const SignupEventRegister = () => {
         const _passwordInput = document.getElementsByTagName('input')[1];
         const _repeatPasswordInput = document.getElementsByTagName('input')[2];
 
-        let storeData = SignupStore.get();
+        const storeData = SignupStore.get();
 
         const test = _passwordInput.value === _repeatPasswordInput.value;
         test
@@ -175,7 +175,7 @@ export const SignupEventRegister = () => {
         const _repeatPasswordInput = document.getElementsByTagName('input')[2];
         const _repeatPasswordError = document.getElementsByName('error')[2];
 
-        let storeData = SignupStore.get();
+        const storeData = SignupStore.get();
 
         const test = _passwordInput.value === _repeatPasswordInput.value;
         if (test) {

@@ -4,18 +4,17 @@ import { HTTPNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileStore } from '../store/profileStore.js';
 import router from '../route/router.js';
 import { addPhotoToProfile } from '../requests/profilePhotoRequest.js';
-import { loginRequest } from '../requests/sessionRequest.js';
-import { feedRequest } from '../requests/feedRequest.js';
+
 import { editProfile } from '../requests/profileRequest.js';
 import { tagsRequest } from '../requests/tagsRequest.js';
-import { emailRegExp, passwordRegExp } from '../constants/validation.js';
+
 import { EditStore } from '../store/editStore.js';
 import { validImgType } from '../validation/edit.js';
 import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
 
 export const EditEventRegister = () => {
-    EventBus.register('edit:save-button', (payload?: string) => {
+    EventBus.register('edit:save-button', () => {
         const _nameInput = document.getElementsByTagName('textarea')[0];
         const _dateInput = document.getElementsByTagName('input')[0];
         const _descriptionInput = document.getElementsByTagName('textarea')[1];
@@ -23,7 +22,7 @@ export const EditEventRegister = () => {
         const testName = _nameInput.value.length !== 0;
         const testDate = _dateInput.value.toString().length === dateLength;
 
-        let storeData = EditStore.get();
+        const storeData = EditStore.get();
 
         if (!testName) {
             storeData.nameFieldClass = 'form-field-edit-novalid text-without-icon';
@@ -49,7 +48,7 @@ export const EditEventRegister = () => {
         const name = _nameInput.value.trim();
         const date = _dateInput.value.trim();
         const description = _descriptionInput.value.trim();
-        let tags = new Array<string>();
+        const tags = new Array<string>();
         if (ProfileStore.get() !== undefined && ProfileStore.get().tags !== undefined) {
             const userTags = ProfileStore.get().tags;
             for (const tag of userTags) {
@@ -78,12 +77,12 @@ export const EditEventRegister = () => {
             .catch((error) => console.log(error));
     });
 
-    EventBus.register('edit:open-tags', (payload?: string) => {
+    EventBus.register('edit:open-tags', () => {
         tagsRequest()
             .then((response) => {
                 if (response.status === HTTPSuccess) {
                     if (response.data.status === HTTPSuccess) {
-                        let storeData = EditStore.get();
+                        const storeData = EditStore.get();
                         storeData.tags = response.data.body;
                         Object.keys(storeData.tags.allTags).map(
                             (item) =>
@@ -109,7 +108,7 @@ export const EditEventRegister = () => {
                     if (userTags === undefined) {
                         return;
                     }
-                    let storeData = EditStore.get();
+                    const storeData = EditStore.get();
                     for (const tag of userTags) {
                         for (let j = 0; j < response.data.body.tagsCount; j++) {
                             if (tag === storeData.tags.allTags[j].tagText) {
@@ -124,8 +123,8 @@ export const EditEventRegister = () => {
     });
 
     EventBus.register('edit:change-tag-condition', (payload?: string) => {
-        let userData = ProfileStore.get();
-        let tagsSet = new Set<string>();
+        const userData = ProfileStore.get();
+        const tagsSet = new Set<string>();
         if (userData && userData.tags) {
             for (const userTag of userData.tags) {
                 tagsSet.add(userTag);
@@ -149,10 +148,10 @@ export const EditEventRegister = () => {
         }
     });
 
-    EventBus.register('edit:name-input', (payload?: string) => {
+    EventBus.register('edit:name-input', () => {
         const _nameInput = document.getElementsByTagName('textarea')[0];
 
-        let storeData = EditStore.get();
+        const storeData = EditStore.get();
 
         const test = _nameInput.value.length !== 0;
 
@@ -167,10 +166,10 @@ export const EditEventRegister = () => {
         EditStore.set(storeData);
     });
 
-    EventBus.register('edit:birth-date-input', (payload?: string) => {
+    EventBus.register('edit:birth-date-input', () => {
         const _dateInput = document.getElementsByTagName('input')[0];
 
-        let storeData = EditStore.get();
+        const storeData = EditStore.get();
 
         const test = _dateInput.value.toString().length === dateLength;
         test
@@ -199,7 +198,7 @@ export const EditEventRegister = () => {
                         }
 
                         // изменения стора должно повлечь изменение вьюхи
-                        let userData = ProfileStore.get();
+                        const userData = ProfileStore.get();
                         userData.imgSrc.push(respons.data.imgPath);
                         ProfileStore.set(userData);
                     })

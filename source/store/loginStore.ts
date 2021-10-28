@@ -8,7 +8,7 @@ export interface LoginData {
     formErrorClass: string;
 }
 
-let LoginStore = new BaseStore<LoginData>();
+const LoginStore = new BaseStore<LoginData>();
 
 const initData = {
     emailFieldClass: 'form-field-valid',

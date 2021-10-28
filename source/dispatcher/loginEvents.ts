@@ -19,7 +19,7 @@ export const LoginEventRegister = () => {
         const testEmail = emailRegExp.test(_emailInput.value);
         const testPassword = passwordRegExp.test(_passwordInput.value);
 
-        let storeData = LoginStore.get();
+        const storeData = LoginStore.get();
 
         if (!testEmail) {
             storeData.emailFieldClass = 'form-field-novalid';
@@ -74,7 +74,7 @@ export const LoginEventRegister = () => {
     EventBus.register('login:email-input', (payload?: string) => {
         const _emailInput = document.getElementsByTagName('input')[0];
 
-        let storeData = LoginStore.get();
+        const storeData = LoginStore.get();
 
         const test = _emailInput.value.length === 0 || emailRegExp.test(_emailInput.value);
 
@@ -94,7 +94,7 @@ export const LoginEventRegister = () => {
     EventBus.register('login:email-focusout', (payload?: string) => {
         const _emailInput = document.getElementsByTagName('input')[0];
 
-        let storeData = LoginStore.get();
+        const storeData = LoginStore.get();
 
         const test = _emailInput.value.length === 0 || emailRegExp.test(_emailInput.value);
         if (test) {
@@ -111,7 +111,7 @@ export const LoginEventRegister = () => {
     EventBus.register('login:password-input', (payload?: string) => {
         const _passwordInput = document.getElementsByTagName('input')[1];
 
-        let storeData = LoginStore.get();
+        const storeData = LoginStore.get();
 
         const test = _passwordInput.value.length === 0 || passwordRegExp.test(_passwordInput.value);
         test
@@ -132,7 +132,7 @@ export const LoginEventRegister = () => {
     EventBus.register('login:password-focusout', (payload?: string) => {
         const _passwordInput = document.getElementsByTagName('input')[1];
 
-        let storeData = LoginStore.get();
+        const storeData = LoginStore.get();
 
         const test = _passwordInput.value.length === 0 || passwordRegExp.test(_passwordInput.value);
         if (test) {

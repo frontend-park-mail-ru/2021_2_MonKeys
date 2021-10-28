@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import router from '../route/router.js';
 
 export namespace MonkeysVirtualDOM {
-    export type Props = { [key: string]: any };
+    export type Props = { [key: string]: string | Function };
     export const jsxFactory = (
         type: string | Function,
         props: Props,
