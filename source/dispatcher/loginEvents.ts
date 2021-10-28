@@ -6,6 +6,7 @@ import router from "../route/router.js";
 import { loginRequest } from "../requests/sessionRequest.js";
 import { feedRequest } from "../requests/feedRequest.js";
 import { LoginStore } from "../store/loginStore.js";
+import feedStore from "../store/feedStore.js";
 
 export const LoginEventRegister = () => {
   EventBus.register("login:login-button", (payload?: string) => {
@@ -48,14 +49,16 @@ export const LoginEventRegister = () => {
       .then((response) => {
         if (response.status === HTTPSuccess) {
           if (response.data.status === HTTPSuccess) {
-            ProfileStore.set(response.data.body);
+            // ProfileStore.set(response.data.body);
             EventBus.dispatch<string>("user:cookie-requests");
             // router.go('/feed');
-            feedRequest().then((feedResponse) => {
-              console.log(1);
-              console.log(feedResponse);
-              router.go("/feed");
-            });
+            // feedRequest().then((feedResponse) => {
+            //   console.log(feedResponse);
+            //   let profileData = feedStore.get();
+            //   profileData.profiles = feedResponse.data.body;
+            //   feedStore.set(profileData);
+            //   router.go("/feed");
+            // });
           } else if (response.data.status === HTTPNotFound) {
             storeData.formErrorClass = "login-error-active";
             LoginStore.set(storeData);

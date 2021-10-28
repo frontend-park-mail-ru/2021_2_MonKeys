@@ -19,6 +19,7 @@ import { ChatEventsRegister } from "./chatEvents.js";
 import eventBus from "./eventBus.js";
 import AuthStore from "../store/authStore.js";
 import { userStatus } from "../constants/userStatus.js";
+import feedStore from "../store/feedStore.js";
 const $root = document.getElementById("app");
 
 export const InitBus = () => {
@@ -41,7 +42,14 @@ export const InitBus = () => {
           }
           // console.log(response);
           ProfileStore.set(response.data.body);
-          router.go("/feed");
+          feedRequest().then((feedResponse) => {
+            console.log(feedResponse);
+            let profileData = feedStore.get();
+            profileData.profiles = feedResponse.data.body;
+            feedStore.set(profileData);
+            router.go("/feed");
+          });
+          //   router.go("/feed");
         } else {
           console.log("error");
         }

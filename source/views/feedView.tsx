@@ -18,7 +18,6 @@ export default class FeedView extends ViewBase {
   private updateDataTemaplate(cardData){
     if (!cardData.outOfCards) {
         this._data.cardData.userData = cardData.profiles[cardData.counter];
-
         this._template = this._createTmpl(this._data, cardData.expanded);
       } else {
         this._template = (
@@ -33,7 +32,7 @@ export default class FeedView extends ViewBase {
   }
   _data = {
     cardData: {
-      userData: {},
+      userData: feedStore.get().profiles,
       buttons: {
         dislikeButton: {
           type: "button",
