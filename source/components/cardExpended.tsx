@@ -32,7 +32,7 @@ export const CardExpended = (props: CardExpendedProps) => {
     return (
         <div id='cardID' class='card-expand'>
             <div id='cardMainID' class='card-main-profile'>
-                {ImgCarousel(props.userData.imgSrc, true)}
+                {/*ImgCarousel(props.userData.imgSrc, true)*/}
                 <div class='name-container'>
                     <div class='name'>{props.userData.name}</div>
                     <div class='age'>{props.userData.age}</div>
