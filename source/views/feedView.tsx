@@ -7,6 +7,7 @@ import { CardFeed } from '../components/cardFeed.js';
 import { CardExpended } from '../components/cardExpended.js';
 import feedStore from '../store/feedStore.js';
 import eventBus from '../dispatcher/eventBus.js';
+import { OutOfCards } from '../components/outOfCards.js';
 
 export default class FeedView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -21,10 +22,8 @@ export default class FeedView extends ViewBase {
             this._template = this._createTmpl(this._data, cardData.expanded);
         } else {
             this._template = (
-                <div>
-                    <div class='card-container'>
-                        <h1>You are out of cards</h1>
-                    </div>
+                <div class='card-container'>
+                    {OutOfCards()}
                     {Tapbar(this._data.tapbar)}
                 </div>
             );

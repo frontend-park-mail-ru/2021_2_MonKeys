@@ -10,7 +10,8 @@
         "prettier": "prettier --write \"source/**/*.+(js|jsx|ts|tsx|json)\"",
         "prettier-scss": "prettier --write --tab-width 2 \"scss/**/*.+(scss)\"",
         "deploy": "bash scripts/docker-nginx-ssl.sh",
-        "serve-nginx": "bash scripts/run-nginx.sh"
+        "serve-nginx": "bash scripts/run-nginx.sh",
+        "rollup": "npx rollup --config rollup.config.js --cofigPlugin typescript"
     },
     "repository": {
         "type": "git",
@@ -23,6 +24,7 @@
     },
     "homepage": "https://github.com/frontend-park-mail-ru/2021_2_MonKeys#readme",
     "devDependencies": {
+        "@rollup/plugin-typescript": "^8.3.0",
         "@typescript-eslint/eslint-plugin": "^5.1.0",
         "@typescript-eslint/parser": "^5.1.0",
         "eslint": "^7.32.0",
@@ -32,13 +34,12 @@
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-promise": "^5.1.0",
         "prettier-eslint": "^13.0.0",
+        "rollup": "^2.58.3",
         "sass": "^1.43.4",
-    
         "stylelint-config-standard": "^23.0.0",
         "typescript": "^4.4.4"
     },
     "dependencies": {
-        
         "jslint": "^0.12.1",
         "path": "^0.12.7",
         "static-livereload": "^0.0.0",

@@ -13,6 +13,7 @@ class Router {
         if (route) {
             window.history.pushState({}, '', route);
         }
+        console.log(AuthStore.get());
         const $root = document.getElementById('app');
         const location = route;
         if (this.routes[location]) {

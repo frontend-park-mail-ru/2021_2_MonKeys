@@ -33,23 +33,23 @@ export const InitBus = () => {
                         AuthStore.set({
                             loggedIn: userStatus.loggedIn,
                         });
+                        matchRequest().then((matchResponse) => {
+                            console.log('matches');
+                            console.log(matchResponse);
+                        });
+                        ProfileStore.set(response.data.body);
+                        feedRequest().then((feedResponse) => {
+                            console.log(feedResponse);
+                            let profileData = feedStore.get();
+                            profileData.profiles = feedResponse.data.body;
+                            feedStore.set(profileData);
+                            router.go('/feed');
+                        });
                     } else {
                         AuthStore.set({
                             loggedIn: userStatus.Signup,
                         });
                     }
-                    matchRequest().then((matchResponse) => {
-                        console.log('matches');
-                        console.log(matchResponse);
-                    });
-                    ProfileStore.set(response.data.body);
-                    feedRequest().then((feedResponse) => {
-                        console.log(feedResponse);
-                        let profileData = feedStore.get();
-                        profileData.profiles = feedResponse.data.body;
-                        feedStore.set(profileData);
-                        router.go('/feed');
-                    });
                     //   router.go("/feed");
                 } else {
                     console.log('error');
