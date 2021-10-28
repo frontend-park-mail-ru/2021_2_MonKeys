@@ -1,6 +1,6 @@
 import router from '../route/router.js';
 
-import { HTTPSuccess } from '../constants/HTTPStatus.js';
+import { HTTPEMailNotFound, HTTPNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileStore } from '../store/profileStore.js';
 import { feedRequest } from '../requests/feedRequest.js';
 import { getProfile } from '../requests/profileRequest.js';
@@ -17,9 +17,11 @@ import eventBus from './eventBus.js';
 import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
 import feedStore from '../store/feedStore.js';
+import { matchRequest } from '../requests/matchRequest.js';
+const $root = document.getElementById('app');
 
 export const InitBus = () => {
-    eventBus.register('user:cookie-requests', () => {
+    eventBus.register('user:cookie-requests', (payload?: string) => {
         // 1) получить профиль
         // 2) получить мэтчи
         // 3) получить ленту
@@ -36,11 +38,14 @@ export const InitBus = () => {
                             loggedIn: userStatus.Signup,
                         });
                     }
-                    // console.log(response);
+                    matchRequest().then((matchResponse) => {
+                        console.log('matches');
+                        console.log(matchResponse);
+                    });
                     ProfileStore.set(response.data.body);
                     feedRequest().then((feedResponse) => {
                         console.log(feedResponse);
-                        const profileData = feedStore.get();
+                        let profileData = feedStore.get();
                         profileData.profiles = feedResponse.data.body;
                         feedStore.set(profileData);
                         router.go('/feed');

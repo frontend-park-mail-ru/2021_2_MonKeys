@@ -30,7 +30,6 @@ const NavButtonPropsSelected = {
     type: 'button',
     class: 'carousel-button-nav current-slide',
     src: 'icons/button_selector_deselected.svg',
-   
 };
 
 declare global {
