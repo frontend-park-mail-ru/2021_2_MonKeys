@@ -1,4 +1,4 @@
-import { MonkeysVirtualDOM } from "../virtualDOM/virtualDOM.js";
+import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 
 export interface errorMsgProps {
     text: string;
@@ -7,6 +7,8 @@ export interface errorMsgProps {
 
 export const ErrorMsg = (props: errorMsgProps) => {
     return (
-      <div name="error" class={props.class}>{props.text}</div>
-  );
+        <div name='error' class={props.class}>
+            {props.text}
+        </div>
+    );
 };

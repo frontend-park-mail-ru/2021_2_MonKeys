@@ -2,23 +2,22 @@
  * Здесь прописаны все возможные пути для роутера
  */
 
-
 import LoginView from '../views/loginView.js';
-import SignupView from "../views/signupView.js";
+import SignupView from '../views/signupView.js';
 import EditView from '../views/editView.js';
 import SignupEditView from '../views/signupEditView.js';
-import ProfileView from "../views/profileView.js";
-import LikesView from "../views/likesView.js";
-import FeedView from "../views/feedView.js";
-import ChatView from "../views/chatView.js"
-import PageNotFoundView from "../views/pageNotFoundView.js";
+import ProfileView from '../views/profileView.js';
+import LikesView from '../views/likesView.js';
+import FeedView from '../views/feedView.js';
+import ChatView from '../views/chatView.js';
+import PageNotFoundView from '../views/pageNotFoundView.js';
 import { userStatus } from '../constants/userStatus.js';
 
 export interface route {
-    readonly name: string,
-    readonly path: string,
-    readonly view?,
-    readonly auth: number,
+    readonly name: string;
+    readonly path: string;
+    readonly view?;
+    readonly auth: number;
 }
 
 export const Routes = {
@@ -81,4 +80,4 @@ export const Routes = {
         auth: userStatus.loggedIn,
         view: PageNotFoundView,
     },
-}
+};

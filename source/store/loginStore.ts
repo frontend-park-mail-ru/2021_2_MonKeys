@@ -1,4 +1,4 @@
-import BaseStore from "./storeBase.js";
+import BaseStore from './storeBase.js';
 
 export interface LoginData {
     emailFieldClass: string;
@@ -16,7 +16,7 @@ const initData = {
     passwordFieldClass: 'form-field-valid',
     passwordErrorClass: 'login-error',
     formErrorClass: 'login-error',
-}
+};
 
 LoginStore.set(initData);
 

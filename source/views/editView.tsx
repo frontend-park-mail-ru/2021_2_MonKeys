@@ -1,12 +1,11 @@
-import ViewBase from "./viewBase.js";
-import { MonkeysVirtualDOM } from "../virtualDOM/virtualDOM.js";
-import { Tapbar } from "../components/tapbar.js";
-import { EditForm } from "../components/editForm.js";
-import { EditStore } from "../store/editStore.js";
-import { ProfileStore } from "../store/profileStore.js";
-import EventBus from "../dispatcher/eventBus.js"
-import { errorEditFormMsg } from "../constants/errorMsg.js";
-
+import ViewBase from './viewBase.js';
+import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
+import { Tapbar } from '../components/tapbar.js';
+import { EditForm } from '../components/editForm.js';
+import { EditStore } from '../store/editStore.js';
+import { ProfileStore } from '../store/profileStore.js';
+import EventBus from '../dispatcher/eventBus.js';
+import { errorEditFormMsg } from '../constants/errorMsg.js';
 
 export default class EditView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -24,7 +23,9 @@ export default class EditView extends ViewBase {
                     value: ProfileStore.get().name,
                     name: 'userName',
                     class: EditStore.get().nameFieldClass,
-                    oninput: () => { EventBus.dispatch<string>('edit:name-input'); },
+                    oninput: () => {
+                        EventBus.dispatch<string>('edit:name-input');
+                    },
                 },
                 'birthDate': {
                     tag: 'input',
@@ -32,7 +33,9 @@ export default class EditView extends ViewBase {
                     value: ProfileStore.get().date,
                     class: EditStore.get().birthDateFieldClass,
                     name: 'birthDate',
-                    oninput: () => { EventBus.dispatch<string>('edit:birth-date-input'); },
+                    oninput: () => {
+                        EventBus.dispatch<string>('edit:birth-date-input');
+                    },
                 },
                 'description': {
                     tag: 'textarea',
@@ -40,7 +43,7 @@ export default class EditView extends ViewBase {
                     value: ProfileStore.get().description,
                     name: 'description',
                     class: 'form-field-desc text-desc',
-                }
+                },
             },
             'tags': EditStore.get().tags,
             'buttons': {
@@ -48,18 +51,24 @@ export default class EditView extends ViewBase {
                     type: 'button',
                     text: 'tags',
                     clas: '',
-                    onclick: ()=>{ EventBus.dispatch<string>('edit:open-tags'); },
+                    onclick: () => {
+                        EventBus.dispatch<string>('edit:open-tags');
+                    },
                 },
                 'imgAddButton': {
                     class: 'add',
-                    onchange: (event)=>{ EventBus.dispatch<string>('editProfile:img-input', event); },
+                    onchange: (event) => {
+                        EventBus.dispatch<string>('editProfile:img-input', event);
+                    },
                 },
                 'saveButton': {
                     type: 'button',
                     text: 'Сохранить',
                     class: 'edit',
-                    onclick: ()=>{ EventBus.dispatch<string>('edit:save-button'); },
-                }
+                    onclick: () => {
+                        EventBus.dispatch<string>('edit:save-button');
+                    },
+                },
             },
             'errorMsgs': {
                 'formError': {
@@ -71,7 +80,7 @@ export default class EditView extends ViewBase {
         'tapbar': {
             class: 'menu-profile',
         },
-    }
+    };
 
     _createTmpl(data: any) {
         return (

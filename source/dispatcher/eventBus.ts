@@ -19,30 +19,31 @@ class EventBus implements IEventBus {
     private subscribers: Subscriber;
     private static nextId = 0;
 
-    constructor(){
+    constructor() {
         this.subscribers = {};
     }
 
     public dispatch<T>(event: string, payload?: T): void {
         const subscriber = this.subscribers[event];
 
-        if (!subscriber) { return; }
+        if (!subscriber) {
+            return;
+        }
 
         Object.keys(subscriber).forEach((key) => subscriber[key](payload));
-
     }
 
     public register(event: string, callback: Function): Register {
         const id = this.getNextId();
 
-        if(!this.subscribers[event]) this.subscribers[event] = {};
+        if (!this.subscribers[event]) this.subscribers[event] = {};
 
         this.subscribers[event][id] = callback;
 
         return {
             unregister: () => {
                 delete this.subscribers[event][id];
-                if(Object.keys(this.subscribers[event]).length === 0) {
+                if (Object.keys(this.subscribers[event]).length === 0) {
                     delete this.subscribers[event];
                 }
             },
@@ -52,8 +53,6 @@ class EventBus implements IEventBus {
     private getNextId(): number {
         return EventBus.nextId++;
     }
-
 }
-
 
 export default new EventBus();

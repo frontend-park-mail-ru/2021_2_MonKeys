@@ -1,7 +1,7 @@
-import ViewBase from "./viewBase.js";
-import { MonkeysVirtualDOM } from "../virtualDOM/virtualDOM.js";
-import { Tapbar } from "../components/tapbar.js";
-import { CardLikes } from "../components/cardLikes.js";
+import ViewBase from './viewBase.js';
+import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
+import { Tapbar } from '../components/tapbar.js';
+import { CardLikes } from '../components/cardLikes.js';
 
 export default class LikesView extends ViewBase {
     _data = {
@@ -29,14 +29,12 @@ export default class LikesView extends ViewBase {
         'tapbar': {
             class: 'menu-likes',
         },
-    }
+    };
     _template = (
         <div>
-            <div class="card-container">
-                <div class="likes-count">
-                    You have {this._data.matchesCount} matches!
-                </div>
-                {Object.keys(this._data.matches).map(item => CardLikes(this._data.matches[item]))}
+            <div class='card-container'>
+                <div class='likes-count'>You have {this._data.matchesCount} matches!</div>
+                {Object.keys(this._data.matches).map((item) => CardLikes(this._data.matches[item]))}
             </div>
             {Tapbar(this._data.tapbar)}
         </div>

@@ -1,4 +1,4 @@
 const like = 1;
 const dislike = 2;
 
-export default {like, dislike};
+export default { like, dislike };

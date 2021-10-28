@@ -1,3 +1,3 @@
-const requestMoreCardsThreshold = 5
+const requestMoreCardsThreshold = 5;
 
 export { requestMoreCardsThreshold };

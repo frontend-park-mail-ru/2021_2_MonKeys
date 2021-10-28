@@ -1,4 +1,4 @@
-import BaseStore from "./storeBase.js";
+import BaseStore from './storeBase.js';
 
 export interface ProfileData {
     id?: string;
@@ -6,7 +6,7 @@ export interface ProfileData {
     age?: string;
     date?: string;
     description?: string;
-    imgSrc?: string [];
+    imgSrc?: string[];
     tags?: Set<string>;
 }
 

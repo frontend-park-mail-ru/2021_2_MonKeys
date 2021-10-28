@@ -1,9 +1,9 @@
-import ViewBase from "./viewBase.js";
-import { MonkeysVirtualDOM } from "../virtualDOM/virtualDOM.js";
-import { EditForm } from "../components/editForm.js";
-import EventBus from "../dispatcher/eventBus.js"
-import { EditStore } from "../store/editStore.js";
-import { errorEditFormMsg } from "../constants/errorMsg.js";
+import ViewBase from './viewBase.js';
+import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
+import { EditForm } from '../components/editForm.js';
+import EventBus from '../dispatcher/eventBus.js';
+import { EditStore } from '../store/editStore.js';
+import { errorEditFormMsg } from '../constants/errorMsg.js';
 
 export default class SignupEditView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -20,21 +20,25 @@ export default class SignupEditView extends ViewBase {
                     placeholder: 'Имя',
                     name: 'userName',
                     class: EditStore.get().nameFieldClass,
-                    oninput: () => { EventBus.dispatch<string>('edit:name-input'); },
+                    oninput: () => {
+                        EventBus.dispatch<string>('edit:name-input');
+                    },
                 },
                 'birthDate': {
                     tag: 'input',
                     type: 'date',
                     class: EditStore.get().birthDateFieldClass,
                     name: 'birthDate',
-                    oninput: () => { EventBus.dispatch<string>('edit:birth-date-input'); },
+                    oninput: () => {
+                        EventBus.dispatch<string>('edit:birth-date-input');
+                    },
                 },
                 'description': {
                     tag: 'textarea',
                     placeholder: 'Расскажите о себе',
                     name: 'description',
                     class: 'form-field-desc text-desc',
-                }
+                },
             },
             'tags': EditStore.get().tags,
             'buttons': {
@@ -42,19 +46,23 @@ export default class SignupEditView extends ViewBase {
                     type: 'button',
                     text: 'tags',
                     clas: '',
-                    onclick: ()=>{ EventBus.dispatch<string>('edit:open-tags'); },
+                    onclick: () => {
+                        EventBus.dispatch<string>('edit:open-tags');
+                    },
                 },
                 'imgAddButton': {
                     type: 'button',
                     text: '',
                     class: 'add',
-                    onclick: ()=>{},
+                    onclick: () => {},
                 },
                 'saveButton': {
                     type: 'button',
                     text: 'Сохранить',
                     class: 'edit',
-                    onclick: ()=>{ EventBus.dispatch<string>('edit:save-button'); },
+                    onclick: () => {
+                        EventBus.dispatch<string>('edit:save-button');
+                    },
                 },
             },
             'errorMsgs': {
@@ -64,14 +72,10 @@ export default class SignupEditView extends ViewBase {
                 },
             },
         },
-    }
+    };
 
     _createTmpl(data: any) {
-        return (
-            <div>
-                {EditForm(this._data.editForm)}
-            </div>
-        );
+        return <div>{EditForm(this._data.editForm)}</div>;
     }
 
     public unsubscribe() {
