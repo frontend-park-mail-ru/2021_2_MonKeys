@@ -6,23 +6,31 @@ language: node_js
 node_js:
   - "14"
 
+install:
+  - npm install
+
+build:
+  - npm run build
+
 
 jobs: 
   fast_finish: true
   include:
-    - stage: dependencies
-    - name: "installing dependencies"
-    - script: npm install
     - stage: prettier
     - name:  "prettier check"
-    - script: npm run prettier-check
+    - script: 
+      - npm install
+      - npm run prettier-check
     - stage: eslint
     - name:  "eslint check"
-    - script: npm run eslint
+    - script: 
+      - npm install
+      - npm run prettier-check
     - stage: build
     - name:  "build"
-    - script: npm run build
- 
+    - script: 
+      - npm install
+      - npm run build
 
 
 
