@@ -211,6 +211,7 @@ export const EditEventRegister = () => {
           .catch((error) => {
             console.error(error);
           });
+
       }
     }
   });

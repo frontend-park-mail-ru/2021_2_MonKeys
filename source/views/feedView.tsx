@@ -64,6 +64,12 @@ export default class FeedView extends ViewBase {
       class: "menu-feed",
     },
   };
+
+  forceRender() {
+    const cardData = feedStore.get();
+    this._template = this._createTmpl(this._data, cardData.expanded)
+    this.render();
+  }
   _createTmpl(data: any, expanded: boolean) {
     if (!expanded) {
       this._data.cardData.buttons.expandButton = {

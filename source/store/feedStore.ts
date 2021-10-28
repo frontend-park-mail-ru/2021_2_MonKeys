@@ -12,6 +12,7 @@ export interface FeedData {
 
 let feedStore = new BaseStore<FeedData>();
 
+
 feedStore.set({
   profiles: [
     // {
@@ -37,5 +38,6 @@ feedStore.set({
   outOfCards: false,
   expanded: false,
 });
+
 
 export default feedStore;

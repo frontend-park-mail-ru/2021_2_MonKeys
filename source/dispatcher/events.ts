@@ -16,6 +16,7 @@ import { ProfileEventsRegister } from "./profileEvents.js";
 import { LikesEventsRegister } from "./likesEvents.js";
 import { FeedEventsRegister } from "./feedEvents.js";
 import { ChatEventsRegister } from "./chatEvents.js";
+import { CarouselEventsRegister } from './carouselEvents.js';
 import eventBus from "./eventBus.js";
 import AuthStore from "../store/authStore.js";
 import { userStatus } from "../constants/userStatus.js";
@@ -67,12 +68,15 @@ export const InitBus = () => {
   // --------------------------edit-----------------------------
   EditEventRegister();
 
-  // ----------------------------profile-----------------------
-  ProfileEventsRegister();
-  // ----------------------likes--------------------------------
-  LikesEventsRegister();
-  // -------------------feed------------------------------------
-  FeedEventsRegister();
-  // -------------------chat------------------------------------
-  ChatEventsRegister();
-};
+     // ----------------------------profile-----------------------
+    ProfileEventsRegister();
+    // ----------------------likes--------------------------------
+    LikesEventsRegister();
+    // -------------------feed------------------------------------
+    FeedEventsRegister();
+    // -------------------chat------------------------------------
+    ChatEventsRegister();
+
+    CarouselEventsRegister();
+}
+
