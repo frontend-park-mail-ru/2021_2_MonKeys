@@ -1,5 +1,5 @@
-import { sessionURL } from '../constants/urls.js';
-import http from '../utils/http.js';
+import { sessionURL } from "../constants/urls.js";
+import http from "../utils/http.js";
 
 const loginRequest = (email: string, password: string) => {
   const body = JSON.stringify({

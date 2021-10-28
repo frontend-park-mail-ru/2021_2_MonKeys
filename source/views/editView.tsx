@@ -89,7 +89,6 @@ export default class EditView extends ViewBase {
     private subcribtionCallback(data, view) {
         view._data.editForm.fields.name.class = data.nameFieldClass;
         view._data.editForm.fields.birthDate.class = data.birthDateFieldClass;
-        console.log(data);
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
         view._data.editForm.tags = data.tags;
         view._data.editForm.fields.name.value = ProfileStore.get().name;

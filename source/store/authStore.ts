@@ -14,5 +14,5 @@ AuthStore.set(
         loggedIn: userStatus.loggedIn
     }
 );
-console.log(AuthStore)
+// console.log(AuthStore)
 export default AuthStore;

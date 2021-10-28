@@ -75,7 +75,7 @@ http {
         }
 
         location / {
- 			root /home/vladimir/TP/MonKeys_front/static/;
+ 			root /home/marvin/MonKeys_Front/static/;
             index index.html;
             autoindex on;
             set $fallback_file /index.html;
