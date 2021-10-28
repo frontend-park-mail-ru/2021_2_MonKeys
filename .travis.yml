@@ -9,14 +9,20 @@ node_js:
 
 jobs: 
   fast_finish: true
-  
-before_install:
-  - npm install -g typescript
+  include:
+    - stage: dependencies
+    - name: "installing dependencies"
+    - script: npm install
+    - stage: prettier
+    - name:  "prettier check"
+    - script: npm run prettier-check
+    - stage: eslint
+    - name:  "eslint check"
+    - script: npm run eslint
+    - stage: build
+    - name:  "build"
+    - script: npm run build
+ 
 
-install:
-  - make build-typescript
-
-eslint:
-  - make eslint-tslint
 
 

@@ -8,7 +8,7 @@ export interface EditData {
 
     addImgFieldClass?: string;
 
-    tags?: any;
+    tags?;
 }
 
 const EditStore = new BaseStore<EditData>();

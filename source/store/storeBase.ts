@@ -1,6 +1,8 @@
+import ViewBase from 'views/viewBase';
+
 export default class BaseStore<type> {
     private data: type;
-    private view: any;
+    private view: ViewBase;
     private observers: { (data: type, curView): void }[];
     constructor() {
         this.observers = [];

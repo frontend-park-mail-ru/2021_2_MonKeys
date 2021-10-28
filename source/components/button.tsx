@@ -1,10 +1,11 @@
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
+import ViewBase from '../views/viewBase.js';
 
 export interface ButtonProps {
     type: string;
     text: string;
     class: string;
-    onclick: Function;
+    onclick: { (data, view?: ViewBase): void };
 }
 
 export const Button = (props: ButtonProps) => {

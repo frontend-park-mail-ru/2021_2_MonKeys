@@ -7,10 +7,10 @@ import { Button } from './button.js';
 import { AddImg } from './addImg.js';
 
 export interface EditFormProps {
-    fields: any;
-    tags: any;
-    buttons: any;
-    errorMsgs: any;
+    fields;
+    tags;
+    buttons;
+    errorMsgs;
 }
 
 export const EditForm = (props: EditFormProps) => {

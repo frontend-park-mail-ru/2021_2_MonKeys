@@ -1,9 +1,11 @@
+import ViewBase from 'views/viewBase';
+
 export interface Register {
     unregister: () => void;
 }
 
 export interface Callable {
-    [key: string]: Function;
+    [key: string]: { (data, view?: ViewBase): void };
 }
 
 export interface Subscriber {
@@ -12,7 +14,7 @@ export interface Subscriber {
 
 export interface IEventBus {
     dispatch<T>(event: string, payload?: T): void;
-    register(event: string, callback: Function): Register;
+    register(event: string, callback: { (data, view?: ViewBase): void }): Register;
 }
 
 class EventBus implements IEventBus {
@@ -33,7 +35,7 @@ class EventBus implements IEventBus {
         Object.keys(subscriber).forEach((key) => subscriber[key](payload));
     }
 
-    public register(event: string, callback: Function): Register {
+    public register(event: string, callback: { (data, view?: ViewBase): void }): Register {
         const id = this.getNextId();
 
         if (!this.subscribers[event]) this.subscribers[event] = {};

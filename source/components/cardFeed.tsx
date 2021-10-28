@@ -1,10 +1,11 @@
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { IconButton } from './iconButton.js';
 import { ImgCarousel } from './imgCarousel.js';
+import { ProfileData } from '../store/profileStore.js';
 
 export interface CardFeedProps {
-    userData: any;
-    buttons: any;
+    userData: ProfileData;
+    buttons;
 }
 
 export const CardFeed = (props: CardFeedProps) => {

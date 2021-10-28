@@ -46,7 +46,7 @@ export default class ProfileView extends ViewBase {
         },
     };
 
-    _createTmpl(data: any) {
+    _createTmpl(data) {
         return (
             <div>
                 <div class='card-container'>{CardExpended(this._data.cardData)}</div>

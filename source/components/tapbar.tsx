@@ -5,7 +5,7 @@ export interface tapbarProps {
 }
 
 export const Tapbar = (props: tapbarProps) => {
-    let tapbarTmpl: any;
+    let tapbarTmpl;
 
     switch (props.class) {
         case 'menu-feed':

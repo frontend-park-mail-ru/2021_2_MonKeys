@@ -1,8 +1,9 @@
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
+import ViewBase from '../views/viewBase.js';
 
 export interface ButtonProps {
     class: string;
-    onchange: Function;
+    onchange: { (data, view?: ViewBase): void };
 }
 
 export const AddImg = (props: ButtonProps) => {

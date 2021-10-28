@@ -24,4 +24,10 @@ export default class ViewBase {
             this._parent.appendChild(MonkeysVirtualDOM.createElement(this._template));
         }
     }
+    forceRender() {
+        // signature, will be redifened later
+    }
+    unsubscribe() {
+        // signature, will be redifened later
+    }
 }

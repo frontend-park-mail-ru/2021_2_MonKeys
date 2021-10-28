@@ -3,7 +3,7 @@
 cd ..
 sudo service nginx stop
 
-CONFIG_NAME="Drip.nginx"
+CONFIG_NAME="nginx.conf"
 STATIC_PATH=$(grep "/static/" $CONFIG_NAME)
 NEW_STATIC_PATH=" \t\t\troot ""${PWD}""/static/;"
 

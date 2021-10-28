@@ -94,7 +94,7 @@ export default class LoginView extends ViewBase {
         },
     };
 
-    _createTmpl(data: any) {
+    _createTmpl(data) {
         return (
             <div class='form-container'>
                 <div class='center-container'>

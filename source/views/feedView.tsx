@@ -69,7 +69,7 @@ export default class FeedView extends ViewBase {
         this._template = this._createTmpl(this._data, cardData.expanded);
         this.render();
     }
-    _createTmpl(data: any, expanded: boolean) {
+    _createTmpl(data, expanded: boolean) {
         if (!expanded) {
             this._data.cardData.buttons.expandButton = {
                 type: 'button',

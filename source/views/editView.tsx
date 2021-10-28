@@ -82,7 +82,7 @@ export default class EditView extends ViewBase {
         },
     };
 
-    _createTmpl(data: any) {
+    _createTmpl(data) {
         return (
             <div>
                 {EditForm(this._data.editForm)}

@@ -40,7 +40,7 @@ export const InitBus = () => {
                         ProfileStore.set(response.data.body);
                         feedRequest().then((feedResponse) => {
                             console.log(feedResponse);
-                            let profileData = feedStore.get();
+                            const profileData = feedStore.get();
                             profileData.profiles = feedResponse.data.body;
                             feedStore.set(profileData);
                             router.go('/feed');

@@ -2,11 +2,12 @@ import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { Tag } from './tag.js';
 import { IconButton } from './iconButton.js';
 import { ImgCarousel } from './imgCarousel.js';
+import { ProfileData } from '../store/profileStore.js';
 
 export interface CardExpendedProps {
-    userData: any;
-    tags: any;
-    buttons: any;
+    userData: ProfileData;
+    tags: Set<string>;
+    buttons;
 }
 
 export const CardExpended = (props: CardExpendedProps) => {
