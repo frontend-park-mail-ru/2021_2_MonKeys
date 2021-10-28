@@ -11,7 +11,7 @@
         "prettier-scss": "prettier --write --tab-width 2 \"scss/**/*.+(scss)\"",
         "deploy": "bash scripts/docker-nginx-ssl.sh",
         "serve-nginx": "bash scripts/run-nginx.sh",
-        "rollup": "npx rollup --config rollup.config.js --cofigPlugin typescript"
+        "rollup": "npx rollup --config rollup.config.js --configPlugin typescript"
     },
     "repository": {
         "type": "git",
@@ -35,6 +35,7 @@
         "eslint-plugin-promise": "^5.1.0",
         "prettier-eslint": "^13.0.0",
         "rollup": "^2.58.3",
+        "rollup-plugin-terser": "^7.0.2",
         "sass": "^1.43.4",
         "stylelint-config-standard": "^23.0.0",
         "typescript": "^4.4.4"
