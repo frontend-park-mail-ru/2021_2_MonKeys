@@ -73,7 +73,6 @@ const conditionalRendering = (param, bool) => {
 };
 
 export const ImgCarousel = (props: string[], expanded: boolean) => {
-    console.log(props);
     if (!window.currentSelectedCarouselItem) {
         window.currentSelectedCarouselItem = 0;
     }
@@ -96,9 +95,6 @@ export const ImgCarousel = (props: string[], expanded: boolean) => {
 
     const oneCard = window.currentCarouselSize === 0;
 
-    console.log(oneCard);
-    console.log(lastCard);
-    console.log(firstCard);
     return (
         <div class={sizeClass}>
             <ul class='carousel-track'>

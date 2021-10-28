@@ -8,12 +8,7 @@ class Router {
     constructor(routes) {
         this.routes = routes;
     }
-
-    go(route: string) {
-        if (route) {
-            window.history.pushState({}, '', route);
-        }
-        console.log(AuthStore.get());
+    move(route: string) {
         const $root = document.getElementById('app');
         const location = route;
         if (this.routes[location]) {
@@ -42,9 +37,13 @@ class Router {
                 currentView.render();
             }
         } else {
-            // console.log(this.routes['/404'])
             window.location.pathname = '/404';
         }
+    }
+    go(route: string) {
+        window.history.pushState('', '', route);
+        console.log(window.history);
+        this.move(route);
     }
 }
 

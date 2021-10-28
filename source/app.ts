@@ -12,9 +12,10 @@ declare global {
     }
 }
 
-window.onpopstate = () => {
-    router.go(window.location.pathname);
+window.onpopstate = (event) => {
+    router.move(window.location.pathname);
 };
 
 EventBus.dispatch<string>('user:cookie-requests');
 router.go(window.location.pathname);
+window.history.pushState('', '', window.location.pathname);
