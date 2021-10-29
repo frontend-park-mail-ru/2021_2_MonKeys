@@ -18,6 +18,7 @@ import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
 import feedStore from '../store/feedStore.js';
 import { matchRequest } from '../requests/matchRequest.js';
+import LikesStore from '../store/likesStore.js';
 const $root = document.getElementById('app');
 
 export const InitBus = () => {
@@ -34,8 +35,12 @@ export const InitBus = () => {
                             loggedIn: userStatus.loggedIn,
                         });
                         matchRequest().then((matchResponse) => {
-                            console.log('matches');
+                            const likesData = LikesStore.get();
+                            likesData.profiles = matchResponse.data.body.allUsers;
+                            likesData.mathesCount = matchResponse.data.body.matchesCount;
+                            LikesStore.set(likesData);
                             console.log(matchResponse);
+                            console.log(LikesStore.get());
                         });
                         ProfileStore.set(response.data.body);
                         feedRequest().then((feedResponse) => {
