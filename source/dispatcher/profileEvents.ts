@@ -20,7 +20,13 @@ export const ProfileEventsRegister = () => {
             if (response.status === HTTPSuccess) {
                 if (response.data.status === HTTPSuccess) {
                     ProfileStore.clean();
-                    feedStore.clean();
+                    feedStore.set({
+                        profiles: [],
+                        counter: 0,
+                        outOfCards: false,
+                        expanded: false,
+                    });
+                    // feedStore.clean();
                     router.go('/login');
                 } else if (response.data.status === HTTPNotFound) {
                     /// ????
