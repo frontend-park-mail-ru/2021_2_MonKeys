@@ -1,6 +1,7 @@
 import EventBus from './eventBus.js';
 import feedStore from '../store/feedStore.js';
 import reactions from '../constants/reactions.js';
+import { likesRequest } from '../requests/likesRequest.js';
 
 export const FeedEventsRegister = () => {
     EventBus.register('feed:like-button', () => {
@@ -29,11 +30,13 @@ export const FeedEventsRegister = () => {
         //...
     });
     EventBus.register('feed:reaction', (reactionID) => {
-        // send req w/ reacID
-
-        // console.log(reactionID);
         const data = feedStore.get();
-        // console.log(data);
+
+        likesRequest(data.profiles[data.counter].id, reactionID).then((response) => {
+            // some effects when match
+            console.log(response);
+        });
+
         data.counter++;
         if (data.profiles[data.counter]) {
             data.outOfCards = false;

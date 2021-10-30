@@ -9,7 +9,6 @@ export default class LikesView extends ViewBase {
         super(parent);
         LikesStore.subscribe(this.subscribtionCallback, this);
         this._template = this._createTmpl(this._data);
-        console.log(this._template);
     }
 
     _data = {

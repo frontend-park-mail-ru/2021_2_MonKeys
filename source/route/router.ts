@@ -42,7 +42,7 @@ class Router {
     }
     go(route: string) {
         window.history.pushState('', '', route);
-        console.log(window.history);
+        // console.log(window.history);
         this.move(route);
     }
 }
