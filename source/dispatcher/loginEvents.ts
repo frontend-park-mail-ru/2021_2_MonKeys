@@ -35,9 +35,9 @@ export const LoginEventRegister = () => {
             return;
         }
 
-        storeData.emailFieldClass = 'form-field-novalid';
+        storeData.emailFieldClass = 'form-field-valid';
         storeData.emailErrorClass = 'login-error';
-        storeData.passwordFieldClass = 'form-field-novalid';
+        storeData.passwordFieldClass = 'form-field-valid';
         storeData.passwordErrorClass = 'login-error';
         LoginStore.set(storeData);
 
