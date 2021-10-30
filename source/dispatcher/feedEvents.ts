@@ -2,6 +2,7 @@ import EventBus from './eventBus.js';
 import feedStore from '../store/feedStore.js';
 import reactions from '../constants/reactions.js';
 import { likesRequest } from '../requests/likesRequest.js';
+import { feedRequest } from '../requests/feedRequest.js';
 
 export const FeedEventsRegister = () => {
     EventBus.register('feed:like-button', () => {
@@ -38,11 +39,27 @@ export const FeedEventsRegister = () => {
         });
 
         data.counter++;
-        if (data.profiles[data.counter]) {
-            data.outOfCards = false;
+        console.log(data.counter);
+        if (data.counter === 5) {
+            feedRequest().then((response) => {
+                console.log(response);
+                data.profiles = response.data.body;
+                data.counter = 0;
+
+                if (data.profiles[data.counter]) {
+                    data.outOfCards = false;
+                } else {
+                    data.outOfCards = true;
+                }
+                feedStore.set(data);
+            });
         } else {
-            data.outOfCards = true;
+            if (data.profiles[data.counter]) {
+                data.outOfCards = false;
+            } else {
+                data.outOfCards = true;
+            }
+            feedStore.set(data);
         }
-        feedStore.set(data);
     });
 };
