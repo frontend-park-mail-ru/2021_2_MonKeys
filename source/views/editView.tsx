@@ -50,7 +50,8 @@ export default class EditView extends ViewBase {
                 'tagsButton': {
                     type: 'button',
                     text: 'tags',
-                    clas: '',
+                    class: 'tags-button',
+                    src: '../icons/button_expand_white.svg',
                     onclick: () => {
                         EventBus.dispatch<string>('edit:open-tags');
                     },
@@ -60,6 +61,7 @@ export default class EditView extends ViewBase {
                     onchange: (event) => {
                         EventBus.dispatch<string>('edit:img-input', event);
                     },
+                    imgs: ProfileStore.get().imgs,
                 },
                 'saveButton': {
                     type: 'button',

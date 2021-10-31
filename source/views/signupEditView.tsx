@@ -45,7 +45,8 @@ export default class SignupEditView extends ViewBase {
                 'tagsButton': {
                     type: 'button',
                     text: 'tags',
-                    clas: '',
+                    class: '',
+                    src: '../icons/button_expand_white.svg',
                     onclick: () => {
                         EventBus.dispatch<string>('edit:open-tags');
                     },

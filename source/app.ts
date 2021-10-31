@@ -11,7 +11,6 @@ declare global {
         currentView: ViewBase;
     }
 }
-
 window.onpopstate = (event) => {
     router.move(window.location.pathname);
 };
