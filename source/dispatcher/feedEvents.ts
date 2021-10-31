@@ -39,8 +39,7 @@ export const FeedEventsRegister = () => {
         likesRequest(data.profiles[data.counter].id, reactionID).then((response) => {
             if (response.status === HTTPSuccess) {
                 if (response.data.status === HTTPSuccess) {
-                    console.log(response.data.match);
-                    if (response.data.match === true) {
+                    if (response.data.body.match) {
                         matchRequest().then((matchResponse) => {
                             const likesData = LikesStore.get();
                             likesData.profiles = matchResponse.data.body.allUsers;
