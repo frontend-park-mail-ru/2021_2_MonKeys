@@ -12,7 +12,7 @@ export const CardFeed = (props: CardFeedProps) => {
     return (
         <div class='card'>
             <div class='card-main'>
-                {/*ImgCarousel(props.userData.imgSrc,false)*/}
+                {ImgCarousel(props.userData.imgs, false)}
                 <div class='bottom-panel'>
                     <div class='name-container'>
                         <div class='name'>{props.userData.name}</div>

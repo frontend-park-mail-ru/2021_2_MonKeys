@@ -15,8 +15,6 @@ export default class ViewBase {
 
     render() {
         if (window.currentDOM) {
-            // console.log('------------------------')
-            // console.log(this._template);
             MonkeysVirtualDOM.update(this._parent, window.currentDOM, this._template);
             window.currentDOM = this._template;
         } else {

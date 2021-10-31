@@ -66,7 +66,10 @@ export const LoginEventRegister = () => {
         const _emailInput = document.getElementsByTagName('input')[0];
 
         const storeData = LoginStore.get();
-
+        if (!_emailInput) {
+            console.log('Error, trying to read _emailInput on wrong view');
+            return;
+        }
         const test = _emailInput.value.length === 0 || emailRegExp.test(_emailInput.value);
 
         test ? (storeData.emailFieldClass = 'form-field-valid') : (storeData.emailFieldClass = 'form-field-novalid');
@@ -101,7 +104,10 @@ export const LoginEventRegister = () => {
 
     EventBus.register('login:password-input', (payload?: string) => {
         const _passwordInput = document.getElementsByTagName('input')[1];
-
+        if (!_passwordInput) {
+            console.log('Error, trying to read _emailInput on wrong view');
+            return;
+        }
         const storeData = LoginStore.get();
 
         const test = _passwordInput.value.length === 0 || passwordRegExp.test(_passwordInput.value);

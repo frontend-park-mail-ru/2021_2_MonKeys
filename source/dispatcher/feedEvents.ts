@@ -57,7 +57,7 @@ export const FeedEventsRegister = () => {
         });
 
         data.counter++;
-        console.log(data.counter);
+
         if (data.counter === requestMoreCardsThreshold) {
             feedRequest().then((response) => {
                 if (response.status === HTTPSuccess) {

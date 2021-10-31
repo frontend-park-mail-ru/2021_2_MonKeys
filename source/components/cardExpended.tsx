@@ -11,7 +11,6 @@ export interface CardExpendedProps {
 }
 
 export const CardExpended = (props: CardExpendedProps) => {
-    console.log(props);
     const tagsExists = props.tags !== undefined ? true : false;
     let tagField: HTMLCollection;
     if (tagsExists) {
@@ -34,7 +33,7 @@ export const CardExpended = (props: CardExpendedProps) => {
     return (
         <div id='cardID' class='card-expand'>
             <div id='cardMainID' class='card-main-profile'>
-                {/*ImgCarousel(props.userData.imgSrc, true)*/}
+                {ImgCarousel(props.userData.imgs, true)}
                 <div class='name-container'>
                     <div class='name'>{props.userData.name}</div>
                     <div class='age'>{props.userData.age}</div>

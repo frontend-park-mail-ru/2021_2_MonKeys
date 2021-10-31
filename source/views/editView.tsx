@@ -10,7 +10,8 @@ import { errorEditFormMsg } from '../constants/errorMsg.js';
 export default class EditView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
-        EditStore.subscribe(this.subcribtionCallback, this);
+        EditStore.subscribe(this.subcribtionCallbackEdit, this);
+        ProfileStore.subscribe(this.subcribtionCallbackProfile, this);
         this._template = this._createTmpl(this._data);
     }
 
@@ -94,10 +95,11 @@ export default class EditView extends ViewBase {
     }
 
     public unsubscribe() {
-        EditStore.unsubscribe(this.subcribtionCallback);
+        EditStore.unsubscribe(this.subcribtionCallbackEdit);
+        EditStore.unsubscribe(this.subcribtionCallbackProfile);
     }
 
-    private subcribtionCallback(data, view) {
+    private subcribtionCallbackEdit(data, view) {
         view._data.editForm.fields.name.class = data.nameFieldClass;
         view._data.editForm.fields.birthDate.class = data.birthDateFieldClass;
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
@@ -105,7 +107,13 @@ export default class EditView extends ViewBase {
         view._data.editForm.fields.name.value = ProfileStore.get().name;
         view._data.editForm.fields.birthDate.value = ProfileStore.get().date;
         view._data.editForm.fields.description.value = ProfileStore.get().description;
+        // console.log("test")
+        // view._data.editForm.buttons.imgAddButton.imgs = ProfileStore.get().imgs;
         view._template = view._createTmpl(view._data);
+
         view.render();
+    }
+    private subcribtionCallbackProfile(data, view) {
+        console.log('profile changes');
     }
 }

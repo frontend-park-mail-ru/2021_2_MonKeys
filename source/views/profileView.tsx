@@ -9,6 +9,7 @@ import eventBus from '../dispatcher/eventBus.js';
 export default class ProfileView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
+
         ProfileStore.subscribe(this.subcribtionCallback, this);
         this._template = this._createTmpl(this._data);
     }
@@ -19,7 +20,7 @@ export default class ProfileView extends ViewBase {
                 name: ProfileStore.get().name,
                 age: ProfileStore.get().age,
                 description: ProfileStore.get().description,
-                imgSrc: ProfileStore.get().imgs,
+                imgs: ProfileStore.get().imgs,
             },
             'tags': ProfileStore.get().tags,
             'buttons': {
@@ -66,5 +67,10 @@ export default class ProfileView extends ViewBase {
         view._data.cardData.tags = data.tags;
         view._template = view._createTmpl(view._data);
         view.render();
+    }
+    public forceRender() {
+        ProfileStore.subscribe(this.subcribtionCallback, this);
+        this._template = this._createTmpl(this._data);
+        this.render();
     }
 }

@@ -15,8 +15,6 @@ const getProfile = () => {
 };
 
 const editProfile = (name, date, description, photoPaths, tags) => {
-    console.log('!Dksodskdosdsosod');
-    console.log(photoPaths);
     const body = JSON.stringify({
         name: name,
         date: date,

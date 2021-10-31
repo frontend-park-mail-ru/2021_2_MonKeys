@@ -10,5 +10,5 @@ const AuthStore = new BaseStore<AuthData>();
 AuthStore.set({
     loggedIn: userStatus.notlLoggedIn,
 });
-// console.log(AuthStore)
+
 export default AuthStore;

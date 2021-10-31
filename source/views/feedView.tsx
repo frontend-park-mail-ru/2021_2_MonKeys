@@ -13,6 +13,7 @@ export default class FeedView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
         const cardData = feedStore.get();
+
         this.updateDataTemaplate(cardData);
         feedStore.subscribe(this.subscribtionCallback, this);
     }

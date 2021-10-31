@@ -26,7 +26,7 @@ export const Button = (props: ButtonProps) => {
         case 'link':
             break;
     }
-    console.log(props);
+
     const textClassName = className + '-text';
     const button = (
         <button onclick={props.onclick} type={props.type} class={className}>

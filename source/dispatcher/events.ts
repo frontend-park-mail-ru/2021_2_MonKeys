@@ -40,7 +40,9 @@ export const InitBus = () => {
                             likesData.mathesCount = matchResponse.data.body.matchesCount;
                             LikesStore.set(likesData);
                         });
+
                         ProfileStore.set(response.data.body);
+
                         feedRequest().then((feedResponse) => {
                             const profileData = feedStore.get();
                             if (feedResponse.data.body !== null) {
@@ -48,6 +50,7 @@ export const InitBus = () => {
                             } else {
                                 profileData.outOfCards = true;
                             }
+
                             feedStore.set(profileData);
                             router.go('/feed');
                         });

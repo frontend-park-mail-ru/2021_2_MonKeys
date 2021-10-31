@@ -40,6 +40,9 @@ declare global {
 }
 
 const slides = (imgSrc: string[], selectedID: number, sizeClass, carouselSizeClass) => {
+    if (!imgSrc) {
+        return <div>no images</div>;
+    }
     const items = [];
     imgSrc.push(imgSrc[selectedID]);
     imgSrc.forEach((element) => {
@@ -73,6 +76,9 @@ const conditionalRendering = (param, bool) => {
 };
 
 export const ImgCarousel = (props: string[], expanded: boolean) => {
+    if (!props) {
+        return <div>no img set</div>;
+    }
     if (!window.currentSelectedCarouselItem) {
         window.currentSelectedCarouselItem = 0;
     }

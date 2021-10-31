@@ -57,7 +57,7 @@ export const EditEventRegister = () => {
             }
         }
         const photoPaths = ProfileStore.get().imgs;
-        console.log(photoPaths);
+
         editProfile(name, date, description, photoPaths, tags)
             .then((response) => {
                 if (response.status === HTTPSuccess) {
@@ -200,10 +200,8 @@ export const EditEventRegister = () => {
                             ps.imgs = [];
                         }
                         userData.imgs.push(response.data.body.photo);
-                        console.log(userData.imgs);
                         ProfileStore.set(userData);
-                        const photoPaths = ProfileStore.get().imgs;
-                        console.log(photoPaths);
+                        console.log('SET!');
                     })
                     .catch((error) => {
                         console.error(error);
