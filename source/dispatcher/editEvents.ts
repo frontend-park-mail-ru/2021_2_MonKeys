@@ -56,7 +56,7 @@ export const EditEventRegister = () => {
                 tags.push(tag);
             }
         }
-        const photoPaths = ProfileStore.get().imgSrc;
+        const photoPaths = ProfileStore.get().imgs;
         console.log(photoPaths);
         editProfile(name, date, description, photoPaths, tags)
             .then((response) => {
@@ -195,14 +195,14 @@ export const EditEventRegister = () => {
 
                         // изменения стора должно повлечь изменение вьюхи
                         const userData = ProfileStore.get();
-                        if (!userData.imgSrc) {
+                        if (!userData.imgs) {
                             const ps = ProfileStore.get();
-                            ps.imgSrc = [];
+                            ps.imgs = [];
                         }
-                        userData.imgSrc.push(response.data.body.photo);
-                        console.log(userData.imgSrc);
+                        userData.imgs.push(response.data.body.photo);
+                        console.log(userData.imgs);
                         ProfileStore.set(userData);
-                        const photoPaths = ProfileStore.get().imgSrc;
+                        const photoPaths = ProfileStore.get().imgs;
                         console.log(photoPaths);
                     })
                     .catch((error) => {

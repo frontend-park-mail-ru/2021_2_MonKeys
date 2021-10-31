@@ -6,14 +6,14 @@ export interface ProfileData {
     age?: string;
     date?: string;
     description?: string;
-    imgSrc?: string[];
+    imgs?: string[];
     tags?: Set<string>;
 }
 
 const ProfileStore = new BaseStore<ProfileData>();
 
 ProfileStore.set({
-    imgSrc: [],
+    imgs: [],
 });
 
 export { ProfileStore };

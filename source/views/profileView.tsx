@@ -19,7 +19,7 @@ export default class ProfileView extends ViewBase {
                 name: ProfileStore.get().name,
                 age: ProfileStore.get().age,
                 description: ProfileStore.get().description,
-                imgSrc: ProfileStore.get().imgSrc,
+                imgSrc: ProfileStore.get().imgs,
             },
             'tags': ProfileStore.get().tags,
             'buttons': {
