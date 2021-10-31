@@ -56,8 +56,9 @@ export const EditEventRegister = () => {
                 tags.push(tag);
             }
         }
-
-        editProfile(name, date, description, tags)
+        const photoPaths = ProfileStore.get().imgSrc;
+        console.log(photoPaths);
+        editProfile(name, date, description, photoPaths, tags)
             .then((response) => {
                 if (response.status === HTTPSuccess) {
                     if (response.data.status === HTTPSuccess) {
@@ -179,7 +180,7 @@ export const EditEventRegister = () => {
 
         EditStore.set(storeData);
     });
-    EventBus.register('editProfile:img-input', (event) => {
+    EventBus.register('edit:img-input', (event) => {
         const files = event.target.files;
 
         if (files.length !== 0) {
@@ -187,17 +188,22 @@ export const EditEventRegister = () => {
 
             if (validImgType(photo)) {
                 addPhotoToProfile(photo)
-                    .then((respons) => {
-                        console.log(respons);
-
-                        if (respons.status !== HTTPSuccess) {
+                    .then((response) => {
+                        if (response.status !== HTTPSuccess) {
                             throw 'jopa';
                         }
 
                         // изменения стора должно повлечь изменение вьюхи
                         const userData = ProfileStore.get();
-                        userData.imgSrc.push(respons.data.imgPath);
+                        if (!userData.imgSrc) {
+                            const ps = ProfileStore.get();
+                            ps.imgSrc = [];
+                        }
+                        userData.imgSrc.push(response.data.body.photo);
+                        console.log(userData.imgSrc);
                         ProfileStore.set(userData);
+                        const photoPaths = ProfileStore.get().imgSrc;
+                        console.log(photoPaths);
                     })
                     .catch((error) => {
                         console.error(error);

@@ -14,12 +14,12 @@ const getProfile = () => {
     return http.get(profileURL);
 };
 
-const editProfile = (name, date, description, /*photoPaths,*/ tags) => {
+const editProfile = (name, date, description, photoPaths, tags) => {
     const body = JSON.stringify({
         name: name,
         date: date,
         description: description,
-        /*  photoPaths: photoPaths,*/
+        imgs: photoPaths,
         tags: tags,
     });
 

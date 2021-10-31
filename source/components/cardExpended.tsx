@@ -11,6 +11,7 @@ export interface CardExpendedProps {
 }
 
 export const CardExpended = (props: CardExpendedProps) => {
+    console.log(props);
     const tagsExists = props.tags !== undefined ? true : false;
     let tagField: HTMLCollection;
     if (tagsExists) {

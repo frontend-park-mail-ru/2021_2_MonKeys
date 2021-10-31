@@ -58,7 +58,7 @@ export default class EditView extends ViewBase {
                 'imgAddButton': {
                     class: 'add',
                     onchange: (event) => {
-                        EventBus.dispatch<string>('editProfile:img-input', event);
+                        EventBus.dispatch<string>('edit:img-input', event);
                     },
                 },
                 'saveButton': {

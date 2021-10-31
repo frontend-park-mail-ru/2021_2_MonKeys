@@ -12,4 +12,8 @@ export interface ProfileData {
 
 const ProfileStore = new BaseStore<ProfileData>();
 
+ProfileStore.set({
+    imgSrc: [],
+});
+
 export { ProfileStore };
