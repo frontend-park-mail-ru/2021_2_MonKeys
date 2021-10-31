@@ -6,6 +6,7 @@ import { likesRequest } from '../requests/likesRequest.js';
 import { matchRequest } from '../requests/matchRequest.js';
 import { feedRequest } from '../requests/feedRequest.js';
 import { HTTPSuccess } from '../constants/HTTPStatus.js';
+import { requestMoreCardsThreshold } from '../constants/feed.js';
 
 export const FeedEventsRegister = () => {
     EventBus.register('feed:like-button', () => {
@@ -57,7 +58,7 @@ export const FeedEventsRegister = () => {
 
         data.counter++;
         console.log(data.counter);
-        if (data.counter === 5) {
+        if (data.counter === requestMoreCardsThreshold) {
             feedRequest().then((response) => {
                 if (response.status === HTTPSuccess) {
                     if (response.data.status === HTTPSuccess) {
