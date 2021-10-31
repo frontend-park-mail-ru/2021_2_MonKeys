@@ -49,7 +49,6 @@ export const InitBus = () => {
                                 profileData.outOfCards = true;
                             }
                             feedStore.set(profileData);
-                            console.log(feedStore.get());
                             router.go('/feed');
                         });
                     } else {
