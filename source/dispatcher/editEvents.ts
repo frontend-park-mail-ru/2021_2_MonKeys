@@ -61,11 +61,7 @@ export const EditEventRegister = () => {
             .then((response) => {
                 if (response.status === HTTPSuccess) {
                     if (response.data.status === HTTPSuccess) {
-                        ProfileStore.set(response.data.body);
-                        AuthStore.set({
-                            loggedIn: userStatus.loggedIn,
-                        });
-                        router.go('/profile');
+                        EventBus.dispatch<string>('user:cookie-requests');
                     } else if (response.data.status === HTTPNotFound) {
                         /// ????
                         console.log('xz');
