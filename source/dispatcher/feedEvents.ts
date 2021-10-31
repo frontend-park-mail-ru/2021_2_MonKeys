@@ -1,8 +1,11 @@
 import EventBus from './eventBus.js';
 import feedStore from '../store/feedStore.js';
+import LikesStore from '../store/likesStore.js';
 import reactions from '../constants/reactions.js';
 import { likesRequest } from '../requests/likesRequest.js';
+import { matchRequest } from '../requests/matchRequest.js';
 import { feedRequest } from '../requests/feedRequest.js';
+import { HTTPSuccess } from '../constants/HTTPStatus.js';
 
 export const FeedEventsRegister = () => {
     EventBus.register('feed:like-button', () => {
@@ -34,24 +37,46 @@ export const FeedEventsRegister = () => {
         const data = feedStore.get();
 
         likesRequest(data.profiles[data.counter].id, reactionID).then((response) => {
-            // some effects when match
-            console.log(response);
+            if (response.status === HTTPSuccess) {
+                if (response.data.status === HTTPSuccess) {
+                    console.log(response.data.match);
+                    if (response.data.match === true) {
+                        matchRequest().then((matchResponse) => {
+                            const likesData = LikesStore.get();
+                            likesData.profiles = matchResponse.data.body.allUsers;
+                            likesData.mathesCount = matchResponse.data.body.matchesCount;
+                            LikesStore.set(likesData);
+                        });
+                    }
+                } else {
+                    console.log('error');
+                }
+            } else {
+                console.log('server internal error');
+            }
         });
 
         data.counter++;
         console.log(data.counter);
         if (data.counter === 5) {
             feedRequest().then((response) => {
-                console.log(response);
-                data.profiles = response.data.body;
-                data.counter = 0;
+                if (response.status === HTTPSuccess) {
+                    if (response.data.status === HTTPSuccess) {
+                        data.profiles = response.data.body;
+                        data.counter = 0;
 
-                if (data.profiles[data.counter]) {
-                    data.outOfCards = false;
+                        if (data.profiles[data.counter]) {
+                            data.outOfCards = false;
+                        } else {
+                            data.outOfCards = true;
+                        }
+                        feedStore.set(data);
+                    } else {
+                        console.log('error');
+                    }
                 } else {
-                    data.outOfCards = true;
+                    console.log('server internal error');
                 }
-                feedStore.set(data);
             });
         } else {
             if (data.profiles[data.counter]) {

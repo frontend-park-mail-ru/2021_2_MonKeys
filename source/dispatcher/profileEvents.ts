@@ -26,7 +26,6 @@ export const ProfileEventsRegister = () => {
                         outOfCards: false,
                         expanded: false,
                     });
-                    // feedStore.clean();
                     router.go('/login');
                 } else if (response.data.status === HTTPNotFound) {
                     /// ????
