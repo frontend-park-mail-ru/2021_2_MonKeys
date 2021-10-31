@@ -1,5 +1,5 @@
-import { likesURL } from '../constants/urls';
-import http from '../utils/http';
+import { likesURL } from '../constants/urls.js';
+import http from '../utils/http.js';
 
 const likesRequest = (id, reaction) => {
     const body = JSON.stringify({

@@ -35,9 +35,9 @@ export const LoginEventRegister = () => {
             return;
         }
 
-        storeData.emailFieldClass = 'form-field-novalid';
+        storeData.emailFieldClass = 'form-field-valid';
         storeData.emailErrorClass = 'login-error';
-        storeData.passwordFieldClass = 'form-field-novalid';
+        storeData.passwordFieldClass = 'form-field-valid';
         storeData.passwordErrorClass = 'login-error';
         LoginStore.set(storeData);
 
@@ -49,16 +49,7 @@ export const LoginEventRegister = () => {
             .then((response) => {
                 if (response.status === HTTPSuccess) {
                     if (response.data.status === HTTPSuccess) {
-                        // ProfileStore.set(response.data.body);
                         EventBus.dispatch<string>('user:cookie-requests');
-                        // router.go('/feed');
-                        // feedRequest().then((feedResponse) => {
-                        //   console.log(feedResponse);
-                        //   let profileData = feedStore.get();
-                        //   profileData.profiles = feedResponse.data.body;
-                        //   feedStore.set(profileData);
-                        //   router.go("/feed");
-                        // });
                     } else if (response.data.status === HTTPNotFound) {
                         storeData.formErrorClass = 'login-error-active';
                         LoginStore.set(storeData);

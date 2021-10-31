@@ -5,6 +5,7 @@ import { HTTPNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
 import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
 import { ProfileStore } from '../store/profileStore.js';
+import feedStore from '../store/feedStore.js';
 
 export const ProfileEventsRegister = () => {
     EventBus.register('profile:edit-button', () => {
@@ -19,6 +20,12 @@ export const ProfileEventsRegister = () => {
             if (response.status === HTTPSuccess) {
                 if (response.data.status === HTTPSuccess) {
                     ProfileStore.clean();
+                    feedStore.set({
+                        profiles: [],
+                        counter: 0,
+                        outOfCards: false,
+                        expanded: false,
+                    });
                     router.go('/login');
                 } else if (response.data.status === HTTPNotFound) {
                     /// ????

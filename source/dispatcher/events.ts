@@ -39,14 +39,15 @@ export const InitBus = () => {
                             likesData.profiles = matchResponse.data.body.allUsers;
                             likesData.mathesCount = matchResponse.data.body.matchesCount;
                             LikesStore.set(likesData);
-                            console.log(matchResponse);
-                            console.log(LikesStore.get());
                         });
                         ProfileStore.set(response.data.body);
                         feedRequest().then((feedResponse) => {
-                            console.log(feedResponse);
                             const profileData = feedStore.get();
-                            profileData.profiles = feedResponse.data.body;
+                            if (feedResponse.data.body !== null) {
+                                profileData.profiles = feedResponse.data.body;
+                            } else {
+                                profileData.outOfCards = true;
+                            }
                             feedStore.set(profileData);
                             router.go('/feed');
                         });

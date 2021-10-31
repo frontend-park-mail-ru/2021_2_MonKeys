@@ -44,7 +44,7 @@ export namespace MonkeysVirtualDOM {
                     rootElement.setAttribute(key, virtualNode.props[key]);
                 }
             });
-        console.log(virtualNode);
+        // console.log(virtualNode);
         virtualNode.children.map(createElement).forEach((childElement) => {
             rootElement.appendChild(childElement);
         });
