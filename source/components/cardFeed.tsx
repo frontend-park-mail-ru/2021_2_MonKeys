@@ -1,35 +1,3 @@
-<<<<<<< HEAD
-import { MonkeysVirtualDOM } from "../virtualDOM/virtualDOM.js";
-import { IconButton } from "./iconButton.js";
-
-export interface CardFeedProps {
-  userData: any;
-  buttons: any;
-}
-
-export const CardFeed = (props: CardFeedProps) => {
-  console.log(props.userData.imgSrc.values());
-  return (
-    <div class="card">
-        <div class="card-main">
-            <img src={props.userData.imgSrc.forEach(element => {
-
-              return element
-            })} class="profile-image"/>
-            <div class="bottom-panel">
-                <div class="name-container">
-                    <div class="name">{props.userData.name}</div>
-                    <div class="age">{props.userData.age}</div>
-                </div>
-                <div class="actions-container">
-                    {Object.keys(props.buttons).map(item => IconButton(props.buttons[item]))}
-                </div>
-            </div>
-        </div>
-    </div>
-  );
-}
-=======
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { IconButton } from './iconButton.js';
 import { ImgCarousel } from './imgCarousel.js';
@@ -58,4 +26,3 @@ export const CardFeed = (props: CardFeedProps) => {
         </div>
     );
 };
->>>>>>> development
