@@ -1,7 +1,5 @@
-import EventBus from "./eventBus.js"
-
-
+import EventBus from './eventBus.js';
 
 export const ChatEventsRegister = () => {
     //...
-}
+};

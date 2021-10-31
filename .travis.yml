@@ -5,18 +5,16 @@ dist: trusty
 language: node_js
 node_js:
   - "14"
-
-
-jobs: 
-  fast_finish: true
   
-before_install:
+install:
+  - npm install
   - npm install -g typescript
 
-install:
-  - make build-typescript
+script:
+  - npm run eslint
+  - npm run prettier-check
 
-eslint:
-  - make eslint-tslint
+build:
+  - npm run build
 
 

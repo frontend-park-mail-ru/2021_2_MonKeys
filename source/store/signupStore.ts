@@ -1,4 +1,4 @@
-import BaseStore from "./storeBase.js";
+import BaseStore from './storeBase.js';
 
 export interface SignupData {
     emailFieldClass: string;
@@ -10,7 +10,7 @@ export interface SignupData {
     formErrorClass: string;
 }
 
-let SignupStore = new BaseStore<SignupData>();
+const SignupStore = new BaseStore<SignupData>();
 
 const initData = {
     emailFieldClass: 'form-field-valid',
@@ -20,7 +20,7 @@ const initData = {
     repeatPasswordFieldClass: 'form-field-valid',
     repeatPasswordErrorClass: 'login-error',
     formErrorClass: 'login-error',
-}
+};
 
 SignupStore.set(initData);
 

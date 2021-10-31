@@ -5,5 +5,11 @@ const errorSignupFormMsg = 'Пользователь с такой почтой 
 const errorRepeatPasswordMsg = 'Пароли не совпадают';
 const errorEditFormMsg = 'Заполните все обязательные поля';
 
-
-export { errorEmailMsg, errorPasswordMsg, errorLoginFormMsg, errorSignupFormMsg, errorRepeatPasswordMsg, errorEditFormMsg };
+export {
+    errorEmailMsg,
+    errorPasswordMsg,
+    errorLoginFormMsg,
+    errorSignupFormMsg,
+    errorRepeatPasswordMsg,
+    errorEditFormMsg,
+};

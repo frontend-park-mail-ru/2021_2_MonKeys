@@ -1,18 +1,16 @@
 import { ProfileData } from './profileStore.js';
 import BaseStore from './storeBase.js';
 
-export type FeedCardData = ProfileData;
+export type MatchCardData = ProfileData;
 
-export interface FeedData {
-    profiles: FeedCardData[];
-    counter: number;
-    outOfCards: boolean;
-    expanded: boolean;
+export interface LikesData {
+    profiles: MatchCardData[];
+    mathesCount: number;
 }
 
-const feedStore = new BaseStore<FeedData>();
+const LikesStore = new BaseStore<LikesData>();
 
-feedStore.set({
+LikesStore.set({
     profiles: [
         // {
         // id: '1',
@@ -33,9 +31,7 @@ feedStore.set({
         //     tags: new Set(['Yeezy', 'Wyoming'])
         // },
     ],
-    counter: 0,
-    outOfCards: false,
-    expanded: false,
+    mathesCount: 0,
 });
 
-export default feedStore;
+export default LikesStore;

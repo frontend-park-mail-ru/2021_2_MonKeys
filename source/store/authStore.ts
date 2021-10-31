@@ -1,18 +1,14 @@
-
-import { userStatus } from "../constants/userStatus.js";
-import BaseStore from "./storeBase.js";
-
+import { userStatus } from '../constants/userStatus.js';
+import BaseStore from './storeBase.js';
 
 export interface AuthData {
     loggedIn: number;
 }
 
-let AuthStore = new BaseStore<AuthData>()
+const AuthStore = new BaseStore<AuthData>();
 
-AuthStore.set( 
-    { 
-        loggedIn: userStatus.notlLoggedIn
-    }
-);
-console.log(AuthStore)
+AuthStore.set({
+    loggedIn: userStatus.notlLoggedIn,
+});
+// console.log(AuthStore)
 export default AuthStore;

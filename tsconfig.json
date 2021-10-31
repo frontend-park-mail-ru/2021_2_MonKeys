@@ -6,12 +6,17 @@
       "moduleResolution": "node",
       "jsxFactory": "MonkeysVirtualDOM.jsxFactory",
       "allowJs": true,
-      "outDir": "./static/js",
+      "outDir": "static/js",
       "baseUrl": "source",
       "paths" : {
         "virtualDOM/*": [
           "virtualDOM/*"
         ]
-      }
-    }
+      
+    }},
+      "exclude": [
+        "rollup.config.js",
+        "static",
+        "node_modules",
+    ],
 }

@@ -8,19 +8,17 @@ export interface EditData {
 
     addImgFieldClass?: string;
 
-    tags?: any;
+    tags?;
 }
 
 const EditStore = new BaseStore<EditData>();
 
 const initData = {
-
     nameFieldClass: 'form-field text-without-icon',
     birthDateFieldClass: 'form-field text-with-icon',
     formErrorClass: 'login-error',
     addImgFieldClass: '', // TODO
 };
-
 
 EditStore.set(initData);
 

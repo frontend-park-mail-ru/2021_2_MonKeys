@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 module.exports = {
   'env': {
     'browser': true,
@@ -20,5 +21,8 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'no-magic-numbers': ['error', { 'ignore': [0, 1, 2, 3] }],
     'no-invalid-this': 0,
+    "newline-per-chained-call": 2,
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-namespace": "off",
   },
 };
