@@ -111,7 +111,11 @@ export namespace MonkeysVirtualDOM {
         manipulationMapStack.map((manipulation) => {
             switch (manipulation.method) {
                 case 'remove': {
-                    manipulation.parent.removeChild(manipulation.child);
+                    console.log(manipulation);
+                    if (manipulation.child) {
+                        manipulation.parent.removeChild(manipulation.child);
+                    }
+
                     break;
                 }
                 case 'append': {
