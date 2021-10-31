@@ -43,8 +43,13 @@ export const InitBus = () => {
                         ProfileStore.set(response.data.body);
                         feedRequest().then((feedResponse) => {
                             const profileData = feedStore.get();
-                            profileData.profiles = feedResponse.data.body;
+                            if (feedResponse.data.body !== null) {
+                                profileData.profiles = feedResponse.data.body;
+                            } else {
+                                profileData.outOfCards = true;
+                            }
                             feedStore.set(profileData);
+                            console.log(feedStore.get());
                             router.go('/feed');
                         });
                     } else {
