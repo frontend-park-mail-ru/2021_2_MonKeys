@@ -51,9 +51,10 @@ export default class SignupEditView extends ViewBase {
                     },
                 },
                 'imgAddButton': {
-                    type: 'button',
-                    text: '',
                     class: 'add',
+                    onchange: (event) => {
+                        EventBus.dispatch<string>('editProfile:img-input', event);
+                    },
                 },
                 'saveButton': {
                     type: 'button',
