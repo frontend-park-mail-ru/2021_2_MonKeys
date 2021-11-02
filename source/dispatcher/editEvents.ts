@@ -3,7 +3,7 @@ import { dateLength } from '../constants/validation.js';
 import { HTTPNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileStore } from '../store/profileStore.js';
 import router from '../route/router.js';
-import { addPhotoToProfile } from '../requests/profilePhotoRequest.js';
+import { addPhotoToProfile, deleteProfilePhoto } from '../requests/profilePhotoRequest.js';
 import { loginRequest } from '../requests/sessionRequest.js';
 import { feedRequest } from '../requests/feedRequest.js';
 import { editProfile } from '../requests/profileRequest.js';
@@ -198,15 +198,37 @@ export const EditEventRegister = () => {
                         if (!userData.imgs) {
                             const ps = ProfileStore.get();
                             ps.imgs = [];
+                            ProfileStore.set(ps);
                         }
                         userData.imgs.push(response.data.body.photo);
                         ProfileStore.set(userData);
-                        console.log('SET!');
                     })
                     .catch((error) => {
                         console.error(error);
                     });
             }
         }
+    });
+    EventBus.register('edit:img-delete', (imgPath) => {
+        console.log(imgPath);
+        deleteProfilePhoto(imgPath)
+            .then((response) => {
+                if (response.status !== HTTPSuccess) {
+                    console.log('Delete img error');
+                    throw 'delete img error';
+                }
+                const userData = ProfileStore.get();
+                console.log(userData.imgs);
+                userData.imgs = userData.imgs.filter((image) => {
+                    if (image != imgPath) {
+                        return image;
+                    }
+                });
+                console.log(userData.imgs);
+                ProfileStore.set(userData);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     });
 };

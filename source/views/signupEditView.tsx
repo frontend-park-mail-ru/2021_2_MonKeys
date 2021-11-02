@@ -3,12 +3,14 @@ import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { EditForm } from '../components/editForm.js';
 import EventBus from '../dispatcher/eventBus.js';
 import { EditStore } from '../store/editStore.js';
+import { ProfileStore } from '../store/profileStore.js';
 import { errorEditFormMsg } from '../constants/errorMsg.js';
 
 export default class SignupEditView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
         EditStore.subscribe(this.subscribtionCallback, this);
+        ProfileStore.subscribe(this.subcribtionCallbackProfile, this);
         this._template = this._createTmpl(this._data);
     }
 
@@ -77,7 +79,7 @@ export default class SignupEditView extends ViewBase {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _createTmpl(data) {
-        return <div>{EditForm(this._data.editForm)}</div>;
+        return <div>{EditForm(data.editForm)}</div>;
     }
 
     public unsubscribe() {
@@ -89,6 +91,12 @@ export default class SignupEditView extends ViewBase {
         view._data.editForm.fields.birthDate.class = data.birthDateFieldClass;
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
         view._data.editForm.tags = data.tags;
+        view._template = view._createTmpl(view._data);
+        view.render();
+    }
+    private subcribtionCallbackProfile(data, view) {
+        if (console.log) console.log(view._data);
+        view._data.editForm.buttons.imgAddButton.imgs = ProfileStore.get().imgs;
         view._template = view._createTmpl(view._data);
         view.render();
     }

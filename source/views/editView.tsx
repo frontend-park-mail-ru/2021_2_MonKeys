@@ -88,8 +88,8 @@ export default class EditView extends ViewBase {
     _createTmpl(data) {
         return (
             <div>
-                {EditForm(this._data.editForm)}
-                {Tapbar(this._data.tapbar)}
+                {EditForm(data.editForm)}
+                {Tapbar(data.tapbar)}
             </div>
         );
     }
@@ -114,6 +114,9 @@ export default class EditView extends ViewBase {
         view.render();
     }
     private subcribtionCallbackProfile(data, view) {
-        console.log('profile changes');
+        if (console.log) console.log(view._data);
+        view._data.editForm.buttons.imgAddButton.imgs = ProfileStore.get().imgs;
+        view._template = view._createTmpl(view._data);
+        view.render();
     }
 }

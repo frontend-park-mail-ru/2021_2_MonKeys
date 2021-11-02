@@ -1,5 +1,7 @@
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import ViewBase from '../views/viewBase.js';
+import { IconButton } from './iconButton.js';
+import EventBus from '../dispatcher/eventBus.js';
 
 export interface ButtonProps {
     class: string;
@@ -7,14 +9,33 @@ export interface ButtonProps {
     imgs: string[];
 }
 
+export interface IconButtonProps {
+    type: string;
+    class: string;
+    src: string;
+    onclick?: { (data, view?: ViewBase): void };
+}
+
 const imgSequence = (imgs: string[]) => {
     const items = [];
-
+    console.log(1);
     if (imgs === undefined || imgs.length === 0) {
         return <div class='text-without-icon'>Нет картинок</div>;
     }
     imgs.forEach((element) => {
-        items.push(<img src={element} class='add-img-item' alt='' />);
+        items.push(
+            <div class='add-img-item'>
+                <img src={element} class='add-img-item' alt='' />
+                {IconButton({
+                    type: 'button',
+                    class: 'add-img-delete',
+                    src: 'icons/button_delete_white.svg',
+                    onclick: () => {
+                        EventBus.dispatch('edit:img-delete', element);
+                    },
+                })}
+            </div>
+        );
     });
     return items;
 };
