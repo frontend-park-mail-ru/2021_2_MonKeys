@@ -54,41 +54,78 @@ export const FeedEventsRegister = () => {
             } else {
                 console.log('server internal error');
             }
+
+            data.counter++;
+
+            if (data.counter === requestMoreCardsThreshold) {
+                feedRequest().then((response) => {
+                    if (response.status === HTTPSuccess) {
+                        if (response.data.status === HTTPSuccess) {
+                            if (response.data.body !== null) {
+                                data.profiles = response.data.body;
+                            } else {
+                                data.profiles = [];
+                                data.outOfCards = true;
+                            }
+                            data.counter = 0;
+
+                            if (data.profiles[data.counter]) {
+                                data.outOfCards = false;
+                            } else {
+                                data.outOfCards = true;
+                            }
+                            feedStore.set(data);
+                        } else {
+                            console.log('error');
+                        }
+                    } else {
+                        console.log('server internal error');
+                    }
+                });
+            } else {
+                if (data.profiles[data.counter]) {
+                    data.outOfCards = false;
+                } else {
+                    data.outOfCards = true;
+                }
+                feedStore.set(data);
+            }
         });
 
-        data.counter++;
+        // data.counter++;
 
-        if (data.counter === requestMoreCardsThreshold) {
-            feedRequest().then((response) => {
-                if (response.status === HTTPSuccess) {
-                    if (response.data.status === HTTPSuccess) {
-                        if (response.data.body) {
-                            data.profiles = response.data.body;
-                        } else {
-                            data.outOfCards = true;
-                        }
-                        data.counter = 0;
+        // if (data.counter === requestMoreCardsThreshold) {
+        //     feedRequest().then((response) => {
+        //         if (response.status === HTTPSuccess) {
+        //             if (response.data.status === HTTPSuccess) {
+        //                 if (response.data.body !== null) {
+        //                     data.profiles = response.data.body;
+        //                 } else {
+        //                     data.profiles = [];
+        //                     data.outOfCards = true;
+        //                 }
+        //                 data.counter = 0;
 
-                        if (data.profiles[data.counter]) {
-                            data.outOfCards = false;
-                        } else {
-                            data.outOfCards = true;
-                        }
-                        feedStore.set(data);
-                    } else {
-                        console.log('error');
-                    }
-                } else {
-                    console.log('server internal error');
-                }
-            });
-        } else {
-            if (data.profiles[data.counter]) {
-                data.outOfCards = false;
-            } else {
-                data.outOfCards = true;
-            }
-            feedStore.set(data);
-        }
+        //                 if (data.profiles[data.counter]) {
+        //                     data.outOfCards = false;
+        //                 } else {
+        //                     data.outOfCards = true;
+        //                 }
+        //                 feedStore.set(data);
+        //             } else {
+        //                 console.log('error');
+        //             }
+        //         } else {
+        //             console.log('server internal error');
+        //         }
+        //     });
+        // } else {
+        //     if (data.profiles[data.counter]) {
+        //         data.outOfCards = false;
+        //     } else {
+        //         data.outOfCards = true;
+        //     }
+        //     feedStore.set(data);
+        // }
     });
 };
