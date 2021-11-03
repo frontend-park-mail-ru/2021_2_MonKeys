@@ -96,7 +96,6 @@ export default class SignupEditView extends ViewBase {
         view.render();
     }
     private subcribtionCallbackProfile(data, view) {
-
         view._data.editForm.buttons.imgAddButton.imgs = ProfileStore.get().imgs;
         view._template = view._createTmpl(view._data);
         view.render();
