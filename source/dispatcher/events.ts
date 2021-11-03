@@ -52,6 +52,7 @@ export const InitBus = () => {
                             }
 
                             feedStore.set(profileData);
+                            console.log(feedStore.get());
                             router.go('/feed');
                         });
                     } else {

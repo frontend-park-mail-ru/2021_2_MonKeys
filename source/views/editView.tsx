@@ -96,7 +96,7 @@ export default class EditView extends ViewBase {
 
     public unsubscribe() {
         EditStore.unsubscribe(this.subcribtionCallbackEdit);
-        EditStore.unsubscribe(this.subcribtionCallbackProfile);
+        ProfileStore.unsubscribe(this.subcribtionCallbackProfile);
     }
 
     private subcribtionCallbackEdit(data, view) {

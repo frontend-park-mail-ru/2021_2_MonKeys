@@ -195,6 +195,7 @@ export const EditEventRegister = () => {
 
                         // изменения стора должно повлечь изменение вьюхи
                         const userData = ProfileStore.get();
+                        console.log(userData);
                         if (!userData.imgs) {
                             const ps = ProfileStore.get();
                             ps.imgs = [];

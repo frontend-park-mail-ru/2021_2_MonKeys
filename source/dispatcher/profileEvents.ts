@@ -19,9 +19,17 @@ export const ProfileEventsRegister = () => {
         logoutRequest().then((response) => {
             if (response.status === HTTPSuccess) {
                 if (response.data.status === HTTPSuccess) {
-                    ProfileStore.clean();
+                    ProfileStore.set({
+                        id: undefined,
+                        name: undefined,
+                        age: undefined,
+                        date: undefined,
+                        description: undefined,
+                        imgs: undefined,
+                        tags: undefined,
+                    });
                     feedStore.set({
-                        profiles: [],
+                        profiles: undefined,
                         counter: 0,
                         outOfCards: false,
                         expanded: false,

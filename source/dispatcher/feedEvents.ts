@@ -62,7 +62,7 @@ export const FeedEventsRegister = () => {
             feedRequest().then((response) => {
                 if (response.status === HTTPSuccess) {
                     if (response.data.status === HTTPSuccess) {
-                        if (response.data.body !== null) {
+                        if (response.data.body) {
                             data.profiles = response.data.body;
                         } else {
                             data.outOfCards = true;
