@@ -1,0 +1,14 @@
+@mixin background() {
+    background: linear-gradient(
+      167.82deg,
+      rgba(240, 151, 255, 0.9) 25.65%,
+      rgba(227, 162, 255, 0.9) 51.98%,
+      rgba(155, 205, 239, 0.9) 89.16%,
+      rgba(153, 231, 255, 0.9) 100%
+    )
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

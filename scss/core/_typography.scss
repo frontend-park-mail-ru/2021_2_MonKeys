@@ -1,0 +1,13 @@
+$font-size-header: 48px;
+$font-size-big: 36px;
+$font-size-medium: 24px;
+$font-size-small: 12px;
+
+$font-default: 'Futura Now Headline Bold';
+
+@font-face {
+  font-family: $font-default;
+  font-style: normal;
+  font-weight: normal;
+  src: local($font-default), url('../fonts/FuturaNowHeadlineBold.woff') format('woff');
+}

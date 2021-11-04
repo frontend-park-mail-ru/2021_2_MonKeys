@@ -102,7 +102,7 @@ export default class SignupView extends ViewBase {
         return (
             <div class='form-container'>
                 <div class='center-container'>
-                    <span class='login-header'>Регистрация</span>
+                    <span class='page-header'>Регистрация</span>
                 </div>
                 <div class='center-container'>
                     <form class='login-form'>

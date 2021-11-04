@@ -81,7 +81,7 @@ export default class EditView extends ViewBase {
             },
         },
         'tapbar': {
-            class: 'menu-profile',
+            class: 'menu-icon',
         },
     };
 

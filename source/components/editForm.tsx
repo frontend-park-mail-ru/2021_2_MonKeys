@@ -1,7 +1,6 @@
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { TagButton } from './tagButton.js';
 import { FormField } from './formField.js';
-import { ImgField } from './imgField.js';
 import { ErrorMsg } from './errorMsg.js';
 import { Button } from './button.js';
 import { AddImg } from './addImg.js';
@@ -30,17 +29,19 @@ export const EditForm = (props: EditFormProps) => {
     }
     return (
         <form class='edit-form'>
-            <div class='inputEdit'>{FormField(props.fields.name)}</div>
-            <div class='inputEdit'>{FormField(props.fields.birthDate)}</div>
-            <div class='inputEdit'>{FormField(props.fields.description)}</div>
-            <div class='tag-container'>
+            <div class='form-field-input'>{FormField(props.fields.name)}</div>
+            <div class='form-field-input'>{FormField(props.fields.birthDate)}</div>
+            <div class='form-field-input'>{FormField(props.fields.description)}</div>
+            <div class='form-field-input'>
+                <div class='tag-container'>
                 {IconButton(props.buttons.tagsButton)}
                 <span class='tags-header'>Tags</span>
 
                 {tagField}
+                </div>
             </div>
 
-            <div class='inputEdit'>{AddImg(props.buttons.imgAddButton)}</div>
+            <div class='form-field-input'>{AddImg(props.buttons.imgAddButton)}</div>
             {ErrorMsg(props.errorMsgs.formError)}
             {Button(props.buttons.saveButton)}
         </form>

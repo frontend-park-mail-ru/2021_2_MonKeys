@@ -1,0 +1,31 @@
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+body {
+  margin: 0px;
+}
+
+::-webkit-input-placeholder {
+  color: #ffffff;
+}
+
+:-ms-input-placeholder {
+  color: #ffffff;
+}
+
+::-moz-placeholder {
+  color: #ffffff;
+  opacity: 1;
+}
+
+:-moz-placeholder {
+  color: #ffffff;
+  opacity: 1;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}

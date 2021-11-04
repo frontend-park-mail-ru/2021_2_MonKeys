@@ -8,7 +8,7 @@ export const Tapbar = (props: tapbarProps) => {
     let tapbarTmpl;
 
     switch (props.class) {
-        case 'menu-feed':
+        case 'menu-icon':
             return (tapbarTmpl = (
                 <div class='tapbar-container'>
                     <mon-router route='/feed'>
@@ -18,27 +18,27 @@ export const Tapbar = (props: tapbarProps) => {
                     </mon-router>
                     <mon-router route='/matches'>
                         <button class='menu-icon'>
-                            <img src='icons/tapbar_likes_white_deselected.svg' class='menu-likes' />
+                            <img src='icons/tapbar_likes_white_deselected.svg' class='menu-icon' />
                         </button>
                     </mon-router>
                     <mon-router route='/chat'>
                         <button class='menu-icon'>
-                            <img src='icons/tapbar_chat_white_deselected.svg' class='menu-chat' />
+                            <img src='icons/tapbar_chat_white_deselected.svg' class='menu-icon' />
                         </button>
                     </mon-router>
                     <mon-router route='/profile'>
                         <button class='menu-icon'>
-                            <img src='icons/tapbar_user_white_deselected.svg' class='menu-profile' />
+                            <img src='icons/tapbar_user_white_deselected.svg' class='menu-icon' />
                         </button>
                     </mon-router>
                 </div>
             ));
-        case 'menu-likes':
+        case 'menu-icon':
             return (tapbarTmpl = (
                 <div class='tapbar-container'>
                     <mon-router route='/feed'>
                         <button class='menu-icon'>
-                            <img src='icons/tapbar_feed_white_deselected.svg' class='menu-feed' />
+                            <img src='icons/tapbar_feed_white_deselected.svg' class='menu-icon' />
                         </button>
                     </mon-router>
                     <mon-router route='/matches'>
@@ -48,27 +48,27 @@ export const Tapbar = (props: tapbarProps) => {
                     </mon-router>
                     <mon-router route='/chat'>
                         <button class='menu-icon'>
-                            <img src='icons/tapbar_chat_white_deselected.svg' class='menu-chat' />
+                            <img src='icons/tapbar_chat_white_deselected.svg' class='menu-icon' />
                         </button>
                     </mon-router>
                     <mon-router route='/profile'>
                         <button class='menu-icon'>
-                            <img src='icons/tapbar_user_white_deselected.svg' class='menu-profile' />
+                            <img src='icons/tapbar_user_white_deselected.svg' class='menu-icon' />
                         </button>
                     </mon-router>
                 </div>
             ));
-        case 'menu-chat':
+        case 'menu-icon':
             return (tapbarTmpl = (
                 <div class='tapbar-container'>
                     <mon-router route='/feed'>
                         <button class='menu-icon'>
-                            <img src='icons/tapbar_feed_white_deselected.svg' class='menu-feed' />
+                            <img src='icons/tapbar_feed_white_deselected.svg' class='menu-icon' />
                         </button>
                     </mon-router>
                     <mon-router route='/matches'>
                         <button class='menu-icon'>
-                            <img src='icons/tapbar_likes_white_deselected.svg' class='menu-likes' />
+                            <img src='icons/tapbar_likes_white_deselected.svg' class='menu-icon' />
                         </button>
                     </mon-router>
                     <mon-router route='/chat'>
@@ -78,27 +78,27 @@ export const Tapbar = (props: tapbarProps) => {
                     </mon-router>
                     <mon-router route='/profile'>
                         <button class='menu-icon'>
-                            <img src='icons/tapbar_user_white_deselected.svg' class='menu-profile' />
+                            <img src='icons/tapbar_user_white_deselected.svg' class='menu-icon' />
                         </button>
                     </mon-router>
                 </div>
             ));
-        case 'menu-profile':
+        case 'menu-icon':
             return (tapbarTmpl = (
                 <div class='tapbar-container'>
                     <mon-router route='/feed'>
                         <button class='menu-icon'>
-                            <img src='icons/tapbar_feed_white_deselected.svg' class='menu-feed' />
+                            <img src='icons/tapbar_feed_white_deselected.svg' class='menu-icon' />
                         </button>
                     </mon-router>
                     <mon-router route='/matches'>
                         <button class='menu-icon'>
-                            <img src='icons/tapbar_likes_white_deselected.svg' class='menu-likes' />
+                            <img src='icons/tapbar_likes_white_deselected.svg' class='menu-icon' />
                         </button>
                     </mon-router>
                     <mon-router route='/chat'>
                         <button class='menu-icon'>
-                            <img src='icons/tapbar_chat_white_deselected.svg' class='menu-chat' />
+                            <img src='icons/tapbar_chat_white_deselected.svg' class='menu-icon' />
                         </button>
                     </mon-router>
                     <mon-router route='/profile'>

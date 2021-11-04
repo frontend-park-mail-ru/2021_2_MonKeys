@@ -46,7 +46,7 @@ export const CardExpended = (props: CardExpendedProps) => {
                     {tagField}
                 </div>
             </div>
-            <div id='editID' class='actions-container-profile'>
+            <div id='editID' class='actions-container'>
                 {Object.keys(props.buttons).map((item) => IconButton(props.buttons[item]))}
             </div>
         </div>
