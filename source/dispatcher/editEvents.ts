@@ -41,8 +41,8 @@ export const EditEventRegister = () => {
             return;
         }
 
-        storeData.nameFieldClass = 'form-field text-without-icon';
-        storeData.birthDateFieldClass = 'form-field text-with-icon';
+        storeData.nameFieldClass = 'form-field-edit text-without-icon';
+        storeData.birthDateFieldClass = 'form-field-edit text-with-icon';
         storeData.formErrorClass = 'login-error';
         EditStore.set(storeData);
 
@@ -154,7 +154,7 @@ export const EditEventRegister = () => {
         const test = _nameInput.value.length !== 0;
 
         test
-            ? (storeData.nameFieldClass = 'form-field text-without-icon')
+            ? (storeData.nameFieldClass = 'form-field-edit text-without-icon')
             : (storeData.nameFieldClass = 'form-field-edit-novalid text-without-icon');
 
         if (storeData.formErrorClass === 'login-error-active') {
@@ -171,7 +171,7 @@ export const EditEventRegister = () => {
 
         const test = _dateInput.value.toString().length === dateLength;
         test
-            ? (storeData.birthDateFieldClass = 'form-field text-with-icon')
+            ? (storeData.birthDateFieldClass = 'form-field-edit text-with-icon')
             : (storeData.birthDateFieldClass = 'form-field-edit-novalid text-with-icon');
 
         if (storeData.formErrorClass === 'login-error-active') {

@@ -39,7 +39,7 @@ export default class SignupEditView extends ViewBase {
                     tag: 'textarea',
                     placeholder: 'Расскажите о себе',
                     name: 'description',
-                    class: 'form-field-desc text-desc',
+                    class: 'form-field-edit text-desc',
                 },
             },
             'tags': EditStore.get().tags,

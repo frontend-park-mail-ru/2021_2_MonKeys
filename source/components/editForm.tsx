@@ -29,15 +29,17 @@ export const EditForm = (props: EditFormProps) => {
     }
     return (
         <form class='edit-form'>
+            <span class='page-header-small'>Профиль</span>
             <div class='form-field-input'>{FormField(props.fields.name)}</div>
             <div class='form-field-input'>{FormField(props.fields.birthDate)}</div>
             <div class='form-field-input'>{FormField(props.fields.description)}</div>
             <div class='form-field-input'>
                 <div class='tag-container'>
-                {IconButton(props.buttons.tagsButton)}
-                <span class='tags-header'>Tags</span>
-
-                {tagField}
+                    <div class='tags-header'>
+                        {IconButton(props.buttons.tagsButton)}
+                        <span>Tags</span>
+                    </div>
+                    {tagField}
                 </div>
             </div>
 
