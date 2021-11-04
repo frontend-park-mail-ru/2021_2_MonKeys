@@ -63,6 +63,7 @@ export const EditEventRegister = () => {
                 if (response.status === HTTPSuccess) {
                     if (response.data.status === HTTPSuccess) {
                         EventBus.dispatch<string>('user:cookie-requests');
+                        router.go('/profile');
                     } else if (response.data.status === HTTPNotFound) {
                         /// ????
                         console.log('400');

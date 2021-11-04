@@ -9,8 +9,8 @@ export default class ChatView extends ViewBase {
         },
     };
     _template = (
-        <div>
-            чатик)
+        <div class='card-container'>
+            чат
             {Tapbar(this._data.tapbar)}
         </div>
     );

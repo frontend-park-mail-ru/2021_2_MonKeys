@@ -87,7 +87,7 @@ export default class EditView extends ViewBase {
 
     _createTmpl(data) {
         return (
-            <div>
+            <div class='card-container'>
                 {EditForm(data.editForm)}
                 {Tapbar(data.tapbar)}
             </div>

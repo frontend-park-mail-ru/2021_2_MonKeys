@@ -4,7 +4,6 @@ import { Tapbar } from '../components/tapbar.js';
 import { CardExpended } from '../components/cardExpended.js';
 import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
-import eventBus from '../dispatcher/eventBus.js';
 
 export default class ProfileView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -49,8 +48,8 @@ export default class ProfileView extends ViewBase {
 
     _createTmpl(data) {
         return (
-            <div>
-                <div class='card-container'>{CardExpended(this._data.cardData)}</div>
+            <div class='card-container'>
+                {CardExpended(this._data.cardData)}
                 {Tapbar(this._data.tapbar)}
             </div>
         );

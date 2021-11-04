@@ -15,5 +15,4 @@ window.onpopstate = (event) => {
 };
 
 EventBus.dispatch<string>('user:cookie-requests');
-router.go(window.location.pathname);
 window.history.pushState('', '', window.location.pathname);

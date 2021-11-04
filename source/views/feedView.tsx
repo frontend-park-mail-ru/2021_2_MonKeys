@@ -1,8 +1,6 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { Tapbar } from '../components/tapbar.js';
-import { CardLikes } from '../components/cardLikes.js';
-import { IconButton } from '../components/iconButton.js';
 import { CardFeed } from '../components/cardFeed.js';
 import { CardExpended } from '../components/cardExpended.js';
 import feedStore from '../store/feedStore.js';
@@ -82,13 +80,11 @@ export default class FeedView extends ViewBase {
             };
 
             return (
-                <div>
-                    <div class='card-container'>
-                        <div class='card3'></div>
-                        <div class='card3'></div>
-                        <div class='card2'></div>
-                        {CardFeed(data.cardData)}
-                    </div>
+                <div class='card-container'>
+                    <div class='card3'></div>
+                    <div class='card3'></div>
+                    <div class='card2'></div>
+                    {CardFeed(data.cardData)}
                     {Tapbar(data.tapbar)}
                 </div>
             );
@@ -102,13 +98,11 @@ export default class FeedView extends ViewBase {
                 },
             };
             return (
-                <div>
-                    <div class='card-container'>
-                        <div class='card3'></div>
-                        <div class='card3'></div>
-                        <div class='card2'></div>
-                        {CardExpended(data.cardData)}
-                    </div>
+                <div class='card-container'>
+                    <div class='card3'></div>
+                    <div class='card3'></div>
+                    <div class='card2'></div>
+                    {CardExpended(data.cardData)}
                     {Tapbar(data.tapbar)}
                 </div>
             );
