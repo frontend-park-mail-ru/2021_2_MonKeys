@@ -73,3 +73,12 @@
   width: 40px;
   background-color: transparent;
 }
+
+.edit-button-text {
+  position: absolute;
+  font-style: normal;
+  font-weight: bold;
+  font-size: $font-size-big;
+  line-height: 59px;
+  color: #000000;
+}
