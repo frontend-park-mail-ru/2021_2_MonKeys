@@ -6,6 +6,7 @@ export interface LoginData {
     passwordFieldClass: string;
     passwordErrorClass: string;
     formErrorClass: string;
+    apiErrorLoadCondition: boolean;
 }
 
 const LoginStore = new BaseStore<LoginData>();
@@ -16,6 +17,7 @@ const initData = {
     passwordFieldClass: 'form-field-valid',
     passwordErrorClass: 'login-error',
     formErrorClass: 'login-error',
+    apiErrorLoadCondition: false,
 };
 
 LoginStore.set(initData);

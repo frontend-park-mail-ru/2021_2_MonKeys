@@ -7,6 +7,7 @@ import { ErrorMsg } from '../components/errorMsg.js';
 import { errorEmailMsg, errorPasswordMsg, errorRepeatPasswordMsg, errorSignupFormMsg } from '../constants/errorMsg.js';
 import EventBus from '../dispatcher/eventBus.js';
 import { SignupStore } from '../store/signupStore.js';
+import { CritError } from '../components/critError.js';
 
 export default class SignupView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -96,6 +97,10 @@ export default class SignupView extends ViewBase {
                 class: SignupStore.get().formErrorClass,
             },
         },
+        'critError': {
+            text: 'API не отвечает',
+            loading: SignupStore.get().apiErrorLoadCondition,
+        },
     };
 
     _createTmpl(data) {
@@ -119,6 +124,7 @@ export default class SignupView extends ViewBase {
                     </form>
                 </div>
                 {Link(this._data.links.login)}
+                {CritError(data.critError)}
             </div>
         );
     }
@@ -135,6 +141,7 @@ export default class SignupView extends ViewBase {
         view._data.errorMsgs.passwordError.class = data.passwordErrorClass;
         view._data.errorMsgs.repeatPasswordError.class = data.repeatPasswordErrorClass;
         view._data.errorMsgs.formError.class = data.formErrorClass;
+        view._data.critError = data.apiErrorLoadCondition;
         view._template = view._createTmpl(view._data);
         view.render();
     }

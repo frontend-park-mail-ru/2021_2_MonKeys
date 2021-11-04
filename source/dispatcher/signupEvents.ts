@@ -67,7 +67,8 @@ export const SignupEventRegister = () => {
                     }
                 } else {
                     // server internal error
-                    console.log('server internal error');
+                    storeData.apiErrorLoadCondition = true;
+                    SignupStore.set(storeData);
                 }
             })
             .catch((error) => console.log(error));

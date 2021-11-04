@@ -20,6 +20,7 @@ export default class LoginView extends ViewBase {
         view._data.errorMsgs.emailError.class = data.emailErrorClass;
         view._data.errorMsgs.passwordError.class = data.passwordErrorClass;
         view._data.errorMsgs.formError.class = data.formErrorClass;
+        view._data.critError = data.apiErrorLoadCondition;
         view._template = view._createTmpl(view._data);
         view.render();
     }
@@ -93,6 +94,10 @@ export default class LoginView extends ViewBase {
                 class: LoginStore.get().formErrorClass,
             },
         },
+        'critError': {
+            text: 'API не отвечает',
+            loading: LoginStore.get().apiErrorLoadCondition,
+        }
     };
 
     _createTmpl(data) {
@@ -114,9 +119,7 @@ export default class LoginView extends ViewBase {
                     </form>
                 </div>
                 {Link(data.links.signup)}
-                {CritError({
-                    text: 'API не отвечает',
-                })}
+                {CritError(data.critError)}
             </div>
         );
     }
