@@ -97,7 +97,7 @@ export default class LoginView extends ViewBase {
         'critError': {
             text: 'API не отвечает',
             loading: LoginStore.get().apiErrorLoadCondition,
-        }
+        },
     };
 
     _createTmpl(data) {

@@ -53,7 +53,7 @@ export default class ProfileView extends ViewBase {
     };
 
     _createTmpl(data) {
-        console.log(data.critError)
+        console.log(data.critError);
         return (
             <div>
                 <div class='card-container'>{CardExpended(data.cardData)}</div>
