@@ -107,14 +107,11 @@ export default class EditView extends ViewBase {
         view._data.editForm.fields.name.value = ProfileStore.get().name;
         view._data.editForm.fields.birthDate.value = ProfileStore.get().date;
         view._data.editForm.fields.description.value = ProfileStore.get().description;
-        // console.log("test")
-        // view._data.editForm.buttons.imgAddButton.imgs = ProfileStore.get().imgs;
         view._template = view._createTmpl(view._data);
 
         view.render();
     }
     private subcribtionCallbackProfile(data, view) {
-        if (console.log) console.log(view._data);
         view._data.editForm.buttons.imgAddButton.imgs = ProfileStore.get().imgs;
         view._template = view._createTmpl(view._data);
         view.render();

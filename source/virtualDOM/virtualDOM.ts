@@ -44,7 +44,6 @@ export namespace MonkeysVirtualDOM {
                     rootElement.setAttribute(key, virtualNode.props[key]);
                 }
             });
-        // console.log(virtualNode);
         virtualNode.children.map(createElement).forEach((childElement) => {
             rootElement.appendChild(childElement);
         });
@@ -111,7 +110,6 @@ export namespace MonkeysVirtualDOM {
         manipulationMapStack.map((manipulation) => {
             switch (manipulation.method) {
                 case 'remove': {
-                    // console.log(manipulation);
                     if (manipulation.child) {
                         manipulation.parent.removeChild(manipulation.child);
                     }

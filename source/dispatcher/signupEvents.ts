@@ -58,7 +58,6 @@ export const SignupEventRegister = () => {
         });
         createProfile(_email, _password)
             .then((response) => {
-                // console.log(response);
                 if (response.status === HTTPSuccess) {
                     if (response.data.status === HTTPSuccess) {
                         router.go('/signup-edit');

@@ -37,9 +37,9 @@ export const ProfileEventsRegister = () => {
                     router.go('/login');
                 } else if (response.data.status === HTTPNotFound) {
                     /// ????
-                    console.log('xz');
+                    console.log('404');
                 } else {
-                    console.log('error');
+                    console.log('400');
                 }
             } else {
                 // server internal error
