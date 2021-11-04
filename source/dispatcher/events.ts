@@ -59,9 +59,8 @@ export const InitBus = () => {
                             loggedIn: userStatus.Signup,
                         });
                     }
-                    //   router.go("/feed");
                 } else {
-                    console.log('error');
+                    console.log('400');
                 }
             } else {
                 // server internal error

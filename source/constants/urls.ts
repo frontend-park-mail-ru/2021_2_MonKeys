@@ -1,4 +1,4 @@
-const serverAddress = 'https://ijia.me';
+const serverAddress = 'http://localhost';
 const profileURL = '/api/v1/profile';
 const tagsURL = '/api/v1/tags';
 const sessionURL = '/api/v1/session';

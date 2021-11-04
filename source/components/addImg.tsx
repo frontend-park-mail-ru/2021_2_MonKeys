@@ -18,7 +18,6 @@ export interface IconButtonProps {
 
 const imgSequence = (imgs: string[]) => {
     const items = [];
-    console.log(1);
     if (imgs === undefined || imgs.length === 0) {
         return <div class='text-without-icon'>Нет картинок</div>;
     }

@@ -65,7 +65,7 @@ export const EditEventRegister = () => {
                         EventBus.dispatch<string>('user:cookie-requests');
                     } else if (response.data.status === HTTPNotFound) {
                         /// ????
-                        console.log('xz');
+                        console.log('400');
                     }
                 } else {
                     // server internal error
@@ -93,7 +93,7 @@ export const EditEventRegister = () => {
                         );
                         EditStore.set(storeData);
                     } else if (response.data.status === HTTPNotFound) {
-                        console.log('xz');
+                        console.log('400');
                     }
                 } else {
                     // server internal error
@@ -210,7 +210,6 @@ export const EditEventRegister = () => {
         }
     });
     EventBus.register('edit:img-delete', (imgPath) => {
-        console.log(imgPath);
         deleteProfilePhoto(imgPath)
             .then((response) => {
                 if (response.status !== HTTPSuccess) {
@@ -218,13 +217,11 @@ export const EditEventRegister = () => {
                     throw 'delete img error';
                 }
                 const userData = ProfileStore.get();
-                console.log(userData.imgs);
                 userData.imgs = userData.imgs.filter((image) => {
                     if (image != imgPath) {
                         return image;
                     }
                 });
-                console.log(userData.imgs);
                 ProfileStore.set(userData);
             })
             .catch((error) => {
