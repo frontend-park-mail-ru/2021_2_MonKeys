@@ -43,7 +43,7 @@ export default class EditView extends ViewBase {
                     placeholder: 'Расскажите о себе',
                     value: ProfileStore.get().description,
                     name: 'description',
-                    class: 'form-field-desc text-desc',
+                    class: 'form-field-edit text-desc',
                 },
             },
             'tags': EditStore.get().tags,
@@ -81,7 +81,7 @@ export default class EditView extends ViewBase {
             },
         },
         'tapbar': {
-            class: 'menu-profile',
+            class: 'menu-icon',
         },
     };
 

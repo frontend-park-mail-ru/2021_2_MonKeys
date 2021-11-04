@@ -5,7 +5,7 @@ import { Tapbar } from '../components/tapbar.js';
 export default class ChatView extends ViewBase {
     _data = {
         'tapbar': {
-            class: 'menu-chat',
+            class: 'menu-icon',
         },
     };
     _template = (

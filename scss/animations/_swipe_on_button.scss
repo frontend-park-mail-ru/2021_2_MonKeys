@@ -1,0 +1,19 @@
+@keyframes swipedLeft {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-400px, 0px) rotate(-20deg);
+    opacity: 0.01;
+  }
+}
+
+@keyframes swipedRight {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(400px, 0px) rotate(20deg);
+    opacity: 0.01;
+  }
+}

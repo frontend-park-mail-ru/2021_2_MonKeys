@@ -37,7 +37,7 @@ export default class FeedView extends ViewBase {
                 dislikeButton: {
                     type: 'button',
                     src: 'icons/button_dislike_white.svg',
-                    class: 'dislike-card',
+                    class: 'menu-icon',
                     onclick: () => {
                         eventBus.dispatch('feed:dislike-button');
                     },
@@ -45,7 +45,7 @@ export default class FeedView extends ViewBase {
                 expandButton: {
                     type: 'button',
                     src: 'icons/button_expand_white.svg',
-                    class: 'expand-card',
+                    class: 'menu-icon',
                     onclick: () => {
                         eventBus.dispatch('feed:expand-button');
                     },
@@ -53,7 +53,7 @@ export default class FeedView extends ViewBase {
                 likeButton: {
                     type: 'button',
                     src: 'icons/tapbar_likes_white_selected.svg',
-                    class: 'like-card',
+                    class: 'menu-icon',
                     onclick: () => {
                         eventBus.dispatch('feed:like-button');
                     },
@@ -61,7 +61,7 @@ export default class FeedView extends ViewBase {
             },
         },
         tapbar: {
-            class: 'menu-feed',
+            class: 'menu-icon',
         },
     };
 
@@ -75,7 +75,7 @@ export default class FeedView extends ViewBase {
             this._data.cardData.buttons.expandButton = {
                 type: 'button',
                 src: 'icons/button_expand_white.svg',
-                class: 'expand-card',
+                class: 'menu-icon',
                 onclick: () => {
                     eventBus.dispatch('feed:expand-button');
                 },
@@ -96,7 +96,7 @@ export default class FeedView extends ViewBase {
             this._data.cardData.buttons.expandButton = {
                 type: 'button',
                 src: 'icons/button_shrink_white.svg',
-                class: 'expand-card',
+                class: 'menu-icon',
                 onclick: () => {
                     eventBus.dispatch('feed:shrink-button');
                 },

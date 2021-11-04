@@ -15,7 +15,7 @@ export default class LikesView extends ViewBase {
         'matchesCount': LikesStore.get().mathesCount,
         'matches': LikesStore.get().profiles,
         'tapbar': {
-            class: 'menu-likes',
+            class: 'menu-icon',
         },
     };
 

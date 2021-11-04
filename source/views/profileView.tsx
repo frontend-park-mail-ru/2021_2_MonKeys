@@ -27,7 +27,7 @@ export default class ProfileView extends ViewBase {
                 'logoutButton': {
                     type: 'button',
                     src: 'icons/button_previous_white.svg',
-                    class: 'profile-logout',
+                    class: 'menu-icon',
                     onclick: () => {
                         EventBus.dispatch<string>('profile:logout-button');
                     },
@@ -35,7 +35,7 @@ export default class ProfileView extends ViewBase {
                 'editButton': {
                     type: 'button',
                     src: 'icons/button_edit_white.svg',
-                    class: 'profile-edit',
+                    class: 'menu-icon',
                     onclick: () => {
                         EventBus.dispatch<string>('profile:edit-button');
                     },
@@ -43,7 +43,7 @@ export default class ProfileView extends ViewBase {
             },
         },
         'tapbar': {
-            class: 'menu-profile',
+            class: 'menu-icon',
         },
     };
 

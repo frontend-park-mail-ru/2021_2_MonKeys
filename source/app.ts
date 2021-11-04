@@ -4,7 +4,6 @@ import { InitBus } from './dispatcher/events.js';
 import ViewBase from 'views/viewBase.js';
 
 InitBus();
-
 declare global {
     interface Window {
         currentDOM;
