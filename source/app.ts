@@ -4,7 +4,6 @@ import { InitBus } from './dispatcher/events.js';
 import ViewBase from './views/viewBase.js';
 import registerServiceWorker from './service/serviceWorkerRegister.js';
 
-registerServiceWorker();
 InitBus();
 
 declare global {
@@ -20,3 +19,5 @@ window.onpopstate = (event) => {
 EventBus.dispatch<string>('user:cookie-requests');
 router.go(window.location.pathname);
 window.history.pushState('', '', window.location.pathname);
+
+registerServiceWorker();
