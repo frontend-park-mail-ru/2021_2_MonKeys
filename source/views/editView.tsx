@@ -80,9 +80,6 @@ export default class EditView extends ViewBase {
                 },
             },
         },
-        'tapbar': {
-            class: 'menu-icon',
-        },
     };
 
     _createTmpl(data) {

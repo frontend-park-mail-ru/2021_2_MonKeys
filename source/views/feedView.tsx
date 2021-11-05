@@ -6,12 +6,13 @@ import { CardExpended } from '../components/cardExpended.js';
 import feedStore from '../store/feedStore.js';
 import eventBus from '../dispatcher/eventBus.js';
 import { OutOfCards } from '../components/outOfCards.js';
+import TapbarStore from '../store/tapbarStore.js';
 
 export default class FeedView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
-        const cardData = feedStore.get();
 
+        const cardData = feedStore.get();
         this.updateDataTemaplate(cardData);
         feedStore.subscribe(this.subscribtionCallback, this);
     }
@@ -23,7 +24,7 @@ export default class FeedView extends ViewBase {
             this._template = (
                 <div class='card-container'>
                     {OutOfCards()}
-                    {Tapbar(this._data.tapbar)}
+                    {Tapbar(TapbarStore.get())}
                 </div>
             );
         }
@@ -57,9 +58,6 @@ export default class FeedView extends ViewBase {
                     },
                 },
             },
-        },
-        tapbar: {
-            class: 'menu-icon',
         },
     };
 

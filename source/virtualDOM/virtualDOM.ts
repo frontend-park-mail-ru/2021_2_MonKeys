@@ -58,6 +58,9 @@ export namespace MonkeysVirtualDOM {
 
     const changedProps = (nodeA, nodeB): boolean => {
         let a = false;
+        if ((!nodeA.props && nodeB.props) || (nodeA.props && !nodeB.props)) {
+            a = true;
+        }
         nodeA.props &&
             nodeB.props &&
             Object.keys(nodeA.props).forEach((key) => {

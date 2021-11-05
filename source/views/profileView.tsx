@@ -4,6 +4,7 @@ import { Tapbar } from '../components/tapbar.js';
 import { CardExpended } from '../components/cardExpended.js';
 import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
+import TapbarStore from '../store/tapbarStore.js';
 
 export default class ProfileView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -50,7 +51,7 @@ export default class ProfileView extends ViewBase {
         return (
             <div class='card-container'>
                 {CardExpended(this._data.cardData)}
-                {Tapbar(this._data.tapbar)}
+                {Tapbar(TapbarStore.get())}
             </div>
         );
     }

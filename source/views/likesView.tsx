@@ -3,10 +3,12 @@ import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { Tapbar } from '../components/tapbar.js';
 import { CardLikes } from '../components/cardLikes.js';
 import LikesStore from '../store/likesStore.js';
+import TapbarStore from '../store/tapbarStore.js';
 
 export default class LikesView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
+
         LikesStore.subscribe(this.subscribtionCallback, this);
         this._template = this._createTmpl(this._data);
     }
@@ -14,9 +16,6 @@ export default class LikesView extends ViewBase {
     _data = {
         'matchesCount': LikesStore.get().mathesCount,
         'matches': LikesStore.get().profiles,
-        'tapbar': {
-            class: 'menu-icon',
-        },
     };
 
     _createTmpl(data) {
@@ -24,7 +23,7 @@ export default class LikesView extends ViewBase {
             <div class='card-container'>
                 <div class='likes-count'>You have {this._data.matchesCount} matches!</div>
                 {Object.keys(this._data.matches).map((item) => CardLikes(this._data.matches[item]))}
-                {Tapbar(this._data.tapbar)}
+                {Tapbar(TapbarStore.get())}
             </div>
         );
     }
