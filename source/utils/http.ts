@@ -18,6 +18,15 @@ class Http {
      * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
      */
     private async _request({ url = '/', method = 'GET', headers = new Headers(), body = null }) {
+
+        const csrfToken = window.csrfToken
+        if (csrfToken){
+            console.log(csrfToken, 'check')
+            const csrfHeader = new Headers()
+            csrfHeader.set('x-csrf-Token', csrfToken)
+            headers = csrfHeader
+        }
+
         const response = await fetch(this._baseURL + url, {
             method: method,
             headers: headers,
@@ -27,9 +36,15 @@ class Http {
 
         const responseData = await response.json();
 
+        // if (method === 'GET') {
+            window.csrfToken = response.headers.get('csrf')
+            console.log(window.csrfToken, 'set')
+        // }
+
         return {
             status: response.status,
             data: responseData,
+            csrf: response.headers.get('csrf'),
         };
     }
 

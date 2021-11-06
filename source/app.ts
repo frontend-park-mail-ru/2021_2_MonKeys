@@ -9,8 +9,10 @@ declare global {
     interface Window {
         currentDOM;
         currentView: ViewBase;
+        csrfToken: string;
     }
 }
+
 window.onpopstate = (event) => {
     router.move(window.location.pathname);
 };
