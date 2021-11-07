@@ -89,7 +89,6 @@ export default class EditView extends ViewBase {
             text: 'API не отвечает',
             loading: EditStore.get().apiErrorLoadCondition,
         },
-
     };
 
     _createTmpl(data) {

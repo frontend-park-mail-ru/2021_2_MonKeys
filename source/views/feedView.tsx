@@ -73,7 +73,6 @@ export default class FeedView extends ViewBase {
             text: 'API не отвечает',
             loading: feedStore.get().apiErrorLoadCondition,
         },
-
     };
 
     forceRender() {
@@ -94,7 +93,6 @@ export default class FeedView extends ViewBase {
             };
 
             return (
-
                 <div>
                     <div class='card-container'>
                         <div class='card3'></div>
