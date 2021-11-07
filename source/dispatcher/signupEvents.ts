@@ -61,10 +61,14 @@ export const SignupEventRegister = () => {
                 if (response.status === HTTPSuccess) {
                     if (response.data.status === HTTPSuccess) {
                         router.go('/signup-edit');
+                        // window.csrfToken = response.csrf
+                        // console.log(window.csrfToken)
                     } else if (response.data.status === HTTPEMailNotFound) {
                         storeData.formErrorClass = 'login-error-active';
                         SignupStore.set(storeData);
                     }
+                    window.csrfToken = response.csrf;
+                    console.log(window.csrfToken);
                 } else {
                     // server internal error
                     console.log('server internal error');
