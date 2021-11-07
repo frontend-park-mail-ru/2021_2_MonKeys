@@ -6,6 +6,7 @@ import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
 import eventBus from '../dispatcher/eventBus.js';
 import { CritError } from '../components/critError.js';
+import TapbarStore from '../store/tapbarStore.js';
 
 export default class ProfileView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -57,7 +58,7 @@ export default class ProfileView extends ViewBase {
         return (
             <div>
                 <div class='card-container'>{CardExpended(data.cardData)}</div>
-                {Tapbar(data.tapbar)}
+                 {Tapbar(TapbarStore.get())}
                 {CritError(data.critError)}
             </div>
         );

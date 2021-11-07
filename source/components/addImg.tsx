@@ -19,7 +19,7 @@ export interface IconButtonProps {
 const imgSequence = (imgs: string[]) => {
     const items = [];
     if (imgs === undefined || imgs.length === 0) {
-        return <div class='text-without-icon'>Нет картинок</div>;
+        return <div class='text-without-icon'>Нет фото</div>;
     }
     imgs.forEach((element) => {
         items.push(

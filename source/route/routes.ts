@@ -43,6 +43,7 @@ export const Routes = {
         path: '/edit',
         auth: userStatus.loggedIn,
         view: EditView,
+        tapbar: 'profile',
     },
     '/signup-edit': {
         name: 'Редактирование',
@@ -55,24 +56,28 @@ export const Routes = {
         path: '/feed',
         auth: userStatus.loggedIn,
         view: FeedView,
+        tapbar: 'feed',
     },
     '/matches': {
         name: 'Мэтчи',
         path: '/matches',
         auth: userStatus.loggedIn,
         view: LikesView,
+        tapbar: 'matches',
     },
     '/profile': {
         name: 'Профиль',
         path: '/profile',
         auth: userStatus.loggedIn,
         view: ProfileView,
+        tapbar: 'profile',
     },
     '/chat': {
         name: 'Чаты',
         path: '/chat',
         auth: userStatus.loggedIn,
         view: ChatView,
+        tapbar: 'chat',
     },
     '/404': {
         name: 'Страница не найдена',

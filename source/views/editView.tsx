@@ -81,6 +81,7 @@ export default class EditView extends ViewBase {
                 },
             },
         },
+
         'tapbar': {
             class: 'menu-icon',
         },
@@ -88,11 +89,12 @@ export default class EditView extends ViewBase {
             text: 'API не отвечает',
             loading: EditStore.get().apiErrorLoadCondition,
         },
+
     };
 
     _createTmpl(data) {
         return (
-            <div>
+            <div class='card-container'>
                 {EditForm(data.editForm)}
                 {Tapbar(data.tapbar)}
                 {CritError(data.critError)}

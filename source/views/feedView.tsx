@@ -1,18 +1,20 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { Tapbar } from '../components/tapbar.js';
-import { CardLikes } from '../components/cardLikes.js';
-import { IconButton } from '../components/iconButton.js';
 import { CardFeed } from '../components/cardFeed.js';
 import { CardExpended } from '../components/cardExpended.js';
 import feedStore from '../store/feedStore.js';
 import eventBus from '../dispatcher/eventBus.js';
 import { OutOfCards } from '../components/outOfCards.js';
+
 import { CritError } from '../components/critError.js';
+
+import TapbarStore from '../store/tapbarStore.js';
 
 export default class FeedView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
+
         const cardData = feedStore.get();
         this.updateDataTemaplate(cardData);
         feedStore.subscribe(this.subscribtionCallback, this);
@@ -27,7 +29,7 @@ export default class FeedView extends ViewBase {
             this._template = (
                 <div class='card-container'>
                     {OutOfCards()}
-                    {Tapbar(this._data.tapbar)}
+                    {Tapbar(TapbarStore.get())}
                     {CritError(this._data.critError)}
                 </div>
             );
@@ -63,6 +65,7 @@ export default class FeedView extends ViewBase {
                 },
             },
         },
+
         tapbar: {
             class: 'menu-icon',
         },
@@ -70,6 +73,7 @@ export default class FeedView extends ViewBase {
             text: 'API не отвечает',
             loading: feedStore.get().apiErrorLoadCondition,
         },
+
     };
 
     forceRender() {
@@ -90,6 +94,7 @@ export default class FeedView extends ViewBase {
             };
 
             return (
+
                 <div>
                     <div class='card-container'>
                         <div class='card3'></div>
@@ -97,7 +102,7 @@ export default class FeedView extends ViewBase {
                         <div class='card2'></div>
                         {CardFeed(data.cardData)}
                     </div>
-                    {Tapbar(data.tapbar)}
+                    {Tapbar(TapbarStore.get())}
                     {CritError(data.critError)}
                 </div>
             );
@@ -111,13 +116,11 @@ export default class FeedView extends ViewBase {
                 },
             };
             return (
-                <div>
-                    <div class='card-container'>
-                        <div class='card3'></div>
-                        <div class='card3'></div>
-                        <div class='card2'></div>
-                        {CardExpended(data.cardData)}
-                    </div>
+                <div class='card-container'>
+                    <div class='card3'></div>
+                    <div class='card3'></div>
+                    <div class='card2'></div>
+                    {CardExpended(data.cardData)}
                     {Tapbar(data.tapbar)}
                     {CritError(data.critError)}
                 </div>

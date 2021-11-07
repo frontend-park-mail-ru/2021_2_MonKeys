@@ -82,10 +82,9 @@ export default class SignupEditView extends ViewBase {
         },
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _createTmpl(data) {
         return (
-            <div>
+            <div class='card-container'>
                 {EditForm(data.editForm)}
                 {CritError(data.critError)}
             </div>
