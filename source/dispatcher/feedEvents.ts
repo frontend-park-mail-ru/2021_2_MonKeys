@@ -52,7 +52,9 @@ export const FeedEventsRegister = () => {
                     console.log('400');
                 }
             } else {
-                console.log('server internal error');
+                const feedData = feedStore.get();
+                feedData.apiErrorLoadCondition = true;
+                feedStore.set(feedData);
             }
 
             data.counter++;
@@ -79,7 +81,9 @@ export const FeedEventsRegister = () => {
                             console.log('400');
                         }
                     } else {
-                        console.log('server internal error');
+                        const feedData = feedStore.get();
+                        feedData.apiErrorLoadCondition = true;
+                        feedStore.set(feedData);
                     }
                 });
             } else {

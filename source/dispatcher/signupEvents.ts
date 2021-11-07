@@ -71,7 +71,8 @@ export const SignupEventRegister = () => {
                     console.log(window.csrfToken);
                 } else {
                     // server internal error
-                    console.log('server internal error');
+                    storeData.apiErrorLoadCondition = true;
+                    SignupStore.set(storeData);
                 }
             })
             .catch((error) => console.log(error));

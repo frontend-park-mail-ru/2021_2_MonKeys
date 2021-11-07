@@ -58,7 +58,8 @@ export const LoginEventRegister = () => {
                     console.log(window.csrfToken);
                 } else {
                     // server internal error
-                    console.log('server internal error');
+                    storeData.apiErrorLoadCondition = true;
+                    LoginStore.set(storeData);
                 }
             })
             .catch((error) => console.log(error));

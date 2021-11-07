@@ -4,6 +4,8 @@ import { Tapbar } from '../components/tapbar.js';
 import { CardExpended } from '../components/cardExpended.js';
 import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
+import eventBus from '../dispatcher/eventBus.js';
+import { CritError } from '../components/critError.js';
 import TapbarStore from '../store/tapbarStore.js';
 
 export default class ProfileView extends ViewBase {
@@ -45,13 +47,19 @@ export default class ProfileView extends ViewBase {
         'tapbar': {
             class: 'menu-icon',
         },
+        'critError': {
+            text: 'API не отвечает',
+            loading: ProfileStore.get().apiErrorLoadCondition,
+        },
     };
 
     _createTmpl(data) {
+        console.log(data.critError);
         return (
-            <div class='card-container'>
-                {CardExpended(this._data.cardData)}
-                {Tapbar(TapbarStore.get())}
+            <div>
+                <div class='card-container'>{CardExpended(data.cardData)}</div>
+                 {Tapbar(TapbarStore.get())}
+                {CritError(data.critError)}
             </div>
         );
     }
@@ -65,6 +73,7 @@ export default class ProfileView extends ViewBase {
         view._data.cardData.userData.age = data.age;
         view._data.cardData.userData.description = data.description;
         view._data.cardData.tags = data.tags;
+        view._data.critError = data.apiErrorLoadCondition;
         view._template = view._createTmpl(view._data);
         view.render();
     }

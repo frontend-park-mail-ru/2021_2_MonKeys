@@ -1,7 +1,7 @@
 @import '../abstracts/variables';
 @import '../core/typography';
 
-.crit-error-container {
+.crit-error-container-active {
     display: flex;
     height: $field-default-height*2;
     width: $field-default-width;
@@ -24,6 +24,10 @@
     position: fixed;
     top: 48px;
     backdrop-filter: blur(20px);
+}
+
+.crit-error-container-disactive {
+    display: none;
 }
 
 .crit-error-icon {

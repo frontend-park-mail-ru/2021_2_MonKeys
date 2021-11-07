@@ -8,7 +8,6 @@ import { loginRequest } from '../requests/sessionRequest.js';
 import { feedRequest } from '../requests/feedRequest.js';
 import { editProfile } from '../requests/profileRequest.js';
 import { tagsRequest } from '../requests/tagsRequest.js';
-import { emailRegExp, passwordRegExp } from '../constants/validation.js';
 import { EditStore } from '../store/editStore.js';
 import { validImgType } from '../validation/edit.js';
 import AuthStore from '../store/authStore.js';
@@ -69,7 +68,8 @@ export const EditEventRegister = () => {
                     }
                 } else {
                     // server internal error
-                    console.log('server internal error');
+                    storeData.apiErrorLoadCondition = true;
+                    EditStore.set(storeData);
                 }
             })
             .catch((error) => console.log(error));
@@ -97,7 +97,9 @@ export const EditEventRegister = () => {
                     }
                 } else {
                     // server internal error
-                    console.log('server internal error');
+                    const storeData = EditStore.get();
+                    storeData.apiErrorLoadCondition = true;
+                    EditStore.set(storeData);
                 }
 
                 // выставляем теги, которые уже есть у пользователя
@@ -212,8 +214,9 @@ export const EditEventRegister = () => {
         deleteProfilePhoto(imgPath)
             .then((response) => {
                 if (response.status !== HTTPSuccess) {
-                    console.log('Delete img error');
-                    throw 'delete img error';
+                    const storeData = EditStore.get();
+                    storeData.apiErrorLoadCondition = true;
+                    EditStore.set(storeData);
                 }
                 const userData = ProfileStore.get();
                 userData.imgs = userData.imgs.filter((image) => {

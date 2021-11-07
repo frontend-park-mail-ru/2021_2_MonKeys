@@ -33,6 +33,7 @@ export const ProfileEventsRegister = () => {
                         counter: 0,
                         outOfCards: false,
                         expanded: false,
+                        apiErrorLoadCondition: false,
                     });
                     router.go('/login');
                 } else if (response.data.status === HTTPNotFound) {
@@ -43,7 +44,9 @@ export const ProfileEventsRegister = () => {
                 }
             } else {
                 // server internal error
-                console.log('server internal error');
+                const storeData = ProfileStore.get();
+                storeData.apiErrorLoadCondition = true;
+                ProfileStore.set(storeData);
             }
         });
     });
