@@ -8,12 +8,16 @@ export interface ProfileData {
     description?: string;
     imgs?: string[];
     tags?: Set<string>;
+
+    apiErrorLoadCondition?: boolean;
 }
 
 const ProfileStore = new BaseStore<ProfileData>();
 
 ProfileStore.set({
     imgs: [],
+
+    apiErrorLoadCondition: false,
 });
 
 export { ProfileStore };

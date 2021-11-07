@@ -6,6 +6,7 @@ import { EditStore } from '../store/editStore.js';
 import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
 import { errorEditFormMsg } from '../constants/errorMsg.js';
+import { CritError } from '../components/critError.js';
 
 export default class EditView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -80,6 +81,15 @@ export default class EditView extends ViewBase {
                 },
             },
         },
+
+        'tapbar': {
+            class: 'menu-icon',
+        },
+        'critError': {
+            text: 'API не отвечает',
+            loading: EditStore.get().apiErrorLoadCondition,
+        },
+
     };
 
     _createTmpl(data) {
@@ -87,6 +97,7 @@ export default class EditView extends ViewBase {
             <div class='card-container'>
                 {EditForm(data.editForm)}
                 {Tapbar(data.tapbar)}
+                {CritError(data.critError)}
             </div>
         );
     }
@@ -101,6 +112,7 @@ export default class EditView extends ViewBase {
         view._data.editForm.fields.birthDate.class = data.birthDateFieldClass;
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
         view._data.editForm.tags = data.tags;
+        view._data.critError = data.apiErrorLoadCondition;
         view._data.editForm.fields.name.value = ProfileStore.get().name;
         view._data.editForm.fields.birthDate.value = ProfileStore.get().date;
         view._data.editForm.fields.description.value = ProfileStore.get().description;
