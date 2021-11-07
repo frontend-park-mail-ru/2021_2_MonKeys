@@ -66,10 +66,9 @@ export const EditEventRegister = () => {
                         EventBus.dispatch<string>('user:cookie-requests');
                         router.go('/profile');
                     } else if (response.data.status === HTTPNotFound) {
-                        console.log('400');
+                        throw 'HTTPNotFound';
                     }
                 } else {
-                    // server internal error
                     storeData.apiErrorLoadCondition = true;
                     EditStore.set(storeData);
                 }
@@ -101,16 +100,14 @@ export const EditEventRegister = () => {
                         );
                         EditStore.set(storeData);
                     } else if (response.data.status === HTTPNotFound) {
-                        console.log('400');
+                        throw 'HTTPNotFound';
                     }
                 } else {
-                    // server internal error
                     const storeData = EditStore.get();
                     storeData.apiErrorLoadCondition = true;
                     EditStore.set(storeData);
                 }
 
-                // выставляем теги, которые уже есть у пользователя
                 if (ProfileStore.get() !== undefined) {
                     const userTags = ProfileStore.get().tags;
                     if (userTags === undefined) {

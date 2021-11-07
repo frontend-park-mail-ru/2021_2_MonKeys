@@ -10,9 +10,6 @@ import feedStore from '../store/feedStore.js';
 
 export const LoginEventRegister = () => {
     EventBus.register('login:login-button', (payload?: string) => {
-        // ТОТАЛЬНЕЙШИЙ КРИНЖ ЭТО ДОЛЖНО БЫТЬ ЧЕРЕЗ ВИРТУАЛДОМ ПОТОМ
-        // НО ПОКА ТАК ААААААААААААААА
-        // ПОЛНЫЙ КРИНЖ АААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА
         const _emailInput = document.getElementsByTagName('input')[0];
         const _passwordInput = document.getElementsByTagName('input')[1];
 
@@ -46,7 +43,6 @@ export const LoginEventRegister = () => {
         const _email = _emailInput.value.trim();
         const _password = _passwordInput.value.trim();
 
-        //запрос
         loginRequest(_email, _password)
             .then((response) => {
                 if (response.status === HTTPSuccess) {
@@ -57,9 +53,7 @@ export const LoginEventRegister = () => {
                         LoginStore.set(storeData);
                     }
                     window.csrfToken = response.csrf;
-                    console.log(window.csrfToken);
                 } else {
-                    // server internal error
                     storeData.apiErrorLoadCondition = true;
                     LoginStore.set(storeData);
                 }

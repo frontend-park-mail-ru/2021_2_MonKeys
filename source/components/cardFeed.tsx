@@ -9,7 +9,6 @@ export interface CardFeedProps {
 }
 
 export const CardFeed = (props: CardFeedProps) => {
-    console.log(props);
     return (
         <div class='card'>
             <div class='card-main'>

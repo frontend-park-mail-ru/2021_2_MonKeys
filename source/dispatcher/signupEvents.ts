@@ -9,9 +9,6 @@ import { userStatus } from '../constants/userStatus.js';
 
 export const SignupEventRegister = () => {
     EventBus.register('signup:signup-button', (payload?: string) => {
-        // ТОТАЛЬНЕЙШИЙ КРИНЖ ЭТО ДОЛЖНО БЫТЬ ЧЕРЕЗ ВИРТУАЛДОМ ПОТОМ
-        // НО ПОКА ТАК ААААААААААААААА
-        // ПОЛНЫЙ КРИНЖ АААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА
         const _emailInput = document.getElementsByTagName('input')[0];
         const _passwordInput = document.getElementsByTagName('input')[1];
         const _repeatPasswordInput = document.getElementsByTagName('input')[2];
@@ -54,7 +51,6 @@ export const SignupEventRegister = () => {
         const _email = _emailInput.value.trim();
         const _password = _passwordInput.value.trim();
 
-        //запрос
         AuthStore.set({
             loggedIn: userStatus.Signup,
         });
@@ -63,16 +59,12 @@ export const SignupEventRegister = () => {
                 if (response.status === HTTPSuccess) {
                     if (response.data.status === HTTPSuccess) {
                         router.go('/signup-edit');
-                        // window.csrfToken = response.csrf
-                        // console.log(window.csrfToken)
                     } else if (response.data.status === HTTPEMailNotFound) {
                         storeData.formErrorClass = 'login-error-active';
                         SignupStore.set(storeData);
                     }
                     window.csrfToken = response.csrf;
-                    console.log(window.csrfToken);
                 } else {
-                    // server internal error
                     storeData.apiErrorLoadCondition = true;
                     SignupStore.set(storeData);
                 }

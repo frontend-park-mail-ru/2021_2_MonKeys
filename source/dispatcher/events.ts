@@ -48,7 +48,6 @@ export const InitBus = () => {
                             }
 
                             feedStore.set(profileData);
-                            console.log(window.location.pathname);
                             if (window.location.pathname === '/signup-edit') {
                                 router.go('/feed');
                             } else {
@@ -61,30 +60,21 @@ export const InitBus = () => {
                         });
                     }
                 } else {
-                    console.log('400');
                     router.go('/login');
                 }
             } else {
-                // server internal error
-                console.log('server internal error');
+                throw 'server internal error';
             }
         });
     });
-    // -------------------------login-----------------------------
     LoginEventRegister();
-    // -------------------------signup----------------------------
     SignupEventRegister();
 
-    // --------------------------edit-----------------------------
     EditEventRegister();
 
-    // ----------------------------profile-----------------------
     ProfileEventsRegister();
-    // ----------------------likes--------------------------------
     LikesEventsRegister();
-    // -------------------feed------------------------------------
     FeedEventsRegister();
-    // -------------------chat------------------------------------
     ChatEventsRegister();
 
     CarouselEventsRegister();

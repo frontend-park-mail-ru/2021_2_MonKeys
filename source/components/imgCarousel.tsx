@@ -82,7 +82,6 @@ export const ImgCarousel = (props: string[], expanded: boolean) => {
     if (!window.currentSelectedCarouselItem) {
         window.currentSelectedCarouselItem = 0;
     }
-    // card-el profile-image-expand
     let sizeClass = 'profile-image',
         carouselSizeClass = 'carousel-slide',
         sideSizeClass = 'side-big';

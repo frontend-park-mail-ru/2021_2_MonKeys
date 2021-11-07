@@ -53,7 +53,7 @@ export const FeedEventsRegister = () => {
                             });
                         }
                     } else {
-                        console.log('400');
+                        throw '400';
                     }
                 } else {
                     const feedData = feedStore.get();
@@ -82,7 +82,7 @@ export const FeedEventsRegister = () => {
                                 }
                                 feedStore.set(data);
                             } else {
-                                console.log('400');
+                                throw '400';
                             }
                         } else {
                             const feedData = feedStore.get();

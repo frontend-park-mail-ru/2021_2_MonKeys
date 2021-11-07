@@ -44,12 +44,11 @@ export const ProfileEventsRegister = () => {
                         });
                         router.go('/login');
                     } else if (response.data.status === HTTPNotFound) {
-                        console.log('404');
+                        throw 'HTTPNotFound';
                     } else {
-                        console.log('400');
+                        throw '400';
                     }
                 } else {
-                    // server internal error
                     const storeData = ProfileStore.get();
                     storeData.apiErrorLoadCondition = true;
                     ProfileStore.set(storeData);

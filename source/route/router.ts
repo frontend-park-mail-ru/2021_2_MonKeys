@@ -29,28 +29,20 @@ class Router {
             let currentView;
 
             const user = AuthStore.get().loggedIn;
-            const pageAuth = this.routes[location].auth;
-            console.log(this.routes[location].auth);
-            console.log(user);
-            console.log('________________________');
 
             if (this.routes[location].auth === user) {
-                console.log('auth matches route, drawing it:');
                 drawLocation(this.routes[location], $root);
             } else {
                 switch (user) {
                     case userStatus.loggedIn: {
-                        console.log('auth doesnt match route, moving to feed page:');
                         drawLocation(this.routes['/feed'], $root);
                         break;
                     }
                     case userStatus.Signup: {
-                        console.log('auth doesnt match route, moving to signup-edit page:');
                         drawLocation(this.routes['/signup-edit'], $root);
                         break;
                     }
                     case userStatus.notlLoggedIn: {
-                        console.log('auth doesnt match route, moving to login page:');
                         drawLocation(this.routes['/login'], $root);
                         break;
                     }

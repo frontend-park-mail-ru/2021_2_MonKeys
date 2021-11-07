@@ -16,7 +16,7 @@ const initData = {
     birthDateFieldClass: 'form-field-edit text-with-icon',
     formErrorClass: 'login-error',
     apiErrorLoadCondition: false,
-    addImgFieldClass: '', // TODO
+    addImgFieldClass: '',
 };
 
 EditStore.set(initData);

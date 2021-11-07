@@ -20,7 +20,6 @@ class Http {
     private async _request({ url = '/', method = 'GET', headers = new Headers(), body = null }) {
         const csrfToken = window.csrfToken;
         if (csrfToken) {
-            console.log(csrfToken, 'check');
             const csrfHeader = new Headers();
             csrfHeader.set('x-csrf-Token', csrfToken);
             headers = csrfHeader;
@@ -36,7 +35,6 @@ class Http {
         const responseData = await response.json();
 
         window.csrfToken = response.headers.get('csrf');
-        console.log(window.csrfToken, 'set');
 
         return {
             status: response.status,
