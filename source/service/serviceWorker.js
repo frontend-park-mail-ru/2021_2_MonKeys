@@ -4,7 +4,6 @@ const config = {
     numbersRegExp: /\d+/,
     versionStaticRegExp: /static\d+/,
     apiUrlRegExp: /http:\/\/localhost\/api\/v*/,
-
 };
 
 self.addEventListener('install', (event) => {
@@ -77,13 +76,11 @@ self.addEventListener('fetch', (event) => {
                         })
                         .catch(() => {
                             return caches.match('/offline/offline.html');
-                      
                         });
                 }
 
                 return fetch(event.request).catch(() => {
                     return caches.match('/offline/offline.html');
-                    
                 });
             }
         })
