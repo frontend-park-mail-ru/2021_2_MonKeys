@@ -83,7 +83,7 @@ export default class FeedView extends ViewBase {
                     <div class='card3'></div>
                     <div class='card2'></div>
                     {CardFeed(data.cardData)}
-                    {Tapbar(data.tapbar)}
+                    {Tapbar(TapbarStore.get())}
                 </div>
             );
         } else {
