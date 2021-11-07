@@ -1,0 +1,23 @@
+
+
+
+.out-of-cards-sign {
+  color: white;
+  font-size: $font-size-big;
+  text-align: center;
+}
+
+.out-of-cards-drip-2 {
+ position: fixed;
+  animation: floating1 4s  infinite;
+  
+}
+.out-of-cards-drip-1 {
+ position: fixed;
+  animation: floating2 6s infinite;
+}
+.out-of-cards-drip-3 {
+ position: fixed;
+  animation: floating3 8s infinite;
+  
+}

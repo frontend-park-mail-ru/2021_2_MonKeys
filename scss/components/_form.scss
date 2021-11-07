@@ -1,0 +1,96 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+.form-field-valid {
+  @include form-field($field-valid-color);
+}
+
+.form-field-novalid {
+  @include form-field($field-novalid-color);
+}
+
+.form-field-edit:focus {
+  border-color: rgba(240, 151, 255, 0.9);
+  box-shadow: 0 0 10px 0 rgba(216, 15, 252, 0.9);
+}
+
+.form-field-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: $px_small;
+  width: $field-default-width !important;
+  
+}
+
+.text-without-icon {
+  font-style: normal;
+  font-weight: bold;
+  font-size: $font-size-big;
+  color: #ffffff;
+  padding-left: 6%;
+  display: flex;
+  width: $px_big*14;
+}
+
+
+
+.text-with-icon {
+  height: 55px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: $font-size-big;
+  line-height: 39px;
+  color: #ffffff;
+  padding-left: 20%;
+  display: flex;
+}
+
+.text-desc {
+  font-style: normal;
+  font-weight: bold;
+  font-size: $font-size-medium;
+  padding-top: 10px;
+  height: $field-default-height*2 !important;
+  padding-left: 6%;
+  color: #ffffff;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  position: absolute;
+  left: -2%;
+  background-image: url('../icons/icon_calendar_white.svg');
+  background-repeat: no-repeat;
+  background-position: 100% center;
+  background-position: left;
+  background-size: 30px;
+  cursor: pointer;
+}
+
+.edit-form {
+  position: fixed;
+  top: $px_small;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0px  !important;
+  
+}
+
+
+
+
+
+.form-field-edit {
+  @include form-field-edit($field-edit-valid-color)
+}
+
+.form-field-edit-novalid {
+  @include form-field-edit($field-edit-novalid-color)
+}
+
+
+

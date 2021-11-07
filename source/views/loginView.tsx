@@ -7,6 +7,7 @@ import { ErrorMsg } from '../components/errorMsg.js';
 import { errorEmailMsg, errorPasswordMsg, errorLoginFormMsg } from '../constants/errorMsg.js';
 import EventBus from '../dispatcher/eventBus.js';
 import { LoginStore } from '../store/loginStore.js';
+import { CritError } from '../components/critError.js';
 
 export default class LoginView extends ViewBase {
     public unsubscribe() {
@@ -98,7 +99,7 @@ export default class LoginView extends ViewBase {
         return (
             <div class='form-container'>
                 <div class='center-container'>
-                    <span class='login-header'>Войти</span>
+                    <span class='page-header'>Войти</span>
                 </div>
                 <div class='center-container'>
                     <form class='login-form'>
@@ -113,6 +114,9 @@ export default class LoginView extends ViewBase {
                     </form>
                 </div>
                 {Link(data.links.signup)}
+                {CritError({
+                    text: 'API не отвечает',
+                })}
             </div>
         );
     }

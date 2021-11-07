@@ -19,9 +19,17 @@ export const ProfileEventsRegister = () => {
         logoutRequest().then((response) => {
             if (response.status === HTTPSuccess) {
                 if (response.data.status === HTTPSuccess) {
-                    ProfileStore.clean();
+                    ProfileStore.set({
+                        id: undefined,
+                        name: undefined,
+                        age: undefined,
+                        date: undefined,
+                        description: undefined,
+                        imgs: undefined,
+                        tags: undefined,
+                    });
                     feedStore.set({
-                        profiles: [],
+                        profiles: undefined,
                         counter: 0,
                         outOfCards: false,
                         expanded: false,
@@ -29,9 +37,9 @@ export const ProfileEventsRegister = () => {
                     router.go('/login');
                 } else if (response.data.status === HTTPNotFound) {
                     /// ????
-                    console.log('xz');
+                    console.log('404');
                 } else {
-                    console.log('error');
+                    console.log('400');
                 }
             } else {
                 // server internal error

@@ -1,6 +1,7 @@
 import { route, Routes } from './routes.js';
 import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
+import TapbarStore from '../store/tapbarStore.js';
 
 class Router {
     private routes: route[];
@@ -13,6 +14,9 @@ class Router {
         const location = route;
         if (this.routes[location]) {
             if (this.routes[location].auth === AuthStore.get().loggedIn) {
+                TapbarStore.set({
+                    activeItem: this.routes[location].tapbar,
+                });
                 const currentView = new this.routes[location].view($root);
                 window.document.title = this.routes[location].name;
                 currentView.render();

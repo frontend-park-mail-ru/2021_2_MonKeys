@@ -41,8 +41,8 @@ export const EditEventRegister = () => {
             return;
         }
 
-        storeData.nameFieldClass = 'form-field text-without-icon';
-        storeData.birthDateFieldClass = 'form-field text-with-icon';
+        storeData.nameFieldClass = 'form-field-edit text-without-icon';
+        storeData.birthDateFieldClass = 'form-field-edit text-with-icon';
         storeData.formErrorClass = 'login-error';
         EditStore.set(storeData);
 
@@ -63,9 +63,9 @@ export const EditEventRegister = () => {
                 if (response.status === HTTPSuccess) {
                     if (response.data.status === HTTPSuccess) {
                         EventBus.dispatch<string>('user:cookie-requests');
+                        router.go('/profile');
                     } else if (response.data.status === HTTPNotFound) {
-                        /// ????
-                        console.log('xz');
+                        console.log('400');
                     }
                 } else {
                     // server internal error
@@ -93,7 +93,7 @@ export const EditEventRegister = () => {
                         );
                         EditStore.set(storeData);
                     } else if (response.data.status === HTTPNotFound) {
-                        console.log('xz');
+                        console.log('400');
                     }
                 } else {
                     // server internal error
@@ -154,7 +154,7 @@ export const EditEventRegister = () => {
         const test = _nameInput.value.length !== 0;
 
         test
-            ? (storeData.nameFieldClass = 'form-field text-without-icon')
+            ? (storeData.nameFieldClass = 'form-field-edit text-without-icon')
             : (storeData.nameFieldClass = 'form-field-edit-novalid text-without-icon');
 
         if (storeData.formErrorClass === 'login-error-active') {
@@ -171,7 +171,7 @@ export const EditEventRegister = () => {
 
         const test = _dateInput.value.toString().length === dateLength;
         test
-            ? (storeData.birthDateFieldClass = 'form-field text-with-icon')
+            ? (storeData.birthDateFieldClass = 'form-field-edit text-with-icon')
             : (storeData.birthDateFieldClass = 'form-field-edit-novalid text-with-icon');
 
         if (storeData.formErrorClass === 'login-error-active') {
@@ -210,7 +210,6 @@ export const EditEventRegister = () => {
         }
     });
     EventBus.register('edit:img-delete', (imgPath) => {
-        console.log(imgPath);
         deleteProfilePhoto(imgPath)
             .then((response) => {
                 if (response.status !== HTTPSuccess) {
@@ -218,13 +217,11 @@ export const EditEventRegister = () => {
                     throw 'delete img error';
                 }
                 const userData = ProfileStore.get();
-                console.log(userData.imgs);
                 userData.imgs = userData.imgs.filter((image) => {
                     if (image != imgPath) {
                         return image;
                     }
                 });
-                console.log(userData.imgs);
                 ProfileStore.set(userData);
             })
             .catch((error) => {

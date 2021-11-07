@@ -52,16 +52,21 @@ export const InitBus = () => {
                             }
 
                             feedStore.set(profileData);
-                            router.go('/feed');
+                            console.log(window.location.pathname);
+                            if (window.location.pathname === '/signup-edit') {
+                                router.go('/feed');
+                            } else {
+                                router.go(window.location.pathname);
+                            }
                         });
                     } else {
                         AuthStore.set({
                             loggedIn: userStatus.Signup,
                         });
                     }
-                    //   router.go("/feed");
                 } else {
-                    console.log('error');
+                    console.log('400');
+                    router.go('/login');
                 }
             } else {
                 // server internal error

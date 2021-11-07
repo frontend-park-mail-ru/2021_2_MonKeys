@@ -43,7 +43,7 @@ export default class EditView extends ViewBase {
                     placeholder: 'Расскажите о себе',
                     value: ProfileStore.get().description,
                     name: 'description',
-                    class: 'form-field-desc text-desc',
+                    class: 'form-field-edit text-desc',
                 },
             },
             'tags': EditStore.get().tags,
@@ -80,14 +80,11 @@ export default class EditView extends ViewBase {
                 },
             },
         },
-        'tapbar': {
-            class: 'menu-profile',
-        },
     };
 
     _createTmpl(data) {
         return (
-            <div>
+            <div class='card-container'>
                 {EditForm(data.editForm)}
                 {Tapbar(data.tapbar)}
             </div>
@@ -96,7 +93,7 @@ export default class EditView extends ViewBase {
 
     public unsubscribe() {
         EditStore.unsubscribe(this.subcribtionCallbackEdit);
-        EditStore.unsubscribe(this.subcribtionCallbackProfile);
+        ProfileStore.unsubscribe(this.subcribtionCallbackProfile);
     }
 
     private subcribtionCallbackEdit(data, view) {
@@ -107,14 +104,11 @@ export default class EditView extends ViewBase {
         view._data.editForm.fields.name.value = ProfileStore.get().name;
         view._data.editForm.fields.birthDate.value = ProfileStore.get().date;
         view._data.editForm.fields.description.value = ProfileStore.get().description;
-        // console.log("test")
-        // view._data.editForm.buttons.imgAddButton.imgs = ProfileStore.get().imgs;
         view._template = view._createTmpl(view._data);
 
         view.render();
     }
     private subcribtionCallbackProfile(data, view) {
-        if (console.log) console.log(view._data);
         view._data.editForm.buttons.imgAddButton.imgs = ProfileStore.get().imgs;
         view._template = view._createTmpl(view._data);
         view.render();

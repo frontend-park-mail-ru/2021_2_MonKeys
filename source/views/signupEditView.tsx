@@ -39,7 +39,7 @@ export default class SignupEditView extends ViewBase {
                     tag: 'textarea',
                     placeholder: 'Расскажите о себе',
                     name: 'description',
-                    class: 'form-field-desc text-desc',
+                    class: 'form-field-edit text-desc',
                 },
             },
             'tags': EditStore.get().tags,
@@ -77,13 +77,13 @@ export default class SignupEditView extends ViewBase {
         },
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _createTmpl(data) {
-        return <div>{EditForm(data.editForm)}</div>;
+        return <div class='card-container'>{EditForm(data.editForm)}</div>;
     }
 
     public unsubscribe() {
         EditStore.unsubscribe(this.subscribtionCallback);
+        ProfileStore.unsubscribe(this.subcribtionCallbackProfile);
     }
 
     private subscribtionCallback(data, view) {
@@ -95,7 +95,6 @@ export default class SignupEditView extends ViewBase {
         view.render();
     }
     private subcribtionCallbackProfile(data, view) {
-        if (console.log) console.log(view._data);
         view._data.editForm.buttons.imgAddButton.imgs = ProfileStore.get().imgs;
         view._template = view._createTmpl(view._data);
         view.render();
