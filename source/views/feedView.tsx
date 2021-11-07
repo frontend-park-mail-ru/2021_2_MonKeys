@@ -65,7 +65,6 @@ export default class FeedView extends ViewBase {
                 },
             },
         },
-
         tapbar: {
             class: 'menu-icon',
         },

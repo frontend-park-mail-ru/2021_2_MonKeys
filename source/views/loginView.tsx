@@ -20,7 +20,7 @@ export default class LoginView extends ViewBase {
         view._data.errorMsgs.emailError.class = data.emailErrorClass;
         view._data.errorMsgs.passwordError.class = data.passwordErrorClass;
         view._data.errorMsgs.formError.class = data.formErrorClass;
-        view._data.critError = data.apiErrorLoadCondition;
+        view._data.critError.loading = data.apiErrorLoadCondition;
         view._template = view._createTmpl(view._data);
         view.render();
     }

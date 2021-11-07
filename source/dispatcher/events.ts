@@ -23,10 +23,6 @@ const $root = document.getElementById('app');
 
 export const InitBus = () => {
     eventBus.register('user:cookie-requests', (payload?: string) => {
-        // 1) получить профиль
-        // 2) получить мэтчи
-        // 3) получить ленту
-        // ... получить чаты
         getProfile().then((response) => {
             if (response.status === HTTPSuccess) {
                 if (response.data.status === HTTPSuccess) {

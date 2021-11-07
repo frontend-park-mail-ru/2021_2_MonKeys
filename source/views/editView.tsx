@@ -111,7 +111,7 @@ export default class EditView extends ViewBase {
         view._data.editForm.fields.birthDate.class = data.birthDateFieldClass;
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
         view._data.editForm.tags = data.tags;
-        view._data.critError = data.apiErrorLoadCondition;
+        view._data.critError.loading = data.apiErrorLoadCondition;
         view._data.editForm.fields.name.value = ProfileStore.get().name;
         view._data.editForm.fields.birthDate.value = ProfileStore.get().date;
         view._data.editForm.fields.description.value = ProfileStore.get().description;
