@@ -28,14 +28,14 @@ export const Routes = {
     },
     '/login': {
         name: 'Вход',
-        path: userStatus.notlLoggedIn,
-        auth: false,
+        path: '/login',
+        auth: userStatus.notlLoggedIn,
         view: LoginView,
     },
     '/signup': {
         name: 'Регистрация',
-        path: userStatus.notlLoggedIn,
-        auth: false,
+        path: '/signup',
+        auth: userStatus.notlLoggedIn,
         view: SignupView,
     },
     '/edit': {
@@ -82,7 +82,6 @@ export const Routes = {
     '/404': {
         name: 'Страница не найдена',
         path: '/404',
-        auth: userStatus.loggedIn,
         view: PageNotFoundView,
     },
 };

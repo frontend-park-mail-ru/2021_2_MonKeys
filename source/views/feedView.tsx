@@ -93,16 +93,14 @@ export default class FeedView extends ViewBase {
             };
 
             return (
-                <div>
                     <div class='card-container'>
                         <div class='card3'></div>
                         <div class='card3'></div>
                         <div class='card2'></div>
                         {CardFeed(data.cardData)}
+                        {Tapbar(TapbarStore.get())}
+                        {CritError(data.critError)}
                     </div>
-                    {Tapbar(TapbarStore.get())}
-                    {CritError(data.critError)}
-                </div>
             );
         } else {
             this._data.cardData.buttons.expandButton = {

@@ -3,6 +3,19 @@ import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
 import TapbarStore from '../store/tapbarStore.js';
 
+const userLoggedIn = () => {
+    return AuthStore.get().loggedIn === userStatus.loggedIn;
+};
+
+const drawLocation = (route, parent) => {
+    TapbarStore.set({
+        activeItem: route.tapbar,
+    });
+    const currentView = new route.view(parent);
+    window.document.title = route.name;
+    currentView.render();
+};
+
 class Router {
     private routes: route[];
 
@@ -13,35 +26,38 @@ class Router {
         const $root = document.getElementById('app');
         const location = route;
         if (this.routes[location]) {
-            if (this.routes[location].auth === AuthStore.get().loggedIn) {
-                TapbarStore.set({
-                    activeItem: this.routes[location].tapbar,
-                });
-                const currentView = new this.routes[location].view($root);
-                window.document.title = this.routes[location].name;
-                currentView.render();
-            } else if (AuthStore.get().loggedIn === userStatus.Signup) {
-                const currentView = new this.routes['/signup-edit'].view($root);
-                window.document.title = this.routes['/signup-edit'].name;
-                window.history.pushState({}, '', '/signup-edit');
-                currentView.render();
-            } else if (
-                (AuthStore.get().loggedIn === userStatus.notlLoggedIn &&
-                    this.routes[location].auth === userStatus.loggedIn) ||
-                this.routes[location].auth === userStatus.Signup
-            ) {
-                const currentView = new this.routes['/login'].view($root);
-                window.document.title = this.routes['/login'].name;
-                window.history.pushState({}, '', '/login');
-                currentView.render();
-            } else if (this.routes[location].auth !== userStatus.Signup) {
-                const currentView = new this.routes[route].view($root);
-                window.document.title = this.routes[location].name;
-                window.history.pushState({}, '', route);
-                currentView.render();
+            let currentView;
+
+            const user = AuthStore.get().loggedIn;
+            const pageAuth = this.routes[location].auth;
+            console.log(this.routes[location].auth);
+            console.log(user);
+            console.log('________________________');
+
+            if (this.routes[location].auth === user) {
+                console.log('auth matches route, drawing it:');
+                drawLocation(this.routes[location], $root);
+            } else {
+                switch (user) {
+                    case userStatus.loggedIn: {
+                        console.log('auth doesnt match route, moving to feed page:');
+                        drawLocation(this.routes['/feed'], $root);
+                        break;
+                    }
+                    case userStatus.Signup: {
+                        console.log('auth doesnt match route, moving to signup-edit page:');
+                        drawLocation(this.routes['/signup-edit'], $root);
+                        break;
+                    }
+                    case userStatus.notlLoggedIn: {
+                        console.log('auth doesnt match route, moving to login page:');
+                        drawLocation(this.routes['/login'], $root);
+                        break;
+                    }
+                }
             }
         } else {
-            window.location.pathname = '/404';
+            this.move('/404');
         }
     }
     go(route: string) {
