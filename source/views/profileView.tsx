@@ -73,7 +73,7 @@ export default class ProfileView extends ViewBase {
         view._data.cardData.userData.age = data.age;
         view._data.cardData.userData.description = data.description;
         view._data.cardData.tags = data.tags;
-        view._data.critError = data.apiErrorLoadCondition;
+        view._data.critError.loading = data.apiErrorLoadCondition;
         view._template = view._createTmpl(view._data);
         view.render();
     }

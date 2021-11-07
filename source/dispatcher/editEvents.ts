@@ -72,7 +72,10 @@ export const EditEventRegister = () => {
                     EditStore.set(storeData);
                 }
             })
-            .catch((error) => console.log(error));
+            .catch(() => {
+                storeData.apiErrorLoadCondition = true;
+                EditStore.set(storeData);
+            });
     });
 
     EventBus.register('edit:open-tags', (payload?: string) => {
@@ -119,7 +122,11 @@ export const EditEventRegister = () => {
                     }
                 }
             })
-            .catch((error) => console.log(error));
+            .catch(() => {
+                const storeData = EditStore.get();
+                storeData.apiErrorLoadCondition = true;
+                EditStore.set(storeData);
+            });
     });
 
     EventBus.register('edit:change-tag-condition', (payload?: string) => {
@@ -206,8 +213,10 @@ export const EditEventRegister = () => {
                 userData.imgs.push(response.data.body.photo);
                 ProfileStore.set(userData);
             })
-            .catch((error) => {
-                console.error(error);
+            .catch(() => {
+                const storeData = EditStore.get();
+                storeData.apiErrorLoadCondition = true;
+                EditStore.set(storeData);
             });
     });
     EventBus.register('edit:img-delete', (imgPath) => {
@@ -227,7 +236,9 @@ export const EditEventRegister = () => {
                 ProfileStore.set(userData);
             })
             .catch((error) => {
-                console.error(error);
+                const storeData = EditStore.get();
+                storeData.apiErrorLoadCondition = true;
+                EditStore.set(storeData);
             });
     });
 };

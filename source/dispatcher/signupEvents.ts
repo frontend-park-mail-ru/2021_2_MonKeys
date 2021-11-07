@@ -75,7 +75,10 @@ export const SignupEventRegister = () => {
                     SignupStore.set(storeData);
                 }
             })
-            .catch((error) => console.log(error));
+            .catch(() => {
+                storeData.apiErrorLoadCondition = true;
+                SignupStore.set(storeData);
+            });
     });
 
     EventBus.register('signup:email-input', (payload?: string) => {

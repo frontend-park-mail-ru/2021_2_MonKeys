@@ -101,7 +101,7 @@ export default class SignupEditView extends ViewBase {
         view._data.editForm.fields.birthDate.class = data.birthDateFieldClass;
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
         view._data.editForm.tags = data.tags;
-        view._data.critError = data.apiErrorLoadCondition;
+        view._data.critError.loading = data.apiErrorLoadCondition;
         view._template = view._createTmpl(view._data);
         view.render();
     }

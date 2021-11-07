@@ -16,38 +16,43 @@ export const ProfileEventsRegister = () => {
         AuthStore.set({
             loggedIn: userStatus.notlLoggedIn,
         });
-        logoutRequest().then((response) => {
-            if (response.status === HTTPSuccess) {
-                if (response.data.status === HTTPSuccess) {
-                    ProfileStore.set({
-                        id: undefined,
-                        name: undefined,
-                        age: undefined,
-                        date: undefined,
-                        description: undefined,
-                        imgs: undefined,
-                        tags: undefined,
-                    });
-                    feedStore.set({
-                        profiles: undefined,
-                        counter: 0,
-                        outOfCards: false,
-                        expanded: false,
-                        apiErrorLoadCondition: false,
-                    });
-                    router.go('/login');
-                } else if (response.data.status === HTTPNotFound) {
-                    /// ????
-                    console.log('404');
+        logoutRequest()
+            .then((response) => {
+                if (response.status === HTTPSuccess) {
+                    if (response.data.status === HTTPSuccess) {
+                        ProfileStore.set({
+                            id: undefined,
+                            name: undefined,
+                            age: undefined,
+                            date: undefined,
+                            description: undefined,
+                            imgs: undefined,
+                            tags: undefined,
+                        });
+                        feedStore.set({
+                            profiles: undefined,
+                            counter: 0,
+                            outOfCards: false,
+                            expanded: false,
+                            apiErrorLoadCondition: false,
+                        });
+                        router.go('/login');
+                    } else if (response.data.status === HTTPNotFound) {
+                        console.log('404');
+                    } else {
+                        console.log('400');
+                    }
                 } else {
-                    console.log('400');
+                    // server internal error
+                    const storeData = ProfileStore.get();
+                    storeData.apiErrorLoadCondition = true;
+                    ProfileStore.set(storeData);
                 }
-            } else {
-                // server internal error
+            })
+            .catch(() => {
                 const storeData = ProfileStore.get();
                 storeData.apiErrorLoadCondition = true;
                 ProfileStore.set(storeData);
-            }
-        });
+            });
     });
 };

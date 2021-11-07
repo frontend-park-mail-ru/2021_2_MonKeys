@@ -62,7 +62,10 @@ export const LoginEventRegister = () => {
                     LoginStore.set(storeData);
                 }
             })
-            .catch((error) => console.log(error));
+            .catch(() => {
+                storeData.apiErrorLoadCondition = true;
+                LoginStore.set(storeData);
+            });
     });
 
     EventBus.register('login:email-input', (payload?: string) => {
