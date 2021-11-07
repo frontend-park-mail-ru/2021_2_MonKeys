@@ -49,7 +49,7 @@ export const AddImg = (props: ButtonProps) => {
                 type={'file'}
                 onchange={props.onchange}
                 style={'visibility: hidden;'}
-                accept={'.jpg, .jpeg, .png'}
+                accept={'.jpg, .jpeg, .png, .webp'}
             />
         </div>
     );

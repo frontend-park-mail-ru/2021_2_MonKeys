@@ -183,31 +183,30 @@ export const EditEventRegister = () => {
     EventBus.register('edit:img-input', (event) => {
         const files = event.target.files;
 
-        if (files.length !== 0) {
-            const photo = files[0];
+        const photo = files[0];
 
-            if (validImgType(photo)) {
-                addPhotoToProfile(photo)
-                    .then((response) => {
-                        if (response.status !== HTTPSuccess) {
-                            throw 'jopa';
-                        }
-
-                        // изменения стора должно повлечь изменение вьюхи
-                        const userData = ProfileStore.get();
-                        if (!userData.imgs) {
-                            const ps = ProfileStore.get();
-                            ps.imgs = [];
-                            ProfileStore.set(ps);
-                        }
-                        userData.imgs.push(response.data.body.photo);
-                        ProfileStore.set(userData);
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    });
-            }
+        if (!validImgType(photo)) {
+            return
         }
+
+        addPhotoToProfile(photo)
+          .then((response) => {
+              if (response.status !== HTTPSuccess) {
+                  throw 'photo not uploaded';
+              }
+
+              const userData = ProfileStore.get();
+              if (!userData.imgs) {
+                  const ps = ProfileStore.get();
+                  ps.imgs = [];
+                  ProfileStore.set(ps);
+              }
+              userData.imgs.push(response.data.body.photo);
+              ProfileStore.set(userData);
+          })
+          .catch((error) => {
+              console.error(error);
+          });
     });
     EventBus.register('edit:img-delete', (imgPath) => {
         deleteProfilePhoto(imgPath)
