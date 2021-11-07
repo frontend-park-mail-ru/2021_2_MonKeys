@@ -23,6 +23,8 @@ export const EditEventRegister = () => {
         const testDate = _dateInput.value.toString().length === dateLength;
 
         const storeData = EditStore.get();
+        storeData.apiErrorLoadCondition = false;
+        EditStore.set(storeData);
 
         if (!testName) {
             storeData.nameFieldClass = 'form-field-edit-novalid text-without-icon';
@@ -79,6 +81,9 @@ export const EditEventRegister = () => {
     });
 
     EventBus.register('edit:open-tags', (payload?: string) => {
+        const storeData = EditStore.get();
+        storeData.apiErrorLoadCondition = false;
+        EditStore.set(storeData);
         tagsRequest()
             .then((response) => {
                 if (response.status === HTTPSuccess) {
@@ -159,6 +164,8 @@ export const EditEventRegister = () => {
         const _nameInput = document.getElementsByTagName('textarea')[0];
 
         const storeData = EditStore.get();
+        storeData.apiErrorLoadCondition = false;
+        EditStore.set(storeData);
 
         const test = _nameInput.value.length !== 0;
 
@@ -177,6 +184,8 @@ export const EditEventRegister = () => {
         const _dateInput = document.getElementsByTagName('input')[0];
 
         const storeData = EditStore.get();
+        storeData.apiErrorLoadCondition = false;
+        EditStore.set(storeData);
 
         const test = _dateInput.value.toString().length === dateLength;
         test

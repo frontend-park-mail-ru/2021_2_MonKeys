@@ -20,6 +20,8 @@ export const LoginEventRegister = () => {
         const testPassword = passwordRegExp.test(_passwordInput.value);
 
         const storeData = LoginStore.get();
+        storeData.apiErrorLoadCondition = false;
+        LoginStore.set(storeData);
 
         if (!testEmail) {
             storeData.emailFieldClass = 'form-field-novalid';
@@ -72,6 +74,8 @@ export const LoginEventRegister = () => {
         const _emailInput = document.getElementsByTagName('input')[0];
 
         const storeData = LoginStore.get();
+        storeData.apiErrorLoadCondition = false;
+        LoginStore.set(storeData);
         if (!_emailInput) {
             console.log('Error, trying to read _emailInput on wrong view');
             return;
@@ -95,6 +99,8 @@ export const LoginEventRegister = () => {
         const _emailInput = document.getElementsByTagName('input')[0];
 
         const storeData = LoginStore.get();
+        storeData.apiErrorLoadCondition = false;
+        LoginStore.set(storeData);
 
         const test = _emailInput.value.length === 0 || emailRegExp.test(_emailInput.value);
         if (test) {
@@ -115,6 +121,8 @@ export const LoginEventRegister = () => {
             return;
         }
         const storeData = LoginStore.get();
+        storeData.apiErrorLoadCondition = false;
+        LoginStore.set(storeData);
 
         const test = _passwordInput.value.length === 0 || passwordRegExp.test(_passwordInput.value);
         test
@@ -136,6 +144,8 @@ export const LoginEventRegister = () => {
         const _passwordInput = document.getElementsByTagName('input')[1];
 
         const storeData = LoginStore.get();
+        storeData.apiErrorLoadCondition = false;
+        LoginStore.set(storeData);
 
         const test = _passwordInput.value.length === 0 || passwordRegExp.test(_passwordInput.value);
         if (test) {

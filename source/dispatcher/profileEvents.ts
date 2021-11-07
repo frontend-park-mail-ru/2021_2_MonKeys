@@ -9,10 +9,16 @@ import feedStore from '../store/feedStore.js';
 
 export const ProfileEventsRegister = () => {
     EventBus.register('profile:edit-button', () => {
+        const storeData = ProfileStore.get();
+        storeData.apiErrorLoadCondition = false;
+        ProfileStore.set(storeData);
         router.go('/edit');
     });
 
     EventBus.register('profile:logout-button', () => {
+        const storeData = ProfileStore.get();
+        storeData.apiErrorLoadCondition = false;
+        ProfileStore.set(storeData);
         AuthStore.set({
             loggedIn: userStatus.notlLoggedIn,
         });

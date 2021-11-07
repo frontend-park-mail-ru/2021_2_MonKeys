@@ -17,11 +17,13 @@ export const FeedEventsRegister = () => {
     });
     EventBus.register('feed:expand-button', () => {
         const data = feedStore.get();
+        data.apiErrorLoadCondition = false;
         data.expanded = true;
         feedStore.set(data);
     });
     EventBus.register('feed:shrink-button', () => {
         const data = feedStore.get();
+        data.apiErrorLoadCondition = false;
         data.expanded = false;
         feedStore.set(data);
     });
@@ -36,6 +38,7 @@ export const FeedEventsRegister = () => {
     });
     EventBus.register('feed:reaction', (reactionID) => {
         const data = feedStore.get();
+        data.apiErrorLoadCondition = false;
 
         likesRequest(data.profiles[data.counter].id, reactionID)
             .then((response) => {

@@ -21,6 +21,8 @@ export const SignupEventRegister = () => {
         const testRepeatPassword = _passwordInput.value === _repeatPasswordInput.value;
 
         const storeData = SignupStore.get();
+        storeData.apiErrorLoadCondition = false;
+        SignupStore.set(storeData);
 
         if (!testEmail) {
             storeData.emailFieldClass = 'form-field-novalid';
@@ -85,6 +87,8 @@ export const SignupEventRegister = () => {
         const _emailInput = document.getElementsByTagName('input')[0];
 
         const storeData = SignupStore.get();
+        storeData.apiErrorLoadCondition = false;
+        SignupStore.set(storeData);
 
         const test = _emailInput.value.length === 0 || emailRegExp.test(_emailInput.value);
         test ? (storeData.emailFieldClass = 'form-field-valid') : (storeData.emailFieldClass = 'form-field-novalid');
@@ -104,6 +108,8 @@ export const SignupEventRegister = () => {
         const _emailInput = document.getElementsByTagName('input')[0];
 
         const storeData = SignupStore.get();
+        storeData.apiErrorLoadCondition = false;
+        SignupStore.set(storeData);
 
         const test = _emailInput.value.length === 0 || emailRegExp.test(_emailInput.value);
         if (test) {
@@ -121,6 +127,8 @@ export const SignupEventRegister = () => {
         const _passwordInput = document.getElementsByTagName('input')[1];
 
         const storeData = SignupStore.get();
+        storeData.apiErrorLoadCondition = false;
+        SignupStore.set(storeData);
 
         const test = _passwordInput.value.length === 0 || passwordRegExp.test(_passwordInput.value);
         test
@@ -142,6 +150,8 @@ export const SignupEventRegister = () => {
         const _passwordInput = document.getElementsByTagName('input')[1];
 
         const storeData = SignupStore.get();
+        storeData.apiErrorLoadCondition = false;
+        SignupStore.set(storeData);
 
         const test = _passwordInput.value.length === 0 || passwordRegExp.test(_passwordInput.value);
         if (test) {
@@ -160,6 +170,8 @@ export const SignupEventRegister = () => {
         const _repeatPasswordInput = document.getElementsByTagName('input')[2];
 
         const storeData = SignupStore.get();
+        storeData.apiErrorLoadCondition = false;
+        SignupStore.set(storeData);
 
         const test = _passwordInput.value === _repeatPasswordInput.value;
         test
@@ -183,6 +195,8 @@ export const SignupEventRegister = () => {
         const _repeatPasswordError = document.getElementsByName('error')[2];
 
         const storeData = SignupStore.get();
+        storeData.apiErrorLoadCondition = false;
+        SignupStore.set(storeData);
 
         const test = _passwordInput.value === _repeatPasswordInput.value;
         if (test) {
