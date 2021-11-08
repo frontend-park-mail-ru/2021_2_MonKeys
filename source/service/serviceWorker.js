@@ -3,7 +3,7 @@ const config = {
     mediaCacheItemsRegExp: /media/,
     numbersRegExp: /\d+/,
     versionStaticRegExp: /static\d+/,
-    apiUrlRegExp: /http:\/\/localhost\/api\/v*/,
+    apiUrlRegExp: /[http|https]:\/\/\w+.\w+\/api\/v\d\/\w+/,
 };
 
 self.addEventListener('install', (event) => {
@@ -25,13 +25,10 @@ self.addEventListener('activate', (event) => {
                 })
             );
         });
-        // self.clients.claim();
     });
-    console.log('activating');
 });
 
 self.addEventListener('fetch', (event) => {
-    console.log('fetch');
     event.respondWith(
         caches.match(event.request).then((response) => {
             if (response) {

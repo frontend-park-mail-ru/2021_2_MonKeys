@@ -43,7 +43,7 @@ class Ball {
   draw() {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = '#0095DD';
+    ctx.fillStyle = '#6B1FD1';
     ctx.fill();
     ctx.closePath();
   }
@@ -78,7 +78,7 @@ class Paddle {
   draw() {
     ctx.beginPath();
     ctx.rect(this.x, this.y, this.width, this.height);
-    ctx.fillStyle = '#0095DD';
+    ctx.fillStyle = '#6B1FD1';
     ctx.fill();
     ctx.closePath();
   }
@@ -212,7 +212,7 @@ function drawBricks() {
         bricks[c][r].y = brickY;
         ctx.beginPath();
         ctx.rect(brickX, brickY, brickWidth, brickHeight);
-        ctx.fillStyle = '#0095DD';
+        ctx.fillStyle = '#6B1FD1';
         ctx.fill();
         ctx.closePath();
       }
@@ -223,21 +223,21 @@ function drawBricks() {
 function drawScore() {
   ctx.font = '16px Arial';
   ctx.textAlign = 'left';
-  ctx.fillStyle = '#0095DD';
+  ctx.fillStyle = '#6B1FD1';
   ctx.fillText('Score: ' + score, 8, 20);
 }
 
 function drawLives() {
   ctx.font = '16px Arial';
   ctx.textAlign = 'right';
-  ctx.fillStyle = '#0095DD';
+  ctx.fillStyle = '#6B1FD1';
   ctx.fillText('Lives: ' + lives, canvas.width, 20);
 }
 
 function drawPause() {
   ctx.font = "36px Arial";
   ctx.textAlign = 'center';
-  ctx.fillStyle = '#0095DD';
+  ctx.fillStyle = '#6B1FD1';
   ctx.fillText('Press', width / 2, height / 2);
 }
 
