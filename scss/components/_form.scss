@@ -33,6 +33,7 @@
   padding-left: 6%;
   display: flex;
   width: $px_big*14;
+  resize: none;
 }
 
 
@@ -46,6 +47,7 @@
   color: #ffffff;
   padding-left: 20%;
   display: flex;
+  
 }
 
 .text-desc {
@@ -56,6 +58,7 @@
   height: $field-default-height*2 !important;
   padding-left: 6%;
   color: #ffffff;
+  resize: none;
 }
 
 input[type='date']::-webkit-calendar-picker-indicator {
