@@ -13,18 +13,17 @@ export interface CardExpendedProps {
 export const CardExpended = (props: CardExpendedProps) => {
     console.log(props.userData.tags);
     let tags;
-    if(props.userData.tags){
+    if (props.userData.tags) {
         tags = props.userData.tags;
     } else if (props.tags) {
-        tags = props.tags
+        tags = props.tags;
     }
     const tagsExists = tags !== undefined ? true : false;
     let tagField: HTMLCollection;
     if (tagsExists) {
         tagField = (
             <div class='column-container'>
-                <div class='center-container'>{Object.keys(tags).map(
-                    (item) => Tag(tags[item],false))}</div>
+                <div class='center-container'>{Object.keys(tags).map((item) => Tag(tags[item], false))}</div>
             </div>
         );
     } else {

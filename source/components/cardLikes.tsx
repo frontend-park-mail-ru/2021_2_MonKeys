@@ -4,7 +4,7 @@ export interface CardLikesProps {
     name: string;
     age: string;
     date?: string;
-    imgs: string [];
+    imgs: string[];
 }
 
 export const CardLikes = (props: CardLikesProps) => {
