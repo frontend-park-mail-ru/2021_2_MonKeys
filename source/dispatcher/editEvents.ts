@@ -9,7 +9,11 @@ import { feedRequest } from '../requests/feedRequest.js';
 import { editProfile } from '../requests/profileRequest.js';
 import { tagsRequest } from '../requests/tagsRequest.js';
 import { EditStore } from '../store/editStore.js';
+<<<<<<< HEAD
 import { validDate, validImgType } from '../validation/edit.js';
+=======
+import {validDate, validImgType} from '../validation/edit.js';
+>>>>>>> cf902217433287c7cbcead13aa72453442d432f2
 import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
 
