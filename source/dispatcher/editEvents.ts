@@ -9,7 +9,7 @@ import { feedRequest } from '../requests/feedRequest.js';
 import { editProfile } from '../requests/profileRequest.js';
 import { tagsRequest } from '../requests/tagsRequest.js';
 import { EditStore } from '../store/editStore.js';
-import { validImgType } from '../validation/edit.js';
+import {validDate, validImgType} from '../validation/edit.js';
 import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
 
@@ -20,7 +20,6 @@ export const EditEventRegister = () => {
         const _descriptionInput = document.getElementsByTagName('textarea')[1];
 
         const testName = _nameInput.value.length !== 0;
-        const testDate = _dateInput.value.toString().length === dateLength;
 
         const storeData = EditStore.get();
         storeData.apiErrorLoadCondition = false;
@@ -31,12 +30,12 @@ export const EditEventRegister = () => {
             EditStore.set(storeData);
         }
 
-        if (!testDate) {
+        if (!validDate(_dateInput)) {
             storeData.birthDateFieldClass = 'form-field-edit-novalid text-with-icon';
             EditStore.set(storeData);
         }
 
-        if (!testName || !testDate) {
+        if (!testName || !validDate(_dateInput)) {
             storeData.formErrorClass = 'login-error-active';
             EditStore.set(storeData);
             return;
@@ -58,6 +57,13 @@ export const EditEventRegister = () => {
             }
         }
         const photoPaths = ProfileStore.get().imgs;
+
+        if (photoPaths == undefined || photoPaths.length === 0) {
+            storeData.addImgFieldClass = 'form-field-edit-novalid';
+            storeData.formErrorClass = 'login-error-active';
+            EditStore.set(storeData);
+            return;
+        }
 
         editProfile(name, date, description, photoPaths, tags)
             .then((response) => {

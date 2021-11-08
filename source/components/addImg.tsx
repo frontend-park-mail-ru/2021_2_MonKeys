@@ -43,13 +43,14 @@ export const AddImg = (props: ButtonProps) => {
     return (
         <div class='add-img-box'>
             {imgSequence(props.imgs)}
-            <label for={'AddImg'} class={props.class} />
+            <label for={'AddImg'} class={'add'} />
             <input
                 id={'AddImg'}
                 type={'file'}
                 onchange={props.onchange}
                 style={'visibility: hidden;'}
                 accept={'.gif, .jpeg, .jpg, .png, .webp'}
+                class={props.class}
             />
         </div>
     );
