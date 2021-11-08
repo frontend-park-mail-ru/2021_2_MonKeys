@@ -11,7 +11,6 @@ export interface CardExpendedProps {
 }
 
 export const CardExpended = (props: CardExpendedProps) => {
-    console.log(props.userData.tags);
     let tags;
     if(props.userData.tags){
         tags = props.userData.tags;
@@ -37,7 +36,6 @@ export const CardExpended = (props: CardExpendedProps) => {
     } else {
         descField = <div class='card-el desc'></div>;
     }
-    console.log(tagField);
     return (
         <div id='cardID' class='card-expand'>
             <div id='cardMainID' class='card-main-profile'>
