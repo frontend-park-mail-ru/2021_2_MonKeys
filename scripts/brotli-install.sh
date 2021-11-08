@@ -10,6 +10,7 @@ git clone https://github.com/google/ngx_brotli --recursive
 
 # установка зависимости
 sudo apt-get install libpcre3-dev -y
+sudo apt-get install zlib1g-dev
 
 # конфигурация сборки nginx
 cd nginx-1.18.0

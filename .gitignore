@@ -21,3 +21,8 @@ go.sum
 static/js/**
 # sass -> css
 static/css/**
+
+# brotli
+scripts/nginx-1.18.0
+scripts/ngx_brotli
+scripts/nginx-1.18.0.tar.gz
