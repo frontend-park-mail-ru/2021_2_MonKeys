@@ -11,7 +11,6 @@ declare global {
     interface Window {
         currentDOM;
         currentView: ViewBase;
-        csrfToken: string;
     }
 }
 

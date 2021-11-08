@@ -63,7 +63,6 @@ export const SignupEventRegister = () => {
                         storeData.formErrorClass = 'login-error-active';
                         SignupStore.set(storeData);
                     }
-                    window.csrfToken = response.csrf;
                 } else {
                     storeData.apiErrorLoadCondition = true;
                     SignupStore.set(storeData);
