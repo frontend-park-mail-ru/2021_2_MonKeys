@@ -7,7 +7,6 @@ const config = {
 };
 
 self.addEventListener('install', (event) => {
-    console.log('Installing [Service Worker]', event);
     event.waitUntil(
         caches.open('offline').then((cache) => {
             return cache.addAll(['/offline/offline.html', '/offline/offline.js']);
@@ -16,7 +15,7 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-    event.waitUntil(
+    event.waitUntil(() => {
         caches.keys().then((keyList) => {
             return Promise.all(
                 keyList.map((key) => {
@@ -25,17 +24,20 @@ self.addEventListener('activate', (event) => {
                     }
                 })
             );
-        })
-    );
+        });
+        // self.clients.claim();
+    });
+    console.log('activating');
 });
 
 self.addEventListener('fetch', (event) => {
+    console.log('fetch');
     event.respondWith(
         caches.match(event.request).then((response) => {
             if (response) {
                 return response;
             } else {
-                if (config.apiUrlRegExp.test(event.request.url)) {
+                if (!config.apiUrlRegExp.test(event.request.url)) {
                     const requsetForCache = event.request.clone();
                     fetch(requsetForCache)
                         .then((networkResponse) => {
@@ -68,17 +70,12 @@ self.addEventListener('fetch', (event) => {
                                         staticCache.add(networkResponse.url);
                                     });
                                 }
-                            } else if (config.mediaCacheItemsRegExp.test(networkResponse.url)) {
-                                caches.open('media').then((mediaCache) => {
-                                    mediaCache.add(networkResponse.url);
-                                });
                             }
                         })
                         .catch(() => {
                             return caches.match('/offline/offline.html');
                         });
                 }
-
                 return fetch(event.request).catch(() => {
                     return caches.match('/offline/offline.html');
                 });
