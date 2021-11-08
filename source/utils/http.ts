@@ -18,7 +18,7 @@ class Http {
      * @return {Promise<{status: number, data: any}>} - Возвращает Promise со статусом ответа и данными.
      */
     private async _request({ url = '/', method = 'GET', headers = new Headers(), body = null }) {
-        const csrfToken = window.csrfToken;
+        const csrfToken = sessionStorage.getItem('csrf');
         if (csrfToken) {
             const csrfHeader = new Headers();
             csrfHeader.set('x-csrf-Token', csrfToken);
@@ -34,12 +34,14 @@ class Http {
 
         const responseData = await response.json();
 
-        window.csrfToken = response.headers.get('csrf');
+        const csrfTokenResp = response.headers.get('csrf');
+        if (csrfTokenResp) {
+            sessionStorage.setItem('csrf', csrfTokenResp);
+        }
 
         return {
             status: response.status,
             data: responseData,
-            csrf: response.headers.get('csrf'),
         };
     }
 

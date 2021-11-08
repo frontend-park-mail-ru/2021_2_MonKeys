@@ -52,7 +52,6 @@ export const LoginEventRegister = () => {
                         storeData.formErrorClass = 'login-error-active';
                         LoginStore.set(storeData);
                     }
-                    window.csrfToken = response.csrf;
                 } else {
                     storeData.apiErrorLoadCondition = true;
                     LoginStore.set(storeData);
