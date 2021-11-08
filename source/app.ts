@@ -9,7 +9,6 @@ declare global {
     interface Window {
         currentDOM;
         currentView: ViewBase;
-        csrfToken: string;
     }
 }
 
@@ -20,4 +19,4 @@ window.onpopstate = (event) => {
 EventBus.dispatch<string>('user:cookie-requests');
 window.history.pushState('', '', window.location.pathname);
 router.go(window.location.pathname);
-registerServiceWorker();
+// registerServiceWorker();
