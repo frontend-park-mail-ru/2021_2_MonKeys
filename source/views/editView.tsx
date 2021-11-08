@@ -59,7 +59,7 @@ export default class EditView extends ViewBase {
                     },
                 },
                 'imgAddButton': {
-                    class: 'add',
+                    class: EditStore.get().addImgFieldClass,
                     onchange: (event) => {
                         EventBus.dispatch<string>('edit:img-input', event);
                     },
