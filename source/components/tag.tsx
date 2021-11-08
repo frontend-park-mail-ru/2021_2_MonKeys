@@ -1,9 +1,9 @@
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
+import { conditionalRendering } from '../tools/jsxTools.js';
 
-export const Tag = (text: string) => {
+export const Tag = (text: string, edit: boolean) => {
     return (
         <label class='checkbox-btn'>
-            <input type='checkbox' class='tag-checkbox'></input>
             <span>{text}</span>
         </label>
     );
