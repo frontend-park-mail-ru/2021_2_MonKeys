@@ -38,11 +38,20 @@ export const EditEventRegister = () => {
         if (!testName || !validDate(_dateInput)) {
             storeData.formErrorClass = 'login-error-active';
             EditStore.set(storeData);
+        }
+
+        const photoPaths = ProfileStore.get().imgs;
+
+        if (photoPaths == undefined || photoPaths.length === 0) {
+            storeData.imgFieldClass = 'add-img-box-novalid';
+            storeData.formErrorClass = 'login-error-active';
+            EditStore.set(storeData);
             return;
         }
 
         storeData.nameFieldClass = 'form-field-edit text-without-icon';
         storeData.birthDateFieldClass = 'form-field-edit text-with-icon';
+        storeData.imgFieldClass = 'add-img-box';
         storeData.formErrorClass = 'login-error';
         EditStore.set(storeData);
 
@@ -55,14 +64,6 @@ export const EditEventRegister = () => {
             for (const tag of userTags) {
                 tags.push(tag);
             }
-        }
-        const photoPaths = ProfileStore.get().imgs;
-
-        if (photoPaths == undefined || photoPaths.length === 0) {
-            storeData.addImgFieldClass = 'form-field-edit-novalid';
-            storeData.formErrorClass = 'login-error-active';
-            EditStore.set(storeData);
-            return;
         }
 
         editProfile(name, date, description, photoPaths, tags)
@@ -224,6 +225,10 @@ export const EditEventRegister = () => {
                 }
                 userData.imgs.push(response.data.body.photo);
                 ProfileStore.set(userData);
+                const editStoreData = EditStore.get();
+                editStoreData.imgFieldClass = 'add-img-box';
+                editStoreData.formErrorClass = 'login-error';
+                EditStore.set(editStoreData);
             })
             .catch(() => {
                 const storeData = EditStore.get();

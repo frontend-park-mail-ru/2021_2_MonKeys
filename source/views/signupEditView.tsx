@@ -42,6 +42,9 @@ export default class SignupEditView extends ViewBase {
                     name: 'description',
                     class: 'form-field-edit text-desc',
                 },
+                'img': {
+                    class: EditStore.get().imgFieldClass,
+                },
             },
             'tags': EditStore.get().tags,
             'buttons': {
@@ -99,6 +102,7 @@ export default class SignupEditView extends ViewBase {
     private subscribtionCallback(data, view) {
         view._data.editForm.fields.name.class = data.nameFieldClass;
         view._data.editForm.fields.birthDate.class = data.birthDateFieldClass;
+        view._data.editForm.fields.img.class = data.imgFieldClass;
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
         view._data.editForm.tags = data.tags;
         view._data.critError.loading = data.apiErrorLoadCondition;

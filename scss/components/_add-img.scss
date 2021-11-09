@@ -5,9 +5,13 @@
   @include form-field-edit($field-edit-valid-color);
   height: $px_big*2.5;
   display: flex;
-  
 }
 
+.add-img-box-novalid {
+  @include form-field-edit($field-edit-novalid-color);
+  height: $px_big*2.5;
+  display: flex;
+}
 
 $px_img: $px_big * 2;
 

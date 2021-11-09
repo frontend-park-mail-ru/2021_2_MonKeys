@@ -46,6 +46,9 @@ export default class EditView extends ViewBase {
                     name: 'description',
                     class: 'form-field-edit text-desc',
                 },
+                'img': {
+                    class: EditStore.get().imgFieldClass,
+                },
             },
             'tags': EditStore.get().tags,
             'buttons': {
@@ -59,7 +62,7 @@ export default class EditView extends ViewBase {
                     },
                 },
                 'imgAddButton': {
-                    class: EditStore.get().addImgFieldClass,
+                    class: EditStore.get().imgFieldClass,
                     onchange: (event) => {
                         EventBus.dispatch<string>('edit:img-input', event);
                     },
@@ -81,7 +84,6 @@ export default class EditView extends ViewBase {
                 },
             },
         },
-
         'tapbar': {
             class: 'menu-icon',
         },
@@ -109,6 +111,7 @@ export default class EditView extends ViewBase {
     private subcribtionCallbackEdit(data, view) {
         view._data.editForm.fields.name.class = data.nameFieldClass;
         view._data.editForm.fields.birthDate.class = data.birthDateFieldClass;
+        view._data.editForm.fields.img.class = data.imgFieldClass;
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
         view._data.editForm.tags = data.tags;
         view._data.critError.loading = data.apiErrorLoadCondition;

@@ -43,7 +43,7 @@ export const EditForm = (props: EditFormProps) => {
                 </div>
             </div>
 
-            <div class='form-field-input'>{AddImg(props.buttons.imgAddButton)}</div>
+            <div class='form-field-input'>{AddImg(props.fields.img, props.buttons.imgAddButton)}</div>
             {ErrorMsg(props.errorMsgs.formError)}
             {Button(props.buttons.saveButton)}
         </form>

@@ -8,7 +8,6 @@ export interface CardLikesProps {
 }
 
 export const CardLikes = (props: CardLikesProps) => {
-    console.log(props);
     return (
         <div class='likes-card'>
             <div class='likes-card-inside'>
