@@ -4,7 +4,7 @@ import { EditForm } from '../components/editForm.js';
 import EventBus from '../dispatcher/eventBus.js';
 import { EditStore } from '../store/editStore.js';
 import { ProfileStore } from '../store/profileStore.js';
-import { errorEditFormMsg } from '../constants/errorMsg.js';
+import { errorNameMsg, errorAgeMsg, errorImgMsg, errorEditFormMsg } from '../constants/errorMsg.js';
 import { CritError } from '../components/critError.js';
 
 export default class SignupEditView extends ViewBase {
@@ -26,6 +26,9 @@ export default class SignupEditView extends ViewBase {
                     oninput: () => {
                         EventBus.dispatch<string>('edit:name-input');
                     },
+                    onfocusout: () => {
+                        EventBus.dispatch<string>('edit:name-focusout');
+                    },
                 },
                 'birthDate': {
                     tag: 'input',
@@ -34,6 +37,9 @@ export default class SignupEditView extends ViewBase {
                     name: 'birthDate',
                     oninput: () => {
                         EventBus.dispatch<string>('edit:birth-date-input');
+                    },
+                    onfocusout: () => {
+                        EventBus.dispatch<string>('edit:birth-date-focusout');
                     },
                 },
                 'description': {
@@ -73,6 +79,18 @@ export default class SignupEditView extends ViewBase {
                 },
             },
             'errorMsgs': {
+                'nameError': {
+                    text: errorNameMsg,
+                    class: EditStore.get().nameErrorClass,
+                },
+                'ageError': {
+                    text: errorAgeMsg,
+                    class: EditStore.get().birthDateErrorClass,
+                },
+                'imgError': {
+                    text: errorImgMsg,
+                    class: EditStore.get().imgErrorClass,
+                },
                 'formError': {
                     text: errorEditFormMsg,
                     class: EditStore.get().formErrorClass,
@@ -103,6 +121,9 @@ export default class SignupEditView extends ViewBase {
         view._data.editForm.fields.name.class = data.nameFieldClass;
         view._data.editForm.fields.birthDate.class = data.birthDateFieldClass;
         view._data.editForm.fields.img.class = data.imgFieldClass;
+        view._data.editForm.errorMsgs.nameError.class = data.nameErrorClass;
+        view._data.editForm.errorMsgs.ageError.class = data.birthDateErrorClass;
+        view._data.editForm.errorMsgs.imgError.class = data.imgErrorClass;
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
         view._data.editForm.tags = data.tags;
         view._data.critError.loading = data.apiErrorLoadCondition;
