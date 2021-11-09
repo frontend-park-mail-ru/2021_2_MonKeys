@@ -12,7 +12,7 @@
         "virtualDOM/*": [
           "virtualDOM/*"
         ]
-      
+
     }},
       "exclude": [
         "rollup.config.js",

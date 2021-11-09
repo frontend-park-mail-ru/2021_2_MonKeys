@@ -12,6 +12,6 @@ export default {
       plugins: [terser()]
     }
     ],
-  
+
   plugins: [typescript()]
 };

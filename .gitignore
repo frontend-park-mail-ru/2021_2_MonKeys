@@ -9,7 +9,7 @@ ijia.me.key
 # VSCode project settings
 .vscode
 
-# Node.js 
+# Node.js
 package-lock.json
 node_modules
 

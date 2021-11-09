@@ -6,5 +6,3 @@ COPY ../nginx.conf /etc/nginx/nginx.conf
 
 # static
 COPY ../static /usr/share/nginx/html
-
-

@@ -5,7 +5,7 @@ dist: trusty
 language: node_js
 node_js:
   - "14"
-  
+
 install:
   - npm install
   - npm install -g typescript
@@ -16,5 +16,3 @@ script:
 
 build:
   - npm run build
-
-
