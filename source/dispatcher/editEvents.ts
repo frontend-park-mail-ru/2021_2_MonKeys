@@ -1,18 +1,13 @@
 import EventBus from './eventBus.js';
-import { dateLength } from '../constants/validation.js';
 import { HTTPNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileStore } from '../store/profileStore.js';
 import router from '../route/router.js';
 import { addPhotoToProfile, deleteProfilePhoto } from '../requests/profilePhotoRequest.js';
-import { loginRequest } from '../requests/sessionRequest.js';
-import { feedRequest } from '../requests/feedRequest.js';
 import { editProfile } from '../requests/profileRequest.js';
 import { tagsRequest } from '../requests/tagsRequest.js';
 import { EditStore } from '../store/editStore.js';
 import { validDate, validImgType } from '../validation/edit.js';
 import { nameRegExp } from '../constants/validation.js';
-import AuthStore from '../store/authStore.js';
-import { userStatus } from '../constants/userStatus.js';
 
 export const EditEventRegister = () => {
     EventBus.register('edit:save-button', (payload?: string) => {

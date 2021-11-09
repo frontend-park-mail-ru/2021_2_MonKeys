@@ -4,7 +4,6 @@ import { Tapbar } from '../components/tapbar.js';
 import { CardExpended } from '../components/cardExpended.js';
 import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
-import eventBus from '../dispatcher/eventBus.js';
 import { CritError } from '../components/critError.js';
 import TapbarStore from '../store/tapbarStore.js';
 

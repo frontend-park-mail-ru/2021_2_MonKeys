@@ -1,12 +1,8 @@
 import EventBus from './eventBus.js';
 import { emailRegExp, passwordRegExp } from '../constants/validation.js';
 import { HTTPNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
-import { ProfileStore } from '../store/profileStore.js';
-import router from '../route/router.js';
 import { loginRequest } from '../requests/sessionRequest.js';
-import { feedRequest } from '../requests/feedRequest.js';
 import { LoginStore } from '../store/loginStore.js';
-import feedStore from '../store/feedStore.js';
 
 export const LoginEventRegister = () => {
     EventBus.register('login:login-button', (payload?: string) => {
