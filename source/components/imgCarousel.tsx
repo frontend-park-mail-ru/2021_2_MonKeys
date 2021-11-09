@@ -69,8 +69,6 @@ const nav = (length, selectedID) => {
     return items;
 };
 
-
-
 export const ImgCarousel = (props: string[], expanded: boolean) => {
     if (!props) {
         return <div>no img set</div>;
