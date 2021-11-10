@@ -1,0 +1,19 @@
+@media (max-width: 500px) {
+  .tapbar-container {
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 24px;
+    width: 240px;
+  }
+}
+
+@media (min-width: 500px) {
+  .tapbar-container {
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 24px;
+    width: 240px;
+  }
+}

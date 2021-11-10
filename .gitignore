@@ -1,16 +1,28 @@
-node_modules
-
-
+# JetBrains settings
 .idea
 
-
-
+# Deplayoment keys
 ijia.me.crt
 ijia.me.key
+.keys/
 
-
+# VSCode project settings
 .vscode
 
+# Node.js
 package-lock.json
+node_modules
 
+# Golang
 go.sum
+
+# Builded files
+# typescript--->js
+static/js/**
+# sass -> css
+static/css/**
+
+# brotli
+scripts/nginx-1.18.0
+scripts/ngx_brotli
+scripts/nginx-1.18.0.tar.gz

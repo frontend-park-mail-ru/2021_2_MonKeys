@@ -1,0 +1,46 @@
+@import './variables';
+
+@mixin background() {
+    background: linear-gradient(
+      167.82deg,
+      rgba(240, 151, 255, 0.9) 25.65%,
+      rgba(227, 162, 255, 0.9) 51.98%,
+      rgba(155, 205, 239, 0.9) 89.16%,
+      rgba(153, 231, 255, 0.9) 100%
+    )
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+@mixin form-field($color) {
+    margin-top: 10%;
+    width: 65%;
+    height: 70px;
+    padding-left: 65px;
+    background: $color;
+    backdrop-filter: blur(20px);
+    border-width: 1px;
+    border-color: white;
+    border-radius: $border-radius-default;
+    font-style: normal;
+    font-weight: bold;
+    font-size: $font-size-medium;
+    line-height: 39px;
+    color: #ffffff;
+}
+
+@mixin form-field-edit($color){
+  width: $field-default-width;
+  height: $field-default-height;
+  left: 15px;
+  top: 67px;
+  background: $color;
+  backdrop-filter: blur(5px);
+  backdrop-filter: contrast(60%);
+  border-radius: 20px;
+  border-width: 0;
+}
