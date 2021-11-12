@@ -69,7 +69,7 @@ export default class FeedView extends ViewBase {
             class: 'menu-icon',
         },
         critError: {
-            text: 'API не отвечает',
+            text: 'Проверь подключение к Интернету и попробуй снова.',
             loading: feedStore.get().apiErrorLoadCondition,
         },
     };

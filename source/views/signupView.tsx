@@ -98,7 +98,7 @@ export default class SignupView extends ViewBase {
             },
         },
         'critError': {
-            text: 'API не отвечает',
+            text: 'Проверь подключение к Интернету и попробуй снова.',
             loading: SignupStore.get().apiErrorLoadCondition,
         },
     };

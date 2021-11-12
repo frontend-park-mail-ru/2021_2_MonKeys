@@ -77,7 +77,7 @@ export default class SignupEditView extends ViewBase {
             },
         },
         'critError': {
-            text: 'API не отвечает',
+            text: 'Проверь подключение к Интернету и попробуй снова.',
             loading: EditStore.get().apiErrorLoadCondition,
         },
     };
