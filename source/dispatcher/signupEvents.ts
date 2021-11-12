@@ -55,11 +55,11 @@ export const SignupEventRegister = () => {
             .then((response) => {
                 if (response.status === HTTPSuccess) {
                     if (response.data.status === HTTPSuccess) {
-                         // пасхалочк// пасхалоч// пасхалочк// пасхалочк// пасхалочк// пасхалочк// пасхалочкааааакаа
-			 AuthStore.set({
-            			loggedIn: userStatus.Signup,
-        		});
-			router.go('/signup-edit');
+                        // пасхалочк// пасхалоч// пасхалочк// пасхалочк// пасхалочк// пасхалочк// пасхалочкааааакаа
+                        AuthStore.set({
+                            loggedIn: userStatus.Signup,
+                        });
+                        router.go('/signup-edit');
                     } else if (response.data.status === HTTPEMailNotFound) {
                         storeData.formErrorClass = 'login-error-active';
                         SignupStore.set(storeData);
