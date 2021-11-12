@@ -8,10 +8,12 @@ import { errorEmailMsg, errorPasswordMsg, errorLoginFormMsg } from '../constants
 import EventBus from '../dispatcher/eventBus.js';
 import { LoginStore } from '../store/loginStore.js';
 import { CritError } from '../components/critError.js';
+import { ErrorStore } from '../store/errorStore';
 
 export default class LoginView extends ViewBase {
     public unsubscribe() {
         LoginStore.unsubscribe(this.subscribtionCallback);
+        ErrorStore.unsubscribe(this.errorStoreUpdatesView);
     }
 
     private subscribtionCallback(data, view) {
@@ -25,9 +27,16 @@ export default class LoginView extends ViewBase {
         view.render();
     }
 
+    private errorStoreUpdatesView(data, view) {
+        view._data.critError.loading = data.apiErrorLoadCondition;
+        view._template = view._createTmpl(view._data);
+        view.render();
+    }
+
     constructor(parent: HTMLElement) {
         super(parent);
         LoginStore.subscribe(this.subscribtionCallback, this);
+        ErrorStore.subscribe(this.errorStoreUpdatesView, this);
         this._template = this._createTmpl(this._data);
     }
 
@@ -95,8 +104,9 @@ export default class LoginView extends ViewBase {
             },
         },
         'critError': {
-            text: 'API не отвечает',
-            loading: LoginStore.get().apiErrorLoadCondition,
+            title: 'Ошибка подключения',
+            text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
+            loading: ErrorStore.get().apiErrorLoadCondition,
         },
     };
 

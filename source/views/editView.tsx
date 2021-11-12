@@ -6,6 +6,7 @@ import { EditStore } from '../store/editStore.js';
 import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
 import { CritError } from '../components/critError.js';
+import { ErrorStore } from '../store/errorStore';
 import { errorNameMsg, errorAgeMsg, errorImgMsg, errorEditFormMsg } from '../constants/errorMsg.js';
 
 export default class EditView extends ViewBase {
@@ -13,6 +14,7 @@ export default class EditView extends ViewBase {
         super(parent);
         EditStore.subscribe(this.subcribtionCallbackEdit, this);
         ProfileStore.subscribe(this.subcribtionCallbackProfile, this);
+        ErrorStore.subscribe(this.errorStoreUpdatesView, this);
         this._template = this._createTmpl(this._data);
     }
 
@@ -106,8 +108,9 @@ export default class EditView extends ViewBase {
             class: 'menu-icon',
         },
         'critError': {
-            text: 'API не отвечает',
-            loading: EditStore.get().apiErrorLoadCondition,
+            title: 'Ошибка подключения',
+            text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
+            loading: ErrorStore.get().apiErrorLoadCondition,
         },
     };
 
@@ -124,6 +127,7 @@ export default class EditView extends ViewBase {
     public unsubscribe() {
         EditStore.unsubscribe(this.subcribtionCallbackEdit);
         ProfileStore.unsubscribe(this.subcribtionCallbackProfile);
+        ErrorStore.unsubscribe(this.errorStoreUpdatesView);
     }
 
     private subcribtionCallbackEdit(data, view) {
@@ -143,6 +147,13 @@ export default class EditView extends ViewBase {
 
         view.render();
     }
+
+    private errorStoreUpdatesView(data, view) {
+        view._data.critError.loading = data.apiErrorLoadCondition;
+        view._template = view._createTmpl(view._data);
+        view.render();
+    }
+
     private subcribtionCallbackProfile(data, view) {
         view._data.editForm.buttons.imgAddButton.imgs = ProfileStore.get().imgs;
         view._template = view._createTmpl(view._data);

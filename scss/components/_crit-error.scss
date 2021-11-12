@@ -3,7 +3,7 @@
 
 .crit-error-container-active {
     display: flex;
-    height: $field-default-height*2;
+    flex-direction: column;
     width: $field-default-width;
     background: radial-gradient(
         112.16% 418.59% at 0% 0%,
@@ -18,7 +18,6 @@
     font-style: normal;
     font-weight: bold;
     font-size: $font-size-medium;
-    line-height: 39px;
     color: #ffffff;
     gap: 12px;
     position: fixed;
@@ -31,11 +30,35 @@
 }
 
 .crit-error-icon {
-    margin: 24px;
+    margin: 12px;
+}
+
+.crit-error-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.crit-error-title {
+    font-size: $font-size-medium;
+    color: rgb(255, 255, 255);
+    margin: 4px 0;
 }
 
 .crit-error-message {
-    font-size: $font-size-medium;
-    padding-top: 24px;
+    font-size: $font-size-small;
     color: rgb(255, 255, 255);
+    margin: 0 24px;
+}
+
+.crit-error-button {
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    backdrop-filter: blur(4px);
+    border-width: 0;
+    border-radius: 35px;
+
+    font-weight: bold;
+    font-size: 24px;
+
+    margin: 0 24px 24px 24px;
 }

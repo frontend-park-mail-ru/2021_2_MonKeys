@@ -142,6 +142,7 @@ for (let c = 0; c < brickColumnCount; c++) {
 document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
 document.addEventListener('mousemove', mouseMoveHandler, false);
+document.addEventListener('click', touchedHandler, false);
 
 document.addEventListener('touchend', touchedHandler, false);
 document.addEventListener('touchmove', touchMoveHandler, false);

@@ -6,12 +6,14 @@ import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
 import { CritError } from '../components/critError.js';
 import TapbarStore from '../store/tapbarStore.js';
+import { ErrorStore } from '../store/errorStore';
 
 export default class ProfileView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
 
         ProfileStore.subscribe(this.subcribtionCallback, this);
+        ErrorStore.subscribe(this.errorStoreUpdatesView, this);
         this._template = this._createTmpl(this._data);
     }
 
@@ -47,8 +49,9 @@ export default class ProfileView extends ViewBase {
             class: 'menu-icon',
         },
         'critError': {
-            text: 'API не отвечает',
-            loading: ProfileStore.get().apiErrorLoadCondition,
+            title: 'Ошибка подключения',
+            text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
+            loading: ErrorStore.get().apiErrorLoadCondition,
         },
     };
 
@@ -64,6 +67,7 @@ export default class ProfileView extends ViewBase {
 
     public unsubscribe() {
         ProfileStore.unsubscribe(this.subcribtionCallback);
+        ErrorStore.unsubscribe(this.errorStoreUpdatesView);
     }
 
     private subcribtionCallback(data, view) {
@@ -75,6 +79,13 @@ export default class ProfileView extends ViewBase {
         view._template = view._createTmpl(view._data);
         view.render();
     }
+
+    private errorStoreUpdatesView(data, view) {
+        view._data.critError.loading = data.apiErrorLoadCondition;
+        view._template = view._createTmpl(view._data);
+        view.render();
+    }
+
     public forceRender() {
         ProfileStore.subscribe(this.subcribtionCallback, this);
         this._template = this._createTmpl(this._data);

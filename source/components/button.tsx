@@ -25,6 +25,8 @@ export const Button = (props: ButtonProps) => {
             break;
         case 'link':
             break;
+        default:
+            className = props.class;
     }
 
     const textClassName = className + '-text';

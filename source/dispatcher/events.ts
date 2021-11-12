@@ -19,6 +19,7 @@ import { userStatus } from '../constants/userStatus.js';
 import feedStore from '../store/feedStore.js';
 import { matchRequest } from '../requests/matchRequest.js';
 import LikesStore from '../store/likesStore.js';
+import { ErrorEventsRegister } from './errorEvents';
 const $root = document.getElementById('app');
 
 export const InitBus = () => {
@@ -79,4 +80,6 @@ export const InitBus = () => {
     ChatEventsRegister();
 
     CarouselEventsRegister();
+
+    ErrorEventsRegister();
 };
