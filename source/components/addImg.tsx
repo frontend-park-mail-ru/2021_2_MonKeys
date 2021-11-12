@@ -9,11 +9,8 @@ export interface ButtonProps {
     imgs: string[];
 }
 
-export interface IconButtonProps {
-    type: string;
+export interface FieldProps {
     class: string;
-    src: string;
-    onclick?: { (data, view?: ViewBase): void };
 }
 
 const imgSequence = (imgs: string[]) => {
@@ -39,18 +36,18 @@ const imgSequence = (imgs: string[]) => {
     return items;
 };
 
-export const AddImg = (props: ButtonProps) => {
+export const AddImg = (fieldProps: FieldProps, buttonProps: ButtonProps) => {
     return (
-        <div class='add-img-box'>
-            {imgSequence(props.imgs)}
+        <div class={fieldProps.class}>
+            {imgSequence(buttonProps.imgs)}
             <label for={'AddImg'} class={'add'} />
             <input
                 id={'AddImg'}
                 type={'file'}
-                onchange={props.onchange}
+                onchange={buttonProps.onchange}
                 style={'visibility: hidden;'}
                 accept={'.gif, .jpeg, .jpg, .png, .webp'}
-                class={props.class}
+                class={buttonProps.class}
             />
         </div>
     );

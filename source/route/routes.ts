@@ -1,7 +1,3 @@
-/**
- * Здесь прописаны все возможные пути для роутера
- */
-
 import LoginView from '../views/loginView.js';
 import SignupView from '../views/signupView.js';
 import EditView from '../views/editView.js';

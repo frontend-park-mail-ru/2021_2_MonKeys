@@ -1,6 +1,7 @@
 import eventBus from '../dispatcher/eventBus.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { IconButton } from './iconButton.js';
+import { conditionalRendering } from '../tools/jsxTools.js';
 
 const LButtonProps = {
     type: 'button',
@@ -66,13 +67,6 @@ const nav = (length, selectedID) => {
         }
     }
     return items;
-};
-
-const conditionalRendering = (param, bool) => {
-    if (bool) {
-        return param;
-    }
-    return <div></div>;
 };
 
 export const ImgCarousel = (props: string[], expanded: boolean) => {

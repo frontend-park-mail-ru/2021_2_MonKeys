@@ -3,7 +3,6 @@
 .name {
   color: white;
   font-size: $font-size-medium;
-  overflow: hidden;
   font-weight: 500;
 }
 
@@ -12,13 +11,13 @@
   display: -ms-flexbox;
   display: flex;
   margin-left: 5%;
+  flex-wrap: wrap;
 }
 
 .age {
   color: white;
   margin-left: 2%;
   font-size: $font-size-medium;
-  overflow: hidden;
 }
 
 .bottom-panel {

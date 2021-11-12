@@ -21,7 +21,7 @@ export default class LikesView extends ViewBase {
     _createTmpl(data) {
         return (
             <div class='card-container'>
-                <div>
+                <div class='edit-form'>
                     <div class='likes-count'>You have {this._data.matchesCount} matches!</div>
                     {Object.keys(this._data.matches).map((item) => CardLikes(this._data.matches[item]))}
                 </div>

@@ -59,6 +59,7 @@ export const InitBus = () => {
                         AuthStore.set({
                             loggedIn: userStatus.Signup,
                         });
+                        router.go('/signup-edit');
                     }
                 } else {
                     router.go('/login');

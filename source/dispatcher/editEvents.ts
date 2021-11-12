@@ -1,17 +1,13 @@
 import EventBus from './eventBus.js';
-import { dateLength } from '../constants/validation.js';
 import { HTTPNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileStore } from '../store/profileStore.js';
 import router from '../route/router.js';
 import { addPhotoToProfile, deleteProfilePhoto } from '../requests/profilePhotoRequest.js';
-import { loginRequest } from '../requests/sessionRequest.js';
-import { feedRequest } from '../requests/feedRequest.js';
 import { editProfile } from '../requests/profileRequest.js';
 import { tagsRequest } from '../requests/tagsRequest.js';
 import { EditStore } from '../store/editStore.js';
 import { validDate, validImgType } from '../validation/edit.js';
-import AuthStore from '../store/authStore.js';
-import { userStatus } from '../constants/userStatus.js';
+import { nameRegExp } from '../constants/validation.js';
 
 export const EditEventRegister = () => {
     EventBus.register('edit:save-button', (payload?: string) => {
@@ -19,7 +15,7 @@ export const EditEventRegister = () => {
         const _dateInput = document.getElementsByTagName('input')[0];
         const _descriptionInput = document.getElementsByTagName('textarea')[1];
 
-        const testName = _nameInput.value.length !== 0;
+        const testName = _nameInput.value.length !== 0 && nameRegExp.test(_nameInput.value);
 
         const storeData = EditStore.get();
         storeData.apiErrorLoadCondition = false;
@@ -27,22 +23,35 @@ export const EditEventRegister = () => {
 
         if (!testName) {
             storeData.nameFieldClass = 'form-field-edit-novalid text-without-icon';
+            storeData.nameErrorClass = 'login-error-active';
             EditStore.set(storeData);
         }
 
         if (!validDate(_dateInput)) {
             storeData.birthDateFieldClass = 'form-field-edit-novalid text-with-icon';
+            storeData.birthDateErrorClass = 'login-error-active';
             EditStore.set(storeData);
         }
 
-        if (!testName || !validDate(_dateInput)) {
+        const photoPaths = ProfileStore.get().imgs;
+
+        if (photoPaths == undefined || photoPaths.length === 0) {
+            storeData.imgFieldClass = 'add-img-box-novalid';
+            storeData.imgErrorClass = 'login-error-active';
+        }
+
+        if (!testName || !validDate(_dateInput) || photoPaths == undefined || photoPaths.length === 0) {
             storeData.formErrorClass = 'login-error-active';
             EditStore.set(storeData);
             return;
         }
 
         storeData.nameFieldClass = 'form-field-edit text-without-icon';
+        storeData.nameErrorClass = 'login-error';
         storeData.birthDateFieldClass = 'form-field-edit text-with-icon';
+        storeData.birthDateErrorClass = 'login-error';
+        storeData.imgFieldClass = 'add-img-box';
+        storeData.imgErrorClass = 'login-error';
         storeData.formErrorClass = 'login-error';
         EditStore.set(storeData);
 
@@ -55,14 +64,6 @@ export const EditEventRegister = () => {
             for (const tag of userTags) {
                 tags.push(tag);
             }
-        }
-        const photoPaths = ProfileStore.get().imgs;
-
-        if (photoPaths == undefined || photoPaths.length === 0) {
-            storeData.addImgFieldClass = 'form-field-edit-novalid';
-            storeData.formErrorClass = 'login-error-active';
-            EditStore.set(storeData);
-            return;
         }
 
         editProfile(name, date, description, photoPaths, tags)
@@ -170,14 +171,38 @@ export const EditEventRegister = () => {
         storeData.apiErrorLoadCondition = false;
         EditStore.set(storeData);
 
-        const test = _nameInput.value.length !== 0;
+        const test = _nameInput.value.length !== 0 && nameRegExp.test(_nameInput.value);
 
         test
             ? (storeData.nameFieldClass = 'form-field-edit text-without-icon')
             : (storeData.nameFieldClass = 'form-field-edit-novalid text-without-icon');
 
+        if (test && storeData.nameErrorClass === 'login-error-active') {
+            storeData.nameErrorClass = 'login-error';
+        }
+
         if (storeData.formErrorClass === 'login-error-active') {
             storeData.formErrorClass = 'login-error';
+        }
+
+        EditStore.set(storeData);
+    });
+
+    EventBus.register('edit:name-focusout', (payload?: string) => {
+        const _nameInput = document.getElementsByTagName('textarea')[0];
+
+        const storeData = EditStore.get();
+        storeData.apiErrorLoadCondition = false;
+        EditStore.set(storeData);
+
+        const test = _nameInput.value.length !== 0 && nameRegExp.test(_nameInput.value);
+
+        if (test) {
+            storeData.nameFieldClass = 'form-field-edit text-without-icon';
+            storeData.nameErrorClass = 'login-error';
+        } else {
+            storeData.nameFieldClass = 'form-field-edit-novalid text-without-icon';
+            storeData.nameErrorClass = 'login-error-active';
         }
 
         EditStore.set(storeData);
@@ -190,10 +215,15 @@ export const EditEventRegister = () => {
         storeData.apiErrorLoadCondition = false;
         EditStore.set(storeData);
 
-        const test = _dateInput.value.toString().length === dateLength;
+        const test = validDate(_dateInput);
+
         test
             ? (storeData.birthDateFieldClass = 'form-field-edit text-with-icon')
             : (storeData.birthDateFieldClass = 'form-field-edit-novalid text-with-icon');
+
+        if (test && storeData.birthDateErrorClass === 'login-error-active') {
+            storeData.birthDateErrorClass = 'login-error';
+        }
 
         if (storeData.formErrorClass === 'login-error-active') {
             storeData.formErrorClass = 'login-error';
@@ -201,6 +231,27 @@ export const EditEventRegister = () => {
 
         EditStore.set(storeData);
     });
+
+    EventBus.register('edit:birth-date-focusout', (payload?: string) => {
+        const _dateInput = document.getElementsByTagName('input')[0];
+
+        const storeData = EditStore.get();
+        storeData.apiErrorLoadCondition = false;
+        EditStore.set(storeData);
+
+        const test = validDate(_dateInput);
+
+        if (test) {
+            storeData.birthDateFieldClass = 'form-field-edit text-with-icon';
+            storeData.birthDateErrorClass = 'login-error';
+        } else {
+            storeData.birthDateFieldClass = 'form-field-edit-novalid text-with-icon';
+            storeData.birthDateErrorClass = 'login-error-active';
+        }
+
+        EditStore.set(storeData);
+    });
+
     EventBus.register('edit:img-input', (event) => {
         const files = event.target.files;
 
@@ -224,6 +275,13 @@ export const EditEventRegister = () => {
                 }
                 userData.imgs.push(response.data.body.photo);
                 ProfileStore.set(userData);
+                const editStoreData = EditStore.get();
+                editStoreData.imgFieldClass = 'add-img-box';
+                if (editStoreData.imgErrorClass === 'login-error-active') {
+                    editStoreData.imgErrorClass = 'login-error';
+                }
+                editStoreData.formErrorClass = 'login-error';
+                EditStore.set(editStoreData);
             })
             .catch(() => {
                 const storeData = EditStore.get();
@@ -231,6 +289,7 @@ export const EditEventRegister = () => {
                 EditStore.set(storeData);
             });
     });
+
     EventBus.register('edit:img-delete', (imgPath) => {
         deleteProfilePhoto(imgPath)
             .then((response) => {

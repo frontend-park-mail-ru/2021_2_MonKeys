@@ -16,13 +16,12 @@
 
 .form-field-input {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
   margin: $px_small;
   width: $field-default-width !important;
-  
 }
 
 .text-without-icon {
@@ -78,9 +77,8 @@ input[type='date']::-webkit-calendar-picker-indicator {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-top: 0px  !important;
-  
+  height: 85%;
+  overflow: auto;
 }
 
 

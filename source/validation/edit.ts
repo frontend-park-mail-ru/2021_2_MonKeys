@@ -1,4 +1,4 @@
-import { dateLength, maxYear, minYear } from '../constants/validation';
+import { maxYear, minYear } from '../constants/validation.js';
 
 const imgTypes = ['image/gif', 'image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 

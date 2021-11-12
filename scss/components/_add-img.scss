@@ -3,19 +3,25 @@
 
 .add-img-box {
   @include form-field-edit($field-edit-valid-color);
-  height: $px_big*2.5;
   display: flex;
-  
+  flex-wrap: wrap;
+  height: auto;
 }
 
+.add-img-box-novalid {
+  @include form-field-edit($field-edit-novalid-color);
+  height: $px_big*2.5;
+  display: flex;
+}
 
 $px_img: $px_big * 2;
 
 .add-img-delete{
   height: 24px;
   width: 24px;
-  position: absolute;
-  top: 0px;
+  position: relative;
+  top: -96px;
+  left: 24px;
   margin-left: 36px;
   border-radius: 8px;
    backdrop-filter: blur(50px) contrast(60%);

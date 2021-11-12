@@ -24,5 +24,3 @@ cd objs
 sudo cp  ngx_http_brotli*.so /usr/share/nginx/modules
 
 # подчищаем за собой
-cd ../../
-sudo rm -rf nginx-1.18.0 nginx-1.18.0.tar.gz ngx_brotli

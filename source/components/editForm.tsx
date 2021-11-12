@@ -30,8 +30,14 @@ export const EditForm = (props: EditFormProps) => {
     return (
         <form class='edit-form'>
             <span class='page-header-small'>Профиль</span>
-            <div class='form-field-input'>{FormField(props.fields.name)}</div>
-            <div class='form-field-input'>{FormField(props.fields.birthDate)}</div>
+            <div class='form-field-input'>
+                {FormField(props.fields.name)}
+                {ErrorMsg(props.errorMsgs.nameError)}
+            </div>
+            <div class='form-field-input'>
+                {FormField(props.fields.birthDate)}
+                {ErrorMsg(props.errorMsgs.ageError)}
+            </div>
             <div class='form-field-input'>{FormField(props.fields.description)}</div>
             <div class='form-field-input'>
                 <div class='tag-container'>
@@ -43,7 +49,10 @@ export const EditForm = (props: EditFormProps) => {
                 </div>
             </div>
 
-            <div class='form-field-input'>{AddImg(props.buttons.imgAddButton)}</div>
+            <div class='form-field-input'>
+                {AddImg(props.fields.img, props.buttons.imgAddButton)}
+                {ErrorMsg(props.errorMsgs.imgError)}
+            </div>
             {ErrorMsg(props.errorMsgs.formError)}
             {Button(props.buttons.saveButton)}
         </form>
