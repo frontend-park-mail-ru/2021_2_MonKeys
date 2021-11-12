@@ -51,14 +51,15 @@ export const SignupEventRegister = () => {
         const _email = _emailInput.value.trim();
         const _password = _passwordInput.value.trim();
 
-        AuthStore.set({
-            loggedIn: userStatus.Signup,
-        });
         createProfile(_email, _password)
             .then((response) => {
                 if (response.status === HTTPSuccess) {
                     if (response.data.status === HTTPSuccess) {
-                        router.go('/signup-edit');
+                         // пасхалочк// пасхалоч// пасхалочк// пасхалочк// пасхалочк// пасхалочк// пасхалочкааааакаа
+			 AuthStore.set({
+            			loggedIn: userStatus.Signup,
+        		});
+			router.go('/signup-edit');
                     } else if (response.data.status === HTTPEMailNotFound) {
                         storeData.formErrorClass = 'login-error-active';
                         SignupStore.set(storeData);
