@@ -98,7 +98,8 @@ export default class SignupView extends ViewBase {
             },
         },
         'critError': {
-            text: 'Проверь подключение к Интернету и попробуй снова.',
+            title: 'Ошибка подключения',
+            text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
             loading: SignupStore.get().apiErrorLoadCondition,
         },
     };

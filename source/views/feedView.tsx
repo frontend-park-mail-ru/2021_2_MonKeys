@@ -69,7 +69,8 @@ export default class FeedView extends ViewBase {
             class: 'menu-icon',
         },
         critError: {
-            text: 'Проверь подключение к Интернету и попробуй снова.',
+            title: 'Ошибка подключения',
+            text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
             loading: feedStore.get().apiErrorLoadCondition,
         },
     };
