@@ -19,6 +19,7 @@
     font-weight: bold;
     font-size: $font-size-medium;
     color: #ffffff;
+    gap: 12px;
     position: fixed;
     top: 48px;
     backdrop-filter: blur(20px);
@@ -47,5 +48,17 @@
 .crit-error-message {
     font-size: $font-size-small;
     color: rgb(255, 255, 255);
-    margin: 0 24px 24px 12px;
+    margin: 0 24px;
+}
+
+.crit-error-button {
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    backdrop-filter: blur(4px);
+    border-width: 0;
+    border-radius: 35px;
+
+    font-weight: bold;
+    font-size: 24px;
+
+    margin: 0 24px 24px 24px;
 }

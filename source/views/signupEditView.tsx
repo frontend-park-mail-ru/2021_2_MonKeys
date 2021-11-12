@@ -6,12 +6,14 @@ import { EditStore } from '../store/editStore.js';
 import { ProfileStore } from '../store/profileStore.js';
 import { errorEditFormMsg } from '../constants/errorMsg.js';
 import { CritError } from '../components/critError.js';
+import { ErrorStore } from '../store/errorStore';
 
 export default class SignupEditView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
         EditStore.subscribe(this.subscribtionCallback, this);
         ProfileStore.subscribe(this.subcribtionCallbackProfile, this);
+        ErrorStore.subscribe(this.errorStoreUpdatesView, this);
         this._template = this._createTmpl(this._data);
     }
 
@@ -79,7 +81,7 @@ export default class SignupEditView extends ViewBase {
         'critError': {
             title: 'Ошибка подключения',
             text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
-            loading: EditStore.get().apiErrorLoadCondition,
+            loading: ErrorStore.get().apiErrorLoadCondition,
         },
     };
 
@@ -95,6 +97,7 @@ export default class SignupEditView extends ViewBase {
     public unsubscribe() {
         EditStore.unsubscribe(this.subscribtionCallback);
         ProfileStore.unsubscribe(this.subcribtionCallbackProfile);
+        ErrorStore.unsubscribe(this.errorStoreUpdatesView);
     }
 
     private subscribtionCallback(data, view) {
@@ -106,8 +109,15 @@ export default class SignupEditView extends ViewBase {
         view._template = view._createTmpl(view._data);
         view.render();
     }
+
     private subcribtionCallbackProfile(data, view) {
         view._data.editForm.buttons.imgAddButton.imgs = ProfileStore.get().imgs;
+        view._template = view._createTmpl(view._data);
+        view.render();
+    }
+
+    private errorStoreUpdatesView(data, view) {
+        view._data.critError.loading = data.apiErrorLoadCondition;
         view._template = view._createTmpl(view._data);
         view.render();
     }

@@ -8,11 +8,13 @@ import { errorEmailMsg, errorPasswordMsg, errorRepeatPasswordMsg, errorSignupFor
 import EventBus from '../dispatcher/eventBus.js';
 import { SignupStore } from '../store/signupStore.js';
 import { CritError } from '../components/critError.js';
+import { ErrorStore } from '../store/errorStore';
 
 export default class SignupView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
         SignupStore.subscribe(this.subscribtionCallback, this);
+        ErrorStore.subscribe(this.errorStoreUpdatesView, this);
         this._template = this._createTmpl(this._data);
     }
 
@@ -100,7 +102,7 @@ export default class SignupView extends ViewBase {
         'critError': {
             title: 'Ошибка подключения',
             text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
-            loading: SignupStore.get().apiErrorLoadCondition,
+            loading: ErrorStore.get().apiErrorLoadCondition,
         },
     };
 
@@ -132,6 +134,7 @@ export default class SignupView extends ViewBase {
 
     public unsubscribe() {
         SignupStore.unsubscribe(this.subscribtionCallback);
+        ErrorStore.unsubscribe(this.errorStoreUpdatesView);
     }
 
     private subscribtionCallback(data, view) {
@@ -142,6 +145,12 @@ export default class SignupView extends ViewBase {
         view._data.errorMsgs.passwordError.class = data.passwordErrorClass;
         view._data.errorMsgs.repeatPasswordError.class = data.repeatPasswordErrorClass;
         view._data.errorMsgs.formError.class = data.formErrorClass;
+        view._data.critError.loading = data.apiErrorLoadCondition;
+        view._template = view._createTmpl(view._data);
+        view.render();
+    }
+
+    private errorStoreUpdatesView(data, view) {
         view._data.critError.loading = data.apiErrorLoadCondition;
         view._template = view._createTmpl(view._data);
         view.render();

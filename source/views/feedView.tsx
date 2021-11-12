@@ -10,6 +10,7 @@ import { OutOfCards } from '../components/outOfCards.js';
 import { CritError } from '../components/critError.js';
 
 import TapbarStore from '../store/tapbarStore.js';
+import { ErrorStore } from '../store/errorStore';
 
 export default class FeedView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -18,6 +19,7 @@ export default class FeedView extends ViewBase {
         const cardData = feedStore.get();
         this.updateDataTemaplate(cardData);
         feedStore.subscribe(this.subscribtionCallback, this);
+        ErrorStore.subscribe(this.errorStoreUpdatesView, this);
     }
 
     private updateDataTemaplate(cardData) {
@@ -71,7 +73,7 @@ export default class FeedView extends ViewBase {
         critError: {
             title: 'Ошибка подключения',
             text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
-            loading: feedStore.get().apiErrorLoadCondition,
+            loading: ErrorStore.get().apiErrorLoadCondition,
         },
     };
 
@@ -126,11 +128,18 @@ export default class FeedView extends ViewBase {
 
     public unsubscribe() {
         feedStore.unsubscribe(this.subscribtionCallback);
+        ErrorStore.unsubscribe(this.errorStoreUpdatesView);
     }
 
     private subscribtionCallback(data, view) {
         const cardData = feedStore.get();
         view.updateDataTemaplate(cardData);
+        view.render();
+    }
+
+    private errorStoreUpdatesView(data, view) {
+        view._data.critError.loading = data.apiErrorLoadCondition;
+        view._template = view._createTmpl(view._data);
         view.render();
     }
 }
