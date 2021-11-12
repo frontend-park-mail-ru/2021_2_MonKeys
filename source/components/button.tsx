@@ -30,9 +30,7 @@ export const Button = (props: ButtonProps) => {
     const textClassName = className + '-text';
     const button = (
         <button onclick={props.onclick} type={props.type} class={className}>
-            <div class='center-container'>
-                <span class={textClassName}>{props.text}</span>
-            </div>
+            <span class={textClassName}>{props.text}</span>
         </button>
     );
     return button;
