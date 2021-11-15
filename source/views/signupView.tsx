@@ -8,7 +8,7 @@ import { errorEmailMsg, errorPasswordMsg, errorRepeatPasswordMsg, errorSignupFor
 import EventBus from '../dispatcher/eventBus.js';
 import { SignupStore } from '../store/signupStore.js';
 import { CritError } from '../components/critError.js';
-import { ErrorStore } from '../store/errorStore';
+import { ErrorStore } from '../store/errorStore.js';
 
 export default class SignupView extends ViewBase {
     constructor(parent: HTMLElement) {

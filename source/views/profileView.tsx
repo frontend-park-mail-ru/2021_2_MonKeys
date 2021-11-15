@@ -6,7 +6,7 @@ import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
 import { CritError } from '../components/critError.js';
 import TapbarStore from '../store/tapbarStore.js';
-import { ErrorStore } from '../store/errorStore';
+import { ErrorStore } from '../store/errorStore.js';
 
 export default class ProfileView extends ViewBase {
     constructor(parent: HTMLElement) {

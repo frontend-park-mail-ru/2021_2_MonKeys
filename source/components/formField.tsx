@@ -27,7 +27,7 @@ export const FormField = (props: formFieldProps) => {
                         type={props.type}
                         name={props.name}
                         placeholder={props.placeholder}
-                        class={props.class}
+                        class="form__field__input"
                         value={props.value}
                     />
                 );
@@ -39,7 +39,7 @@ export const FormField = (props: formFieldProps) => {
                         type={props.type}
                         name={props.name}
                         placeholder={props.placeholder}
-                        class={props.class}
+                        class="form__field__input"
                     />
                 );
             }

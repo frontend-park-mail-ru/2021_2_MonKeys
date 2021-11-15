@@ -8,7 +8,7 @@ import { errorEmailMsg, errorPasswordMsg, errorLoginFormMsg } from '../constants
 import EventBus from '../dispatcher/eventBus.js';
 import { LoginStore } from '../store/loginStore.js';
 import { CritError } from '../components/critError.js';
-import { ErrorStore } from '../store/errorStore';
+import { ErrorStore } from '../store/errorStore.js';
 
 export default class LoginView extends ViewBase {
     public unsubscribe() {
@@ -112,22 +112,16 @@ export default class LoginView extends ViewBase {
 
     _createTmpl(data) {
         return (
-            <div class='form-container'>
-                <div class='center-container'>
-                    <span class='page-header'>Войти</span>
+            <div class="flex_box_column_center">
+                <div class="header_big">
+                    Drip
                 </div>
-                <div class='center-container'>
-                    <form class='login-form'>
-                        <div class='drip-logo-bg'>
-                            {FormField(data.fields.email)}
-                            {ErrorMsg(data.errorMsgs.emailError)}
-                            {FormField(data.fields.password)}
-                            {ErrorMsg(data.errorMsgs.passwordError)}
-                        </div>
-                        {ErrorMsg(data.errorMsgs.formError)}
-                        {Button(data.buttons.loginButton)}
-                    </form>
-                </div>
+                {FormField(data.fields.email)}
+                {ErrorMsg(data.errorMsgs.emailError)}
+                {FormField(data.fields.password)}
+                {ErrorMsg(data.errorMsgs.passwordError)}
+                {ErrorMsg(data.errorMsgs.formError)}
+                {Button(data.buttons.loginButton)}
                 {Link(data.links.signup)}
                 {CritError(data.critError)}
             </div>
