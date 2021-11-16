@@ -29,7 +29,7 @@ export const FormField = (props: formFieldProps) => {
                         placeholder={props.placeholder}
                         class="form__field__input"
                         value={props.value}
-                        autocomplete="new-password"
+                        autocomplete="off"
                     />
                 );
             } else {
@@ -41,7 +41,7 @@ export const FormField = (props: formFieldProps) => {
                         name={props.name}
                         placeholder={props.placeholder}
                         class="form__field__input"
-                        autocomplete="new-password"
+                        autocomplete="off"
                     />
                 );
             }
@@ -55,7 +55,7 @@ export const FormField = (props: formFieldProps) => {
                         name={props.name}
                         placeholder={props.placeholder}
                         class={props.class}
-                        autocomplete="off"
+                        autocomplete="chrome-off"
                     >
                         {props.value}
                     </textarea>
@@ -78,10 +78,10 @@ export const FormField = (props: formFieldProps) => {
     let fieldTmpl;
     if (props.iconSrc !== undefined) {
         fieldTmpl = (
-            <div class={props.class}>
+            <form class={props.class}>
                 <img src={props.iconSrc} class="form__field__icon"/>
                 {field}
-            </div>
+            </form>
         );
     } else {
         fieldTmpl = <div class='input-with-icon'>{field}</div>;
