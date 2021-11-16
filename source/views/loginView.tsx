@@ -10,6 +10,7 @@ import { LoginStore } from '../store/loginStore.js';
 import { CritError } from '../components/critError.js';
 import { ErrorStore } from '../store/errorStore.js';
 import router from '../route/router.js';
+import { dropsBackground } from '../components/dropsBackground.js';
 
 export default class LoginView extends ViewBase {
     public unsubscribe() {
@@ -114,14 +115,11 @@ export default class LoginView extends ViewBase {
     _createTmpl(data) {
         return (
             <div class="flex_box_column_center">
-                <img src="icons/drip_gradient.svg" class="droplet-1"/>
-                <img src="icons/drip_gradient.svg" class="droplet-2"/>
-                <img src="icons/drip_gradient.svg" class="droplet-3"/>
-                <img src="icons/drip_gradient.svg" class="droplet-4"/>
+                {dropsBackground()}
                 <div class="header-big">
                     Drip
                 </div>
-                <img src="icons/drip_gradient.svg" class="droplet-5"/>
+                
                 {FormField(data.fields.email)}
                 {ErrorMsg(data.errorMsgs.emailError)}
                 

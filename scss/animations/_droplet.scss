@@ -5,7 +5,7 @@
     width: 144px;
     height: 240px;
     transform: translateY(-200vh);
-    position: fixed;
+    position: absolute;
     animation: falling-droplet ease $time infinite;
 }
 

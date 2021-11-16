@@ -9,6 +9,8 @@ import EventBus from '../dispatcher/eventBus.js';
 import { SignupStore } from '../store/signupStore.js';
 import { CritError } from '../components/critError.js';
 import { ErrorStore } from '../store/errorStore.js';
+import router from '../route/router.js';
+import { dropsBackground } from '../components/dropsBackground.js';
 
 export default class SignupView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -66,10 +68,18 @@ export default class SignupView extends ViewBase {
         'buttons': {
             'signupButton': {
                 type: 'button',
-                text: 'Зарегистрироваться',
-                class: 'signup',
+                text: 'Регистрация',
+                class: 'button-white',
                 onclick: () => {
                     EventBus.dispatch<string>('signup:signup-button');
+                },
+            },
+            'loginButton': {
+                type: 'button',
+                text: 'Вход',
+                class: 'button-black',
+                onclick: () => {
+                    router.go('/login');
                 },
             },
         },
@@ -108,26 +118,20 @@ export default class SignupView extends ViewBase {
 
     _createTmpl(data) {
         return (
-            <div class='form-container'>
-                <div class='center-container'>
-                    <span class='page-header'>Регистрация</span>
-                </div>
-                <div class='center-container'>
-                    <form class='login-form'>
-                        <div class='drip-logo-bg'>
-                            {FormField(this._data.fields.email)}
-                            {ErrorMsg(this._data.errorMsgs.emailError)}
-                            {FormField(this._data.fields.password)}
-                            {ErrorMsg(this._data.errorMsgs.passwordError)}
-                            {FormField(this._data.fields.repeatPassword)}
-                            {ErrorMsg(this._data.errorMsgs.repeatPasswordError)}
-                        </div>
-                        {ErrorMsg(this._data.errorMsgs.formError)}
-                        {Button(this._data.buttons.signupButton)}
-                    </form>
-                </div>
-                {Link(this._data.links.login)}
-                {CritError(data.critError)}
+            <div class='flex_box_column_center'>
+                {dropsBackground()}
+                <div class='header-medium'>Регистрация</div>
+                {FormField(this._data.fields.email)}
+                {ErrorMsg(this._data.errorMsgs.emailError)}
+                {FormField(this._data.fields.password)}
+                {ErrorMsg(this._data.errorMsgs.passwordError)}
+                {FormField(this._data.fields.repeatPassword)}
+                {ErrorMsg(this._data.errorMsgs.repeatPasswordError)}
+                {/* {ErrorMsg(this._data.errorMsgs.formError)} */}
+                {Button(this._data.buttons.signupButton)}
+
+                {Button(this._data.buttons.loginButton)}
+                {/* {CritError(data.critError)} */}
             </div>
         );
     }

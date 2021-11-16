@@ -5,7 +5,7 @@
 @mixin button($background-color,$text-color,$width){
     background: $background-color;
     border-radius: $border-radius-default;
-    width: $width;
+    // width: $width;
     height: 36px;
     margin-top: 36px;
     color: $text-color;
