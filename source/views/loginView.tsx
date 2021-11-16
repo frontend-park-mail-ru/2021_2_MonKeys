@@ -9,6 +9,7 @@ import EventBus from '../dispatcher/eventBus.js';
 import { LoginStore } from '../store/loginStore.js';
 import { CritError } from '../components/critError.js';
 import { ErrorStore } from '../store/errorStore.js';
+import router from '../route/router.js';
 
 export default class LoginView extends ViewBase {
     public unsubscribe() {
@@ -75,18 +76,18 @@ export default class LoginView extends ViewBase {
             'loginButton': {
                 type: 'button',
                 text: 'Войти',
-                class: 'login',
+                class: 'button-white',
                 onclick: () => {
-                    EventBus.dispatch<string>('login:login-button');
+                    EventBus.dispatch<string>('login:button-white');
                 },
             },
-        },
-        'links': {
-            'signup': {
-                text: 'Зарегистрироваться',
-                class: 'signup-link',
-                dataSection: 'signup',
-                route: '/signup',
+            'signupButton': {
+                type: 'button',
+                text: 'Регистрация',
+                class: 'button-black',
+                onclick: () => {
+                    router.go('/signup');
+                },
             },
         },
         'errorMsgs': {
@@ -113,17 +114,23 @@ export default class LoginView extends ViewBase {
     _createTmpl(data) {
         return (
             <div class="flex_box_column_center">
-                <div class="header_big">
+                <img src="icons/drip_gradient.svg" class="droplet-1"/>
+                <img src="icons/drip_gradient.svg" class="droplet-2"/>
+                <img src="icons/drip_gradient.svg" class="droplet-3"/>
+                <img src="icons/drip_gradient.svg" class="droplet-4"/>
+                <div class="header-big">
                     Drip
                 </div>
+                <img src="icons/drip_gradient.svg" class="droplet-5"/>
                 {FormField(data.fields.email)}
                 {ErrorMsg(data.errorMsgs.emailError)}
+                
                 {FormField(data.fields.password)}
                 {ErrorMsg(data.errorMsgs.passwordError)}
-                {ErrorMsg(data.errorMsgs.formError)}
+                {/* {ErrorMsg(data.errorMsgs.formError)} */}
                 {Button(data.buttons.loginButton)}
-                {Link(data.links.signup)}
-                {CritError(data.critError)}
+                {Button(data.buttons.signupButton)}
+                {/* {CritError(data.critError)} */}
             </div>
         );
     }

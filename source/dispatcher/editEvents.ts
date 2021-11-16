@@ -23,13 +23,13 @@ export const EditEventRegister = () => {
 
         if (!testName) {
             storeData.nameFieldClass = 'form-field-edit-novalid text-without-icon';
-            storeData.nameErrorClass = 'login-error-active';
+            storeData.nameErrorClass = 'error-active';
             EditStore.set(storeData);
         }
 
         if (!validDate(_dateInput)) {
             storeData.birthDateFieldClass = 'form-field-edit-novalid text-with-icon';
-            storeData.birthDateErrorClass = 'login-error-active';
+            storeData.birthDateErrorClass = 'error-active';
             EditStore.set(storeData);
         }
 
@@ -37,22 +37,22 @@ export const EditEventRegister = () => {
 
         if (photoPaths == undefined || photoPaths.length === 0) {
             storeData.imgFieldClass = 'add-img-box-novalid';
-            storeData.imgErrorClass = 'login-error-active';
+            storeData.imgErrorClass = 'error-active';
         }
 
         if (!testName || !validDate(_dateInput) || photoPaths == undefined || photoPaths.length === 0) {
-            storeData.formErrorClass = 'login-error-active';
+            storeData.formErrorClass = 'error-active';
             EditStore.set(storeData);
             return;
         }
 
         storeData.nameFieldClass = 'form-field-edit text-without-icon';
-        storeData.nameErrorClass = 'login-error';
+        storeData.nameErrorClass = 'error-inactive';
         storeData.birthDateFieldClass = 'form-field-edit text-with-icon';
-        storeData.birthDateErrorClass = 'login-error';
+        storeData.birthDateErrorClass = 'error-inactive';
         storeData.imgFieldClass = 'add-img-box';
-        storeData.imgErrorClass = 'login-error';
-        storeData.formErrorClass = 'login-error';
+        storeData.imgErrorClass = 'error-inactive';
+        storeData.formErrorClass = 'error-inactive';
         EditStore.set(storeData);
 
         const name = _nameInput.value.trim();
@@ -177,12 +177,12 @@ export const EditEventRegister = () => {
             ? (storeData.nameFieldClass = 'form-field-edit text-without-icon')
             : (storeData.nameFieldClass = 'form-field-edit-novalid text-without-icon');
 
-        if (test && storeData.nameErrorClass === 'login-error-active') {
-            storeData.nameErrorClass = 'login-error';
+        if (test && storeData.nameErrorClass === 'error-active') {
+            storeData.nameErrorClass = 'error-inactive';
         }
 
-        if (storeData.formErrorClass === 'login-error-active') {
-            storeData.formErrorClass = 'login-error';
+        if (storeData.formErrorClass === 'error-active') {
+            storeData.formErrorClass = 'error-inactive';
         }
 
         EditStore.set(storeData);
@@ -199,10 +199,10 @@ export const EditEventRegister = () => {
 
         if (test) {
             storeData.nameFieldClass = 'form-field-edit text-without-icon';
-            storeData.nameErrorClass = 'login-error';
+            storeData.nameErrorClass = 'error-inactive';
         } else {
             storeData.nameFieldClass = 'form-field-edit-novalid text-without-icon';
-            storeData.nameErrorClass = 'login-error-active';
+            storeData.nameErrorClass = 'error-active';
         }
 
         EditStore.set(storeData);
@@ -221,12 +221,12 @@ export const EditEventRegister = () => {
             ? (storeData.birthDateFieldClass = 'form-field-edit text-with-icon')
             : (storeData.birthDateFieldClass = 'form-field-edit-novalid text-with-icon');
 
-        if (test && storeData.birthDateErrorClass === 'login-error-active') {
-            storeData.birthDateErrorClass = 'login-error';
+        if (test && storeData.birthDateErrorClass === 'error-active') {
+            storeData.birthDateErrorClass = 'error-inactive';
         }
 
-        if (storeData.formErrorClass === 'login-error-active') {
-            storeData.formErrorClass = 'login-error';
+        if (storeData.formErrorClass === 'error-active') {
+            storeData.formErrorClass = 'error-inactive';
         }
 
         EditStore.set(storeData);
@@ -243,10 +243,10 @@ export const EditEventRegister = () => {
 
         if (test) {
             storeData.birthDateFieldClass = 'form-field-edit text-with-icon';
-            storeData.birthDateErrorClass = 'login-error';
+            storeData.birthDateErrorClass = 'error-inactive';
         } else {
             storeData.birthDateFieldClass = 'form-field-edit-novalid text-with-icon';
-            storeData.birthDateErrorClass = 'login-error-active';
+            storeData.birthDateErrorClass = 'error-active';
         }
 
         EditStore.set(storeData);
@@ -277,10 +277,10 @@ export const EditEventRegister = () => {
                 ProfileStore.set(userData);
                 const editStoreData = EditStore.get();
                 editStoreData.imgFieldClass = 'add-img-box';
-                if (editStoreData.imgErrorClass === 'login-error-active') {
-                    editStoreData.imgErrorClass = 'login-error';
+                if (editStoreData.imgErrorClass === 'error-active') {
+                    editStoreData.imgErrorClass = 'error-inactive';
                 }
-                editStoreData.formErrorClass = 'login-error';
+                editStoreData.formErrorClass = 'error-inactive';
                 EditStore.set(editStoreData);
             })
             .catch(() => {

@@ -1,0 +1,19 @@
+@import '../abstracts/colors';
+@import '../animations/opacity_animations';
+
+@mixin errorText(){
+    color: $red;
+    font-size: $font-size-tiny;
+    text-align: center;
+    
+}
+
+.error-inactive {
+    @include errorText();
+    visibility: hidden;
+}
+
+.error-active {
+    @include errorText();
+    animation: opacityIn 1s ease 1;
+}

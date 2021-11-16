@@ -17,26 +17,3 @@
 
 
 
-@mixin form-field($color) {
-    margin-top: 36px;
-    width: 288px;
-    height: 36px;
-    background: $color;
-    backdrop-filter: blur(20px);
-    border-radius: $border-radius-default;
-    font-weight: bold;
-    font-size: $font-size-medium;
-    color: #ffffff;
-}
-
-@mixin form-field-edit($color){
-  width: $field-default-width;
-  height: $field-default-height;
-  left: 15px;
-  top: 67px;
-  background: $color;
-  backdrop-filter: blur(5px);
-  backdrop-filter: contrast(60%);
-  border-radius: 20px;
-  border-width: 0;
-}

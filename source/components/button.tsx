@@ -9,30 +9,9 @@ export interface ButtonProps {
 }
 
 export const Button = (props: ButtonProps) => {
-    let className: string;
-    switch (props.class) {
-        case 'login':
-            className = 'login-button';
-            break;
-        case 'signup':
-            className = 'signup-button';
-            break;
-        case 'add':
-            className = 'add';
-            break;
-        case 'edit':
-            className = 'edit-button';
-            break;
-        case 'link':
-            break;
-        default:
-            className = props.class;
-    }
-
-    const textClassName = className + '-text';
     const button = (
-        <button onclick={props.onclick} type={props.type} class={className}>
-            <span class={textClassName}>{props.text}</span>
+        <button onclick={props.onclick} type={props.type} class={props.class}>
+            <span class="button__text">{props.text}</span>
         </button>
     );
     return button;

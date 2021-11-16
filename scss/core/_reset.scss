@@ -1,3 +1,5 @@
+@import './typography';
+
 
 textarea:focus,
 input:focus {
@@ -8,26 +10,9 @@ body {
   margin: 0px;
 }
 
-::-webkit-input-placeholder {
-  color: #ffffff;
-}
-
-:-ms-input-placeholder {
-  color: #ffffff;
-}
-
-::-moz-placeholder {
-  color: #ffffff;
-  opacity: 1;
-}
-
-:-moz-placeholder {
-  color: #ffffff;
-  opacity: 1;
-}
-
-::-webkit-scrollbar {
-  width: 0;
+button {
+  border: none;
+  font-family: $font-default;
 }
 
 input:-webkit-autofill,
@@ -45,4 +30,5 @@ select:-webkit-autofill:focus {
 
 input {
   border: none;
+  background: none;
 }

@@ -74,9 +74,9 @@ export const FormField = (props: formFieldProps) => {
     let fieldTmpl;
     if (props.iconSrc !== undefined) {
         fieldTmpl = (
-            <div class='input-with-icon'>
+            <div class={props.class}>
+                <img src={props.iconSrc} class="form__field__icon"/>
                 {field}
-                <img src={props.iconSrc} class='input-icon' />
             </div>
         );
     } else {

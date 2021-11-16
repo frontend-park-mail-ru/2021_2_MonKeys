@@ -12,11 +12,11 @@ export interface LoginData {
 const LoginStore = new BaseStore<LoginData>();
 
 const initData = {
-    emailFieldClass: 'form-field-valid',
-    emailErrorClass: 'login-error',
-    passwordFieldClass: 'form-field-valid',
-    passwordErrorClass: 'login-error',
-    formErrorClass: 'login-error',
+    emailFieldClass: 'form__field-valid',
+    emailErrorClass: 'error-inactive',
+    passwordFieldClass: 'form__field-valid',
+    passwordErrorClass: 'error-inactive',
+    formErrorClass: 'error-inactive',
     apiErrorLoadCondition: false,
 };
 

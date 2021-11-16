@@ -1,0 +1,42 @@
+
+@mixin droplet($startX, $startY, $time){
+    top: $startY;
+    left: $startX;
+    width: 144px;
+    height: 240px;
+    transform: translateY(-200vh);
+    position: fixed;
+    animation: falling-droplet $time infinite;
+}
+
+.droplet-1 {
+    @include droplet(50px,0px,3s);
+}
+
+.droplet-2 {
+   @include droplet(200px,200px,4s);
+}
+
+.droplet-3 {
+   @include droplet(50px,400px,5s);
+}
+
+.droplet-4 {
+   @include droplet(200px,600px,4s);
+}
+
+.droplet-5 {
+   @include droplet(50px,800px,3s);
+}
+
+@keyframes falling-droplet {
+  0% {
+    transform: translateY(-150vh);
+  }
+  75% {
+    transform: translateY(100vh);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}

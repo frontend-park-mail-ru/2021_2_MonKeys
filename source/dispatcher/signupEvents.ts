@@ -22,30 +22,30 @@ export const SignupEventRegister = () => {
         SignupStore.set(storeData);
 
         if (!testEmail) {
-            storeData.emailFieldClass = 'form-field-novalid';
-            storeData.emailErrorClass = 'login-error-active';
+            storeData.emailFieldClass = 'form__field-invalid';
+            storeData.emailErrorClass = 'error-active';
             SignupStore.set(storeData);
         }
         if (!testPassword) {
-            storeData.passwordFieldClass = 'form-field-novalid';
-            storeData.passwordErrorClass = 'login-error-active';
+            storeData.passwordFieldClass = 'form__field-invalid';
+            storeData.passwordErrorClass = 'error-active';
             SignupStore.set(storeData);
         }
         if (!testRepeatPassword) {
-            storeData.repeatPasswordFieldClass = 'form-field-novalid';
-            storeData.repeatPasswordErrorClass = 'login-error-active';
+            storeData.repeatPasswordFieldClass = 'form__field-invalid';
+            storeData.repeatPasswordErrorClass = 'error-active';
             SignupStore.set(storeData);
         }
         if (!testEmail || !testPassword || !testRepeatPassword) {
             return;
         }
 
-        storeData.emailFieldClass = 'form-field-valid';
-        storeData.emailErrorClass = 'login-error';
-        storeData.passwordFieldClass = 'form-field-valid';
-        storeData.passwordErrorClass = 'login-error';
-        storeData.repeatPasswordFieldClass = 'form-field-valid';
-        storeData.repeatPasswordErrorClass = 'login-error';
+        storeData.emailFieldClass = 'form__field-valid';
+        storeData.emailErrorClass = 'error-inactive';
+        storeData.passwordFieldClass = 'form__field-valid';
+        storeData.passwordErrorClass = 'error-inactive';
+        storeData.repeatPasswordFieldClass = 'form__field-valid';
+        storeData.repeatPasswordErrorClass = 'error-inactive';
         SignupStore.set(storeData);
 
         const _email = _emailInput.value.trim();
@@ -61,7 +61,7 @@ export const SignupEventRegister = () => {
                         });
                         router.go('/signup-edit');
                     } else if (response.data.status === HTTPEMailNotFound) {
-                        storeData.formErrorClass = 'login-error-active';
+                        storeData.formErrorClass = 'error-active';
                         SignupStore.set(storeData);
                     }
                 } else {
@@ -83,14 +83,14 @@ export const SignupEventRegister = () => {
         SignupStore.set(storeData);
 
         const test = _emailInput.value.length === 0 || emailRegExp.test(_emailInput.value);
-        test ? (storeData.emailFieldClass = 'form-field-valid') : (storeData.emailFieldClass = 'form-field-novalid');
+        test ? (storeData.emailFieldClass = 'form__field-valid') : (storeData.emailFieldClass = 'form__field-invalid');
 
-        if (test && storeData.emailErrorClass === 'login-error-active') {
-            storeData.emailErrorClass = 'login-error';
+        if (test && storeData.emailErrorClass === 'error-active') {
+            storeData.emailErrorClass = 'error-inactive';
         }
 
-        if (storeData.formErrorClass === 'login-error-active') {
-            storeData.formErrorClass = 'login-error';
+        if (storeData.formErrorClass === 'error-active') {
+            storeData.formErrorClass = 'error-inactive';
         }
 
         SignupStore.set(storeData);
@@ -105,11 +105,11 @@ export const SignupEventRegister = () => {
 
         const test = _emailInput.value.length === 0 || emailRegExp.test(_emailInput.value);
         if (test) {
-            storeData.emailFieldClass = 'form-field-valid';
-            storeData.emailErrorClass = 'login-error';
+            storeData.emailFieldClass = 'form__field-valid';
+            storeData.emailErrorClass = 'error-inactive';
         } else {
-            storeData.emailFieldClass = 'form-field-novalid';
-            storeData.emailErrorClass = 'login-error-active';
+            storeData.emailFieldClass = 'form__field-invalid';
+            storeData.emailErrorClass = 'error-active';
         }
 
         SignupStore.set(storeData);
@@ -124,15 +124,15 @@ export const SignupEventRegister = () => {
 
         const test = _passwordInput.value.length === 0 || passwordRegExp.test(_passwordInput.value);
         test
-            ? (storeData.passwordFieldClass = 'form-field-valid')
-            : (storeData.passwordFieldClass = 'form-field-novalid');
+            ? (storeData.passwordFieldClass = 'form__field-valid')
+            : (storeData.passwordFieldClass = 'form__field-invalid');
 
-        if (test && storeData.passwordErrorClass === 'login-error-active') {
-            storeData.passwordErrorClass = 'login-error';
+        if (test && storeData.passwordErrorClass === 'error-active') {
+            storeData.passwordErrorClass = 'error-inactive';
         }
 
-        if (storeData.formErrorClass === 'login-error-active') {
-            storeData.formErrorClass = 'login-error';
+        if (storeData.formErrorClass === 'error-active') {
+            storeData.formErrorClass = 'error-inactive';
         }
 
         SignupStore.set(storeData);
@@ -147,11 +147,11 @@ export const SignupEventRegister = () => {
 
         const test = _passwordInput.value.length === 0 || passwordRegExp.test(_passwordInput.value);
         if (test) {
-            storeData.passwordFieldClass = 'form-field-valid';
-            storeData.passwordErrorClass = 'login-error';
+            storeData.passwordFieldClass = 'form__field-valid';
+            storeData.passwordErrorClass = 'error-inactive';
         } else {
-            storeData.passwordFieldClass = 'form-field-novalid';
-            storeData.passwordErrorClass = 'login-error-active';
+            storeData.passwordFieldClass = 'form__field-invalid';
+            storeData.passwordErrorClass = 'error-active';
         }
 
         SignupStore.set(storeData);
@@ -167,15 +167,15 @@ export const SignupEventRegister = () => {
 
         const test = _passwordInput.value === _repeatPasswordInput.value;
         test
-            ? (storeData.repeatPasswordFieldClass = 'form-field-valid')
-            : (storeData.repeatPasswordFieldClass = 'form-field-novalid');
+            ? (storeData.repeatPasswordFieldClass = 'form__field-valid')
+            : (storeData.repeatPasswordFieldClass = 'form__field-invalid');
 
-        if (test && storeData.repeatPasswordErrorClass === 'login-error-active') {
-            storeData.repeatPasswordErrorClass = 'login-error';
+        if (test && storeData.repeatPasswordErrorClass === 'error-active') {
+            storeData.repeatPasswordErrorClass = 'error-inactive';
         }
 
-        if (storeData.formErrorClass === 'login-error-active') {
-            storeData.formErrorClass = 'login-error';
+        if (storeData.formErrorClass === 'error-active') {
+            storeData.formErrorClass = 'error-inactive';
         }
 
         SignupStore.set(storeData);
@@ -184,7 +184,7 @@ export const SignupEventRegister = () => {
     EventBus.register('signup:repeat-password-focusout', (payload?: string) => {
         const _passwordInput = document.getElementsByTagName('input')[1];
         const _repeatPasswordInput = document.getElementsByTagName('input')[2];
-        const _repeatPasswordError = document.getElementsByName('error')[2];
+        const _repeatPasswordError = document.getElementsByName('error-inactive')[2];
 
         const storeData = SignupStore.get();
         storeData.apiErrorLoadCondition = false;
@@ -192,11 +192,11 @@ export const SignupEventRegister = () => {
 
         const test = _passwordInput.value === _repeatPasswordInput.value;
         if (test) {
-            storeData.repeatPasswordFieldClass = 'form-field-valid';
-            storeData.repeatPasswordErrorClass = 'login-error';
+            storeData.repeatPasswordFieldClass = 'form__field-valid';
+            storeData.repeatPasswordErrorClass = 'error-inactive';
         } else {
-            storeData.repeatPasswordFieldClass = 'form-field-novalid';
-            storeData.repeatPasswordErrorClass = 'login-error-active';
+            storeData.repeatPasswordFieldClass = 'form__field-invalid';
+            storeData.repeatPasswordErrorClass = 'error-active';
         }
 
         SignupStore.set(storeData);

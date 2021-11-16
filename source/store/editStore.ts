@@ -16,12 +16,12 @@ const EditStore = new BaseStore<EditData>();
 
 const initData = {
     nameFieldClass: 'form-field-edit text-without-icon',
-    nameErrorClass: 'login-error',
+    nameErrorClass: 'error-inactive',
     birthDateFieldClass: 'form-field-edit text-with-icon',
-    birthDateErrorClass: 'login-error',
+    birthDateErrorClass: 'error-inactive',
     imgFieldClass: 'add-img-box',
-    imgErrorClass: 'login-error',
-    formErrorClass: 'login-error',
+    imgErrorClass: 'error-inactive',
+    formErrorClass: 'error-inactive',
     apiErrorLoadCondition: false,
 };
 
