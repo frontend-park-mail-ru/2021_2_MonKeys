@@ -29,6 +29,7 @@ export const FormField = (props: formFieldProps) => {
                         placeholder={props.placeholder}
                         class="form__field__input"
                         value={props.value}
+                        autocomplete="new-password"
                     />
                 );
             } else {
@@ -40,6 +41,7 @@ export const FormField = (props: formFieldProps) => {
                         name={props.name}
                         placeholder={props.placeholder}
                         class="form__field__input"
+                        autocomplete="new-password"
                     />
                 );
             }
@@ -53,6 +55,7 @@ export const FormField = (props: formFieldProps) => {
                         name={props.name}
                         placeholder={props.placeholder}
                         class={props.class}
+                        autocomplete="off"
                     >
                         {props.value}
                     </textarea>
@@ -64,6 +67,7 @@ export const FormField = (props: formFieldProps) => {
                         onfocusout={props.onfocusout}
                         name={props.name}
                         placeholder={props.placeholder}
+                        autocomplete="off"
                         class={props.class}
                     />
                 );
