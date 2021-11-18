@@ -5,14 +5,19 @@ export type MatchCardData = ProfileData;
 
 export interface LikesData {
     profiles: MatchCardData[];
-    mathesCount: number;
+    likesCount: number;
+
+    expended: boolean;
+    userIndex: number;
 }
 
 const LikesStore = new BaseStore<LikesData>();
 
 LikesStore.set({
     profiles: [],
-    mathesCount: 0,
+    likesCount: 0,
+    expended: false,
+    userIndex: 0,
 });
 
 export default LikesStore;

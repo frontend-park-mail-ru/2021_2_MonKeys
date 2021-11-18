@@ -6,7 +6,7 @@ import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
 import { CritError } from '../components/critError.js';
 import TapbarStore from '../store/tapbarStore.js';
-import { ErrorStore } from '../store/errorStore';
+import { ErrorStore } from '../store/errorStore.js';
 
 export default class ProfileView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -24,6 +24,7 @@ export default class ProfileView extends ViewBase {
                 age: ProfileStore.get().age,
                 description: ProfileStore.get().description,
                 imgs: ProfileStore.get().imgs,
+                tags: ProfileStore.get().tags,
             },
             'tags': ProfileStore.get().tags,
             'buttons': {
@@ -58,7 +59,7 @@ export default class ProfileView extends ViewBase {
     _createTmpl(data) {
         return (
             <div class='card-container'>
-                {CardExpended(data.cardData)}
+                {CardExpended({ userData: data.cardData.userData, withActions: false })}
                 {Tapbar(TapbarStore.get())}
                 {CritError(data.critError)}
             </div>

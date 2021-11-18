@@ -17,9 +17,10 @@ import eventBus from './eventBus.js';
 import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
 import feedStore from '../store/feedStore.js';
+import { userLikesRequset } from '../requests/likesRequest.js';
 import { matchRequest } from '../requests/matchRequest.js';
 import LikesStore from '../store/likesStore.js';
-import { ErrorEventsRegister } from './errorEvents';
+import { ErrorEventsRegister } from './errorEvents.js';
 const $root = document.getElementById('app');
 
 export const InitBus = () => {
@@ -31,10 +32,16 @@ export const InitBus = () => {
                         AuthStore.set({
                             loggedIn: userStatus.loggedIn,
                         });
-                        matchRequest().then((matchResponse) => {
+                        // matchRequest().then((matchResponse) => {
+                        //     const likesData = LikesStore.get();
+                        //     likesData.profiles = matchResponse.data.body.allUsers;
+                        //     likesData.mathesCount = matchResponse.data.body.matchesCount;
+                        //     LikesStore.set(likesData);
+                        // });
+                        userLikesRequset().then((likesResponse) => {
                             const likesData = LikesStore.get();
-                            likesData.profiles = matchResponse.data.body.allUsers;
-                            likesData.mathesCount = matchResponse.data.body.matchesCount;
+                            likesData.profiles = likesResponse.data.body.allUsers;
+                            likesData.likesCount = likesResponse.data.body.likesCount;
                             LikesStore.set(likesData);
                         });
 
