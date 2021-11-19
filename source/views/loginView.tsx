@@ -77,7 +77,7 @@ export default class LoginView extends ViewBase {
             'loginButton': {
                 type: 'button',
                 text: 'Войти',
-                class: 'button-white',
+                class: 'button-white-small',
                 onclick: () => {
                     EventBus.dispatch<string>('login:button-white');
                 },
@@ -85,7 +85,7 @@ export default class LoginView extends ViewBase {
             'signupButton': {
                 type: 'button',
                 text: 'Регистрация',
-                class: 'button-black',
+                class: 'button-black-big',
                 onclick: () => {
                     router.go('/signup');
                 },

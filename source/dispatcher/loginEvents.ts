@@ -72,12 +72,17 @@ export const LoginEventRegister = () => {
         const test = _emailInput.value.length === 0 || emailRegExp.test(_emailInput.value);
 
         test ? (storeData.emailFieldClass = 'form__field-valid') : (storeData.emailFieldClass = 'form__field-invalid');
-
-        if (test && storeData.emailErrorClass === 'error-active') {
+        if (!test && storeData.emailErrorClass !== 'error-active') {
+            console.log('4');
+            storeData.emailErrorClass = 'error-hint';
+        }
+        if (test && (storeData.emailErrorClass === 'error-active' || storeData.emailErrorClass === 'error-hint')) {
+            console.log('3');
             storeData.emailErrorClass = 'error-inactive';
         }
 
-        if (storeData.formErrorClass === 'error-active') {
+        if (storeData.emailErrorClass === 'error-active' || storeData.emailErrorClass === 'error-hint') {
+            console.log('2');
             storeData.formErrorClass = 'error-inactive';
         }
 
