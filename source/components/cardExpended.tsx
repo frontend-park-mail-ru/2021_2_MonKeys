@@ -38,10 +38,14 @@ export const CardExpended = (props: CardExpendedProps) => {
     if (props.withActions) {
         imgTmpl = ImgCard({ userData: props.userData, size: 'medium', expanded: false });
         // !!!!
-        nameTmpl = <div></div>
+        nameTmpl = <div></div>;
     } else {
         imgTmpl = <img class={'img-card__img img-card__img_size_medium'} src={props.userData.imgs[0]} />;
-        nameTmpl = <div class='img-card__name-age img-card__name-age_size_small'>{props.userData.name + ', ' + props.userData.age}</div>;
+        nameTmpl = (
+            <div class='img-card__name-age img-card__name-age_size_small'>
+                {props.userData.name + ', ' + props.userData.age}
+            </div>
+        );
     }
 
     return (

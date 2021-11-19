@@ -46,7 +46,11 @@ export default class ProfileView extends ViewBase {
         return (
             <div class='view-contant view-contant_align_center'>
                 <div class='view-contant__icon-button'>
-                    <img src='icons2/settings.svg' class='view-contant__dislike' onclick={data.cardData.settingButtons.onclick}/>
+                    <img
+                        src='icons2/settings.svg'
+                        class='view-contant__dislike'
+                        onclick={data.cardData.settingButtons.onclick}
+                    />
                 </div>
                 {CardExpended({ userData: data.cardData.userData, withActions: false })}
                 {Tapbar(TapbarStore.get())}
