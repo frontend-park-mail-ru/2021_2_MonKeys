@@ -10,6 +10,10 @@ import { LoginStore } from '../store/loginStore.js';
 import { CritError } from '../components/critError.js';
 import { ErrorStore } from '../store/errorStore.js';
 
+import router from '../route/router.js';
+import { dropsBackground } from '../components/dropsBackground.js';
+
+
 export default class LoginView extends ViewBase {
     public unsubscribe() {
         LoginStore.unsubscribe(this.subscribtionCallback);
@@ -75,18 +79,18 @@ export default class LoginView extends ViewBase {
             'loginButton': {
                 type: 'button',
                 text: 'Войти',
-                class: 'login',
+                class: 'button-white-small',
                 onclick: () => {
-                    EventBus.dispatch<string>('login:login-button');
+                    EventBus.dispatch<string>('login:button-white');
                 },
             },
-        },
-        'links': {
-            'signup': {
-                text: 'Зарегистрироваться',
-                class: 'signup-link',
-                dataSection: 'signup',
-                route: '/signup',
+            'signupButton': {
+                type: 'button',
+                text: 'Регистрация',
+                class: 'button-black-big',
+                onclick: () => {
+                    router.go('/signup');
+                },
             },
         },
         'errorMsgs': {
@@ -112,24 +116,19 @@ export default class LoginView extends ViewBase {
 
     _createTmpl(data) {
         return (
-            <div class='form-container'>
-                <div class='center-container'>
-                    <span class='page-header'>Войти</span>
-                </div>
-                <div class='center-container'>
-                    <form class='login-form'>
-                        <div class='drip-logo-bg'>
-                            {FormField(data.fields.email)}
-                            {ErrorMsg(data.errorMsgs.emailError)}
-                            {FormField(data.fields.password)}
-                            {ErrorMsg(data.errorMsgs.passwordError)}
-                        </div>
-                        {ErrorMsg(data.errorMsgs.formError)}
-                        {Button(data.buttons.loginButton)}
-                    </form>
-                </div>
-                {Link(data.links.signup)}
-                {CritError(data.critError)}
+            <div class='flex_box_column_center'>
+                {dropsBackground()}
+                <div class='header-big'>Drip</div>
+
+                {FormField(data.fields.email)}
+                {ErrorMsg(data.errorMsgs.emailError)}
+
+                {FormField(data.fields.password)}
+                {ErrorMsg(data.errorMsgs.passwordError)}
+                {/* {ErrorMsg(data.errorMsgs.formError)} */}
+                {Button(data.buttons.loginButton)}
+                {Button(data.buttons.signupButton)}
+                {/* {CritError(data.critError)} */}
             </div>
         );
     }

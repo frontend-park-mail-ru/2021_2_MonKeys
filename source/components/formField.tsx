@@ -27,8 +27,9 @@ export const FormField = (props: formFieldProps) => {
                         type={props.type}
                         name={props.name}
                         placeholder={props.placeholder}
-                        class={props.class}
+                        class='form__field__input'
                         value={props.value}
+                        autocomplete='off'
                     />
                 );
             } else {
@@ -39,7 +40,8 @@ export const FormField = (props: formFieldProps) => {
                         type={props.type}
                         name={props.name}
                         placeholder={props.placeholder}
-                        class={props.class}
+                        class='form__field__input'
+                        autocomplete='off'
                     />
                 );
             }
@@ -53,6 +55,7 @@ export const FormField = (props: formFieldProps) => {
                         name={props.name}
                         placeholder={props.placeholder}
                         class={props.class}
+                        autocomplete='chrome-off'
                     >
                         {props.value}
                     </textarea>
@@ -64,6 +67,7 @@ export const FormField = (props: formFieldProps) => {
                         onfocusout={props.onfocusout}
                         name={props.name}
                         placeholder={props.placeholder}
+                        autocomplete='off'
                         class={props.class}
                     />
                 );
@@ -74,10 +78,10 @@ export const FormField = (props: formFieldProps) => {
     let fieldTmpl;
     if (props.iconSrc !== undefined) {
         fieldTmpl = (
-            <div class='input-with-icon'>
+            <form class={props.class}>
+                <img src={props.iconSrc} class='form__field__icon' />
                 {field}
-                <img src={props.iconSrc} class='input-icon' />
-            </div>
+            </form>
         );
     } else {
         fieldTmpl = <div class='input-with-icon'>{field}</div>;
