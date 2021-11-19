@@ -4,6 +4,9 @@ export interface SignupData {
     emailFieldClass: string;
     emailErrorClass: string;
     passwordFieldClass: string;
+    emailPass?: boolean;
+    passwordPass?: boolean;
+    repeatPasswordPass?: boolean;
     passwordErrorClass: string;
     repeatPasswordFieldClass: string;
     repeatPasswordErrorClass: string;

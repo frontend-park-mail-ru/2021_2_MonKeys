@@ -22,13 +22,13 @@ export const EditEventRegister = () => {
         EditStore.set(storeData);
 
         if (!testName) {
-            storeData.nameFieldClass = 'form-field-edit-novalid text-without-icon';
+            storeData.nameFieldClass = 'form__field-invalid text-without-icon';
             storeData.nameErrorClass = 'error-active';
             EditStore.set(storeData);
         }
 
         if (!validDate(_dateInput)) {
-            storeData.birthDateFieldClass = 'form-field-edit-novalid text-with-icon';
+            storeData.birthDateFieldClass = 'form__field-invalid text-with-icon';
             storeData.birthDateErrorClass = 'error-active';
             EditStore.set(storeData);
         }
@@ -46,9 +46,9 @@ export const EditEventRegister = () => {
             return;
         }
 
-        storeData.nameFieldClass = 'form-field-edit text-without-icon';
+        storeData.nameFieldClass = 'form__field-valid';
         storeData.nameErrorClass = 'error-inactive';
-        storeData.birthDateFieldClass = 'form-field-edit text-with-icon';
+        storeData.birthDateFieldClass = 'form__field-valid';
         storeData.birthDateErrorClass = 'error-inactive';
         storeData.imgFieldClass = 'add-img-box';
         storeData.imgErrorClass = 'error-inactive';
@@ -174,8 +174,8 @@ export const EditEventRegister = () => {
         const test = _nameInput.value.length !== 0 && nameRegExp.test(_nameInput.value);
 
         test
-            ? (storeData.nameFieldClass = 'form-field-edit text-without-icon')
-            : (storeData.nameFieldClass = 'form-field-edit-novalid text-without-icon');
+            ? (storeData.nameFieldClass = 'form__field-valid')
+            : (storeData.nameFieldClass = 'form__field-invalid text-without-icon');
 
         if (test && storeData.nameErrorClass === 'error-active') {
             storeData.nameErrorClass = 'error-inactive';
@@ -198,10 +198,10 @@ export const EditEventRegister = () => {
         const test = _nameInput.value.length !== 0 && nameRegExp.test(_nameInput.value);
 
         if (test) {
-            storeData.nameFieldClass = 'form-field-edit text-without-icon';
+            storeData.nameFieldClass = 'form__field-valid';
             storeData.nameErrorClass = 'error-inactive';
         } else {
-            storeData.nameFieldClass = 'form-field-edit-novalid text-without-icon';
+            storeData.nameFieldClass = 'form__field-invalid text-without-icon';
             storeData.nameErrorClass = 'error-active';
         }
 
@@ -218,8 +218,8 @@ export const EditEventRegister = () => {
         const test = validDate(_dateInput);
 
         test
-            ? (storeData.birthDateFieldClass = 'form-field-edit text-with-icon')
-            : (storeData.birthDateFieldClass = 'form-field-edit-novalid text-with-icon');
+            ? (storeData.birthDateFieldClass = 'form__field-valid')
+            : (storeData.birthDateFieldClass = 'form__field-invalid text-with-icon');
 
         if (test && storeData.birthDateErrorClass === 'error-active') {
             storeData.birthDateErrorClass = 'error-inactive';
@@ -242,10 +242,10 @@ export const EditEventRegister = () => {
         const test = validDate(_dateInput);
 
         if (test) {
-            storeData.birthDateFieldClass = 'form-field-edit text-with-icon';
+            storeData.birthDateFieldClass = 'form__field-valid';
             storeData.birthDateErrorClass = 'error-inactive';
         } else {
-            storeData.birthDateFieldClass = 'form-field-edit-novalid text-with-icon';
+            storeData.birthDateFieldClass = 'form__field-invalid text-with-icon';
             storeData.birthDateErrorClass = 'error-active';
         }
 

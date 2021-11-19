@@ -9,11 +9,10 @@ import EventBus from '../dispatcher/eventBus.js';
 import { SignupStore } from '../store/signupStore.js';
 import { CritError } from '../components/critError.js';
 import { ErrorStore } from '../store/errorStore.js';
-<<<<<<< HEAD
+
 import router from '../route/router.js';
 import { dropsBackground } from '../components/dropsBackground.js';
-=======
->>>>>>> d2d838d90538727fa9a87d31b6a06913b2223af9
+
 
 export default class SignupView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -146,8 +145,11 @@ export default class SignupView extends ViewBase {
 
     private subscribtionCallback(data, view) {
         view._data.fields.email.class = data.emailFieldClass;
+        view._data.fields.email.pass = data.emailPass;
         view._data.fields.password.class = data.passwordFieldClass;
+        view._data.fields.password.pass = data.passwordPass;
         view._data.fields.repeatPassword.class = data.repeatPasswordFieldClass;
+        view._data.fields.repeatPassword.pass = data.repeatPasswordPass;
         view._data.errorMsgs.emailError.class = data.emailErrorClass;
         view._data.errorMsgs.passwordError.class = data.passwordErrorClass;
         view._data.errorMsgs.repeatPasswordError.class = data.repeatPasswordErrorClass;

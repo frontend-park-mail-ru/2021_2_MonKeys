@@ -22,7 +22,9 @@ export default class LoginView extends ViewBase {
 
     private subscribtionCallback(data, view) {
         view._data.fields.email.class = data.emailFieldClass;
+        view._data.fields.email.pass = data.emailPass;
         view._data.fields.password.class = data.passwordFieldClass;
+        view._data.fields.password.pass = data.passwordPass;
         view._data.errorMsgs.emailError.class = data.emailErrorClass;
         view._data.errorMsgs.passwordError.class = data.passwordErrorClass;
         view._data.errorMsgs.formError.class = data.formErrorClass;
@@ -53,6 +55,7 @@ export default class LoginView extends ViewBase {
                 name: 'email',
                 iconSrc: 'icons/email.svg',
                 class: LoginStore.get().emailFieldClass,
+                pass: false,
                 oninput: () => {
                     EventBus.dispatch<string>('login:email-input');
                 },
@@ -67,6 +70,7 @@ export default class LoginView extends ViewBase {
                 name: 'password',
                 iconSrc: 'icons/password.svg',
                 class: LoginStore.get().passwordFieldClass,
+                pass: false,
                 oninput: () => {
                     EventBus.dispatch<string>('login:password-input');
                 },

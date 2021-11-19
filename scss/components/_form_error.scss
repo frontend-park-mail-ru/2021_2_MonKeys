@@ -8,7 +8,12 @@
 .error-inactive {
     @include errorText();
     animation: opacityOut 1s ease 1;
-    color: currentColor;
+      color: $light-grey;
+    visibility: hidden;
+}
+
+.error-hidden {
+    @include errorText();
     visibility: hidden;
 }
 

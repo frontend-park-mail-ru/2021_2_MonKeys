@@ -28,18 +28,14 @@ export const EditForm = (props: EditFormProps) => {
         tagField = <div class='column-container'></div>;
     }
     return (
-        <form class='edit-form'>
-            <span class='page-header-small'>Профиль</span>
-            <div class='form-field-input'>
-                {FormField(props.fields.name)}
-                {ErrorMsg(props.errorMsgs.nameError)}
-            </div>
-            <div class='form-field-input'>
-                {FormField(props.fields.birthDate)}
-                {ErrorMsg(props.errorMsgs.ageError)}
-            </div>
-            <div class='form-field-input'>{FormField(props.fields.description)}</div>
-            <div class='form-field-input'>
+        <form class='flex_box_column_center'>
+            <span class='header-medium'>Профиль</span>
+            {FormField(props.fields.name)}
+            {ErrorMsg(props.errorMsgs.nameError)}
+            {FormField(props.fields.birthDate)}
+            {ErrorMsg(props.errorMsgs.ageError)}
+            {FormField(props.fields.description)}
+            {/* <div class='form-field-input'>
                 <div class='tag-container'>
                     <div class='tags-header'>
                         {IconButton(props.buttons.tagsButton)}
@@ -47,13 +43,13 @@ export const EditForm = (props: EditFormProps) => {
                     </div>
                     {tagField}
                 </div>
-            </div>
+            </div> */}
 
-            <div class='form-field-input'>
+            {/* <div class='form-field-input'>
                 {AddImg(props.fields.img, props.buttons.imgAddButton)}
                 {ErrorMsg(props.errorMsgs.imgError)}
-            </div>
-            {ErrorMsg(props.errorMsgs.formError)}
+            </div> */}
+            {/* ErrorMsg(props.errorMsgs.formError)*/}
             {Button(props.buttons.saveButton)}
         </form>
     );

@@ -52,7 +52,7 @@ export default class EditView extends ViewBase {
                     placeholder: 'Расскажите о себе',
                     value: ProfileStore.get().description,
                     name: 'description',
-                    class: 'form-field-edit text-desc',
+                    class: 'form__field-valid',
                 },
                 'img': {
                     class: EditStore.get().imgFieldClass,

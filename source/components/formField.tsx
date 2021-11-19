@@ -1,5 +1,6 @@
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import ViewBase from '../views/viewBase.js';
+import { conditionalRendering } from '../tools/jsxTools.js';
 
 export interface formFieldProps {
     tag: string;
@@ -9,6 +10,7 @@ export interface formFieldProps {
     name: string;
     iconSrc?: string;
     class?: string;
+    pass?: boolean;
     oninput?: { (data, view?: ViewBase): void };
     onfocusout?: { (data, view?: ViewBase): void };
     onchange?: { (data, view?: ViewBase): void };
@@ -81,10 +83,15 @@ export const FormField = (props: formFieldProps) => {
             <form class={props.class}>
                 <img src={props.iconSrc} class='form__field__icon' />
                 {field}
+                {conditionalRendering(<img src='icons/pass_green.svg'/>,props.pass)}
             </form>
         );
     } else {
-        fieldTmpl = <div class='input-with-icon'>{field}</div>;
+        fieldTmpl = ( 
+        <div>
+            {field}
+        </div>
+        );
     }
 
     return fieldTmpl;

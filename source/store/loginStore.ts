@@ -6,6 +6,8 @@ export interface LoginData {
     passwordFieldClass: string;
     passwordErrorClass: string;
     formErrorClass: string;
+    emailPass?: boolean;
+    passwordPass?: boolean; 
     apiErrorLoadCondition: boolean;
 }
 
@@ -13,10 +15,12 @@ const LoginStore = new BaseStore<LoginData>();
 
 const initData = {
     emailFieldClass: 'form__field-valid',
-    emailErrorClass: 'error-inactive',
+    emailErrorClass: 'error-hidden',
+    emailPass: false,
     passwordFieldClass: 'form__field-valid',
-    passwordErrorClass: 'error-inactive',
-    formErrorClass: 'error-inactive',
+    passwordErrorClass: 'error-hidden',
+    passwordPass: false,
+    formErrorClass: 'error-hidden',
     apiErrorLoadCondition: false,
 };
 
