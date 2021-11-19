@@ -22,7 +22,7 @@ export default class LikesView extends ViewBase {
     _createTmpl(data) {
         if (!LikesStore.get().expended) {
             return (
-                <div class='likes-view-contant'>
+                <div class='view-contant'>
                     <div class='likes-view-header'>Вы понравились нескольким людям</div>
                     <div class='likes-view-cards'>
                         {Object.keys(data.likes).map((item) =>
@@ -34,7 +34,7 @@ export default class LikesView extends ViewBase {
             );
         } else {
             return (
-                <div class='likes-view-contant likes-view-contant_align_center'>
+                <div class='view-contant view-contant_align_center'>
                     {CardExpended({ userData: data.likes[LikesStore.get().userIndex], withActions: true })}
                     {Tapbar(TapbarStore.get())}
                 </div>

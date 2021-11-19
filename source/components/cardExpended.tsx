@@ -41,7 +41,7 @@ export const CardExpended = (props: CardExpendedProps) => {
         nameTmpl = <div></div>
     } else {
         imgTmpl = <img class={'img-card__img img-card__img_size_medium'} src={props.userData.imgs[0]} />;
-        nameTmpl = <div>{props.userData.name}</div>;
+        nameTmpl = <div class='img-card__name-age img-card__name-age_size_small'>{props.userData.name + ', ' + props.userData.age}</div>;
     }
 
     return (
