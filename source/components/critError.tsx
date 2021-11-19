@@ -1,6 +1,6 @@
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import { Button } from './button';
-import EventBus from '../dispatcher/eventBus';
+import { Button } from './button.js';
+import EventBus from '../dispatcher/eventBus.js';
 
 export interface CritErrorProps {
     title: string;

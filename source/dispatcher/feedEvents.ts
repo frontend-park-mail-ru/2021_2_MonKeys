@@ -45,12 +45,12 @@ export const FeedEventsRegister = () => {
                 if (response.status === HTTPSuccess) {
                     if (response.data.status === HTTPSuccess) {
                         if (response.data.body.match) {
-                            matchRequest().then((matchResponse) => {
-                                const likesData = LikesStore.get();
-                                likesData.profiles = matchResponse.data.body.allUsers;
-                                likesData.mathesCount = matchResponse.data.body.matchesCount;
-                                LikesStore.set(likesData);
-                            });
+                            // matchRequest().then((matchResponse) => {
+                            //     const likesData = LikesStore.get();
+                            //     likesData.profiles = matchResponse.data.body.allUsers;
+                            //     likesData.mathesCount = matchResponse.data.body.matchesCount;
+                            //     LikesStore.set(likesData);
+                            // });
                         }
                     } else {
                         throw '400';
