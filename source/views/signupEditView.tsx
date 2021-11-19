@@ -6,7 +6,7 @@ import { EditStore } from '../store/editStore.js';
 import { ProfileStore } from '../store/profileStore.js';
 import { errorNameMsg, errorAgeMsg, errorImgMsg, errorEditFormMsg } from '../constants/errorMsg.js';
 import { CritError } from '../components/critError.js';
-import { ErrorStore } from '../store/errorStore';
+import { ErrorStore } from '../store/errorStore.js';
 
 export default class SignupEditView extends ViewBase {
     constructor(parent: HTMLElement) {

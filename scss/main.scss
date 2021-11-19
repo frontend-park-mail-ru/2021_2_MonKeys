@@ -25,6 +25,8 @@
 @import './components/link';
 @import './pages/login';
 
+@import './components/message';
+
 html {
   @include background;
   font-family: $font-default;
@@ -39,7 +41,7 @@ html {
     width: 100%;
     display: flex;
     justify-content: center;
- 
+
   }
 
   .form-container {
@@ -58,19 +60,19 @@ html {
 
 @media (min-width: 500px) {
   .card-container {
-    
+
     width: 25%;
     margin-left: 37.5%;
     margin-right: 37.5%;
-  
+
   }
 
   .form-container {
-    
+
     width: 25%;
     margin-left: 37.5%;
     margin-right: 37.5%;
-   
+
   }
 }
 

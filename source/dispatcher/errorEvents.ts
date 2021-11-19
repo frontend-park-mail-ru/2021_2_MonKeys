@@ -1,5 +1,5 @@
-import EventBus from './eventBus';
-import { ErrorStore } from '../store/errorStore';
+import EventBus from './eventBus.js';
+import { ErrorStore } from '../store/errorStore.js';
 
 export const ErrorEventsRegister = () => {
     EventBus.register('error:ok-button', () => {

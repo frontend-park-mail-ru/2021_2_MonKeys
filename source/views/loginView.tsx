@@ -8,7 +8,7 @@ import { errorEmailMsg, errorPasswordMsg, errorLoginFormMsg } from '../constants
 import EventBus from '../dispatcher/eventBus.js';
 import { LoginStore } from '../store/loginStore.js';
 import { CritError } from '../components/critError.js';
-import { ErrorStore } from '../store/errorStore';
+import { ErrorStore } from '../store/errorStore.js';
 
 export default class LoginView extends ViewBase {
     public unsubscribe() {
