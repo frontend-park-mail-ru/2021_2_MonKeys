@@ -33,7 +33,7 @@ export const LikesEventsRegister = () => {
         storeData.expended = false;
         LikesStore.set(storeData);
         if (storeData && storeData.profiles) {
-            let newProfiles = [];
+            const newProfiles = [];
             let newCount = 0;
             for (let i = 0; i < storeData.likesCount; i++) {
                 if (storeData.profiles[i].id !== payload.userID) {
