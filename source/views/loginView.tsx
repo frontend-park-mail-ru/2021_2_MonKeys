@@ -9,8 +9,10 @@ import EventBus from '../dispatcher/eventBus.js';
 import { LoginStore } from '../store/loginStore.js';
 import { CritError } from '../components/critError.js';
 import { ErrorStore } from '../store/errorStore.js';
+
 import router from '../route/router.js';
 import { dropsBackground } from '../components/dropsBackground.js';
+
 
 export default class LoginView extends ViewBase {
     public unsubscribe() {

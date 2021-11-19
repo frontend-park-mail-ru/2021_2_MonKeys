@@ -9,8 +9,11 @@ import EventBus from '../dispatcher/eventBus.js';
 import { SignupStore } from '../store/signupStore.js';
 import { CritError } from '../components/critError.js';
 import { ErrorStore } from '../store/errorStore.js';
+<<<<<<< HEAD
 import router from '../route/router.js';
 import { dropsBackground } from '../components/dropsBackground.js';
+=======
+>>>>>>> d2d838d90538727fa9a87d31b6a06913b2223af9
 
 export default class SignupView extends ViewBase {
     constructor(parent: HTMLElement) {

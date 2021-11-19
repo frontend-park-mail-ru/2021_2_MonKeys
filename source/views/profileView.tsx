@@ -24,24 +24,11 @@ export default class ProfileView extends ViewBase {
                 age: ProfileStore.get().age,
                 description: ProfileStore.get().description,
                 imgs: ProfileStore.get().imgs,
+                tags: ProfileStore.get().tags,
             },
-            'tags': ProfileStore.get().tags,
-            'buttons': {
-                'logoutButton': {
-                    type: 'button',
-                    src: 'icons/button_previous_white.svg',
-                    class: 'menu-icon',
-                    onclick: () => {
-                        EventBus.dispatch<string>('profile:logout-button');
-                    },
-                },
-                'editButton': {
-                    type: 'button',
-                    src: 'icons/button_edit_white.svg',
-                    class: 'menu-icon',
-                    onclick: () => {
-                        EventBus.dispatch<string>('profile:edit-button');
-                    },
+            'settingButtons': {
+                onclick: () => {
+                    EventBus.dispatch<string>('profile:edit-button');
                 },
             },
         },
@@ -57,8 +44,15 @@ export default class ProfileView extends ViewBase {
 
     _createTmpl(data) {
         return (
-            <div class='card-container'>
-                {CardExpended(data.cardData)}
+            <div class='view-contant view-contant_align_center'>
+                <div class='view-contant__icon-button'>
+                    <img
+                        src='icons2/settings.svg'
+                        class='view-contant__dislike'
+                        onclick={data.cardData.settingButtons.onclick}
+                    />
+                </div>
+                {CardExpended({ userData: data.cardData.userData, withActions: false })}
                 {Tapbar(TapbarStore.get())}
                 {CritError(data.critError)}
             </div>
@@ -74,7 +68,6 @@ export default class ProfileView extends ViewBase {
         view._data.cardData.userData.name = data.name;
         view._data.cardData.userData.age = data.age;
         view._data.cardData.userData.description = data.description;
-        view._data.cardData.tags = data.tags;
         view._data.critError.loading = data.apiErrorLoadCondition;
         view._template = view._createTmpl(view._data);
         view.render();
