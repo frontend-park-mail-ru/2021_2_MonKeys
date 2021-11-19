@@ -114,15 +114,13 @@ export default class LoginView extends ViewBase {
 
     _createTmpl(data) {
         return (
-            <div class="flex_box_column_center">
+            <div class='flex_box_column_center'>
                 {dropsBackground()}
-                <div class="header-big">
-                    Drip
-                </div>
-                
+                <div class='header-big'>Drip</div>
+
                 {FormField(data.fields.email)}
                 {ErrorMsg(data.errorMsgs.emailError)}
-                
+
                 {FormField(data.fields.password)}
                 {ErrorMsg(data.errorMsgs.passwordError)}
                 {/* {ErrorMsg(data.errorMsgs.formError)} */}

@@ -11,7 +11,7 @@ export interface ButtonProps {
 export const Button = (props: ButtonProps) => {
     const button = (
         <button onclick={props.onclick} type={props.type} class={props.class}>
-            <span class="button__text">{props.text}</span>
+            <span class='button__text'>{props.text}</span>
         </button>
     );
     return button;

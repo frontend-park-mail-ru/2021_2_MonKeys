@@ -27,9 +27,9 @@ export const FormField = (props: formFieldProps) => {
                         type={props.type}
                         name={props.name}
                         placeholder={props.placeholder}
-                        class="form__field__input"
+                        class='form__field__input'
                         value={props.value}
-                        autocomplete="off"
+                        autocomplete='off'
                     />
                 );
             } else {
@@ -40,8 +40,8 @@ export const FormField = (props: formFieldProps) => {
                         type={props.type}
                         name={props.name}
                         placeholder={props.placeholder}
-                        class="form__field__input"
-                        autocomplete="off"
+                        class='form__field__input'
+                        autocomplete='off'
                     />
                 );
             }
@@ -55,7 +55,7 @@ export const FormField = (props: formFieldProps) => {
                         name={props.name}
                         placeholder={props.placeholder}
                         class={props.class}
-                        autocomplete="chrome-off"
+                        autocomplete='chrome-off'
                     >
                         {props.value}
                     </textarea>
@@ -67,7 +67,7 @@ export const FormField = (props: formFieldProps) => {
                         onfocusout={props.onfocusout}
                         name={props.name}
                         placeholder={props.placeholder}
-                        autocomplete="off"
+                        autocomplete='off'
                         class={props.class}
                     />
                 );
@@ -79,7 +79,7 @@ export const FormField = (props: formFieldProps) => {
     if (props.iconSrc !== undefined) {
         fieldTmpl = (
             <form class={props.class}>
-                <img src={props.iconSrc} class="form__field__icon"/>
+                <img src={props.iconSrc} class='form__field__icon' />
                 {field}
             </form>
         );
