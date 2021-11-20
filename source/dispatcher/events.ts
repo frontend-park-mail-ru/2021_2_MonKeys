@@ -20,6 +20,7 @@ import feedStore from '../store/feedStore.js';
 import { userLikesRequset } from '../requests/likesRequest.js';
 import { matchRequest } from '../requests/matchRequest.js';
 import LikesStore from '../store/likesStore.js';
+import { MatchesStore } from '../store/matchStore.js';
 import { ErrorEventsRegister } from './errorEvents.js';
 const $root = document.getElementById('app');
 
@@ -32,12 +33,12 @@ export const InitBus = () => {
                         AuthStore.set({
                             loggedIn: userStatus.loggedIn,
                         });
-                        // matchRequest().then((matchResponse) => {
-                        //     const likesData = LikesStore.get();
-                        //     likesData.profiles = matchResponse.data.body.allUsers;
-                        //     likesData.mathesCount = matchResponse.data.body.matchesCount;
-                        //     LikesStore.set(likesData);
-                        // });
+                        matchRequest().then((matchResponse) => {
+                            const matchesData = MatchesStore.get();
+                            matchesData.matches = matchResponse.data.body.allUsers;
+                            matchesData.matchesTotal = matchResponse.data.body.matchesCount;
+                            MatchesStore.set(matchesData);
+                        });
                         userLikesRequset().then((likesResponse) => {
                             const likesData = LikesStore.get();
                             likesData.profiles = likesResponse.data.body.allUsers;

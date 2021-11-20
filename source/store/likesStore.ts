@@ -1,10 +1,10 @@
 import { ProfileData } from './profileStore.js';
 import BaseStore from './storeBase.js';
 
-export type MatchCardData = ProfileData;
+export type LikeCardData = ProfileData;
 
 export interface LikesData {
-    profiles: MatchCardData[];
+    profiles: LikeCardData[];
     likesCount: number;
 
     expended: boolean;
