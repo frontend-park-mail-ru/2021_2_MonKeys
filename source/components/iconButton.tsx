@@ -9,9 +9,5 @@ export interface IconButtonProps {
 }
 
 export const IconButton = (props: IconButtonProps) => {
-    return (
-        
-            <img onclick={props.onclick} src={props.src} class={props.class} />
-        
-    );
+    return <img onclick={props.onclick} src={props.src} class={props.class} />;
 };
