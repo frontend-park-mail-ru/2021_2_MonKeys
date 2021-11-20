@@ -4,6 +4,8 @@ import { feedRequest } from '../requests/feedRequest.js';
 import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import LikesStore from '../store/likesStore.js';
 import feedStore from '../store/feedStore.js';
+import { MatchesStore } from '../store/matchStore.js';
+import { matchRequest } from '../requests/matchRequest.js';
 
 export const LikesEventsRegister = () => {
     EventBus.register('likes:expand-button', (userID) => {
@@ -50,13 +52,12 @@ export const LikesEventsRegister = () => {
             if (response.status === HTTPSuccess) {
                 if (response.data.status === HTTPSuccess) {
                     if (response.data.body.match) {
-                        console.log('match');
-                        // matchRequest().then((matchResponse) => {
-                        //     const likesData = LikesStore.get();
-                        //     likesData.profiles = matchResponse.data.body.allUsers;
-                        //     likesData.mathesCount = matchResponse.data.body.matchesCount;
-                        //     LikesStore.set(likesData);
-                        // });
+                        matchRequest().then((matchResponse) => {
+                            const matchesData = MatchesStore.get();
+                            matchesData.matches = matchResponse.data.body.allUsers;
+                            matchesData.matchesTotal = matchResponse.data.body.matchesCount;
+                            MatchesStore.set(matchesData);
+                        });
                     }
                 } else {
                     throw '400';
