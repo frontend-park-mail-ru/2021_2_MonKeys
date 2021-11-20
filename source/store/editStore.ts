@@ -15,13 +15,13 @@ export interface EditData {
 const EditStore = new BaseStore<EditData>();
 
 const initData = {
-    nameFieldClass: 'form-field-edit text-without-icon',
-    nameErrorClass: 'login-error',
-    birthDateFieldClass: 'form-field-edit text-with-icon',
-    birthDateErrorClass: 'login-error',
+    nameFieldClass: 'form__field-valid',
+    nameErrorClass: 'error-inactive',
+    birthDateFieldClass: 'form__field-valid',
+    birthDateErrorClass: 'error-inactive',
     imgFieldClass: 'add-img-box',
-    imgErrorClass: 'login-error',
-    formErrorClass: 'login-error',
+    imgErrorClass: 'error-inactive',
+    formErrorClass: 'error-inactive',
     apiErrorLoadCondition: false,
 };
 

@@ -1,0 +1,58 @@
+@import '../abstracts/variables';
+@import './form_field';
+
+.add-img-box {
+  @include form-field($field-valid-color);
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+}
+
+.add-img-box-novalid {
+  @include form-field($field-valid-color);
+  height: $px_big*2.5;
+  display: flex;
+}
+
+$px_img: $px_big * 2;
+
+.add-img-delete{
+  height: 24px;
+  width: 24px;
+  position: relative;
+  top: -96px;
+  left: 24px;
+  margin-left: 36px;
+  border-radius: 8px;
+   backdrop-filter: blur(50px) contrast(60%);
+  background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(234, 0, 255, 0.274) 0%, rgba(245, 0, 53, 0) 100%);
+}
+
+
+.add-img-item {
+  border-radius: 10px;
+  margin: $px_base;
+  height: $px_img;
+  width: $px_img;
+  object-fit: cover;
+}
+.add {
+  position: absolute;
+  background: url('../icons/add_img.svg'), radial-gradient(112.16% 418.59% at 0% 0%, rgba(17, 0, 255, 0.274) 0%, rgba(0, 165, 245, 0) 100%);
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  bottom: -5px;
+  right: -5px;
+}
+
+.removeImg {
+  position: absolute;
+  background: url('../icons/remove_img.svg');
+  width: 15px;
+  height: 15px;
+  border-radius: 5px;
+  right: 0;
+  bottom: 4;
+  border: 1px solid #000000;
+}

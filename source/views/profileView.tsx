@@ -47,7 +47,7 @@ export default class ProfileView extends ViewBase {
             <div class='view-contant view-contant_align_center'>
                 <div class='view-contant__icon-button'>
                     <img
-                        src='icons2/settings.svg'
+                        src='icons/settings.svg'
                         class='view-contant__dislike'
                         onclick={data.cardData.settingButtons.onclick}
                     />

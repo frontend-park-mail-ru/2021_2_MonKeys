@@ -52,7 +52,7 @@ export default class EditView extends ViewBase {
                     placeholder: 'Расскажите о себе',
                     value: ProfileStore.get().description,
                     name: 'description',
-                    class: 'form-field-edit text-desc',
+                    class: 'form__field-valid',
                 },
                 'img': {
                     class: EditStore.get().imgFieldClass,
@@ -64,7 +64,7 @@ export default class EditView extends ViewBase {
                     type: 'button',
                     text: 'tags',
                     class: 'tags-button',
-                    src: '../icons/button_expand_white.svg',
+                    src: 'icons/expand_big.svg',
                     onclick: () => {
                         EventBus.dispatch<string>('edit:open-tags');
                     },

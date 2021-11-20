@@ -6,17 +6,21 @@ export interface LoginData {
     passwordFieldClass: string;
     passwordErrorClass: string;
     formErrorClass: string;
+    emailPass?: boolean;
+    passwordPass?: boolean;
     apiErrorLoadCondition: boolean;
 }
 
 const LoginStore = new BaseStore<LoginData>();
 
 const initData = {
-    emailFieldClass: 'form-field-valid',
-    emailErrorClass: 'login-error',
-    passwordFieldClass: 'form-field-valid',
-    passwordErrorClass: 'login-error',
-    formErrorClass: 'login-error',
+    emailFieldClass: 'form__field-valid',
+    emailErrorClass: 'error-hidden',
+    emailPass: false,
+    passwordFieldClass: 'form__field-valid',
+    passwordErrorClass: 'error-hidden',
+    passwordPass: false,
+    formErrorClass: 'error-hidden',
     apiErrorLoadCondition: false,
 };
 

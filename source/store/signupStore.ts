@@ -4,6 +4,9 @@ export interface SignupData {
     emailFieldClass: string;
     emailErrorClass: string;
     passwordFieldClass: string;
+    emailPass?: boolean;
+    passwordPass?: boolean;
+    repeatPasswordPass?: boolean;
     passwordErrorClass: string;
     repeatPasswordFieldClass: string;
     repeatPasswordErrorClass: string;
@@ -14,13 +17,13 @@ export interface SignupData {
 const SignupStore = new BaseStore<SignupData>();
 
 const initData = {
-    emailFieldClass: 'form-field-valid',
-    emailErrorClass: 'login-error',
-    passwordFieldClass: 'form-field-valid',
-    passwordErrorClass: 'login-error',
-    repeatPasswordFieldClass: 'form-field-valid',
-    repeatPasswordErrorClass: 'login-error',
-    formErrorClass: 'login-error',
+    emailFieldClass: 'form__field-valid',
+    emailErrorClass: 'error-inactive',
+    passwordFieldClass: 'form__field-valid',
+    passwordErrorClass: 'error-inactive',
+    repeatPasswordFieldClass: 'form__field-valid',
+    repeatPasswordErrorClass: 'error-inactive',
+    formErrorClass: 'error-inactive',
     apiErrorLoadCondition: false,
 };
 
