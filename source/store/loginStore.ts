@@ -7,7 +7,7 @@ export interface LoginData {
     passwordErrorClass: string;
     formErrorClass: string;
     emailPass?: boolean;
-    passwordPass?: boolean; 
+    passwordPass?: boolean;
     apiErrorLoadCondition: boolean;
 }
 

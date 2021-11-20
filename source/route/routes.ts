@@ -26,7 +26,7 @@ export const Routes = {
         name: 'Вход',
         path: '/login',
         auth: userStatus.notlLoggedIn,
-        view: LoginView,
+        view: SignupEditView,
     },
     '/signup': {
         name: 'Регистрация',

@@ -37,6 +37,7 @@ export default class SignupEditView extends ViewBase {
                     type: 'date',
                     class: EditStore.get().birthDateFieldClass,
                     name: 'birthDate',
+                    iconSrc: 'icons/calendar.svg',
                     oninput: () => {
                         EventBus.dispatch<string>('edit:birth-date-input');
                     },
@@ -60,7 +61,7 @@ export default class SignupEditView extends ViewBase {
                     type: 'button',
                     text: 'tags',
                     class: '',
-                    src: '../icons/button_expand_white.svg',
+                    src: 'icons/expand_big.svg',
                     onclick: () => {
                         EventBus.dispatch<string>('edit:open-tags');
                     },

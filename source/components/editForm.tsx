@@ -4,7 +4,9 @@ import { FormField } from './formField.js';
 import { ErrorMsg } from './errorMsg.js';
 import { Button } from './button.js';
 import { AddImg } from './addImg.js';
+import { ItemList } from './itemList.js';
 import { IconButton } from '../components/iconButton.js';
+import { DescriptionField } from './DescriptionField.js';
 
 export interface EditFormProps {
     fields;
@@ -34,21 +36,69 @@ export const EditForm = (props: EditFormProps) => {
             {ErrorMsg(props.errorMsgs.nameError)}
             {FormField(props.fields.birthDate)}
             {ErrorMsg(props.errorMsgs.ageError)}
-            {FormField(props.fields.description)}
-            {/* <div class='form-field-input'>
-                <div class='tag-container'>
-                    <div class='tags-header'>
-                        {IconButton(props.buttons.tagsButton)}
-                        <span>Tags</span>
-                    </div>
-                    {tagField}
-                </div>
-            </div> */}
+            {ItemList({
+                title: 'Ваш пол',
+                valid: true,
+                open: true,
+                items: [
+                    {
+                        value: 'мужчина',
+                        selected: false,
+                    },
+                    {
+                        value: 'женщина',
+                        selected: false,
+                    },
+                ],
+            })}
+            {DescriptionField(props.fields.description)}
 
-            {/* <div class='form-field-input'>
+            {ItemList({
+                title: 'Предпочтения',
+                valid: true,
+                open: true,
+                items: [
+                    {
+                        value: 'hello',
+                        selected: false,
+                    },
+                    {
+                        value: 'check',
+                        selected: false,
+                    },
+                    {
+                        value: 'chsds',
+                        selected: false,
+                    },
+                    {
+                        value: 'check',
+                        selected: false,
+                    },
+                    {
+                        value: 'chsds',
+                        selected: true,
+                    },
+                ],
+            })}
+            {ItemList({
+                title: 'Предпочтения',
+                valid: true,
+                open: true,
+                items: [
+                    {
+                        value: 'Мужчины',
+                        selected: false,
+                    },
+                    {
+                        value: 'Женщины',
+                        selected: false,
+                    },
+                ],
+            })}
+            <div class='form-field-input'>
                 {AddImg(props.fields.img, props.buttons.imgAddButton)}
                 {ErrorMsg(props.errorMsgs.imgError)}
-            </div> */}
+            </div>
             {/* ErrorMsg(props.errorMsgs.formError)*/}
             {Button(props.buttons.saveButton)}
         </form>

@@ -18,63 +18,31 @@ export interface formFieldProps {
 
 export const FormField = (props: formFieldProps) => {
     let field: HTMLElement;
-
-    switch (props.tag) {
-        case 'input':
-            if (props.value !== undefined) {
-                field = (
-                    <input
-                        oninput={props.oninput}
-                        onfocusout={props.onfocusout}
-                        type={props.type}
-                        name={props.name}
-                        placeholder={props.placeholder}
-                        class='form__field__input'
-                        value={props.value}
-                        autocomplete='off'
-                    />
-                );
-            } else {
-                field = (
-                    <input
-                        oninput={props.oninput}
-                        onfocusout={props.onfocusout}
-                        type={props.type}
-                        name={props.name}
-                        placeholder={props.placeholder}
-                        class='form__field__input'
-                        autocomplete='off'
-                    />
-                );
-            }
-            break;
-        case 'textarea':
-            if (props.value !== undefined) {
-                field = (
-                    <textarea
-                        oninput={props.oninput}
-                        onfocusout={props.onfocusout}
-                        name={props.name}
-                        placeholder={props.placeholder}
-                        class={props.class}
-                        autocomplete='chrome-off'
-                    >
-                        {props.value}
-                    </textarea>
-                );
-            } else {
-                field = (
-                    <textarea
-                        oninput={props.oninput}
-                        onfocusout={props.onfocusout}
-                        name={props.name}
-                        placeholder={props.placeholder}
-                        autocomplete='off'
-                        class={props.class}
-                    />
-                );
-            }
-            break;
+    if (props.value !== undefined) {
+        field = (
+            <input
+                oninput={props.oninput}
+                onfocusout={props.onfocusout}
+                type={props.type}
+                name={props.name}
+                placeholder={props.placeholder}
+                class='form__field__input'
+                value={props.value}
+                autocomplete='off'
+            />
+        );
+    } else {
+        field = (
+            <input
+                oninput={props.oninput}
+                onfocusout={props.onfocusout}
+                type={props.type}
+                name={props.name}
+                placeholder={props.placeholder}
+                class='form__field__input'
+                autocomplete='off'
+            />
+        );
     }
 
     let fieldTmpl;
@@ -83,15 +51,12 @@ export const FormField = (props: formFieldProps) => {
             <form class={props.class}>
                 <img src={props.iconSrc} class='form__field__icon' />
                 {field}
-                {conditionalRendering(<img src='icons/pass_green.svg'/>,props.pass)}
+                {conditionalRendering(<img src='icons/pass_green.svg' />, props.pass)}
             </form>
         );
     } else {
-        fieldTmpl = ( 
-        <div>
-            {field}
-        </div>
-        );
+        console.log(1);
+        fieldTmpl = <div class={props.class}>{field}</div>;
     }
 
     return fieldTmpl;

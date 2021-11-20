@@ -13,7 +13,6 @@ import { ErrorStore } from '../store/errorStore.js';
 import router from '../route/router.js';
 import { dropsBackground } from '../components/dropsBackground.js';
 
-
 export default class LoginView extends ViewBase {
     public unsubscribe() {
         LoginStore.unsubscribe(this.subscribtionCallback);

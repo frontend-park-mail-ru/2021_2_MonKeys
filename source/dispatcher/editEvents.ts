@@ -11,9 +11,9 @@ import { nameRegExp } from '../constants/validation.js';
 
 export const EditEventRegister = () => {
     EventBus.register('edit:save-button', (payload?: string) => {
-        const _nameInput = document.getElementsByTagName('textarea')[0];
-        const _dateInput = document.getElementsByTagName('input')[0];
-        const _descriptionInput = document.getElementsByTagName('textarea')[1];
+        const _nameInput = document.getElementsByTagName('input')[0];
+        const _dateInput = document.getElementsByTagName('input')[1];
+        const _descriptionInput = document.getElementsByTagName('textarea')[0];
 
         const testName = _nameInput.value.length !== 0 && nameRegExp.test(_nameInput.value);
 
@@ -22,13 +22,13 @@ export const EditEventRegister = () => {
         EditStore.set(storeData);
 
         if (!testName) {
-            storeData.nameFieldClass = 'form__field-invalid text-without-icon';
+            storeData.nameFieldClass = 'form__field-invalid';
             storeData.nameErrorClass = 'error-active';
             EditStore.set(storeData);
         }
 
         if (!validDate(_dateInput)) {
-            storeData.birthDateFieldClass = 'form__field-invalid text-with-icon';
+            storeData.birthDateFieldClass = 'form__field-invalid';
             storeData.birthDateErrorClass = 'error-active';
             EditStore.set(storeData);
         }
@@ -165,7 +165,7 @@ export const EditEventRegister = () => {
     });
 
     EventBus.register('edit:name-input', (payload?: string) => {
-        const _nameInput = document.getElementsByTagName('textarea')[0];
+        const _nameInput = document.getElementsByTagName('input')[0];
 
         const storeData = EditStore.get();
         storeData.apiErrorLoadCondition = false;
@@ -189,7 +189,7 @@ export const EditEventRegister = () => {
     });
 
     EventBus.register('edit:name-focusout', (payload?: string) => {
-        const _nameInput = document.getElementsByTagName('textarea')[0];
+        const _nameInput = document.getElementsByTagName('input')[0];
 
         const storeData = EditStore.get();
         storeData.apiErrorLoadCondition = false;
@@ -209,7 +209,7 @@ export const EditEventRegister = () => {
     });
 
     EventBus.register('edit:birth-date-input', (payload?: string) => {
-        const _dateInput = document.getElementsByTagName('input')[0];
+        const _dateInput = document.getElementsByTagName('input')[1];
 
         const storeData = EditStore.get();
         storeData.apiErrorLoadCondition = false;
@@ -233,7 +233,7 @@ export const EditEventRegister = () => {
     });
 
     EventBus.register('edit:birth-date-focusout', (payload?: string) => {
-        const _dateInput = document.getElementsByTagName('input')[0];
+        const _dateInput = document.getElementsByTagName('input')[1];
 
         const storeData = EditStore.get();
         storeData.apiErrorLoadCondition = false;

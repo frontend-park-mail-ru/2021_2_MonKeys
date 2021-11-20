@@ -71,7 +71,7 @@ export const LoginEventRegister = () => {
         }
         const test = _emailInput.value.length === 0 || emailRegExp.test(_emailInput.value);
         console.log(!_emailInput.value);
-        if(!test || !_emailInput.value){
+        if (!test || !_emailInput.value) {
             storeData.emailPass = false;
         }
         test ? (storeData.emailFieldClass = 'form__field-valid') : (storeData.emailFieldClass = 'form__field-invalid');
@@ -80,7 +80,7 @@ export const LoginEventRegister = () => {
         }
         if (test && (storeData.emailErrorClass === 'error-active' || storeData.emailErrorClass === 'error-hint')) {
             storeData.emailErrorClass = 'error-inactive';
-            if(_emailInput.value) storeData.emailPass = true;
+            if (_emailInput.value) storeData.emailPass = true;
         }
 
         if (storeData.emailErrorClass === 'error-active' || storeData.emailErrorClass === 'error-hint') {
@@ -105,7 +105,7 @@ export const LoginEventRegister = () => {
             storeData.emailFieldClass = 'form__field-invalid';
             storeData.emailErrorClass = 'error-active';
         }
-        
+
         LoginStore.set(storeData);
     });
 
@@ -120,22 +120,25 @@ export const LoginEventRegister = () => {
         LoginStore.set(storeData);
 
         const test = _passwordInput.value.length === 0 || passwordRegExp.test(_passwordInput.value);
-        if(!test || !_passwordInput.value){
+        if (!test || !_passwordInput.value) {
             storeData.passwordPass = false;
         }
-        test ? (storeData.passwordFieldClass = 'form__field-valid')
+        test
+            ? (storeData.passwordFieldClass = 'form__field-valid')
             : (storeData.passwordFieldClass = 'form__field-invalid');
         if (!test && storeData.passwordErrorClass !== 'error-active') {
             storeData.passwordErrorClass = 'error-hint';
         }
-        if (test && (storeData.passwordErrorClass === 'error-active' || storeData.passwordErrorClass === 'error-hint')) {
+        if (
+            test &&
+            (storeData.passwordErrorClass === 'error-active' || storeData.passwordErrorClass === 'error-hint')
+        ) {
             storeData.passwordErrorClass = 'error-inactive';
-            if(_passwordInput.value) storeData.passwordPass = true;
+            if (_passwordInput.value) storeData.passwordPass = true;
         }
 
         if (storeData.passwordErrorClass === 'error-active' || storeData.passwordErrorClass === 'error-hint') {
             storeData.formErrorClass = 'error-inactive';
-            
         }
 
         LoginStore.set(storeData);

@@ -13,7 +13,6 @@ import { ErrorStore } from '../store/errorStore.js';
 import router from '../route/router.js';
 import { dropsBackground } from '../components/dropsBackground.js';
 
-
 export default class SignupView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
