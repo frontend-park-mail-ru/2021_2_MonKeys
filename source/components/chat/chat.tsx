@@ -2,12 +2,13 @@ import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import { InputMessage } from './inputMessage.js';
 import { ChatHeader } from './chatHeader.js';
 import { Message } from './message.js';
+import { Chat as ChatData } from '../../store/ChatsStore.js';
 
-export const Chat = (data) => {
+export const Chat = (chat: ChatData) => {
     return (
         <div class=''>
-            {ChatHeader(data.header)}
-            {data.messages.map((msg, index) => Message(msg))}
+            {ChatHeader(chat.name, chat.img)}
+            {chat.messages.map((msg) => Message(msg))}
             {InputMessage()}
         </div>
     );

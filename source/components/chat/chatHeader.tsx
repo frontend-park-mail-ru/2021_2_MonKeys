@@ -1,10 +1,8 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
-import { FormField } from '../formField.js';
 import { Button } from '../button.js';
-import EventBus from '../../dispatcher/eventBus.js';
 
-export const ChatHeader = (data) => {
+export const ChatHeader = (name: string, img: string) => {
     const props = {};
 
-    return <div class=''>{data.username}</div>;
+    return <div class=''>{name}</div>;
 };

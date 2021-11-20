@@ -1,6 +1,6 @@
 import EventBus from './eventBus.js';
-import { ChatStore } from '../store/chatStore.js';
 import { SendMessage } from '../requests/SendMessageRequest.js';
+import { ChatsStore, Message } from '../store/ChatsStore.js';
 
 export const ChatEventsRegister = () => {
     EventBus.register('chat:send-button', (payload?: string) => {
@@ -8,23 +8,22 @@ export const ChatEventsRegister = () => {
         const messageText = _msgInput.value.trim();
 
         SendMessage(messageText);
-
-        // const storeData = ChatStore.get();
-
-        // storeData.messages.push({
-        //   text: messageText,
-        //   fromID: "1",
-        // });
-        // storeData.apiErrorLoadCondition = false;
-        //
-        // ChatStore.set(storeData);
     });
 };
 
+// export const NewMessage = (message: Message) => {
 export const NewMessage = (message) => {
-    const storeData = ChatStore.get();
+    const storeData = ChatsStore.get();
 
-    storeData.messages.push(message);
+    const msg: Message = {
+        text: message.text,
+        date: new Date(),
+        fromID: '10',
+        isRead: true,
+        messageID: 'qsdqwewx',
+    }
 
-    ChatStore.set(storeData);
+    storeData.chats[0].messages.push(msg);
+
+    ChatsStore.set(storeData);
 };

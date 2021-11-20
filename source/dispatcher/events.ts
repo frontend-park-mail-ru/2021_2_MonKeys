@@ -21,6 +21,7 @@ import { matchRequest } from '../requests/matchRequest.js';
 import LikesStore from '../store/likesStore.js';
 import { ErrorEventsRegister } from './errorEvents.js';
 import { wsRegister } from './wsEvents.js';
+import { ChatsEventsRegister } from './chatsEvents.js';
 
 const $root = document.getElementById('app');
 
@@ -81,6 +82,7 @@ export const InitBus = () => {
     FeedEventsRegister();
 
     wsRegister();
+    ChatsEventsRegister();
     ChatEventsRegister();
 
     CarouselEventsRegister();

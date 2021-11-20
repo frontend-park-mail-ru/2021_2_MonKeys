@@ -1,12 +1,8 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
+import { Message as MessageData } from '../../store/ChatsStore.js';
 
-export interface MessageData {
-    text: string;
-    fromID: string;
-}
+export const Message = (msg: MessageData) => {
+    const textClass = msg.fromID === '1' ? 'my-message' : 'not-my-message';
 
-export const Message = (data: MessageData) => {
-    const textClass = data.fromID === '1' ? 'my-message' : 'not-my-message';
-
-    return <div class={textClass}>{data.text}</div>;
+    return <div class={textClass}>{msg.text}</div>;
 };

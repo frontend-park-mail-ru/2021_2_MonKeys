@@ -8,6 +8,7 @@ import FeedView from '../views/feedView.js';
 import ChatView from '../views/chatView.js';
 import PageNotFoundView from '../views/pageNotFoundView.js';
 import { userStatus } from '../constants/userStatus.js';
+import ChatsView from '../views/chatsView.js';
 
 export interface route {
     readonly name: string;
@@ -68,12 +69,19 @@ export const Routes = {
         view: ProfileView,
         tapbar: 'profile',
     },
-    '/chat': {
+    '/chats': {
         name: 'Чаты',
+        path: '/chats',
+        auth: userStatus.loggedIn,
+        view: ChatsView,
+        tapbar: 'chats',
+    },
+    '/chat': {
+        name: 'Чат',
         path: '/chat',
         auth: userStatus.loggedIn,
         view: ChatView,
-        tapbar: 'chat',
+        tapbar: 'chats',
     },
     '/404': {
         name: 'Страница не найдена',
