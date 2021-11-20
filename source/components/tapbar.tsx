@@ -18,29 +18,29 @@ export const Tapbar = (props: tapbarProps) => {
             <mon-router route='/feed'>
                 {renderOnCondition(
                     props.activeItem === 'feed',
-                    <img src='icons/tapbar_feed_white_selected.svg' class='menu-icon' />,
-                    <img src='icons/tapbar_feed_white_deselected.svg' class='menu-icon' />
+                    <img src='icons/feed_selected.svg' class='menu-icon' />,
+                    <img src='icons/feed_unselected.svg' class='menu-icon' />
                 )}
             </mon-router>
             <mon-router route='/matches'>
                 {renderOnCondition(
                     props.activeItem === 'matches',
-                    <img src='icons/tapbar_likes_white_selected.svg' class='menu-icon' />,
-                    <img src='icons/tapbar_likes_white_deselected.svg' class='menu-icon' />
+                    <img src='icons/likes_selected.svg' class='menu-icon' />,
+                    <img src='icons/likes_unselected.svg' class='menu-icon' />
                 )}
             </mon-router>
             <mon-router route='/chat'>
                 {renderOnCondition(
                     props.activeItem === 'chat',
-                    <img src='icons/tapbar_chat_white_selected.svg' class='menu-icon' />,
-                    <img src='icons/tapbar_chat_white_deselected.svg' class='menu-icon' />
+                    <img src='icons/chat_selected.svg' class='menu-icon' />,
+                    <img src='icons/chat_unselected.svg' class='menu-icon' />
                 )}
             </mon-router>
             <mon-router route='/profile'>
                 {renderOnCondition(
                     props.activeItem === 'profile',
-                    <img src='icons/tapbar_user_white_selected.svg' class='menu-icon' />,
-                    <img src='icons/tapbar_user_white_deselected.svg' class='menu-icon' />
+                    <img src='icons/profile_selected.svg' class='menu-icon' />,
+                    <img src='icons/profile_unselected.svg' class='menu-icon' />
                 )}
             </mon-router>
         </div>

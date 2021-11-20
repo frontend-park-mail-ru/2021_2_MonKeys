@@ -75,7 +75,7 @@ export default class SignupEditView extends ViewBase {
                 'saveButton': {
                     type: 'button',
                     text: 'Сохранить',
-                    class: 'edit',
+                    class: 'button-white-big',
                     onclick: () => {
                         EventBus.dispatch<string>('edit:save-button');
                     },
@@ -111,7 +111,7 @@ export default class SignupEditView extends ViewBase {
         return (
             <div class='card-container'>
                 {EditForm(data.editForm)}
-                {CritError(data.critError)}
+                {/*CritError(data.critError)*/}
             </div>
         );
     }

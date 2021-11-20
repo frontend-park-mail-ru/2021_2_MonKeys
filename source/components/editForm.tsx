@@ -3,10 +3,9 @@ import { TagButton } from './tagButton.js';
 import { FormField } from './formField.js';
 import { ErrorMsg } from './errorMsg.js';
 import { Button } from './button.js';
-import { AddImg } from './addImg.js';
+import { ImgField } from './imgField.js';
 import { ItemList } from './itemList.js';
-import { IconButton } from '../components/iconButton.js';
-import { DescriptionField } from './DescriptionField.js';
+import { DescriptionField } from './descriptionField.js';
 
 export interface EditFormProps {
     fields;
@@ -83,7 +82,7 @@ export const EditForm = (props: EditFormProps) => {
             {ItemList({
                 title: 'Предпочтения',
                 valid: true,
-                open: true,
+                open: false,
                 items: [
                     {
                         value: 'Мужчины',
@@ -96,7 +95,7 @@ export const EditForm = (props: EditFormProps) => {
                 ],
             })}
             <div class='form-field-input'>
-                {AddImg(props.fields.img, props.buttons.imgAddButton)}
+                {ImgField(props.fields.img, props.buttons.imgAddButton)}
                 {ErrorMsg(props.errorMsgs.imgError)}
             </div>
             {/* ErrorMsg(props.errorMsgs.formError)*/}

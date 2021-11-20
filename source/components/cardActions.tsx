@@ -21,18 +21,18 @@ export const CardActions = (props: CardActionsProps) => {
         const expandClick = () => {
             eventBus.dispatch('likes:expand-button', props.userID);
         };
-        arrowTmpl = <img src='icons2/expand_big.svg' class='actions__button-expand' onclick={expandClick} />;
+        arrowTmpl = <img src='icons/expand_big.svg' class='actions__button-expand' onclick={expandClick} />;
     } else {
         const shrinkClick = () => {
             eventBus.dispatch('likes:shrink-button', props.userID);
         };
-        arrowTmpl = <img src='icons2/shrink.svg' class='actions__button-shrink' onclick={shrinkClick} />;
+        arrowTmpl = <img src='icons/shrink.svg' class='actions__button-shrink' onclick={shrinkClick} />;
     }
     return (
         <div class='actions'>
-            <img src='icons2/dislike.svg' class='actions__button-dislike' onclick={dislikeClick} />
+            <img src='icons/dislike.svg' class='actions__button-dislike' onclick={dislikeClick} />
             {arrowTmpl}
-            <img src='icons2/likes.svg' class='actions__button-like' onclick={likeClick} />
+            <img src='icons/likes.svg' class='actions__button-like' onclick={likeClick} />
         </div>
     );
 };
