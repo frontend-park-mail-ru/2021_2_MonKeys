@@ -10,7 +10,7 @@ export const SearchField = () => {
     return (
         <form class='search-form'>
             <input oninput={searchEvent} type='text' placeholder='Поиск' class='search-form__input' />
-            <img src='icons2/search.svg' class='search-form__icon' />
+            <img src='icons/search.svg' class='search-form__icon' />
         </form>
     );
 };

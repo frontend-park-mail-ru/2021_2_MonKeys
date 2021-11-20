@@ -1,6 +1,6 @@
-.view-contant__matches-header{
-  width: 288px;
-  
+$profile-photo-size: 96px;
+
+.view-contant__matches-header{  
   font-size: $font-size-medium;
   line-height: 42px;
     
@@ -10,6 +10,7 @@
   margin-bottom: 12px;
   margin-left: 24px;
 }
+
 .view-contant__matches-profiles{
   display: flex;
   flex-direction: row;
@@ -18,50 +19,20 @@
   
   margin-left: 24px;
 }
-.view-contant__match-profile{
-  width: 96px;
-  height: 96px;
 
-//   border-radius: $border-radius-default;
+.view-contant__match-profile{
+  width: $profile-photo-size;
+  height: $profile-photo-size;
 
   margin-right: 12px;
 }
+
 .view-contant__match-img{
-  width: 96px;
-  height: 96px;
+  width: $profile-photo-size;
+  height: $profile-photo-size;
 
   -o-object-fit: cover;
   object-fit: cover;
 
   border-radius: $border-radius-default;
-}
-
-
-// SearchForm component
-.search-form{
-  display: flex;
-  margin-left: 24px;
-  margin-top: 24px;
-}
-.search-form__input{
-  position: relative;
-  width: 312px;
-  height: 30px;
-
-  padding-left: 12px;
-
-  background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.4) 0%, rgba(0, 165, 245, 0) 100%);
-  backdrop-filter: blur(20px);
-  
-  border-radius: 12px;
-  border: 0px;
-}
-.search-form__icon{
-  position: absolute;
-
-  width: 18px;
-  height: 18px;
-  
-  top: 32px;
-  left: 312px;
 }
