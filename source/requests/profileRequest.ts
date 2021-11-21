@@ -14,9 +14,11 @@ const getProfile = () => {
     return http.get(profileURL);
 };
 
-const editProfile = (name, date, description, photoPaths, tags) => {
+const editProfile = (name, gender, prefer, date, description, photoPaths, tags) => {
     const body = JSON.stringify({
         name: name,
+        gender: gender,
+        prefer: prefer,
         date: date,
         description: description,
         imgs: photoPaths,

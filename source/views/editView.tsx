@@ -21,6 +21,9 @@ export default class EditView extends ViewBase {
     _data = {
         'editForm': {
             'fields': {
+                'genderField': EditStore.get().genderField,
+                'tagsField': EditStore.get().tagsField,
+                'preferField': EditStore.get().preferField,
                 'name': {
                     tag: 'textarea',
                     placeholder: 'Имя',
@@ -58,7 +61,7 @@ export default class EditView extends ViewBase {
                     class: EditStore.get().imgFieldClass,
                 },
             },
-            'tags': EditStore.get().tags,
+            // 'tags': EditStore.get().tags,
             'buttons': {
                 'tagsButton': {
                     type: 'button',
@@ -143,8 +146,13 @@ export default class EditView extends ViewBase {
         view._data.editForm.fields.name.value = ProfileStore.get().name;
         view._data.editForm.fields.birthDate.value = ProfileStore.get().date;
         view._data.editForm.fields.description.value = ProfileStore.get().description;
+
+        view._data.editForm.fields.genderField = data.genderField;
+        view._data.editForm.fields.preferField = data.preferField;
+
         view._template = view._createTmpl(view._data);
 
+        
         view.render();
     }
 

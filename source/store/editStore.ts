@@ -32,12 +32,12 @@ const initData = {
         open: true,
         items: [
             {
-                value: 'мужчина',
-                selected: false,
+                value: 'Мужчина',
+                selected: true,
                 clickEvent: 'edit:gender-male-click',
             },
             {
-                value: 'женщина',
+                value: 'Женщина',
                 selected: false,
                 clickEvent: 'edit:gender-female-click',
             },
@@ -45,35 +45,55 @@ const initData = {
         buttonEvent: 'edit:gender-click',
     },
     preferField: {
-        title: 'Предпочтения',
+        title: 'Кого вы ищите',
         valid: true,
         open: true,
         items: [
             {
-                value: 'hello',
-                selected: false,
-                clickEvent: 'edit:tags-hello-click',
-            },
-        ],
-        buttonEvent: 'edit:tags-click',
-    },
-    tagsField: {
-        title: 'Предпочтения',
-        valid: true,
-        open: false,
-        items: [
-            {
-                value: 'Мужчины',
-                selected: false,
+                value: 'Мужчину',
+                selected: true,
                 clickEvent: 'edit:prefer-male-click',
             },
             {
-                value: 'Женщины',
+                value: 'Женщину',
                 selected: false,
                 clickEvent: 'edit:prefer-female-click',
             },
         ],
         buttonEvent: 'edit:prefer-click',
+    },
+    tagsField: {
+        title: 'Тэги',
+        valid: true,
+        open: false,
+        items: [
+            {
+                value: 'anime',
+                selected: false,
+                clickEvent: 'edit:tag-click',
+            },
+            {
+                value: 'music',
+                selected: false,
+                clickEvent: 'edit:tag-click',
+            },
+            {
+                value: 'gaming',
+                selected: false,
+                clickEvent: 'edit:tag-click',
+            },
+            {
+                value: 'science',
+                selected: false,
+                clickEvent: 'edit:tag-click',
+            },
+            {
+                value: 'sport',
+                selected: false,
+                clickEvent: 'edit:tag-click',
+            },
+        ],
+        buttonEvent: 'edit:tags-click',
     },
     apiErrorLoadCondition: false,
 };

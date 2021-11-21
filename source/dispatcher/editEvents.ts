@@ -66,7 +66,23 @@ export const EditEventRegister = () => {
             }
         }
 
-        editProfile(name, date, description, photoPaths, tags)
+        let userGender = ''
+        let userPrefer = '';
+
+        if (storeData.genderField.items[0].selected) {
+            userGender = 'male'
+        } else {
+            userGender = 'female'
+        }
+
+        if (storeData.preferField.items[0].selected&&!storeData.preferField.items[1].selected) {
+            userPrefer = 'male'
+        } else if (!storeData.preferField.items[0].selected&&storeData.preferField.items[1].selected){
+            userPrefer = 'female'
+        }
+    
+        console.log(userGender)
+        editProfile(name, userGender, userPrefer, date, description, photoPaths, tags)
             .then((response) => {
                 if (response.status === HTTPSuccess) {
                     if (response.data.status === HTTPSuccess) {
@@ -319,10 +335,43 @@ export const EditEventRegister = () => {
         EditStore.set(storeData);
     });
 
+    EventBus.register('edit:prefer-click', () => {
+        const storeData = EditStore.get();
+        storeData.preferField.open = !storeData.preferField.open;
+        EditStore.set(storeData);
+    });
+
+    EventBus.register('edit:tags-click', () => {
+        const storeData = EditStore.get();
+        storeData.tagsField.open = !storeData.tagsField.open;
+        EditStore.set(storeData);
+    });
+
     EventBus.register('edit:gender-male-click', () => {
         const storeData = EditStore.get();
-        console.log('dsdsds');
-        storeData.genderField.items[0].selected = !storeData.genderField.items[0].selected;
+        storeData.genderField.items[0].selected = true;
+        storeData.genderField.items[1].selected = false;
+        EditStore.set(storeData);
+    });
+
+    EventBus.register('edit:gender-female-click', () => {
+        const storeData = EditStore.get();
+        storeData.genderField.items[1].selected = true;
+        storeData.genderField.items[0].selected = false;
+        EditStore.set(storeData);
+    });
+
+    EventBus.register('edit:prefer-male-click', () => {
+        const storeData = EditStore.get();
+        storeData.preferField.items[0].selected = !storeData.preferField.items[0].selected;
+        // storeData.preferField.items[1].selected = false;
+        EditStore.set(storeData);
+    });
+
+    EventBus.register('edit:prefer-female-click', () => {
+        const storeData = EditStore.get();
+        storeData.preferField.items[1].selected = !storeData.preferField.items[1].selected;
+        // storeData.preferField.items[0].selected = false;
         EditStore.set(storeData);
     });
 };

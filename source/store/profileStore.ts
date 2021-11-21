@@ -3,6 +3,8 @@ import BaseStore from './storeBase.js';
 export interface ProfileData {
     id?: number;
     name?: string;
+    gender?: string;
+    prefer?: string;
     age?: string;
     date?: string;
     description?: string;
