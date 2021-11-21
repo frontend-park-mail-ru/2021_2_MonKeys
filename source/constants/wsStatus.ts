@@ -1,6 +1,4 @@
-const wsCONNECTING = 0;
-const wsOPEN = 1;
-const wsCLOSING = 2;
-const wsCLOSED = 3;
-
-export { wsCONNECTING, wsOPEN, wsCLOSING, wsCLOSED };
+export const wsCONNECTING = 0;
+export const wsOPEN = 1;
+export const wsCLOSING = 2;
+export const wsCLOSED = 3;

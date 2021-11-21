@@ -22,6 +22,8 @@ import LikesStore from '../store/likesStore.js';
 import { ErrorEventsRegister } from './errorEvents.js';
 import { wsRegister } from './wsEvents.js';
 import { ChatsEventsRegister } from './chatsEvents.js';
+import ws from '../store/wsStore.js';
+import { wsURL } from '../constants/urls.js';
 
 const $root = document.getElementById('app');
 
@@ -71,6 +73,13 @@ export const InitBus = () => {
                 throw 'server internal error';
             }
         });
+
+        ws.CreateConnect(wsURL)
+          .then(wsRegister)
+          .catch((err) => {
+              console.log(err);
+              throw err;
+          });
     });
     LoginEventRegister();
     SignupEventRegister();
@@ -81,7 +90,6 @@ export const InitBus = () => {
     LikesEventsRegister();
     FeedEventsRegister();
 
-    wsRegister();
     ChatsEventsRegister();
     ChatEventsRegister();
 

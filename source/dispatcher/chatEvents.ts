@@ -7,7 +7,7 @@ export const ChatEventsRegister = () => {
         const _msgInput = document.getElementsByTagName('textarea')[0];
         const messageText = _msgInput.value.trim();
 
-        SendMessageWS(messageText);
+        SendMessageWS(messageText).catch((err) => console.log(err));
     });
 };
 
