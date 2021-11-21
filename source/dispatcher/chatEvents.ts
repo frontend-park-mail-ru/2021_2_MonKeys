@@ -1,6 +1,7 @@
 import EventBus from './eventBus.js';
 import { SendMessageWS } from '../requests/messageWS.js';
 import { ChatsStore, Message } from '../store/ChatsStore.js';
+import router from '../route/router.js';
 
 export const ChatEventsRegister = () => {
     EventBus.register('chat:send-button', (payload?: string) => {
@@ -8,6 +9,9 @@ export const ChatEventsRegister = () => {
         const messageText = _msgInput.value.trim();
 
         SendMessageWS(messageText).catch((err) => console.log(err));
+    });
+    EventBus.register('chat:back-button', (payload?: string) => {
+        router.go('/chats');
     });
 };
 

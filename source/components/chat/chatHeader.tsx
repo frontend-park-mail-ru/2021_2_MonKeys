@@ -1,8 +1,23 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import { Button } from '../button.js';
+import EventBus from '../../dispatcher/eventBus.js';
 
 export const ChatHeader = (name: string, img: string) => {
-    const props = {};
+    const props = {
+        backButton: {
+            type: 'button',
+            text: 'Назад',
+            class: '',
+            onclick: () => {
+                EventBus.dispatch<string>('chat:back-button');
+            },
+        }
+    };
 
-    return <div class=''>{name}</div>;
+    return (
+      <div>
+          {Button(props.backButton)}
+          <div class=''>{name}</div>
+      </div>
+    );
 };
