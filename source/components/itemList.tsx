@@ -14,6 +14,7 @@ export interface ItemListProps {
 export interface ListItem {
     value: string;
     selected: boolean;
+    clickEvent: string;
 }
 
 const classMap = (valid: boolean) => {
@@ -40,9 +41,15 @@ const processItems = (items: ListItem[]) => {
     const result = [];
     items.forEach((element) => {
         if (element.selected) {
-            result.push(<div class='list-item-selected'>{element.value}</div>);
+            result.push(<div class='list-item-selected'
+                 onclick={()=>{eventBus.dispatch(element.clickEvent)}}>
+                {element.value}
+                </div>);
         } else {
-            result.push(<div class='list-item-deselected'>{element.value}</div>);
+            result.push(<div 
+                    class='list-item-deselected'
+                    onclick={()=>{eventBus.dispatch(element.clickEvent)}}
+            >{element.value}</div>);
         }
     });
     return result;

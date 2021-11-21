@@ -34,10 +34,12 @@ const initData = {
             {
                 value: 'мужчина',
                 selected: false,
+                clickEvent: 'edit:gender-male-click',
             },
             {
                 value: 'женщина',
                 selected: false,
+                clickEvent: 'edit:gender-female-click',
             },
         ],
         buttonEvent: 'edit:gender-click',
@@ -50,22 +52,7 @@ const initData = {
             {
                 value: 'hello',
                 selected: false,
-            },
-            {
-                value: 'check',
-                selected: false,
-            },
-            {
-                value: 'chsds',
-                selected: false,
-            },
-            {
-                value: 'check',
-                selected: false,
-            },
-            {
-                value: 'chsds',
-                selected: true,
+                clickEvent: 'edit:tags-hello-click',
             },
         ],
         buttonEvent: 'edit:tags-click',
@@ -78,10 +65,12 @@ const initData = {
             {
                 value: 'Мужчины',
                 selected: false,
+                clickEvent: 'edit:prefer-male-click',
             },
             {
                 value: 'Женщины',
                 selected: false,
+                clickEvent: 'edit:prefer-female-click',
             },
         ],
         buttonEvent: 'edit:prefer-click',

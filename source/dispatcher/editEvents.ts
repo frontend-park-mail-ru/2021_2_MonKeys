@@ -318,4 +318,11 @@ export const EditEventRegister = () => {
         storeData.genderField.open = !storeData.genderField.open;
         EditStore.set(storeData);
     });
+
+    EventBus.register('edit:gender-male-click', () => {
+        const storeData = EditStore.get();
+        console.log('dsdsds');
+        storeData.genderField.items[0].selected = !storeData.genderField.items[0].selected;
+        EditStore.set(storeData);
+    });
 };
