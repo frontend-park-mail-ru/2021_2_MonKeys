@@ -52,7 +52,7 @@ export default class ProfileView extends ViewBase {
                         onclick={data.cardData.settingButtons.onclick}
                     />
                 </div>
-                {CardExpended({ userData: data.cardData.userData, withActions: false })}
+                {CardExpended({ userData: data.cardData.userData, withActions: false, withReports: false })}
                 {Tapbar(TapbarStore.get())}
                 {CritError(data.critError)}
             </div>

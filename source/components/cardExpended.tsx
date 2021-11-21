@@ -1,5 +1,5 @@
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import eventBus from '../dispatcher/eventBus.js';
+import EventBus from '../dispatcher/eventBus.js';
 import reactions from '../constants/reactions.js';
 import { Tag } from './tag.js';
 import { IconButton } from './iconButton.js';
@@ -7,11 +7,17 @@ import { ImgCarousel } from './imgCarousel.js';
 import { ProfileData } from '../store/profileStore.js';
 import { CardActions } from './cardActions.js';
 import { ImgCard } from './imgCard.js';
+import { Button } from './button.js';
+import { ReportWindow } from './reportWindow.js';
 
 export interface CardExpendedProps {
     userData: ProfileData;
 
     withActions: boolean;
+    withReports: boolean;
+
+    reports?: string[];
+    reported?: boolean;
 }
 
 export const CardExpended = (props: CardExpendedProps) => {
@@ -37,7 +43,6 @@ export const CardExpended = (props: CardExpendedProps) => {
     let nameTmpl: HTMLAllCollection;
     if (props.withActions) {
         imgTmpl = ImgCard({ userData: props.userData, size: 'medium', expanded: false });
-        // !!!!
         nameTmpl = <div></div>;
     } else {
         imgTmpl = <img class={'img-card__img img-card__img_size_medium'} src={props.userData.imgs[0]} />;
@@ -47,13 +52,37 @@ export const CardExpended = (props: CardExpendedProps) => {
             </div>
         );
     }
+    const reportButtonAction = () => {
+        EventBus.dispatch<string>('reports:report-button');
+    };
+    const reportButtonTmpl = props.withReports ? (
+        <div class='card-expended__report-button'>
+            {Button({
+                type: 'button',
+                text: 'Пожаловаться',
+                class: 'button-black-big button-black-big_margin-bottom',
+                onclick: reportButtonAction,
+            })}
+        </div>
+    ) : (
+        <div></div>
+    );
+    const reportWindowTmpl = props.withReports ? (
+        ReportWindow({ reports: props.reports, reportedUserID: props.userData.id, visible: props.reported })
+    ) : (
+        <div></div>
+    );
 
     return (
-        <div class='card-expended'>
-            {imgTmpl}
-            {nameTmpl}
-            {descField}
-            {tagField}
+        <div>
+            {reportWindowTmpl}
+            <div class='card-expended'>
+                {imgTmpl}
+                {nameTmpl}
+                {descField}
+                {tagField}
+                {reportButtonTmpl}
+            </div>
         </div>
     );
     // let tags;

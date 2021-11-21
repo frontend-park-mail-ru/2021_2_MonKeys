@@ -1,3 +1,5 @@
+@import '../abstracts/colors';
+
 $card-expanded-default-width: 372px;
 $card-expanded-default-height: 594px;
 $card-expanded-img-default-height: 384px;
@@ -27,7 +29,7 @@ $card-expanded-img-default-height: 384px;
   margin-right: 12px;
   margin-top: 6px;
 
-  font-size: $font-size-small;
+  font-size: $font-size-tiny;
   line-height: 24px;
 
   color: #FFFFFF;
@@ -36,4 +38,16 @@ $card-expanded-img-default-height: 384px;
 .card-expended__tags{
   margin-left: 12px;
   margin-bottom: 6px;
+}
+
+.card-expended__report-button{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.report-window__problems-buttons{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
