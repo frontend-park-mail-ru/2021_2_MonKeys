@@ -5,13 +5,16 @@ $card-expanded-default-height: 594px;
 $card-expanded-img-default-height: 384px;
 
 .card-expended{
+  margin-top: 6px;
+}
+
+.card-profile{
   position: relative;
   display: flex;
   flex-direction: column;
   width: $card-expanded-default-width;
   height: $card-expanded-default-height;
 
-  margin-top: 6px;
   overflow-x: hidden;
   overflow-y: scroll;
 
