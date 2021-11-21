@@ -11,7 +11,4 @@ ws.set({
     connect: new WebSocket(wsURL),
 });
 
-console.log('----- store -----');
-console.log(ws);
-
 export default ws;

@@ -1,5 +1,5 @@
 import EventBus from './eventBus.js';
-import { SendMessage } from '../requests/SendMessageRequest.js';
+import { SendMessageWS } from '../requests/messageWS.js';
 import { ChatsStore, Message } from '../store/ChatsStore.js';
 
 export const ChatEventsRegister = () => {
@@ -7,7 +7,7 @@ export const ChatEventsRegister = () => {
         const _msgInput = document.getElementsByTagName('textarea')[0];
         const messageText = _msgInput.value.trim();
 
-        SendMessage(messageText);
+        SendMessageWS(messageText);
     });
 };
 
