@@ -1,6 +1,6 @@
 import BaseStore from './storeBase.js';
 import { Chat } from '../components/chat/chat.js';
-import { chatURL } from '../constants/urls.js';
+import { ProfileStore } from './profileStore.js';
 
 export interface Message {
     messageID: number;
@@ -133,6 +133,17 @@ export const getIdxByChatID = (chatID: number) => {
     }
 
     return undefined;
+};
+
+export const getChatIdxByMessage = (message: Message) => {
+    if (message === null) {
+        return;
+    }
+
+    const profileID = ProfileStore.get().id;
+    const chatID = (profileID === message.fromID) ? message.toID: message.fromID;
+
+    return getIdxByChatID(chatID);
 };
 
 export const getChatByID = (chatID: number) => {

@@ -1,6 +1,6 @@
 import EventBus from './eventBus.js';
 import { SendMessageWS } from '../requests/messageWS.js';
-import { ChatsStore, Message } from '../store/ChatsStore.js';
+import { ChatsStore, getChatIdxByMessage, getIdxByChatID, Message } from '../store/ChatsStore.js';
 import router from '../route/router.js';
 
 export const ChatEventsRegister = () => {
@@ -16,11 +16,11 @@ export const ChatEventsRegister = () => {
     });
 };
 
-// export const NewMessage = (message: Message) => {
-export const NewMessage = (message) => {
+export const NewMessage = (message: Message) => {
     const storeData = ChatsStore.get();
+    const chatIdx = getChatIdxByMessage(message);
 
-    storeData.chats[0].messages.push(message);
+    storeData.chats[chatIdx].messages.push(message);
 
     ChatsStore.set(storeData);
 };
