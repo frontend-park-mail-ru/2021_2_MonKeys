@@ -11,13 +11,15 @@ export const ChatHeader = (name: string, img: string) => {
             onclick: () => {
                 EventBus.dispatch<string>('chat:back-button');
             },
-        }
+        },
     };
 
     return (
-      <div>
-          {Button(props.backButton)}
-          <div class=''>{name}</div>
-      </div>
+        <div>
+            {Button(props.backButton)}
+            <div class=''>
+                <h2>{name}</h2>
+            </div>
+        </div>
     );
 };

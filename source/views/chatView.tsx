@@ -3,7 +3,7 @@ import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { Chat } from '../components/chat/chat.js';
 import { CritError } from '../components/critError.js';
 import { ErrorStore } from '../store/errorStore.js';
-import { ChatsStore, getChatByID } from '../store/ChatsStore.js';
+import { ChatsStore, getCurrentChat } from '../store/ChatsStore.js';
 
 export default class ChatView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -19,7 +19,7 @@ export default class ChatView extends ViewBase {
     }
 
     _data = {
-        chat: getChatByID('2'),
+        chat: getCurrentChat(),
         critError: {
             title: 'Ошибка подключения',
             text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
@@ -37,7 +37,7 @@ export default class ChatView extends ViewBase {
     }
 
     private chatUpdatesView(data, view) {
-        view._data.chat = getChatByID('2');
+        view._data.chat = getCurrentChat();
 
         view._template = view._createTmpl(view._data);
 

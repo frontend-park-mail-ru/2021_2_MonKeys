@@ -5,10 +5,10 @@ import EventBus from '../../dispatcher/eventBus.js';
 export const ChatPreview = (chat: Chat) => {
     const lastMessage = chat.messages.at(-1);
 
-    const fromID = chat.fromID;
+    const fromID = chat.fromUserID;
 
     function onclick() {
-        EventBus.dispatch<string>('chats:preview-chat', fromID);
+        EventBus.dispatch<number>('chats:preview-chat', fromID);
     }
 
     return (

@@ -1,7 +1,8 @@
 import ws from '../store/wsStore.js';
 
-const SendMessageWS = (message) => {
+const SendMessageWS = (message: string, recipient: number) => {
     const data = JSON.stringify({
+        toID: recipient,
         text: message,
     });
 
@@ -11,7 +12,7 @@ const SendMessageWS = (message) => {
 const NewMessageWS = (messageHandler) => {
     return function (message) {
         messageHandler(JSON.parse(message.data));
-    }
-}
+    };
+};
 
-export { SendMessageWS, NewMessageWS }
+export { SendMessageWS, NewMessageWS };

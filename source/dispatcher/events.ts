@@ -24,6 +24,9 @@ import { wsRegister } from './wsEvents.js';
 import { ChatsEventsRegister } from './chatsEvents.js';
 import ws from '../store/wsStore.js';
 import { wsURL } from '../constants/urls.js';
+import { getChats } from '../requests/chatsRequest.js';
+import { Chats } from '../components/chats/chats.js';
+import { Chat, ChatsStore } from '../store/ChatsStore.js';
 
 const $root = document.getElementById('app');
 
@@ -74,12 +77,27 @@ export const InitBus = () => {
             }
         });
 
+        getChats()
+            .then((response) => {
+                if (response.status !== HTTPSuccess || response.data.status !== HTTPSuccess) {
+                    throw 'bad request';
+                }
+
+                const chats = ChatsStore.get();
+                chats.chats = response.data.body;
+                ChatsStore.set(chats);
+            })
+            .catch((err) => {
+                console.log(err);
+                throw err;
+            });
+
         ws.CreateConnect(wsURL)
-          .then(wsRegister)
-          .catch((err) => {
-              console.log(err);
-              throw err;
-          });
+            .then(wsRegister)
+            .catch((err) => {
+                console.log(err);
+                throw err;
+            });
     });
     LoginEventRegister();
     SignupEventRegister();

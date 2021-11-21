@@ -8,8 +8,9 @@ export const ChatEventsRegister = () => {
         const _msgInput = document.getElementsByTagName('textarea')[0];
         const messageText = _msgInput.value.trim();
 
-        SendMessageWS(messageText).catch((err) => console.log(err));
+        SendMessageWS(messageText, ChatsStore.get().currentChat).catch((err) => console.log(err));
     });
+
     EventBus.register('chat:back-button', (payload?: string) => {
         router.go('/chats');
     });
@@ -19,15 +20,7 @@ export const ChatEventsRegister = () => {
 export const NewMessage = (message) => {
     const storeData = ChatsStore.get();
 
-    const msg: Message = {
-        text: message.text,
-        date: new Date(),
-        fromID: '10',
-        isRead: true,
-        messageID: 'qsdqwewx',
-    }
-
-    storeData.chats[0].messages.push(msg);
+    storeData.chats[0].messages.push(message);
 
     ChatsStore.set(storeData);
 };

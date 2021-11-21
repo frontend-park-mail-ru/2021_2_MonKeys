@@ -1,16 +1,18 @@
 import BaseStore from './storeBase.js';
 import { Chat } from '../components/chat/chat.js';
+import { chatURL } from '../constants/urls.js';
 
 export interface Message {
-    messageID: string;
-    fromID: string;
+    messageID: number;
+    fromID: number;
+    toID: number;
     text: string;
     date: Date;
     isRead: boolean;
 }
 
 export interface Chat {
-    fromID: string;
+    fromUserID: number;
     name: string;
     img: string;
     messages: Message[];
@@ -18,6 +20,7 @@ export interface Chat {
 
 export interface ChatsData {
     chats: Chat[];
+    currentChat: number;
 }
 
 const ChatsStore = new BaseStore<ChatsData>();
@@ -69,20 +72,22 @@ chats.set('3', {
 const initData = {
     chats: [
         {
-            fromID: '2',
+            fromUserID: 2,
             name: 'masha',
             img: 'path.img',
             messages: [
                 {
-                    messageID: '1asd12',
-                    fromID: '1',
+                    messageID: 13,
+                    fromID: 1,
+                    toID: 2,
                     text: 'hi',
                     date: new Date(),
                     isRead: true,
                 },
                 {
-                    messageID: '1asda12wef',
-                    fromID: '2',
+                    messageID: 14,
+                    fromID: 2,
+                    toID: 2,
                     text: 'hi!',
                     date: new Date(),
                     isRead: true,
@@ -90,20 +95,22 @@ const initData = {
             ],
         },
         {
-            fromID: '3',
+            fromUserID: 3,
             name: 'alina',
             img: 'path.img',
             messages: [
                 {
-                    messageID: '1asd12',
-                    fromID: '1',
+                    messageID: 15,
+                    fromID: 1,
+                    toID: 3,
                     text: 'hi',
                     date: new Date(),
                     isRead: true,
                 },
                 {
-                    messageID: '1asda12wef',
-                    fromID: '2',
+                    messageID: 16,
+                    fromID: 2,
+                    toID: 3,
                     text: 'privet',
                     date: new Date(),
                     isRead: true,
@@ -111,20 +118,60 @@ const initData = {
             ],
         },
     ],
+    currentChat: null,
 };
 
 ChatsStore.set(initData);
 
-export const getChatByID = (id: string) => {
+export const getIdxByChatID = (chatID: number) => {
+    const chats = ChatsStore.get().chats;
+
+    for (let i = 0; i < chats.length; i++) {
+        if (chats[i].fromUserID === chatID) {
+            return i;
+        }
+    }
+
+    return undefined;
+};
+
+export const getChatByID = (chatID: number) => {
     const chats = ChatsStore.get().chats;
 
     for (const chat of chats) {
-        if (chat.fromID === id) {
+        if (chat.fromUserID === chatID) {
             return chat;
         }
     }
 
     return null;
-}
+};
+
+export const getFirstMessageID = (chatID: number) => {
+    const chat = getChatByID(chatID);
+    return chat.messages[0].messageID;
+};
+
+export const getCurrentChat = () => {
+    const chat = ChatsStore.get().currentChat;
+    return getChatByID(chat);
+};
+
+export const updateChatMessages = (chatID: number, messages: Message[]) => {
+    if (messages === null) {
+        return;
+    }
+
+    const chatsStore = ChatsStore.get();
+
+    const chatIdx = getIdxByChatID(chatID);
+
+    for (const msg of chatsStore.chats[chatIdx].messages) {
+        messages.push(msg);
+    }
+    chatsStore.chats[chatIdx].messages = messages;
+
+    ChatsStore.set(chatsStore);
+};
 
 export { ChatsStore };
