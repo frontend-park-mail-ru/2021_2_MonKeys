@@ -1,0 +1,29 @@
+$card-expanded-default-width: 372px;
+$card-expanded-default-height: 594px;
+$card-expanded-img-default-height: 384px;
+
+.card{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: $card-expanded-default-width;
+  height: $card-expanded-default-height;
+
+  margin-top: 6px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.4) 0%, rgba(0, 44, 65, 0) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: $border-radius-default;
+}
+
+.card-bottom-panel{
+    position: absolute;
+    bottom: 0px;
+}
+
+.card-bottom-panel__name {
+    display: flex;
+}

@@ -35,65 +35,10 @@ export const EditForm = (props: EditFormProps) => {
             {ErrorMsg(props.errorMsgs.nameError)}
             {FormField(props.fields.birthDate)}
             {ErrorMsg(props.errorMsgs.ageError)}
-            {ItemList({
-                title: 'Ваш пол',
-                valid: true,
-                open: true,
-                items: [
-                    {
-                        value: 'мужчина',
-                        selected: false,
-                    },
-                    {
-                        value: 'женщина',
-                        selected: false,
-                    },
-                ],
-            })}
+            {ItemList(props.fields.genderField)}
             {DescriptionField(props.fields.description)}
-
-            {ItemList({
-                title: 'Предпочтения',
-                valid: true,
-                open: true,
-                items: [
-                    {
-                        value: 'hello',
-                        selected: false,
-                    },
-                    {
-                        value: 'check',
-                        selected: false,
-                    },
-                    {
-                        value: 'chsds',
-                        selected: false,
-                    },
-                    {
-                        value: 'check',
-                        selected: false,
-                    },
-                    {
-                        value: 'chsds',
-                        selected: true,
-                    },
-                ],
-            })}
-            {ItemList({
-                title: 'Предпочтения',
-                valid: true,
-                open: false,
-                items: [
-                    {
-                        value: 'Мужчины',
-                        selected: false,
-                    },
-                    {
-                        value: 'Женщины',
-                        selected: false,
-                    },
-                ],
-            })}
+            {ItemList(props.fields.tagsField)}
+            {ItemList(props.fields.preferField)}
             <div class='form-field-input'>
                 {ImgField(props.fields.img, props.buttons.imgAddButton)}
                 {ErrorMsg(props.errorMsgs.imgError)}

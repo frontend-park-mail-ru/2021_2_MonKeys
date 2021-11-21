@@ -14,33 +14,33 @@ const renderOnCondition = (bool: boolean, ifTrue, ifFalse) => {
 
 export const Tapbar = (props: tapbarProps) => {
     return (
-        <div class='tapbar-container'>
+        <div class='tapbar'>
             <mon-router route='/feed'>
                 {renderOnCondition(
                     props.activeItem === 'feed',
-                    <img src='icons/feed_selected.svg' class='menu-icon' />,
-                    <img src='icons/feed_unselected.svg' class='menu-icon' />
+                    <img src='icons/feed_selected.svg' class='tapbar_item' />,
+                    <img src='icons/feed_unselected.svg' class='tapbar_item' />
                 )}
             </mon-router>
             <mon-router route='/matches'>
                 {renderOnCondition(
                     props.activeItem === 'matches',
-                    <img src='icons/likes_selected.svg' class='menu-icon' />,
-                    <img src='icons/likes_unselected.svg' class='menu-icon' />
+                    <img src='icons/likes_selected.svg' class='tapbar_item' />,
+                    <img src='icons/likes_unselected.svg' class='tapbar_item' />
                 )}
             </mon-router>
             <mon-router route='/chat'>
                 {renderOnCondition(
                     props.activeItem === 'chat',
-                    <img src='icons/chat_selected.svg' class='menu-icon' />,
-                    <img src='icons/chat_unselected.svg' class='menu-icon' />
+                    <img src='icons/chat_selected.svg' class='tapbar_item' />,
+                    <img src='icons/chat_unselected.svg' class='tapbar_item' />
                 )}
             </mon-router>
             <mon-router route='/profile'>
                 {renderOnCondition(
                     props.activeItem === 'profile',
-                    <img src='icons/profile_selected.svg' class='menu-icon' />,
-                    <img src='icons/profile_unselected.svg' class='menu-icon' />
+                    <img src='icons/profile_selected.svg' class='tapbar_item' />,
+                    <img src='icons/profile_unselected.svg' class='tapbar_item' />
                 )}
             </mon-router>
         </div>

@@ -312,4 +312,10 @@ export const EditEventRegister = () => {
                 EditStore.set(storeData);
             });
     });
+
+    EventBus.register('edit:gender-click', () => {
+        const storeData = EditStore.get();
+        storeData.genderField.open = !storeData.genderField.open;
+        EditStore.set(storeData);
+    });
 };

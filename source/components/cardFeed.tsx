@@ -11,18 +11,18 @@ export interface CardFeedProps {
 export const CardFeed = (props: CardFeedProps) => {
     return (
         <div class='card'>
-            <div class='card-main'>
+            
                 {ImgCarousel(props.userData.imgs, false)}
-                <div class='bottom-panel'>
-                    <div class='name-container'>
-                        <div class='name'>{props.userData.name}</div>
-                        <div class='age'>{props.userData.age}</div>
+                <div class='card-bottom-panel'>
+                    <div class='card-bottom-panel__name'>
+                        {props.userData.name}
+                        {props.userData.age}
                     </div>
                     <div class='actions-container'>
                         {Object.keys(props.buttons).map((item) => IconButton(props.buttons[item]))}
                     </div>
                 </div>
-            </div>
         </div>
+     
     );
 };

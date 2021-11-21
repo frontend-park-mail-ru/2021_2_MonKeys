@@ -43,7 +43,7 @@ export default class FeedView extends ViewBase {
             buttons: {
                 dislikeButton: {
                     type: 'button',
-                    src: 'icons/button_dislike_white.svg',
+                    src: 'icons/dislike.svg',
                     class: 'menu-icon',
                     onclick: () => {
                         eventBus.dispatch('feed:dislike-button');
@@ -51,7 +51,7 @@ export default class FeedView extends ViewBase {
                 },
                 expandButton: {
                     type: 'button',
-                    src: 'icons/button_expand_white.svg',
+                    src: 'icons/expand_big.svg',
                     class: 'menu-icon',
                     onclick: () => {
                         eventBus.dispatch('feed:expand-button');
@@ -59,7 +59,7 @@ export default class FeedView extends ViewBase {
                 },
                 likeButton: {
                     type: 'button',
-                    src: 'icons/tapbar_likes_white_selected.svg',
+                    src: 'icons/likes.svg',
                     class: 'menu-icon',
                     onclick: () => {
                         eventBus.dispatch('feed:like-button');
@@ -87,7 +87,7 @@ export default class FeedView extends ViewBase {
         if (!expanded) {
             this._data.cardData.buttons.expandButton = {
                 type: 'button',
-                src: 'icons/button_expand_white.svg',
+                src: 'icons/expand_big.svg',
                 class: 'menu-icon',
                 onclick: () => {
                     eventBus.dispatch('feed:expand-button');
@@ -96,12 +96,9 @@ export default class FeedView extends ViewBase {
 
             return (
                 <div class='card-container'>
-                    <div class='card3'></div>
-                    <div class='card3'></div>
-                    <div class='card2'></div>
                     {CardFeed(data.cardData)}
                     {Tapbar(TapbarStore.get())}
-                    {CritError(data.critError)}
+                    {/* {CritError(data.critError)} */}
                 </div>
             );
         } else {
@@ -115,12 +112,9 @@ export default class FeedView extends ViewBase {
             };
             return (
                 <div class='card-container'>
-                    <div class='card3'></div>
-                    <div class='card3'></div>
-                    <div class='card2'></div>
                     {CardExpended(data.cardData)}
                     {Tapbar(data.tapbar)}
-                    {CritError(data.critError)}
+                    {/* {CritError(data.critError)} */}
                 </div>
             );
         }
