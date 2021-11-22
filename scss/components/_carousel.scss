@@ -39,27 +39,25 @@
   top: 20%;
 }
 .carousel-button-nav {
-  width: 30px;
-  height: 30px;
+  height: 6px;
   top: 50%;
-  left: 0px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.3);
+  background: black;
+  flex-grow: 1;
+  border-radius: 12px;
+  filter: invert(1) grayscale(1) brightness(1);
 }
 
 .carousel-button-nav.current-slide {
-  width: 30px;
-  height: 30px;
+  height: 6px;
   top: 50%;
-  left: 0px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.75);
+  background: black;
+  filter: invert(1) grayscale(1) brightness(0.5);
 }
 
 .carousel-nav {
   position: absolute;
   top: 20px;
-  width: 95%;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
@@ -67,5 +65,6 @@
 .card__img {
   object-fit: cover;
   width: 100%;
+  border-radius: 12px;
   height: 100%;
 }

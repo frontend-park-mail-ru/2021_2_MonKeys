@@ -15,8 +15,8 @@ const animationThanLikeAndReset = () => {
     card.style.transform = '';
     card.style.animation = '';
     card.style.opacity = '1';
-    const heart = document.querySelectorAll<HTMLElement>('img')[3];
-    const dislike = document.querySelectorAll<HTMLElement>('img')[1];
+    const heart = document.querySelector<HTMLElement>('img[alt="like"]');
+    const dislike = document.querySelector<HTMLElement>('img[alt="dislike"]');
     dislike.style.width = `36px`;
     dislike.style.height = `36px`;
     dislike.style.transform = ``;
@@ -37,8 +37,8 @@ const animationThanDislikeAndReset = () => {
     card.style.transform = '';
     card.style.animation = '';
     card.style.opacity = '1';
-    const heart = document.querySelectorAll<HTMLElement>('img')[3];
-    const dislike = document.querySelectorAll<HTMLElement>('img')[1];
+    const heart = document.querySelector<HTMLElement>('img[alt="like"]');
+    const dislike = document.querySelector<HTMLElement>('img[alt="dislike"]');
     dislike.style.width = `36px`;
     dislike.style.height = `36px`;
     dislike.style.transform = ``;

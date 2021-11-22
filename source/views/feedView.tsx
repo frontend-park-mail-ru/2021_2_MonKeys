@@ -44,6 +44,7 @@ export default class FeedView extends ViewBase {
                 dislikeButton: {
                     type: 'button',
                     src: 'icons/dislike.svg',
+                    alt: 'dislike',
                     class: 'card-bottom-panel_actions_action',
                     onclick: () => {
                         eventBus.dispatch('feed:dislike-button');
@@ -60,6 +61,7 @@ export default class FeedView extends ViewBase {
                 likeButton: {
                     type: 'button',
                     src: 'icons/likes.svg',
+                    alt: 'like',
                     class: 'card-bottom-panel_actions_action',
                     onclick: () => {
                         eventBus.dispatch('feed:like-button');

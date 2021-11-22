@@ -22,7 +22,7 @@ export const SwipeEvenetsRegister = () => {
     EventBus.register('swipe:move', (cardMoveOffset) => {
         const card = document.querySelectorAll<HTMLElement>('.card')[0];
 
-        const heart = document.querySelectorAll<HTMLElement>('img')[3];
+        const heart = document.querySelector<HTMLElement>('img[alt="like"]');
         let heartTranslateX = 0;
         let heartTranslateY = 0;
 
@@ -49,7 +49,7 @@ export const SwipeEvenetsRegister = () => {
         heart.style.height = `${Math.round(swipesAnimation.iconDefaultWidth + cardMoveOffset.diffX / 2)}px`;
         // heart.style.opacity = `${1 - cardMoveOffset.diffX / 300}`;
 
-        const dislike = document.querySelectorAll<HTMLElement>('img')[1];
+        const dislike = document.querySelector<HTMLElement>('img[alt="dislike"]');
 
         let dislikeTranslateX = 0;
         let dislikeTranslateY = 0;
@@ -97,23 +97,23 @@ export const SwipeEvenetsRegister = () => {
             eventBus.dispatch('feed:dislike-button');
             return;
         }
-        const heart = document.querySelectorAll<HTMLElement>('img')[3];
-        const dislike = document.querySelectorAll<HTMLElement>('img')[1];
+        const heart = document.querySelector<HTMLElement>('img[alt="like"]');
+        const dislike = document.querySelector<HTMLElement>('img[alt="dislike"]');
         card.style.animation = 'returnToDefault 1s ease 1';
         heart.style.animation = 'returnToDefaultAction 1s ease 1';
         dislike.style.animation = 'returnToDefaultAction 1s ease 1';
 
         card.addEventListener('animationend', (event) => {
             const card = document.querySelectorAll<HTMLElement>('.card')[0];
-            const heart = document.querySelectorAll<HTMLElement>('img')[3];
-            const dislike = document.querySelectorAll<HTMLElement>('img')[1];
-            dislike.style.width = `swipesAnimation.iconDefaultWidthpx`;
-            dislike.style.height = `swipesAnimation.iconDefaultWidthpx`;
+            const heart = document.querySelector<HTMLElement>('img[alt="like"]');
+            const dislike = document.querySelector<HTMLElement>('img[alt="dislike"]');
+            dislike.style.width = `${swipesAnimation.iconDefaultWidth}px`;
+            dislike.style.height = `${swipesAnimation.iconDefaultWidth}px`;
             dislike.style.transform = ``;
             dislike.style.opacity = `1`;
             dislike.style.animation = '';
-            heart.style.width = `swipesAnimation.iconDefaultWidthpx`;
-            heart.style.height = `swipesAnimation.iconDefaultWidthpx`;
+            heart.style.width = `${swipesAnimation.iconDefaultWidth}px`;
+            heart.style.height = `${swipesAnimation.iconDefaultWidth}px`;
             heart.style.transform = ``;
             heart.style.opacity = `1`;
             heart.style.animation = '';

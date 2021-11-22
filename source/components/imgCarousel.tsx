@@ -6,7 +6,7 @@ import { conditionalRendering } from '../tools/jsxTools.js';
 const LButtonProps = {
     type: 'button',
     class: 'carousel-button-left',
-    src: 'icons/button_previous_black.svg',
+    src: 'icons/carousel_left.svg',
     onclick: () => {
         eventBus.dispatch('carousel:previous');
     },
@@ -15,7 +15,7 @@ const LButtonProps = {
 const RButtonProps = {
     type: 'button',
     class: 'carousel-button-right',
-    src: 'icons/button_next_black.svg',
+    src: 'icons/carousel_right.svg',
     onclick: () => {
         eventBus.dispatch('carousel:next');
     },
@@ -56,9 +56,19 @@ const nav = (length, selectedID) => {
     const items = [];
     for (let i = 0; i < length; i++) {
         if (i === selectedID) {
-            items.push(IconButton(NavButtonPropsSelected));
+            items.push(
+            <div 
+                class="carousel-button-nav current-slide" 
+                alt="untracked"> 
+            </div>
+            );
         } else {
-            items.push(IconButton(NavButtonProps));
+            items.push(
+                <div 
+                class="carousel-button-nav" 
+                alt="untracked"> 
+                </div>
+            );
         }
     }
     return items;
@@ -91,7 +101,7 @@ export const ImgCarousel = (props: string[], expanded: boolean) => {
 
     return (
         <div class='card-img'>
-            {slides(props, window.currentSelectedCarouselItem, sizeClass, carouselSizeClass)}
+            {<img src={props[window.currentSelectedCarouselItem]} class='card__img' alt='' />}
             {conditionalRendering(IconButton(LButtonProps), !firstCard)}
             {conditionalRendering(IconButton(RButtonProps), !lastCard)}
             <div class='carousel-nav'>
