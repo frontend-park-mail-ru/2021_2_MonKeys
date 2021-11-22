@@ -46,9 +46,7 @@ const slides = (imgSrc: string[], selectedID: number, sizeClass, carouselSizeCla
     }
     const items = [];
     imgSrc.forEach((element) => {
-        items.push(
-            <img src={element} class='card__img' alt='' />
-        );
+        items.push(<img src={element} class='card__img' alt='' />);
     });
     imgSrc.pop();
     return items;
@@ -68,7 +66,7 @@ const nav = (length, selectedID) => {
 
 export const ImgCarousel = (props: string[], expanded: boolean) => {
     if (!props) {
-        return <img src="img/stare-dont-blink.gif" class="card-img"/>;
+        return <img src='img/stare-dont-blink.gif' class='card-img' />;
     }
     if (!window.currentSelectedCarouselItem) {
         window.currentSelectedCarouselItem = 0;

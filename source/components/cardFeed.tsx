@@ -9,24 +9,24 @@ export interface CardFeedProps {
     buttons;
 }
 
-
 export const CardFeed = (props: CardFeedProps) => {
     return (
-        <div class='card'
-        ontouchstart={(event)=>{
-            const { touches } = event;
-            if(!window.startX){
-                window.startX = 0;
-                window.startY = 0;
-            }
-            window.startX = touches[0].clientX;
-            window.startY = touches[0].clientY;
-            eventBus.dispatch('swipe:start');
-        }}
-        ontouchmove={(event)=>{
-            if (!window.startX || !window.startY) {
-                return;
-            }
+        <div
+            class='card'
+            ontouchstart={(event) => {
+                const { touches } = event;
+                if (!window.startX) {
+                    window.startX = 0;
+                    window.startY = 0;
+                }
+                window.startX = touches[0].clientX;
+                window.startY = touches[0].clientY;
+                eventBus.dispatch('swipe:start');
+            }}
+            ontouchmove={(event) => {
+                if (!window.startX || !window.startY) {
+                    return;
+                }
                 const { touches } = event;
                 let x;
                 let y;
@@ -41,24 +41,22 @@ export const CardFeed = (props: CardFeedProps) => {
                 const diffY = y - window.startY;
                 window.offsetX = diffX;
                 window.offsetY = diffY;
-                eventBus.dispatch('swipe:move',{ diffX,diffY })
-        }}
-        ontouchend={()=>{
-            eventBus.dispatch('swipe:end')
-        }}
+                eventBus.dispatch('swipe:move', { diffX, diffY });
+            }}
+            ontouchend={() => {
+                eventBus.dispatch('swipe:end');
+            }}
         >
-            
-                {ImgCarousel(props.userData.imgs, false)}
-                <div class='card-bottom-panel'>
-                    <div class='card-bottom-panel__name'>
-                        <div class='card-bottom-panel__name__name'>{props.userData.name}</div>
-                        <div class='card-bottom-panel__name__age'>{props.userData.age}</div>
-                    </div>
-                    <div class='card-bottom-panel_actions'>
-                        {Object.keys(props.buttons).map((item) => IconButton(props.buttons[item]))}
-                    </div>
+            {ImgCarousel(props.userData.imgs, false)}
+            <div class='card-bottom-panel'>
+                <div class='card-bottom-panel__name'>
+                    <div class='card-bottom-panel__name__name'>{props.userData.name}</div>
+                    <div class='card-bottom-panel__name__age'>{props.userData.age}</div>
                 </div>
+                <div class='card-bottom-panel_actions'>
+                    {Object.keys(props.buttons).map((item) => IconButton(props.buttons[item]))}
+                </div>
+            </div>
         </div>
-     
     );
 };

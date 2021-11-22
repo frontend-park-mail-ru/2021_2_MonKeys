@@ -1,6 +1,6 @@
 import eventBus from './eventBus.js';
 import EventBus from './eventBus.js';
-
+import { swipesAnimation } from '../constants/animations.js';
 export interface cardMoveOffset {
     offsetX: number;
     offsetY: number;
@@ -26,24 +26,27 @@ export const SwipeEvenetsRegister = () => {
         let heartTranslateX = 0;
         let heartTranslateY = 0;
 
-        // X 0.5 for x scale
+        // X swipesAnimtion.iconXTranslateModifier for x scale
         // X 2 for y scale like dislike translate
-        if (-cardMoveOffset.diffX * 0.5 > -25) {
-            heartTranslateX = -cardMoveOffset.diffX * 0.5;
+        if (
+            -cardMoveOffset.diffX * swipesAnimation.iconXTranslateModifier >
+            -swipesAnimation.iconXTranslateThreshhold
+        ) {
+            heartTranslateX = -cardMoveOffset.diffX * swipesAnimation.iconXTranslateModifier;
         } else {
-            heartTranslateX = -25;
+            heartTranslateX = -swipesAnimation.iconXTranslateThreshhold;
         }
-        if (-cardMoveOffset.diffX * 2 > -180) {
+        if (-cardMoveOffset.diffX * 2 > -swipesAnimation.iconYTranslateThreshhold) {
             heartTranslateY = -cardMoveOffset.diffX * 2;
         } else {
-            heartTranslateY = -180;
+            heartTranslateY = -swipesAnimation.iconYTranslateThreshhold;
         }
 
         heart.style.transform = `translate(${heartTranslateX - cardMoveOffset.diffX}px, ${
             heartTranslateY - cardMoveOffset.diffY
         }px)`;
-        heart.style.width = `${Math.round(36 + cardMoveOffset.diffX / 2)}px`;
-        heart.style.height = `${Math.round(36 + cardMoveOffset.diffX / 2)}px`;
+        heart.style.width = `${Math.round(swipesAnimation.iconDefaultWidth + cardMoveOffset.diffX / 2)}px`;
+        heart.style.height = `${Math.round(swipesAnimation.iconDefaultWidth + cardMoveOffset.diffX / 2)}px`;
         // heart.style.opacity = `${1 - cardMoveOffset.diffX / 300}`;
 
         const dislike = document.querySelectorAll<HTMLElement>('img')[1];
@@ -51,24 +54,24 @@ export const SwipeEvenetsRegister = () => {
         let dislikeTranslateX = 0;
         let dislikeTranslateY = 0;
 
-        // X 0.5 for x scale
+        // X swipesAnimtion.iconXTranslateModifier for x scale
         // X 2 for y scale like dislike translate
-        if (-cardMoveOffset.diffX * 0.5 < 25) {
-            dislikeTranslateX = -cardMoveOffset.diffX * 0.5;
+        if (-cardMoveOffset.diffX * swipesAnimation.iconXTranslateModifier < swipesAnimation.iconXTranslateThreshhold) {
+            dislikeTranslateX = -cardMoveOffset.diffX * swipesAnimation.iconXTranslateModifier;
         } else {
-            dislikeTranslateX = 25;
+            dislikeTranslateX = swipesAnimation.iconXTranslateThreshhold;
         }
-        if (cardMoveOffset.diffX * 2 > -180) {
+        if (cardMoveOffset.diffX * 2 > -swipesAnimation.iconYTranslateThreshhold) {
             dislikeTranslateY = cardMoveOffset.diffX * 2;
         } else {
-            dislikeTranslateY = -180;
+            dislikeTranslateY = -swipesAnimation.iconYTranslateThreshhold;
         }
 
         dislike.style.transform = `translate(${dislikeTranslateX - cardMoveOffset.diffX}px, ${
             dislikeTranslateY - cardMoveOffset.diffY
         }px)`;
-        dislike.style.width = `${Math.round(36 - cardMoveOffset.diffX / 2)}px`;
-        dislike.style.height = `${Math.round(36 - cardMoveOffset.diffX / 2)}px`;
+        dislike.style.width = `${Math.round(swipesAnimation.iconDefaultWidth - cardMoveOffset.diffX / 2)}px`;
+        dislike.style.height = `${Math.round(swipesAnimation.iconDefaultWidth - cardMoveOffset.diffX / 2)}px`;
         // dislike.style.opacity = `${1 + cardMoveOffset.diffX / 300}`;
 
         card.style.transform = `translate(${cardMoveOffset.diffX}px, ${cardMoveOffset.diffY}px)`;
@@ -81,14 +84,14 @@ export const SwipeEvenetsRegister = () => {
     });
     EventBus.register('swipe:end', () => {
         const card = document.querySelectorAll<HTMLElement>('.card')[0];
-        if (window.offsetX > 200) {
+        if (window.offsetX > swipesAnimation.likeXThreshhold) {
             console.log('LIKE');
             window.startX = 0;
             eventBus.dispatch('feed:like-button');
             return;
         }
 
-        if (window.offsetX < -200) {
+        if (window.offsetX < -swipesAnimation.likeXThreshhold) {
             console.log('DISLIKE');
             window.startX = 0;
             eventBus.dispatch('feed:dislike-button');
@@ -104,13 +107,13 @@ export const SwipeEvenetsRegister = () => {
             const card = document.querySelectorAll<HTMLElement>('.card')[0];
             const heart = document.querySelectorAll<HTMLElement>('img')[3];
             const dislike = document.querySelectorAll<HTMLElement>('img')[1];
-            dislike.style.width = `36px`;
-            dislike.style.height = `36px`;
+            dislike.style.width = `swipesAnimation.iconDefaultWidthpx`;
+            dislike.style.height = `swipesAnimation.iconDefaultWidthpx`;
             dislike.style.transform = ``;
             dislike.style.opacity = `1`;
             dislike.style.animation = '';
-            heart.style.width = `36px`;
-            heart.style.height = `36px`;
+            heart.style.width = `swipesAnimation.iconDefaultWidthpx`;
+            heart.style.height = `swipesAnimation.iconDefaultWidthpx`;
             heart.style.transform = ``;
             heart.style.opacity = `1`;
             heart.style.animation = '';
