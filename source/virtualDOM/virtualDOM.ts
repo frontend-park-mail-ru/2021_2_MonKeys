@@ -30,9 +30,6 @@ export namespace MonkeysVirtualDOM {
         if (typeof virtualNode === 'string') {
             return document.createTextNode(virtualNode);
         }
-        if (!virtualNode) {
-            return document.createTextNode(virtualNode);
-        }
         const rootElement = document.createElement(virtualNode.type);
         if (virtualNode.type === 'mon-router') {
             rootElement.addEventListener('click', () => {
