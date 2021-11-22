@@ -107,18 +107,20 @@ export const SwipeEvenetsRegister = () => {
             const card = document.querySelectorAll<HTMLElement>('.card')[0];
             const heart = document.querySelector<HTMLElement>('img[alt="like"]');
             const dislike = document.querySelector<HTMLElement>('img[alt="dislike"]');
-            dislike.style.width = `${swipesAnimation.iconDefaultWidth}px`;
-            dislike.style.height = `${swipesAnimation.iconDefaultWidth}px`;
-            dislike.style.transform = ``;
-            dislike.style.opacity = `1`;
-            dislike.style.animation = '';
-            heart.style.width = `${swipesAnimation.iconDefaultWidth}px`;
-            heart.style.height = `${swipesAnimation.iconDefaultWidth}px`;
-            heart.style.transform = ``;
-            heart.style.opacity = `1`;
-            heart.style.animation = '';
-            card.style.transform = '';
-            card.style.animation = '';
+            if (card && heart && dislike) {
+                dislike.style.width = `${swipesAnimation.iconDefaultWidth}px`;
+                dislike.style.height = `${swipesAnimation.iconDefaultWidth}px`;
+                dislike.style.transform = ``;
+                dislike.style.opacity = `1`;
+                dislike.style.animation = '';
+                heart.style.width = `${swipesAnimation.iconDefaultWidth}px`;
+                heart.style.height = `${swipesAnimation.iconDefaultWidth}px`;
+                heart.style.transform = ``;
+                heart.style.opacity = `1`;
+                heart.style.animation = '';
+                card.style.transform = '';
+                card.style.animation = '';
+            }
         });
     });
 };

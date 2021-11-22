@@ -15,12 +15,15 @@ export interface CardExpendedProps {
 
     withActions: boolean;
     withReports: boolean;
+    feed?: boolean;
 
     reports?: string[];
     reported?: boolean;
 }
 
 export const CardExpended = (props: CardExpendedProps) => {
+    
+ 
     const tagsExists = props.userData.tags !== undefined ? true : false;
     let tagField: HTMLCollection;
     if (tagsExists) {
@@ -51,6 +54,10 @@ export const CardExpended = (props: CardExpendedProps) => {
                 {props.userData.name + ', ' + props.userData.age}
             </div>
         );
+    }
+    if(props.feed){
+        imgTmpl = ImgCard({ userData: props.userData, size: 'medium', expanded: true, feed: true });
+        nameTmpl = <div></div>;
     }
     const reportButtonAction = () => {
         EventBus.dispatch<string>('reports:report-button');
@@ -85,49 +92,5 @@ export const CardExpended = (props: CardExpendedProps) => {
             </div>
         </div>
     );
-    // let tags;
-    // if (props.userData.tags) {
-    //     tags = props.userData.tags;
-    // } else if (props.tags) {
-    //     tags = props.tags;
-    // }
-    // const tagsExists = tags !== undefined ? true : false;
-    // let tagField: HTMLCollection;
-    // if (tagsExists) {
-    //     tagField = (
-    //         <div class='column-container'>
-    //             <div class='center-container'>{Object.keys(tags).map((item) => Tag(tags[item], false))}</div>
-    //         </div>
-    //     );
-    // } else {
-    //     tagField = <div class='column-container'></div>;
-    // }
-    // const descExists = props.userData.description !== undefined ? true : false;
-    // let descField: HTMLCollection;
-    // if (descExists) {
-    //     descField = <div class='card-el desc'>{props.userData.description}</div>;
-    // } else {
-    //     descField = <div class='card-el desc'></div>;
-    // }
-    // return (
-    //     <div id='cardID' class='card-expand'>
-    //         <div id='cardMainID' class='card-main-profile'>
-    //             {ImgCarousel(props.userData.imgs, true)}
-    //             <div class='name-container'>
-    //                 <div class='name'>{props.userData.name}</div>
-    //                 <div class='age'>{props.userData.age}</div>
-    //             </div>
-    //             <div class='card-el bord'></div>
-    //             {descField}
-    //             <div class='card-el bord'></div>
-
-    //             <div id='tagsID' class='card-el tags-container'>
-    //                 {tagField}
-    //             </div>
-    //         </div>
-    //         <div id='editID' class='actions-container'>
-    //             {Object.keys(props.buttons).map((item) => IconButton(props.buttons[item]))}
-    //         </div>
-    //     </div>
-    // );
+  
 };

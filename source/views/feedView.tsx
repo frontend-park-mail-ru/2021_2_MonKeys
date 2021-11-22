@@ -68,6 +68,7 @@ export default class FeedView extends ViewBase {
                     },
                 },
             },
+            feed: true,
         },
         tapbar: {
             class: 'card-bottom-panel_actions_action',

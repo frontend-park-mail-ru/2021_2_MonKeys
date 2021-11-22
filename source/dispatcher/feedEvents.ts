@@ -11,7 +11,15 @@ import { requestMoreCardsThreshold } from '../constants/feed.js';
 const animationThanLikeAndReset = () => {
     console.log('HELLO');
     EventBus.dispatch('feed:reaction', reactions.like);
-    const card = document.querySelectorAll<HTMLElement>('.card')[0];
+    let card = document.querySelectorAll<HTMLElement>('.card')[0];
+    if (!card) {
+        card = document.querySelectorAll<HTMLElement>('.card-expended')[0];
+        card.style.transform = '';
+        card.style.animation = '';
+        card.style.opacity = '1';
+        card.removeEventListener('animationend', animationThanLikeAndReset);
+        return;
+    }
     card.style.transform = '';
     card.style.animation = '';
     card.style.opacity = '1';
@@ -33,7 +41,15 @@ const animationThanLikeAndReset = () => {
 const animationThanDislikeAndReset = () => {
     console.log('HELLO');
     EventBus.dispatch('feed:reaction', reactions.like);
-    const card = document.querySelectorAll<HTMLElement>('.card')[0];
+    let card = document.querySelectorAll<HTMLElement>('.card')[0];
+    if (!card) {
+        card = document.querySelectorAll<HTMLElement>('.card-expended')[0];
+        card.style.transform = '';
+        card.style.animation = '';
+        card.style.opacity = '1';
+        card.removeEventListener('animationend', animationThanDislikeAndReset);
+        return;
+    }
     card.style.transform = '';
     card.style.animation = '';
     card.style.opacity = '1';
@@ -54,12 +70,18 @@ const animationThanDislikeAndReset = () => {
 
 export const FeedEventsRegister = () => {
     EventBus.register('feed:like-button', () => {
-        const card = document.querySelectorAll<HTMLElement>('.card')[0];
+        let card = document.querySelectorAll<HTMLElement>('.card')[0];
+        if (!card) {
+            card = document.querySelectorAll<HTMLElement>('.card-expended')[0];
+        }
         card.style.animation = 'swipedRight 1s ease 1';
         card.addEventListener('animationend', animationThanLikeAndReset);
     });
     EventBus.register('feed:dislike-button', () => {
-        const card = document.querySelectorAll<HTMLElement>('.card')[0];
+        let card = document.querySelectorAll<HTMLElement>('.card')[0];
+        if (!card) {
+            card = document.querySelectorAll<HTMLElement>('.card-expended')[0];
+        }
         card.style.animation = 'swipedLeft 1s ease 1';
         card.addEventListener('animationend', animationThanDislikeAndReset);
     });

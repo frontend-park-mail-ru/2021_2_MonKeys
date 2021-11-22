@@ -8,6 +8,7 @@ export interface ProfileCardProps {
 
     size: string;
     expanded: boolean;
+    feed?: boolean;
 }
 
 export const ImgCard = (props: ProfileCardProps) => {
@@ -36,7 +37,7 @@ export const ImgCard = (props: ProfileCardProps) => {
                         <span class={'img-card__report-text'}>{props.userData.reportStatus}</span>
                     </div>
                 </div>
-                {CardActions({ userID: props.userData.id, expend: props.expanded })}
+                {CardActions({ userID: props.userData.id, expend: props.expanded, feed: props.feed })}
             </div>
         </div>
     );
