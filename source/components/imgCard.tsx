@@ -25,6 +25,13 @@ export const ImgCard = (props: ProfileCardProps) => {
             sizeModificator = '_size_big';
             break;
     }
+    const ReportTmpl = props.userData.reportStatus ? (
+        <div class={'img-card__report-status'}>
+            <span class={'img-card__report-text'}>{props.userData.reportStatus}</span>
+        </div>
+    ) : (
+        <div></div>
+    );
 
     return (
         <div class={'img-card img-card' + sizeModificator}>
@@ -33,9 +40,7 @@ export const ImgCard = (props: ProfileCardProps) => {
             <div class={'img-card__bottom-panel img-card__bottom-panel' + sizeModificator}>
                 <div class={'img-card__short-desc img-card__short-desc' + sizeModificator}>
                     <div class={'img-card__name-age img-card__name-age' + sizeModificator}>{nameAge}</div>
-                    <div class={'img-card__report-status'}>
-                        <span class={'img-card__report-text'}>{props.userData.reportStatus}</span>
-                    </div>
+                    {ReportTmpl}
                 </div>
                 {CardActions({ userID: props.userData.id, expend: props.expanded, feed: props.feed })}
             </div>
