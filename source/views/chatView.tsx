@@ -1,5 +1,7 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
+import { Chat } from '../components/chat/chat.js';
+import { ChatsStore, getCurrentChat } from '../store/ChatsStore.js';
 import { Tapbar } from '../components/tapbar.js';
 import TapbarStore from '../store/tapbarStore.js';
 import { MatchesStore } from '../store/matchStore.js';
@@ -10,10 +12,21 @@ import { SearchField } from '../components/searchField.js';
 export default class ChatView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
+        ChatsStore.subscribe(this.chatUpdatesView, this);
+        ErrorStore.subscribe(this.errorStoreUpdatesView, this);
         MatchesStore.subscribe(this.subscribtionCallback, this);
         this._template = this._createTmpl(this._data);
     }
+
+    public unsubscribe() {
+        ChatsStore.unsubscribe(this.chatUpdatesView);
+        ErrorStore.unsubscribe(this.errorStoreUpdatesView);
+        MatchesStore.unsubscribe(this.subscribtionCallback);
+    }
+
     _data = {
+        chat: getCurrentChat(),
+
         'matches': MatchesStore.get().matches,
         'matchesSearched': MatchesStore.get().matchesSearched,
         'tapbar': {
@@ -27,12 +40,6 @@ export default class ChatView extends ViewBase {
     };
 
     _createTmpl(data) {
-        // let profiles;
-        // if (!MatchesStore.get().searching) {
-        //     profiles = data.matches;
-        // } else {
-        //     profiles = data.matchesSearched;
-        // }
         return (
             <div class='view-contant'>
                 {SearchField()}
@@ -46,13 +53,23 @@ export default class ChatView extends ViewBase {
                         );
                     })}
                 </div>
+                {Chat(data.chat)}
+                {CritError(data.critError)}
                 {Tapbar(TapbarStore.get())}
             </div>
         );
     }
 
-    public unsubscribe() {
-        MatchesStore.unsubscribe(this.subscribtionCallback);
+    private chatUpdatesView(data, view) {
+        view._data.chat = getCurrentChat();
+
+        view._template = view._createTmpl(view._data);
+
+        view.render();
+    }
+
+    private errorStoreUpdatesView(data, view) {
+        view._data.critError.loading = data.apiErrorLoadCondition;
     }
 
     private subscribtionCallback(data, view) {
