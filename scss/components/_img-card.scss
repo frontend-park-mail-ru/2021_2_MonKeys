@@ -1,3 +1,5 @@
+@import '../abstracts/colors';
+
 $img-card-small-width: 312px;
 $img-card-small-height: 438px;
 
@@ -5,6 +7,8 @@ $img-card-medium-width: 372px;
 $img-card-medium-height: 384px;
 
 $border-radius-default: 12px;
+
+$report-status-max-width: 96px;
 
 .img-card{
   position: relative;
@@ -83,11 +87,31 @@ $border-radius-default: 12px;
   top: 342px;
 }
 
+.img-card__short-desc{
+  display: flex;
+}
+
+.img-card__short-desc_size_small{
+  width: $img-card-small-width;
+}
+
+.img-card__short-desc_size_meduim{
+  width: $img-card-medium-width;
+}
+
+.img-card__short-desc_size_big{
+  width: $img-card-small-width;
+}
+
 .img-card__name-age{
   font-size: $font-size-medium;
   line-height: 42px;
 
   color: #FFFFFF;
+
+  overflow: hidden;
+	text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .img-card__name-age_size_small{
@@ -109,4 +133,26 @@ $border-radius-default: 12px;
 
   margin-bottom: 6px;
   margin-left: 12px;
+}
+
+.img-card__report-status{
+  display: flex;
+  align-items: flex-start;
+
+  margin-top: 6px;
+  margin-right: 6px;
+}
+
+.img-card__report-text{
+  font-size: $font-size-tiny;
+  line-height: 18px;
+
+  border: 1px solid $red;
+  border-radius: $border-radius-default;
+
+  color: $red;
+
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-bottom: 2px;
 }

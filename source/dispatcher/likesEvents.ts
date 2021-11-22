@@ -6,6 +6,8 @@ import LikesStore from '../store/likesStore.js';
 import feedStore from '../store/feedStore.js';
 import { MatchesStore } from '../store/matchStore.js';
 import { matchRequest } from '../requests/matchRequest.js';
+import ReportsStore from '../store/reportsStore.js';
+import { reportsRequest } from '../requests/reportsRequest.js';
 
 export const LikesEventsRegister = () => {
     EventBus.register('likes:expand-button', (userID) => {

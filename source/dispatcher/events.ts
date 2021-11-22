@@ -13,7 +13,11 @@ import { LikesEventsRegister } from './likesEvents.js';
 import { FeedEventsRegister } from './feedEvents.js';
 import { ChatEventsRegister } from './chatEvents.js';
 import { CarouselEventsRegister } from './carouselEvents.js';
+
+import { ReportsEventsRegister } from './reportsEvents.js';
+
 import { SwipeEvenetsRegister } from './swipeEvents.js';
+
 import eventBus from './eventBus.js';
 import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
@@ -44,6 +48,9 @@ export const InitBus = () => {
                             const likesData = LikesStore.get();
                             likesData.profiles = likesResponse.data.body.allUsers;
                             likesData.likesCount = likesResponse.data.body.likesCount;
+                            likesData.expended = false;
+                            likesData.reported = false;
+                            likesData.userIndex = 0;
                             LikesStore.set(likesData);
                         });
 
@@ -78,6 +85,7 @@ export const InitBus = () => {
             }
         });
     });
+
     LoginEventRegister();
     SignupEventRegister();
 
@@ -89,6 +97,8 @@ export const InitBus = () => {
     ChatEventsRegister();
 
     CarouselEventsRegister();
+
+    ReportsEventsRegister();
 
     ErrorEventsRegister();
 

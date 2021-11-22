@@ -30,7 +30,12 @@ export const ImgCard = (props: ProfileCardProps) => {
             {/* {ImgCarousel(props.userData.imgs, true)} */}
             <img class={'img-card__img img-card__img' + sizeModificator} src={props.userData.imgs[0]} />
             <div class={'img-card__bottom-panel img-card__bottom-panel' + sizeModificator}>
-                <div class={'img-card__name-age img-card__name-age' + sizeModificator}>{nameAge}</div>
+                <div class={'img-card__short-desc img-card__short-desc' + sizeModificator}>
+                    <div class={'img-card__name-age img-card__name-age' + sizeModificator}>{nameAge}</div>
+                    <div class={'img-card__report-status'}>
+                        <span class={'img-card__report-text'}>{props.userData.reportStatus}</span>
+                    </div>
+                </div>
                 {CardActions({ userID: props.userData.id, expend: props.expanded })}
             </div>
         </div>
