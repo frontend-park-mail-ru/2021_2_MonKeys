@@ -8,7 +8,7 @@ import { HTTPSuccess } from '../constants/HTTPStatus.js';
 
 export const ChatEventsRegister = () => {
     EventBus.register('chat:send-button', (payload?: string) => {
-        const _msgInput = document.getElementsByTagName('textarea')[0];
+        const _msgInput = document.getElementsByTagName('input')[0];
         const messageText = _msgInput.value.trim();
 
         SendMessageWS(messageText, ChatsStore.get().currentChat).catch((err) => console.log(err));

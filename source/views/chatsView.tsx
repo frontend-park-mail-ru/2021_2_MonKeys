@@ -54,7 +54,7 @@ export default class ChatsView extends ViewBase {
                         );
                     })}
                 </div>
-                {Chats(data.chat)}
+                {Chats(data.chats)}
                 {/* {CritError(data.critError)} */}
                 {Tapbar(TapbarStore.get())}
             </div>
