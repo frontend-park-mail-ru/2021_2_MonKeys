@@ -57,17 +57,15 @@ export const EditEventRegister = () => {
 
         const name = _nameInput.value.trim();
         const date = _dateInput.value.trim();
+        let userGender = '';
+        let userPrefer = '';
         const description = _descriptionInput.value.trim();
         const tags = new Array<string>();
-        if (ProfileStore.get() !== undefined && ProfileStore.get().tags !== undefined) {
-            const userTags = ProfileStore.get().tags;
-            for (const tag of userTags) {
-                tags.push(tag);
+        storeData.tagsField.items.filter((element)=>{
+            if(element.selected){
+                tags.push(element.value)
             }
-        }
-
-        let userGender = ''
-        let userPrefer = '';
+        })
 
         if (storeData.genderField.items[0].selected) {
             userGender = 'male'
@@ -343,8 +341,29 @@ export const EditEventRegister = () => {
 
     EventBus.register('edit:tags-click', () => {
         const storeData = EditStore.get();
+        if (ProfileStore.get().tags) {
+            const tags = []
+            ProfileStore.get().tags.forEach(v => tags.push(v));
+            storeData.tagsField.items.filter((element)=>{
+                if(tags.indexOf(element.value) !== -1){
+                    element.selected = true;
+                }
+            })
+        }
         storeData.tagsField.open = !storeData.tagsField.open;
         EditStore.set(storeData);
+    });
+
+    EventBus.register('edit:tag-click', (payload?: string) => {
+        const storeData = EditStore.get();
+
+        storeData.tagsField.items.filter((element)=>{
+            if(element.value === payload){
+                element.selected = !element.selected;
+                EditStore.set(storeData);
+                return;
+            }
+        })
     });
 
     EventBus.register('edit:gender-male-click', () => {
@@ -364,14 +383,12 @@ export const EditEventRegister = () => {
     EventBus.register('edit:prefer-male-click', () => {
         const storeData = EditStore.get();
         storeData.preferField.items[0].selected = !storeData.preferField.items[0].selected;
-        // storeData.preferField.items[1].selected = false;
         EditStore.set(storeData);
     });
 
     EventBus.register('edit:prefer-female-click', () => {
         const storeData = EditStore.get();
         storeData.preferField.items[1].selected = !storeData.preferField.items[1].selected;
-        // storeData.preferField.items[0].selected = false;
         EditStore.set(storeData);
     });
 };

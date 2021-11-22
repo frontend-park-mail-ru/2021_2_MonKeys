@@ -45,7 +45,7 @@ const processItems = (items: ListItem[]) => {
                 <div
                     class='list-item-selected'
                     onclick={() => {
-                        eventBus.dispatch(element.clickEvent);
+                        eventBus.dispatch(element.clickEvent, element.value);
                     }}
                 >
                     {element.value}
@@ -56,7 +56,7 @@ const processItems = (items: ListItem[]) => {
                 <div
                     class='list-item-deselected'
                     onclick={() => {
-                        eventBus.dispatch(element.clickEvent);
+                        eventBus.dispatch(element.clickEvent, element.value);
                     }}
                 >
                     {element.value}
