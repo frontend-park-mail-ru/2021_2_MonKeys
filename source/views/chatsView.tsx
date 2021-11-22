@@ -23,7 +23,6 @@ export default class ChatsView extends ViewBase {
         ChatsStore.unsubscribe(this.chatsStoreUpdatesView);
         ErrorStore.unsubscribe(this.errorStoreUpdatesView);
         MatchesStore.unsubscribe(this.subscribtionCallback);
-
     }
 
     _data = {
@@ -33,7 +32,7 @@ export default class ChatsView extends ViewBase {
             text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
             loading: ErrorStore.get().apiErrorLoadCondition,
         },
-        
+
         'matches': MatchesStore.get().matches,
         'matchesSearched': MatchesStore.get().matchesSearched,
         'tapbar': {
@@ -76,7 +75,7 @@ export default class ChatsView extends ViewBase {
         view.render();
     }
 
-     private subscribtionCallback(data, view) {
+    private subscribtionCallback(data, view) {
         view._data.matches = data.matches;
         view._data.matchesSearched = data.matchesSearched;
         view._template = view._createTmpl(view._data);

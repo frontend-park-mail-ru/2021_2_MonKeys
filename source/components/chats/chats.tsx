@@ -4,7 +4,7 @@ import { Chat } from '../../store/ChatsStore.js';
 
 export const Chats = (chats: Map<string, Chat>) => {
     const items: Chat[] = [];
-    if(chats){
+    if (chats) {
         chats.forEach((chat) => items.push(chat));
     }
     return (
