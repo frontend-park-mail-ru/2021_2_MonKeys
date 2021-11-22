@@ -22,8 +22,6 @@ export interface CardExpendedProps {
 }
 
 export const CardExpended = (props: CardExpendedProps) => {
-    
- 
     const tagsExists = props.userData.tags !== undefined ? true : false;
     let tagField: HTMLCollection;
     if (tagsExists) {
@@ -55,7 +53,7 @@ export const CardExpended = (props: CardExpendedProps) => {
             </div>
         );
     }
-    if(props.feed){
+    if (props.feed) {
         imgTmpl = ImgCard({ userData: props.userData, size: 'medium', expanded: true, feed: true });
         nameTmpl = <div></div>;
     }
@@ -92,5 +90,4 @@ export const CardExpended = (props: CardExpendedProps) => {
             </div>
         </div>
     );
-  
 };

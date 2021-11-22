@@ -30,14 +30,14 @@ export const CardActions = (props: CardActionsProps) => {
         arrowTmpl = <img src='icons/shrink.svg' class='actions__button-shrink' onclick={shrinkClick} />;
     }
 
-    if(props.feed) {
+    if (props.feed) {
         const shrinkClick = () => {
             eventBus.dispatch('feed:shrink-button', props.userID);
-        }
+        };
         arrowTmpl = <img src='icons/shrink.svg' class='actions__button-shrink' onclick={shrinkClick} />;
         dislikeClick = () => {
-        eventBus.dispatch('feed:dislike-button', { userID: props.userID, reactionType: reactions.dislike });
-            };
+            eventBus.dispatch('feed:dislike-button', { userID: props.userID, reactionType: reactions.dislike });
+        };
         likeClick = () => {
             eventBus.dispatch('feed:like-button', { userID: props.userID, reactionType: reactions.like });
         };

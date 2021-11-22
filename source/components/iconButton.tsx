@@ -10,7 +10,7 @@ export interface IconButtonProps {
 }
 
 export const IconButton = (props: IconButtonProps) => {
-    if(!props.alt){
+    if (!props.alt) {
         props.alt = 'untracked';
     }
     return <img onclick={props.onclick} src={props.src} class={props.class} alt={props.alt} />;

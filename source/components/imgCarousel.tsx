@@ -56,19 +56,9 @@ const nav = (length, selectedID) => {
     const items = [];
     for (let i = 0; i < length; i++) {
         if (i === selectedID) {
-            items.push(
-            <div 
-                class="carousel-button-nav current-slide" 
-                alt="untracked"> 
-            </div>
-            );
+            items.push(<div class='carousel-button-nav current-slide' alt='untracked'></div>);
         } else {
-            items.push(
-                <div 
-                class="carousel-button-nav" 
-                alt="untracked"> 
-                </div>
-            );
+            items.push(<div class='carousel-button-nav' alt='untracked'></div>);
         }
     }
     return items;
