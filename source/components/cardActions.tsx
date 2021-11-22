@@ -5,15 +5,16 @@ import ViewBase from '../views/viewBase.js';
 
 export interface CardActionsProps {
     userID: number;
-
+    feed?: boolean;
     expend: boolean;
 }
 
 export const CardActions = (props: CardActionsProps) => {
-    const dislikeClick = () => {
+    console.log(props.feed);
+    let dislikeClick = () => {
         eventBus.dispatch('likes:reaction', { userID: props.userID, reactionType: reactions.dislike });
     };
-    const likeClick = () => {
+    let likeClick = () => {
         eventBus.dispatch('likes:reaction', { userID: props.userID, reactionType: reactions.like });
     };
     let arrowTmpl;
@@ -27,6 +28,19 @@ export const CardActions = (props: CardActionsProps) => {
             eventBus.dispatch('likes:shrink-button', props.userID);
         };
         arrowTmpl = <img src='icons/shrink.svg' class='actions__button-shrink' onclick={shrinkClick} />;
+    }
+
+    if (props.feed) {
+        const shrinkClick = () => {
+            eventBus.dispatch('feed:shrink-button', props.userID);
+        };
+        arrowTmpl = <img src='icons/shrink.svg' class='actions__button-shrink' onclick={shrinkClick} />;
+        dislikeClick = () => {
+            eventBus.dispatch('feed:dislike-button', { userID: props.userID, reactionType: reactions.dislike });
+        };
+        likeClick = () => {
+            eventBus.dispatch('feed:like-button', { userID: props.userID, reactionType: reactions.like });
+        };
     }
     return (
         <div class='actions'>

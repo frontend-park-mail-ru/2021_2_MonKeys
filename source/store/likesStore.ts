@@ -9,6 +9,7 @@ export interface LikesData {
 
     expended: boolean;
     userIndex: number;
+    reported: boolean;
 }
 
 const LikesStore = new BaseStore<LikesData>();
@@ -18,6 +19,7 @@ LikesStore.set({
     likesCount: 0,
     expended: false,
     userIndex: 0,
+    reported: false,
 });
 
 export default LikesStore;

@@ -19,15 +19,21 @@
 @import './components/card-expended';
 @import './components/img-card';
 @import './components/search-form';
+
+@import './components/report-window';
+@import './components/report-radio-button';
+
 @import './components/tapbar';
 @import './components/card';
 @import './components/carousel';
+
 
 @import './layout/flex_column_center';
 
 @import './core/reset.scss';
 
 @import './animations/droplet';
+@import './animations/feed_animations';
 
 html {
   @include background;

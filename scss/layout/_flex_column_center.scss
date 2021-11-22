@@ -11,3 +11,10 @@
     width: 100%;
     flex-wrap: wrap;
 }
+
+.overflow-hidden {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}

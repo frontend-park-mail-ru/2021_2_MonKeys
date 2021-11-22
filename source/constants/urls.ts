@@ -7,5 +7,17 @@ const likesURL = '/api/v1/likes';
 const userLikesURL = '/api/v1/user/likes';
 const matchURL = '/api/v1/matches';
 const profilePhotoURL = '/api/v1/profile/photo';
+const reportsURL = '/api/v1/reports';
 
-export { serverAddress, profileURL, tagsURL, sessionURL, feedURL, likesURL, userLikesURL, matchURL, profilePhotoURL };
+export {
+    serverAddress,
+    profileURL,
+    tagsURL,
+    sessionURL,
+    feedURL,
+    likesURL,
+    userLikesURL,
+    matchURL,
+    profilePhotoURL,
+    reportsURL,
+};
