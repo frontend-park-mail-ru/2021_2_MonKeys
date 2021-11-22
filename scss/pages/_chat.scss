@@ -1,0 +1,38 @@
+$profile-photo-size: 96px;
+
+.view-contant__matches-header{  
+  font-size: $font-size-medium;
+  line-height: 42px;
+    
+  color: #FFFFFF;
+    
+  margin-top: 12px;
+  margin-bottom: 12px;
+  margin-left: 24px;
+}
+
+.view-contant__matches-profiles{
+  display: flex;
+  flex-direction: row;
+
+  overflow-x: scroll;
+  
+  margin-left: 24px;
+}
+
+.view-contant__match-profile{
+  width: $profile-photo-size;
+  height: $profile-photo-size;
+
+  margin-right: 12px;
+}
+
+.view-contant__match-img{
+  width: $profile-photo-size;
+  height: $profile-photo-size;
+
+  -o-object-fit: cover;
+  object-fit: cover;
+
+  border-radius: $border-radius-default;
+}

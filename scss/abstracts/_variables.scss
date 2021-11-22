@@ -1,4 +1,4 @@
-$border-radius-default: 35px;
+$border-radius-default: 12px;
 
 $px_base: 6px;
 $px_small: $px_base * 2;
@@ -9,17 +9,6 @@ $px_big: $px_base * 6;
 $field-default-height: $px_base * 8;
 $field-default-width: $field-default-height * 6;
 
-$field-valid-color: radial-gradient(
-    112.16% 418.59% at 0% 0%,
-     rgba(226, 246, 255, 0.4) 0%,
-      rgba(0, 165, 245, 0) 100%);
-
-$field-novalid-color: radial-gradient(
-    112.16% 418.59% at 0% 0%,
-    rgba(226, 246, 255, 0.4) 0%,
-    rgba(255, 0, 0, 0.289583) 25.52%,
-    rgba(0, 165, 245, 0) 100%
-);
 
 $field-edit-valid-color: radial-gradient(
     112.16% 418.59% at 0% 0%,

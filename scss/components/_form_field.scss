@@ -1,0 +1,57 @@
+@import '../abstracts/variables';
+
+$form-field-width: 288px;
+$form-field-height: 36px;
+$form-field-margin: 36px;
+
+$form-field-input-max-width: 204px;
+
+$form-field-icon-size: 24px;
+
+
+$field-valid-color: radial-gradient(
+    112.16% 418.59% at 0% 0%,
+     rgba(226, 246, 255, 0.4) 0%,
+      rgba(0, 165, 245, 0) 100%);
+
+$field-invalid-color: radial-gradient(
+    112.16% 418.59% at 0% 0%,
+    rgba(226, 246, 255, 0.4) 0%,
+    rgba(255, 0, 0, 0.289583) 25.52%,
+    rgba(0, 165, 245, 0) 100%
+);
+
+@mixin form-field($color) {
+    margin-top: $form-field-margin;
+    width: $form-field-width;
+    height: $form-field-height;
+    background: $color;
+    backdrop-filter: blur(20px);
+    border-radius: $border-radius-default;
+    display: flex;
+    align-items: center;
+}
+
+
+.form__field-valid {
+    @include form-field($field-valid-color);
+}
+
+.form__field-invalid {
+    @include form-field($field-invalid-color);
+}
+
+.form__field__input {
+    font-weight: bold;
+    color:white;
+    font-size: $font-size-small;
+    max-width: $form-field-input-max-width;
+}
+
+
+.form__field__icon {
+    margin-left: 12px;
+    margin-right: 12px;
+    width: $form-field-icon-size;
+    height: $form-field-icon-size;
+}

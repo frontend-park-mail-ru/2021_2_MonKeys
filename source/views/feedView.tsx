@@ -29,7 +29,7 @@ export default class FeedView extends ViewBase {
             this._template = this._createTmpl(this._data, cardData.expanded);
         } else {
             this._template = (
-                <div class='card-container'>
+                <div class='card-container overflow-hidden'>
                     {OutOfCards()}
                     {Tapbar(TapbarStore.get())}
                     {CritError(this._data.critError)}
@@ -43,32 +43,35 @@ export default class FeedView extends ViewBase {
             buttons: {
                 dislikeButton: {
                     type: 'button',
-                    src: 'icons/button_dislike_white.svg',
-                    class: 'menu-icon',
+                    src: 'icons/dislike.svg',
+                    alt: 'dislike',
+                    class: 'card-bottom-panel_actions_action',
                     onclick: () => {
                         eventBus.dispatch('feed:dislike-button');
                     },
                 },
                 expandButton: {
                     type: 'button',
-                    src: 'icons/button_expand_white.svg',
-                    class: 'menu-icon',
+                    src: 'icons/expand_big.svg',
+                    class: 'card-bottom-panel_actions_action',
                     onclick: () => {
                         eventBus.dispatch('feed:expand-button');
                     },
                 },
                 likeButton: {
                     type: 'button',
-                    src: 'icons/tapbar_likes_white_selected.svg',
-                    class: 'menu-icon',
+                    src: 'icons/likes.svg',
+                    alt: 'like',
+                    class: 'card-bottom-panel_actions_action',
                     onclick: () => {
                         eventBus.dispatch('feed:like-button');
                     },
                 },
             },
+            feed: true,
         },
         tapbar: {
-            class: 'menu-icon',
+            class: 'card-bottom-panel_actions_action',
         },
         critError: {
             title: 'Ошибка подключения',
@@ -87,40 +90,34 @@ export default class FeedView extends ViewBase {
         if (!expanded) {
             this._data.cardData.buttons.expandButton = {
                 type: 'button',
-                src: 'icons/button_expand_white.svg',
-                class: 'menu-icon',
+                src: 'icons/expand_big.svg',
+                class: 'card-bottom-panel_actions_action',
                 onclick: () => {
                     eventBus.dispatch('feed:expand-button');
                 },
             };
 
             return (
-                <div class='card-container'>
-                    <div class='card3'></div>
-                    <div class='card3'></div>
-                    <div class='card2'></div>
+                <div class='flex_box_column_center overflow-hidden'>
                     {CardFeed(data.cardData)}
                     {Tapbar(TapbarStore.get())}
-                    {CritError(data.critError)}
+                    {/* {CritError(data.critError)} */}
                 </div>
             );
         } else {
             this._data.cardData.buttons.expandButton = {
                 type: 'button',
                 src: 'icons/button_shrink_white.svg',
-                class: 'menu-icon',
+                class: 'card-bottom-panel_actions_action',
                 onclick: () => {
                     eventBus.dispatch('feed:shrink-button');
                 },
             };
             return (
-                <div class='card-container'>
-                    <div class='card3'></div>
-                    <div class='card3'></div>
-                    <div class='card2'></div>
+                <div class='flex_box_column_center overflow-hidden'>
                     {CardExpended(data.cardData)}
                     {Tapbar(data.tapbar)}
-                    {CritError(data.critError)}
+                    {/* {CritError(data.critError)} */}
                 </div>
             );
         }

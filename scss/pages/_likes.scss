@@ -1,51 +1,30 @@
-
-.likes-count {
-  color: white;
-  font-size: $font-size-medium;
-  font-weight: 500;
-  text-align: center;
-  margin-top: 36px;
-}
-
-.likes-card {
-  margin-top: 36px;
-  background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.2) 0%, rgba(0, 165, 245, 0) 100%);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border-style: solid;
-  border-color: white;
-  border-width: 1px;
-  border-radius: $border-radius-default;
-  height: 96px;
-  width: 288px;
-}
-
-.likes-card-inside {
-  left: 0;
-  right: 0;
-  margin-left: 10px;
-  margin-top: 10px;
-  display: flex;
-}
-
-.likes-img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: $border-radius-default;
-}
-
-.likes-data {
-  color: white;
-  font-size: $font-size-small;
-  font-weight: 300;
-  margin-top: 10px;
-  margin-left: 10px;
-}
-
-
-.likes-container{
+.view-contant{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+}
+
+.view-contant_align_center{
+  align-items: center;
+}
+
+.likes-view-header{
+  width: 288px;
+  
+  font-size: $font-size-medium;
+  line-height: 42px;
+  
+  color: #FFFFFF;
+  
+  margin-top: 48px;
+  margin-bottom: 36px;
+  margin-left: 24px;
+}
+
+.likes-view-cards{
+  display: flex;
+  flex-direction: row;
+
+  overflow-x: scroll;
+  
+  margin-left: 24px;
 }

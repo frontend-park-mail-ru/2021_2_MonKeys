@@ -8,6 +8,7 @@ export interface ProfileData {
     description?: string;
     imgs?: string[];
     tags?: Set<string>;
+    reportStatus?: string;
 
     apiErrorLoadCondition?: boolean;
 }

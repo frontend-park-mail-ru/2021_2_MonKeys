@@ -1,0 +1,33 @@
+$icon-size-big: 36px;
+$report-window-default-width: 372px;
+$report-window-default-height: 594px;
+
+.report-window{
+  position: absolute;
+  z-index: 1;
+
+  width: $report-window-default-width;
+  height: $report-window-default-height;
+
+  background: linear-gradient(110.48deg, rgba(219, 0, 255, 0.7) 1.23%, rgba(255, 143, 244, 0.7) 8.85%, rgba(0, 133, 255, 0) 91.43%, rgba(0, 126, 187, 0) 98.8%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border-radius: 12px;
+}
+
+.report-window_hidden{
+  visibility: hidden;
+}
+
+.report-window__button-back{
+  width: $icon-size-big;
+  height: $icon-size-big;
+
+  margin-left: 24px;
+  margin-top: 36px;
+}
+
+.report-window__problems-buttons{
+    margin-top: 12px;
+}

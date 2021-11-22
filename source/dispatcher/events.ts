@@ -19,14 +19,17 @@ import { userStatus } from '../constants/userStatus.js';
 import feedStore from '../store/feedStore.js';
 import { matchRequest } from '../requests/matchRequest.js';
 import LikesStore from '../store/likesStore.js';
+import { MatchesStore } from '../store/matchStore.js';
 import { ErrorEventsRegister } from './errorEvents.js';
 import { wsRegister } from './wsEvents.js';
 import { ChatsEventsRegister } from './chatsEvents.js';
 import ws from '../store/wsStore.js';
 import { wsURL } from '../constants/urls.js';
 import { getChats } from '../requests/chatsRequest.js';
+import { userLikesRequset } from '../requests/likesRequest.js';
 import { Chat, ChatsStore } from '../store/ChatsStore.js';
-
+import { ReportsEventsRegister } from './reportsEvents.js';
+import { SwipeEvenetsRegister } from './swipeEvents.js';
 const $root = document.getElementById('app');
 
 export const InitBus = () => {
@@ -61,9 +64,18 @@ export const InitBus = () => {
         }
 
         matchRequest().then((matchResponse) => {
+            const matchesData = MatchesStore.get();
+            matchesData.matches = matchResponse.data.body.allUsers;
+            matchesData.matchesTotal = matchResponse.data.body.matchesCount;
+            MatchesStore.set(matchesData);
+        });
+        userLikesRequset().then((likesResponse) => {
             const likesData = LikesStore.get();
-            likesData.profiles = matchResponse.data.body.allUsers;
-            likesData.mathesCount = matchResponse.data.body.matchesCount;
+            likesData.profiles = likesResponse.data.body.allUsers;
+            likesData.likesCount = likesResponse.data.body.likesCount;
+            likesData.expended = false;
+            likesData.reported = false;
+            likesData.userIndex = 0;
             LikesStore.set(likesData);
         });
 
@@ -123,4 +135,8 @@ export const InitBus = () => {
     CarouselEventsRegister();
 
     ErrorEventsRegister();
+
+    ReportsEventsRegister();
+
+    SwipeEvenetsRegister();
 };

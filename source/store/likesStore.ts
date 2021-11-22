@@ -1,18 +1,25 @@
 import { ProfileData } from './profileStore.js';
 import BaseStore from './storeBase.js';
 
-export type MatchCardData = ProfileData;
+export type LikeCardData = ProfileData;
 
 export interface LikesData {
-    profiles: MatchCardData[];
-    mathesCount: number;
+    profiles: LikeCardData[];
+    likesCount: number;
+
+    expended: boolean;
+    userIndex: number;
+    reported: boolean;
 }
 
 const LikesStore = new BaseStore<LikesData>();
 
 LikesStore.set({
     profiles: [],
-    mathesCount: 0,
+    likesCount: 0,
+    expended: false,
+    userIndex: 0,
+    reported: false,
 });
 
 export default LikesStore;

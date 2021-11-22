@@ -1,5 +1,9 @@
-import { likesURL } from '../constants/urls.js';
+import { likesURL, userLikesURL } from '../constants/urls.js';
 import http from '../utils/http.js';
+
+const userLikesRequset = () => {
+    return http.get(userLikesURL);
+};
 
 const likesRequest = (id, reaction) => {
     const body = JSON.stringify({
@@ -10,4 +14,4 @@ const likesRequest = (id, reaction) => {
     return http.post(likesURL, body);
 };
 
-export { likesRequest };
+export { userLikesRequset, likesRequest };

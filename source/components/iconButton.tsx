@@ -6,12 +6,12 @@ export interface IconButtonProps {
     class: string;
     src: string;
     onclick?: { (data, view?: ViewBase): void };
+    alt?: string;
 }
 
 export const IconButton = (props: IconButtonProps) => {
-    return (
-        <button type={props.type} class='menu-icon'>
-            <img onclick={props.onclick} src={props.src} class={props.class} />
-        </button>
-    );
+    if (!props.alt) {
+        props.alt = 'untracked';
+    }
+    return <img onclick={props.onclick} src={props.src} class={props.class} alt={props.alt} />;
 };

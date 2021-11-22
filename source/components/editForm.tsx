@@ -3,8 +3,9 @@ import { TagButton } from './tagButton.js';
 import { FormField } from './formField.js';
 import { ErrorMsg } from './errorMsg.js';
 import { Button } from './button.js';
-import { AddImg } from './addImg.js';
-import { IconButton } from '../components/iconButton.js';
+import { ImgField } from './imgField.js';
+import { ItemList } from './itemList.js';
+import { DescriptionField } from './descriptionField.js';
 
 export interface EditFormProps {
     fields;
@@ -28,32 +29,21 @@ export const EditForm = (props: EditFormProps) => {
         tagField = <div class='column-container'></div>;
     }
     return (
-        <form class='edit-form'>
-            <span class='page-header-small'>Профиль</span>
+        <form class='flex_box_column_center'>
+            <span class='header-medium'>Профиль</span>
+            {FormField(props.fields.name)}
+            {ErrorMsg(props.errorMsgs.nameError)}
+            {FormField(props.fields.birthDate)}
+            {ErrorMsg(props.errorMsgs.ageError)}
+            {ItemList(props.fields.genderField)}
+            {DescriptionField(props.fields.description)}
+            {ItemList(props.fields.tagsField)}
+            {ItemList(props.fields.preferField)}
             <div class='form-field-input'>
-                {FormField(props.fields.name)}
-                {ErrorMsg(props.errorMsgs.nameError)}
-            </div>
-            <div class='form-field-input'>
-                {FormField(props.fields.birthDate)}
-                {ErrorMsg(props.errorMsgs.ageError)}
-            </div>
-            <div class='form-field-input'>{FormField(props.fields.description)}</div>
-            <div class='form-field-input'>
-                <div class='tag-container'>
-                    <div class='tags-header'>
-                        {IconButton(props.buttons.tagsButton)}
-                        <span>Tags</span>
-                    </div>
-                    {tagField}
-                </div>
-            </div>
-
-            <div class='form-field-input'>
-                {AddImg(props.fields.img, props.buttons.imgAddButton)}
+                {ImgField(props.fields.img, props.buttons.imgAddButton)}
                 {ErrorMsg(props.errorMsgs.imgError)}
             </div>
-            {ErrorMsg(props.errorMsgs.formError)}
+            {/* ErrorMsg(props.errorMsgs.formError)*/}
             {Button(props.buttons.saveButton)}
         </form>
     );

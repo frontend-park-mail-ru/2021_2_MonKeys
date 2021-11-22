@@ -20,6 +20,9 @@ export default class SignupEditView extends ViewBase {
     _data = {
         'editForm': {
             'fields': {
+                'genderField': EditStore.get().genderField,
+                'tagsField': EditStore.get().tagsField,
+                'preferField': EditStore.get().preferField,
                 'name': {
                     tag: 'textarea',
                     placeholder: 'Имя',
@@ -37,6 +40,7 @@ export default class SignupEditView extends ViewBase {
                     type: 'date',
                     class: EditStore.get().birthDateFieldClass,
                     name: 'birthDate',
+                    iconSrc: 'icons/calendar.svg',
                     oninput: () => {
                         EventBus.dispatch<string>('edit:birth-date-input');
                     },
@@ -48,7 +52,7 @@ export default class SignupEditView extends ViewBase {
                     tag: 'textarea',
                     placeholder: 'Расскажите о себе',
                     name: 'description',
-                    class: 'form-field-edit text-desc',
+                    class: 'form__field-valid',
                 },
                 'img': {
                     class: EditStore.get().imgFieldClass,
@@ -60,7 +64,7 @@ export default class SignupEditView extends ViewBase {
                     type: 'button',
                     text: 'tags',
                     class: '',
-                    src: '../icons/button_expand_white.svg',
+                    src: 'icons/expand_big.svg',
                     onclick: () => {
                         EventBus.dispatch<string>('edit:open-tags');
                     },
@@ -74,7 +78,7 @@ export default class SignupEditView extends ViewBase {
                 'saveButton': {
                     type: 'button',
                     text: 'Сохранить',
-                    class: 'edit',
+                    class: 'button-white-big',
                     onclick: () => {
                         EventBus.dispatch<string>('edit:save-button');
                     },
@@ -110,7 +114,7 @@ export default class SignupEditView extends ViewBase {
         return (
             <div class='card-container'>
                 {EditForm(data.editForm)}
-                {CritError(data.critError)}
+                {/*CritError(data.critError)*/}
             </div>
         );
     }
@@ -131,7 +135,11 @@ export default class SignupEditView extends ViewBase {
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
         view._data.editForm.tags = data.tags;
         view._data.critError.loading = data.apiErrorLoadCondition;
+
+        view._data.editForm.fields.genderField = data.genderField;
+
         view._template = view._createTmpl(view._data);
+
         view.render();
     }
 

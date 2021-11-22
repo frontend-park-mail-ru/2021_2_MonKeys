@@ -1,3 +1,4 @@
+import { ItemListProps } from 'components/itemList.js';
 import BaseStore from './storeBase.js';
 
 export interface EditData {
@@ -8,6 +9,9 @@ export interface EditData {
     formErrorClass: string;
     imgFieldClass: string;
     imgErrorClass: string;
+    genderField?: ItemListProps;
+    preferField?: ItemListProps;
+    tagsField?: ItemListProps;
     apiErrorLoadCondition: boolean;
     tags?;
 }
@@ -15,13 +19,62 @@ export interface EditData {
 const EditStore = new BaseStore<EditData>();
 
 const initData = {
-    nameFieldClass: 'form-field-edit text-without-icon',
-    nameErrorClass: 'login-error',
-    birthDateFieldClass: 'form-field-edit text-with-icon',
-    birthDateErrorClass: 'login-error',
+    nameFieldClass: 'form__field-valid',
+    nameErrorClass: 'error-inactive',
+    birthDateFieldClass: 'form__field-valid',
+    birthDateErrorClass: 'error-inactive',
     imgFieldClass: 'add-img-box',
-    imgErrorClass: 'login-error',
-    formErrorClass: 'login-error',
+    imgErrorClass: 'error-inactive',
+    formErrorClass: 'error-inactive',
+    genderField: {
+        title: 'Ваш пол',
+        valid: true,
+        open: true,
+        items: [
+            {
+                value: 'мужчина',
+                selected: false,
+                clickEvent: 'edit:gender-male-click',
+            },
+            {
+                value: 'женщина',
+                selected: false,
+                clickEvent: 'edit:gender-female-click',
+            },
+        ],
+        buttonEvent: 'edit:gender-click',
+    },
+    preferField: {
+        title: 'Предпочтения',
+        valid: true,
+        open: true,
+        items: [
+            {
+                value: 'hello',
+                selected: false,
+                clickEvent: 'edit:tags-hello-click',
+            },
+        ],
+        buttonEvent: 'edit:tags-click',
+    },
+    tagsField: {
+        title: 'Предпочтения',
+        valid: true,
+        open: false,
+        items: [
+            {
+                value: 'Мужчины',
+                selected: false,
+                clickEvent: 'edit:prefer-male-click',
+            },
+            {
+                value: 'Женщины',
+                selected: false,
+                clickEvent: 'edit:prefer-female-click',
+            },
+        ],
+        buttonEvent: 'edit:prefer-click',
+    },
     apiErrorLoadCondition: false,
 };
 
