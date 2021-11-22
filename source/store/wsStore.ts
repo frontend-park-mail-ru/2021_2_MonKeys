@@ -1,6 +1,4 @@
 import BaseStore from './storeBase.js';
-import { wsURL } from '../constants/urls.js';
-import { wsRegister } from '../dispatcher/wsEvents.js';
 import { wsCONNECTING, wsOPEN } from '../constants/wsStatus.js';
 
 interface wsData {
@@ -11,6 +9,10 @@ class WebSocketStore {
     ws = new BaseStore<wsData>();
 
     async CreateConnect(wsURL) {
+        if (!window['WebSocket']) {
+            throw 'Your browser does not support WebSockets';
+        }
+
         this.ws.set({
             connect: new WebSocket(wsURL),
         });

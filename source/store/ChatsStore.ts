@@ -25,99 +25,8 @@ export interface ChatsData {
 
 const ChatsStore = new BaseStore<ChatsData>();
 
-/*
-let chats = new Map<string, Chat>();
-chats.set('2', {
-    name: 'masha',
-    img: 'path.img',
-    messages: [
-        {
-            messageID: '1asd12',
-            fromID: '1',
-            text: 'hi',
-            date: new Date(),
-            isRead: true,
-        },
-        {
-            messageID: '1asda12wef',
-            fromID: '2',
-            text: 'hi!',
-            date: new Date(),
-            isRead: true,
-        },
-    ],
-});
-chats.set('3', {
-    name: 'alina',
-    img: 'path.img',
-    messages: [
-        {
-            messageID: '1asd12',
-            fromID: '1',
-            text: 'hi',
-            date: new Date(),
-            isRead: true,
-        },
-        {
-            messageID: '1asda12wef',
-            fromID: '2',
-            text: 'privet',
-            date: new Date(),
-            isRead: true,
-        },
-    ],
-});
-*/
-
 const initData = {
-    chats: [
-        {
-            fromUserID: 2,
-            name: 'masha',
-            img: 'path.img',
-            messages: [
-                {
-                    messageID: 13,
-                    fromID: 1,
-                    toID: 2,
-                    text: 'hi',
-                    date: new Date(),
-                    isRead: true,
-                },
-                {
-                    messageID: 14,
-                    fromID: 2,
-                    toID: 2,
-                    text: 'hi!',
-                    date: new Date(),
-                    isRead: true,
-                },
-            ],
-        },
-        {
-            fromUserID: 3,
-            name: 'alina',
-            img: 'path.img',
-            messages: [
-                {
-                    messageID: 15,
-                    fromID: 1,
-                    toID: 3,
-                    text: 'hi',
-                    date: new Date(),
-                    isRead: true,
-                },
-                {
-                    messageID: 16,
-                    fromID: 2,
-                    toID: 3,
-                    text: 'privet',
-                    date: new Date(),
-                    isRead: true,
-                },
-            ],
-        },
-    ],
+    chats: [],
     currentChat: null,
 };
 
@@ -141,7 +50,7 @@ export const getChatIdxByMessage = (message: Message) => {
     }
 
     const profileID = ProfileStore.get().id;
-    const chatID = (profileID === message.fromID) ? message.toID: message.fromID;
+    const chatID = profileID === message.fromID ? message.toID : message.fromID;
 
     return getIdxByChatID(chatID);
 };

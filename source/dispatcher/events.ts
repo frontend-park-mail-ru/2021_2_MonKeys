@@ -25,7 +25,6 @@ import { ChatsEventsRegister } from './chatsEvents.js';
 import ws from '../store/wsStore.js';
 import { wsURL } from '../constants/urls.js';
 import { getChats } from '../requests/chatsRequest.js';
-import { Chats } from '../components/chats/chats.js';
 import { Chat, ChatsStore } from '../store/ChatsStore.js';
 
 const $root = document.getElementById('app');
@@ -39,30 +38,9 @@ export const InitBus = () => {
                         AuthStore.set({
                             loggedIn: userStatus.loggedIn,
                         });
-                        matchRequest().then((matchResponse) => {
-                            const likesData = LikesStore.get();
-                            likesData.profiles = matchResponse.data.body.allUsers;
-                            likesData.mathesCount = matchResponse.data.body.matchesCount;
-                            LikesStore.set(likesData);
-                        });
-
                         ProfileStore.set(response.data.body);
 
-                        feedRequest().then((feedResponse) => {
-                            const profileData = feedStore.get();
-                            if (feedResponse.data.body !== null) {
-                                profileData.profiles = feedResponse.data.body;
-                            } else {
-                                profileData.outOfCards = true;
-                            }
-
-                            feedStore.set(profileData);
-                            if (window.location.pathname === '/signup-edit') {
-                                router.go('/feed');
-                            } else {
-                                router.go(window.location.pathname);
-                            }
-                        });
+                        eventBus.dispatch('user:data-requests');
                     } else {
                         AuthStore.set({
                             loggedIn: userStatus.Signup,
@@ -74,6 +52,37 @@ export const InitBus = () => {
                 }
             } else {
                 throw 'server internal error';
+            }
+        });
+    });
+    eventBus.register('user:data-requests', (payload?: string) => {
+        if (AuthStore.get().loggedIn !== userStatus.loggedIn) {
+            return;
+        }
+
+        matchRequest().then((matchResponse) => {
+            const likesData = LikesStore.get();
+            likesData.profiles = matchResponse.data.body.allUsers;
+            likesData.mathesCount = matchResponse.data.body.matchesCount;
+            LikesStore.set(likesData);
+        });
+
+        feedRequest().then((response) => {
+            if (response.status !== HTTPSuccess || response.data.status !== HTTPSuccess) {
+                throw 'bad request';
+            }
+            const feed = feedStore.get();
+            if (response.data.body !== null) {
+                feed.profiles = response.data.body;
+            } else {
+                feed.outOfCards = true;
+            }
+
+            feedStore.set(feed);
+            if (window.location.pathname === '/signup-edit') {
+                router.go('/feed');
+            } else {
+                router.go(window.location.pathname);
             }
         });
 
