@@ -18,7 +18,9 @@ textarea{
 body {
   margin: 0px;
 }
-
+::-webkit-scrollbar {
+  width: 0;
+}
 
 button {
   border: none;

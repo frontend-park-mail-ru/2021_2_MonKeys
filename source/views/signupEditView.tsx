@@ -20,6 +20,9 @@ export default class SignupEditView extends ViewBase {
     _data = {
         'editForm': {
             'fields': {
+                'genderField': EditStore.get().genderField,
+                'tagsField': EditStore.get().tagsField,
+                'preferField': EditStore.get().preferField,
                 'name': {
                     tag: 'textarea',
                     placeholder: 'Имя',
@@ -132,7 +135,11 @@ export default class SignupEditView extends ViewBase {
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
         view._data.editForm.tags = data.tags;
         view._data.critError.loading = data.apiErrorLoadCondition;
+
+        view._data.editForm.fields.genderField = data.genderField;
+
         view._template = view._createTmpl(view._data);
+
         view.render();
     }
 

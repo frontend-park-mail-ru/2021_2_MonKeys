@@ -6,7 +6,7 @@ import { conditionalRendering } from '../tools/jsxTools.js';
 const LButtonProps = {
     type: 'button',
     class: 'carousel-button-left',
-    src: 'icons/button_previous_black.svg',
+    src: 'icons/carousel_left.svg',
     onclick: () => {
         eventBus.dispatch('carousel:previous');
     },
@@ -15,7 +15,7 @@ const LButtonProps = {
 const RButtonProps = {
     type: 'button',
     class: 'carousel-button-right',
-    src: 'icons/button_next_black.svg',
+    src: 'icons/carousel_right.svg',
     onclick: () => {
         eventBus.dispatch('carousel:next');
     },
@@ -45,13 +45,8 @@ const slides = (imgSrc: string[], selectedID: number, sizeClass, carouselSizeCla
         return <div>no images</div>;
     }
     const items = [];
-    imgSrc.push(imgSrc[selectedID]);
     imgSrc.forEach((element) => {
-        items.push(
-            <li class={carouselSizeClass}>
-                <img src={element} class={sizeClass} alt='' />
-            </li>
-        );
+        items.push(<img src={element} class='card__img' alt='' />);
     });
     imgSrc.pop();
     return items;
@@ -61,9 +56,19 @@ const nav = (length, selectedID) => {
     const items = [];
     for (let i = 0; i < length; i++) {
         if (i === selectedID) {
-            items.push(IconButton(NavButtonPropsSelected));
+            items.push(
+            <div 
+                class="carousel-button-nav current-slide" 
+                alt="untracked"> 
+            </div>
+            );
         } else {
-            items.push(IconButton(NavButtonProps));
+            items.push(
+                <div 
+                class="carousel-button-nav" 
+                alt="untracked"> 
+                </div>
+            );
         }
     }
     return items;
@@ -71,16 +76,16 @@ const nav = (length, selectedID) => {
 
 export const ImgCarousel = (props: string[], expanded: boolean) => {
     if (!props) {
-        return <div>no img set</div>;
+        return <img src='img/stare-dont-blink.gif' class='card-img' />;
     }
     if (!window.currentSelectedCarouselItem) {
         window.currentSelectedCarouselItem = 0;
     }
-    let sizeClass = 'profile-image',
+    let sizeClass = 'img-card__img',
         carouselSizeClass = 'carousel-slide',
         sideSizeClass = 'side-big';
     if (expanded) {
-        sizeClass = 'card-el profile-image-expand';
+        sizeClass = 'card-el img-card__img-expand';
         carouselSizeClass = 'carousel-slide-expand';
         sideSizeClass = 'side-small';
     }
@@ -95,12 +100,8 @@ export const ImgCarousel = (props: string[], expanded: boolean) => {
     const oneCard = window.currentCarouselSize === 0;
 
     return (
-        <div class={sizeClass}>
-            <ul class='carousel-track'>
-                <div class='carousel-track-container'>
-                    {slides(props, window.currentSelectedCarouselItem, sizeClass, carouselSizeClass)}
-                </div>
-            </ul>
+        <div class='card-img'>
+            {<img src={props[window.currentSelectedCarouselItem]} class='card__img' alt='' />}
             {conditionalRendering(IconButton(LButtonProps), !firstCard)}
             {conditionalRendering(IconButton(RButtonProps), !lastCard)}
             <div class='carousel-nav'>

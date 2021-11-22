@@ -1,0 +1,13 @@
+.tapbar {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 24px;
+    width: 100%;
+}
+
+.tapbar_item {
+    height: 36px;
+    width: 36px;
+    margin: 12px
+}
