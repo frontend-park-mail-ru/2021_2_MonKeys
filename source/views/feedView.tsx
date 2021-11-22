@@ -29,7 +29,7 @@ export default class FeedView extends ViewBase {
             this._template = this._createTmpl(this._data, cardData.expanded);
         } else {
             this._template = (
-                <div class='card-container'>
+                <div class='card-container overflow-hidden'>
                     {OutOfCards()}
                     {Tapbar(TapbarStore.get())}
                     {CritError(this._data.critError)}
@@ -44,7 +44,7 @@ export default class FeedView extends ViewBase {
                 dislikeButton: {
                     type: 'button',
                     src: 'icons/dislike.svg',
-                    class: 'menu-icon',
+                    class: 'card-bottom-panel_actions_action',
                     onclick: () => {
                         eventBus.dispatch('feed:dislike-button');
                     },
@@ -52,7 +52,7 @@ export default class FeedView extends ViewBase {
                 expandButton: {
                     type: 'button',
                     src: 'icons/expand_big.svg',
-                    class: 'menu-icon',
+                    class: 'card-bottom-panel_actions_action',
                     onclick: () => {
                         eventBus.dispatch('feed:expand-button');
                     },
@@ -60,7 +60,7 @@ export default class FeedView extends ViewBase {
                 likeButton: {
                     type: 'button',
                     src: 'icons/likes.svg',
-                    class: 'menu-icon',
+                    class: 'card-bottom-panel_actions_action',
                     onclick: () => {
                         eventBus.dispatch('feed:like-button');
                     },
@@ -68,7 +68,7 @@ export default class FeedView extends ViewBase {
             },
         },
         tapbar: {
-            class: 'menu-icon',
+            class: 'card-bottom-panel_actions_action',
         },
         critError: {
             title: 'Ошибка подключения',
@@ -88,14 +88,14 @@ export default class FeedView extends ViewBase {
             this._data.cardData.buttons.expandButton = {
                 type: 'button',
                 src: 'icons/expand_big.svg',
-                class: 'menu-icon',
+                class: 'card-bottom-panel_actions_action',
                 onclick: () => {
                     eventBus.dispatch('feed:expand-button');
                 },
             };
 
             return (
-                <div class='card-container'>
+                <div class='flex_box_column_center overflow-hidden'>
                     {CardFeed(data.cardData)}
                     {Tapbar(TapbarStore.get())}
                     {/* {CritError(data.critError)} */}
@@ -105,13 +105,13 @@ export default class FeedView extends ViewBase {
             this._data.cardData.buttons.expandButton = {
                 type: 'button',
                 src: 'icons/button_shrink_white.svg',
-                class: 'menu-icon',
+                class: 'card-bottom-panel_actions_action',
                 onclick: () => {
                     eventBus.dispatch('feed:shrink-button');
                 },
             };
             return (
-                <div class='card-container'>
+                <div class='flex_box_column_center overflow-hidden'>
                     {CardExpended(data.cardData)}
                     {Tapbar(data.tapbar)}
                     {/* {CritError(data.critError)} */}

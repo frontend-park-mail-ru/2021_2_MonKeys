@@ -28,6 +28,7 @@
 @import './core/reset.scss';
 
 @import './animations/droplet';
+@import './animations/feed_animations';
 
 html {
   @include background;

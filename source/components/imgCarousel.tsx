@@ -45,12 +45,9 @@ const slides = (imgSrc: string[], selectedID: number, sizeClass, carouselSizeCla
         return <div>no images</div>;
     }
     const items = [];
-    imgSrc.push(imgSrc[selectedID]);
     imgSrc.forEach((element) => {
         items.push(
-            <li class={carouselSizeClass}>
-                <img src={element} class={sizeClass} alt='' />
-            </li>
+            <img src={element} class='card__img' alt='' />
         );
     });
     imgSrc.pop();
@@ -71,16 +68,16 @@ const nav = (length, selectedID) => {
 
 export const ImgCarousel = (props: string[], expanded: boolean) => {
     if (!props) {
-        return <div>no img set</div>;
+        return <img src="img/stare-dont-blink.gif" class="card-img"/>;
     }
     if (!window.currentSelectedCarouselItem) {
         window.currentSelectedCarouselItem = 0;
     }
-    let sizeClass = 'profile-image',
+    let sizeClass = 'img-card__img',
         carouselSizeClass = 'carousel-slide',
         sideSizeClass = 'side-big';
     if (expanded) {
-        sizeClass = 'card-el profile-image-expand';
+        sizeClass = 'card-el img-card__img-expand';
         carouselSizeClass = 'carousel-slide-expand';
         sideSizeClass = 'side-small';
     }
@@ -95,12 +92,8 @@ export const ImgCarousel = (props: string[], expanded: boolean) => {
     const oneCard = window.currentCarouselSize === 0;
 
     return (
-        <div class={sizeClass}>
-            <ul class='carousel-track'>
-                <div class='carousel-track-container'>
-                    {slides(props, window.currentSelectedCarouselItem, sizeClass, carouselSizeClass)}
-                </div>
-            </ul>
+        <div class='card-img'>
+            {slides(props, window.currentSelectedCarouselItem, sizeClass, carouselSizeClass)}
             {conditionalRendering(IconButton(LButtonProps), !firstCard)}
             {conditionalRendering(IconButton(RButtonProps), !lastCard)}
             <div class='carousel-nav'>
