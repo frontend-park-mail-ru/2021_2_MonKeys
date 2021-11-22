@@ -33,7 +33,7 @@ const initData = {
         items: [
             {
                 value: 'Мужчина',
-                selected: true,
+                selected: false,
                 clickEvent: 'edit:gender-male-click',
             },
             {
