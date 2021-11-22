@@ -4,8 +4,9 @@ import { Chat } from '../../store/ChatsStore.js';
 
 export const Chats = (chats: Map<string, Chat>) => {
     const items: Chat[] = [];
-    chats.forEach((chat) => items.push(chat));
-
+    if(chats){
+        chats.forEach((chat) => items.push(chat));
+    }
     return (
         <div class=''>
             <span class='page-header-small'>Чаты</span>
