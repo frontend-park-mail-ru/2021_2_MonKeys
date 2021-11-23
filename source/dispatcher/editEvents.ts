@@ -61,25 +61,24 @@ export const EditEventRegister = () => {
         let userPrefer = '';
         const description = _descriptionInput.value.trim();
         const tags = new Array<string>();
-        storeData.tagsField.items.filter((element)=>{
-            if(element.selected){
-                tags.push(element.value)
+        storeData.tagsField.items.filter((element) => {
+            if (element.selected) {
+                tags.push(element.value);
             }
-        })
+        });
 
         if (storeData.genderField.items[0].selected) {
-            userGender = 'male'
+            userGender = 'male';
         } else {
-            userGender = 'female'
+            userGender = 'female';
         }
 
-        if (storeData.preferField.items[0].selected&&!storeData.preferField.items[1].selected) {
-            userPrefer = 'male'
-        } else if (!storeData.preferField.items[0].selected&&storeData.preferField.items[1].selected){
-            userPrefer = 'female'
+        if (storeData.preferField.items[0].selected && !storeData.preferField.items[1].selected) {
+            userPrefer = 'male';
+        } else if (!storeData.preferField.items[0].selected && storeData.preferField.items[1].selected) {
+            userPrefer = 'female';
         }
-    
-        console.log(userGender)
+
         editProfile(name, userGender, userPrefer, date, description, photoPaths, tags)
             .then((response) => {
                 if (response.status === HTTPSuccess) {
@@ -342,13 +341,13 @@ export const EditEventRegister = () => {
     EventBus.register('edit:tags-click', () => {
         const storeData = EditStore.get();
         if (ProfileStore.get().tags) {
-            const tags = []
-            ProfileStore.get().tags.forEach(v => tags.push(v));
-            storeData.tagsField.items.filter((element)=>{
-                if(tags.indexOf(element.value) !== -1){
+            const tags = [];
+            ProfileStore.get().tags.forEach((v) => tags.push(v));
+            storeData.tagsField.items.filter((element) => {
+                if (tags.indexOf(element.value) !== -1) {
                     element.selected = true;
                 }
-            })
+            });
         }
         storeData.tagsField.open = !storeData.tagsField.open;
         EditStore.set(storeData);
@@ -357,13 +356,13 @@ export const EditEventRegister = () => {
     EventBus.register('edit:tag-click', (payload?: string) => {
         const storeData = EditStore.get();
 
-        storeData.tagsField.items.filter((element)=>{
-            if(element.value === payload){
+        storeData.tagsField.items.filter((element) => {
+            if (element.value === payload) {
                 element.selected = !element.selected;
                 EditStore.set(storeData);
                 return;
             }
-        })
+        });
     });
 
     EventBus.register('edit:gender-male-click', () => {

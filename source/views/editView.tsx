@@ -15,6 +15,36 @@ export default class EditView extends ViewBase {
         EditStore.subscribe(this.subcribtionCallbackEdit, this);
         ProfileStore.subscribe(this.subcribtionCallbackProfile, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
+
+        const storeData = ProfileStore.get();
+        const editStore = EditStore.get();
+        switch (storeData.gender) {
+            case 'male':
+                editStore.genderField.items[0].selected = true;
+                editStore.genderField.items[1].selected = false;
+                break;
+            case 'female':
+                editStore.genderField.items[1].selected = true;
+                editStore.genderField.items[0].selected = false;
+                break;
+        }
+        switch (storeData.prefer) {
+            case 'male':
+                editStore.preferField.items[0].selected = true;
+                editStore.preferField.items[1].selected = false;
+                break;
+            case 'female':
+                editStore.preferField.items[1].selected = true;
+                editStore.preferField.items[0].selected = false;
+                break;
+            default:
+                editStore.preferField.items[1].selected = true;
+                editStore.preferField.items[0].selected = true;
+                break;
+        }
+
+        EditStore.set(editStore);
+
         this._template = this._createTmpl(this._data);
     }
 
@@ -152,7 +182,6 @@ export default class EditView extends ViewBase {
 
         view._template = view._createTmpl(view._data);
 
-        
         view.render();
     }
 
