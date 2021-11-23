@@ -7,8 +7,9 @@ export interface MatchProfileProps {
 }
 
 export const MatchProfile = (props: MatchProfileProps) => {
+    const profile = props.userData;
     const profileClick = () => {
-        eventBus.dispatch('chats:new-chat', { chatID: props.userData.id, userData: props.userData });
+        eventBus.dispatch('chats:new-chat', profile);
     };
     return (
         <div class='match-profile' onclick={profileClick}>
