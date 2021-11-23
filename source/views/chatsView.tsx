@@ -6,7 +6,7 @@ import { Tapbar } from '../components/tapbar.js';
 import { MatchesStore } from '../store/matchStore.js';
 import TapbarStore from '../store/tapbarStore.js';
 import { Chats } from '../components/chats/chats.js';
-import { ChatsStore } from '../store/ChatsStore.js';
+import { ChatsStore, chatsManager } from '../store/ChatsStore.js';
 import { SearchField } from '../components/searchField.js';
 import { MatchProfile } from '../components/chats/matchProfile.js';
 
@@ -27,7 +27,7 @@ export default class ChatsView extends ViewBase {
     }
 
     _data = {
-        chats: ChatsStore.get().chats,
+        chats: chatsManager.chatsWithMessages,
         'critError': {
             title: 'Ошибка подключения',
             text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
@@ -57,7 +57,7 @@ export default class ChatsView extends ViewBase {
     }
 
     private chatsStoreUpdatesView(data, view) {
-        view._data.chats = ChatsStore.get().chats;
+        view._data.chats = chatsManager.chatsWithMessages;
 
         view._template = view._createTmpl(view._data);
 

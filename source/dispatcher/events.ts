@@ -27,7 +27,7 @@ import ws from '../store/wsStore.js';
 import { wsURL } from '../constants/urls.js';
 import { getChats } from '../requests/chatsRequest.js';
 import { userLikesRequset } from '../requests/likesRequest.js';
-import { Chat, ChatsStore } from '../store/ChatsStore.js';
+import { Chat, chatsManager, ChatsStore } from '../store/ChatsStore.js';
 import { ReportsEventsRegister } from './reportsEvents.js';
 import { SwipeEvenetsRegister } from './swipeEvents.js';
 const $root = document.getElementById('app');
@@ -104,9 +104,7 @@ export const InitBus = () => {
                     throw 'bad request';
                 }
 
-                const chats = ChatsStore.get();
-                chats.chats = response.data.body;
-                ChatsStore.set(chats);
+                chatsManager.chats = response.data.body;
             })
             .catch((err) => {
                 console.log(err);

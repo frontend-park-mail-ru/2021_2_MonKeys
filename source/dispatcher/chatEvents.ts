@@ -1,6 +1,6 @@
 import EventBus from './eventBus.js';
 import { SendMessageWS } from '../requests/messageWS.js';
-import { ChatsStore, getChatIdxByMessage, getChatIdxByChatID, Message } from '../store/ChatsStore.js';
+import { Message, chatsManager } from '../store/ChatsStore.js';
 import router from '../route/router.js';
 import { MatchesStore } from '../store/matchStore.js';
 import { searchMathesRequest } from '../requests/matchRequest.js';
@@ -11,16 +11,11 @@ export const ChatEventsRegister = () => {
         const _msgInput = document.getElementsByTagName('input')[0];
         const messageText = _msgInput.value.trim();
 
-        SendMessageWS(messageText, ChatsStore.get().currentChat).catch((err) => console.log(err));
+        SendMessageWS(messageText, chatsManager.chatID).catch((err) => console.log(err));
     });
 
     EventBus.register('chat:new-message', (message: Message) => {
-        const storeData = ChatsStore.get();
-        const chatIdx = getChatIdxByMessage(message);
-
-        storeData.chats[chatIdx].messages.push(message);
-
-        ChatsStore.set(storeData);
+        chatsManager.saveNewMessage(message);
     });
 
     EventBus.register('chat:back-button', (payload?: string) => {
