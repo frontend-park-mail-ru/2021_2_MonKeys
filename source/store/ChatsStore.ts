@@ -32,7 +32,7 @@ const initData = {
 
 ChatsStore.set(initData);
 
-export const getIdxByChatID = (chatID: number) => {
+export const getChatIdxByChatID = (chatID: number) => {
     const chats = ChatsStore.get().chats;
 
     for (let i = 0; i < chats.length; i++) {
@@ -52,7 +52,7 @@ export const getChatIdxByMessage = (message: Message) => {
     const profileID = ProfileStore.get().id;
     const chatID = profileID === message.fromID ? message.toID : message.fromID;
 
-    return getIdxByChatID(chatID);
+    return getChatIdxByChatID(chatID);
 };
 
 export const getChatByID = (chatID: number) => {
@@ -84,7 +84,7 @@ export const updateChatMessages = (chatID: number, messages: Message[]) => {
 
     const chatsStore = ChatsStore.get();
 
-    const chatIdx = getIdxByChatID(chatID);
+    const chatIdx = getChatIdxByChatID(chatID);
 
     for (const msg of chatsStore.chats[chatIdx].messages) {
         messages.push(msg);
