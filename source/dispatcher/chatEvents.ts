@@ -1,10 +1,11 @@
 import EventBus from './eventBus.js';
 import { SendMessageWS } from '../requests/messageWS.js';
-import { Message, chatsManager } from '../store/ChatsStore.js';
+import { Message, chatsManager } from '../store/chatsStore.js';
 import router from '../route/router.js';
 import { MatchesStore } from '../store/matchStore.js';
 import { searchMathesRequest } from '../requests/matchRequest.js';
 import { HTTPSuccess } from '../constants/HTTPStatus.js';
+import { ProfileData } from '../store/profileStore.js';
 
 export const ChatEventsRegister = () => {
     EventBus.register('chat:send-button', (payload?: string) => {
@@ -15,6 +16,21 @@ export const ChatEventsRegister = () => {
     });
 
     EventBus.register('chat:new-message', (message: Message) => {
+        const chatID = chatsManager.getChatIDByMessage(message);
+        if (!chatsManager.isHaveChat(chatID)) {
+            let profile: ProfileData;
+
+            const matches = MatchesStore.get().matches;
+            for (let i = 0; i < MatchesStore.get().matchesTotal; i++) {
+                if (matches[i].id === message.fromID) {
+                    profile = matches[i];
+                    break;
+                }
+            }
+
+            chatsManager.newChat(profile)
+        }
+
         chatsManager.saveNewMessage(message);
     });
 

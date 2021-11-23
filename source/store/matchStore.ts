@@ -8,7 +8,7 @@ export type MatchProfile = ProfileData;
 // }
 
 export interface MatchData {
-    matches: MatchProfile[];
+    matches: Map<number, MatchProfile>;
     matchesSearched: MatchProfile[];
     matchesTotal: number;
     searching: boolean;
@@ -17,7 +17,7 @@ export interface MatchData {
 const MatchesStore = new BaseStore<MatchData>();
 
 MatchesStore.set({
-    matches: [],
+    matches: new Map<number, MatchProfile>(),
     matchesSearched: [],
     matchesTotal: 0,
     searching: false,

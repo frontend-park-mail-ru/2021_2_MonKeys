@@ -1,5 +1,6 @@
 import BaseStore from './storeBase.js';
 import { ProfileData, ProfileStore } from './profileStore.js';
+import { MatchesStore } from './matchStore.js';
 
 interface Message {
     messageID: number;
@@ -53,6 +54,10 @@ class ChatsManager {
 
     // chat
     newChat(profile: ProfileData) {
+        if (profile === null) {
+            return;
+        }
+
         const newChatID = profile.id;
 
         if (this.isHaveChat(newChatID)) {
@@ -108,6 +113,11 @@ class ChatsManager {
     }
 
     saveNewMessage(message: Message) {
+        if (message ===  null ||
+          !this.isHaveChat(this.getChatIDByMessage(message))) {
+            return;
+        }
+
         const storeData = ChatsStore.get();
         const chatIdx = this.getChatIdxByMessage(message);
 
@@ -121,6 +131,15 @@ class ChatsManager {
         return chat.messages[0].messageID;
     }
 
+
+    getChatIDByMessage(message: Message) {
+        if (message === null) {
+            return null;
+        }
+
+        const profileID = ProfileStore.get().id;
+        return profileID === message.fromID ? message.toID : message.fromID;
+    }
     private getChatByID(chatID: number) {
         const chats = ChatsStore.get().chats;
 
@@ -145,13 +164,9 @@ class ChatsManager {
     }
     private getChatIdxByMessage(message: Message) {
         if (message === null) {
-            return;
+            return null;
         }
-
-        const profileID = ProfileStore.get().id;
-        const chatID = profileID === message.fromID ? message.toID : message.fromID;
-
-        return this.getChatIdxByChatID(chatID);
+        return this.getChatIdxByChatID(this.getChatIDByMessage(message));
     }
 }
 

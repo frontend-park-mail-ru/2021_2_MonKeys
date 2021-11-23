@@ -1,5 +1,5 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
-import { Message as MessageData } from '../../store/ChatsStore.js';
+import { Message as MessageData } from '../../store/chatsStore.js';
 import { ProfileStore } from '../../store/profileStore.js';
 
 export const Message = (msg: MessageData) => {
