@@ -8,6 +8,7 @@ import TapbarStore from '../store/tapbarStore.js';
 import { Chats } from '../components/chats/chats.js';
 import { ChatsStore } from '../store/ChatsStore.js';
 import { SearchField } from '../components/searchField.js';
+import { MatchProfile } from '../components/chats/matchProfile.js';
 
 export default class ChatsView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -46,13 +47,7 @@ export default class ChatsView extends ViewBase {
                 {SearchField()}
                 <div class='view-contant__matches-header'>Ваши пары</div>
                 <div class='view-contant__matches-profiles'>
-                    {Object.keys(data.matches).map((item) => {
-                        return (
-                            <div class='view-contant__match-profile'>
-                                <img class='view-contant__match-img' src={data.matches[item].imgs[0]} />
-                            </div>
-                        );
-                    })}
+                    {Object.keys(data.matches).map((item) => MatchProfile({ userData: data.matches[item] }))}
                 </div>
                 {Chats(data.chats)}
                 {/* {CritError(data.critError)} */}

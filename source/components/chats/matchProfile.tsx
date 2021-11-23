@@ -8,8 +8,8 @@ export interface MatchProfileProps {
 
 export const MatchProfile = (props: MatchProfileProps) => {
     const profileClick = () => {
-        eventBus.dispatch('chats:new-chat', {chatID: props.userData.id, userData: props.userData});
-    }
+        eventBus.dispatch('chats:new-chat', { chatID: props.userData.id, userData: props.userData });
+    };
     return (
         <div class='match-profile' onclick={profileClick}>
             <img class='match-profile__match-img' src={props.userData.imgs[0]} />
