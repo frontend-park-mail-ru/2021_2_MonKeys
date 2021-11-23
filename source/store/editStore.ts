@@ -30,6 +30,7 @@ const initData = {
         title: 'Ваш пол',
         valid: true,
         open: true,
+        openable: false,
         items: [
             {
                 value: 'Мужчина',
@@ -48,6 +49,7 @@ const initData = {
         title: 'Кого вы ищите',
         valid: true,
         open: true,
+        openable: false,
         items: [
             {
                 value: 'Мужчину',
@@ -66,6 +68,7 @@ const initData = {
         title: 'Тэги',
         valid: true,
         open: false,
+        openable: true,
         items: [
             {
                 value: 'anime',

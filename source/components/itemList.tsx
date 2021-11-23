@@ -7,6 +7,7 @@ export interface ItemListProps {
     title: string;
     items: ListItem[];
     open: boolean;
+    openable: boolean;
     valid: boolean;
     buttonEvent: string;
 }
@@ -72,13 +73,13 @@ export const ItemList = (props: ItemListProps) => {
     return (
         <div class={boxClass}>
             <div class='flex_box_row_left'>
-                <img
+                {conditionalRendering(<img
                     src={conditionalReturn('icons/shrink.svg', 'icons/expand_big.svg', props.open)}
                     class='form__field__icon'
                     onclick={() => {
                         eventBus.dispatch(props.buttonEvent);
                     }}
-                />
+                />, props.openable)}
                 {props.title}
             </div>
 
