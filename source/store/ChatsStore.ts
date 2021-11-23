@@ -55,8 +55,7 @@ class ChatsManager {
     newChat(profile: ProfileData) {
         const newChatID = profile.id;
 
-        const chatIdx = this.getChatIdxByChatID(newChatID);
-        if (chatIdx != null) {
+        if (this.isHaveChat(newChatID)) {
             return;
         }
 
@@ -77,6 +76,10 @@ class ChatsManager {
         const chatsStore = ChatsStore.get();
         chatsStore.currentChat = chatID;
         ChatsStore.set(chatsStore);
+    }
+
+    isHaveChat(chatID: number) {
+        return this.getChatByID(chatID) != null;
     }
 
     // current chat
