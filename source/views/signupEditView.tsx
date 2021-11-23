@@ -58,7 +58,6 @@ export default class SignupEditView extends ViewBase {
                     class: EditStore.get().imgFieldClass,
                 },
             },
-            'tags': EditStore.get().tags,
             'buttons': {
                 'tagsButton': {
                     type: 'button',
@@ -137,6 +136,8 @@ export default class SignupEditView extends ViewBase {
         view._data.critError.loading = data.apiErrorLoadCondition;
 
         view._data.editForm.fields.genderField = data.genderField;
+        view._data.editForm.fields.preferField = data.preferField;
+        view._data.editForm.fields.tagsField = data.tagsField;
 
         view._template = view._createTmpl(view._data);
 

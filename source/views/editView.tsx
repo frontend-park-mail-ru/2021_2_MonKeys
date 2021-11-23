@@ -15,12 +15,45 @@ export default class EditView extends ViewBase {
         EditStore.subscribe(this.subcribtionCallbackEdit, this);
         ProfileStore.subscribe(this.subcribtionCallbackProfile, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
+
+        const storeData = ProfileStore.get();
+        const editStore = EditStore.get();
+        switch (storeData.gender) {
+            case 'male':
+                editStore.genderField.items[0].selected = true;
+                editStore.genderField.items[1].selected = false;
+                break;
+            case 'female':
+                editStore.genderField.items[1].selected = true;
+                editStore.genderField.items[0].selected = false;
+                break;
+        }
+        switch (storeData.prefer) {
+            case 'male':
+                editStore.preferField.items[0].selected = true;
+                editStore.preferField.items[1].selected = false;
+                break;
+            case 'female':
+                editStore.preferField.items[1].selected = true;
+                editStore.preferField.items[0].selected = false;
+                break;
+            default:
+                editStore.preferField.items[1].selected = true;
+                editStore.preferField.items[0].selected = true;
+                break;
+        }
+
+        EditStore.set(editStore);
+
         this._template = this._createTmpl(this._data);
     }
 
     _data = {
         'editForm': {
             'fields': {
+                'genderField': EditStore.get().genderField,
+                'tagsField': EditStore.get().tagsField,
+                'preferField': EditStore.get().preferField,
                 'name': {
                     tag: 'textarea',
                     placeholder: 'Имя',
@@ -58,7 +91,6 @@ export default class EditView extends ViewBase {
                     class: EditStore.get().imgFieldClass,
                 },
             },
-            'tags': EditStore.get().tags,
             'buttons': {
                 'tagsButton': {
                     type: 'button',
@@ -143,6 +175,11 @@ export default class EditView extends ViewBase {
         view._data.editForm.fields.name.value = ProfileStore.get().name;
         view._data.editForm.fields.birthDate.value = ProfileStore.get().date;
         view._data.editForm.fields.description.value = ProfileStore.get().description;
+
+        view._data.editForm.fields.genderField = data.genderField;
+        view._data.editForm.fields.preferField = data.preferField;
+        view._data.editForm.fields.tagsField = data.tagsField;
+
         view._template = view._createTmpl(view._data);
 
         view.render();
