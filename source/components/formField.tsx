@@ -55,7 +55,6 @@ export const FormField = (props: formFieldProps) => {
             </form>
         );
     } else {
-        console.log(1);
         fieldTmpl = <div class={props.class}>{field}</div>;
     }
 

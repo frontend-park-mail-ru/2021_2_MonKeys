@@ -1,6 +1,6 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import { ChatPreview } from './chatPreview.js';
-import { Chat } from '../../store/ChatsStore.js';
+import { Chat } from '../../store/chatsStore.js';
 
 export const Chats = (chats: Chat[]) => {
     return (

@@ -1,5 +1,5 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
-import { Chat } from '../../store/ChatsStore.js';
+import { Chat } from '../../store/chatsStore.js';
 import EventBus from '../../dispatcher/eventBus.js';
 
 export const ChatPreview = (chat: Chat) => {

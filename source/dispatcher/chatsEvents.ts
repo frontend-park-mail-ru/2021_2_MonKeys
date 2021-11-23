@@ -1,6 +1,6 @@
 import EventBus from './eventBus.js';
 import router from '../route/router.js';
-import { chatsManager } from '../store/ChatsStore.js';
+import { chatsManager } from '../store/chatsStore.js';
 import { getChat } from '../requests/ChatRequest.js';
 import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileData } from '../store/profileStore.js';
