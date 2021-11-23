@@ -27,7 +27,7 @@ import ws from '../store/wsStore.js';
 import { wsURL } from '../constants/urls.js';
 import { getChats } from '../requests/chatsRequest.js';
 import { userLikesRequset } from '../requests/likesRequest.js';
-import { Chat, chatsManager, ChatsStore } from '../store/ChatsStore.js';
+import { chatsManager } from '../store/ChatsStore.js';
 import { ReportsEventsRegister } from './reportsEvents.js';
 import { SwipeEvenetsRegister } from './swipeEvents.js';
 const $root = document.getElementById('app');

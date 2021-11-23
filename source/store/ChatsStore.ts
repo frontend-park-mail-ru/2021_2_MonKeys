@@ -1,5 +1,4 @@
 import BaseStore from './storeBase.js';
-import { Chat } from '../components/chat/chat.js';
 import { ProfileData, ProfileStore } from './profileStore.js';
 
 interface Message {
