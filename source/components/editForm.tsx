@@ -30,7 +30,7 @@ export const EditForm = (props: EditFormProps) => {
     }
     return (
         <form class='flex_box_column_center'>
-            <span class='header-medium'>Профиль</span>
+            <span class='header-medium'>Редактирование</span>
             {FormField(props.fields.name)}
             {ErrorMsg(props.errorMsgs.nameError)}
             {FormField(props.fields.birthDate)}
