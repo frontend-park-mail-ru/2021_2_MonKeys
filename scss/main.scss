@@ -35,6 +35,8 @@
 @import './animations/droplet';
 @import './animations/feed_animations';
 
+@import './components/message';
+
 html {
   @include background;
   font-family: $font-default;

@@ -29,9 +29,9 @@ export const Tapbar = (props: tapbarProps) => {
                     <img src='icons/likes_unselected.svg' class='tapbar_item' />
                 )}
             </mon-router>
-            <mon-router route='/chat'>
+            <mon-router route='/chats'>
                 {renderOnCondition(
-                    props.activeItem === 'chat',
+                    props.activeItem === 'chats',
                     <img src='icons/chat_selected.svg' class='tapbar_item' />,
                     <img src='icons/chat_unselected.svg' class='tapbar_item' />
                 )}

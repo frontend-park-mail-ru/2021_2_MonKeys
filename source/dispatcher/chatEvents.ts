@@ -1,9 +1,23 @@
 import EventBus from './eventBus.js';
+import { SendMessageWS } from '../requests/messageWS.js';
+import { ChatsStore, getChatIdxByMessage, getIdxByChatID, Message } from '../store/ChatsStore.js';
+import router from '../route/router.js';
 import { MatchesStore } from '../store/matchStore.js';
 import { searchMathesRequest } from '../requests/matchRequest.js';
 import { HTTPSuccess } from '../constants/HTTPStatus.js';
 
 export const ChatEventsRegister = () => {
+    EventBus.register('chat:send-button', (payload?: string) => {
+        const _msgInput = document.getElementsByTagName('input')[0];
+        const messageText = _msgInput.value.trim();
+
+        SendMessageWS(messageText, ChatsStore.get().currentChat).catch((err) => console.log(err));
+    });
+
+    EventBus.register('chat:back-button', (payload?: string) => {
+        router.go('/chats');
+    });
+
     EventBus.register('chat:search', () => {
         // const storeData = MatchesStore.get();
         // storeData.searching = true;
@@ -36,4 +50,13 @@ export const ChatEventsRegister = () => {
         // storeData.expended = false;
         // <tStore.set(storeData);
     });
+};
+
+export const NewMessage = (message: Message) => {
+    const storeData = ChatsStore.get();
+    const chatIdx = getChatIdxByMessage(message);
+
+    storeData.chats[chatIdx].messages.push(message);
+
+    ChatsStore.set(storeData);
 };
