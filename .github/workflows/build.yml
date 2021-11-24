@@ -46,8 +46,9 @@ jobs:
         node-version: ${{ matrix.node-version }}
     
     - name: Install TypeScript
-      run: npm install -g typescript
-      run: tsc --version
+      run: |
+           npm install -g typescript
+           tsc --version
       
 
     - name: Build
