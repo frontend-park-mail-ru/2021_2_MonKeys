@@ -47,13 +47,11 @@ jobs:
     
     - name: Install TypeScript
       run: npm install -g typescript
-      with:
-        node-version: ${{ matrix.node-version }}
+      
 
     - name: Build
       run: tsc
-      with:
-        node-version: ${{ matrix.node-version }}
+      
   
   eslint-prettier:
     runs-on: ubuntu-latest
