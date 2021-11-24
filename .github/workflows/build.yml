@@ -51,7 +51,7 @@ jobs:
         cd source
         npx tsc -w
   
-    eslint-prettier:
+  eslint-prettier:
     runs-on: ubuntu-latest
 
     strategy:
