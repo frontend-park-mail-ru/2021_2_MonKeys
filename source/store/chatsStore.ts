@@ -113,8 +113,7 @@ class ChatsManager {
     }
 
     saveNewMessage(message: Message) {
-        if (message ===  null ||
-          !this.isHaveChat(this.getChatIDByMessage(message))) {
+        if (message === null || !this.isHaveChat(this.getChatIDByMessage(message))) {
             return;
         }
 
@@ -130,7 +129,6 @@ class ChatsManager {
         const chat = this.getChatByID(chatID);
         return chat.messages[0].messageID;
     }
-
 
     getChatIDByMessage(message: Message) {
         if (message === null) {

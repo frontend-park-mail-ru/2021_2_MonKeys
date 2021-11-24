@@ -28,7 +28,7 @@ export const ChatEventsRegister = () => {
                 }
             }
 
-            chatsManager.newChat(profile)
+            chatsManager.newChat(profile);
         }
 
         chatsManager.saveNewMessage(message);
