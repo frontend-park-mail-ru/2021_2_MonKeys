@@ -1,9 +1,7 @@
 import EventBus from './eventBus.js';
 import feedStore from '../store/feedStore.js';
-import LikesStore from '../store/likesStore.js';
 import reactions from '../constants/reactions.js';
 import { likesRequest } from '../requests/likesRequest.js';
-import { matchRequest } from '../requests/matchRequest.js';
 import { feedRequest } from '../requests/feedRequest.js';
 import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { requestMoreCardsThreshold } from '../constants/feed.js';

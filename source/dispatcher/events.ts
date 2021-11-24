@@ -1,6 +1,6 @@
 import router from '../route/router.js';
 
-import { HTTPEMailNotFound, HTTPNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
+import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileStore } from '../store/profileStore.js';
 import { feedRequest } from '../requests/feedRequest.js';
 import { getProfile } from '../requests/profileRequest.js';
@@ -30,10 +30,9 @@ import { userLikesRequset } from '../requests/likesRequest.js';
 import { chatsManager } from '../store/chatsStore.js';
 import { ReportsEventsRegister } from './reportsEvents.js';
 import { SwipeEvenetsRegister } from './swipeEvents.js';
-const $root = document.getElementById('app');
 
 export const InitBus = () => {
-    eventBus.register('user:cookie-requests', (payload?: string) => {
+    eventBus.register('user:cookie-requests', () => {
         getProfile().then((response) => {
             if (response.status === HTTPSuccess) {
                 if (response.data.status === HTTPSuccess) {
@@ -58,7 +57,7 @@ export const InitBus = () => {
             }
         });
     });
-    eventBus.register('user:data-requests', (payload?: string) => {
+    eventBus.register('user:data-requests', () => {
         if (AuthStore.get().loggedIn !== userStatus.loggedIn) {
             return;
         }

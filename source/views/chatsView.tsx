@@ -1,6 +1,5 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import { CritError } from '../components/critError.js';
 import { ErrorStore } from '../store/errorStore.js';
 import { Tapbar } from '../components/tapbar.js';
 import { MatchesStore } from '../store/matchStore.js';

@@ -47,7 +47,7 @@ export const CardFeed = (props: CardFeedProps) => {
                 eventBus.dispatch('swipe:end');
             }}
         >
-            {ImgCarousel(props.userData.imgs, false)}
+            {ImgCarousel(props.userData.imgs)}
             <div class='card-bottom-panel'>
                 <div class='card-bottom-panel__name'>
                     <div class='card-bottom-panel__name__name'>{props.userData.name}</div>

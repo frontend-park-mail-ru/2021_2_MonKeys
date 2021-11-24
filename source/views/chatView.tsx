@@ -1,7 +1,6 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { Chat } from '../components/chat/chat.js';
-import { CritError } from '../components/critError.js';
 import { ErrorStore } from '../store/errorStore.js';
 import { ChatsStore, chatsManager } from '../store/chatsStore.js';
 

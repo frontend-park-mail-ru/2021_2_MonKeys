@@ -1,11 +1,7 @@
 import EventBus from './eventBus.js';
-import { likesRequest } from '../requests/likesRequest.js';
-import { feedRequest } from '../requests/feedRequest.js';
+
 import { HTTPSuccess } from '../constants/HTTPStatus.js';
-import LikesStore from '../store/likesStore.js';
-import feedStore from '../store/feedStore.js';
-import { MatchesStore } from '../store/matchStore.js';
-import { matchRequest } from '../requests/matchRequest.js';
+
 import ReportsStore from '../store/reportsStore.js';
 import { reportsRequest, newReportRequest } from '../requests/reportsRequest.js';
 

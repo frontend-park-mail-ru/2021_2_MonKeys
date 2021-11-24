@@ -2,12 +2,10 @@ import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { FormField } from '../components/formField.js';
 import { Button } from '../components/button.js';
-import { Link } from '../components/link.js';
 import { ErrorMsg } from '../components/errorMsg.js';
 import { errorEmailMsg, errorPasswordMsg, errorRepeatPasswordMsg, errorSignupFormMsg } from '../constants/errorMsg.js';
 import EventBus from '../dispatcher/eventBus.js';
 import { SignupStore } from '../store/signupStore.js';
-import { CritError } from '../components/critError.js';
 import { ErrorStore } from '../store/errorStore.js';
 
 import router from '../route/router.js';
@@ -18,7 +16,7 @@ export default class SignupView extends ViewBase {
         super(parent);
         SignupStore.subscribe(this.subscribtionCallback, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
-        this._template = this._createTmpl(this._data);
+        this._template = this._createTmpl();
     }
 
     _data = {
@@ -117,7 +115,7 @@ export default class SignupView extends ViewBase {
         },
     };
 
-    _createTmpl(data) {
+    _createTmpl() {
         return (
             <div class='flex_box_column_center'>
                 {dropsBackground()}

@@ -5,7 +5,6 @@ import { ImgCard } from '../components/imgCard.js';
 import LikesStore from '../store/likesStore.js';
 import ReportsStore from '../store/reportsStore.js';
 import TapbarStore from '../store/tapbarStore.js';
-import eventBus from '../dispatcher/eventBus.js';
 import { CardExpended } from '../components/cardExpended.js';
 
 export default class LikesView extends ViewBase {

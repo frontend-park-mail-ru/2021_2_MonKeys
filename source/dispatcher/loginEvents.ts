@@ -5,7 +5,7 @@ import { loginRequest } from '../requests/sessionRequest.js';
 import { LoginStore } from '../store/loginStore.js';
 
 export const LoginEventRegister = () => {
-    EventBus.register('login:button-white', (payload?: string) => {
+    EventBus.register('login:button-white', () => {
         const _emailInput = document.getElementsByTagName('input')[0];
         const _passwordInput = document.getElementsByTagName('input')[1];
 
@@ -59,7 +59,7 @@ export const LoginEventRegister = () => {
             });
     });
 
-    EventBus.register('login:email-input', (payload?: string) => {
+    EventBus.register('login:email-input', () => {
         const _emailInput = document.getElementsByTagName('input')[0];
 
         const storeData = LoginStore.get();
@@ -90,7 +90,7 @@ export const LoginEventRegister = () => {
         LoginStore.set(storeData);
     });
 
-    EventBus.register('login:email-focusout', (payload?: string) => {
+    EventBus.register('login:email-focusout', () => {
         const _emailInput = document.getElementsByTagName('input')[0];
 
         const storeData = LoginStore.get();
@@ -109,7 +109,7 @@ export const LoginEventRegister = () => {
         LoginStore.set(storeData);
     });
 
-    EventBus.register('login:password-input', (payload?: string) => {
+    EventBus.register('login:password-input', () => {
         const _passwordInput = document.getElementsByTagName('input')[1];
         if (!_passwordInput) {
             console.log('Error, trying to read _emailInput on wrong view');
@@ -144,7 +144,7 @@ export const LoginEventRegister = () => {
         LoginStore.set(storeData);
     });
 
-    EventBus.register('login:password-focusout', (payload?: string) => {
+    EventBus.register('login:password-focusout', () => {
         const _passwordInput = document.getElementsByTagName('input')[1];
 
         const storeData = LoginStore.get();

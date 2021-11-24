@@ -1,11 +1,10 @@
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import EventBus from '../dispatcher/eventBus.js';
-import reactions from '../constants/reactions.js';
+
 import { Tag } from './tag.js';
-import { IconButton } from './iconButton.js';
-import { ImgCarousel } from './imgCarousel.js';
+
 import { ProfileData } from '../store/profileStore.js';
-import { CardActions } from './cardActions.js';
+
 import { ImgCard } from './imgCard.js';
 import { Button } from './button.js';
 import { ReportWindow } from './reportWindow.js';

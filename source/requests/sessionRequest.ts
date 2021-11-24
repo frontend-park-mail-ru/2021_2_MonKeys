@@ -1,4 +1,4 @@
-import { authSessionURL, sessionURL } from '../constants/urls.js';
+import { authSessionURL } from '../constants/urls.js';
 import http from '../utils/http.js';
 
 const loginRequest = (email: string, password: string) => {

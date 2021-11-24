@@ -10,7 +10,7 @@ import { validDate, validImgType } from '../validation/edit.js';
 import { nameRegExp } from '../constants/validation.js';
 
 export const EditEventRegister = () => {
-    EventBus.register('edit:save-button', (payload?: string) => {
+    EventBus.register('edit:save-button', () => {
         const _nameInput = document.getElementsByTagName('input')[0];
         const _dateInput = document.getElementsByTagName('input')[1];
         const _descriptionInput = document.getElementsByTagName('textarea')[0];
@@ -99,7 +99,7 @@ export const EditEventRegister = () => {
             });
     });
 
-    EventBus.register('edit:open-tags', (payload?: string) => {
+    EventBus.register('edit:open-tags', () => {
         const storeData = EditStore.get();
         storeData.apiErrorLoadCondition = false;
         EditStore.set(storeData);
@@ -177,7 +177,7 @@ export const EditEventRegister = () => {
         }
     });
 
-    EventBus.register('edit:name-input', (payload?: string) => {
+    EventBus.register('edit:name-input', () => {
         const _nameInput = document.getElementsByTagName('input')[0];
 
         const storeData = EditStore.get();
@@ -201,7 +201,7 @@ export const EditEventRegister = () => {
         EditStore.set(storeData);
     });
 
-    EventBus.register('edit:name-focusout', (payload?: string) => {
+    EventBus.register('edit:name-focusout', () => {
         const _nameInput = document.getElementsByTagName('input')[0];
 
         const storeData = EditStore.get();
@@ -221,7 +221,7 @@ export const EditEventRegister = () => {
         EditStore.set(storeData);
     });
 
-    EventBus.register('edit:birth-date-input', (payload?: string) => {
+    EventBus.register('edit:birth-date-input', () => {
         const _dateInput = document.getElementsByTagName('input')[1];
 
         const storeData = EditStore.get();
@@ -245,7 +245,7 @@ export const EditEventRegister = () => {
         EditStore.set(storeData);
     });
 
-    EventBus.register('edit:birth-date-focusout', (payload?: string) => {
+    EventBus.register('edit:birth-date-focusout', () => {
         const _dateInput = document.getElementsByTagName('input')[1];
 
         const storeData = EditStore.get();
@@ -319,7 +319,7 @@ export const EditEventRegister = () => {
                 });
                 ProfileStore.set(userData);
             })
-            .catch((error) => {
+            .catch(() => {
                 const storeData = EditStore.get();
                 storeData.apiErrorLoadCondition = true;
                 EditStore.set(storeData);

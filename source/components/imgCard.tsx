@@ -1,7 +1,6 @@
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { CardActions } from './cardActions.js';
 import { ProfileData } from '../store/profileStore.js';
-import { ImgCarousel } from './imgCarousel.js';
 
 export interface ProfileCardProps {
     userData: ProfileData;

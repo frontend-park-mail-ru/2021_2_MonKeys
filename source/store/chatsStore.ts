@@ -1,6 +1,5 @@
 import BaseStore from './storeBase.js';
 import { ProfileData, ProfileStore } from './profileStore.js';
-import { MatchesStore } from './matchStore.js';
 
 interface Message {
     messageID: number;

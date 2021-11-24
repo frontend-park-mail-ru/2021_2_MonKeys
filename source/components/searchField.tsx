@@ -1,7 +1,5 @@
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import eventBus from '../dispatcher/eventBus.js';
-import reactions from '../constants/reactions.js';
-import ViewBase from '../views/viewBase.js';
 
 export const SearchField = () => {
     const searchEvent = () => {

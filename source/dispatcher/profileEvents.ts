@@ -6,7 +6,6 @@ import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
 import { ProfileStore } from '../store/profileStore.js';
 import feedStore from '../store/feedStore.js';
-import { EditStore } from '../store/editStore.js';
 
 export const ProfileEventsRegister = () => {
     EventBus.register('profile:edit-button', () => {

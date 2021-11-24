@@ -3,10 +3,6 @@ import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
 import TapbarStore from '../store/tapbarStore.js';
 
-const userLoggedIn = () => {
-    return AuthStore.get().loggedIn === userStatus.loggedIn;
-};
-
 const drawLocation = (route, parent) => {
     TapbarStore.set({
         activeItem: route.tapbar,
@@ -26,8 +22,6 @@ class Router {
         const $root = document.getElementById('app');
         const location = route;
         if (this.routes[location]) {
-            let currentView;
-
             const user = AuthStore.get().loggedIn;
 
             if (this.routes[location].auth === user) {

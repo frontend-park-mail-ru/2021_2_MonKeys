@@ -8,7 +8,7 @@ import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileData } from '../store/profileStore.js';
 
 export const ChatEventsRegister = () => {
-    EventBus.register('chat:send-button', (payload?: string) => {
+    EventBus.register('chat:send-button', () => {
         const _msgInput = document.getElementsByTagName('input')[0];
         const messageText = _msgInput.value.trim();
 
@@ -34,7 +34,7 @@ export const ChatEventsRegister = () => {
         chatsManager.saveNewMessage(message);
     });
 
-    EventBus.register('chat:back-button', (payload?: string) => {
+    EventBus.register('chat:back-button', () => {
         router.go('/chats');
     });
 

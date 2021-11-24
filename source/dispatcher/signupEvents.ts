@@ -8,7 +8,7 @@ import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
 
 export const SignupEventRegister = () => {
-    EventBus.register('signup:signup-button', (payload?: string) => {
+    EventBus.register('signup:signup-button', () => {
         const _emailInput = document.getElementsByTagName('input')[0];
         const _passwordInput = document.getElementsByTagName('input')[1];
         const _repeatPasswordInput = document.getElementsByTagName('input')[2];
@@ -75,7 +75,7 @@ export const SignupEventRegister = () => {
             });
     });
 
-    EventBus.register('signup:email-input', (payload?: string) => {
+    EventBus.register('signup:email-input', () => {
         const _emailInput = document.getElementsByTagName('input')[0];
 
         const storeData = SignupStore.get();
@@ -103,7 +103,7 @@ export const SignupEventRegister = () => {
         SignupStore.set(storeData);
     });
 
-    EventBus.register('signup:email-focusout', (payload?: string) => {
+    EventBus.register('signup:email-focusout', () => {
         const _emailInput = document.getElementsByTagName('input')[0];
 
         const storeData = SignupStore.get();
@@ -122,7 +122,7 @@ export const SignupEventRegister = () => {
         SignupStore.set(storeData);
     });
 
-    EventBus.register('signup:password-input', (payload?: string) => {
+    EventBus.register('signup:password-input', () => {
         const _passwordInput = document.getElementsByTagName('input')[1];
 
         const storeData = SignupStore.get();
@@ -154,7 +154,7 @@ export const SignupEventRegister = () => {
         SignupStore.set(storeData);
     });
 
-    EventBus.register('signup:password-focusout', (payload?: string) => {
+    EventBus.register('signup:password-focusout', () => {
         const _passwordInput = document.getElementsByTagName('input')[1];
 
         const storeData = SignupStore.get();
@@ -173,7 +173,7 @@ export const SignupEventRegister = () => {
         SignupStore.set(storeData);
     });
 
-    EventBus.register('signup:repeat-password-input', (payload?: string) => {
+    EventBus.register('signup:repeat-password-input', () => {
         const _passwordInput = document.getElementsByTagName('input')[1];
         const _repeatPasswordInput = document.getElementsByTagName('input')[2];
 
@@ -210,10 +210,9 @@ export const SignupEventRegister = () => {
         SignupStore.set(storeData);
     });
 
-    EventBus.register('signup:repeat-password-focusout', (payload?: string) => {
+    EventBus.register('signup:repeat-password-focusout', () => {
         const _passwordInput = document.getElementsByTagName('input')[1];
         const _repeatPasswordInput = document.getElementsByTagName('input')[2];
-        const _repeatPasswordError = document.getElementsByName('error-inactive')[2];
 
         const storeData = SignupStore.get();
         storeData.apiErrorLoadCondition = false;
