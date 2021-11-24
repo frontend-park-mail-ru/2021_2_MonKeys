@@ -1,4 +1,4 @@
-import { profileURL } from '../constants/urls.js';
+import { authProfileURL, profileURL } from '../constants/urls.js';
 import http from '../utils/http.js';
 
 const createProfile = (email, password) => {
@@ -7,11 +7,11 @@ const createProfile = (email, password) => {
         password: password,
     });
 
-    return http.post(profileURL, body);
+    return http.post(authProfileURL, body);
 };
 
 const getProfile = () => {
-    return http.get(profileURL);
+    return http.get(authProfileURL);
 };
 
 const editProfile = (name, gender, prefer, date, description, photoPaths, tags) => {
