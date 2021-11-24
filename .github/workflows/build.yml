@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [12.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -35,7 +35,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [12.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -47,11 +47,11 @@ jobs:
     
     - name: Install TypeScript
       run: npm install -g typescript
+      run: tsc --version
       
 
     - name: Build
       run: tsc
-      
   
   eslint-prettier:
     runs-on: ubuntu-latest
