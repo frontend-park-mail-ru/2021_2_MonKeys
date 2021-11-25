@@ -27,9 +27,13 @@ export namespace MonkeysVirtualDOM {
     };
 
     export const createElement = (virtualNode) => {
+        if (typeof virtualNode == 'number') {
+            return document.createTextNode(virtualNode.toString());
+        }
         if (typeof virtualNode === 'string') {
             return document.createTextNode(virtualNode);
         }
+
         const rootElement = document.createElement(virtualNode.type);
         if (virtualNode.type === 'mon-router') {
             rootElement.addEventListener('click', () => {

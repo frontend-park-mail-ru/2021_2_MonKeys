@@ -5,12 +5,9 @@ import { CardFeed } from '../components/cardFeed.js';
 import { CardExpended } from '../components/cardExpended.js';
 import feedStore from '../store/feedStore.js';
 import eventBus from '../dispatcher/eventBus.js';
-import { OutOfCards } from '../components/outOfCards.js';
-
-import { CritError } from '../components/critError.js';
-
 import TapbarStore from '../store/tapbarStore.js';
 import { ErrorStore } from '../store/errorStore.js';
+import { dropsBackground } from '../components/dropsBackground.js';
 
 export default class FeedView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -30,9 +27,9 @@ export default class FeedView extends ViewBase {
         } else {
             this._template = (
                 <div class='card-container overflow-hidden'>
-                    {OutOfCards()}
+                    {dropsBackground()}
+                    <div class='header-big'>Карточки кончились</div>
                     {Tapbar(TapbarStore.get())}
-                    {CritError(this._data.critError)}
                 </div>
             );
         }
