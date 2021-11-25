@@ -13,13 +13,26 @@ class WebSocketStore {
             throw 'Your browser does not support WebSockets';
         }
 
+        if (this.checkConnectWS()) {
+            return;
+        }
+
         this.ws.set({
             connect: new WebSocket(wsURL),
         });
     }
 
     checkConnectWS() {
-        const state = this.ws.get().connect.readyState;
+        if (this.ws.get() === undefined) {
+            return false;
+        }
+
+        const connect = this.ws.get().connect;
+        if (connect === null) {
+            return false;
+        }
+
+        const state = connect.readyState;
         return state === wsOPEN || state === wsCONNECTING;
     }
 
