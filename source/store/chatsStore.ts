@@ -59,7 +59,7 @@ class ChatsManager {
 
         const newChatID = profile.id;
 
-        if (this.isHaveChat(newChatID)) {
+        if (this.hasChat(newChatID)) {
             return;
         }
 
@@ -82,7 +82,7 @@ class ChatsManager {
         ChatsStore.set(chatsStore);
     }
 
-    isHaveChat(chatID: number) {
+    hasChat(chatID: number) {
         return this.getChatByID(chatID) != null;
     }
 
@@ -112,7 +112,7 @@ class ChatsManager {
     }
 
     saveNewMessage(message: Message) {
-        if (message === null || !this.isHaveChat(this.getChatIDByMessage(message))) {
+        if (message === null || !this.hasChat(this.getChatIDByMessage(message))) {
             return;
         }
 

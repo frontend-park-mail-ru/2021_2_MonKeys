@@ -17,7 +17,7 @@ export const ChatEventsRegister = () => {
 
     EventBus.register('chat:new-message', (message: Message) => {
         const chatID = chatsManager.getChatIDByMessage(message);
-        if (!chatsManager.isHaveChat(chatID)) {
+        if (!chatsManager.hasChat(chatID)) {
             let profile: ProfileData;
 
             const matches = MatchesStore.get().matches;
