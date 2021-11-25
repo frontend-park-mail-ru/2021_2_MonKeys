@@ -8,6 +8,7 @@ import { Chats } from '../components/chats/chats.js';
 import { ChatsStore, chatsManager } from '../store/chatsStore.js';
 import { SearchField } from '../components/searchField.js';
 import { MatchProfile } from '../components/chats/matchProfile.js';
+import { matchRequest } from '../requests/matchRequest.js';
 
 export default class ChatsView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -17,6 +18,13 @@ export default class ChatsView extends ViewBase {
         MatchesStore.subscribe(this.subscribtionCallback, this);
 
         this._template = this._createTmpl(this._data);
+
+        matchRequest().then((matchResponse) => {
+            const matchesData = MatchesStore.get();
+            matchesData.matches = matchResponse.data.body.allUsers;
+            matchesData.matchesTotal = matchResponse.data.body.matchesCount;
+            MatchesStore.set(matchesData);
+        });
     }
 
     public unsubscribe() {

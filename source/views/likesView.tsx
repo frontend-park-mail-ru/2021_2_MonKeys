@@ -6,6 +6,7 @@ import LikesStore from '../store/likesStore.js';
 import ReportsStore from '../store/reportsStore.js';
 import TapbarStore from '../store/tapbarStore.js';
 import { CardExpended } from '../components/cardExpended.js';
+import { userLikesRequset } from '../requests/likesRequest.js';
 
 export default class LikesView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -13,6 +14,16 @@ export default class LikesView extends ViewBase {
         LikesStore.subscribe(this.subscribtionCallback, this);
         ReportsStore.subscribe(this.reportsSubscribtionCallback, this);
         this._template = this._createTmpl(this._data);
+
+        userLikesRequset().then((likesResponse) => {
+            const likesData = LikesStore.get();
+            likesData.profiles = likesResponse.data.body.allUsers;
+            likesData.likesCount = likesResponse.data.body.likesCount;
+            likesData.expended = false;
+            likesData.reported = false;
+            likesData.userIndex = 0;
+            LikesStore.set(likesData);
+        });
     }
 
     _data = {
