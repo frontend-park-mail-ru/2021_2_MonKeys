@@ -7,7 +7,7 @@ const ws = new WebSocketManager(wsURL);
 
 const ConnectWS = () => {
     return ws.CreateConnect();
-}
+};
 
 const initWS = () => {
     ws.onmessage = function (response) {
@@ -15,7 +15,7 @@ const initWS = () => {
         message.date = new Date(message.date);
 
         eventBus.dispatch<Message>('chat:new-message', message);
-    }
+    };
 };
 
 const SendMessageWS = (message: string, recipient: number) => {

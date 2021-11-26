@@ -32,36 +32,36 @@ import { ConnectWS, initWS } from '../requests/messageWS.js';
 export const InitBus = () => {
     eventBus.register('user:cookie-requests', () => {
         getProfile()
-          .then((response) => {
-            if (response.status !== HTTPSuccess) {
-                throw 'server internal error';
-            }
+            .then((response) => {
+                if (response.status !== HTTPSuccess) {
+                    throw 'server internal error';
+                }
 
-            if (response.data.status !== HTTPSuccess) {
-                router.go('/login');
-                return;
-            }
+                if (response.data.status !== HTTPSuccess) {
+                    router.go('/login');
+                    return;
+                }
 
-            const profile = response.data.body;
+                const profile = response.data.body;
 
-            if (profile.name) {
-                AuthStore.set({
-                    loggedIn: userStatus.loggedIn,
-                });
-                ProfileStore.set(profile);
+                if (profile.name) {
+                    AuthStore.set({
+                        loggedIn: userStatus.loggedIn,
+                    });
+                    ProfileStore.set(profile);
 
-                eventBus.dispatch('user:data-requests');
-            } else {
-                AuthStore.set({
-                    loggedIn: userStatus.Signup,
-                });
-                router.go('/signup-edit');
-            }
-          })
-          .catch((err) => {
-              console.log(err);
-              throw err;
-          });
+                    eventBus.dispatch('user:data-requests');
+                } else {
+                    AuthStore.set({
+                        loggedIn: userStatus.Signup,
+                    });
+                    router.go('/signup-edit');
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                throw err;
+            });
     });
     eventBus.register('user:data-requests', () => {
         if (AuthStore.get().loggedIn !== userStatus.loggedIn) {
@@ -117,11 +117,11 @@ export const InitBus = () => {
             });
 
         ConnectWS()
-          .then(initWS)
-          .catch((err) => {
-              console.log(err);
-              throw err;
-          });
+            .then(initWS)
+            .catch((err) => {
+                console.log(err);
+                throw err;
+            });
     });
     LoginEventRegister();
     SignupEventRegister();
