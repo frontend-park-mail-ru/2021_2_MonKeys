@@ -1,7 +1,7 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { ErrorStore } from '../store/errorStore.js';
-import { Tapbar } from '../components/tapbar.js';
+import { Tapbar } from '../components/tapbar/tapbar.js';
 import { MatchesStore } from '../store/matchStore.js';
 import TapbarStore from '../store/tapbarStore.js';
 import { Chats } from '../components/chats/chats.js';
