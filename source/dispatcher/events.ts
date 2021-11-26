@@ -21,41 +21,47 @@ import { matchRequest } from '../requests/matchRequest.js';
 import LikesStore from '../store/likesStore.js';
 import { MatchesStore } from '../store/matchStore.js';
 import { ErrorEventsRegister } from './errorEvents.js';
-import { wsRegister } from './wsEvents.js';
 import { ChatsEventsRegister } from './chatsEvents.js';
-import ws from '../store/wsStore.js';
-import { wsURL } from '../constants/urls.js';
 import { getChats } from '../requests/chatsRequest.js';
 import { userLikesRequset } from '../requests/likesRequest.js';
 import { chatsManager } from '../store/chatsStore.js';
 import { ReportsEventsRegister } from './reportsEvents.js';
 import { SwipeEvenetsRegister } from './swipeEvents.js';
+import { ConnectWS, initWS } from '../requests/messageWS.js';
 
 export const InitBus = () => {
     eventBus.register('user:cookie-requests', () => {
-        getProfile().then((response) => {
-            if (response.status === HTTPSuccess) {
-                if (response.data.status === HTTPSuccess) {
-                    if (response.data.body.name) {
-                        AuthStore.set({
-                            loggedIn: userStatus.loggedIn,
-                        });
-                        ProfileStore.set(response.data.body);
-
-                        eventBus.dispatch('user:data-requests');
-                    } else {
-                        AuthStore.set({
-                            loggedIn: userStatus.Signup,
-                        });
-                        router.go('/signup-edit');
-                    }
-                } else {
-                    router.go('/login');
-                }
-            } else {
+        getProfile()
+          .then((response) => {
+            if (response.status !== HTTPSuccess) {
                 throw 'server internal error';
             }
-        });
+
+            if (response.data.status !== HTTPSuccess) {
+                router.go('/login');
+                return;
+            }
+
+            const profile = response.data.body;
+
+            if (profile.name) {
+                AuthStore.set({
+                    loggedIn: userStatus.loggedIn,
+                });
+                ProfileStore.set(profile);
+
+                eventBus.dispatch('user:data-requests');
+            } else {
+                AuthStore.set({
+                    loggedIn: userStatus.Signup,
+                });
+                router.go('/signup-edit');
+            }
+          })
+          .catch((err) => {
+              console.log(err);
+              throw err;
+          });
     });
     eventBus.register('user:data-requests', () => {
         if (AuthStore.get().loggedIn !== userStatus.loggedIn) {
@@ -110,12 +116,12 @@ export const InitBus = () => {
                 throw err;
             });
 
-        ws.CreateConnect(wsURL)
-            .then(wsRegister)
-            .catch((err) => {
-                console.log(err);
-                throw err;
-            });
+        ConnectWS()
+          .then(initWS)
+          .catch((err) => {
+              console.log(err);
+              throw err;
+          });
     });
     LoginEventRegister();
     SignupEventRegister();

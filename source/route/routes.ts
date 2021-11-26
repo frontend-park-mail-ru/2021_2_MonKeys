@@ -20,19 +20,19 @@ export interface route {
 export const Routes = {
     '/': {
         name: 'Drip',
-        auth: userStatus.notlLoggedIn,
+        auth: userStatus.notLoggedIn,
         view: LoginView,
     },
     '/login': {
         name: 'Вход',
         path: '/login',
-        auth: userStatus.notlLoggedIn,
+        auth: userStatus.notLoggedIn,
         view: LoginView,
     },
     '/signup': {
         name: 'Регистрация',
         path: '/signup',
-        auth: userStatus.notlLoggedIn,
+        auth: userStatus.notLoggedIn,
         view: SignupView,
     },
     '/edit': {
