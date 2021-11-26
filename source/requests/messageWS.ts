@@ -10,9 +10,12 @@ const ConnectWS = () => {
 }
 
 const initWS = () => {
-    ws.onmessage = NewMessageWS(function (message: Message) {
+    ws.onmessage = function (response) {
+        const message = JSON.parse(response.data);
+        message.date = new Date(message.date);
+
         eventBus.dispatch<Message>('chat:new-message', message);
-    });
+    }
 };
 
 const SendMessageWS = (message: string, recipient: number) => {
@@ -24,10 +27,4 @@ const SendMessageWS = (message: string, recipient: number) => {
     return ws.Send(data);
 };
 
-const NewMessageWS = (messageHandler) => {
-    return function (message) {
-        messageHandler(JSON.parse(message.data));
-    };
-};
-
-export { ConnectWS, initWS, SendMessageWS, NewMessageWS };
+export { ConnectWS, initWS, SendMessageWS };

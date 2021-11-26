@@ -9,7 +9,8 @@ export const ChatsEventsRegister = () => {
     EventBus.register('chats:preview-chat', (chatID: number) => {
         chatsManager.switchChat(chatID);
 
-        router.go(`/chat/${chatID}`);
+        // router.go(`/chat/${chatID}`);
+        router.go(`/chat`);
 
         const messageID = chatsManager.getFirstMessageID(chatID);
         getChat(chatID, messageID)
