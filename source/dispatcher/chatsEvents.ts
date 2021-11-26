@@ -1,7 +1,7 @@
 import EventBus from './eventBus.js';
 import router from '../route/router.js';
 import { chatsManager } from '../store/chatsStore.js';
-import { getChat } from '../requests/ChatRequest.js';
+import { getChat } from '../requests/chatRequest.js';
 import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileData } from '../store/profileStore.js';
 
@@ -9,7 +9,8 @@ export const ChatsEventsRegister = () => {
     EventBus.register('chats:preview-chat', (chatID: number) => {
         chatsManager.switchChat(chatID);
 
-        router.go('/chat');
+        // router.go(`/chat/${chatID}`);
+        router.go(`/chat`);
 
         const messageID = chatsManager.getFirstMessageID(chatID);
         getChat(chatID, messageID)

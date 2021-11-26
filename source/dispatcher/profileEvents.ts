@@ -20,7 +20,7 @@ export const ProfileEventsRegister = () => {
         storeData.apiErrorLoadCondition = false;
         ProfileStore.set(storeData);
         AuthStore.set({
-            loggedIn: userStatus.notlLoggedIn,
+            loggedIn: userStatus.notLoggedIn,
         });
         logoutRequest()
             .then((response) => {

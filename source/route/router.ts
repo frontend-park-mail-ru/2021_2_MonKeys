@@ -36,7 +36,7 @@ class Router {
                         drawLocation(this.routes['/signup-edit'], $root);
                         break;
                     }
-                    case userStatus.notlLoggedIn: {
+                    case userStatus.notLoggedIn: {
                         drawLocation(this.routes['/login'], $root);
                         break;
                     }
