@@ -1,6 +1,6 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import { ErrorStore } from '../store/errorStore.js';
+import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { Tapbar } from '../components/tapbar/tapbar.js';
 import { MatchesStore } from '../store/matchStore.js';
 import TapbarStore from '../store/tapbarStore.js';
@@ -9,6 +9,7 @@ import { ChatsStore, chatsManager } from '../store/chatsStore.js';
 import { SearchField } from '../components/searchField.js';
 import { MatchProfile } from '../components/chats/matchProfile.js';
 import { matchRequest } from '../requests/matchRequest.js';
+import { ServerError } from '../components/error/ServerError.js';
 
 export default class ChatsView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -35,11 +36,7 @@ export default class ChatsView extends ViewBase {
 
     _data = {
         chats: chatsManager.chatsWithMessages,
-        'critError': {
-            title: 'Ошибка подключения',
-            text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
-            loading: ErrorStore.get().apiErrorLoadCondition,
-        },
+        error: errorManager.error,
 
         'matches': MatchesStore.get().matches,
         'matchesSearched': MatchesStore.get().matchesSearched,
@@ -57,7 +54,7 @@ export default class ChatsView extends ViewBase {
                     {Object.keys(data.matches).map((item) => MatchProfile({ userData: data.matches[item] }))}
                 </div>
                 {Chats(data.chats)}
-                {/* {CritError(data.critError)} */}
+                {ServerError(data.error)}
                 {Tapbar(TapbarStore.get())}
             </div>
         );
@@ -72,7 +69,7 @@ export default class ChatsView extends ViewBase {
     }
 
     private errorStoreUpdatesView(data, view) {
-        view._data.critError.loading = data.apiErrorLoadCondition;
+        view._data.error = errorManager.error;
         view._template = view._createTmpl(view._data);
         view.render();
     }

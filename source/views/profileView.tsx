@@ -53,7 +53,7 @@ export default class ProfileView extends ViewBase {
                 </div>
                 {CardExpended({ userData: data.cardData.userData, withActions: false, withReports: false })}
                 {Tapbar(TapbarStore.get())}
-                {/* {CritError(data.critError)} */}
+                {/* {Error(data.critError)} */}
             </div>
         );
     }

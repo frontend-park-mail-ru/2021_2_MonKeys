@@ -1,15 +1,15 @@
-import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import { Button } from './button.js';
-import EventBus from '../dispatcher/eventBus.js';
+import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
+import { Button } from '../button.js';
+import EventBus from '../../dispatcher/eventBus.js';
 
-export interface CritErrorProps {
+export interface ErrorData {
     title: string;
     text: string;
-    loading: boolean;
+    show: boolean;
 }
 
-export const CritError = (props: CritErrorProps) => {
-    const className = props.loading ? 'crit-error-container-active' : 'crit-error-container-disactive';
+export const Error = (error: ErrorData) => {
+    const className = error.show ? 'crit-error-container-active' : 'crit-error-container-disactive';
     const okButton = {
         type: 'button',
         text: 'OK',
@@ -18,13 +18,14 @@ export const CritError = (props: CritErrorProps) => {
             EventBus.dispatch<string>('error:ok-button');
         },
     };
+
     return (
         <div class={className}>
             <div class={'crit-error-header'}>
                 <img src='icons/icon_error_red.svg' class='menu-icon crit-error-icon' />
-                <h1 class='crit-error-title'>{props.title}</h1>
+                <h1 class='crit-error-title'>{error.title}</h1>
             </div>
-            <div class='crit-error-message'>{props.text}</div>
+            <div class='crit-error-message'>{error.text}</div>
             {Button(okButton)}
         </div>
     );
