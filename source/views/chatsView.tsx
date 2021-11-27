@@ -10,6 +10,7 @@ import { SearchField } from '../components/searchField.js';
 import { MatchProfile } from '../components/chats/matchProfile.js';
 import { matchRequest } from '../requests/matchRequest.js';
 import { ServerError } from '../components/error/ServerError.js';
+import { Errors } from '../components/error/Errors.js';
 
 export default class ChatsView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -51,7 +52,7 @@ export default class ChatsView extends ViewBase {
                     {Object.keys(data.matches).map((item) => MatchProfile({ userData: data.matches[item] }))}
                 </div>
                 {Chats(data.chats)}
-                {ServerError(data.error)}
+                {Errors(data.error)}
                 {Tapbar(TapbarStore.get())}
             </div>
         );

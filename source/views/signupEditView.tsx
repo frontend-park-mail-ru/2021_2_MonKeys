@@ -12,7 +12,8 @@ import {
     errorGenderMsg,
     errorPreferMsg,
 } from '../constants/errorMsg.js';
-import { ErrorStore } from '../store/errorStore.js';
+import { errorManager, ErrorStore } from '../store/errorStore.js';
+import { Errors } from '../components/error/Errors.js';
 
 export default class SignupEditView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -116,18 +117,14 @@ export default class SignupEditView extends ViewBase {
                 },
             },
         },
-        'critError': {
-            title: 'Ошибка подключения',
-            text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
-            loading: ErrorStore.get().apiErrorLoadCondition,
-        },
+        error: errorManager.error,
     };
 
     _createTmpl(data) {
         return (
             <div class='card-container'>
                 {EditForm(data.editForm)}
-                {/*Error(data.critError)*/}
+                {Errors(data.error)}
             </div>
         );
     }
@@ -147,7 +144,6 @@ export default class SignupEditView extends ViewBase {
         view._data.editForm.errorMsgs.imgError.class = data.imgErrorClass;
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
         view._data.editForm.tags = data.tags;
-        view._data.critError.loading = data.apiErrorLoadCondition;
 
         view._data.editForm.fields.genderField = data.genderField;
         view._data.editForm.fields.preferField = data.preferField;
@@ -167,7 +163,7 @@ export default class SignupEditView extends ViewBase {
     }
 
     private errorStoreUpdatesView(data, view) {
-        view._data.critError.loading = data.apiErrorLoadCondition;
+        view._data.error = errorManager.error;
         view._template = view._createTmpl(view._data);
         view.render();
     }

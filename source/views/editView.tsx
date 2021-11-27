@@ -5,8 +5,7 @@ import { EditForm } from '../components/editForm.js';
 import { EditStore } from '../store/editStore.js';
 import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
-// import { Error } from '../components/critError.js';
-import { ErrorStore } from '../store/errorStore.js';
+import { errorManager, ErrorStore } from '../store/errorStore.js';
 import {
     errorNameMsg,
     errorAgeMsg,
@@ -15,6 +14,7 @@ import {
     errorGenderMsg,
     errorPreferMsg,
 } from '../constants/errorMsg.js';
+import { Errors } from '../components/error/Errors.js';
 
 export default class EditView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -157,11 +157,7 @@ export default class EditView extends ViewBase {
         'tapbar': {
             class: 'menu-icon',
         },
-        'critError': {
-            title: 'Ошибка подключения',
-            text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
-            loading: ErrorStore.get().apiErrorLoadCondition,
-        },
+        error: errorManager.error,
     };
 
     _createTmpl(data) {
@@ -169,7 +165,7 @@ export default class EditView extends ViewBase {
             <div class='card-container'>
                 {EditForm(data.editForm)}
                 {Tapbar(data.tapbar)}
-                {/*{Error(data.critError)}*/}
+                {Errors(data.error)}
             </div>
         );
     }
@@ -189,7 +185,6 @@ export default class EditView extends ViewBase {
         view._data.editForm.errorMsgs.imgError.class = data.imgErrorClass;
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
         view._data.editForm.tags = data.tags;
-        view._data.critError.loading = data.apiErrorLoadCondition;
         view._data.editForm.fields.name.value = ProfileStore.get().name;
         view._data.editForm.fields.birthDate.value = ProfileStore.get().date;
         view._data.editForm.fields.description.value = ProfileStore.get().description;
@@ -206,7 +201,7 @@ export default class EditView extends ViewBase {
     }
 
     private errorStoreUpdatesView(data, view) {
-        view._data.critError.loading = data.apiErrorLoadCondition;
+        view._data.error = errorManager.error;
         view._template = view._createTmpl(view._data);
         view.render();
     }

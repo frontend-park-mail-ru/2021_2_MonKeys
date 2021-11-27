@@ -7,12 +7,15 @@ import ReportsStore from '../store/reportsStore.js';
 import TapbarStore from '../store/tapbarStore.js';
 import { CardExpended } from '../components/cardExpended.js';
 import { userLikesRequset } from '../requests/likesRequest.js';
+import { errorManager, ErrorStore } from '../store/errorStore.js';
+import { Errors } from '../components/error/Errors.js';
 
 export default class LikesView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
         LikesStore.subscribe(this.subscribtionCallback, this);
         ReportsStore.subscribe(this.reportsSubscribtionCallback, this);
+        ErrorStore.unsubscribe(this.errorStoreUpdatesView);
         this._template = this._createTmpl(this._data);
 
         userLikesRequset().then((likesResponse) => {
@@ -31,6 +34,7 @@ export default class LikesView extends ViewBase {
         'likes': LikesStore.get().profiles,
         'reports': ReportsStore.get().reports,
         'reportsActive': ReportsStore.get().active,
+        error: errorManager.error,
     };
 
     _createTmpl(data) {
@@ -43,6 +47,7 @@ export default class LikesView extends ViewBase {
                             ImgCard({ userData: data.likes[item], size: 'small', expanded: true })
                         )}
                     </div>
+                    {Errors(data.error)}
                     {Tapbar(TapbarStore.get())}
                 </div>
             );
@@ -56,6 +61,7 @@ export default class LikesView extends ViewBase {
                         reports: data.reports,
                         reported: data.reportsActive,
                     })}
+                    {Errors(data.error)}
                     {Tapbar(TapbarStore.get())}
                 </div>
             );
@@ -70,6 +76,12 @@ export default class LikesView extends ViewBase {
     private subscribtionCallback(data, view) {
         view._data.likes = data.profiles;
         view._data.likesCount = data.likesCount;
+        view._template = view._createTmpl(view._data);
+        view.render();
+    }
+
+    private errorStoreUpdatesView(data, view) {
+        view._data.error = errorManager.error;
         view._template = view._createTmpl(view._data);
         view.render();
     }

@@ -14,7 +14,6 @@ export interface EditData {
     preferField?: ItemListProps;
     preferErrorClass?: string;
     tagsField?: ItemListProps;
-    apiErrorLoadCondition: boolean;
     tags?;
 }
 
@@ -107,7 +106,6 @@ const initData = {
         ],
         buttonEvent: 'edit:tags-click',
     },
-    apiErrorLoadCondition: false,
 };
 
 EditStore.set(initData);
