@@ -59,11 +59,6 @@ export const ChatEventsRegister = () => {
     });
 
     EventBus.register('chat:search', () => {
-        // const storeData = MatchesStore.get();
-        // storeData.searching = true;
-        // MatchesStore.set(storeData);
-
-        // console.log(storeData.matches);
         const _searchInput = document.getElementsByTagName('input')[0];
         const searchTmpl = _searchInput.value.trim() + '%';
 

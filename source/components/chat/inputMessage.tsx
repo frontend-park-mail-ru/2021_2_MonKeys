@@ -15,18 +15,6 @@ export const InputMessage = (chat: ChatData) => {
                 name: 'inputText',
                 class: 'form__field-valid',
             },
-            // 'inputText': {
-            //     tag: 'textarea',
-            //     type: 'text',
-            //     name: 'messageText',
-            //     class: '',
-            //     oninput: () => {
-            //         EventBus.dispatch<string>('');
-            //     },
-            //     onfocusout: () => {
-            //         EventBus.dispatch<string>('');
-            //     },
-            // },
         },
         sendMessage: {
             type: 'button',
@@ -36,10 +24,9 @@ export const InputMessage = (chat: ChatData) => {
                 EventBus.dispatch<string>('chat:send-button');
             },
             onkeypress: (event) => {
-                alert(1);
                 const enterKeyCode = 13;
-                console.log('dsdsd');
                 if (event.keyCode === enterKeyCode) {
+                    event.preventDefault();
                     EventBus.dispatch<string>('chat:send-button');
                 }
             },
@@ -59,16 +46,13 @@ export const InputMessage = (chat: ChatData) => {
     const buttonSendEvent = () => {
         EventBus.dispatch<number>('chat:send-button', chat.fromUserID);
     };
-    const formEvent = () => {
-        EventBus.dispatch('chat:load-form')
-    }
 
     const inputValue = (chat.draftMessage === undefined || chat.draftMessage === '')
         ? ''
         : chat.draftMessage;
     return (
         // <div class='input-message'>
-            <form class='input-message' onload={formEvent}>
+            <form class='input-message'>
                 <input type='text'
                        class='input-message__field'
                        placeholder='Сообщение'

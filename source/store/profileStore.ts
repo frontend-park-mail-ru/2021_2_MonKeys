@@ -19,7 +19,7 @@ const ProfileStore = new BaseStore<ProfileData>();
 
 ProfileStore.set({
     imgs: [],
-
+    prefer: '',
     apiErrorLoadCondition: false,
 });
 

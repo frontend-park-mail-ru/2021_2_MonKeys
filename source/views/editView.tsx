@@ -7,7 +7,14 @@ import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
 // import { Error } from '../components/critError.js';
 import { ErrorStore } from '../store/errorStore.js';
-import { errorNameMsg, errorAgeMsg, errorImgMsg, errorEditFormMsg } from '../constants/errorMsg.js';
+import {
+    errorNameMsg,
+    errorAgeMsg,
+    errorImgMsg,
+    errorEditFormMsg,
+    errorGenderMsg,
+    errorPreferMsg,
+} from '../constants/errorMsg.js';
 
 export default class EditView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -32,14 +39,17 @@ export default class EditView extends ViewBase {
             case 'male':
                 editStore.preferField.items[0].selected = true;
                 editStore.preferField.items[1].selected = false;
+                editStore.preferField.items[2].selected = false;
                 break;
             case 'female':
-                editStore.preferField.items[1].selected = true;
                 editStore.preferField.items[0].selected = false;
+                editStore.preferField.items[1].selected = true;
+                editStore.preferField.items[2].selected = false;
                 break;
             default:
-                editStore.preferField.items[1].selected = true;
-                editStore.preferField.items[0].selected = true;
+                editStore.preferField.items[0].selected = false;
+                editStore.preferField.items[1].selected = false;
+                editStore.preferField.items[2].selected = true;
                 break;
         }
 
@@ -126,6 +136,14 @@ export default class EditView extends ViewBase {
                     text: errorAgeMsg,
                     class: EditStore.get().birthDateErrorClass,
                 },
+                'genderError': {
+                    text: errorGenderMsg,
+                    class: EditStore.get().genderErrorClass,
+                },
+                'preferError': {
+                    text: errorPreferMsg,
+                    class: EditStore.get().preferErrorClass,
+                },
                 'imgError': {
                     text: errorImgMsg,
                     class: EditStore.get().imgErrorClass,
@@ -179,6 +197,8 @@ export default class EditView extends ViewBase {
         view._data.editForm.fields.genderField = data.genderField;
         view._data.editForm.fields.preferField = data.preferField;
         view._data.editForm.fields.tagsField = data.tagsField;
+        view._data.editForm.errorMsgs.genderError.class = data.genderErrorClass;
+        view._data.editForm.errorMsgs.preferError.class = data.preferErrorClass;
 
         view._template = view._createTmpl(view._data);
 

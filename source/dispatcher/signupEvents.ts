@@ -83,7 +83,6 @@ export const SignupEventRegister = () => {
         SignupStore.set(storeData);
 
         const test = _emailInput.value.length === 0 || emailRegExp.test(_emailInput.value);
-        console.log(!_emailInput.value);
         if (!test || !_emailInput.value) {
             storeData.emailPass = false;
         }

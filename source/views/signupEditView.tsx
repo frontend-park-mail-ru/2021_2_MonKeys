@@ -4,7 +4,14 @@ import { EditForm } from '../components/editForm.js';
 import EventBus from '../dispatcher/eventBus.js';
 import { EditStore } from '../store/editStore.js';
 import { ProfileStore } from '../store/profileStore.js';
-import { errorNameMsg, errorAgeMsg, errorImgMsg, errorEditFormMsg } from '../constants/errorMsg.js';
+import {
+    errorNameMsg,
+    errorAgeMsg,
+    errorImgMsg,
+    errorEditFormMsg,
+    errorGenderMsg,
+    errorPreferMsg,
+} from '../constants/errorMsg.js';
 import { ErrorStore } from '../store/errorStore.js';
 
 export default class SignupEditView extends ViewBase {
@@ -91,6 +98,14 @@ export default class SignupEditView extends ViewBase {
                     text: errorAgeMsg,
                     class: EditStore.get().birthDateErrorClass,
                 },
+                'genderError': {
+                    text: errorGenderMsg,
+                    class: EditStore.get().genderErrorClass,
+                },
+                'preferError': {
+                    text: errorPreferMsg,
+                    class: EditStore.get().preferErrorClass,
+                },
                 'imgError': {
                     text: errorImgMsg,
                     class: EditStore.get().imgErrorClass,
@@ -137,6 +152,8 @@ export default class SignupEditView extends ViewBase {
         view._data.editForm.fields.genderField = data.genderField;
         view._data.editForm.fields.preferField = data.preferField;
         view._data.editForm.fields.tagsField = data.tagsField;
+        view._data.editForm.errorMsgs.genderError.class = data.genderErrorClass;
+        view._data.editForm.errorMsgs.preferError.class = data.preferErrorClass;
 
         view._template = view._createTmpl(view._data);
 

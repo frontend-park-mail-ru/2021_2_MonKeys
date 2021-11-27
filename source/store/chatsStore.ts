@@ -32,6 +32,14 @@ ChatsStore.set({
     currentChat: null,
 });
 
+function compareChats(l: Chat, r: Chat) {
+    if (l.messages.length === 0 || r.messages.length === 0 || l.messages.at(-1).date < r.messages.at(-1).date) {
+        return 1;
+    }
+
+    return -1;
+}
+
 class ChatsManager {
     // all chats
     get chatsWithMessages() {
@@ -41,6 +49,8 @@ class ChatsManager {
                 chats.push(chat);
             }
         });
+
+        chats.sort(compareChats);
 
         return chats;
     }
@@ -89,6 +99,11 @@ class ChatsManager {
 
     hasChat(chatID: number) {
         return this.getChatByID(chatID) != null;
+    }
+
+    hasMessages(chatID: number) {
+        const chat = this.getChatByID(chatID);
+        return chat.messages.length !== 0;
     }
 
     // current chat

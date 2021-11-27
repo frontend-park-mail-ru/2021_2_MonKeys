@@ -48,7 +48,6 @@ export const LikesEventsRegister = () => {
             LikesStore.set(storeData);
         }
 
-        console.log(payload);
         likesRequest(payload.userID, payload.reactionType).then((response) => {
             if (response.status === HTTPSuccess) {
                 if (response.data.status === HTTPSuccess) {
