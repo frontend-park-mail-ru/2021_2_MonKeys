@@ -10,7 +10,9 @@ export interface EditData {
     imgFieldClass: string;
     imgErrorClass: string;
     genderField?: ItemListProps;
+    genderErrorClass?: string;
     preferField?: ItemListProps;
+    preferErrorClass?: string;
     tagsField?: ItemListProps;
     apiErrorLoadCondition: boolean;
     tags?;
@@ -25,6 +27,8 @@ const initData = {
     birthDateErrorClass: 'error-inactive',
     imgFieldClass: 'add-img-box',
     imgErrorClass: 'error-inactive',
+    genderErrorClass: 'error-inactive',
+    preferErrorClass: 'error-inactive',
     formErrorClass: 'error-inactive',
     genderField: {
         title: 'Ваш пол',
@@ -60,6 +64,11 @@ const initData = {
                 value: 'Женщину',
                 selected: false,
                 clickEvent: 'edit:prefer-female-click',
+            },
+            {
+                value: 'Не важно',
+                selected: false,
+                clickEvent: 'edit:prefer-any-click',
             },
         ],
         buttonEvent: 'edit:prefer-click',

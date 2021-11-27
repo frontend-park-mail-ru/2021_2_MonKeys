@@ -33,6 +33,21 @@ export const EditEventRegister = () => {
             EditStore.set(storeData);
         }
 
+        
+        const genderValid = !storeData.genderField.items[0].selected&&!storeData.genderField.items[1].selected
+        const preferValid = !storeData.preferField.items[0].selected&&!storeData.preferField.items[1].selected&&!storeData.preferField.items[2].selected
+
+
+        if (genderValid) {
+            storeData.genderErrorClass = 'error-active';
+            EditStore.set(storeData);
+        }
+
+        if (preferValid) {
+            storeData.preferErrorClass = 'error-active';
+            EditStore.set(storeData);
+        }
+
         const photoPaths = ProfileStore.get().imgs;
 
         if (photoPaths == undefined || photoPaths.length === 0) {
@@ -40,7 +55,7 @@ export const EditEventRegister = () => {
             storeData.imgErrorClass = 'error-active';
         }
 
-        if (!testName || !validDate(_dateInput) || photoPaths == undefined || photoPaths.length === 0) {
+        if (!testName || !validDate(_dateInput) || photoPaths == undefined || photoPaths.length === 0 || genderValid || preferValid) {
             storeData.formErrorClass = 'error-active';
             EditStore.set(storeData);
             return;
@@ -53,6 +68,8 @@ export const EditEventRegister = () => {
         storeData.imgFieldClass = 'add-img-box';
         storeData.imgErrorClass = 'error-inactive';
         storeData.formErrorClass = 'error-inactive';
+        storeData.genderErrorClass = 'error-inactive';
+        storeData.preferErrorClass = 'error-inactive';
         EditStore.set(storeData);
 
         const name = _nameInput.value.trim();
@@ -73,9 +90,9 @@ export const EditEventRegister = () => {
             userGender = 'female';
         }
 
-        if (storeData.preferField.items[0].selected && !storeData.preferField.items[1].selected) {
+        if (storeData.preferField.items[0].selected) {
             userPrefer = 'male';
-        } else if (!storeData.preferField.items[0].selected && storeData.preferField.items[1].selected) {
+        } else if (storeData.preferField.items[1].selected) {
             userPrefer = 'female';
         }
 
@@ -326,18 +343,6 @@ export const EditEventRegister = () => {
             });
     });
 
-    EventBus.register('edit:gender-click', () => {
-        const storeData = EditStore.get();
-        storeData.genderField.open = !storeData.genderField.open;
-        EditStore.set(storeData);
-    });
-
-    EventBus.register('edit:prefer-click', () => {
-        const storeData = EditStore.get();
-        storeData.preferField.open = !storeData.preferField.open;
-        EditStore.set(storeData);
-    });
-
     EventBus.register('edit:tags-click', () => {
         const storeData = EditStore.get();
         if (ProfileStore.get().tags) {
@@ -369,25 +374,42 @@ export const EditEventRegister = () => {
         const storeData = EditStore.get();
         storeData.genderField.items[0].selected = true;
         storeData.genderField.items[1].selected = false;
+        storeData.genderErrorClass = 'error-inactive';
         EditStore.set(storeData);
     });
 
     EventBus.register('edit:gender-female-click', () => {
         const storeData = EditStore.get();
-        storeData.genderField.items[1].selected = true;
         storeData.genderField.items[0].selected = false;
+        storeData.genderField.items[1].selected = true;
+        storeData.genderErrorClass = 'error-inactive';
         EditStore.set(storeData);
     });
 
     EventBus.register('edit:prefer-male-click', () => {
         const storeData = EditStore.get();
-        storeData.preferField.items[0].selected = !storeData.preferField.items[0].selected;
+        storeData.preferField.items[0].selected = true;
+        storeData.preferField.items[1].selected = false;
+        storeData.preferField.items[2].selected = false;
+        storeData.preferErrorClass = 'error-inactive';
         EditStore.set(storeData);
     });
 
     EventBus.register('edit:prefer-female-click', () => {
         const storeData = EditStore.get();
-        storeData.preferField.items[1].selected = !storeData.preferField.items[1].selected;
+        storeData.preferField.items[0].selected = false;
+        storeData.preferField.items[1].selected = true;
+        storeData.preferField.items[2].selected = false;
+        storeData.preferErrorClass = 'error-inactive';
+        EditStore.set(storeData);
+    });
+
+    EventBus.register('edit:prefer-any-click', () => {
+        const storeData = EditStore.get();
+        storeData.preferField.items[0].selected = false;
+        storeData.preferField.items[1].selected = false;
+        storeData.preferField.items[2].selected = true;
+        storeData.preferErrorClass = 'error-inactive';
         EditStore.set(storeData);
     });
 };

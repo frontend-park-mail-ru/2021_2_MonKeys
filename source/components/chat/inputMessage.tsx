@@ -37,7 +37,6 @@ export const InputMessage = () => {
             onkeypress: (event) => {
                 alert(1);
                 const enterKeyCode = 13;
-                console.log('dsdsd');
                 if (event.keyCode === enterKeyCode) {
                     EventBus.dispatch<string>('chat:send-button');
                 }
@@ -50,7 +49,6 @@ export const InputMessage = () => {
             class=''
             onkeypress={(event) => {
                 const enterKeyCode = 13;
-                console.log('dsdsd');
                 if (event.keyCode === enterKeyCode) {
                     event.preventDefault();
                     EventBus.dispatch<string>('chat:send-button');
