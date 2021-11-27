@@ -8,7 +8,7 @@ import TapbarStore from '../store/tapbarStore.js';
 import { CardExpended } from '../components/cardExpended.js';
 import { userLikesRequset } from '../requests/likesRequest.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
-import { Errors } from '../components/error/Errors.js';
+import { Errors } from '../components/error/errors.js';
 
 export default class LikesView extends ViewBase {
     constructor(parent: HTMLElement) {

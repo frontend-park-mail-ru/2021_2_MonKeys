@@ -5,7 +5,7 @@ import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { ChatsStore, chatsManager } from '../store/chatsStore.js';
 import ReportsStore from '../store/reportsStore.js';
 import { CardExpended } from '../components/cardExpended.js';
-import { Errors } from '../components/error/Errors.js';
+import { Errors } from '../components/error/errors.js';
 
 export default class ChatView extends ViewBase {
     constructor(parent: HTMLElement) {

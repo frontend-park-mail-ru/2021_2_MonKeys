@@ -10,7 +10,7 @@ import { errorManager, ErrorStore } from '../store/errorStore.js';
 
 import router from '../route/router.js';
 import { dropsBackground } from '../components/dropsBackground.js';
-import { Errors } from '../components/error/Errors.js';
+import { Errors } from '../components/error/errors.js';
 
 export default class LoginView extends ViewBase {
     public unsubscribe() {
