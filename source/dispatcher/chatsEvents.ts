@@ -21,17 +21,6 @@ export const ChatsEventsRegister = () => {
 
                 chatsManager.openChat(chatID);
                 chatsManager.updateChatMessages(chatID, response.data.body);
-
-                // if (!chatsManager.withProfile(chatID)) {
-                //     const matchesData = MatchesStore.get();
-                //     let profile: ProfileData;
-                //     for (let i = 0; i < matchesData.matchesTotal; i++) {
-                //         if (matchesData.matches[i].id === chatID) {
-                //             profile = matchesData.matches[i];
-                //         }
-                //     }
-                //     chatsManager.setProfile(chatID, profile);
-                // }
             })
             .catch((err) => {
                 errorManager.pushAPIError();
@@ -56,6 +45,7 @@ export const ChatsEventsRegister = () => {
                             throw 'bad request';
                         }
 
+                        chatsManager.openChat(chatID);
                         chatsManager.updateChatMessages(chatID, response.data.body);
                     })
                     .catch((err) => {

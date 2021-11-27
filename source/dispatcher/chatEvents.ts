@@ -91,5 +91,10 @@ export const ChatEventsRegister = () => {
             }
             chatsManager.setProfile(userID, profile);
         }
+        chatsManager.activateProfile(userID);
+    });
+    EventBus.register('chat:back-to-chat-button', (userID: number) => {
+        chatsManager.disableProfile(userID);
+        // EventBus.dispatch<number>('chats:preview-chat', userID);
     });
 };

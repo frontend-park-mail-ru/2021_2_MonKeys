@@ -65,6 +65,7 @@ export default class FeedView extends ViewBase {
                     },
                 },
             },
+            withActions: true,
             feed: true,
         },
         tapbar: {
@@ -106,6 +107,7 @@ export default class FeedView extends ViewBase {
                     eventBus.dispatch('feed:shrink-button');
                 },
             };
+            console.log(1);
             return (
                 <div class='flex_box_column_center overflow-hidden'>
                     {CardExpended(data.cardData)}

@@ -46,7 +46,7 @@ export default class LikesView extends ViewBase {
                     <div class='likes-view-header'>Вы понравились нескольким людям</div>
                     <div class='likes-view-cards'>
                         {Object.keys(data.likes).map((item) =>
-                            ImgCard({ userData: data.likes[item], size: 'small', expanded: true })
+                            ImgCard({ userData: data.likes[item], size: 'small', withActions: true, expanded: true })
                         )}
                     </div>
                     {Errors(data.error)}

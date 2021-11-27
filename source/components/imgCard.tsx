@@ -6,6 +6,7 @@ export interface ProfileCardProps {
     userData: ProfileData;
 
     size: string;
+    withActions: boolean;
     expanded: boolean;
     feed?: boolean;
 }
@@ -31,6 +32,11 @@ export const ImgCard = (props: ProfileCardProps) => {
     ) : (
         <div></div>
     );
+    const cardActionsTmpl = props.withActions ? (
+        CardActions({ userID: props.userData.id, expend: props.expanded, feed: props.feed })
+    ) : (
+        <div></div>
+    );
 
     return (
         <div class={'img-card img-card' + sizeModificator}>
@@ -41,7 +47,8 @@ export const ImgCard = (props: ProfileCardProps) => {
                     <div class={'img-card__name-age img-card__name-age' + sizeModificator}>{nameAge}</div>
                     {ReportTmpl}
                 </div>
-                {CardActions({ userID: props.userData.id, expend: props.expanded, feed: props.feed })}
+                {cardActionsTmpl}
+                {/* {CardActions({ userID: props.userData.id, expend: props.expanded, feed: props.feed })} */}
             </div>
         </div>
     );

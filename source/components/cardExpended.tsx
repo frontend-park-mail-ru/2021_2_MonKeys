@@ -14,6 +14,7 @@ export interface CardExpendedProps {
 
     withActions: boolean;
     withReports: boolean;
+    withBackButton?: boolean;
     feed?: boolean;
 
     reports?: string[];
@@ -21,9 +22,10 @@ export interface CardExpendedProps {
 }
 
 export const CardExpended = (props: CardExpendedProps) => {
-    if (!props.userData) {
-        return <div></div>;
-    }
+    // if (!props.userData) {
+    //     return <div></div>;
+    // }
+    // console.log(props.userData);
     const tagsExists = props.userData.tags !== undefined ? true : false;
     let tagField: HTMLCollection;
     if (tagsExists) {
@@ -43,21 +45,33 @@ export const CardExpended = (props: CardExpendedProps) => {
         descField = <div class='card-expended__description'></div>;
     }
     let imgTmpl: HTMLAllCollection;
-    let nameTmpl: HTMLAllCollection;
-    if (props.withActions) {
-        imgTmpl = ImgCard({ userData: props.userData, size: 'medium', expanded: false });
-        nameTmpl = <div></div>;
-    } else {
-        imgTmpl = <img class={'img-card__img img-card__img_size_medium'} src={props.userData.imgs[0]} />;
-        nameTmpl = (
-            <div class='img-card__name-age img-card__name-age_size_small'>
-                {props.userData.name + ', ' + props.userData.age}
-            </div>
-        );
-    }
+    // let nameTmpl: HTMLAllCollection;
+    // if (props.withActions) {
+    //     imgTmpl = ImgCard({ userData: props.userData, size: 'medium', expanded: false });
+    //     nameTmpl = <div></div>;
+    // } else {
+    //     imgTmpl = <img class={'img-card__img img-card__img_size_medium'} src={props.userData.imgs[0]} />;
+    //     nameTmpl = (
+    //         <div class='img-card__name-age img-card__name-age_size_small'>
+    //             {props.userData.name + ', ' + props.userData.age}
+    //         </div>
+    //     );
+    // }
     if (props.feed) {
-        imgTmpl = ImgCard({ userData: props.userData, size: 'medium', expanded: true, feed: true });
-        nameTmpl = <div></div>;
+        imgTmpl = ImgCard({
+            userData: props.userData,
+            size: 'medium',
+            withActions: props.withActions,
+            expanded: true,
+            feed: props.feed,
+        });
+    } else {
+        imgTmpl = ImgCard({
+            userData: props.userData,
+            size: 'medium',
+            withActions: props.withActions,
+            expanded: false,
+        });
     }
     const reportButtonAction = () => {
         EventBus.dispatch<string>('reports:report-button');
@@ -74,9 +88,23 @@ export const CardExpended = (props: CardExpendedProps) => {
     ) : (
         <div></div>
     );
-    console.log(props.reports);
     const reportWindowTmpl = props.withReports ? (
         ReportWindow({ reports: props.reports, reportedUserID: props.userData.id, visible: props.reported })
+    ) : (
+        <div></div>
+    );
+    const backProfileButtonClick = () => {
+        EventBus.dispatch<number>('chat:back-to-chat-button', props.userData.id);
+    };
+    const backProfileButton = props.withBackButton ? (
+        <div class='card-expended__back-button'>
+            {Button({
+                type: 'button',
+                text: 'Назад',
+                class: 'button-white-big',
+                onclick: backProfileButtonClick,
+            })}
+        </div>
     ) : (
         <div></div>
     );
@@ -86,9 +114,9 @@ export const CardExpended = (props: CardExpendedProps) => {
             {reportWindowTmpl}
             <div class='card-profile'>
                 {imgTmpl}
-                {nameTmpl}
                 {descField}
                 {tagField}
+                {backProfileButton}
                 {reportButtonTmpl}
             </div>
         </div>

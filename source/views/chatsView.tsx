@@ -9,7 +9,6 @@ import { ChatsStore, chatsManager } from '../store/chatsStore.js';
 import { SearchField } from '../components/searchField.js';
 import { MatchProfile } from '../components/chats/matchProfile.js';
 import { matchRequest } from '../requests/matchRequest.js';
-import { Errors } from '../components/error/Errors.js';
 
 export default class ChatsView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -54,7 +53,7 @@ export default class ChatsView extends ViewBase {
                 </div>
                 <span class='view-contant__chats-header'>Чаты</span>
                 {Chats(data.chats)}
-                {Errors(data.error)}
+                {/* {Errors(data.error)} */}
                 {Tapbar(TapbarStore.get())}
             </div>
         );
