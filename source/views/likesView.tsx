@@ -8,7 +8,7 @@ import TapbarStore from '../store/tapbarStore.js';
 import { CardExpended } from '../components/cardExpended.js';
 import { userLikesRequset } from '../requests/likesRequest.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
-import { Errors } from '../components/error/Errors.js';
+import { Errors } from '../components/error/errors.js';
 
 export default class LikesView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -18,17 +18,15 @@ export default class LikesView extends ViewBase {
         ErrorStore.unsubscribe(this.errorStoreUpdatesView);
         this._template = this._createTmpl(this._data);
 
-        userLikesRequset()
-            .then((likesResponse) => {
-                const likesData = LikesStore.get();
-                likesData.profiles = likesResponse.data.body.allUsers;
-                likesData.likesCount = likesResponse.data.body.likesCount;
-                likesData.expended = false;
-                likesData.reported = false;
-                likesData.userIndex = 0;
-                LikesStore.set(likesData);
-            })
-            .catch(errorManager.pushAPIError);
+        userLikesRequset().then((data) => {
+            const likesData = LikesStore.get();
+            likesData.profiles = data.body.allUsers;
+            likesData.likesCount = data.body.likesCount;
+            likesData.expended = false;
+            likesData.reported = false;
+            likesData.userIndex = 0;
+            LikesStore.set(likesData);
+        });
     }
 
     _data = {

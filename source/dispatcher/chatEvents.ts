@@ -4,7 +4,7 @@ import { Message, chatsManager } from '../store/chatsStore.js';
 import router from '../route/router.js';
 import { MatchesStore } from '../store/matchStore.js';
 import { searchMathesRequest } from '../requests/matchRequest.js';
-import { HTTPSuccess } from '../constants/HTTPStatus.js';
+import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { ProfileData } from '../store/profileStore.js';
 
 export const ChatEventsRegister = () => {
@@ -57,22 +57,16 @@ export const ChatEventsRegister = () => {
         const _searchInput = document.getElementsByTagName('input')[0];
         const searchTmpl = _searchInput.value.trim() + '%';
 
-        searchMathesRequest(searchTmpl).then((matchesResponse) => {
-            if (matchesResponse.status === HTTPSuccess) {
-                if (matchesResponse.data.status === HTTPSuccess) {
-                    if (matchesResponse.data.body.allUsers) {
-                        const matchesData = MatchesStore.get();
-                        matchesData.matches = matchesResponse.data.body.allUsers;
-                        matchesData.matchesTotal = matchesResponse.data.body.matchesCount;
-                        MatchesStore.set(matchesData);
-                    }
-                } else {
-                    throw '400';
-                }
-            } else {
-                // const feedData = feedStore.get();
-                // feedData.apiErrorLoadCondition = true;
-                // feedStore.set(feedData);
+        searchMathesRequest(searchTmpl).then((data) => {
+            if (data.status === HTTPSuccess) {
+                throw 'bad response';
+            }
+
+            if (data.body.allUsers) {
+                const matchesData = MatchesStore.get();
+                matchesData.matches = data.body.allUsers;
+                matchesData.matchesTotal = data.body.matchesCount;
+                MatchesStore.set(matchesData);
             }
         });
 

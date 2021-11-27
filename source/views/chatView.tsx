@@ -5,7 +5,7 @@ import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { ChatsStore, chatsManager } from '../store/chatsStore.js';
 import ReportsStore from '../store/reportsStore.js';
 import { CardExpended } from '../components/cardExpended.js';
-import { Errors } from '../components/error/Errors.js';
+import { Errors } from '../components/error/errors.js';
 
 export default class ChatView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -14,7 +14,6 @@ export default class ChatView extends ViewBase {
         ReportsStore.subscribe(this.reportsSubscribtionCallback, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
         this._template = this._createTmpl(this._data);
-        console.log(chatsManager.chat);
     }
 
     public unsubscribe() {

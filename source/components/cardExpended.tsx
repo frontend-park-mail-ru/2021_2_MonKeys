@@ -74,7 +74,6 @@ export const CardExpended = (props: CardExpendedProps) => {
     ) : (
         <div></div>
     );
-    console.log(props.reports);
     const reportWindowTmpl = props.withReports ? (
         ReportWindow({ reports: props.reports, reportedUserID: props.userData.id, visible: props.reported })
     ) : (
