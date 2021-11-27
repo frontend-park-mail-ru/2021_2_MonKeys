@@ -33,10 +33,11 @@ export const EditEventRegister = () => {
             EditStore.set(storeData);
         }
 
-        
-        const genderValid = !storeData.genderField.items[0].selected&&!storeData.genderField.items[1].selected
-        const preferValid = !storeData.preferField.items[0].selected&&!storeData.preferField.items[1].selected&&!storeData.preferField.items[2].selected
-
+        const genderValid = !storeData.genderField.items[0].selected && !storeData.genderField.items[1].selected;
+        const preferValid =
+            !storeData.preferField.items[0].selected &&
+            !storeData.preferField.items[1].selected &&
+            !storeData.preferField.items[2].selected;
 
         if (genderValid) {
             storeData.genderErrorClass = 'error-active';
@@ -55,7 +56,14 @@ export const EditEventRegister = () => {
             storeData.imgErrorClass = 'error-active';
         }
 
-        if (!testName || !validDate(_dateInput) || photoPaths == undefined || photoPaths.length === 0 || genderValid || preferValid) {
+        if (
+            !testName ||
+            !validDate(_dateInput) ||
+            photoPaths == undefined ||
+            photoPaths.length === 0 ||
+            genderValid ||
+            preferValid
+        ) {
             storeData.formErrorClass = 'error-active';
             EditStore.set(storeData);
             return;

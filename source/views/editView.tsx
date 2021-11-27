@@ -7,7 +7,14 @@ import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
 // import { Error } from '../components/critError.js';
 import { ErrorStore } from '../store/errorStore.js';
-import { errorNameMsg, errorAgeMsg, errorImgMsg, errorEditFormMsg, errorGenderMsg, errorPreferMsg } from '../constants/errorMsg.js';
+import {
+    errorNameMsg,
+    errorAgeMsg,
+    errorImgMsg,
+    errorEditFormMsg,
+    errorGenderMsg,
+    errorPreferMsg,
+} from '../constants/errorMsg.js';
 
 export default class EditView extends ViewBase {
     constructor(parent: HTMLElement) {
