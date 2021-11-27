@@ -1,7 +1,7 @@
 import EventBus from './eventBus.js';
 import router from '../route/router.js';
 import { chatsManager } from '../store/chatsStore.js';
-import { getChat } from '../requests/chatRequest.js';
+import { getChatRequest } from '../requests/chatRequest.js';
 import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileData } from '../store/profileStore.js';
 import { errorManager } from '../store/errorStore.js';
@@ -13,7 +13,7 @@ export const ChatsEventsRegister = () => {
         router.go(`/chat`);
 
         const messageID = chatsManager.getFirstMessageID(chatID);
-        getChat(chatID, messageID)
+        getChatRequest(chatID, messageID)
             .then((response) => {
                 if (response.status !== HTTPSuccess || response.data.status !== HTTPSuccess) {
                     throw 'bad request';
@@ -50,7 +50,7 @@ export const ChatsEventsRegister = () => {
 
             if (chatsManager.hasMessages(chatID)) {
                 const messageID = chatsManager.getFirstMessageID(chatID);
-                getChat(chatID, messageID)
+                getChatRequest(chatID, messageID)
                     .then((response) => {
                         if (response.status !== HTTPSuccess || response.data.status !== HTTPSuccess) {
                             throw 'bad request';

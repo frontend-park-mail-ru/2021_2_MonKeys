@@ -3,7 +3,7 @@ import router from '../route/router.js';
 import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileStore } from '../store/profileStore.js';
 import { feedRequest } from '../requests/feedRequest.js';
-import { getProfile } from '../requests/profileRequest.js';
+import { getProfileRequest } from '../requests/profileRequest.js';
 
 import { LoginEventRegister } from './loginEvents.js';
 import { SignupEventRegister } from './signupEvents.js';
@@ -22,7 +22,7 @@ import LikesStore from '../store/likesStore.js';
 import { MatchesStore } from '../store/matchStore.js';
 import { ErrorEventsRegister } from './errorEvents.js';
 import { ChatsEventsRegister } from './chatsEvents.js';
-import { getChats } from '../requests/chatsRequest.js';
+import { getChatsRequest } from '../requests/chatsRequest.js';
 import { userLikesRequset } from '../requests/likesRequest.js';
 import { chatsManager } from '../store/chatsStore.js';
 import { ReportsEventsRegister } from './reportsEvents.js';
@@ -32,7 +32,7 @@ import { errorManager } from '../store/errorStore.js';
 
 export const InitBus = () => {
     eventBus.register('user:cookie-requests', () => {
-        getProfile()
+        getProfileRequest()
             .then((response) => {
                 if (response.status !== HTTPSuccess) {
                     throw 'server internal error';
@@ -110,7 +110,7 @@ export const InitBus = () => {
             })
             .catch(errorManager.pushAPIError);
 
-        getChats()
+        getChatsRequest()
             .then((response) => {
                 if (response.status !== HTTPSuccess || response.data.status !== HTTPSuccess) {
                     throw 'bad response';

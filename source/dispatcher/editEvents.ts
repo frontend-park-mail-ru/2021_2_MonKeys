@@ -2,8 +2,8 @@ import EventBus from './eventBus.js';
 import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileStore } from '../store/profileStore.js';
 import router from '../route/router.js';
-import { addPhotoToProfile, deleteProfilePhoto } from '../requests/profilePhotoRequest.js';
-import { editProfile } from '../requests/profileRequest.js';
+import { addPhotoToProfileRequest, deleteProfilePhotoRequest } from '../requests/profilePhotoRequest.js';
+import { editProfileRequest } from '../requests/profileRequest.js';
 import { tagsRequest } from '../requests/tagsRequest.js';
 import { EditStore } from '../store/editStore.js';
 import { validDate, validImgType } from '../validation/edit.js';
@@ -103,7 +103,7 @@ export const EditEventRegister = () => {
             userPrefer = 'female';
         }
 
-        editProfile(name, userGender, userPrefer, date, description, photoPaths, tags)
+        editProfileRequest(name, userGender, userPrefer, date, description, photoPaths, tags)
             .then((response) => {
                 if (response.status !== HTTPSuccess || response.data.status !== HTTPSuccess) {
                     throw 'bad response';
@@ -269,7 +269,7 @@ export const EditEventRegister = () => {
             return;
         }
 
-        addPhotoToProfile(photo)
+        addPhotoToProfileRequest(photo)
             .then((response) => {
                 if (response.status !== HTTPSuccess) {
                     throw 'photo not uploaded';
@@ -295,7 +295,7 @@ export const EditEventRegister = () => {
     });
 
     EventBus.register('edit:img-delete', (imgPath) => {
-        deleteProfilePhoto(imgPath)
+        deleteProfilePhotoRequest(imgPath)
             .then((response) => {
                 if (response.status !== HTTPSuccess || response.data.status !== HTTPSuccess) {
                     throw 'bad response';

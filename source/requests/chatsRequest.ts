@@ -4,7 +4,7 @@ import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { Chat, Message } from '../store/chatsStore.js';
 import { errorManager } from '../store/errorStore.js';
 
-const getChats = () => {
+const getChatsRequest = () => {
     return http
         .get(chatsURL)
         .then((response) => {
@@ -28,4 +28,4 @@ const getChats = () => {
         });
 };
 
-export { getChats };
+export { getChatsRequest };

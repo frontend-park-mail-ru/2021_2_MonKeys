@@ -2,7 +2,7 @@ import EventBus from './eventBus.js';
 import { emailRegExp, passwordRegExp } from '../constants/validation.js';
 import { HTTPEMailNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
 import router from '../route/router.js';
-import { createProfile } from '../requests/profileRequest.js';
+import { createProfileRequest } from '../requests/profileRequest.js';
 import { SignupStore } from '../store/signupStore.js';
 import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
@@ -50,7 +50,7 @@ export const SignupEventRegister = () => {
         const _email = _emailInput.value.trim();
         const _password = _passwordInput.value.trim();
 
-        createProfile(_email, _password)
+        createProfileRequest(_email, _password)
             .then((response) => {
                 if (response.status === HTTPSuccess) {
                     if (response.data.status === HTTPSuccess) {

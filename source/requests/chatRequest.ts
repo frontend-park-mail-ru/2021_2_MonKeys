@@ -4,7 +4,7 @@ import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { Message } from '../store/chatsStore.js';
 import { errorManager } from '../store/errorStore.js';
 
-const getChat = (fromUserID, lastMessageID) => {
+const getChatRequest = (fromUserID, lastMessageID) => {
     return http
         .get(`${chatURL}/${fromUserID}&${lastMessageID}`)
         .then((response) => {
@@ -26,4 +26,4 @@ const getChat = (fromUserID, lastMessageID) => {
         });
 };
 
-export { getChat };
+export { getChatRequest };

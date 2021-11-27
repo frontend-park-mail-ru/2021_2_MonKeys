@@ -3,7 +3,7 @@ import http from '../utils/http.js';
 import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { errorManager } from '../store/errorStore.js';
 
-const createProfile = (email, password) => {
+const createProfileRequest = (email, password) => {
     const body = JSON.stringify({
         email: email,
         password: password,
@@ -24,7 +24,7 @@ const createProfile = (email, password) => {
         });
 };
 
-const getProfile = () => {
+const getProfileRequest = () => {
     return http
         .get(authProfileURL)
         .then((response) => {
@@ -40,7 +40,7 @@ const getProfile = () => {
         });
 };
 
-const editProfile = (name, gender, prefer, date, description, photoPaths, tags) => {
+const editProfileRequest = (name, gender, prefer, date, description, photoPaths, tags) => {
     const body = JSON.stringify({
         name: name,
         gender: gender,
@@ -66,4 +66,4 @@ const editProfile = (name, gender, prefer, date, description, photoPaths, tags) 
         });
 };
 
-export { createProfile, getProfile, editProfile };
+export { createProfileRequest, getProfileRequest, editProfileRequest };

@@ -3,7 +3,7 @@ import http from '../utils/http.js';
 import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { errorManager } from '../store/errorStore.js';
 
-const addPhotoToProfile = (photo) => {
+const addPhotoToProfileRequest = (photo) => {
     const body = new FormData();
     body.append('photo', photo);
 
@@ -22,7 +22,7 @@ const addPhotoToProfile = (photo) => {
         });
 };
 
-const deleteProfilePhoto = (photo) => {
+const deleteProfilePhotoRequest = (photo) => {
     const body = JSON.stringify({
         photo: photo,
     });
@@ -42,4 +42,4 @@ const deleteProfilePhoto = (photo) => {
         });
 };
 
-export { addPhotoToProfile, deleteProfilePhoto };
+export { addPhotoToProfileRequest, deleteProfilePhotoRequest };

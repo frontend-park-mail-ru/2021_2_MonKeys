@@ -2,7 +2,6 @@ import WebSocketManager from '../utils/webSocket.js';
 import { wsURL } from '../constants/urls.js';
 import eventBus from '../dispatcher/eventBus.js';
 import { Message } from '../store/chatsStore.js';
-import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { errorManager } from '../store/errorStore.js';
 
 const ws = new WebSocketManager(wsURL);
