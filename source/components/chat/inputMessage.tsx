@@ -45,22 +45,43 @@ export const InputMessage = () => {
         },
     };
 
+    const enterSendEvent = (event) => {
+        const enterKeyCode = 13;
+        if (event.keyCode === enterKeyCode) {
+            event.preventDefault();
+            EventBus.dispatch<string>('chat:send-button');
+        }
+    };
+    const buttonSendEvent = () => {
+        EventBus.dispatch<string>('chat:send-button');
+    };
+
     return (
-        <div
-            class=''
-            onkeypress={(event) => {
-                const enterKeyCode = 13;
-                console.log('dsdsd');
-                if (event.keyCode === enterKeyCode) {
-                    event.preventDefault();
-                    EventBus.dispatch<string>('chat:send-button');
-                }
-            }}
-        >
-            <form class={''}>
-                <div>{FormField(props.fields.inputText)}</div>
-                <div>{Button(props.sendMessage)}</div>
+        // <div class='input-message'>
+            <form class='input-message'>
+                <input type='text' class='input-message__field' placeholder='Сообщение' onkeypress={enterSendEvent} focus/>
+                <button class='input-message__button-send' type='reset' onclick={buttonSendEvent} onkeypress={enterSendEvent}>
+                    <img class='input-message__icon-send' src='icons/send.svg'/>
+                </button>
             </form>
-        </div>
+        // </div>
     );
+    // return (
+    //     <div
+    //         class=''
+    //         onkeypress={(event) => {
+    //             const enterKeyCode = 13;
+    //             console.log('dsdsd');
+    //             if (event.keyCode === enterKeyCode) {
+    //                 event.preventDefault();
+    //                 EventBus.dispatch<string>('chat:send-button');
+    //             }
+    //         }}
+    //     >
+    //         <form class={''}>
+    //             <div>{FormField(props.fields.inputText)}</div>
+    //             <div>{Button(props.sendMessage)}</div>
+    //         </form>
+    //     </div>
+    // );
 };

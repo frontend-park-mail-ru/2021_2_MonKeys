@@ -1,0 +1,30 @@
+.view-contant__matches-header{  
+  font-size: $font-size-medium;
+  line-height: 42px;
+    
+  color: #FFFFFF;
+    
+  margin-top: 12px;
+  margin-bottom: 12px;
+  margin-left: 24px;
+}
+
+.view-contant__matches-profiles{
+  display: flex;
+  flex-direction: row;
+
+  overflow-x: scroll;
+  
+  margin-left: 24px;
+}
+
+.view-contant__chats-header{
+  font-size: $font-size-medium;
+  line-height: 42px;
+  
+  color: #FFFFFF;
+  
+  margin-top: 12px;
+  margin-bottom: 12px;
+  margin-left: 24px;
+}

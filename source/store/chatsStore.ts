@@ -20,6 +20,7 @@ interface Chat {
 interface ChatsData {
     chats: Chat[];
     currentChat: number;
+    messageValue?: string;
 }
 
 const ChatsStore = new BaseStore<ChatsData>();

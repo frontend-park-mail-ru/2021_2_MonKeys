@@ -56,6 +56,7 @@ export default class ChatsView extends ViewBase {
                 <div class='view-contant__matches-profiles'>
                     {Object.keys(data.matches).map((item) => MatchProfile({ userData: data.matches[item] }))}
                 </div>
+                <span class='view-contant__chats-header'>Чаты</span>
                 {Chats(data.chats)}
                 {/* {CritError(data.critError)} */}
                 {Tapbar(TapbarStore.get())}

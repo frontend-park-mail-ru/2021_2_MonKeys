@@ -1,0 +1,13 @@
+.view-contant{
+  display: flex;
+  flex-direction: column;
+}
+
+.view-contant_align_center{
+  align-items: center;
+}
+
+.view-contant_scroll-y_banned{
+  height: 810px;
+  overflow-y: hidden;
+}

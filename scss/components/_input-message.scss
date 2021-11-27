@@ -1,0 +1,33 @@
+$input-message-field-width: 312px;
+$input-message-field-height:30px;
+
+.input-message{
+//   position: relative;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.input-message__field{
+  width: $input-message-field-width;
+  height: $input-message-field-height;
+
+  background: $black;
+  border-radius: 12px;
+
+  padding-left: 12px;
+
+  font-size: $font-size-tiny;
+  line-height: 18px;
+  
+  color: $white;
+}
+
+.input-message__button-send{
+  background: transparent;
+}
+
+.input-message__icon-send{
+  position: absolute;
+  top: 773px;
+  left: 318px;
+}
