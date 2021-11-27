@@ -1,4 +1,22 @@
-import ws from '../store/wsStore.js';
+import WebSocketManager from '../utils/webSocket.js';
+import { wsURL } from '../constants/urls.js';
+import eventBus from '../dispatcher/eventBus.js';
+import { Message } from '../store/chatsStore.js';
+
+const ws = new WebSocketManager(wsURL);
+
+const ConnectWS = () => {
+    return ws.CreateConnect();
+};
+
+const initWS = () => {
+    ws.onmessage = function (response) {
+        const message = JSON.parse(response.data);
+        message.date = new Date(message.date);
+
+        eventBus.dispatch<Message>('chat:new-message', message);
+    };
+};
 
 const SendMessageWS = (message: string, recipient: number) => {
     const data = JSON.stringify({
@@ -9,10 +27,4 @@ const SendMessageWS = (message: string, recipient: number) => {
     return ws.Send(data);
 };
 
-const NewMessageWS = (messageHandler) => {
-    return function (message) {
-        messageHandler(JSON.parse(message.data));
-    };
-};
-
-export { SendMessageWS, NewMessageWS };
+export { ConnectWS, initWS, SendMessageWS };

@@ -1,11 +1,11 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import { Tapbar } from '../components/tapbar.js';
+import { Tapbar } from '../components/tapbar/tapbar.js';
 import { EditForm } from '../components/editForm.js';
 import { EditStore } from '../store/editStore.js';
 import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
-// import { CritError } from '../components/critError.js';
+// import { Error } from '../components/critError.js';
 import { ErrorStore } from '../store/errorStore.js';
 import { errorNameMsg, errorAgeMsg, errorImgMsg, errorEditFormMsg } from '../constants/errorMsg.js';
 
@@ -151,7 +151,7 @@ export default class EditView extends ViewBase {
             <div class='card-container'>
                 {EditForm(data.editForm)}
                 {Tapbar(data.tapbar)}
-                {/*{CritError(data.critError)}*/}
+                {/*{Error(data.critError)}*/}
             </div>
         );
     }

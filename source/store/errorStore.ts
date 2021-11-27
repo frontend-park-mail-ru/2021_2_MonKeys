@@ -6,10 +6,16 @@ export interface CritErrorData {
 
 const ErrorStore = new BaseStore<CritErrorData>();
 
-const initData = {
+ErrorStore.set({
     apiErrorLoadCondition: false,
-};
+});
 
-ErrorStore.set(initData);
+class ErrorManager {
+    get error() {
+        return ErrorStore.get().apiErrorLoadCondition;
+    }
+}
 
-export { ErrorStore };
+const errorManager = new ErrorManager();
+
+export { ErrorStore, errorManager };

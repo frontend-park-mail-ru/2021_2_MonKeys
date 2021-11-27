@@ -1,6 +1,6 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import { Tapbar } from '../components/tapbar.js';
+import { Tapbar } from '../components/tapbar/tapbar.js';
 import { CardExpended } from '../components/cardExpended.js';
 import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
@@ -53,7 +53,7 @@ export default class ProfileView extends ViewBase {
                 </div>
                 {CardExpended({ userData: data.cardData.userData, withActions: false, withReports: false })}
                 {Tapbar(TapbarStore.get())}
-                {/* {CritError(data.critError)} */}
+                {/* {Error(data.critError)} */}
             </div>
         );
     }

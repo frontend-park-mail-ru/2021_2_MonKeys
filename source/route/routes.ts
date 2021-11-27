@@ -20,19 +20,19 @@ export interface route {
 export const Routes = {
     '/': {
         name: 'Drip',
-        auth: userStatus.notlLoggedIn,
+        auth: userStatus.notLoggedIn,
         view: LoginView,
     },
     '/login': {
         name: 'Вход',
         path: '/login',
-        auth: userStatus.notlLoggedIn,
+        auth: userStatus.notLoggedIn,
         view: LoginView,
     },
     '/signup': {
         name: 'Регистрация',
         path: '/signup',
-        auth: userStatus.notlLoggedIn,
+        auth: userStatus.notLoggedIn,
         view: SignupView,
     },
     '/edit': {
@@ -55,12 +55,12 @@ export const Routes = {
         view: FeedView,
         tapbar: 'feed',
     },
-    '/matches': {
-        name: 'Мэтчи',
-        path: '/matches',
+    '/likes': {
+        name: 'Лайки',
+        path: '/likes',
         auth: userStatus.loggedIn,
         view: LikesView,
-        tapbar: 'matches',
+        tapbar: 'likes',
     },
     '/profile': {
         name: 'Профиль',

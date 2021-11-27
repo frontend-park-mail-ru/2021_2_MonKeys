@@ -112,7 +112,7 @@ export default class SignupEditView extends ViewBase {
         return (
             <div class='card-container'>
                 {EditForm(data.editForm)}
-                {/*CritError(data.critError)*/}
+                {/*Error(data.critError)*/}
             </div>
         );
     }
