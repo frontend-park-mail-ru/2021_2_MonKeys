@@ -1,5 +1,7 @@
 import { authProfileURL, profileURL } from '../constants/urls.js';
 import http from '../utils/http.js';
+import { HTTPSuccess } from '../constants/HTTPStatus.js';
+import { errorManager } from '../store/errorStore.js';
 
 const createProfile = (email, password) => {
     const body = JSON.stringify({
@@ -7,11 +9,35 @@ const createProfile = (email, password) => {
         password: password,
     });
 
-    return http.post(authProfileURL, body);
+    return http
+        .post(authProfileURL, body)
+        .then((response) => {
+            if (response.status !== HTTPSuccess) {
+                throw 'server internal error';
+            }
+
+            return response.data;
+        })
+        .catch((err) => {
+            errorManager.pushAPIError();
+            throw err;
+        });
 };
 
 const getProfile = () => {
-    return http.get(authProfileURL);
+    return http
+        .get(authProfileURL)
+        .then((response) => {
+            if (response.status !== HTTPSuccess) {
+                throw 'server internal error';
+            }
+
+            return response.data;
+        })
+        .catch((err) => {
+            errorManager.pushAPIError();
+            throw err;
+        });
 };
 
 const editProfile = (name, gender, prefer, date, description, photoPaths, tags) => {
@@ -25,7 +51,19 @@ const editProfile = (name, gender, prefer, date, description, photoPaths, tags) 
         tags: tags,
     });
 
-    return http.put(profileURL, body);
+    return http
+        .put(profileURL, body)
+        .then((response) => {
+            if (response.status !== HTTPSuccess) {
+                throw 'server internal error';
+            }
+
+            return response.data;
+        })
+        .catch((err) => {
+            errorManager.pushAPIError();
+            throw err;
+        });
 };
 
 export { createProfile, getProfile, editProfile };
