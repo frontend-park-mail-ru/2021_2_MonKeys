@@ -14,7 +14,6 @@ export default class ChatView extends ViewBase {
         ReportsStore.subscribe(this.reportsSubscribtionCallback, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
         this._template = this._createTmpl(this._data);
-        console.log(chatsManager.chat);
     }
 
     public unsubscribe() {

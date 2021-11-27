@@ -1,0 +1,66 @@
+@import '../abstracts/variables';
+@import '../core/typography';
+
+.crit-error-container-active {
+    display: flex;
+    flex-direction: column;
+    width: $field-default-width;
+    background: radial-gradient(
+        112.16% 418.59% at 0% 0%,
+        rgba(226, 246, 255, 0.4) 0%,
+        rgba(255, 0, 0, 0.289583) 25.52%,
+        rgba(0, 165, 245, 0) 100%
+    );
+    backdrop-filter: blur(20px);
+    border-width: 1px;
+    border-color: white;
+    border-radius: $border-radius-default;
+    font-style: normal;
+    font-weight: bold;
+    font-size: $font-size-medium;
+    color: #ffffff;
+    gap: 12px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(20px);
+}
+
+.crit-error-container-disactive {
+    display: none;
+}
+
+.crit-error-icon {
+    margin: 12px;
+}
+
+.crit-error-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.crit-error-title {
+    font-size: $font-size-medium;
+    color: rgb(255, 255, 255);
+    margin: 4px 0;
+}
+
+.crit-error-message {
+    font-size: $font-size-small;
+    color: rgb(255, 255, 255);
+    margin: 0 24px;
+}
+
+.crit-error-button {
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    backdrop-filter: blur(4px);
+    border-width: 0;
+    border-radius: 35px;
+
+    font-weight: bold;
+    font-size: 24px;
+
+    margin: 0 24px 24px 24px;
+}
