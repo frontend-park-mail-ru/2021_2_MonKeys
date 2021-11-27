@@ -1,6 +1,6 @@
 import EventBus from './eventBus.js';
 import { emailRegExp, passwordRegExp } from '../constants/validation.js';
-import { HTTPNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
+import { HTTPNotFound, HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { loginRequest } from '../requests/sessionRequest.js';
 import { LoginStore } from '../store/loginStore.js';
 

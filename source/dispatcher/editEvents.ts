@@ -1,5 +1,5 @@
 import EventBus from './eventBus.js';
-import { HTTPSuccess } from '../constants/HTTPStatus.js';
+import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { ProfileStore } from '../store/profileStore.js';
 import router from '../route/router.js';
 import { addPhotoToProfileRequest, deleteProfilePhotoRequest } from '../requests/profilePhotoRequest.js';

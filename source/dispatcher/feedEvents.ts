@@ -3,7 +3,7 @@ import feedStore from '../store/feedStore.js';
 import reactions from '../constants/reactions.js';
 import { likesRequest } from '../requests/likesRequest.js';
 import { feedRequest } from '../requests/feedRequest.js';
-import { HTTPSuccess } from '../constants/HTTPStatus.js';
+import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { requestMoreCardsThreshold } from '../constants/feed.js';
 
 const animationThanLikeAndReset = () => {

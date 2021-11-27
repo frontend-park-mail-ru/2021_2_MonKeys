@@ -2,7 +2,7 @@ import EventBus from './eventBus.js';
 import router from '../route/router.js';
 import { chatsManager } from '../store/chatsStore.js';
 import { getChatRequest } from '../requests/chatRequest.js';
-import { HTTPSuccess } from '../constants/HTTPStatus.js';
+import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { ProfileData } from '../store/profileStore.js';
 
 export const ChatsEventsRegister = () => {

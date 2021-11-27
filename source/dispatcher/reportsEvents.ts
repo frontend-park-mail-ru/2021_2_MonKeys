@@ -1,6 +1,6 @@
 import EventBus from './eventBus.js';
 
-import { HTTPSuccess } from '../constants/HTTPStatus.js';
+import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 
 import ReportsStore from '../store/reportsStore.js';
 import { reportsRequest, newReportRequest } from '../requests/reportsRequest.js';

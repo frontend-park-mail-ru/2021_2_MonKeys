@@ -1,6 +1,6 @@
 import router from '../route/router.js';
 
-import { HTTPSuccess } from '../constants/HTTPStatus.js';
+import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { ProfileStore } from '../store/profileStore.js';
 import { feedRequest } from '../requests/feedRequest.js';
 import { getProfileRequest } from '../requests/profileRequest.js';

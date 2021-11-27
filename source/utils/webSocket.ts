@@ -1,4 +1,5 @@
-import { wsCONNECTING, wsOPEN } from '../constants/wsStatus.js';
+import { wsCONNECTING, wsOPEN } from './constants/statusWS.js';
+import { browserErr, connIsAlreadyEstablishedErr, connNotEstablishedErr } from './constants/errorWS.js';
 
 export default class WebSocketManager {
     private connect: WebSocket;
@@ -10,11 +11,11 @@ export default class WebSocketManager {
 
     async CreateConnect() {
         if (!window['WebSocket']) {
-            throw 'Your browser does not support WebSockets';
+            throw browserErr;
         }
 
         if (this.checkConnectWS()) {
-            throw 'Connection is already established';
+            throw connIsAlreadyEstablishedErr;
         }
 
         this.connect = new WebSocket(this.url);
@@ -22,7 +23,7 @@ export default class WebSocketManager {
 
     async Send(data: string) {
         if (!this.checkConnectWS()) {
-            throw 'connection not established';
+            throw connNotEstablishedErr;
         }
 
         this.connect.send(data);
@@ -30,7 +31,7 @@ export default class WebSocketManager {
 
     set onmessage(onmessage) {
         if (!this.checkConnectWS()) {
-            throw 'connection not established';
+            throw connNotEstablishedErr;
         }
 
         this.connect.onmessage = onmessage;

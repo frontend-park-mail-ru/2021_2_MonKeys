@@ -4,7 +4,7 @@ import { Message, chatsManager } from '../store/chatsStore.js';
 import router from '../route/router.js';
 import { MatchesStore } from '../store/matchStore.js';
 import { searchMathesRequest } from '../requests/matchRequest.js';
-import { HTTPSuccess } from '../constants/HTTPStatus.js';
+import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { ProfileData } from '../store/profileStore.js';
 
 export const ChatEventsRegister = () => {

@@ -1,7 +1,7 @@
 import router from '../route/router.js';
 import EventBus from './eventBus.js';
 import { logoutRequest } from '../requests/sessionRequest.js';
-import { HTTPSuccess } from '../constants/HTTPStatus.js';
+import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
 import { ProfileStore } from '../store/profileStore.js';

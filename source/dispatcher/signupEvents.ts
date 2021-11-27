@@ -1,6 +1,6 @@
 import EventBus from './eventBus.js';
 import { emailRegExp, passwordRegExp } from '../constants/validation.js';
-import { HTTPEMailNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
+import { HTTPEMailNotFound, HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import router from '../route/router.js';
 import { createProfileRequest } from '../requests/profileRequest.js';
 import { SignupStore } from '../store/signupStore.js';

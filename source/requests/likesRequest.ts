@@ -1,6 +1,6 @@
 import { likesURL, userLikesURL } from '../constants/urls.js';
 import http from '../utils/http.js';
-import { HTTPSuccess } from '../constants/HTTPStatus.js';
+import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { errorManager } from '../store/errorStore.js';
 
 const userLikesRequset = () => {
