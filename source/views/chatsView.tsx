@@ -9,7 +9,6 @@ import { ChatsStore, chatsManager } from '../store/chatsStore.js';
 import { SearchField } from '../components/searchField.js';
 import { MatchProfile } from '../components/chats/matchProfile.js';
 import { matchRequest } from '../requests/matchRequest.js';
-import { ServerError } from '../components/error/ServerError.js';
 import { Errors } from '../components/error/Errors.js';
 
 export default class ChatsView extends ViewBase {
@@ -28,7 +27,7 @@ export default class ChatsView extends ViewBase {
                 matchesData.matchesTotal = matchResponse.data.body.matchesCount;
                 MatchesStore.set(matchesData);
             })
-            .catch((err) => errorManager.pushAPIError());
+            .catch(() => errorManager.pushAPIError());
     }
 
     public unsubscribe() {
