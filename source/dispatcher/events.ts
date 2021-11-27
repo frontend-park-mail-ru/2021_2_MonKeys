@@ -28,100 +28,72 @@ import { chatsManager } from '../store/chatsStore.js';
 import { ReportsEventsRegister } from './reportsEvents.js';
 import { SwipeEvenetsRegister } from './swipeEvents.js';
 import { ConnectWS, initWS } from '../requests/messageWS.js';
-import { errorManager } from '../store/errorStore.js';
 
 export const InitBus = () => {
     eventBus.register('user:cookie-requests', () => {
-        getProfileRequest()
-            .then((response) => {
-                if (response.status !== HTTPSuccess) {
-                    throw 'server internal error';
-                }
+        getProfileRequest().then((data) => {
+            if (data.status !== HTTPSuccess) {
+                router.go('/login');
+                return;
+            }
 
-                if (response.data.status !== HTTPSuccess) {
-                    router.go('/login');
-                    return;
-                }
+            const profile = data.body;
 
-                const profile = response.data.body;
+            if (profile.name) {
+                AuthStore.set({
+                    loggedIn: userStatus.loggedIn,
+                });
+                ProfileStore.set(profile);
 
-                if (profile.name) {
-                    AuthStore.set({
-                        loggedIn: userStatus.loggedIn,
-                    });
-                    ProfileStore.set(profile);
-
-                    eventBus.dispatch('user:data-requests');
-                } else {
-                    AuthStore.set({
-                        loggedIn: userStatus.Signup,
-                    });
-                    router.go('/signup-edit');
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-                throw err;
-            });
+                eventBus.dispatch('user:data-requests');
+            } else {
+                AuthStore.set({
+                    loggedIn: userStatus.Signup,
+                });
+                router.go('/signup-edit');
+            }
+        });
     });
     eventBus.register('user:data-requests', () => {
         if (AuthStore.get().loggedIn !== userStatus.loggedIn) {
             return;
         }
 
-        matchRequest()
-            .then((matchResponse) => {
-                const matchesData = MatchesStore.get();
-                matchesData.matches = matchResponse.data.body.allUsers;
-                matchesData.matchesTotal = matchResponse.data.body.matchesCount;
-                MatchesStore.set(matchesData);
-            })
-            .catch(errorManager.pushAPIError);
-        userLikesRequset()
-            .then((likesResponse) => {
-                const likesData = LikesStore.get();
-                likesData.profiles = likesResponse.data.body.allUsers;
-                likesData.likesCount = likesResponse.data.body.likesCount;
-                likesData.expended = false;
-                likesData.reported = false;
-                likesData.userIndex = 0;
-                LikesStore.set(likesData);
-            })
-            .catch(errorManager.pushAPIError);
+        matchRequest().then((data) => {
+            const matchesData = MatchesStore.get();
+            matchesData.matches = data.body.allUsers;
+            matchesData.matchesTotal = data.body.matchesCount;
+            MatchesStore.set(matchesData);
+        });
+        userLikesRequset().then((data) => {
+            const likesData = LikesStore.get();
+            likesData.profiles = data.body.allUsers;
+            likesData.likesCount = data.body.likesCount;
+            likesData.expended = false;
+            likesData.reported = false;
+            likesData.userIndex = 0;
+            LikesStore.set(likesData);
+        });
 
-        feedRequest()
-            .then((response) => {
-                if (response.status !== HTTPSuccess || response.data.status !== HTTPSuccess) {
-                    throw 'bad response';
-                }
-                const feed = feedStore.get();
-                if (response.data.body !== null) {
-                    feed.profiles = response.data.body;
-                } else {
-                    feed.outOfCards = true;
-                }
+        feedRequest().then((data) => {
+            const feed = feedStore.get();
+            if (data.body !== null) {
+                feed.profiles = data.body;
+            } else {
+                feed.outOfCards = true;
+            }
 
-                feedStore.set(feed);
-                if (window.location.pathname === '/signup-edit') {
-                    router.go('/feed');
-                } else {
-                    router.go(window.location.pathname);
-                }
-            })
-            .catch(errorManager.pushAPIError);
+            feedStore.set(feed);
+            if (window.location.pathname === '/signup-edit') {
+                router.go('/feed');
+            } else {
+                router.go(window.location.pathname);
+            }
+        });
 
-        getChatsRequest()
-            .then((response) => {
-                if (response.status !== HTTPSuccess || response.data.status !== HTTPSuccess) {
-                    throw 'bad response';
-                }
-
-                chatsManager.chats = response.data.body;
-            })
-            .catch((err) => {
-                errorManager.pushAPIError();
-                throw err;
-            });
+        getChatsRequest().then((data) => {
+            chatsManager.chats = data.body;
+        });
 
         ConnectWS()
             .then(initWS)

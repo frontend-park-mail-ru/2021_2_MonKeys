@@ -6,7 +6,6 @@ import { createProfileRequest } from '../requests/profileRequest.js';
 import { SignupStore } from '../store/signupStore.js';
 import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
-import { errorManager } from '../store/errorStore.js';
 
 export const SignupEventRegister = () => {
     EventBus.register('signup:signup-button', () => {
@@ -50,24 +49,18 @@ export const SignupEventRegister = () => {
         const _email = _emailInput.value.trim();
         const _password = _passwordInput.value.trim();
 
-        createProfileRequest(_email, _password)
-            .then((response) => {
-                if (response.status === HTTPSuccess) {
-                    if (response.data.status === HTTPSuccess) {
-                        // пасхалочк// пасхалоч// пасхалочк// пасхалочк// пасхалочк// пасхалочк// пасхалочкааааакаа
-                        AuthStore.set({
-                            loggedIn: userStatus.Signup,
-                        });
-                        router.go('/signup-edit');
-                    } else if (response.data.status === HTTPEMailNotFound) {
-                        storeData.formErrorClass = 'error-active';
-                        SignupStore.set(storeData);
-                    }
-                } else {
-                    throw 'bad response';
-                }
-            })
-            .catch(errorManager.pushAPIError);
+        createProfileRequest(_email, _password).then((data) => {
+            if (data.status === HTTPSuccess) {
+                // пасхалочк// пасхалоч// пасхалочк// пасхалочк// пасхалочк// пасхалочк// пасхалочкааааакаа
+                AuthStore.set({
+                    loggedIn: userStatus.Signup,
+                });
+                router.go('/signup-edit');
+            } else if (data.status === HTTPEMailNotFound) {
+                storeData.formErrorClass = 'error-active';
+                SignupStore.set(storeData);
+            }
+        });
     });
 
     EventBus.register('signup:email-input', () => {

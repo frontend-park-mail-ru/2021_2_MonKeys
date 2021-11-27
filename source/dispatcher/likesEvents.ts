@@ -29,8 +29,6 @@ export const LikesEventsRegister = () => {
         LikesStore.set(storeData);
     });
     EventBus.register('likes:reaction', (payload) => {
-        // const data = feedStore.get();
-        // data.apiErrorLoadCondition = false;
         const storeData = LikesStore.get();
         storeData.expended = false;
         LikesStore.set(storeData);
@@ -48,52 +46,40 @@ export const LikesEventsRegister = () => {
             LikesStore.set(storeData);
         }
 
-        likesRequest(payload.userID, payload.reactionType).then((response) => {
-            if (response.status === HTTPSuccess) {
-                if (response.data.status === HTTPSuccess) {
-                    if (response.data.body.match) {
-                        matchRequest().then((matchResponse) => {
-                            const matchesData = MatchesStore.get();
-                            matchesData.matches = matchResponse.data.body.allUsers;
-                            matchesData.matchesTotal = matchResponse.data.body.matchesCount;
-                            MatchesStore.set(matchesData);
-                        });
-                    }
-                } else {
-                    throw '400';
-                }
-            } else {
-                // const feedData = feedStore.get();
-                // feedData.apiErrorLoadCondition = true;
-                // feedStore.set(feedData);
+        likesRequest(payload.userID, payload.reactionType).then((data) => {
+            if (data.status === HTTPSuccess) {
+                throw 'bad response';
+            }
+
+            if (data.body.match) {
+                matchRequest().then((matchData) => {
+                    const matchesData = MatchesStore.get();
+                    matchesData.matches = matchData.body.allUsers;
+                    matchesData.matchesTotal = matchData.body.matchesCount;
+                    MatchesStore.set(matchesData);
+                });
             }
 
             const feedData = feedStore.get();
-            feedRequest().then((response) => {
-                if (response.status === HTTPSuccess) {
-                    if (response.data.status === HTTPSuccess) {
-                        if (response.data.body !== null) {
-                            feedData.profiles = response.data.body;
-                        } else {
-                            feedData.profiles = [];
-                            feedData.outOfCards = true;
-                        }
-                        feedData.counter = 0;
-
-                        if (feedData.profiles[feedData.counter]) {
-                            feedData.outOfCards = false;
-                        } else {
-                            feedData.outOfCards = true;
-                        }
-                        feedStore.set(feedData);
-                    } else {
-                        throw '400';
-                    }
-                } else {
-                    // const feedData = feedStore.get();
-                    // feedData.apiErrorLoadCondition = true;
-                    // feedStore.set(feedData);
+            feedRequest().then((data) => {
+                if (data.status === HTTPSuccess) {
+                    throw 'bad response';
                 }
+
+                if (data.body) {
+                    feedData.profiles = data.body;
+                } else {
+                    feedData.profiles = [];
+                    feedData.outOfCards = true;
+                }
+                feedData.counter = 0;
+
+                if (feedData.profiles[feedData.counter]) {
+                    feedData.outOfCards = false;
+                } else {
+                    feedData.outOfCards = true;
+                }
+                feedStore.set(feedData);
             });
         });
     });

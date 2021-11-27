@@ -8,7 +8,6 @@ import { tagsRequest } from '../requests/tagsRequest.js';
 import { EditStore } from '../store/editStore.js';
 import { validDate, validImgType } from '../validation/edit.js';
 import { nameRegExp } from '../constants/validation.js';
-import { errorManager } from '../store/errorStore.js';
 
 export const EditEventRegister = () => {
     EventBus.register('edit:save-button', () => {
@@ -103,55 +102,48 @@ export const EditEventRegister = () => {
             userPrefer = 'female';
         }
 
-        editProfileRequest(name, userGender, userPrefer, date, description, photoPaths, tags)
-            .then((response) => {
-                if (response.status !== HTTPSuccess || response.data.status !== HTTPSuccess) {
-                    throw 'bad response';
-                }
+        editProfileRequest(name, userGender, userPrefer, date, description, photoPaths, tags).then((data) => {
+            if (data.status !== HTTPSuccess) {
+                throw 'bad response';
+            }
 
-                EventBus.dispatch<string>('user:cookie-requests');
-                router.go('/profile');
-            })
-            .catch(errorManager.pushAPIError);
+            EventBus.dispatch<string>('user:cookie-requests');
+            router.go('/profile');
+        });
     });
 
     EventBus.register('edit:open-tags', () => {
-        tagsRequest()
-            .then((response) => {
-                if (response.status !== HTTPSuccess || response.data.status !== HTTPSuccess) {
-                    throw 'bad response';
+        tagsRequest().then((data) => {
+            if (data.status !== HTTPSuccess) {
+                throw 'bad response';
+            }
+
+            const storeData = EditStore.get();
+            storeData.tags = data.body;
+            Object.keys(storeData.tags.allTags).map(
+                (item) =>
+                    (storeData.tags.allTags[item].onchange = () => {
+                        EventBus.dispatch<string>('edit:change-tag-condition', storeData.tags.allTags[item].tagText);
+                    })
+            );
+            EditStore.set(storeData);
+
+            if (ProfileStore.get() !== undefined) {
+                const userTags = ProfileStore.get().tags;
+                if (userTags === undefined) {
+                    return;
                 }
-
                 const storeData = EditStore.get();
-                storeData.tags = response.data.body;
-                Object.keys(storeData.tags.allTags).map(
-                    (item) =>
-                        (storeData.tags.allTags[item].onchange = () => {
-                            EventBus.dispatch<string>(
-                                'edit:change-tag-condition',
-                                storeData.tags.allTags[item].tagText
-                            );
-                        })
-                );
-                EditStore.set(storeData);
-
-                if (ProfileStore.get() !== undefined) {
-                    const userTags = ProfileStore.get().tags;
-                    if (userTags === undefined) {
-                        return;
-                    }
-                    const storeData = EditStore.get();
-                    for (const tag of userTags) {
-                        for (let j = 0; j < response.data.body.tagsCount; j++) {
-                            if (tag === storeData.tags.allTags[j].tagText) {
-                                storeData.tags.allTags[j].isActive = true;
-                                EditStore.set(storeData);
-                            }
+                for (const tag of userTags) {
+                    for (let j = 0; j < data.body.tagsCount; j++) {
+                        if (tag === storeData.tags.allTags[j].tagText) {
+                            storeData.tags.allTags[j].isActive = true;
+                            EditStore.set(storeData);
                         }
                     }
                 }
-            })
-            .catch(errorManager.pushAPIError);
+            }
+        });
     });
 
     EventBus.register('edit:change-tag-condition', (payload?: string) => {
@@ -269,47 +261,43 @@ export const EditEventRegister = () => {
             return;
         }
 
-        addPhotoToProfileRequest(photo)
-            .then((response) => {
-                if (response.status !== HTTPSuccess) {
-                    throw 'photo not uploaded';
-                }
+        addPhotoToProfileRequest(photo).then((data) => {
+            if (data.status !== HTTPSuccess) {
+                throw 'photo not uploaded';
+            }
 
-                const userData = ProfileStore.get();
-                if (!userData.imgs) {
-                    const ps = ProfileStore.get();
-                    ps.imgs = [];
-                    ProfileStore.set(ps);
-                }
-                userData.imgs.push(response.data.body.photo);
-                ProfileStore.set(userData);
-                const editStoreData = EditStore.get();
-                editStoreData.imgFieldClass = 'add-img-box';
-                if (editStoreData.imgErrorClass === 'error-active') {
-                    editStoreData.imgErrorClass = 'error-inactive';
-                }
-                editStoreData.formErrorClass = 'error-inactive';
-                EditStore.set(editStoreData);
-            })
-            .catch(errorManager.pushAPIError);
+            const userData = ProfileStore.get();
+            if (!userData.imgs) {
+                const ps = ProfileStore.get();
+                ps.imgs = [];
+                ProfileStore.set(ps);
+            }
+            userData.imgs.push(data.body.photo);
+            ProfileStore.set(userData);
+            const editStoreData = EditStore.get();
+            editStoreData.imgFieldClass = 'add-img-box';
+            if (editStoreData.imgErrorClass === 'error-active') {
+                editStoreData.imgErrorClass = 'error-inactive';
+            }
+            editStoreData.formErrorClass = 'error-inactive';
+            EditStore.set(editStoreData);
+        });
     });
 
     EventBus.register('edit:img-delete', (imgPath) => {
-        deleteProfilePhotoRequest(imgPath)
-            .then((response) => {
-                if (response.status !== HTTPSuccess || response.data.status !== HTTPSuccess) {
-                    throw 'bad response';
-                }
+        deleteProfilePhotoRequest(imgPath).then((data) => {
+            if (data.status !== HTTPSuccess) {
+                throw 'bad response';
+            }
 
-                const userData = ProfileStore.get();
-                userData.imgs = userData.imgs.filter((image) => {
-                    if (image != imgPath) {
-                        return image;
-                    }
-                });
-                ProfileStore.set(userData);
-            })
-            .catch(errorManager.pushAPIError);
+            const userData = ProfileStore.get();
+            userData.imgs = userData.imgs.filter((image) => {
+                if (image != imgPath) {
+                    return image;
+                }
+            });
+            ProfileStore.set(userData);
+        });
     });
 
     EventBus.register('edit:tags-click', () => {

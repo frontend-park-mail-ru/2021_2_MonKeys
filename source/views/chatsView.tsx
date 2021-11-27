@@ -20,14 +20,12 @@ export default class ChatsView extends ViewBase {
 
         this._template = this._createTmpl(this._data);
 
-        matchRequest()
-            .then((matchResponse) => {
-                const matchesData = MatchesStore.get();
-                matchesData.matches = matchResponse.data.body.allUsers;
-                matchesData.matchesTotal = matchResponse.data.body.matchesCount;
-                MatchesStore.set(matchesData);
-            })
-            .catch(() => errorManager.pushAPIError());
+        matchRequest().then((data) => {
+            const matchesData = MatchesStore.get();
+            matchesData.matches = data.body.allUsers;
+            matchesData.matchesTotal = data.body.matchesCount;
+            MatchesStore.set(matchesData);
+        });
     }
 
     public unsubscribe() {
