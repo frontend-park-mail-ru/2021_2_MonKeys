@@ -36,19 +36,21 @@ export const ChatsEventsRegister = () => {
         if (chatsManager.hasChat(chatID)) {
             chatsManager.switchChat(chatID);
 
-            const messageID = chatsManager.getFirstMessageID(chatID);
-            getChat(chatID, messageID)
-                .then((response) => {
-                    if (response.status !== HTTPSuccess || response.data.status !== HTTPSuccess) {
-                        throw 'bad request';
-                    }
+            if (chatsManager.hasMessages(chatID)) {
+                const messageID = chatsManager.getFirstMessageID(chatID);
+                getChat(chatID, messageID)
+                    .then((response) => {
+                        if (response.status !== HTTPSuccess || response.data.status !== HTTPSuccess) {
+                            throw 'bad request';
+                        }
 
-                    chatsManager.updateChatMessages(chatID, response.data.body);
-                })
-                .catch((err) => {
-                    console.log(err);
-                    throw err;
-                });
+                        chatsManager.updateChatMessages(chatID, response.data.body);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        throw err;
+                    });
+            }
         } else {
             chatsManager.newChat(profile);
         }

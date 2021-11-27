@@ -13,9 +13,9 @@ export const ChatPreview = (chat: Chat) => {
     }
 
     return (
-        <div class='' onclick={onclick}>
+        <div onclick={onclick}>
             <span>{chat.name}</span>
-            <div class=''>{lastMessage.text}</div>
+            <div>{lastMessage.text}</div>
         </div>
     );
 };

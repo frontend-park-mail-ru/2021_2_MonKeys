@@ -40,9 +40,6 @@ export default class ChatsView extends ViewBase {
 
         'matches': MatchesStore.get().matches,
         'matchesSearched': MatchesStore.get().matchesSearched,
-        'tapbar': {
-            class: 'menu-icon',
-        },
     };
 
     _createTmpl(data) {
