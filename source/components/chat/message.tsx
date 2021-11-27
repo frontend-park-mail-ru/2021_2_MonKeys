@@ -3,7 +3,6 @@ import { Message as MessageData } from '../../store/chatsStore.js';
 import { ProfileStore } from '../../store/profileStore.js';
 
 export const Message = (msg: MessageData) => {
-    console.log(msg.date)
     const msgYear = msg.date.getFullYear().toString();
     const msgMonth = msg.date.getMonth().toString();
     const msgDate = msg.date.getDate().toString();

@@ -6,13 +6,9 @@ import { MatchesStore } from '../store/matchStore.js';
 import { searchMathesRequest } from '../requests/matchRequest.js';
 import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileData } from '../store/profileStore.js';
+import { getProfile } from '../requests/profileRequest.js';
 
 export const ChatEventsRegister = () => {
-    EventBus.register('chat:load-form', (chatID: number) => {
-        const _chatSpace = document.getElementsByClassName('view-contant__message-space')[0];
-        _chatSpace.scrollTop = _chatSpace.scrollHeight;
-        console.log('lol');
-    });
     EventBus.register('chat:input-message', (chatID: number) => {
         const _msgInput = document.getElementsByTagName('input')[0];
         const messageText = _msgInput.value.trim();
@@ -84,5 +80,17 @@ export const ChatEventsRegister = () => {
         // const storeData = MatchesStore.get();
         // storeData.expended = false;
         // <tStore.set(storeData);
+    });
+    EventBus.register('chat:open-profile', (userID: number) => {
+        if (!chatsManager.withProfile(userID)) {
+            const matchesData = MatchesStore.get();
+            let profile: ProfileData;
+            for (let i = 0; i < matchesData.matchesTotal; i++) {
+                if (matchesData.matches[i].id === userID) {
+                    profile = matchesData.matches[i];
+                }
+            }
+            chatsManager.setProfile(userID, profile);
+        }
     });
 };

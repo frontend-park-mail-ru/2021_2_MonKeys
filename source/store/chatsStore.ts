@@ -1,5 +1,6 @@
 import BaseStore from './storeBase.js';
 import { ProfileData, ProfileStore } from './profileStore.js';
+import { MatchesStore } from './matchStore.js';
 
 interface Message {
     messageID: number;
@@ -17,12 +18,13 @@ interface Chat {
     messages: Message[];
     draftMessage: string;
     opened: boolean;
+    profile: ProfileData;
+    isOpenedProfile: boolean;
 }
 
 interface ChatsData {
     chats: Chat[];
     currentChat: number;
-    messageValue?: string;
 }
 
 const ChatsStore = new BaseStore<ChatsData>();
@@ -76,6 +78,14 @@ class ChatsManager {
             return;
         }
 
+        const matchesData = MatchesStore.get();
+        let fromProfile: ProfileData;
+        for (let i = 0; i < matchesData.matchesTotal; i++) {
+            if (matchesData.matches[i].id === profile.id) {
+                profile = matchesData.matches[i];
+            }
+        }
+
         const chat: Chat = {
             fromUserID: newChatID,
             name: profile.name,
@@ -83,6 +93,8 @@ class ChatsManager {
             messages: [],
             draftMessage: '',
             opened: true,
+            profile: fromProfile,
+            isOpenedProfile: false,
         };
 
         const chatsStore = ChatsStore.get();
@@ -183,6 +195,21 @@ class ChatsManager {
         const chatIdx = this.getChatIdxByChatID(chatID);
         const chatsData = ChatsStore.get();
         chatsData.chats[chatIdx].opened = false;
+        ChatsStore.set(chatsData);
+    }
+
+    withProfile(chatID: number) {
+        const curChat = this.getChatByID(chatID);
+        if (curChat.profile) {
+            return true;
+        }
+        return false;
+    }
+
+    setProfile(chatID: number, fromProfile: ProfileData) {
+        const chatIdx = this.getChatIdxByChatID(chatID);
+        const chatsData = ChatsStore.get();
+        chatsData.chats[chatIdx].profile = fromProfile;
         ChatsStore.set(chatsData);
     }
 

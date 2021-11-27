@@ -4,6 +4,7 @@ import { chatsManager } from '../store/chatsStore.js';
 import { getChat } from '../requests/chatRequest.js';
 import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileData } from '../store/profileStore.js';
+import { MatchesStore } from '../store/matchStore.js';
 // import { resolve } from 'path/posix';
 
 export const ChatsEventsRegister = () => {
@@ -21,6 +22,17 @@ export const ChatsEventsRegister = () => {
 
                 chatsManager.openChat(chatID);
                 chatsManager.updateChatMessages(chatID, response.data.body);
+
+                // if (!chatsManager.withProfile(chatID)) {
+                //     const matchesData = MatchesStore.get();
+                //     let profile: ProfileData;
+                //     for (let i = 0; i < matchesData.matchesTotal; i++) {
+                //         if (matchesData.matches[i].id === chatID) {
+                //             profile = matchesData.matches[i];
+                //         }
+                //     }
+                //     chatsManager.setProfile(chatID, profile);
+                // }
             })
             .catch((err) => {
                 console.log(err);
