@@ -3,6 +3,7 @@ import { emailRegExp, passwordRegExp } from '../constants/validation.js';
 import { HTTPNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
 import { loginRequest } from '../requests/sessionRequest.js';
 import { LoginStore } from '../store/loginStore.js';
+import { errorManager } from '../store/errorStore.js';
 
 export const LoginEventRegister = () => {
     EventBus.register('login:button-white', () => {
@@ -13,8 +14,6 @@ export const LoginEventRegister = () => {
         const testPassword = passwordRegExp.test(_passwordInput.value);
 
         const storeData = LoginStore.get();
-        storeData.apiErrorLoadCondition = false;
-        LoginStore.set(storeData);
 
         if (!testEmail) {
             storeData.emailFieldClass = 'form__field-invalid';
@@ -41,30 +40,24 @@ export const LoginEventRegister = () => {
 
         loginRequest(_email, _password)
             .then((response) => {
-                if (response.status === HTTPSuccess) {
-                    if (response.data.status === HTTPSuccess) {
-                        EventBus.dispatch<string>('user:cookie-requests');
-                    } else if (response.data.status === HTTPNotFound) {
-                        storeData.formErrorClass = 'error-active';
-                        LoginStore.set(storeData);
-                    }
-                } else {
-                    storeData.apiErrorLoadCondition = true;
+                if (response.status !== HTTPSuccess) {
+                    throw 'bad response';
+                }
+
+                if (response.data.status === HTTPSuccess) {
+                    EventBus.dispatch<string>('user:cookie-requests');
+                } else if (response.data.status === HTTPNotFound) {
+                    storeData.formErrorClass = 'error-active';
                     LoginStore.set(storeData);
                 }
             })
-            .catch(() => {
-                storeData.apiErrorLoadCondition = true;
-                LoginStore.set(storeData);
-            });
+            .catch(errorManager.pushAPIError);
     });
 
     EventBus.register('login:email-input', () => {
         const _emailInput = document.getElementsByTagName('input')[0];
 
         const storeData = LoginStore.get();
-        storeData.apiErrorLoadCondition = false;
-        LoginStore.set(storeData);
         if (!_emailInput) {
             console.log('Error, trying to read _emailInput on wrong view');
             return;
@@ -93,8 +86,6 @@ export const LoginEventRegister = () => {
         const _emailInput = document.getElementsByTagName('input')[0];
 
         const storeData = LoginStore.get();
-        storeData.apiErrorLoadCondition = false;
-        LoginStore.set(storeData);
 
         const test = _emailInput.value.length === 0 || emailRegExp.test(_emailInput.value);
         if (test) {
@@ -115,8 +106,6 @@ export const LoginEventRegister = () => {
             return;
         }
         const storeData = LoginStore.get();
-        storeData.apiErrorLoadCondition = false;
-        LoginStore.set(storeData);
 
         const test = _passwordInput.value.length === 0 || passwordRegExp.test(_passwordInput.value);
         if (!test || !_passwordInput.value) {
@@ -147,8 +136,6 @@ export const LoginEventRegister = () => {
         const _passwordInput = document.getElementsByTagName('input')[1];
 
         const storeData = LoginStore.get();
-        storeData.apiErrorLoadCondition = false;
-        LoginStore.set(storeData);
 
         const test = _passwordInput.value.length === 0 || passwordRegExp.test(_passwordInput.value);
         if (test) {

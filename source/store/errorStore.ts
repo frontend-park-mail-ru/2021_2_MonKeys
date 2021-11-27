@@ -12,7 +12,7 @@ export class ErrorType {
 }
 
 interface ErrorsData {
-    errors: ErrorType[]
+    errors: ErrorType[];
 }
 
 const ErrorStore = new BaseStore<ErrorsData>();
@@ -31,9 +31,11 @@ class ErrorManager {
     }
 
     pushAPIError() {
+        console.log('pushAPIError');
         this.pushError(errorType.apiErrorLoadCondition);
     }
     deleteAPIError() {
+        console.log('deleteAPIError');
         this.deleteError(errorType.apiErrorLoadCondition);
     }
 
@@ -51,7 +53,7 @@ class ErrorManager {
             if (err.type !== error) {
                 errors.push(err);
             }
-        })
+        });
 
         errorsStore.errors = errors;
         ErrorStore.set(errorsStore);

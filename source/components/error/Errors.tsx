@@ -3,11 +3,18 @@ import { errorType, ErrorType } from '../../store/errorStore.js';
 import { ServerError } from './ServerError.js';
 
 export const Errors = (error: ErrorType) => {
-  switch (error.type) {
-    case errorType.apiErrorLoadCondition:
-      return ServerError();
-    default:
-      break;
-  }
-  return;
-}
+    let tmpl = <div style={'visibility: hidden;'} />;
+
+    console.log(error);
+    if (error) {
+        switch (error.type) {
+            case errorType.apiErrorLoadCondition:
+                tmpl = ServerError();
+                break;
+            default:
+                break;
+        }
+    }
+
+    return tmpl;
+};

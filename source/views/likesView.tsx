@@ -18,15 +18,17 @@ export default class LikesView extends ViewBase {
         ErrorStore.unsubscribe(this.errorStoreUpdatesView);
         this._template = this._createTmpl(this._data);
 
-        userLikesRequset().then((likesResponse) => {
-            const likesData = LikesStore.get();
-            likesData.profiles = likesResponse.data.body.allUsers;
-            likesData.likesCount = likesResponse.data.body.likesCount;
-            likesData.expended = false;
-            likesData.reported = false;
-            likesData.userIndex = 0;
-            LikesStore.set(likesData);
-        });
+        userLikesRequset()
+            .then((likesResponse) => {
+                const likesData = LikesStore.get();
+                likesData.profiles = likesResponse.data.body.allUsers;
+                likesData.likesCount = likesResponse.data.body.likesCount;
+                likesData.expended = false;
+                likesData.reported = false;
+                likesData.userIndex = 0;
+                LikesStore.set(likesData);
+            })
+            .catch(errorManager.pushAPIError);
     }
 
     _data = {

@@ -21,12 +21,14 @@ export default class ChatsView extends ViewBase {
 
         this._template = this._createTmpl(this._data);
 
-        matchRequest().then((matchResponse) => {
-            const matchesData = MatchesStore.get();
-            matchesData.matches = matchResponse.data.body.allUsers;
-            matchesData.matchesTotal = matchResponse.data.body.matchesCount;
-            MatchesStore.set(matchesData);
-        });
+        matchRequest()
+            .then((matchResponse) => {
+                const matchesData = MatchesStore.get();
+                matchesData.matches = matchResponse.data.body.allUsers;
+                matchesData.matchesTotal = matchResponse.data.body.matchesCount;
+                MatchesStore.set(matchesData);
+            })
+            .catch((err) => errorManager.pushAPIError());
     }
 
     public unsubscribe() {
@@ -67,6 +69,8 @@ export default class ChatsView extends ViewBase {
     }
 
     private errorStoreUpdatesView(data, view) {
+        console.log('---errorStoreUpdatesView');
+        console.log(errorManager.error);
         view._data.error = errorManager.error;
         view._template = view._createTmpl(view._data);
         view.render();
