@@ -1,12 +1,11 @@
 import EventBus from './eventBus.js';
 import { SendMessageWS } from '../requests/messageWS.js';
-import { Message, chatsManager, ChatsStore } from '../store/chatsStore.js';
+import { Message, chatsManager } from '../store/chatsStore.js';
 import router from '../route/router.js';
 import { MatchesStore } from '../store/matchStore.js';
 import { searchMathesRequest } from '../requests/matchRequest.js';
 import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileData } from '../store/profileStore.js';
-import { getProfile } from '../requests/profileRequest.js';
 
 export const ChatEventsRegister = () => {
     EventBus.register('chat:input-message', (chatID: number) => {

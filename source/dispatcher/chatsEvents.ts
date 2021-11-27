@@ -4,8 +4,6 @@ import { chatsManager } from '../store/chatsStore.js';
 import { getChat } from '../requests/chatRequest.js';
 import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileData } from '../store/profileStore.js';
-import { MatchesStore } from '../store/matchStore.js';
-// import { resolve } from 'path/posix';
 
 export const ChatsEventsRegister = () => {
     EventBus.register('chats:preview-chat', (chatID: number) => {

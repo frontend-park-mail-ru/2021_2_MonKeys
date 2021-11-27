@@ -14,7 +14,7 @@ export const chatsPreview = (chat: Chat) => {
 
     return (
         <div class='chats-preview' onclick={onclick}>
-            <img class='chats-preview__user-img' src={chat.img}/>
+            <img class='chats-preview__user-img' src={chat.img} />
             <div class='chats-preview__user-info'>
                 <span class='chats-preview__user-name'>{chat.name}</span>
                 <div class='chats-preview__last-message'>{lastMessage.text}</div>

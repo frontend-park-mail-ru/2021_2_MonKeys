@@ -9,21 +9,23 @@ export const Message = (msg: MessageData) => {
     const msgHourse = msg.date.getHours().toString();
     let msgMinutes = msg.date.getMinutes().toString();
     if (msgMinutes.length === 1) {
-        msgMinutes  = '0' + msgMinutes;
+        msgMinutes = '0' + msgMinutes;
     }
 
     const timeElapsed = Date.now();
-    const today = new Date(timeElapsed)
+    const today = new Date(timeElapsed);
     let date = msgHourse + ':' + msgMinutes;
     if (today.getDate().toString() !== msgDate) {
         date = date + ' ' + msgDate + '.' + msgMonth + '.' + msgYear;
     }
-    const textClass = msg.fromID === ProfileStore.get().id
-        ? 'message-container__message message-container__message_my-message'
-        : 'message-container__message message-container__message_not-my-message';
-    const messageContainerClass = msg.fromID === ProfileStore.get().id
-        ? 'message-container message-container_my-message'
-        : 'message-container message-container_not-my-message';
+    const textClass =
+        msg.fromID === ProfileStore.get().id
+            ? 'message-container__message message-container__message_my-message'
+            : 'message-container__message message-container__message_not-my-message';
+    const messageContainerClass =
+        msg.fromID === ProfileStore.get().id
+            ? 'message-container message-container_my-message'
+            : 'message-container message-container_not-my-message';
 
     return (
         <div>

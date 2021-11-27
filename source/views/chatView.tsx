@@ -13,7 +13,7 @@ export default class ChatView extends ViewBase {
         ReportsStore.subscribe(this.reportsSubscribtionCallback, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
         this._template = this._createTmpl(this._data);
-        console.log(chatsManager.chat)
+        console.log(chatsManager.chat);
     }
 
     public unsubscribe() {
@@ -36,11 +36,13 @@ export default class ChatView extends ViewBase {
     _createTmpl(data) {
         return (
             <div class=''>
-                {CardExpended({userData: data.profile,
+                {CardExpended({
+                    userData: data.profile,
                     withActions: false,
                     withReports: true,
                     reports: data.reports,
-                    reported: data.reportsActive})}
+                    reported: data.reportsActive,
+                })}
                 {Chat(data.chat)}
                 {/*{Error(data.critError)}*/}
             </div>

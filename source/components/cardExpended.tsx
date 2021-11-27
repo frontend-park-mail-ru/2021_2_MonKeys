@@ -22,7 +22,7 @@ export interface CardExpendedProps {
 
 export const CardExpended = (props: CardExpendedProps) => {
     if (!props.userData) {
-        return <div></div>
+        return <div></div>;
     }
     const tagsExists = props.userData.tags !== undefined ? true : false;
     let tagField: HTMLCollection;
@@ -74,7 +74,7 @@ export const CardExpended = (props: CardExpendedProps) => {
     ) : (
         <div></div>
     );
-    console.log(props.reports)
+    console.log(props.reports);
     const reportWindowTmpl = props.withReports ? (
         ReportWindow({ reports: props.reports, reportedUserID: props.userData.id, visible: props.reported })
     ) : (

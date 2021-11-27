@@ -12,10 +12,8 @@ export const Chat = (chat: ChatData) => {
     }
     return (
         <div class='view-contant view-contant_align_center view-contant_scroll-y_banned'>
-            {ChatHeader({chatID: chat.fromUserID, userName: chat.name, userImg: chat.img})}
-            <div class='view-contant__message-space'>
-                {chat.messages.map((msg) => Message(msg))}
-            </div>
+            {ChatHeader({ chatID: chat.fromUserID, userName: chat.name, userImg: chat.img })}
+            <div class='view-contant__message-space'>{chat.messages.map((msg) => Message(msg))}</div>
             {InputMessage(chat)}
         </div>
     );
