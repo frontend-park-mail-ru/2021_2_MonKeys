@@ -69,10 +69,6 @@ export const ChatEventsRegister = () => {
                 MatchesStore.set(matchesData);
             }
         });
-
-        // const storeData = MatchesStore.get();
-        // storeData.expended = false;
-        // <tStore.set(storeData);
     });
     EventBus.register('chat:open-profile', (userID: number) => {
         if (!chatsManager.withProfile(userID)) {
@@ -85,5 +81,9 @@ export const ChatEventsRegister = () => {
             }
             chatsManager.setProfile(userID, profile);
         }
+        chatsManager.activateProfile(userID);
+    });
+    EventBus.register('chat:back-to-chat-button', (userID: number) => {
+        chatsManager.disableProfile(userID);
     });
 };

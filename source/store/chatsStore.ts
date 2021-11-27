@@ -213,6 +213,20 @@ class ChatsManager {
         ChatsStore.set(chatsData);
     }
 
+    activateProfile(chatID: number) {
+        const chatIdx = this.getChatIdxByChatID(chatID);
+        const chatsData = ChatsStore.get();
+        chatsData.chats[chatIdx].isOpenedProfile = true;
+        ChatsStore.set(chatsData);
+    }
+
+    disableProfile(chatID: number) {
+        const chatIdx = this.getChatIdxByChatID(chatID);
+        const chatsData = ChatsStore.get();
+        chatsData.chats[chatIdx].isOpenedProfile = false;
+        ChatsStore.set(chatsData);
+    }
+
     private getChatByID(chatID: number) {
         const chats = ChatsStore.get().chats;
 

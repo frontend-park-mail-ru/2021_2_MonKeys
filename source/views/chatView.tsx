@@ -30,19 +30,28 @@ export default class ChatView extends ViewBase {
     };
 
     _createTmpl(data) {
-        return (
-            <div class=''>
-                {CardExpended({
-                    userData: data.profile,
-                    withActions: false,
-                    withReports: true,
-                    reports: data.reports,
-                    reported: data.reportsActive,
-                })}
-                {Chat(data.chat)}
-                {Errors(data.error)}
-            </div>
-        );
+        if (!data.chat || !data.chat.profile || !data.chat.isOpenedProfile) {
+            return (
+                <div>
+                    {Chat(data.chat)}
+                    {Errors(data.error)}
+                </div>
+            );
+        } else {
+            return (
+                <div class=''>
+                    {CardExpended({
+                        userData: data.chat.profile,
+                        withActions: false,
+                        withReports: true,
+                        withBackButton: true,
+                        reports: data.reports,
+                        reported: data.reportsActive,
+                    })}
+                    {Errors(data.error)}
+                </div>
+            );
+        }
     }
 
     private chatUpdatesView(data, view) {
@@ -52,10 +61,15 @@ export default class ChatView extends ViewBase {
 
         view.render();
 
-        const _chatSpace = document.getElementsByClassName('view-contant__message-space')[0];
-        _chatSpace.scrollTop = _chatSpace.scrollHeight;
-        const _inputMsg = document.getElementsByTagName('input')[0];
-        _inputMsg.focus();
+        if (!view._data.chat || !view._data.chat.profile || !view._data.chat.isOpenedProfile) {
+            const _chatSpace = document.getElementsByClassName('view-contant__message-space')[0];
+            _chatSpace.scrollTop = _chatSpace.scrollHeight;
+            const _inputMsg = document.getElementsByTagName('input')[0];
+            _inputMsg.focus();
+        } else {
+            const _cardProfile = document.getElementsByClassName('card-profile')[0];
+            _cardProfile.scrollTop = 0;
+        }
     }
 
     private reportsSubscribtionCallback(data, view) {

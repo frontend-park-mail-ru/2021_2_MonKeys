@@ -19,7 +19,6 @@ export const InputMessage = (chat: ChatData) => {
 
     const inputValue = chat.draftMessage === undefined || chat.draftMessage === '' ? '' : chat.draftMessage;
     return (
-        // <div class='input-message'>
         <form class='input-message'>
             <input
                 type='text'
@@ -33,6 +32,5 @@ export const InputMessage = (chat: ChatData) => {
                 <img class='input-message__icon-send' src='icons/send.svg' />
             </button>
         </form>
-        // </div>
     );
 };
