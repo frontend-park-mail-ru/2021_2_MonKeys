@@ -7,7 +7,6 @@ import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { requestMoreCardsThreshold } from '../constants/feed.js';
 
 const animationThanLikeAndReset = () => {
-    console.log('HELLO');
     EventBus.dispatch('feed:reaction', reactions.like);
     let card = document.querySelectorAll<HTMLElement>('.card')[0];
     if (!card) {
@@ -37,7 +36,6 @@ const animationThanLikeAndReset = () => {
 };
 
 const animationThanDislikeAndReset = () => {
-    console.log('HELLO');
     EventBus.dispatch('feed:reaction', reactions.like);
     let card = document.querySelectorAll<HTMLElement>('.card')[0];
     if (!card) {

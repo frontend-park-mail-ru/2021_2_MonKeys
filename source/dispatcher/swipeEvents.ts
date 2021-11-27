@@ -85,14 +85,12 @@ export const SwipeEvenetsRegister = () => {
     EventBus.register('swipe:end', () => {
         const card = document.querySelectorAll<HTMLElement>('.card')[0];
         if (window.offsetX > swipesAnimation.likeXThreshhold) {
-            console.log('LIKE');
             window.startX = 0;
             eventBus.dispatch('feed:like-button');
             return;
         }
 
         if (window.offsetX < -swipesAnimation.likeXThreshhold) {
-            console.log('DISLIKE');
             window.startX = 0;
             eventBus.dispatch('feed:dislike-button');
             return;

@@ -5,6 +5,8 @@ const errorSignupFormMsg = 'Пользователь с такой почтой 
 const errorRepeatPasswordMsg = 'Пароли не совпадают';
 const errorNameMsg = 'Введите свое настоящее имя';
 const errorAgeMsg = 'Введите настояющую дату рождения. Вы должны быть старше 18 лет';
+const errorGenderMsg = 'Укажите свой пол';
+const errorPreferMsg = 'Укажите свои предпочтения';
 const errorImgMsg = 'Добавьте хотя бы 1 фотографию';
 const errorEditFormMsg = 'Заполните все обязательные поля';
 
@@ -16,6 +18,8 @@ export {
     errorRepeatPasswordMsg,
     errorNameMsg,
     errorAgeMsg,
+    errorGenderMsg,
+    errorPreferMsg,
     errorImgMsg,
     errorEditFormMsg,
 };

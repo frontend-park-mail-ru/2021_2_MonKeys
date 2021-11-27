@@ -22,9 +22,11 @@ export const EditForm = (props: EditFormProps) => {
             {FormField(props.fields.birthDate)}
             {ErrorMsg(props.errorMsgs.ageError)}
             {ItemList(props.fields.genderField)}
+            {ErrorMsg(props.errorMsgs.genderError)}
             {DescriptionField(props.fields.description)}
             {ItemList(props.fields.tagsField)}
             {ItemList(props.fields.preferField)}
+            {ErrorMsg(props.errorMsgs.preferError)}
             <div class='form-field-input'>
                 {ImgField(props.fields.img, props.buttons.imgAddButton)}
                 {ErrorMsg(props.errorMsgs.imgError)}

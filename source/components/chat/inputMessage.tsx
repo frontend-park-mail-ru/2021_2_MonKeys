@@ -14,18 +14,6 @@ export const InputMessage = () => {
                 name: 'inputText',
                 class: 'form__field-valid',
             },
-            // 'inputText': {
-            //     tag: 'textarea',
-            //     type: 'text',
-            //     name: 'messageText',
-            //     class: '',
-            //     oninput: () => {
-            //         EventBus.dispatch<string>('');
-            //     },
-            //     onfocusout: () => {
-            //         EventBus.dispatch<string>('');
-            //     },
-            // },
         },
         sendMessage: {
             type: 'button',
