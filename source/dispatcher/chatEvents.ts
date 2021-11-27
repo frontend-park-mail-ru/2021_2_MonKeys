@@ -8,13 +8,24 @@ import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileData } from '../store/profileStore.js';
 
 export const ChatEventsRegister = () => {
-    EventBus.register('chat:send-button', () => {
+    EventBus.register('chat:input-message', (chatID: number) => {
         const _msgInput = document.getElementsByTagName('input')[0];
         const messageText = _msgInput.value.trim();
 
-        SendMessageWS(messageText, chatsManager.chatID).catch((err) => console.log(err));
+        chatsManager.saveDraftMessage(chatID, messageText);
     });
+    EventBus.register('chat:send-button', (chatID: number) => {
+        const _msgInput = document.getElementsByTagName('input')[0];
+        const messageText = _msgInput.value.trim();
 
+        if (messageText !== '') {
+            SendMessageWS(messageText, chatsManager.chatID)
+                .then(() => {
+                    chatsManager.clearDraftMessage(chatID);
+                })
+                .catch((err) => console.log(err));
+        }
+    });
     EventBus.register('chat:new-message', (message: Message) => {
         const chatID = chatsManager.getChatIDByMessage(message);
         if (!chatsManager.hasChat(chatID)) {
@@ -32,9 +43,13 @@ export const ChatEventsRegister = () => {
         }
 
         chatsManager.saveNewMessage(message);
+
+        const _chatSpace = document.getElementsByClassName('view-contant__message-space')[0];
+        _chatSpace.scrollTop = _chatSpace.scrollHeight;
     });
 
-    EventBus.register('chat:back-button', () => {
+    EventBus.register('chat:back-button', (chatID: number) => {
+        chatsManager.closeChat(chatID);
         router.go('/chats');
     });
 
@@ -64,5 +79,17 @@ export const ChatEventsRegister = () => {
         // const storeData = MatchesStore.get();
         // storeData.expended = false;
         // <tStore.set(storeData);
+    });
+    EventBus.register('chat:open-profile', (userID: number) => {
+        if (!chatsManager.withProfile(userID)) {
+            const matchesData = MatchesStore.get();
+            let profile: ProfileData;
+            for (let i = 0; i < matchesData.matchesTotal; i++) {
+                if (matchesData.matches[i].id === userID) {
+                    profile = matchesData.matches[i];
+                }
+            }
+            chatsManager.setProfile(userID, profile);
+        }
     });
 };

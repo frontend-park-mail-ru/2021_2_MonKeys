@@ -155,6 +155,9 @@ export namespace MonkeysVirtualDOM {
                                     router.go(manipulation.newChild.props[key]);
                                 });
                             }
+                            if (key === 'value' && manipulation.newChild.props[key] === '') {
+                                manipulation.oldChild.value = '';
+                            }
                             if (/^on/.test(key)) {
                                 manipulation.oldChild.addEventListener(key.slice(2), manipulation.newChild.props[key]);
                             } else {

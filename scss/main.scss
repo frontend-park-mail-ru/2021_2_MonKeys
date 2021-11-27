@@ -7,6 +7,7 @@
 
 @import './pages/likes';
 @import './pages/profile';
+@import './pages/chats';
 @import './pages/chat';
 
 @import './components/form_field';
@@ -25,9 +26,15 @@
 @import './components/card';
 @import './components/carousel';
 @import './components/match-profile';
+@import './components/chats';
+@import './components/chats-preview';
+@import './components/chat';
+@import './components/chat-header';
+@import './components/input-message';
 
 
 @import './layout/flex_column_center';
+@import './layout/view-contant';
 
 @import './core/reset.scss';
 

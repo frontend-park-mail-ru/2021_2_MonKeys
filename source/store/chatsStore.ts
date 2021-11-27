@@ -1,5 +1,6 @@
 import BaseStore from './storeBase.js';
 import { ProfileData, ProfileStore } from './profileStore.js';
+import { MatchesStore } from './matchStore.js';
 
 interface Message {
     messageID: number;
@@ -15,6 +16,10 @@ interface Chat {
     name: string;
     img: string;
     messages: Message[];
+    draftMessage: string;
+    opened: boolean;
+    profile: ProfileData;
+    isOpenedProfile: boolean;
 }
 
 interface ChatsData {
@@ -73,11 +78,23 @@ class ChatsManager {
             return;
         }
 
+        const matchesData = MatchesStore.get();
+        let fromProfile: ProfileData;
+        for (let i = 0; i < matchesData.matchesTotal; i++) {
+            if (matchesData.matches[i].id === profile.id) {
+                profile = matchesData.matches[i];
+            }
+        }
+
         const chat: Chat = {
             fromUserID: newChatID,
             name: profile.name,
             img: profile.imgs[0],
             messages: [],
+            draftMessage: '',
+            opened: true,
+            profile: fromProfile,
+            isOpenedProfile: false,
         };
 
         const chatsStore = ChatsStore.get();
@@ -152,6 +169,50 @@ class ChatsManager {
         const profileID = ProfileStore.get().id;
         return profileID === message.fromID ? message.toID : message.fromID;
     }
+
+    saveDraftMessage(chatID: number, msg: string) {
+        const chatIdx = this.getChatIdxByChatID(chatID);
+        const chatsData = ChatsStore.get();
+        chatsData.chats[chatIdx].draftMessage = msg;
+        ChatsStore.set(chatsData);
+    }
+
+    clearDraftMessage(chatID: number) {
+        const chatIdx = this.getChatIdxByChatID(chatID);
+        const chatsData = ChatsStore.get();
+        chatsData.chats[chatIdx].draftMessage = '';
+        ChatsStore.set(chatsData);
+    }
+
+    openChat(chatID: number) {
+        const chatIdx = this.getChatIdxByChatID(chatID);
+        const chatsData = ChatsStore.get();
+        chatsData.chats[chatIdx].opened = true;
+        ChatsStore.set(chatsData);
+    }
+
+    closeChat(chatID: number) {
+        const chatIdx = this.getChatIdxByChatID(chatID);
+        const chatsData = ChatsStore.get();
+        chatsData.chats[chatIdx].opened = false;
+        ChatsStore.set(chatsData);
+    }
+
+    withProfile(chatID: number) {
+        const curChat = this.getChatByID(chatID);
+        if (curChat.profile) {
+            return true;
+        }
+        return false;
+    }
+
+    setProfile(chatID: number, fromProfile: ProfileData) {
+        const chatIdx = this.getChatIdxByChatID(chatID);
+        const chatsData = ChatsStore.get();
+        chatsData.chats[chatIdx].profile = fromProfile;
+        ChatsStore.set(chatsData);
+    }
+
     private getChatByID(chatID: number) {
         const chats = ChatsStore.get().chats;
 
