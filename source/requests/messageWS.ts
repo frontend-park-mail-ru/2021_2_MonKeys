@@ -12,7 +12,7 @@ const ConnectWS = () => {
 const initWS = () => {
     ws.onmessage = function (response) {
         const message = JSON.parse(response.data);
-        // message.date = new Date(message.date);
+        message.date = new Date(message.date);
 
         eventBus.dispatch<Message>('chat:new-message', message);
     };

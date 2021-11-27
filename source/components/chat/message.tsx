@@ -3,12 +3,22 @@ import { Message as MessageData } from '../../store/chatsStore.js';
 import { ProfileStore } from '../../store/profileStore.js';
 
 export const Message = (msg: MessageData) => {
-    // console.log(typeof msg.date)
-    // console.log(msg.date.getFullYear())
-    // console.log(msg.date.getMonth())
-    // console.log(msg.date.getDate)
-    // console.log(msg.date.getHours())
-    // console.log(msg.date.getMinutes())
+    console.log(msg.date)
+    const msgYear = msg.date.getFullYear().toString();
+    const msgMonth = msg.date.getMonth().toString();
+    const msgDate = msg.date.getDate().toString();
+    const msgHourse = msg.date.getHours().toString();
+    let msgMinutes = msg.date.getMinutes().toString();
+    if (msgMinutes.length === 1) {
+        msgMinutes  = '0' + msgMinutes;
+    }
+
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed)
+    let date = msgHourse + ':' + msgMinutes;
+    if (today.getDate().toString() !== msgDate) {
+        date = date + ' ' + msgDate + '.' + msgMonth + '.' + msgYear;
+    }
     const textClass = msg.fromID === ProfileStore.get().id
         ? 'message-container__message message-container__message_my-message'
         : 'message-container__message message-container__message_not-my-message';
@@ -24,7 +34,7 @@ export const Message = (msg: MessageData) => {
                 </div>
             </div>
             <div class={messageContainerClass}>
-                <span class='message-container__date'>{msg.date}</span>
+                <span class='message-container__date'>{date}</span>
             </div>
         </div>
     );
