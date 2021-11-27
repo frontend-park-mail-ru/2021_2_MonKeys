@@ -9,7 +9,7 @@ import { ChatsStore, chatsManager } from '../store/chatsStore.js';
 import { SearchField } from '../components/searchField.js';
 import { MatchProfile } from '../components/chats/matchProfile.js';
 import { matchRequest } from '../requests/matchRequest.js';
-import { ServerError } from '../components/error/ServerError.js';
+import { Errors } from '../components/error/Errors.js';
 
 export default class ChatsView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -20,12 +20,14 @@ export default class ChatsView extends ViewBase {
 
         this._template = this._createTmpl(this._data);
 
-        matchRequest().then((matchResponse) => {
-            const matchesData = MatchesStore.get();
-            matchesData.matches = matchResponse.data.body.allUsers;
-            matchesData.matchesTotal = matchResponse.data.body.matchesCount;
-            MatchesStore.set(matchesData);
-        });
+        matchRequest()
+            .then((matchResponse) => {
+                const matchesData = MatchesStore.get();
+                matchesData.matches = matchResponse.data.body.allUsers;
+                matchesData.matchesTotal = matchResponse.data.body.matchesCount;
+                MatchesStore.set(matchesData);
+            })
+            .catch(() => errorManager.pushAPIError());
     }
 
     public unsubscribe() {
@@ -51,7 +53,7 @@ export default class ChatsView extends ViewBase {
                     {Object.keys(data.matches).map((item) => MatchProfile({ userData: data.matches[item] }))}
                 </div>
                 {Chats(data.chats)}
-                {ServerError(data.error)}
+                {Errors(data.error)}
                 {Tapbar(TapbarStore.get())}
             </div>
         );
@@ -66,6 +68,8 @@ export default class ChatsView extends ViewBase {
     }
 
     private errorStoreUpdatesView(data, view) {
+        console.log('---errorStoreUpdatesView');
+        console.log(errorManager.error);
         view._data.error = errorManager.error;
         view._template = view._createTmpl(view._data);
         view.render();

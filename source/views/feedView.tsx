@@ -8,7 +8,7 @@ import eventBus from '../dispatcher/eventBus.js';
 import TapbarStore from '../store/tapbarStore.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { dropsBackground } from '../components/dropsBackground.js';
-import { ServerError } from '../components/error/ServerError.js';
+import { Errors } from '../components/error/Errors.js';
 
 export default class FeedView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -23,7 +23,6 @@ export default class FeedView extends ViewBase {
     private updateDataTemaplate(cardData) {
         if (!cardData.outOfCards) {
             this._data.cardData.userData = cardData.profiles[cardData.counter];
-            this._data.error = errorManager.error;
             this._template = this._createTmpl(this._data, cardData.expanded);
         } else {
             this._template = (
@@ -95,7 +94,7 @@ export default class FeedView extends ViewBase {
                 <div class='flex_box_column_center overflow-hidden'>
                     {CardFeed(data.cardData)}
                     {Tapbar(TapbarStore.get())}
-                    {ServerError(data.error)}
+                    {Errors(data.error)}
                 </div>
             );
         } else {
@@ -111,7 +110,7 @@ export default class FeedView extends ViewBase {
                 <div class='flex_box_column_center overflow-hidden'>
                     {CardExpended(data.cardData)}
                     {Tapbar(data.tapbar)}
-                    {ServerError(data.error)}
+                    {Errors(data.error)}
                 </div>
             );
         }

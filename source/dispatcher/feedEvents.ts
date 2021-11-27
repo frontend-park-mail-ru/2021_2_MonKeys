@@ -5,6 +5,7 @@ import { likesRequest } from '../requests/likesRequest.js';
 import { feedRequest } from '../requests/feedRequest.js';
 import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { requestMoreCardsThreshold } from '../constants/feed.js';
+import { errorManager } from '../store/errorStore.js';
 
 const animationThanLikeAndReset = () => {
     EventBus.dispatch('feed:reaction', reactions.like);
@@ -83,13 +84,11 @@ export const FeedEventsRegister = () => {
     });
     EventBus.register('feed:expand-button', () => {
         const data = feedStore.get();
-        data.apiErrorLoadCondition = false;
         data.expanded = true;
         feedStore.set(data);
     });
     EventBus.register('feed:shrink-button', () => {
         const data = feedStore.get();
-        data.apiErrorLoadCondition = false;
         data.expanded = false;
         feedStore.set(data);
     });
@@ -104,58 +103,47 @@ export const FeedEventsRegister = () => {
     });
     EventBus.register('feed:reaction', (reactionID) => {
         const data = feedStore.get();
-        data.apiErrorLoadCondition = false;
         console.log(`REACTED ${data.profiles[data.counter].id}`);
         likesRequest(data.profiles[data.counter].id, reactionID)
             .then((response) => {
-                if (response.status === HTTPSuccess) {
-                    if (response.data.status === HTTPSuccess) {
-                        if (response.data.body.match) {
-                            // matchRequest().then((matchResponse) => {
-                            //     const likesData = LikesStore.get();
-                            //     likesData.profiles = matchResponse.data.body.allUsers;
-                            //     likesData.mathesCount = matchResponse.data.body.matchesCount;
-                            //     LikesStore.set(likesData);
-                            // });
-                        }
-                    } else {
-                        throw '400';
-                    }
-                } else {
-                    const feedData = feedStore.get();
-                    feedData.apiErrorLoadCondition = true;
-                    feedStore.set(feedData);
+                if (response.status !== HTTPSuccess || response.data.status !== HTTPSuccess) {
+                    throw 'bad response';
+                }
+
+                if (response.data.body.match) {
+                    // matchRequest().then((matchResponse) => {
+                    //     const likesData = LikesStore.get();
+                    //     likesData.profiles = matchResponse.data.body.allUsers;
+                    //     likesData.mathesCount = matchResponse.data.body.matchesCount;
+                    //     LikesStore.set(likesData);
+                    // });
                 }
 
                 data.counter++;
 
                 if (data.counter === requestMoreCardsThreshold) {
-                    feedRequest().then((response) => {
-                        if (response.status === HTTPSuccess) {
-                            if (response.data.status === HTTPSuccess) {
-                                if (response.data.body !== null) {
-                                    data.profiles = response.data.body;
-                                } else {
-                                    data.profiles = [];
-                                    data.outOfCards = true;
-                                }
-                                data.counter = 0;
-
-                                if (data.profiles[data.counter]) {
-                                    data.outOfCards = false;
-                                } else {
-                                    data.outOfCards = true;
-                                }
-                                feedStore.set(data);
-                            } else {
-                                throw '400';
+                    feedRequest()
+                        .then((response) => {
+                            if (response.status !== HTTPSuccess || response.data.status !== HTTPSuccess) {
+                                throw 'bad response';
                             }
-                        } else {
-                            const feedData = feedStore.get();
-                            feedData.apiErrorLoadCondition = true;
-                            feedStore.set(feedData);
-                        }
-                    });
+
+                            if (response.data.body !== null) {
+                                data.profiles = response.data.body;
+                            } else {
+                                data.profiles = [];
+                                data.outOfCards = true;
+                            }
+                            data.counter = 0;
+
+                            if (data.profiles[data.counter]) {
+                                data.outOfCards = false;
+                            } else {
+                                data.outOfCards = true;
+                            }
+                            feedStore.set(data);
+                        })
+                        .catch(errorManager.pushAPIError);
                 } else {
                     if (data.profiles[data.counter]) {
                         data.outOfCards = false;
@@ -165,10 +153,6 @@ export const FeedEventsRegister = () => {
                     feedStore.set(data);
                 }
             })
-            .catch(() => {
-                const feedData = feedStore.get();
-                feedData.apiErrorLoadCondition = true;
-                feedStore.set(feedData);
-            });
+            .catch(errorManager.pushAPIError);
     });
 };
