@@ -1,6 +1,6 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import { Tapbar } from '../components/tapbar.js';
+import { Tapbar } from '../components/tapbar/tapbar.js';
 import { ImgCard } from '../components/imgCard.js';
 import LikesStore from '../store/likesStore.js';
 import ReportsStore from '../store/reportsStore.js';

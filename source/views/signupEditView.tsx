@@ -4,7 +4,14 @@ import { EditForm } from '../components/editForm.js';
 import EventBus from '../dispatcher/eventBus.js';
 import { EditStore } from '../store/editStore.js';
 import { ProfileStore } from '../store/profileStore.js';
-import { errorNameMsg, errorAgeMsg, errorImgMsg, errorEditFormMsg, errorGenderMsg, errorPreferMsg } from '../constants/errorMsg.js';
+import {
+    errorNameMsg,
+    errorAgeMsg,
+    errorImgMsg,
+    errorEditFormMsg,
+    errorGenderMsg,
+    errorPreferMsg,
+} from '../constants/errorMsg.js';
 import { ErrorStore } from '../store/errorStore.js';
 
 export default class SignupEditView extends ViewBase {
@@ -120,7 +127,7 @@ export default class SignupEditView extends ViewBase {
         return (
             <div class='card-container'>
                 {EditForm(data.editForm)}
-                {/*CritError(data.critError)*/}
+                {/*Error(data.critError)*/}
             </div>
         );
     }

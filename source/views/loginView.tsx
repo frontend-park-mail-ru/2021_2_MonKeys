@@ -129,7 +129,7 @@ export default class LoginView extends ViewBase {
                 {/* {ErrorMsg(data.errorMsgs.formError)} */}
                 {Button(data.buttons.loginButton)}
                 {Button(data.buttons.signupButton)}
-                {/* {CritError(data.critError)} */}
+                {/* {Error(data.critError)} */}
             </div>
         );
     }

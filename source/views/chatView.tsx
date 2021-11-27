@@ -30,7 +30,7 @@ export default class ChatView extends ViewBase {
         return (
             <div class=''>
                 {Chat(data.chat)}
-                {/*{CritError(data.critError)}*/}
+                {/*{Error(data.critError)}*/}
             </div>
         );
     }

@@ -14,18 +14,6 @@ export const InputMessage = () => {
                 name: 'inputText',
                 class: 'form__field-valid',
             },
-            // 'inputText': {
-            //     tag: 'textarea',
-            //     type: 'text',
-            //     name: 'messageText',
-            //     class: '',
-            //     oninput: () => {
-            //         EventBus.dispatch<string>('');
-            //     },
-            //     onfocusout: () => {
-            //         EventBus.dispatch<string>('');
-            //     },
-            // },
         },
         sendMessage: {
             type: 'button',
@@ -35,9 +23,9 @@ export const InputMessage = () => {
                 EventBus.dispatch<string>('chat:send-button');
             },
             onkeypress: (event) => {
-                alert(1);
                 const enterKeyCode = 13;
                 if (event.keyCode === enterKeyCode) {
+                    event.preventDefault();
                     EventBus.dispatch<string>('chat:send-button');
                 }
             },
@@ -45,16 +33,7 @@ export const InputMessage = () => {
     };
 
     return (
-        <div
-            class=''
-            onkeypress={(event) => {
-                const enterKeyCode = 13;
-                if (event.keyCode === enterKeyCode) {
-                    event.preventDefault();
-                    EventBus.dispatch<string>('chat:send-button');
-                }
-            }}
-        >
+        <div class='' onkeypress={props.sendMessage.onkeypress}>
             <form class={''}>
                 <div>{FormField(props.fields.inputText)}</div>
                 <div>{Button(props.sendMessage)}</div>

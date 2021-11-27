@@ -55,12 +55,12 @@ export const Routes = {
         view: FeedView,
         tapbar: 'feed',
     },
-    '/matches': {
-        name: 'Мэтчи',
-        path: '/matches',
+    '/likes': {
+        name: 'Лайки',
+        path: '/likes',
         auth: userStatus.loggedIn,
         view: LikesView,
-        tapbar: 'matches',
+        tapbar: 'likes',
     },
     '/profile': {
         name: 'Профиль',

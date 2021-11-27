@@ -130,7 +130,7 @@ export default class SignupView extends ViewBase {
                 {Button(this._data.buttons.signupButton)}
 
                 {Button(this._data.buttons.loginButton)}
-                {/* {CritError(data.critError)} */}
+                {/* {Error(data.critError)} */}
             </div>
         );
     }

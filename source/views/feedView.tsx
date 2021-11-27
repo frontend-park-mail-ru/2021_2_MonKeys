@@ -1,13 +1,14 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import { Tapbar } from '../components/tapbar.js';
+import { Tapbar } from '../components/tapbar/tapbar.js';
 import { CardFeed } from '../components/cardFeed.js';
 import { CardExpended } from '../components/cardExpended.js';
 import feedStore from '../store/feedStore.js';
 import eventBus from '../dispatcher/eventBus.js';
 import TapbarStore from '../store/tapbarStore.js';
-import { ErrorStore } from '../store/errorStore.js';
+import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { dropsBackground } from '../components/dropsBackground.js';
+import { ServerError } from '../components/error/ServerError.js';
 
 export default class FeedView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -22,7 +23,7 @@ export default class FeedView extends ViewBase {
     private updateDataTemaplate(cardData) {
         if (!cardData.outOfCards) {
             this._data.cardData.userData = cardData.profiles[cardData.counter];
-            this._data.critError.loading = cardData.apiErrorLoadCondition;
+            this._data.error = errorManager.error;
             this._template = this._createTmpl(this._data, cardData.expanded);
         } else {
             this._template = (
@@ -70,11 +71,7 @@ export default class FeedView extends ViewBase {
         tapbar: {
             class: 'card-bottom-panel_actions_action',
         },
-        critError: {
-            title: 'Ошибка подключения',
-            text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
-            loading: ErrorStore.get().apiErrorLoadCondition,
-        },
+        error: errorManager.error,
     };
 
     forceRender() {
@@ -98,7 +95,7 @@ export default class FeedView extends ViewBase {
                 <div class='flex_box_column_center overflow-hidden'>
                     {CardFeed(data.cardData)}
                     {Tapbar(TapbarStore.get())}
-                    {/* {CritError(data.critError)} */}
+                    {ServerError(data.error)}
                 </div>
             );
         } else {
@@ -114,7 +111,7 @@ export default class FeedView extends ViewBase {
                 <div class='flex_box_column_center overflow-hidden'>
                     {CardExpended(data.cardData)}
                     {Tapbar(data.tapbar)}
-                    {/* {CritError(data.critError)} */}
+                    {ServerError(data.error)}
                 </div>
             );
         }
@@ -132,7 +129,7 @@ export default class FeedView extends ViewBase {
     }
 
     private errorStoreUpdatesView(data, view) {
-        view._data.critError.loading = data.apiErrorLoadCondition;
+        view._data.error = errorManager.error;
         view._template = view._createTmpl(view._data);
         view.render();
     }
