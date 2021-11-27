@@ -30,8 +30,7 @@ ChatsStore.set({
 });
 
 function compareChats(l: Chat, r: Chat) {
-    if (l.messages.length === 0 || r.messages.length === 0 ||
-        l.messages.at(-1).date < r.messages.at(-1).date) {
+    if (l.messages.length === 0 || r.messages.length === 0 || l.messages.at(-1).date < r.messages.at(-1).date) {
         return 1;
     }
 
