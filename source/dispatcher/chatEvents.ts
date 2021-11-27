@@ -1,6 +1,6 @@
 import EventBus from './eventBus.js';
 import { SendMessageWS } from '../requests/messageWS.js';
-import { Message, chatsManager } from '../store/chatsStore.js';
+import { Message, chatsManager, ChatsStore } from '../store/chatsStore.js';
 import router from '../route/router.js';
 import { MatchesStore } from '../store/matchStore.js';
 import { searchMathesRequest } from '../requests/matchRequest.js';
@@ -8,13 +8,23 @@ import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileData } from '../store/profileStore.js';
 
 export const ChatEventsRegister = () => {
-    EventBus.register('chat:send-button', () => {
+    EventBus.register('chat:input-message', (chatID: number) => {
         const _msgInput = document.getElementsByTagName('input')[0];
         const messageText = _msgInput.value.trim();
 
-        SendMessageWS(messageText, chatsManager.chatID).catch((err) => console.log(err));
+        chatsManager.saveDraftMessage(chatID, messageText);
     });
+    EventBus.register('chat:send-button', (chatID: number) => {
+        const _msgInput = document.getElementsByTagName('input')[0];
+        const messageText = _msgInput.value.trim();
+        // _msgInput.value = '';
 
+        SendMessageWS(messageText, chatsManager.chatID)
+            .then(() => {
+                chatsManager.clearDraftMessage(chatID);
+            })
+            .catch((err) => console.log(err));
+    });
     EventBus.register('chat:new-message', (message: Message) => {
         const chatID = chatsManager.getChatIDByMessage(message);
         if (!chatsManager.hasChat(chatID)) {

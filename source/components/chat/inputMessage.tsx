@@ -1,9 +1,10 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import { FormField } from '../formField.js';
 import { Button } from '../button.js';
+import { Chat as ChatData } from '../../store/chatsStore.js';
 import EventBus from '../../dispatcher/eventBus.js';
 
-export const InputMessage = () => {
+export const InputMessage = (chat: ChatData) => {
     const props = {
         'fields': {
             'inputText': {
@@ -45,22 +46,36 @@ export const InputMessage = () => {
         },
     };
 
+    const inputEvent = () => {
+        EventBus.dispatch<number>('chat:input-message', chat.fromUserID);
+    }
     const enterSendEvent = (event) => {
         const enterKeyCode = 13;
         if (event.keyCode === enterKeyCode) {
             event.preventDefault();
-            EventBus.dispatch<string>('chat:send-button');
+            EventBus.dispatch<number>('chat:send-button', chat.fromUserID);
         }
     };
     const buttonSendEvent = () => {
-        EventBus.dispatch<string>('chat:send-button');
+        EventBus.dispatch<number>('chat:send-button', chat.fromUserID);
     };
+    console.log('in store', chat.draftMessage)
 
+    let inputValue: string;
+    (chat.draftMessage === undefined || chat.draftMessage === '')
+    ? inputValue = 'ahahahahaha'
+    : inputValue = chat.draftMessage;
+    console.log('in tmpl', inputValue)
     return (
         // <div class='input-message'>
             <form class='input-message'>
-                <input type='text' class='input-message__field' placeholder='Сообщение' onkeypress={enterSendEvent} focus/>
-                <button class='input-message__button-send' type='reset' onclick={buttonSendEvent} onkeypress={enterSendEvent}>
+                <input type='text'
+                       class='input-message__field'
+                       placeholder='Сообщение'
+                       oninput={inputEvent}
+                       onkeypress={enterSendEvent}
+                       value={inputValue}/>
+                <button class='input-message__button-send' type='reset' onclick={buttonSendEvent}>
                     <img class='input-message__icon-send' src='icons/send.svg'/>
                 </button>
             </form>

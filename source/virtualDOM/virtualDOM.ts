@@ -113,6 +113,7 @@ export namespace MonkeysVirtualDOM {
             }
         };
         updateElement($rootElement, currNode, nextNode, index);
+        console.log(manipulationMapStack);
 
         manipulationMapStack.map((manipulation) => {
             switch (manipulation.method) {

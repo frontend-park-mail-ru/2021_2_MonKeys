@@ -16,7 +16,7 @@ export const Chat = (chat: ChatData) => {
             <div class='view-contant__message-space'>
                 {chat.messages.map((msg) => Message(msg))}
             </div>
-            {InputMessage()}
+            {InputMessage(chat)}
         </div>
     );
 };

@@ -37,6 +37,8 @@ export default class ChatView extends ViewBase {
 
     private chatUpdatesView(data, view) {
         view._data.chat = chatsManager.chat;
+        console.log(chatsManager.chat)
+        console.log('tyt')
 
         view._template = view._createTmpl(view._data);
 
