@@ -8,7 +8,6 @@ export interface FeedData {
     counter: number;
     outOfCards: boolean;
     expanded: boolean;
-    apiErrorLoadCondition: boolean;
 }
 
 const feedStore = new BaseStore<FeedData>();
@@ -18,7 +17,6 @@ feedStore.set({
     counter: 0,
     outOfCards: false,
     expanded: false,
-    apiErrorLoadCondition: false,
 });
 
 export default feedStore;

@@ -4,6 +4,7 @@ import { chatsManager } from '../store/chatsStore.js';
 import { getChat } from '../requests/chatRequest.js';
 import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileData } from '../store/profileStore.js';
+import { errorManager } from '../store/errorStore.js';
 
 export const ChatsEventsRegister = () => {
     EventBus.register('chats:preview-chat', (chatID: number) => {
@@ -33,7 +34,7 @@ export const ChatsEventsRegister = () => {
                 // }
             })
             .catch((err) => {
-                console.log(err);
+                errorManager.pushAPIError();
                 throw err;
             });
     });
@@ -58,7 +59,7 @@ export const ChatsEventsRegister = () => {
                         chatsManager.updateChatMessages(chatID, response.data.body);
                     })
                     .catch((err) => {
-                        console.log(err);
+                        errorManager.pushAPIError();
                         throw err;
                     });
             }

@@ -6,10 +6,11 @@ import { ErrorMsg } from '../components/errorMsg.js';
 import { errorEmailMsg, errorPasswordMsg, errorRepeatPasswordMsg, errorSignupFormMsg } from '../constants/errorMsg.js';
 import EventBus from '../dispatcher/eventBus.js';
 import { SignupStore } from '../store/signupStore.js';
-import { ErrorStore } from '../store/errorStore.js';
+import { errorManager, ErrorStore } from '../store/errorStore.js';
 
 import router from '../route/router.js';
 import { dropsBackground } from '../components/dropsBackground.js';
+import { Errors } from '../components/error/Errors.js';
 
 export default class SignupView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -108,11 +109,7 @@ export default class SignupView extends ViewBase {
                 class: SignupStore.get().formErrorClass,
             },
         },
-        'critError': {
-            title: 'Ошибка подключения',
-            text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
-            loading: ErrorStore.get().apiErrorLoadCondition,
-        },
+        error: errorManager.error,
     };
 
     _createTmpl() {
@@ -130,7 +127,7 @@ export default class SignupView extends ViewBase {
                 {Button(this._data.buttons.signupButton)}
 
                 {Button(this._data.buttons.loginButton)}
-                {/* {Error(data.critError)} */}
+                {Errors(this._data.error)}
             </div>
         );
     }
@@ -151,13 +148,12 @@ export default class SignupView extends ViewBase {
         view._data.errorMsgs.passwordError.class = data.passwordErrorClass;
         view._data.errorMsgs.repeatPasswordError.class = data.repeatPasswordErrorClass;
         view._data.errorMsgs.formError.class = data.formErrorClass;
-        view._data.critError.loading = data.apiErrorLoadCondition;
         view._template = view._createTmpl(view._data);
         view.render();
     }
 
     private errorStoreUpdatesView(data, view) {
-        view._data.critError.loading = data.apiErrorLoadCondition;
+        view._data.error = errorManager.error;
         view._template = view._createTmpl(view._data);
         view.render();
     }

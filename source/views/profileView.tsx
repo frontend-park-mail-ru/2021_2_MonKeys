@@ -5,7 +5,8 @@ import { CardExpended } from '../components/cardExpended.js';
 import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
 import TapbarStore from '../store/tapbarStore.js';
-import { ErrorStore } from '../store/errorStore.js';
+import { errorManager, ErrorStore } from '../store/errorStore.js';
+import { Errors } from '../components/error/Errors.js';
 
 export default class ProfileView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -34,11 +35,7 @@ export default class ProfileView extends ViewBase {
         'tapbar': {
             class: 'menu-icon',
         },
-        'critError': {
-            title: 'Ошибка подключения',
-            text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
-            loading: ErrorStore.get().apiErrorLoadCondition,
-        },
+        error: errorManager.error,
     };
 
     _createTmpl(data) {
@@ -53,7 +50,7 @@ export default class ProfileView extends ViewBase {
                 </div>
                 {CardExpended({ userData: data.cardData.userData, withActions: false, withReports: false })}
                 {Tapbar(TapbarStore.get())}
-                {/* {Error(data.critError)} */}
+                {Errors(data.error)}
             </div>
         );
     }
@@ -67,13 +64,12 @@ export default class ProfileView extends ViewBase {
         view._data.cardData.userData.name = data.name;
         view._data.cardData.userData.age = data.age;
         view._data.cardData.userData.description = data.description;
-        view._data.critError.loading = data.apiErrorLoadCondition;
         view._template = view._createTmpl(view._data);
         view.render();
     }
 
     private errorStoreUpdatesView(data, view) {
-        view._data.critError.loading = data.apiErrorLoadCondition;
+        view._data.error = errorManager.error;
         view._template = view._createTmpl(view._data);
         view.render();
     }

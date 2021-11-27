@@ -8,7 +8,6 @@ export interface LoginData {
     formErrorClass: string;
     emailPass?: boolean;
     passwordPass?: boolean;
-    apiErrorLoadCondition: boolean;
 }
 
 const LoginStore = new BaseStore<LoginData>();
@@ -21,7 +20,6 @@ const initData = {
     passwordErrorClass: 'error-hidden',
     passwordPass: false,
     formErrorClass: 'error-hidden',
-    apiErrorLoadCondition: false,
 };
 
 LoginStore.set(initData);

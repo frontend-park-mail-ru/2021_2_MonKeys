@@ -1,5 +1,5 @@
 import EventBus from './eventBus.js';
-import { HTTPNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
+import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileStore } from '../store/profileStore.js';
 import router from '../route/router.js';
 import { addPhotoToProfile, deleteProfilePhoto } from '../requests/profilePhotoRequest.js';
@@ -8,6 +8,7 @@ import { tagsRequest } from '../requests/tagsRequest.js';
 import { EditStore } from '../store/editStore.js';
 import { validDate, validImgType } from '../validation/edit.js';
 import { nameRegExp } from '../constants/validation.js';
+import { errorManager } from '../store/errorStore.js';
 
 export const EditEventRegister = () => {
     EventBus.register('edit:save-button', () => {
@@ -18,8 +19,6 @@ export const EditEventRegister = () => {
         const testName = _nameInput.value.length !== 0 && nameRegExp.test(_nameInput.value);
 
         const storeData = EditStore.get();
-        storeData.apiErrorLoadCondition = false;
-        EditStore.set(storeData);
 
         if (!testName) {
             storeData.nameFieldClass = 'form__field-invalid';
@@ -106,52 +105,35 @@ export const EditEventRegister = () => {
 
         editProfile(name, userGender, userPrefer, date, description, photoPaths, tags)
             .then((response) => {
-                if (response.status === HTTPSuccess) {
-                    if (response.data.status === HTTPSuccess) {
-                        EventBus.dispatch<string>('user:cookie-requests');
-                        router.go('/profile');
-                    } else if (response.data.status === HTTPNotFound) {
-                        throw 'HTTPNotFound';
-                    }
-                } else {
-                    storeData.apiErrorLoadCondition = true;
-                    EditStore.set(storeData);
+                if (response.status !== HTTPSuccess || response.data.status !== HTTPSuccess) {
+                    throw 'bad response';
                 }
+
+                EventBus.dispatch<string>('user:cookie-requests');
+                router.go('/profile');
             })
-            .catch(() => {
-                storeData.apiErrorLoadCondition = true;
-                EditStore.set(storeData);
-            });
+            .catch(errorManager.pushAPIError);
     });
 
     EventBus.register('edit:open-tags', () => {
-        const storeData = EditStore.get();
-        storeData.apiErrorLoadCondition = false;
-        EditStore.set(storeData);
         tagsRequest()
             .then((response) => {
-                if (response.status === HTTPSuccess) {
-                    if (response.data.status === HTTPSuccess) {
-                        const storeData = EditStore.get();
-                        storeData.tags = response.data.body;
-                        Object.keys(storeData.tags.allTags).map(
-                            (item) =>
-                                (storeData.tags.allTags[item].onchange = () => {
-                                    EventBus.dispatch<string>(
-                                        'edit:change-tag-condition',
-                                        storeData.tags.allTags[item].tagText
-                                    );
-                                })
-                        );
-                        EditStore.set(storeData);
-                    } else if (response.data.status === HTTPNotFound) {
-                        throw 'HTTPNotFound';
-                    }
-                } else {
-                    const storeData = EditStore.get();
-                    storeData.apiErrorLoadCondition = true;
-                    EditStore.set(storeData);
+                if (response.status !== HTTPSuccess || response.data.status !== HTTPSuccess) {
+                    throw 'bad response';
                 }
+
+                const storeData = EditStore.get();
+                storeData.tags = response.data.body;
+                Object.keys(storeData.tags.allTags).map(
+                    (item) =>
+                        (storeData.tags.allTags[item].onchange = () => {
+                            EventBus.dispatch<string>(
+                                'edit:change-tag-condition',
+                                storeData.tags.allTags[item].tagText
+                            );
+                        })
+                );
+                EditStore.set(storeData);
 
                 if (ProfileStore.get() !== undefined) {
                     const userTags = ProfileStore.get().tags;
@@ -169,11 +151,7 @@ export const EditEventRegister = () => {
                     }
                 }
             })
-            .catch(() => {
-                const storeData = EditStore.get();
-                storeData.apiErrorLoadCondition = true;
-                EditStore.set(storeData);
-            });
+            .catch(errorManager.pushAPIError);
     });
 
     EventBus.register('edit:change-tag-condition', (payload?: string) => {
@@ -206,8 +184,6 @@ export const EditEventRegister = () => {
         const _nameInput = document.getElementsByTagName('input')[0];
 
         const storeData = EditStore.get();
-        storeData.apiErrorLoadCondition = false;
-        EditStore.set(storeData);
 
         const test = _nameInput.value.length !== 0 && nameRegExp.test(_nameInput.value);
 
@@ -230,8 +206,6 @@ export const EditEventRegister = () => {
         const _nameInput = document.getElementsByTagName('input')[0];
 
         const storeData = EditStore.get();
-        storeData.apiErrorLoadCondition = false;
-        EditStore.set(storeData);
 
         const test = _nameInput.value.length !== 0 && nameRegExp.test(_nameInput.value);
 
@@ -250,8 +224,6 @@ export const EditEventRegister = () => {
         const _dateInput = document.getElementsByTagName('input')[1];
 
         const storeData = EditStore.get();
-        storeData.apiErrorLoadCondition = false;
-        EditStore.set(storeData);
 
         const test = validDate(_dateInput);
 
@@ -274,8 +246,6 @@ export const EditEventRegister = () => {
         const _dateInput = document.getElementsByTagName('input')[1];
 
         const storeData = EditStore.get();
-        storeData.apiErrorLoadCondition = false;
-        EditStore.set(storeData);
 
         const test = validDate(_dateInput);
 
@@ -321,21 +291,16 @@ export const EditEventRegister = () => {
                 editStoreData.formErrorClass = 'error-inactive';
                 EditStore.set(editStoreData);
             })
-            .catch(() => {
-                const storeData = EditStore.get();
-                storeData.apiErrorLoadCondition = true;
-                EditStore.set(storeData);
-            });
+            .catch(errorManager.pushAPIError);
     });
 
     EventBus.register('edit:img-delete', (imgPath) => {
         deleteProfilePhoto(imgPath)
             .then((response) => {
-                if (response.status !== HTTPSuccess) {
-                    const storeData = EditStore.get();
-                    storeData.apiErrorLoadCondition = true;
-                    EditStore.set(storeData);
+                if (response.status !== HTTPSuccess || response.data.status !== HTTPSuccess) {
+                    throw 'bad response';
                 }
+
                 const userData = ProfileStore.get();
                 userData.imgs = userData.imgs.filter((image) => {
                     if (image != imgPath) {
@@ -344,11 +309,7 @@ export const EditEventRegister = () => {
                 });
                 ProfileStore.set(userData);
             })
-            .catch(() => {
-                const storeData = EditStore.get();
-                storeData.apiErrorLoadCondition = true;
-                EditStore.set(storeData);
-            });
+            .catch(errorManager.pushAPIError);
     });
 
     EventBus.register('edit:tags-click', () => {

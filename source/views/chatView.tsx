@@ -1,10 +1,11 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { Chat } from '../components/chat/chat.js';
-import { ErrorStore } from '../store/errorStore.js';
+import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { ChatsStore, chatsManager } from '../store/chatsStore.js';
 import ReportsStore from '../store/reportsStore.js';
 import { CardExpended } from '../components/cardExpended.js';
+import { Errors } from '../components/error/Errors.js';
 
 export default class ChatView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -26,11 +27,7 @@ export default class ChatView extends ViewBase {
         chat: chatsManager.chat,
         reports: ReportsStore.get().reports,
         reportsActive: ReportsStore.get().active,
-        critError: {
-            title: 'Ошибка подключения',
-            text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
-            loading: ErrorStore.get().apiErrorLoadCondition,
-        },
+        error: errorManager.error,
     };
 
     _createTmpl(data) {
@@ -44,7 +41,7 @@ export default class ChatView extends ViewBase {
                     reported: data.reportsActive,
                 })}
                 {Chat(data.chat)}
-                {/*{Error(data.critError)}*/}
+                {Errors(data.error)}
             </div>
         );
     }
@@ -70,7 +67,7 @@ export default class ChatView extends ViewBase {
     }
 
     private errorStoreUpdatesView(data, view) {
-        view._data.critError.loading = data.apiErrorLoadCondition;
+        view._data.error = errorManager.error;
         view._template = view._createTmpl(view._data);
         view.render();
     }

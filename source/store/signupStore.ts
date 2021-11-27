@@ -11,7 +11,6 @@ export interface SignupData {
     repeatPasswordFieldClass: string;
     repeatPasswordErrorClass: string;
     formErrorClass: string;
-    apiErrorLoadCondition: boolean;
 }
 
 const SignupStore = new BaseStore<SignupData>();
@@ -24,7 +23,6 @@ const initData = {
     repeatPasswordFieldClass: 'form__field-valid',
     repeatPasswordErrorClass: 'error-inactive',
     formErrorClass: 'error-inactive',
-    apiErrorLoadCondition: false,
 };
 
 SignupStore.set(initData);
