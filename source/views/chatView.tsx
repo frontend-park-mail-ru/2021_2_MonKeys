@@ -5,6 +5,7 @@ import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { ChatsStore, chatsManager } from '../store/chatsStore.js';
 import ReportsStore from '../store/reportsStore.js';
 import { CardExpended } from '../components/cardExpended.js';
+import { Errors } from '../components/error/errors.js';
 
 export default class ChatView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -13,7 +14,6 @@ export default class ChatView extends ViewBase {
         ReportsStore.subscribe(this.reportsSubscribtionCallback, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
         this._template = this._createTmpl(this._data);
-        // console.log(chatsManager.chat);
     }
 
     public unsubscribe() {
@@ -30,27 +30,11 @@ export default class ChatView extends ViewBase {
     };
 
     _createTmpl(data) {
-        // console.log('create tmpl', data.chat)
-        // console.log(data)
-        // const profileTmpl = (!data.chat || !data.chat.profile)
-        //     ? <div></div>
-        //     : CardExpended({
-        //             userData: data.chat.profile,
-        //             withActions: false,
-        //             withReports: true,
-        //             reports: data.reports,
-        //             reported: data.reportsActive,
-        //         });
-        // if (!data.chat || !data.chat.profile) {
-        //     console.log('NO')
-        // } else {
-        //     console.log(data.chat.profile)
-        // }
         if (!data.chat || !data.chat.profile || !data.chat.isOpenedProfile) {
             return (
                 <div>
                     {Chat(data.chat)}
-                    {/* {Errors(data.error)} */}
+                    {Errors(data.error)}
                 </div>
             );
         } else {
@@ -64,7 +48,7 @@ export default class ChatView extends ViewBase {
                         reports: data.reports,
                         reported: data.reportsActive,
                     })}
-                    {/* {Errors(data.error)} */}
+                    {Errors(data.error)}
                 </div>
             );
         }
@@ -72,8 +56,6 @@ export default class ChatView extends ViewBase {
 
     private chatUpdatesView(data, view) {
         view._data.chat = chatsManager.chat;
-        // console.log('update', view._data.chat)
-        // console.log(1)
 
         view._template = view._createTmpl(view._data);
 

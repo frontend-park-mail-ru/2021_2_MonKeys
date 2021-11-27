@@ -22,10 +22,6 @@ export interface CardExpendedProps {
 }
 
 export const CardExpended = (props: CardExpendedProps) => {
-    // if (!props.userData) {
-    //     return <div></div>;
-    // }
-    // console.log(props.userData);
     const tagsExists = props.userData.tags !== undefined ? true : false;
     let tagField: HTMLCollection;
     if (tagsExists) {
@@ -45,18 +41,6 @@ export const CardExpended = (props: CardExpendedProps) => {
         descField = <div class='card-expended__description'></div>;
     }
     let imgTmpl: HTMLAllCollection;
-    // let nameTmpl: HTMLAllCollection;
-    // if (props.withActions) {
-    //     imgTmpl = ImgCard({ userData: props.userData, size: 'medium', expanded: false });
-    //     nameTmpl = <div></div>;
-    // } else {
-    //     imgTmpl = <img class={'img-card__img img-card__img_size_medium'} src={props.userData.imgs[0]} />;
-    //     nameTmpl = (
-    //         <div class='img-card__name-age img-card__name-age_size_small'>
-    //             {props.userData.name + ', ' + props.userData.age}
-    //         </div>
-    //     );
-    // }
     if (props.feed) {
         imgTmpl = ImgCard({
             userData: props.userData,

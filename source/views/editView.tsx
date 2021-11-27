@@ -14,7 +14,7 @@ import {
     errorGenderMsg,
     errorPreferMsg,
 } from '../constants/errorMsg.js';
-import { Errors } from '../components/error/Errors.js';
+import { Errors } from '../components/error/errors.js';
 
 export default class EditView extends ViewBase {
     constructor(parent: HTMLElement) {

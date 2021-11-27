@@ -1,9 +1,8 @@
 import EventBus from './eventBus.js';
 import { emailRegExp, passwordRegExp } from '../constants/validation.js';
-import { HTTPNotFound, HTTPSuccess } from '../constants/HTTPStatus.js';
+import { HTTPNotFound, HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { loginRequest } from '../requests/sessionRequest.js';
 import { LoginStore } from '../store/loginStore.js';
-import { errorManager } from '../store/errorStore.js';
 
 export const LoginEventRegister = () => {
     EventBus.register('login:button-white', () => {
@@ -38,20 +37,14 @@ export const LoginEventRegister = () => {
         const _email = _emailInput.value.trim();
         const _password = _passwordInput.value.trim();
 
-        loginRequest(_email, _password)
-            .then((response) => {
-                if (response.status !== HTTPSuccess) {
-                    throw 'bad response';
-                }
-
-                if (response.data.status === HTTPSuccess) {
-                    EventBus.dispatch<string>('user:cookie-requests');
-                } else if (response.data.status === HTTPNotFound) {
-                    storeData.formErrorClass = 'error-active';
-                    LoginStore.set(storeData);
-                }
-            })
-            .catch(errorManager.pushAPIError);
+        loginRequest(_email, _password).then((data) => {
+            if (data.status === HTTPSuccess) {
+                EventBus.dispatch<string>('user:cookie-requests');
+            } else if (data.status === HTTPNotFound) {
+                storeData.formErrorClass = 'error-active';
+                LoginStore.set(storeData);
+            }
+        });
     });
 
     EventBus.register('login:email-input', () => {

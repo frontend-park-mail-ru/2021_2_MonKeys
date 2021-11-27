@@ -1,5 +1,5 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
-import { Error, ErrorData } from './Error.js';
+import { Error, ErrorData } from './error.js';
 
 export const ServerError = () => {
     const error: ErrorData = {

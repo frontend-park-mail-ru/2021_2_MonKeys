@@ -31,11 +31,9 @@ class ErrorManager {
     }
 
     pushAPIError() {
-        console.log('pushAPIError');
         this.pushError(errorType.apiErrorLoadCondition);
     }
     deleteAPIError() {
-        console.log('deleteAPIError');
         this.deleteError(errorType.apiErrorLoadCondition);
     }
 

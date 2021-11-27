@@ -8,7 +8,6 @@ export interface ErrorData {
 }
 
 export const Error = (error: ErrorData) => {
-    // const className = error.show ? 'crit-error-container-active' : 'crit-error-container-disactive';
     const okButton = {
         type: 'button',
         text: 'OK',
