@@ -59,16 +59,16 @@ export const InputMessage = (chat: ChatData) => {
     const buttonSendEvent = () => {
         EventBus.dispatch<number>('chat:send-button', chat.fromUserID);
     };
-    console.log('in store', chat.draftMessage)
+    const formEvent = () => {
+        EventBus.dispatch('chat:load-form')
+    }
 
-    let inputValue: string;
-    (chat.draftMessage === undefined || chat.draftMessage === '')
-    ? inputValue = 'ahahahahaha'
-    : inputValue = chat.draftMessage;
-    console.log('in tmpl', inputValue)
+    const inputValue = (chat.draftMessage === undefined || chat.draftMessage === '')
+        ? ''
+        : chat.draftMessage;
     return (
         // <div class='input-message'>
-            <form class='input-message'>
+            <form class='input-message' onload={formEvent}>
                 <input type='text'
                        class='input-message__field'
                        placeholder='Сообщение'

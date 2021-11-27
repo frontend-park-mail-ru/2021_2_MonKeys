@@ -16,6 +16,7 @@ interface Chat {
     img: string;
     messages: Message[];
     draftMessage: string;
+    opened: boolean;
 }
 
 interface ChatsData {
@@ -71,6 +72,7 @@ class ChatsManager {
             img: profile.imgs[0],
             messages: [],
             draftMessage: '',
+            opened: true,
         };
 
         const chatsStore = ChatsStore.get();
@@ -152,6 +154,20 @@ class ChatsManager {
         const chatIdx = this.getChatIdxByChatID(chatID);
         const chatsData = ChatsStore.get();
         chatsData.chats[chatIdx].draftMessage = '';
+        ChatsStore.set(chatsData);
+    }
+
+    openChat(chatID: number) {
+        const chatIdx = this.getChatIdxByChatID(chatID);
+        const chatsData = ChatsStore.get();
+        chatsData.chats[chatIdx].opened = true;
+        ChatsStore.set(chatsData);
+    }
+
+    closeChat(chatID: number) {
+        const chatIdx = this.getChatIdxByChatID(chatID);
+        const chatsData = ChatsStore.get();
+        chatsData.chats[chatIdx].opened = false;
         ChatsStore.set(chatsData);
     }
 

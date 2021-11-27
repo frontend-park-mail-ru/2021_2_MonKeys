@@ -55,7 +55,7 @@ export default class ChatsView extends ViewBase {
                 </div>
                 <span class='view-contant__chats-header'>Чаты</span>
                 {Chats(data.chats)}
-                {ServerError(data.error)}
+                {/* {ServerError(data.error)} */}
                 {Tapbar(TapbarStore.get())}
             </div>
         );

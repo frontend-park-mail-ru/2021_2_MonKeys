@@ -3,6 +3,7 @@ import { Button } from '../button.js';
 import EventBus from '../../dispatcher/eventBus.js';
 
 export interface ChatHeaderProps {
+    chatID: number;
     userName: string;
     userImg: string;
 }
@@ -19,7 +20,7 @@ export const ChatHeader = (props: ChatHeaderProps) => {
     //     },
     // };
     const backButtonClick = () => {
-        EventBus.dispatch<string>('chat:back-button');
+        EventBus.dispatch<number>('chat:back-button', props.chatID);
     }
     const profileClick = () => {
         EventBus.dispatch<string>('chat:profile-button');

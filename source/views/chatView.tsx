@@ -37,12 +37,15 @@ export default class ChatView extends ViewBase {
 
     private chatUpdatesView(data, view) {
         view._data.chat = chatsManager.chat;
-        console.log(chatsManager.chat)
-        console.log('tyt')
 
         view._template = view._createTmpl(view._data);
 
         view.render();
+
+        const _chatSpace = document.getElementsByClassName('view-contant__message-space')[0];
+        _chatSpace.scrollTop = _chatSpace.scrollHeight;
+        const _inputMsg = document.getElementsByTagName('input')[0];
+        _inputMsg.focus();
     }
 
     private errorStoreUpdatesView(data, view) {

@@ -2,7 +2,7 @@ $input-message-field-width: 312px;
 $input-message-field-height:30px;
 
 .input-message{
-//   position: relative;
+  position: relative;
   margin-top: 12px;
   margin-bottom: 12px;
 }
@@ -28,6 +28,6 @@ $input-message-field-height:30px;
 
 .input-message__icon-send{
   position: absolute;
-  top: 773px;
-  left: 318px;
+  top: 8px;
+  left: 300px;
 }

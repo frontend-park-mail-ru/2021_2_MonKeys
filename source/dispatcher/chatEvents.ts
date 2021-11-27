@@ -8,6 +8,11 @@ import { HTTPSuccess } from '../constants/HTTPStatus.js';
 import { ProfileData } from '../store/profileStore.js';
 
 export const ChatEventsRegister = () => {
+    EventBus.register('chat:load-form', (chatID: number) => {
+        const _chatSpace = document.getElementsByClassName('view-contant__message-space')[0];
+        _chatSpace.scrollTop = _chatSpace.scrollHeight;
+        console.log('lol');
+    });
     EventBus.register('chat:input-message', (chatID: number) => {
         const _msgInput = document.getElementsByTagName('input')[0];
         const messageText = _msgInput.value.trim();
@@ -17,13 +22,14 @@ export const ChatEventsRegister = () => {
     EventBus.register('chat:send-button', (chatID: number) => {
         const _msgInput = document.getElementsByTagName('input')[0];
         const messageText = _msgInput.value.trim();
-        // _msgInput.value = '';
 
-        SendMessageWS(messageText, chatsManager.chatID)
-            .then(() => {
-                chatsManager.clearDraftMessage(chatID);
-            })
-            .catch((err) => console.log(err));
+        if (messageText !== '') {
+            SendMessageWS(messageText, chatsManager.chatID)
+                .then(() => {
+                    chatsManager.clearDraftMessage(chatID);
+                })
+                .catch((err) => console.log(err));
+        }
     });
     EventBus.register('chat:new-message', (message: Message) => {
         const chatID = chatsManager.getChatIDByMessage(message);
@@ -42,9 +48,13 @@ export const ChatEventsRegister = () => {
         }
 
         chatsManager.saveNewMessage(message);
+
+        const _chatSpace = document.getElementsByClassName('view-contant__message-space')[0];
+        _chatSpace.scrollTop = _chatSpace.scrollHeight;
     });
 
-    EventBus.register('chat:back-button', () => {
+    EventBus.register('chat:back-button', (chatID: number) => {
+        chatsManager.closeChat(chatID);
         router.go('/chats');
     });
 
