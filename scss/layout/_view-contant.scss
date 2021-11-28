@@ -28,3 +28,8 @@ $view-max-width: 375px;
 .view-content__max-height{
   max-width: $view-max-width;
 }
+
+.view-content__scroll-y{
+  height: 100vh;
+  overflow-y: scroll;
+}

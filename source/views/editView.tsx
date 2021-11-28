@@ -162,9 +162,8 @@ export default class EditView extends ViewBase {
 
     _createTmpl(data) {
         return (
-            <div class='card-container'>
+            <div class='view-contant view-content__scroll-y'>
                 {EditForm(data.editForm)}
-                {Tapbar(data.tapbar)}
                 {Errors(data.error)}
             </div>
         );
