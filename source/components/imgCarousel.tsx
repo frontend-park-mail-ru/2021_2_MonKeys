@@ -67,8 +67,10 @@ export const ImgCarousel = (props: string[]) => {
                     alt=''
                 />
             }
-            {conditionalRendering(IconButton(LButtonProps), !firstCard)}
-            {conditionalRendering(IconButton(RButtonProps), !lastCard)}
+            <div class="carousel-nav__arrows">
+                {conditionalRendering(IconButton(LButtonProps), !firstCard)}
+                {conditionalRendering(IconButton(RButtonProps), !lastCard)}
+            </div>
             <div class='carousel-nav'>
                 {conditionalRendering(nav(props.length, window.currentSelectedCarouselItem), !oneCard)}
             </div>

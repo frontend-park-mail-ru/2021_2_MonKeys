@@ -101,6 +101,11 @@ export const FeedEventsRegister = () => {
         //...
     });
     EventBus.register('feed:reaction', (reactionID) => {
+        window.currentSelectedCarouselItem = 0;
+        window.startX = null;
+        window.startY = null;
+        window.offsetX = null;
+        window.offsetY = null;
         const data = feedStore.get();
         console.log(`REACTED ${data.profiles[data.counter].id}`);
         likesRequest(data.profiles[data.counter].id, reactionID).then((likesData) => {
