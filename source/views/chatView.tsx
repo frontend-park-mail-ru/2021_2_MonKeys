@@ -31,7 +31,7 @@ export default class ChatView extends ViewBase {
 
     _createTmpl(data) {
         return (
-            <div class=''>
+            <div class='view-contant view-contant_align_center view-contant_scroll-y_banned view-contant_scroll-x_banned'>
                 {CardExpended({
                     userData: data.profile,
                     withActions: false,
