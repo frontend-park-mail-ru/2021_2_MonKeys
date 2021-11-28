@@ -15,12 +15,8 @@ export const Chat = (chat: ChatData) => {
             <div class='view-content__header'>
                 {ChatHeader({ chatID: chat.fromUserID, userName: chat.name, userImg: chat.img })}
             </div>
-            <div class='view-content__message-space'>
-                {chat.messages.map((msg) => Message(msg))}
-            </div>
-            <div class='view-content__input-message'>
-                {InputMessage(chat)}
-            </div>
+            <div class='view-content__message-space'>{chat.messages.map((msg) => Message(msg))}</div>
+            <div class='view-content__input-message'>{InputMessage(chat)}</div>
         </div>
     );
 };

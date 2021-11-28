@@ -31,7 +31,10 @@ export default class ChatView extends ViewBase {
 
     _createTmpl(data) {
         return (
-            <div class='view-contant view-contant_align_center view-contant_scroll-y_banned view-contant_scroll-x_banned'>
+            <div
+                class='view-contant view-contant_align_center
+            view-contant_scroll-y_banned view-contant_scroll-x_banned'
+            >
                 {CardExpended({
                     userData: data.profile,
                     withActions: false,
@@ -52,8 +55,11 @@ export default class ChatView extends ViewBase {
 
         view.render();
 
-        const _chatSpace = document.getElementsByClassName('view-contant__message-space')[0];
-        _chatSpace.scrollTop = _chatSpace.scrollHeight;
+        const _chatSpace = document.getElementsByClassName('view-content__message-space')[0];
+        if (_chatSpace) {
+            console.log(_chatSpace);
+            _chatSpace.scrollTop = _chatSpace.scrollHeight;
+        }
         const _inputMsg = document.getElementsByTagName('input')[0];
         _inputMsg.focus();
     }
