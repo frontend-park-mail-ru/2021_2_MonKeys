@@ -1,3 +1,5 @@
+$view-max-width: 375px;
+
 .view-contant{
   display: flex;
   flex-direction: column;
@@ -7,13 +9,22 @@
   align-items: center;
 }
 
+.view-content_scroll-banned{
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  overflow: hidden;
+}
+
 .view-contant_scroll-y_banned{
-  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
   overflow-y: hidden;
 }
 
 .view-contant_scroll-x_banned{
-  width: 100vw;
   overflow-x: hidden;
+}
+
+.view-content__max-height{
+  max-width: $view-max-width;
 }

@@ -1,5 +1,10 @@
 $icon-size-small: 18px;
 
+.view-content__search{
+  width: 100%;
+  flex: 0 0 auto;
+}
+
 .search-form{
   display: flex;
   margin-left: 24px;
@@ -22,11 +27,11 @@ $icon-size-small: 18px;
   font-size: $font-size-tiny;
 }
 .search-form__icon{
-  position: absolute;
+  position: relative;
 
   width: $icon-size-small;
   height: $icon-size-small;
 
-  top: 32px;
-  left: 312px;
+  top: 6px;
+  left: -30px;
 }

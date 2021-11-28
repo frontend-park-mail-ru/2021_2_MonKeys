@@ -9,10 +9,9 @@ $chat-img-border-radius: 27px;
   flex-direction: row;
   align-items: center;
 
-  width: $chats-preview-width;
   min-height: $chats-preview-height;
 
-  margin-bottom: 12px;
+  margin: 0px $chats-margin_left 12px $chats-margin_left;
 
   background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.4) 0%, rgba(0, 165, 245, 0) 100%);
   backdrop-filter: blur(20px);
@@ -42,13 +41,13 @@ $chat-img-border-radius: 27px;
 .chats-preview__user-name{
   font-size: $font-size-small;
   line-height: 24px;
-  
+
   color: #FFFFFF;
 }
 
 .chats-preview__last-message{
   font-size: $font-size-tiny;
   line-height: 24px;
-  
+
   color: #FFFFFF;
 }

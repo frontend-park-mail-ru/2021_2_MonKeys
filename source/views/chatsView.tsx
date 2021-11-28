@@ -43,12 +43,14 @@ export default class ChatsView extends ViewBase {
 
     _createTmpl(data) {
         return (
-            <div class='view-contant view-contant_align_center view-contant_scroll-y_banned view-contant_scroll-x_banned'>
-                {SearchField()}
-                {Matches(data.matches)}
-                {Chats(data.chats)}
-                {Errors(data.error)}
-                {Tapbar(TapbarStore.get())}
+            <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                <div class='view-contant view-contant_align_center view-content_scroll-banned view-content__max-height'>
+                    {SearchField()}
+                    {Matches(data.matches)}
+                    {Chats(data.chats)}
+                    {Tapbar(TapbarStore.get())}
+                    {Errors(data.error)}
+                </div>
             </div>
         );
     }
