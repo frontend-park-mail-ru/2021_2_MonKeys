@@ -57,7 +57,16 @@ export const ImgCarousel = (props: string[]) => {
 
     return (
         <div class='card-img'>
-            {<img src={props[window.currentSelectedCarouselItem]} class='card__img' alt='' />}
+            {
+                <img
+                    src={props[window.currentSelectedCarouselItem]}
+                    class='card__img'
+                    ondragstart={() => {
+                        return false;
+                    }}
+                    alt=''
+                />
+            }
             {conditionalRendering(IconButton(LButtonProps), !firstCard)}
             {conditionalRendering(IconButton(RButtonProps), !lastCard)}
             <div class='carousel-nav'>
