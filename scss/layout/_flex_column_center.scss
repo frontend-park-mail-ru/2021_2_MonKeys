@@ -4,11 +4,16 @@
     flex-direction: column;
 }
 
+.signup-container {
+    padding-bottom: 144px;
+}
+
+
 .flex_box_row_left {
     display: flex;
     align-items: start;
     flex-direction: row;
-    width: 100%;
+    width: 90%;
     flex-wrap: wrap;
 }
 

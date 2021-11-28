@@ -121,7 +121,7 @@ export default class EditView extends ViewBase {
                 'saveButton': {
                     type: 'button',
                     text: 'Сохранить',
-                    class: 'edit',
+                    class: 'button-white-big',
                     onclick: () => {
                         EventBus.dispatch<string>('edit:save-button');
                     },

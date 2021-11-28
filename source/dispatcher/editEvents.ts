@@ -178,16 +178,19 @@ export const EditEventRegister = () => {
         const storeData = EditStore.get();
 
         const test = _nameInput.value.length !== 0 && nameRegExp.test(_nameInput.value);
-
-        test
-            ? (storeData.nameFieldClass = 'form__field-valid')
-            : (storeData.nameFieldClass = 'form__field-invalid text-without-icon');
-
-        if (test && storeData.nameErrorClass === 'error-active') {
+        if (!test || !_nameInput.value) {
+            // storeData.namePass = false;
+        }
+        test ? (storeData.nameFieldClass = 'form__field-valid') : (storeData.nameFieldClass = 'form__field-invalid');
+        if (!test && storeData.nameErrorClass !== 'error-active') {
+            storeData.nameErrorClass = 'error-hint';
+        }
+        if (test && (storeData.nameErrorClass === 'error-active' || storeData.nameErrorClass === 'error-hint')) {
             storeData.nameErrorClass = 'error-inactive';
+            // if (_nameInput.value) storeData.namePass = true;
         }
 
-        if (storeData.formErrorClass === 'error-active') {
+        if (storeData.nameErrorClass === 'error-active' || storeData.nameErrorClass === 'error-hint') {
             storeData.formErrorClass = 'error-inactive';
         }
 
@@ -205,7 +208,7 @@ export const EditEventRegister = () => {
             storeData.nameFieldClass = 'form__field-valid';
             storeData.nameErrorClass = 'error-inactive';
         } else {
-            storeData.nameFieldClass = 'form__field-invalid text-without-icon';
+            storeData.nameFieldClass = 'form__field-invalid';
             storeData.nameErrorClass = 'error-active';
         }
 

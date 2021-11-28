@@ -26,7 +26,7 @@ class ErrorManager {
         if (ErrorStore.get().errors.length === 0) {
             return null;
         }
-
+        // @ts-ignore
         return ErrorStore.get().errors.at(-1);
     }
 

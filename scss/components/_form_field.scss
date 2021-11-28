@@ -32,7 +32,9 @@ $field-invalid-color: radial-gradient(
     align-items: center;
 }
 
-
+.form__field-no-error-compensator{
+    margin-bottom: 12px;
+}
 .form__field-valid {
     @include form-field($field-valid-color);
 }
@@ -46,6 +48,7 @@ $field-invalid-color: radial-gradient(
     color:white;
     font-size: $font-size-small;
     max-width: $form-field-input-max-width;
+    padding-left: 12px;
 }
 
 

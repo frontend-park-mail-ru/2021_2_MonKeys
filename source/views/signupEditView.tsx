@@ -122,7 +122,7 @@ export default class SignupEditView extends ViewBase {
 
     _createTmpl(data) {
         return (
-            <div class='card-container'>
+            <div class='signup-container'>
                 {EditForm(data.editForm)}
                 {Errors(data.error)}
             </div>
