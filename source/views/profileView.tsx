@@ -7,6 +7,7 @@ import EventBus from '../dispatcher/eventBus.js';
 import TapbarStore from '../store/tapbarStore.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { Errors } from '../components/error/errors.js';
+import { ProfileActions } from '../components/profileActions.js';
 
 export default class ProfileView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -26,9 +27,20 @@ export default class ProfileView extends ViewBase {
                 imgs: ProfileStore.get().imgs,
                 tags: ProfileStore.get().tags,
             },
-            'settingButtons': {
-                onclick: () => {
-                    EventBus.dispatch<string>('profile:edit-button');
+            'actions': {
+                'logoutButton': {
+                    src: 'icons/exit.svg',
+                    class: 'view-contant__dislike',
+                    onclick: () => {
+                        EventBus.dispatch<string>('profile:logout-button');
+                    },
+                },
+                'settingButtons': {
+                    src: 'icons/settings.svg',
+                    class: 'view-contant__dislike',
+                    onclick: () => {
+                        EventBus.dispatch<string>('profile:edit-button');
+                    },
                 },
             },
         },
@@ -41,13 +53,7 @@ export default class ProfileView extends ViewBase {
     _createTmpl(data) {
         return (
             <div class='view-contant view-contant_align_center'>
-                <div class='view-contant__icon-button'>
-                    <img
-                        src='icons/settings.svg'
-                        class='view-contant__dislike'
-                        onclick={data.cardData.settingButtons.onclick}
-                    />
-                </div>
+                {ProfileActions(data.cardData.actions)}
                 {CardExpended({ userData: data.cardData.userData, withActions: false, withReports: false })}
                 {Tapbar(TapbarStore.get())}
                 {Errors(data.error)}
