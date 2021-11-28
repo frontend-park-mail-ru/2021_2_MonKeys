@@ -38,14 +38,14 @@
   background: black;
   flex-grow: 1;
   border-radius: 12px;
-  filter: invert(1) grayscale(1) brightness(1);
+  filter: invert(1) grayscale(1) brightness(0.5);
 }
 
 .carousel-button-nav.current-slide {
   height: 6px;
   top: 50%;
   background: black;
-  filter: invert(1) grayscale(1) brightness(0.5);
+  filter: invert(1) grayscale(1) brightness(1);
 }
 
 .carousel-nav {

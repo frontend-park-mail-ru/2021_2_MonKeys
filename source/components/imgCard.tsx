@@ -1,6 +1,7 @@
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { CardActions } from './cardActions.js';
 import { ProfileData } from '../store/profileStore.js';
+import { ImgCarousel } from './imgCarousel.js';
 
 export interface ProfileCardProps {
     userData: ProfileData;
@@ -41,7 +42,7 @@ export const ImgCard = (props: ProfileCardProps) => {
     return (
         <div class={'img-card img-card' + sizeModificator}>
             {/* {ImgCarousel(props.userData.imgs, true)} */}
-            <img class={'img-card__img img-card__img' + sizeModificator} src={props.userData.imgs[0]} />
+            {ImgCarousel(props.userData.imgs, 'img-card__img img-card__img' + sizeModificator)}
             <div class={'img-card__bottom-panel img-card__bottom-panel' + sizeModificator}>
                 <div class={'img-card__short-desc img-card__short-desc' + sizeModificator}>
                     <div class={'img-card__name-age img-card__name-age' + sizeModificator}>{nameAge}</div>
