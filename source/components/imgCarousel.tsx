@@ -21,13 +21,6 @@ const RButtonProps = {
     },
 };
 
-declare global {
-    interface Window {
-        currentSelectedCarouselItem: number;
-        currentCarouselSize: number;
-    }
-}
-
 const nav = (length, selectedID) => {
     const items = [];
     for (let i = 0; i < length; i++) {
@@ -40,7 +33,7 @@ const nav = (length, selectedID) => {
     return items;
 };
 
-export const ImgCarousel = (props: string[]) => {
+export const ImgCarousel = (props: string[], sizeClass: string) => {
     if (!props) {
         return <img src='img/stare-dont-blink.gif' class='card-img' />;
     }
@@ -54,12 +47,38 @@ export const ImgCarousel = (props: string[]) => {
     const firstCard = window.currentSelectedCarouselItem === 0;
 
     const oneCard = window.currentCarouselSize === 0;
-
+    if (sizeClass === 'img-card__img img-card__img_size_small') {
+        return (
+            <div class={sizeClass}>
+                {
+                    <img
+                        src={props[0]}
+                        class={sizeClass}
+                        ondragstart={() => {
+                            return false;
+                        }}
+                        alt=''
+                    />
+                }
+            </div>
+        );
+    }
     return (
-        <div class='card-img'>
-            {<img src={props[window.currentSelectedCarouselItem]} class='card__img' alt='' />}
-            {conditionalRendering(IconButton(LButtonProps), !firstCard)}
-            {conditionalRendering(IconButton(RButtonProps), !lastCard)}
+        <div class={sizeClass}>
+            {
+                <img
+                    src={props[window.currentSelectedCarouselItem]}
+                    class={sizeClass}
+                    ondragstart={() => {
+                        return false;
+                    }}
+                    alt=''
+                />
+            }
+            <div class='carousel-nav__arrows'>
+                {conditionalRendering(IconButton(LButtonProps), !firstCard)}
+                {conditionalRendering(IconButton(RButtonProps), !lastCard)}
+            </div>
             <div class='carousel-nav'>
                 {conditionalRendering(nav(props.length, window.currentSelectedCarouselItem), !oneCard)}
             </div>

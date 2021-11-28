@@ -36,6 +36,8 @@ $chat-img-border-radius: 27px;
   flex-direction: column;
 
   margin-left: 6px;
+
+  overflow: hidden;
 }
 
 .chats-preview__user-name{
@@ -50,4 +52,8 @@ $chat-img-border-radius: 27px;
   line-height: 24px;
 
   color: #FFFFFF;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

@@ -16,7 +16,7 @@ export interface FieldProps {
 const imgSequence = (imgs: string[]) => {
     const items = [];
     if (imgs === undefined || imgs.length === 0) {
-        return <div class='text-without-icon'>Нет фото</div>;
+        return <div class='add-img__no-photo-text'>Нет фото</div>;
     }
     imgs.forEach((element) => {
         items.push(

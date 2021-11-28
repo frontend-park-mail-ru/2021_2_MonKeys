@@ -45,7 +45,9 @@ export const ChatEventsRegister = () => {
         chatsManager.saveNewMessage(message);
 
         const _chatSpace = document.getElementsByClassName('view-contant__message-space')[0];
-        _chatSpace.scrollTop = _chatSpace.scrollHeight;
+        if (_chatSpace) {
+            _chatSpace.scrollTop = _chatSpace.scrollHeight;
+        }
     });
 
     EventBus.register('chat:back-button', (chatID: number) => {
@@ -69,10 +71,6 @@ export const ChatEventsRegister = () => {
                 MatchesStore.set(matchesData);
             }
         });
-
-        // const storeData = MatchesStore.get();
-        // storeData.expended = false;
-        // <tStore.set(storeData);
     });
     EventBus.register('chat:open-profile', (userID: number) => {
         if (!chatsManager.withProfile(userID)) {
@@ -85,5 +83,9 @@ export const ChatEventsRegister = () => {
             }
             chatsManager.setProfile(userID, profile);
         }
+        chatsManager.activateProfile(userID);
+    });
+    EventBus.register('chat:back-to-chat-button', (userID: number) => {
+        chatsManager.disableProfile(userID);
     });
 };

@@ -15,20 +15,14 @@
   width: 95%;
 }
 
-.carousel-button-right {
-  width: 30px;
-  height: 30px;
-
+.carousel-nav__arrows{
+  height:30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
   position: absolute;
-  right: 10px;
-}
-
-.carousel-button-left {
-  width: 30px;
-  height: 30px;
-
-  position: absolute;
-  left: 10px;
+  top: 50%;
 }
 
 .side-big {
@@ -44,19 +38,19 @@
   background: black;
   flex-grow: 1;
   border-radius: 12px;
-  filter: invert(1) grayscale(1) brightness(1);
+  filter: invert(1) grayscale(1) brightness(0.5);
 }
 
 .carousel-button-nav.current-slide {
   height: 6px;
   top: 50%;
   background: black;
-  filter: invert(1) grayscale(1) brightness(0.5);
+  filter: invert(1) grayscale(1) brightness(1);
 }
 
 .carousel-nav {
   position: absolute;
-  top: 20px;
+  top: 0px;
   width: 100%;
   display: flex;
   justify-content: center;

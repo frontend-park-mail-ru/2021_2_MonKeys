@@ -35,6 +35,16 @@ export namespace MonkeysVirtualDOM {
         }
 
         const rootElement = document.createElement(virtualNode.type);
+
+        if (virtualNode.type === 'img') {
+            rootElement.addEventListener(
+                'dragstart',
+                (e) => {
+                    e.preventDefault();
+                },
+                false
+            );
+        }
         if (virtualNode.type === 'mon-router') {
             rootElement.addEventListener('click', () => {
                 router.go(virtualNode.props['route']);

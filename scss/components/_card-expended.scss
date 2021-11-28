@@ -38,9 +38,12 @@ $card-expanded-img-default-height: 384px;
   color: #FFFFFF;
 }
 
-.card-expended__tags{
-  margin-left: 12px;
-  margin-bottom: 6px;
+
+
+.card-expended__back-button{
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .card-expended__report-button{

@@ -5,6 +5,7 @@ import { likesRequest } from '../requests/likesRequest.js';
 import { feedRequest } from '../requests/feedRequest.js';
 import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { requestMoreCardsThreshold } from '../constants/feed.js';
+import { resetCarousel } from '../modules/carousel.js';
 
 const animationThanLikeAndReset = () => {
     EventBus.dispatch('feed:reaction', reactions.like);
@@ -101,8 +102,8 @@ export const FeedEventsRegister = () => {
         //...
     });
     EventBus.register('feed:reaction', (reactionID) => {
+        resetCarousel();
         const data = feedStore.get();
-        console.log(`REACTED ${data.profiles[data.counter].id}`);
         likesRequest(data.profiles[data.counter].id, reactionID).then((likesData) => {
             if (likesData.status !== HTTPSuccess) {
                 throw 'bad response';

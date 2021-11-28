@@ -44,7 +44,7 @@ export default class LikesView extends ViewBase {
                     <div class='likes-view-header'>Вы понравились нескольким людям</div>
                     <div class='likes-view-cards'>
                         {Object.keys(data.likes).map((item) =>
-                            ImgCard({ userData: data.likes[item], size: 'small', expanded: true })
+                            ImgCard({ userData: data.likes[item], size: 'small', withActions: true, expanded: true })
                         )}
                     </div>
                     {Errors(data.error)}
@@ -79,7 +79,18 @@ export default class LikesView extends ViewBase {
         view._template = view._createTmpl(view._data);
         view.render();
     }
-
+    forceRender() {
+        console.log('dsds');
+        this._data = {
+            'likesCount': LikesStore.get().likesCount,
+            'likes': LikesStore.get().profiles,
+            'reports': ReportsStore.get().reports,
+            'reportsActive': ReportsStore.get().active,
+            error: errorManager.error,
+        };
+        this._template = this._createTmpl(this._data);
+        this.render();
+    }
     private errorStoreUpdatesView(data, view) {
         view._data.error = errorManager.error;
         view._template = view._createTmpl(view._data);

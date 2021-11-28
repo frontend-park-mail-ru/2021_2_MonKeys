@@ -2,6 +2,7 @@ import { route, Routes } from './routes.js';
 import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
 import TapbarStore from '../store/tapbarStore.js';
+import { resetCarousel } from '../modules/carousel.js';
 
 const drawLocation = (route, parent) => {
     TapbarStore.set({
@@ -21,6 +22,7 @@ class Router {
     move(route: string) {
         const $root = document.getElementById('app');
         const location = route;
+        resetCarousel();
         if (this.routes[location]) {
             const user = AuthStore.get().loggedIn;
 

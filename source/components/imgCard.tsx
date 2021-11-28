@@ -1,11 +1,13 @@
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { CardActions } from './cardActions.js';
 import { ProfileData } from '../store/profileStore.js';
+import { ImgCarousel } from './imgCarousel.js';
 
 export interface ProfileCardProps {
     userData: ProfileData;
 
     size: string;
+    withActions: boolean;
     expanded: boolean;
     feed?: boolean;
 }
@@ -31,17 +33,23 @@ export const ImgCard = (props: ProfileCardProps) => {
     ) : (
         <div></div>
     );
+    const cardActionsTmpl = props.withActions ? (
+        CardActions({ userID: props.userData.id, expend: props.expanded, feed: props.feed })
+    ) : (
+        <div></div>
+    );
 
     return (
         <div class={'img-card img-card' + sizeModificator}>
             {/* {ImgCarousel(props.userData.imgs, true)} */}
-            <img class={'img-card__img img-card__img' + sizeModificator} src={props.userData.imgs[0]} />
+            {ImgCarousel(props.userData.imgs, 'img-card__img img-card__img' + sizeModificator)}
             <div class={'img-card__bottom-panel img-card__bottom-panel' + sizeModificator}>
                 <div class={'img-card__short-desc img-card__short-desc' + sizeModificator}>
                     <div class={'img-card__name-age img-card__name-age' + sizeModificator}>{nameAge}</div>
                     {ReportTmpl}
                 </div>
-                {CardActions({ userID: props.userData.id, expend: props.expanded, feed: props.feed })}
+                {cardActionsTmpl}
+                {/* {CardActions({ userID: props.userData.id, expend: props.expanded, feed: props.feed })} */}
             </div>
         </div>
     );

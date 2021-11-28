@@ -5,12 +5,18 @@
   @include form-field($field-valid-color);
   display: flex;
   flex-wrap: wrap;
+  min-height: 72px;
   height: auto;
 }
-
+.add-img__no-photo-text{
+  font-size: 24px;
+  padding-left: 12px;
+  padding-top: 12px;
+}
 .add-img-box-novalid {
-  @include form-field($field-valid-color);
-  height: $px_big*2.5;
+  @include form-field($field-invalid-color);
+  min-height: 72px;
+  height: auto;
   display: flex;
 }
 
@@ -56,3 +62,4 @@ $px_img: $px_big * 2;
   bottom: 4;
   border: 1px solid #000000;
 }
+

@@ -65,6 +65,7 @@ export default class FeedView extends ViewBase {
                     },
                 },
             },
+            withActions: true,
             feed: true,
         },
         tapbar: {

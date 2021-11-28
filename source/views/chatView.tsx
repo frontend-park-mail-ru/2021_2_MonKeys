@@ -30,22 +30,31 @@ export default class ChatView extends ViewBase {
     };
 
     _createTmpl(data) {
-        return (
-            <div
+        if (!data.chat || !data.chat.profile || !data.chat.isOpenedProfile) {
+            return (
+              <div
                 class='view-contant view-contant_align_center
-            view-contant_scroll-y_banned view-contant_scroll-x_banned'
-            >
-                {CardExpended({
-                    userData: data.profile,
-                    withActions: false,
-                    withReports: true,
-                    reports: data.reports,
-                    reported: data.reportsActive,
-                })}
-                {Chat(data.chat)}
-                {Errors(data.error)}
-            </div>
-        );
+                       view-contant_scroll-y_banned view-contant_scroll-x_banned'
+              >
+                    {Chat(data.chat)}
+                    {Errors(data.error)}
+                </div>
+            );
+        } else {
+            return (
+                <div class=''>
+                    {CardExpended({
+                        userData: data.chat.profile,
+                        withActions: false,
+                        withReports: true,
+                        withBackButton: true,
+                        reports: data.reports,
+                        reported: data.reportsActive,
+                    })}
+                    {Errors(data.error)}
+                </div>
+            );
+        }
     }
 
     private chatUpdatesView(data, view) {
@@ -55,13 +64,21 @@ export default class ChatView extends ViewBase {
 
         view.render();
 
-        const _chatSpace = document.getElementsByClassName('view-content__message-space')[0];
-        if (_chatSpace) {
-            console.log(_chatSpace);
-            _chatSpace.scrollTop = _chatSpace.scrollHeight;
+        if (!view._data.chat || !view._data.chat.profile || !view._data.chat.isOpenedProfile) {
+            const _chatSpace = document.getElementsByClassName('view-contant__message-space')[0];
+            if (_chatSpace) {
+                _chatSpace.scrollTop = _chatSpace.scrollHeight;
+            }
+            const _inputMsg = document.getElementsByTagName('input')[0];
+            if (_inputMsg) {
+                _inputMsg.focus();
+            }
+        } else {
+            const _cardProfile = document.getElementsByClassName('card-profile')[0];
+            if (_cardProfile) {
+                _cardProfile.scrollTop = 0;
+            }
         }
-        const _inputMsg = document.getElementsByTagName('input')[0];
-        _inputMsg.focus();
     }
 
     private reportsSubscribtionCallback(data, view) {

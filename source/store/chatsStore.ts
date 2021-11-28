@@ -35,6 +35,7 @@ ChatsStore.set({
 });
 
 function compareChats(l: Chat, r: Chat) {
+    // @ts-ignore
     if (l.messages.length === 0 || r.messages.length === 0 || l.messages.at(-1).date < r.messages.at(-1).date) {
         return 1;
     }
@@ -210,6 +211,20 @@ class ChatsManager {
         const chatIdx = this.getChatIdxByChatID(chatID);
         const chatsData = ChatsStore.get();
         chatsData.chats[chatIdx].profile = fromProfile;
+        ChatsStore.set(chatsData);
+    }
+
+    activateProfile(chatID: number) {
+        const chatIdx = this.getChatIdxByChatID(chatID);
+        const chatsData = ChatsStore.get();
+        chatsData.chats[chatIdx].isOpenedProfile = true;
+        ChatsStore.set(chatsData);
+    }
+
+    disableProfile(chatID: number) {
+        const chatIdx = this.getChatIdxByChatID(chatID);
+        const chatsData = ChatsStore.get();
+        chatsData.chats[chatIdx].isOpenedProfile = false;
         ChatsStore.set(chatsData);
     }
 
