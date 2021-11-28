@@ -107,7 +107,6 @@ export default class FeedView extends ViewBase {
                     eventBus.dispatch('feed:shrink-button');
                 },
             };
-            console.log(1);
             return (
                 <div class='flex_box_column_center overflow-hidden'>
                     {CardExpended(data.cardData)}

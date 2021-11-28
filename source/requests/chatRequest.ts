@@ -26,4 +26,20 @@ const getChatRequest = (fromUserID, lastMessageID) => {
         });
 };
 
-export { getChatRequest };
+const deleteChatRequest = (fromUserID) => {
+    return http
+        .delete(`${chatURL}/${fromUserID}`)
+        .then((response) => {
+            if (response.status !== HTTPSuccess) {
+                throw 'server internal error';
+            }
+
+            return response.data;
+        })
+        .catch((err) => {
+            errorManager.pushAPIError();
+            throw err;
+        });
+};
+
+export { getChatRequest, deleteChatRequest };

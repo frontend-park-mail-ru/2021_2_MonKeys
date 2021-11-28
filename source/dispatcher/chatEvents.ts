@@ -45,7 +45,9 @@ export const ChatEventsRegister = () => {
         chatsManager.saveNewMessage(message);
 
         const _chatSpace = document.getElementsByClassName('view-contant__message-space')[0];
-        _chatSpace.scrollTop = _chatSpace.scrollHeight;
+        if (_chatSpace) {
+            _chatSpace.scrollTop = _chatSpace.scrollHeight;
+        }
     });
 
     EventBus.register('chat:back-button', (chatID: number) => {

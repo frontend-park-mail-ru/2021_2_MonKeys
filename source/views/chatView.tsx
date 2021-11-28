@@ -63,12 +63,18 @@ export default class ChatView extends ViewBase {
 
         if (!view._data.chat || !view._data.chat.profile || !view._data.chat.isOpenedProfile) {
             const _chatSpace = document.getElementsByClassName('view-contant__message-space')[0];
-            _chatSpace.scrollTop = _chatSpace.scrollHeight;
+            if (_chatSpace) {
+                _chatSpace.scrollTop = _chatSpace.scrollHeight;
+            }
             const _inputMsg = document.getElementsByTagName('input')[0];
-            _inputMsg.focus();
+            if (_inputMsg) {
+                _inputMsg.focus();
+            }
         } else {
             const _cardProfile = document.getElementsByClassName('card-profile')[0];
-            _cardProfile.scrollTop = 0;
+            if (_cardProfile) {
+                _cardProfile.scrollTop = 0;
+            }
         }
     }
 
