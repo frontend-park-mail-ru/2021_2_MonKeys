@@ -4,12 +4,10 @@ import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 
 import ReportsStore from '../store/reportsStore.js';
 import { reportsRequest, newReportRequest } from '../requests/reportsRequest.js';
+import { deleteChatRequest } from '../requests/chatRequest.js';
 
 export const ReportsEventsRegister = () => {
     EventBus.register('reports:report-button', () => {
-        // const likesData = LikesStore.get();
-        // likesData.reported = true;
-        // LikesStore.set(likesData);
         const reportsData = ReportsStore.get();
         reportsData.active = true;
         ReportsStore.set(reportsData);
@@ -40,9 +38,15 @@ export const ReportsEventsRegister = () => {
     EventBus.register('reports:declare-button', (userID) => {
         if (ReportsStore.get().choosedReport !== '') {
             newReportRequest(userID, ReportsStore.get().choosedReport).then((data) => {
-                if (data.status === HTTPSuccess) {
+                if (data.status !== HTTPSuccess) {
                     throw 'bad response';
                 }
+
+                deleteChatRequest(userID).then((data) => {
+                    if (data.status !== HTTPSuccess) {
+                        throw 'bad response';
+                    }
+                });
 
                 const reportsData = ReportsStore.get();
                 reportsData.active = false;
