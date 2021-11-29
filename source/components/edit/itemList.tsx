@@ -9,6 +9,7 @@ export interface ItemListProps {
     openable: boolean;
     valid: boolean;
     buttonEvent: string;
+    alignCenter?: boolean;
 }
 
 export interface ListItem {
@@ -29,7 +30,7 @@ const classMap = (valid: boolean) => {
     }
 };
 
-const conditionalReturn = (a, b, bool) => {
+const conditionalReturn = (a: string, b: string, bool: boolean) => {
     if (bool) {
         return a;
     } else {
@@ -71,22 +72,22 @@ const processItems = (items: ListItem[]) => {
 
 export const ItemList = (props: ItemListProps) => {
     const boxClass = classMap(props.valid).boxClass;
+    const aligning = props.alignCenter ? 'flex_box_row_center' : 'flex_box_row_left';
     return (
         <div class={boxClass}>
-            <div class='flex_box_row_left'>
+            <div class={aligning}>
+                {props.title}
                 {conditionalRendering(
                     <img
                         src={conditionalReturn('icons/shrink.svg', 'icons/expand_big.svg', props.open)}
-                        class='form__field__icon'
+                        class='form__field__icon form__field__icon_small-padding-top'
                         onclick={() => {
                             eventBus.dispatch(props.buttonEvent);
                         }}
                     />,
                     props.openable
                 )}
-                {props.title}
             </div>
-
             {conditionalRendering(<div class='flex_box_row_left'>{processItems(props.items)}</div>, props.open)}
         </div>
     );

@@ -123,7 +123,7 @@ export default class SignupView extends ViewBase {
                 {ErrorMsg(this._data.errorMsgs.passwordError)}
                 {FormField(this._data.fields.repeatPassword)}
                 {ErrorMsg(this._data.errorMsgs.repeatPasswordError)}
-                {/* {ErrorMsg(this._data.errorMsgs.formError)} */}
+                {ErrorMsg(this._data.errorMsgs.formError)}
                 {Button(this._data.buttons.signupButton)}
 
                 {Button(this._data.buttons.loginButton)}

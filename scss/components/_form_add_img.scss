@@ -7,6 +7,9 @@
   flex-wrap: wrap;
   min-height: 72px;
   height: auto;
+
+  // padding-top: 6px;
+  padding-bottom: 12px;
 }
 .add-img__no-photo-text{
   font-size: 24px;
@@ -34,10 +37,16 @@ $px_img: $px_big * 2;
   background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(234, 0, 255, 0.274) 0%, rgba(245, 0, 53, 0) 100%);
 }
 
-
 .add-img-item {
   border-radius: 10px;
-  margin: $px_base;
+  margin: 2*$px_base $px_base;
+  height: $px_img;
+  width: $px_img;
+  object-fit: cover;
+}
+.add-img-img {
+  border-radius: 10px;
+  margin: $px_base $px_base;
   height: $px_img;
   width: $px_img;
   object-fit: cover;
@@ -63,3 +72,6 @@ $px_img: $px_big * 2;
   border: 1px solid #000000;
 }
 
+.add-img-box__input-field{
+  height: 0;
+}

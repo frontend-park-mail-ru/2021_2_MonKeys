@@ -73,10 +73,11 @@ const initData = {
         buttonEvent: 'edit:prefer-click',
     },
     tagsField: {
-        title: 'Тэги',
+        title: 'Интересы',
         valid: true,
         open: false,
         openable: true,
+        alignCenter: true,
         items: [
             {
                 value: 'anime',
