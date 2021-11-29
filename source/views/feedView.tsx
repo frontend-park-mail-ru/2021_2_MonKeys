@@ -26,10 +26,17 @@ export default class FeedView extends ViewBase {
             this._template = this._createTmpl(this._data, cardData.expanded);
         } else {
             this._template = (
-                <div class='card-container overflow-hidden'>
-                    {dropsBackground()}
-                    <div class='header-big'>Карточки кончились</div>
-                    {Tapbar(TapbarStore.get())}
+                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                    <div
+                        class='view-contant view-contant_align_center
+                  view-content_scroll-banned view-content__max-height'
+                    >
+                        {dropsBackground()}
+                        <div class='view-content__card'>
+                            <div class='header-big'>Карточки кончились</div>
+                        </div>
+                        {Tapbar(TapbarStore.get())}
+                    </div>
                 </div>
             );
         }
