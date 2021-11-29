@@ -3,8 +3,8 @@ import { Chat } from '../../store/chatsStore.js';
 import EventBus from '../../dispatcher/eventBus.js';
 
 export const chatsPreview = (chat: Chat) => {
-    // @ts-ignore
-    const lastMessage = chat.messages.at(-1);
+    const lastMsgIdx = chat.messages.length - 1;
+    const lastMessage = chat.messages[lastMsgIdx];
 
     const ChatID = chat.fromUserID;
 

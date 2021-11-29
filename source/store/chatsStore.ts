@@ -35,8 +35,8 @@ ChatsStore.set({
 });
 
 function compareChats(l: Chat, r: Chat) {
-    // @ts-ignore
-    if (l.messages.length === 0 || r.messages.length === 0 || l.messages.at(-1).date < r.messages.at(-1).date) {
+    const lastMsg = (messages: Message[]) => messages[messages.length - 1];
+    if (l.messages.length === 0 || r.messages.length === 0 || lastMsg(l.messages).date < lastMsg(r.messages).date) {
         return 1;
     }
 
