@@ -32,12 +32,11 @@ export default class ChatView extends ViewBase {
     _createTmpl(data) {
         if (!data.chat || !data.chat.profile || !data.chat.isOpenedProfile) {
             return (
-                <div
-                    class='view-contant view-contant_align_center
-                       view-contant_scroll-y_banned view-contant_scroll-x_banned'
-                >
-                    {Chat(data.chat)}
-                    {Errors(data.error)}
+                <div class='view-content'>
+                    <div class='app__chat'>
+                        {Chat(data.chat)}
+                        {Errors(data.error)}
+                    </div>
                 </div>
             );
         } else {
@@ -65,7 +64,7 @@ export default class ChatView extends ViewBase {
         view.render();
 
         if (!view._data.chat || !view._data.chat.profile || !view._data.chat.isOpenedProfile) {
-            const _chatSpace = document.getElementsByClassName('view-content__message-space')[0];
+            const _chatSpace = document.getElementsByClassName('chat__messages')[0];
             if (_chatSpace) {
                 _chatSpace.scrollTop = _chatSpace.scrollHeight;
             }

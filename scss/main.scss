@@ -28,10 +28,10 @@
 @import './components/chats/chats-preview';
 @import './components/chats/match-profile';
 @import './components/chats/search-form';
-@import './components/chat/chat';
-@import './components/chat/chat-header';
 @import './components/chat/input-message';
+@import './components/profile/profile-preview';
 @import './components/chat/message';
+@import './components/chat/chat';
 @import './components/error_api';
 
 @import './layout/flex_column_center';
@@ -52,4 +52,10 @@ html {
 
 ::-webkit-scrollbar {
     display: none;
+}
+
+.app {
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  width: 100vw;
 }
