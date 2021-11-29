@@ -48,6 +48,7 @@ html {
   @include background;
   font-family: $font-default;
   color: $white;
+  transition: all 1s;
 }
 
 
