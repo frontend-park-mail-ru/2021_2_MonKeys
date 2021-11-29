@@ -15,6 +15,13 @@ $view-max-width: 375px;
   overflow: hidden;
 }
 
+.view-content_scroll{
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  user-select: none; 
+}
+
+
 .view-contant_scroll-y_banned{
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);

@@ -42,6 +42,28 @@ export default class ChatsView extends ViewBase {
     };
 
     _createTmpl(data) {
+        console.log(data.matches);
+        console.log(data.chats);
+        if (!data.matches[0] && !data.chats[0]) {
+            return (
+                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                    <div
+                        class='view-contant view-contant_align_center
+                  view-content_scroll-banned view-content__max-height'
+                    >
+                        <div class='likes-view-text-big'>Здесь будут ваши пары и чаты</div>
+
+                        <div class='view-content__dummy-image-container'>
+                            <img src='icons/chat_gradient.svg' class='view-content__dummy-image'></img>
+                        </div>
+                        <div class='likes-view-text-small'>Лайкайте карточки в ленте и возвращайтесь</div>
+
+                        {Tapbar(TapbarStore.get())}
+                        {Errors(data.error)}
+                    </div>
+                </div>
+            );
+        }
         return (
             <div class='view-contant view-contant_align_center view-content_scroll-banned'>
                 <div class='view-contant view-contant_align_center view-content_scroll-banned view-content__max-height'>

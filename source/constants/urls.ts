@@ -1,4 +1,3 @@
-
 const domain = 'api.monkeys.team';
 export const serverAddress = `https://${domain}`;
 export const wsURL = `wss://${domain}/api/v1/apiws`;
