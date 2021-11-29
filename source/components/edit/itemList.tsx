@@ -43,6 +43,7 @@ const processItems = (items: ListItem[]) => {
         if (element.selected) {
             result.push(
                 <div
+                    name='tag'
                     class='list-item-selected'
                     onclick={() => {
                         eventBus.dispatch(element.clickEvent, element.value);
@@ -54,6 +55,7 @@ const processItems = (items: ListItem[]) => {
         } else {
             result.push(
                 <div
+                    name='tag'
                     class='list-item-deselected'
                     onclick={() => {
                         eventBus.dispatch(element.clickEvent, element.value);

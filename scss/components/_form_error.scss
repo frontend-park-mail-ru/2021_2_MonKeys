@@ -7,24 +7,23 @@
 
 .error-inactive {
     @include errorText();
-    animation: opacityOut 1s ease 1;
       color: $light-grey;
-    visibility: hidden;
+    opacity: 0;
 }
 
 .error-hidden {
     @include errorText();
-    visibility: hidden;
+    opacity: 0;
 }
 
 .error-active {
     @include errorText();
     color: $red;
-    animation: opacityIn 1s ease 1;
+    opacity: 1;
 }
 
 .error-hint {
     @include errorText();
     color: $light-grey;
-    animation: opacityIn 1s ease 1;
+    opacity: 1;
 }
