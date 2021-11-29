@@ -52,11 +52,13 @@ export default class ProfileView extends ViewBase {
 
     _createTmpl(data) {
         return (
-            <div class='view-contant view-contant_align_center'>
-                {ProfileActions(data.cardData.actions)}
-                {CardExpended({ userData: data.cardData.userData, withActions: false, withReports: false })}
-                {Tapbar(TapbarStore.get())}
-                {Errors(data.error)}
+            <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                <div class='view-contant view-contant_align_center view-content_scroll-banned view-content__max-height'>
+                    {ProfileActions(data.cardData.actions)}
+                    {CardExpended({ userData: data.cardData.userData, withActions: false, withReports: false })}
+                    {Tapbar(TapbarStore.get())}
+                    {Errors(data.error)}
+                </div>
             </div>
         );
     }

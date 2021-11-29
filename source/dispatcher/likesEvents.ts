@@ -61,13 +61,13 @@ export const LikesEventsRegister = () => {
             }
 
             const feedData = feedStore.get();
-            feedRequest().then((data) => {
-                if (data.status === HTTPSuccess) {
+            feedRequest().then((feedDataResp) => {
+                if (feedDataResp.status === HTTPSuccess) {
                     throw 'bad response';
                 }
 
-                if (data.body) {
-                    feedData.profiles = data.body;
+                if (feedDataResp.body) {
+                    feedData.profiles = feedDataResp.body;
                 } else {
                     feedData.profiles = [];
                     feedData.outOfCards = true;

@@ -94,7 +94,7 @@ export const CardExpended = (props: CardExpendedProps) => {
     );
 
     return (
-        <div class='card-expended'>
+        <div class='view-content__card-expended'>
             {reportWindowTmpl}
             <div class='card-profile'>
                 {imgTmpl}

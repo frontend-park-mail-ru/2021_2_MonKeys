@@ -26,10 +26,17 @@ export default class FeedView extends ViewBase {
             this._template = this._createTmpl(this._data, cardData.expanded);
         } else {
             this._template = (
-                <div class='card-container overflow-hidden'>
-                    {dropsBackground()}
-                    <div class='header-big'>Карточки кончились</div>
-                    {Tapbar(TapbarStore.get())}
+                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                    <div
+                        class='view-contant view-contant_align_center
+                  view-content_scroll-banned view-content__max-height'
+                    >
+                        {dropsBackground()}
+                        <div class='view-content__card'>
+                            <div class='header-big'>Карточки кончились</div>
+                        </div>
+                        {Tapbar(TapbarStore.get())}
+                    </div>
                 </div>
             );
         }
@@ -92,10 +99,15 @@ export default class FeedView extends ViewBase {
             };
 
             return (
-                <div class='flex_box_column_center overflow-hidden'>
-                    {CardFeed(data.cardData)}
-                    {Tapbar(TapbarStore.get())}
-                    {Errors(data.error)}
+                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                    <div
+                        class='view-contant view-contant_align_center
+                  view-content_scroll-banned view-content__max-height'
+                    >
+                        {CardFeed(data.cardData)}
+                        {Tapbar(TapbarStore.get())}
+                        {Errors(data.error)}
+                    </div>
                 </div>
             );
         } else {
@@ -108,10 +120,15 @@ export default class FeedView extends ViewBase {
                 },
             };
             return (
-                <div class='flex_box_column_center overflow-hidden'>
-                    {CardExpended(data.cardData)}
-                    {Tapbar(TapbarStore.get())}
-                    {Errors(data.error)}
+                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                    <div
+                        class='view-contant view-contant_align_center
+                  view-content_scroll-banned view-content__max-height'
+                    >
+                        {CardExpended(data.cardData)}
+                        {Tapbar(data.tapbar)}
+                        {Errors(data.error)}
+                    </div>
                 </div>
             );
         }

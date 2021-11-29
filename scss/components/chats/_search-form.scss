@@ -1,5 +1,10 @@
 $icon-size-small: 18px;
 
+.view-content__search{
+  width: 100%;
+  flex: 0 0 auto;
+}
+
 .search-form{
   display: flex;
   margin-left: 24px;
@@ -9,24 +14,24 @@ $icon-size-small: 18px;
   position: relative;
   width: 312px;
   height: 30px;
-  
+
   padding-left: 12px;
-  
+
   background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.4) 0%, rgba(0, 165, 245, 0) 100%);
   backdrop-filter: blur(20px);
-  
+
   border-radius: 12px;
   border: 0px;
-  
+
   color:white;
   font-size: $font-size-tiny;
 }
 .search-form__icon{
-  position: absolute;
-  
+  position: relative;
+
   width: $icon-size-small;
   height: $icon-size-small;
-  
-  top: 32px;
-  left: 312px;
+
+  top: 6px;
+  left: -30px;
 }

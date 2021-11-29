@@ -26,9 +26,7 @@ $chat-header-img-size: 48px;
   width: 12px;
   height: 24px;
 
-  margin-left: 18px;
-
-  padding-right: 36px;
+  margin: 0px 18px;
 }
 
 .chat-header__profile{
@@ -45,14 +43,12 @@ $chat-header-img-size: 48px;
 
   object-fit: cover;
   -o-object-fit: cover;
-
-  margin-left: 24px;
 }
 
 .chat-header__user-name{
   font-size: $font-size-small;
   line-height: 24px;
-  
+
   color: #FFFFFF;
 
   margin-left: 12px;

@@ -1,19 +1,20 @@
 @import '../abstracts/colors';
 
 $card-expanded-default-width: 372px;
-$card-expanded-default-height: 594px;
+$card-expanded-default-height: 500px;
 $card-expanded-img-default-height: 384px;
 
-.card-expended{
-  margin-top: 6px;
+.view-content__card-expended{
+  width: 100%;
+  flex: 1 0 auto;
+  max-height: calc(100vh - 48px - 66.4px)
 }
 
 .card-profile{
   position: relative;
   display: flex;
   flex-direction: column;
-  width: $card-expanded-default-width;
-  height: $card-expanded-default-height;
+  min-height: $card-expanded-default-height;
 
   overflow-x: hidden;
   overflow-y: scroll;
@@ -22,6 +23,8 @@ $card-expanded-img-default-height: 384px;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: $border-radius-default;
+
+  margin: 0px $margin-small;
 }
 
 .card-expended__description{

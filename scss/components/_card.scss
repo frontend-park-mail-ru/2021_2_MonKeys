@@ -4,6 +4,12 @@ $card-expanded-default-width: 360px;
 $card-expanded-default-height: 600px;
 $card-expanded-img-default-height: 384px;
 
+.view-content__card{
+  width: 100%;
+  flex: 1 0 auto;
+  max-height: calc(100vh - 66.4px);
+}
+
 .card{
   position: relative;
   display: flex;

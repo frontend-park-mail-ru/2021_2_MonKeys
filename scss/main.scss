@@ -1,14 +1,14 @@
 @import './abstracts/variables';
 @import './abstracts/mixins';
 @import './core/typography';
+@import './core/margin';
 
 @import './abstracts/colors';
-
 
 @import './pages/likes';
 @import './pages/profile';
 @import './pages/chats';
-@import './pages/chat';
+// @import './pages/chat';
 
 @import './components/form_field';
 @import './components/header';
@@ -19,20 +19,20 @@
 @import './components/card-actions';
 @import './components/card-expended';
 @import './components/img-card';
-@import './components/search-form';
 @import './components/report-window';
 @import './components/report-radio-button';
 @import './components/tapbar';
 @import './components/card';
 @import './components/carousel';
-@import './components/match-profile';
-@import './components/chats';
-@import './components/chats-preview';
-@import './components/chat';
-@import './components/chat-header';
+@import './components/chats/chats';
+@import './components/chats/chats-preview';
+@import './components/chats/match-profile';
+@import './components/chats/search-form';
+@import './components/chat/chat';
+@import './components/chat/chat-header';
+@import './components/chat/input-message';
+@import './components/chat/message';
 @import './components/error_api';
-@import './components/input-message';
-
 
 @import './layout/flex_column_center';
 @import './layout/view-contant';
@@ -42,36 +42,14 @@
 @import './animations/droplet';
 @import './animations/feed_animations';
 
-@import './components/message';
-
 html {
   @include background;
   font-family: $font-default;
   color: $white;
+  overflow: hidden;
   transition: all 1s;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+::-webkit-scrollbar {
+    display: none;
+}

@@ -1,4 +1,4 @@
-@import '../abstracts/colors';
+@import '../../abstracts/colors';
 
 .message-container{
   display: flex;
@@ -39,7 +39,7 @@
 
   font-size: $font-size-tiny;
   line-height: 18px;
-  
+
   color: $white;
 
   word-break: break-all;
@@ -50,6 +50,6 @@
   line-height: 8px;
 
   margin-top: 3px;
-  
+
   color: $light-grey;
 }

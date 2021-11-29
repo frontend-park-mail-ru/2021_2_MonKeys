@@ -1,8 +1,11 @@
+.view-content__tapbar{
+  width: 100%;
+  flex: 0 0 auto;
+}
+
 .tapbar {
     display: flex;
     justify-content: center;
-    position: absolute;
-    bottom: 24px;
     width: 100%;
 }
 

@@ -11,7 +11,7 @@ textarea{
   color: white;
   font-size: 18px;
   font-family: 'Futura Now Headline Bold';
-  height: 144px !important; 
+  height: 144px !important;
   border: none;
 
   margin-bottom: 18px;
@@ -19,6 +19,7 @@ textarea{
 
 body {
   margin: 0px;
+  overflow: hidden;
 }
 ::-webkit-scrollbar {
   width: 0;

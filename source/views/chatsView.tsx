@@ -7,9 +7,9 @@ import TapbarStore from '../store/tapbarStore.js';
 import { Chats } from '../components/chats/chats.js';
 import { ChatsStore, chatsManager } from '../store/chatsStore.js';
 import { SearchField } from '../components/searchField.js';
-import { MatchProfile } from '../components/chats/matchProfile.js';
 import { matchRequest } from '../requests/matchRequest.js';
 import { Errors } from '../components/error/errors.js';
+import { Matches } from '../components/chats/matches.js';
 
 export default class ChatsView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -37,23 +37,20 @@ export default class ChatsView extends ViewBase {
     _data = {
         chats: chatsManager.chatsWithMessages,
         error: errorManager.error,
-
-        'matches': MatchesStore.get().matches,
-        'matchesSearched': MatchesStore.get().matchesSearched,
+        matches: MatchesStore.get().matches,
+        matchesSearched: MatchesStore.get().matchesSearched,
     };
 
     _createTmpl(data) {
         return (
-            <div class='view-contant'>
-                {SearchField()}
-                <div class='view-contant__matches-header'>Ваши пары</div>
-                <div class='view-contant__matches-profiles'>
-                    {Object.keys(data.matches).map((item) => MatchProfile({ userData: data.matches[item] }))}
+            <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                <div class='view-contant view-contant_align_center view-content_scroll-banned view-content__max-height'>
+                    {SearchField()}
+                    {Matches(data.matches)}
+                    {Chats(data.chats)}
+                    {Tapbar(TapbarStore.get())}
+                    {Errors(data.error)}
                 </div>
-                <span class='view-contant__chats-header'>Чаты</span>
-                {Chats(data.chats)}
-                {Errors(data.error)}
-                {Tapbar(TapbarStore.get())}
             </div>
         );
     }
