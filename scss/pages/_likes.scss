@@ -1,11 +1,22 @@
+.view-content__likes-header{
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.view-content__likes-profile{
+  width: 100%;
+  flex: 1 0 auto;
+  max-height: calc(100vh - 168px - 66.4px);
+}
+
 .likes-view-header{
   width: 288px;
-  
+
   font-size: $font-size-medium;
   line-height: 42px;
-  
+
   color: #FFFFFF;
-  
+
   margin-top: 48px;
   margin-bottom: 36px;
   margin-left: 24px;
@@ -16,6 +27,6 @@
   flex-direction: row;
 
   overflow-x: scroll;
-  
+
   margin-left: 24px;
 }

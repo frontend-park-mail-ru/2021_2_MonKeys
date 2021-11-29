@@ -92,10 +92,15 @@ export default class FeedView extends ViewBase {
             };
 
             return (
-                <div class='flex_box_column_center overflow-hidden'>
-                    {CardFeed(data.cardData)}
-                    {Tapbar(TapbarStore.get())}
-                    {Errors(data.error)}
+                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                    <div
+                        class='view-contant view-contant_align_center
+                  view-content_scroll-banned view-content__max-height'
+                    >
+                        {CardFeed(data.cardData)}
+                        {Tapbar(TapbarStore.get())}
+                        {Errors(data.error)}
+                    </div>
                 </div>
             );
         } else {
@@ -108,10 +113,15 @@ export default class FeedView extends ViewBase {
                 },
             };
             return (
-                <div class='flex_box_column_center overflow-hidden'>
-                    {CardExpended(data.cardData)}
-                    {Tapbar(data.tapbar)}
-                    {Errors(data.error)}
+                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                    <div
+                        class='view-contant view-contant_align_center
+                  view-content_scroll-banned view-content__max-height'
+                    >
+                        {CardExpended(data.cardData)}
+                        {Tapbar(data.tapbar)}
+                        {Errors(data.error)}
+                    </div>
                 </div>
             );
         }

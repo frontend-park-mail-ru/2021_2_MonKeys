@@ -32,10 +32,10 @@ export default class ChatView extends ViewBase {
     _createTmpl(data) {
         if (!data.chat || !data.chat.profile || !data.chat.isOpenedProfile) {
             return (
-              <div
-                class='view-contant view-contant_align_center
+                <div
+                    class='view-contant view-contant_align_center
                        view-contant_scroll-y_banned view-contant_scroll-x_banned'
-              >
+                >
                     {Chat(data.chat)}
                     {Errors(data.error)}
                 </div>

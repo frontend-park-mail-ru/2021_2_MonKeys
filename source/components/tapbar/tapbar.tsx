@@ -25,5 +25,9 @@ export const Tapbar = (props: tapbarProps) => {
         },
     ];
 
-    return <div class='tapbar'>{items.map((props) => TapbarItem(props))}</div>;
+    return (
+        <div class='view-content__tapbar'>
+            <div class='tapbar'>{items.map((props) => TapbarItem(props))}</div>
+        </div>
+    );
 };

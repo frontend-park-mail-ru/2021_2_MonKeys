@@ -40,29 +40,48 @@ export default class LikesView extends ViewBase {
     _createTmpl(data) {
         if (!LikesStore.get().expended) {
             return (
-                <div class='view-contant'>
-                    <div class='likes-view-header'>Вы понравились нескольким людям</div>
-                    <div class='likes-view-cards'>
-                        {Object.keys(data.likes).map((item) =>
-                            ImgCard({ userData: data.likes[item], size: 'small', withActions: true, expanded: true })
-                        )}
+                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                    <div
+                        class='view-contant view-contant_align_center
+                  view-content_scroll-banned view-content__max-height'
+                    >
+                        <div class='view-content__likes-header'>
+                            <div class='likes-view-header'>Вы понравились нескольким людям</div>
+                        </div>
+                        <div class='view-content__likes-profile'>
+                            <div class='likes-view-cards'>
+                                {Object.keys(data.likes).map((item) =>
+                                    ImgCard({
+                                        userData: data.likes[item],
+                                        size: 'small',
+                                        withActions: true,
+                                        expanded: true,
+                                    })
+                                )}
+                            </div>
+                        </div>
+                        {Tapbar(TapbarStore.get())}
+                        {Errors(data.error)}
                     </div>
-                    {Errors(data.error)}
-                    {Tapbar(TapbarStore.get())}
                 </div>
             );
         } else {
             return (
-                <div class='view-contant view-contant_align_center'>
-                    {CardExpended({
-                        userData: data.likes[LikesStore.get().userIndex],
-                        withActions: true,
-                        withReports: true,
-                        reports: data.reports,
-                        reported: data.reportsActive,
-                    })}
-                    {Errors(data.error)}
-                    {Tapbar(TapbarStore.get())}
+                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                    <div
+                        class='view-contant view-contant_align_center
+                  view-content_scroll-banned view-content__max-height'
+                    >
+                        {CardExpended({
+                            userData: data.likes[LikesStore.get().userIndex],
+                            withActions: true,
+                            withReports: true,
+                            reports: data.reports,
+                            reported: data.reportsActive,
+                        })}
+                        {Tapbar(TapbarStore.get())}
+                        {Errors(data.error)}
+                    </div>
                 </div>
             );
         }
