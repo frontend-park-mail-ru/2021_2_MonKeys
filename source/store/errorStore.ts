@@ -26,8 +26,8 @@ class ErrorManager {
         if (ErrorStore.get().errors.length === 0) {
             return null;
         }
-        // @ts-ignore
-        return ErrorStore.get().errors.at(-1);
+        const lastErrorIdx = ErrorStore.get().errors.length - 1;
+        return ErrorStore.get().errors[lastErrorIdx];
     }
 
     pushAPIError() {
