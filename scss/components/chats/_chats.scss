@@ -1,11 +1,36 @@
 $span-line-height: 42px;
+$max-width: 400px;
 
-.view-content__matches{
+$search-min-height: 56px;
+$match-min-height: 156px;
+
+.chats {
+  height: 100%;
   width: 100%;
+  max-width: $max-width;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chats__search {
+  width: 100%;
+  min-width: $search-min-height;
   flex: 0 0 auto;
 }
 
-.view-content__matches-header{
+.chats__search-form {
+
+}
+
+.chats__matches {
+  width: 100%;
+  min-height: $match-min-height;
+  flex: 0 0 auto;
+}
+
+.chats__matches-header {
   font-size: $font-size-medium;
   line-height: $span-line-height;
 
@@ -14,7 +39,7 @@ $span-line-height: 42px;
   margin-left: $margin-medium;
 }
 
-.view-content__matches-profiles{
+.chats__matches-profiles {
   display: flex;
   flex-direction: row;
 
@@ -23,14 +48,14 @@ $span-line-height: 42px;
   margin-left: $margin-medium;
 }
 
-.view-content__chats{
+.chats__chats {
   width: 100%;
   flex: 1 0 auto;
   min-height: $span-line-height;
-  max-height: calc(100vh - 56px - 156px - 66.4px);
+  max-height: calc(100% - $search-min-height - $match-min-height - $tapbar-height);
 }
 
-.view-content__chats-header{
+.chats__chats-header {
   font-size: $font-size-medium;
   line-height: $span-line-height;
 
@@ -39,7 +64,13 @@ $span-line-height: 42px;
   margin-left: $margin-medium;
 }
 
-.view-content__chats-list{
+.chats__chats-list {
+  flex: 1 0 auto;
   overflow-y: scroll;
   max-height: calc(100% - $span-line-height);
+}
+
+.chats__tapbar {
+  width: 100%;
+  flex: 0 0 auto;
 }

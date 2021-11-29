@@ -32,16 +32,14 @@ export default class ChatView extends ViewBase {
     _createTmpl(data) {
         if (!data.chat || !data.chat.profile || !data.chat.isOpenedProfile) {
             return (
-                <div class='view-content'>
-                    <div class='app__chat'>
-                        {Chat(data.chat)}
-                        {Errors(data.error)}
-                    </div>
+                <div class='app__content--align-center'>
+                    {Chat(data.chat)}
+                    {Errors(data.error)}
                 </div>
             );
         } else {
             return (
-                <div class=''>
+                <div class='app__content--align-center'>
                     {CardExpended({
                         userData: data.chat.profile,
                         withActions: false,
