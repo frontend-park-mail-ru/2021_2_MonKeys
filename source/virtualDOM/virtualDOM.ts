@@ -27,10 +27,25 @@ export namespace MonkeysVirtualDOM {
     };
 
     export const createElement = (virtualNode) => {
+        if (typeof virtualNode == 'number') {
+            return document.createTextNode(virtualNode.toString());
+        }
         if (typeof virtualNode === 'string') {
             return document.createTextNode(virtualNode);
         }
+
         const rootElement = document.createElement(virtualNode.type);
+
+        // rootElement.style.transition = '1s';
+        if (virtualNode.type === 'img') {
+            rootElement.addEventListener(
+                'dragstart',
+                (e) => {
+                    e.preventDefault();
+                },
+                false
+            );
+        }
         if (virtualNode.type === 'mon-router') {
             rootElement.addEventListener('click', () => {
                 router.go(virtualNode.props['route']);
@@ -38,6 +53,9 @@ export namespace MonkeysVirtualDOM {
         }
         virtualNode.props &&
             Object.keys(virtualNode.props).forEach((key) => {
+                if (key === 'name' && (virtualNode.props[key] === 'error' || virtualNode.props[key] === 'tag')) {
+                    rootElement.style.transition = '1s';
+                }
                 if (/^on/.test(key)) {
                     rootElement.addEventListener(key.slice(2), virtualNode.props[key]);
                 } else {
@@ -150,6 +168,9 @@ export namespace MonkeysVirtualDOM {
                                 manipulation.oldChild.addEventListener('click', () => {
                                     router.go(manipulation.newChild.props[key]);
                                 });
+                            }
+                            if (key === 'value' && manipulation.newChild.props[key] === '') {
+                                manipulation.oldChild.value = '';
                             }
                             if (/^on/.test(key)) {
                                 manipulation.oldChild.addEventListener(key.slice(2), manipulation.newChild.props[key]);

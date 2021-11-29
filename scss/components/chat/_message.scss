@@ -1,0 +1,55 @@
+@import '../../abstracts/colors';
+
+.message-container{
+  display: flex;
+
+  width: 326px;
+}
+
+.message-container_my-message{
+  justify-content: flex-end;
+}
+
+.message-container_not-my-message{
+  justify-content: flex-start;
+}
+
+.message-container__message{
+  display: flex;
+
+  max-width: 80%;
+
+  margin-top: 6px;
+
+  padding: 6px 12px;
+}
+
+.message-container__message_my-message {
+  background: $navy-blue;
+  border-radius: 12px 12px 1px 12px;
+}
+
+.message-container__message_not-my-message {
+  background: $black;
+  border-radius: 12px 12px 12px 1px;
+}
+
+.message-container__text{
+  display: flex;
+
+  font-size: $font-size-tiny;
+  line-height: 18px;
+
+  color: $white;
+
+  word-break: break-all;
+}
+
+.message-container__date{
+  font-size: 8px;
+  line-height: 8px;
+
+  margin-top: 3px;
+
+  color: $light-grey;
+}

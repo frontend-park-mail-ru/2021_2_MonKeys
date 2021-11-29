@@ -1,16 +1,14 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import { Tapbar } from '../components/tapbar.js';
-import { CardFeed } from '../components/cardFeed.js';
-import { CardExpended } from '../components/cardExpended.js';
+import { Tapbar } from '../components/tapbar/tapbar.js';
+import { CardFeed } from '../components/card/cardFeed.js';
+import { CardExpended } from '../components/card/cardExpended.js';
 import feedStore from '../store/feedStore.js';
 import eventBus from '../dispatcher/eventBus.js';
-import { OutOfCards } from '../components/outOfCards.js';
-
-import { CritError } from '../components/critError.js';
-
 import TapbarStore from '../store/tapbarStore.js';
-import { ErrorStore } from '../store/errorStore';
+import { errorManager, ErrorStore } from '../store/errorStore.js';
+import { dropsBackground } from '../components/common/dropsBackground.js';
+import { Errors } from '../components/error/errors.js';
 
 export default class FeedView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -25,14 +23,20 @@ export default class FeedView extends ViewBase {
     private updateDataTemaplate(cardData) {
         if (!cardData.outOfCards) {
             this._data.cardData.userData = cardData.profiles[cardData.counter];
-            this._data.critError.loading = cardData.apiErrorLoadCondition;
             this._template = this._createTmpl(this._data, cardData.expanded);
         } else {
             this._template = (
-                <div class='card-container'>
-                    {OutOfCards()}
-                    {Tapbar(TapbarStore.get())}
-                    {CritError(this._data.critError)}
+                <div class='view-contant view-contant_align_center view-content_scroll'>
+                    <div
+                        class='view-contant view-contant_align_center
+                  view-content_scroll view-content__max-height'
+                    >
+                        {dropsBackground()}
+                        <div class='view-content__card'>
+                            <div class='header-big'>Карточки кончились</div>
+                        </div>
+                        {Tapbar(TapbarStore.get())}
+                    </div>
                 </div>
             );
         }
@@ -43,38 +47,38 @@ export default class FeedView extends ViewBase {
             buttons: {
                 dislikeButton: {
                     type: 'button',
-                    src: 'icons/button_dislike_white.svg',
-                    class: 'menu-icon',
+                    src: 'icons/dislike.svg',
+                    alt: 'dislike',
+                    class: 'card-bottom-panel_actions_action',
                     onclick: () => {
                         eventBus.dispatch('feed:dislike-button');
                     },
                 },
                 expandButton: {
                     type: 'button',
-                    src: 'icons/button_expand_white.svg',
-                    class: 'menu-icon',
+                    src: 'icons/expand_big.svg',
+                    class: 'card-bottom-panel_actions_action',
                     onclick: () => {
                         eventBus.dispatch('feed:expand-button');
                     },
                 },
                 likeButton: {
                     type: 'button',
-                    src: 'icons/tapbar_likes_white_selected.svg',
-                    class: 'menu-icon',
+                    src: 'icons/likes.svg',
+                    alt: 'like',
+                    class: 'card-bottom-panel_actions_action',
                     onclick: () => {
                         eventBus.dispatch('feed:like-button');
                     },
                 },
             },
+            withActions: true,
+            feed: true,
         },
         tapbar: {
-            class: 'menu-icon',
+            class: 'card-bottom-panel_actions_action',
         },
-        critError: {
-            title: 'Ошибка подключения',
-            text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
-            loading: ErrorStore.get().apiErrorLoadCondition,
-        },
+        error: errorManager.error,
     };
 
     forceRender() {
@@ -87,40 +91,44 @@ export default class FeedView extends ViewBase {
         if (!expanded) {
             this._data.cardData.buttons.expandButton = {
                 type: 'button',
-                src: 'icons/button_expand_white.svg',
-                class: 'menu-icon',
+                src: 'icons/expand_big.svg',
+                class: 'card-bottom-panel_actions_action',
                 onclick: () => {
                     eventBus.dispatch('feed:expand-button');
                 },
             };
 
             return (
-                <div class='card-container'>
-                    <div class='card3'></div>
-                    <div class='card3'></div>
-                    <div class='card2'></div>
-                    {CardFeed(data.cardData)}
-                    {Tapbar(TapbarStore.get())}
-                    {CritError(data.critError)}
+                <div class='view-contant view-contant_align_center view-content_scroll'>
+                    <div
+                        class='view-contant view-contant_align_center
+                  view-content_scroll view-content__max-height'
+                    >
+                        {CardFeed(data.cardData)}
+                        {Tapbar(TapbarStore.get())}
+                        {Errors(data.error)}
+                    </div>
                 </div>
             );
         } else {
             this._data.cardData.buttons.expandButton = {
                 type: 'button',
                 src: 'icons/button_shrink_white.svg',
-                class: 'menu-icon',
+                class: 'card-bottom-panel_actions_action',
                 onclick: () => {
                     eventBus.dispatch('feed:shrink-button');
                 },
             };
             return (
-                <div class='card-container'>
-                    <div class='card3'></div>
-                    <div class='card3'></div>
-                    <div class='card2'></div>
-                    {CardExpended(data.cardData)}
-                    {Tapbar(data.tapbar)}
-                    {CritError(data.critError)}
+                <div class='view-contant view-contant_align_center view-content_scroll'>
+                    <div
+                        class='view-contant view-contant_align_center
+                  view-content_scroll view-content__max-height'
+                    >
+                        {CardExpended(data.cardData)}
+                        {Tapbar(data.tapbar)}
+                        {Errors(data.error)}
+                    </div>
                 </div>
             );
         }
@@ -138,7 +146,7 @@ export default class FeedView extends ViewBase {
     }
 
     private errorStoreUpdatesView(data, view) {
-        view._data.critError.loading = data.apiErrorLoadCondition;
+        view._data.error = errorManager.error;
         view._template = view._createTmpl(view._data);
         view.render();
     }

@@ -1,13 +1,19 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import { EditForm } from '../components/editForm.js';
+import { EditForm } from '../components/edit/editForm.js';
 import EventBus from '../dispatcher/eventBus.js';
 import { EditStore } from '../store/editStore.js';
 import { ProfileStore } from '../store/profileStore.js';
-import { errorNameMsg, errorAgeMsg, errorImgMsg, errorEditFormMsg } from '../constants/errorMsg.js';
-import { CritError } from '../components/critError.js';
-import { ErrorStore } from '../store/errorStore';
-
+import {
+    errorNameMsg,
+    errorAgeMsg,
+    errorImgMsg,
+    errorEditFormMsg,
+    errorGenderMsg,
+    errorPreferMsg,
+} from '../constants/errorMsg.js';
+import { errorManager, ErrorStore } from '../store/errorStore.js';
+import { Errors } from '../components/error/errors.js';
 export default class SignupEditView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
@@ -20,6 +26,9 @@ export default class SignupEditView extends ViewBase {
     _data = {
         'editForm': {
             'fields': {
+                'genderField': EditStore.get().genderField,
+                'tagsField': EditStore.get().tagsField,
+                'preferField': EditStore.get().preferField,
                 'name': {
                     tag: 'textarea',
                     placeholder: 'Имя',
@@ -37,6 +46,7 @@ export default class SignupEditView extends ViewBase {
                     type: 'date',
                     class: EditStore.get().birthDateFieldClass,
                     name: 'birthDate',
+                    iconSrc: 'icons/calendar.svg',
                     oninput: () => {
                         EventBus.dispatch<string>('edit:birth-date-input');
                     },
@@ -48,19 +58,18 @@ export default class SignupEditView extends ViewBase {
                     tag: 'textarea',
                     placeholder: 'Расскажите о себе',
                     name: 'description',
-                    class: 'form-field-edit text-desc',
+                    class: 'form__field-valid',
                 },
                 'img': {
                     class: EditStore.get().imgFieldClass,
                 },
             },
-            'tags': EditStore.get().tags,
             'buttons': {
                 'tagsButton': {
                     type: 'button',
                     text: 'tags',
                     class: '',
-                    src: '../icons/button_expand_white.svg',
+                    src: 'icons/expand_big.svg',
                     onclick: () => {
                         EventBus.dispatch<string>('edit:open-tags');
                     },
@@ -74,7 +83,7 @@ export default class SignupEditView extends ViewBase {
                 'saveButton': {
                     type: 'button',
                     text: 'Сохранить',
-                    class: 'edit',
+                    class: 'button-white-big',
                     onclick: () => {
                         EventBus.dispatch<string>('edit:save-button');
                     },
@@ -89,6 +98,14 @@ export default class SignupEditView extends ViewBase {
                     text: errorAgeMsg,
                     class: EditStore.get().birthDateErrorClass,
                 },
+                'genderError': {
+                    text: errorGenderMsg,
+                    class: EditStore.get().genderErrorClass,
+                },
+                'preferError': {
+                    text: errorPreferMsg,
+                    class: EditStore.get().preferErrorClass,
+                },
                 'imgError': {
                     text: errorImgMsg,
                     class: EditStore.get().imgErrorClass,
@@ -99,18 +116,16 @@ export default class SignupEditView extends ViewBase {
                 },
             },
         },
-        'critError': {
-            title: 'Ошибка подключения',
-            text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
-            loading: ErrorStore.get().apiErrorLoadCondition,
-        },
+        error: errorManager.error,
     };
 
     _createTmpl(data) {
         return (
-            <div class='card-container'>
-                {EditForm(data.editForm)}
-                {CritError(data.critError)}
+            <div class='view-contant view-content__scroll-y'>
+                <div class='signup-container'>
+                    {EditForm(data.editForm)}
+                    {Errors(data.error)}
+                </div>
             </div>
         );
     }
@@ -130,8 +145,15 @@ export default class SignupEditView extends ViewBase {
         view._data.editForm.errorMsgs.imgError.class = data.imgErrorClass;
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
         view._data.editForm.tags = data.tags;
-        view._data.critError.loading = data.apiErrorLoadCondition;
+
+        view._data.editForm.fields.genderField = data.genderField;
+        view._data.editForm.fields.preferField = data.preferField;
+        view._data.editForm.fields.tagsField = data.tagsField;
+        view._data.editForm.errorMsgs.genderError.class = data.genderErrorClass;
+        view._data.editForm.errorMsgs.preferError.class = data.preferErrorClass;
+
         view._template = view._createTmpl(view._data);
+
         view.render();
     }
 
@@ -142,7 +164,7 @@ export default class SignupEditView extends ViewBase {
     }
 
     private errorStoreUpdatesView(data, view) {
-        view._data.critError.loading = data.apiErrorLoadCondition;
+        view._data.error = errorManager.error;
         view._template = view._createTmpl(view._data);
         view.render();
     }

@@ -1,0 +1,158 @@
+@import '../abstracts/colors';
+
+$img-card-small-width: 312px;
+$img-card-small-height: 438px;
+
+$img-card-medium-width: 372px;
+$img-card-medium-height: 384px;
+
+$border-radius-default: 12px;
+
+$report-status-max-width: 96px;
+
+.img-card{
+  position: relative;
+
+  display: flex;
+}
+
+.img-card_size_small{
+  width: $img-card-small-width;
+  height: $img-card-small-height;
+
+  margin-right: 12px;
+}
+
+.img-card_size_medium{
+  width: $img-card-medium-width;
+  height: $img-card-medium-height;
+
+  margin-right: 12px;
+}
+
+.img-card_size_big{
+  width: $img-card-small-width;
+  height: $img-card-small-height;
+
+  margin-right: 12px;
+}
+
+.img-card__img{
+  -o-object-fit: cover;
+  object-fit: cover;
+
+  border-radius: $border-radius-default;
+}
+
+.img-card__img_size_small{
+  width: $img-card-small-width;
+  height: $img-card-small-height;
+}
+
+.img-card__img_size_medium{
+  width: $img-card-medium-width;
+  height: $img-card-medium-height;
+}
+
+.img-card__img_size_big{
+  width: $img-card-small-width;
+  height: $img-card-small-height;
+}
+
+.img-card__bottom-panel{
+  position: absolute;
+
+  border-radius: 0 0 $border-radius-default $border-radius-default;
+
+  background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.2) 0%, rgba(0, 165, 245, 0) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.img-card__bottom-panel_size_small{
+  width: $img-card-small-width;
+  height: 96px;
+  top: 342px;
+}
+
+.img-card__bottom-panel_size_medium{
+  width: $img-card-medium-width;
+  height: 102px;
+  top: 282px;
+}
+
+.img-card__bottom-panel_size_big{
+  width: $img-card-small-width;
+  height: 96px;
+  top: 342px;
+}
+
+.img-card__short-desc{
+  display: flex;
+}
+
+.img-card__short-desc_size_small{
+  width: $img-card-small-width;
+}
+
+.img-card__short-desc_size_meduim{
+  width: $img-card-medium-width;
+}
+
+.img-card__short-desc_size_big{
+  width: $img-card-small-width;
+}
+
+.img-card__name-age{
+  font-size: $font-size-medium;
+  line-height: 42px;
+
+  color: #FFFFFF;
+
+  overflow: hidden;
+	text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.img-card__name-age_size_small{
+  width: $img-card-small-width;
+
+  margin-bottom: 6px;
+  margin-left: 12px;
+}
+
+.img-card__name-age_size_medium{
+  width: $img-card-medium-width;
+
+  margin-bottom: 6px;
+  margin-left: 24px;
+}
+
+.img-card__name-age_size_big{
+  width: $img-card-small-width;
+
+  margin-bottom: 6px;
+  margin-left: 12px;
+}
+
+.img-card__report-status{
+  display: flex;
+  align-items: flex-start;
+
+  margin-top: 6px;
+  margin-right: 6px;
+}
+
+.img-card__report-text{
+  font-size: $font-size-tiny;
+  line-height: 18px;
+
+  border: 1px solid $red;
+  border-radius: $border-radius-default;
+
+  color: $red;
+
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-bottom: 2px;
+}

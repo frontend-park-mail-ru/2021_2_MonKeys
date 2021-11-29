@@ -1,13 +1,20 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import { Tapbar } from '../components/tapbar.js';
-import { EditForm } from '../components/editForm.js';
+import { EditForm } from '../components/edit/editForm.js';
 import { EditStore } from '../store/editStore.js';
 import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
-import { CritError } from '../components/critError.js';
-import { ErrorStore } from '../store/errorStore';
-import { errorNameMsg, errorAgeMsg, errorImgMsg, errorEditFormMsg } from '../constants/errorMsg.js';
+import { errorManager, ErrorStore } from '../store/errorStore.js';
+import {
+    errorNameMsg,
+    errorAgeMsg,
+    errorImgMsg,
+    errorEditFormMsg,
+    errorGenderMsg,
+    errorPreferMsg,
+} from '../constants/errorMsg.js';
+import { Errors } from '../components/error/errors.js';
+import router from '../route/router.js';
 
 export default class EditView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -15,12 +22,48 @@ export default class EditView extends ViewBase {
         EditStore.subscribe(this.subcribtionCallbackEdit, this);
         ProfileStore.subscribe(this.subcribtionCallbackProfile, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
+
+        const storeData = ProfileStore.get();
+        const editStore = EditStore.get();
+        switch (storeData.gender) {
+            case 'male':
+                editStore.genderField.items[0].selected = true;
+                editStore.genderField.items[1].selected = false;
+                break;
+            case 'female':
+                editStore.genderField.items[1].selected = true;
+                editStore.genderField.items[0].selected = false;
+                break;
+        }
+        switch (storeData.prefer) {
+            case 'male':
+                editStore.preferField.items[0].selected = true;
+                editStore.preferField.items[1].selected = false;
+                editStore.preferField.items[2].selected = false;
+                break;
+            case 'female':
+                editStore.preferField.items[0].selected = false;
+                editStore.preferField.items[1].selected = true;
+                editStore.preferField.items[2].selected = false;
+                break;
+            default:
+                editStore.preferField.items[0].selected = false;
+                editStore.preferField.items[1].selected = false;
+                editStore.preferField.items[2].selected = true;
+                break;
+        }
+
+        EditStore.set(editStore);
+
         this._template = this._createTmpl(this._data);
     }
 
     _data = {
         'editForm': {
             'fields': {
+                'genderField': EditStore.get().genderField,
+                'tagsField': EditStore.get().tagsField,
+                'preferField': EditStore.get().preferField,
                 'name': {
                     tag: 'textarea',
                     placeholder: 'Имя',
@@ -40,6 +83,7 @@ export default class EditView extends ViewBase {
                     value: ProfileStore.get().date,
                     class: EditStore.get().birthDateFieldClass,
                     name: 'birthDate',
+                    iconSrc: 'icons/calendar.svg',
                     oninput: () => {
                         EventBus.dispatch<string>('edit:birth-date-input');
                     },
@@ -52,19 +96,18 @@ export default class EditView extends ViewBase {
                     placeholder: 'Расскажите о себе',
                     value: ProfileStore.get().description,
                     name: 'description',
-                    class: 'form-field-edit text-desc',
+                    class: 'form__field-valid',
                 },
                 'img': {
                     class: EditStore.get().imgFieldClass,
                 },
             },
-            'tags': EditStore.get().tags,
             'buttons': {
                 'tagsButton': {
                     type: 'button',
                     text: 'tags',
                     class: 'tags-button',
-                    src: '../icons/button_expand_white.svg',
+                    src: 'icons/expand_big.svg',
                     onclick: () => {
                         EventBus.dispatch<string>('edit:open-tags');
                     },
@@ -79,7 +122,7 @@ export default class EditView extends ViewBase {
                 'saveButton': {
                     type: 'button',
                     text: 'Сохранить',
-                    class: 'edit',
+                    class: 'button-white-big',
                     onclick: () => {
                         EventBus.dispatch<string>('edit:save-button');
                     },
@@ -94,6 +137,14 @@ export default class EditView extends ViewBase {
                     text: errorAgeMsg,
                     class: EditStore.get().birthDateErrorClass,
                 },
+                'genderError': {
+                    text: errorGenderMsg,
+                    class: EditStore.get().genderErrorClass,
+                },
+                'preferError': {
+                    text: errorPreferMsg,
+                    class: EditStore.get().preferErrorClass,
+                },
                 'imgError': {
                     text: errorImgMsg,
                     class: EditStore.get().imgErrorClass,
@@ -107,19 +158,32 @@ export default class EditView extends ViewBase {
         'tapbar': {
             class: 'menu-icon',
         },
-        'critError': {
-            title: 'Ошибка подключения',
-            text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
-            loading: ErrorStore.get().apiErrorLoadCondition,
+        actions: {
+            'logoutButton': {
+                src: 'icons/back.svg',
+                class: 'view-contant__dislike',
+                onclick: () => {
+                    router.go('/profile');
+                },
+            },
+            'settingButtons': {
+                src: 'icons/exit.svg',
+                class: 'view-contant__dislike',
+                onclick: () => {
+                    EventBus.dispatch<string>('profile:logout-button');
+                },
+            },
         },
+        error: errorManager.error,
     };
 
     _createTmpl(data) {
         return (
-            <div class='card-container'>
-                {EditForm(data.editForm)}
-                {Tapbar(data.tapbar)}
-                {CritError(data.critError)}
+            <div class='view-contant view-content__scroll-y'>
+                <div class='signup-container'>
+                    {EditForm(data.editForm, data.actions.logoutButton)}
+                    {Errors(data.error)}
+                </div>
             </div>
         );
     }
@@ -139,17 +203,23 @@ export default class EditView extends ViewBase {
         view._data.editForm.errorMsgs.imgError.class = data.imgErrorClass;
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
         view._data.editForm.tags = data.tags;
-        view._data.critError.loading = data.apiErrorLoadCondition;
         view._data.editForm.fields.name.value = ProfileStore.get().name;
         view._data.editForm.fields.birthDate.value = ProfileStore.get().date;
         view._data.editForm.fields.description.value = ProfileStore.get().description;
+
+        view._data.editForm.fields.genderField = data.genderField;
+        view._data.editForm.fields.preferField = data.preferField;
+        view._data.editForm.fields.tagsField = data.tagsField;
+        view._data.editForm.errorMsgs.genderError.class = data.genderErrorClass;
+        view._data.editForm.errorMsgs.preferError.class = data.preferErrorClass;
+
         view._template = view._createTmpl(view._data);
 
         view.render();
     }
 
     private errorStoreUpdatesView(data, view) {
-        view._data.critError.loading = data.apiErrorLoadCondition;
+        view._data.error = errorManager.error;
         view._template = view._createTmpl(view._data);
         view.render();
     }

@@ -1,12 +1,13 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import { Tapbar } from '../components/tapbar.js';
-import { CardExpended } from '../components/cardExpended.js';
+import { Tapbar } from '../components/tapbar/tapbar.js';
+import { CardExpended } from '../components/card/cardExpended.js';
 import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
-import { CritError } from '../components/critError.js';
 import TapbarStore from '../store/tapbarStore.js';
-import { ErrorStore } from '../store/errorStore';
+import { errorManager, ErrorStore } from '../store/errorStore.js';
+import { Errors } from '../components/error/errors.js';
+import { ProfileActions } from '../components/profile/profileActions.js';
 
 export default class ProfileView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -24,21 +25,19 @@ export default class ProfileView extends ViewBase {
                 age: ProfileStore.get().age,
                 description: ProfileStore.get().description,
                 imgs: ProfileStore.get().imgs,
+                tags: ProfileStore.get().tags,
             },
-            'tags': ProfileStore.get().tags,
-            'buttons': {
+            'actions': {
                 'logoutButton': {
-                    type: 'button',
-                    src: 'icons/button_previous_white.svg',
-                    class: 'menu-icon',
+                    src: 'icons/exit.svg',
+                    class: 'view-contant__dislike',
                     onclick: () => {
                         EventBus.dispatch<string>('profile:logout-button');
                     },
                 },
-                'editButton': {
-                    type: 'button',
-                    src: 'icons/button_edit_white.svg',
-                    class: 'menu-icon',
+                'settingButtons': {
+                    src: 'icons/settings.svg',
+                    class: 'view-contant__dislike',
                     onclick: () => {
                         EventBus.dispatch<string>('profile:edit-button');
                     },
@@ -48,19 +47,18 @@ export default class ProfileView extends ViewBase {
         'tapbar': {
             class: 'menu-icon',
         },
-        'critError': {
-            title: 'Ошибка подключения',
-            text: 'Не удаётся подключиться к серверу. Проверь подключение к Интернету и попробуй снова.',
-            loading: ErrorStore.get().apiErrorLoadCondition,
-        },
+        error: errorManager.error,
     };
 
     _createTmpl(data) {
         return (
-            <div class='card-container'>
-                {CardExpended(data.cardData)}
-                {Tapbar(TapbarStore.get())}
-                {CritError(data.critError)}
+            <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                <div class='view-contant view-contant_align_center view-content_scroll-banned view-content__max-height'>
+                    {ProfileActions(data.cardData.actions)}
+                    {CardExpended({ userData: data.cardData.userData, withActions: false, withReports: false })}
+                    {Tapbar(TapbarStore.get())}
+                    {Errors(data.error)}
+                </div>
             </div>
         );
     }
@@ -74,14 +72,12 @@ export default class ProfileView extends ViewBase {
         view._data.cardData.userData.name = data.name;
         view._data.cardData.userData.age = data.age;
         view._data.cardData.userData.description = data.description;
-        view._data.cardData.tags = data.tags;
-        view._data.critError.loading = data.apiErrorLoadCondition;
         view._template = view._createTmpl(view._data);
         view.render();
     }
 
     private errorStoreUpdatesView(data, view) {
-        view._data.critError.loading = data.apiErrorLoadCondition;
+        view._data.error = errorManager.error;
         view._template = view._createTmpl(view._data);
         view.render();
     }

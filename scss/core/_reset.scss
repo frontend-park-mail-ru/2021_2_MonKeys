@@ -1,44 +1,38 @@
+@import './typography';
+
 
 textarea:focus,
 input:focus {
   outline: none;
 }
 
+textarea{
+  resize: none;
+  color: white;
+  font-size: 18px;
+  font-family: 'Futura Now Headline Bold';
+  height: 144px !important;
+  border: none;
+
+  padding-left: 12px;
+
+  margin-bottom: 18px;
+}
+
 body {
   margin: 0px;
+  overflow: hidden;
 }
-
-::-webkit-input-placeholder {
-  color: #ffffff;
-}
-
-:-ms-input-placeholder {
-  color: #ffffff;
-}
-
-::-moz-placeholder {
-  color: #ffffff;
-  opacity: 1;
-}
-
-:-moz-placeholder {
-  color: #ffffff;
-  opacity: 1;
-}
-
 ::-webkit-scrollbar {
   width: 0;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus {
-  -webkit-text-fill-color: rgb(255, 255, 255);
-  transition: background-color 5000s ease-in-out 0s;
+button {
+  border: none;
+  font-family: $font-default;
+}
+
+input {
+  border: none;
+  background: none;
 }

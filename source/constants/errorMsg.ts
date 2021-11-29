@@ -1,10 +1,12 @@
 const errorEmailMsg = 'Введите почту в формате example@drip.com';
-const errorPasswordMsg = 'Пароль должен состоять из больших и маленьких латинских символов (не менее 8 символов)';
-const errorLoginFormMsg = 'Такой пользователь еще не зарегистрирован';
+const errorPasswordMsg = 'Пароль должен состоять из A-Z, a-z и 0-9';
+const errorLoginFormMsg = 'Неверная почта или пароль';
 const errorSignupFormMsg = 'Пользователь с такой почтой уже зарегистрирован';
 const errorRepeatPasswordMsg = 'Пароли не совпадают';
 const errorNameMsg = 'Введите свое настоящее имя';
-const errorAgeMsg = 'Введите настояющую дату рождения. Вы должны быть старше 18 лет';
+const errorAgeMsg = 'Вы должны быть старше 18 лет и моложе 100 лет';
+const errorGenderMsg = 'Укажите свой пол';
+const errorPreferMsg = 'Укажите свои предпочтения';
 const errorImgMsg = 'Добавьте хотя бы 1 фотографию';
 const errorEditFormMsg = 'Заполните все обязательные поля';
 
@@ -16,6 +18,8 @@ export {
     errorRepeatPasswordMsg,
     errorNameMsg,
     errorAgeMsg,
+    errorGenderMsg,
+    errorPreferMsg,
     errorImgMsg,
     errorEditFormMsg,
 };

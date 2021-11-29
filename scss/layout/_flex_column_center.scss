@@ -1,0 +1,38 @@
+.flex_box_column_center {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.signup-container {
+    padding-bottom: 144px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+
+.flex_box_row_left {
+    display: flex;
+    align-items: start;
+    flex-direction: row;
+    width: 90%;
+    flex-wrap: wrap;
+}
+
+.flex_box_row_center {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 90%;
+    flex-wrap: wrap;
+}
+
+.overflow-hidden {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}

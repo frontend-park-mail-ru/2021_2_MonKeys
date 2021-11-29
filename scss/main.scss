@@ -1,99 +1,58 @@
 @import './abstracts/variables';
 @import './abstracts/mixins';
 @import './core/typography';
-@import './animations/new-feed-card';
-@import './animations/out-of-cards';
-@import './animations/profile';
-@import './animations/swipe_on_button';
-@import './animations/swipe_touch';
-@import './components/form';
-@import './components/carousel';
-@import './components/out-of-cards';
-@import './components/add-img';
-@import './components/tags';
-@import './components/buttons';
-@import './components/crit-error';
-@import './pages/likes';
-@import './pages/feed';
+@import './core/margin';
 
-@import './layout/header';
+@import './abstracts/colors';
+
+@import './pages/likes';
+@import './pages/profile';
+@import './pages/chats';
+// @import './pages/chat';
+
+@import './components/form_field';
+@import './components/header';
+@import './components/button';
+@import './components/form_error';
+@import './components/form_item_list';
+@import './components/form_add_img';
+@import './components/card-actions';
+@import './components/card-expended';
+@import './components/img-card';
+@import './components/report-window';
+@import './components/report-radio-button';
+@import './components/tapbar';
+@import './components/card';
+@import './components/carousel';
+@import './components/chats/chats';
+@import './components/chats/chats-preview';
+@import './components/chats/match-profile';
+@import './components/chats/search-form';
+@import './components/chat/chat';
+@import './components/chat/chat-header';
+@import './components/chat/input-message';
+@import './components/chat/message';
+@import './components/error_api';
+@import './components/dummy';
+
+@import './layout/flex_column_center';
+@import './layout/view-contant';
 
 @import './core/reset.scss';
-@import './components/card-expand';
-@import './components/tapbar';
-@import './components/login-error';
-@import './components/link';
-@import './pages/login';
+
+@import './animations/droplet';
+@import './animations/feed_animations';
 
 html {
   @include background;
   font-family: $font-default;
+  color: $white;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transition: all 1s;
 }
 
-
-.card-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
- 
-  }
-
-  .form-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    display: flex;
-    justify-content: center;
-  }
-
-@media (min-width: 500px) {
-  .card-container {
-    
-    width: 25%;
-    margin-left: 37.5%;
-    margin-right: 37.5%;
-  
-  }
-
-  .form-container {
-    
-    width: 25%;
-    margin-left: 37.5%;
-    margin-right: 37.5%;
-   
-  }
+::-webkit-scrollbar {
+    display: none;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

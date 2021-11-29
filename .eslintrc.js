@@ -22,7 +22,8 @@ module.exports = {
     'no-magic-numbers': ['error', { 'ignore': [0, -1, 1, 2, 3] }],
     'no-invalid-this': 0,
     "newline-per-chained-call": 2,
-    "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-namespace": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-unused-vars": ["error", { "varsIgnorePattern": "MonkeysVirtualDOM" }]
   },
 };

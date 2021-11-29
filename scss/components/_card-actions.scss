@@ -1,0 +1,29 @@
+@mixin icon-button() {
+  width: 36px;
+  height: 36px;
+}
+
+.actions{
+  display: flex;
+  justify-content: center;
+}
+
+.actions__button-dislike{
+  @include icon-button();
+}
+
+.actions__button-expand{
+  @include icon-button();
+
+  margin: 0px 36px;
+}
+
+.actions__button-shrink{
+  @include icon-button();
+
+  margin: 0px 36px;
+}
+
+.actions__button-like{
+  @include icon-button();
+}

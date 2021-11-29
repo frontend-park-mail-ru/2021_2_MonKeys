@@ -1,51 +1,58 @@
-
-.likes-count {
-  color: white;
-  font-size: $font-size-medium;
-  font-weight: 500;
-  text-align: center;
-  margin-top: 36px;
+.view-content__likes-header{
+  width: 100%;
+  flex: 0 0 auto;
 }
 
-.likes-card {
-  margin-top: 36px;
-  background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.2) 0%, rgba(0, 165, 245, 0) 100%);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border-style: solid;
-  border-color: white;
-  border-width: 1px;
-  border-radius: $border-radius-default;
-  height: 96px;
+.view-content__likes-profile{
+  width: 100%;
+  flex: 1 0 auto;
+  max-height: calc(100vh - 168px - 66.4px);
+}
+
+.likes-view-header{
   width: 288px;
+
+  font-size: $font-size-medium;
+  line-height: 42px;
+
+  color: #FFFFFF;
+
+  margin-top: 48px;
+  margin-bottom: 36px;
+  margin-left: 24px;
 }
 
-.likes-card-inside {
-  left: 0;
-  right: 0;
-  margin-left: 10px;
-  margin-top: 10px;
+
+.likes-view-text-big{
+  width: 288px;
+
+  font-size: 18px;
+
+  color: #FFFFFF;
+
+  margin-top: 48px;
+  margin-bottom: 36px;
+  margin-left: 24px;
+}
+
+
+.likes-view-text-small{
+  width: 288px;
+
+  font-size: 14px;
+
+  color: #FFFFFF;
+
+  margin-top: 48px;
+  margin-bottom: 36px;
+  margin-left: 24px;
+}
+
+.likes-view-cards{
   display: flex;
-}
+  flex-direction: row;
 
-.likes-img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: $border-radius-default;
-}
+  overflow-x: scroll;
 
-.likes-data {
-  color: white;
-  font-size: $font-size-small;
-  font-weight: 300;
-  margin-top: 10px;
-  margin-left: 10px;
-}
-
-
-.likes-container{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  margin-left: 24px;
 }

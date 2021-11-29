@@ -1,0 +1,22 @@
+import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
+import { InputMessage } from './inputMessage.js';
+import { ChatHeader } from './chatHeader.js';
+import { Message } from './message.js';
+import { Chat as ChatData } from '../../store/chatsStore.js';
+import router from '../../route/router.js';
+
+export const Chat = (chat: ChatData) => {
+    if (!chat) {
+        router.go('/chats');
+        return;
+    }
+    return (
+        <div class='view-contant view-contant_align_center view-contant_scroll-y_banned'>
+            <div class='view-content__header'>
+                {ChatHeader({ chatID: chat.fromUserID, userName: chat.name, userImg: chat.img })}
+            </div>
+            <div class='view-content__message-space'>{chat.messages.map((msg) => Message(msg))}</div>
+            <div class='view-content__input-message'>{InputMessage(chat)}</div>
+        </div>
+    );
+};

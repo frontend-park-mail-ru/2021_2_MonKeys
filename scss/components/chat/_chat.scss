@@ -1,0 +1,15 @@
+.view-content__header{
+  flex: 0 0 auto;
+  max-height: 90px;
+}
+
+.view-content__message-space{
+  flex: 1 0 auto;
+  max-height: calc(100% - 90px - 54px);
+  overflow-y: scroll;
+}
+
+.view-content__input-message{
+  flex: 0 0 auto;
+  max-height: 54px;
+}

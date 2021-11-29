@@ -1,0 +1,42 @@
+$input-message-width: 326px;
+
+$input-message-field-width: 270px;
+$input-message-field-height:30px;
+
+.input-message{
+  position: relative;
+  width: $input-message-width;
+  height: $input-message-field-height;
+
+  margin-top: 12px;
+  margin-bottom: 12px;
+
+  background: $black;
+  border-radius: 12px;
+}
+
+.input-message__field{
+  width: $input-message-field-width;
+  height: $input-message-field-height;
+
+  background: transparent;
+
+  padding-left: 12px;
+
+  font-size: $font-size-tiny;
+  line-height: 18px;
+
+  color: $white;
+}
+
+.input-message__button-send{
+  position: absolute;
+  top: 5px;
+  left: 294px;
+
+  background: transparent;
+}
+
+.input-message__icon-send{
+
+}
