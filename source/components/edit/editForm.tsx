@@ -15,9 +15,7 @@ export interface EditFormProps {
 }
 
 export const EditForm = (props: EditFormProps, actions?) => {
-    const backButton = (actions)
-    ? IconButton(actions)
-    : <div></div>
+    const backButton = actions ? IconButton(actions) : <div></div>;
     return (
         <form class='flex_box_column_center'>
             <span class='header-medium'>

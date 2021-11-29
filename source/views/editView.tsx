@@ -14,8 +14,6 @@ import {
     errorPreferMsg,
 } from '../constants/errorMsg.js';
 import { Errors } from '../components/error/errors.js';
-import { IconButton } from '../components/common/iconButton.js';
-import { ProfileActions } from '../components/profile/profileActions.js';
 import router from '../route/router.js';
 
 export default class EditView extends ViewBase {
@@ -183,8 +181,6 @@ export default class EditView extends ViewBase {
         return (
             <div class='view-contant view-content__scroll-y'>
                 <div class='signup-container'>
-                    {/* {IconButton(data.actions.logoutButton)} */}
-                    {/* {ProfileActions(data.actions)} */}
                     {EditForm(data.editForm, data.actions.logoutButton)}
                     {Errors(data.error)}
                 </div>

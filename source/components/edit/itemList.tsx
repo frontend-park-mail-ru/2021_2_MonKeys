@@ -30,7 +30,7 @@ const classMap = (valid: boolean) => {
     }
 };
 
-const conditionalReturn = (a:string, b:string, bool:boolean) => {
+const conditionalReturn = (a: string, b: string, bool: boolean) => {
     if (bool) {
         return a;
     } else {
@@ -70,9 +70,7 @@ const processItems = (items: ListItem[]) => {
 
 export const ItemList = (props: ItemListProps) => {
     const boxClass = classMap(props.valid).boxClass;
-    const aligning = (props.alignCenter)
-        ? 'flex_box_row_center'
-        : 'flex_box_row_left'
+    const aligning = props.alignCenter ? 'flex_box_row_center' : 'flex_box_row_left';
     return (
         <div class={boxClass}>
             <div class={aligning}>
