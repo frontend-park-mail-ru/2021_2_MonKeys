@@ -5,6 +5,7 @@ import { Button } from '../common/button.js';
 import { ImgField } from './imgField.js';
 import { ItemList } from './itemList.js';
 import { DescriptionField } from './descriptionField.js';
+import { IconButton } from '../common/iconButton.js';
 
 export interface EditFormProps {
     fields;
@@ -13,10 +14,16 @@ export interface EditFormProps {
     errorMsgs;
 }
 
-export const EditForm = (props: EditFormProps) => {
+export const EditForm = (props: EditFormProps, actions?) => {
+    const backButton = (actions)
+    ? IconButton(actions)
+    : <div></div>
     return (
         <form class='flex_box_column_center'>
-            <span class='header-medium'>Редактирование</span>
+            <span class='header-medium'>
+                {backButton}
+                Редактирование
+            </span>
             {FormField(props.fields.name)}
             {ErrorMsg(props.errorMsgs.nameError)}
             {FormField(props.fields.birthDate)}

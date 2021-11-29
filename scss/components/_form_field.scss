@@ -51,10 +51,26 @@ $field-invalid-color: radial-gradient(
     padding-left: 12px;
 }
 
+.form__field__input::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    color: transparent;
+    background: transparent;
+}
+
 
 .form__field__icon {
     margin-left: 12px;
     margin-right: 12px;
     width: $form-field-icon-size;
     height: $form-field-icon-size;
+}
+
+.form__field__icon_small-padding-top {
+    padding-top: 6px;
 }

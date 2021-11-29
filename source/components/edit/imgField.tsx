@@ -21,7 +21,7 @@ const imgSequence = (imgs: string[]) => {
     imgs.forEach((element) => {
         items.push(
             <div class='add-img-item'>
-                <img src={element} class='add-img-item' alt='' />
+                <img src={element} class='add-img-img' alt='' />
                 {IconButton({
                     type: 'button',
                     class: 'add-img-delete',
@@ -42,6 +42,7 @@ export const ImgField = (fieldProps: FieldProps, buttonProps: ButtonProps) => {
             {imgSequence(buttonProps.imgs)}
             <label for={'AddImg'} class={'add'} />
             <input
+                class={fieldProps.class + '__input-field'}
                 id={'AddImg'}
                 type={'file'}
                 onchange={buttonProps.onchange}

@@ -14,6 +14,7 @@ import {
     errorPreferMsg,
 } from '../constants/errorMsg.js';
 import { Errors } from '../components/error/errors.js';
+import { IconButton } from '../components/common/iconButton.js';
 import { ProfileActions } from '../components/profile/profileActions.js';
 import router from '../route/router.js';
 
@@ -84,6 +85,7 @@ export default class EditView extends ViewBase {
                     value: ProfileStore.get().date,
                     class: EditStore.get().birthDateFieldClass,
                     name: 'birthDate',
+                    iconSrc: 'icons/calendar.svg',
                     oninput: () => {
                         EventBus.dispatch<string>('edit:birth-date-input');
                     },
@@ -181,8 +183,9 @@ export default class EditView extends ViewBase {
         return (
             <div class='view-contant view-content__scroll-y'>
                 <div class='signup-container'>
-                    {ProfileActions(data.actions)}
-                    {EditForm(data.editForm)}
+                    {/* {IconButton(data.actions.logoutButton)} */}
+                    {/* {ProfileActions(data.actions)} */}
+                    {EditForm(data.editForm, data.actions.logoutButton)}
                     {Errors(data.error)}
                 </div>
             </div>
