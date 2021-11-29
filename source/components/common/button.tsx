@@ -1,5 +1,5 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
-import ViewBase from '../../views/viewBase.jsx';
+import ViewBase from '../../views/viewBase.js';
 
 export interface ButtonProps {
     type: string;

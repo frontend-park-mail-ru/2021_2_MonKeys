@@ -1,6 +1,6 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
-import ViewBase from '../../views/viewBase.jsx';
-import { conditionalRendering } from '../../utils/tsxTools/jsxTools.jsx';
+import ViewBase from '../../views/viewBase.js';
+import { conditionalRendering } from '../../utils/tsxTools/jsxTools.js';
 
 export interface formFieldProps {
     tag: string;

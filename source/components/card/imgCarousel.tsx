@@ -1,7 +1,7 @@
 import eventBus from '../../dispatcher/eventBus.js';
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import { IconButton } from '../common/iconButton.js';
-import { conditionalRendering } from '../../utils/tsxTools/jsxTools.jsx';
+import { conditionalRendering } from '../../utils/tsxTools/jsxTools.js';
 
 const LButtonProps = {
     type: 'button',

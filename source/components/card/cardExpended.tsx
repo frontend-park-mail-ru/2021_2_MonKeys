@@ -6,7 +6,7 @@ import { Tag } from '../common/tag.js';
 import { ProfileData } from '../../store/profileStore.js';
 
 import { ImgCard } from './imgCard.js';
-import { Button } from '../common/button.jsx';
+import { Button } from '../common/button.js';
 import { ReportWindow } from '../report/reportWindow.js';
 
 export interface CardExpendedProps {

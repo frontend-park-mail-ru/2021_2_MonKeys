@@ -1,6 +1,6 @@
 import eventBus from '../../dispatcher/eventBus.js';
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
-import { conditionalRendering } from '../../utils/tsxTools/jsxTools.jsx';
+import { conditionalRendering } from '../../utils/tsxTools/jsxTools.js';
 
 export interface ItemListProps {
     title: string;
