@@ -1,5 +1,4 @@
 $span-line-height: 42px;
-$chats-margin_left: 24px;
 
 .view-content__matches{
   width: 100%;
@@ -12,7 +11,7 @@ $chats-margin_left: 24px;
 
   color: #FFFFFF;
 
-  margin-left: $chats-margin_left;
+  margin-left: $margin-medium;
 }
 
 .view-content__matches-profiles{
@@ -21,14 +20,14 @@ $chats-margin_left: 24px;
 
   overflow-x: scroll;
 
-  margin-left: $chats-margin_left;
+  margin-left: $margin-medium;
 }
 
 .view-content__chats{
   width: 100%;
   flex: 1 0 auto;
   min-height: $span-line-height;
-  max-height: calc(100vh - 56px - 194px - 66px);
+  max-height: calc(100vh - 56px - 170px - 66px);
 }
 
 .view-content__chats-header{
@@ -37,7 +36,7 @@ $chats-margin_left: 24px;
 
   color: #FFFFFF;
 
-  margin-left: $chats-margin_left;
+  margin-left: $margin-medium;
 }
 
 .view-content__chats-list{

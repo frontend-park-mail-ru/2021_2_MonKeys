@@ -1,8 +1,12 @@
+.view-content__profile-actions{
+  width: 100%;
+  flex: 0 0 auto;
+}
+
 .profile-actions{
-  margin-top: 12px;
+  margin: $margin-small $margin-medium;
   display: flex;
   justify-content: space-between;
-  width: 324px;
 }
 
 .view-contant__dislike{
