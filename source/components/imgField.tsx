@@ -47,7 +47,6 @@ export const ImgField = (fieldProps: FieldProps, buttonProps: ButtonProps) => {
                 onchange={buttonProps.onchange}
                 style={'visibility: hidden;'}
                 accept={'.gif, .jpeg, .jpg, .png, .webp'}
-                class={buttonProps.class}
             />
         </div>
     );

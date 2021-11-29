@@ -35,7 +35,7 @@ export namespace MonkeysVirtualDOM {
         }
 
         const rootElement = document.createElement(virtualNode.type);
-
+        rootElement.style.transition = '1s';
         if (virtualNode.type === 'img') {
             rootElement.addEventListener(
                 'dragstart',

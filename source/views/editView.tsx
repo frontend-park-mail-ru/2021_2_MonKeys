@@ -14,6 +14,8 @@ import {
     errorPreferMsg,
 } from '../constants/errorMsg.js';
 import { Errors } from '../components/error/errors.js';
+import { ProfileActions } from '../components/profileActions.js';
+import router from '../route/router.js';
 
 export default class EditView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -156,12 +158,30 @@ export default class EditView extends ViewBase {
         'tapbar': {
             class: 'menu-icon',
         },
+        actions: {
+            'logoutButton': {
+                src: 'icons/back.svg',
+                class: 'view-contant__dislike',
+                onclick: () => {
+                    router.go('/profile');
+                },
+            },
+            'settingButtons': {
+                src: 'icons/exit.svg',
+                class: 'view-contant__dislike',
+                onclick: () => {
+                    EventBus.dispatch<string>('profile:logout-button');
+                },
+            },
+        },
         error: errorManager.error,
     };
 
     _createTmpl(data) {
         return (
-            <div class='view-contant view-content__scroll-y'>
+          // <div class='view-contant view-content__scroll-y'>
+            <div class='signup-container'>
+                {ProfileActions(data.actions)}
                 {EditForm(data.editForm)}
                 {Errors(data.error)}
             </div>

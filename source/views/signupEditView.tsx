@@ -14,7 +14,6 @@ import {
 } from '../constants/errorMsg.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { Errors } from '../components/error/errors.js';
-
 export default class SignupEditView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
