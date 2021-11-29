@@ -14,7 +14,6 @@ const drawLocation = (route, parent) => {
     currentView.render();
 };
 
-
 class Router {
     private routes: route[];
 

@@ -1,0 +1,231 @@
+[33mcommit f2942f3310f9c792f0293c1d2681b7a1f83f4f80[m[33m ([m[1;36mHEAD -> [m[1;32mexperimental[m[33m, [m[1;31morigin/experimental[m[33m)[m
+Author: perlinleo <perlinleo@github.com>
+Date:   Mon Nov 29 01:29:38 2021 +0000
+
+    minor fixes for edit / tapbar
+
+[33mcommit ce9553cb726729cf87f7129426ab518e67e98a1a[m
+Author: perlinleo <perlinleo@github.com>
+Date:   Mon Nov 29 01:51:15 2021 +0300
+
+    throttle.ts / client.ts
+
+[33mcommit d9ab14dddaf99f939b818b48b3b46de3b358d683[m
+Author: perlinleo <perlinleo@github.com>
+Date:   Sun Nov 28 20:23:15 2021 +0000
+
+    feed carousel fix
+
+[33mcommit 7620884953ad7677520e07b4e841543806eda608[m
+Author: perlinleo <perlinleo@github.com>
+Date:   Sun Nov 28 18:41:27 2021 +0000
+
+    feed carousel fix
+
+[33mcommit aa3ee0b68010f53c0992f6de7847d42aa2599de8[m
+Merge: fa741cd d8262d0
+Author: 4Marvin2 <42600546+4Marvin2@users.noreply.github.com>
+Date:   Sun Nov 28 20:50:20 2021 +0300
+
+    Merge pull request #75 from frontend-park-mail-ru/chatLayout
+    
+    fixed msg text
+
+[33mcommit d8262d0f87b71639a365ccf32f19a5b536806d68[m[33m ([m[1;31morigin/chatLayout[m[33m)[m
+Author: 4Marvin2 <mumeu222@mail.ru>
+Date:   Sun Nov 28 20:48:17 2021 +0300
+
+    fixed msg text
+
+[33mcommit fa741cd7c27130bc3d5876f52c10a41983c78357[m
+Merge: 9724b50 9c5a171
+Author: perlinleo <perlinleo@github.com>
+Date:   Sun Nov 28 17:41:43 2021 +0000
+
+    Merge branch 'experimental' of github.com:frontend-park-mail-ru/2021_2_MonKeys into experimental
+
+[33mcommit 9724b509e22910820cf777ff41d46c78ed6d90bb[m
+Author: perlinleo <perlinleo@github.com>
+Date:   Sun Nov 28 17:41:38 2021 +0000
+
+    undraggable card
+
+[33mcommit 9c5a1716a1ebefa6d134b1e0fc043070d4f4fff3[m
+Merge: 28a5624 d5eff9a
+Author: 4Marvin2 <42600546+4Marvin2@users.noreply.github.com>
+Date:   Sun Nov 28 19:24:36 2021 +0300
+
+    Merge pull request #74 from frontend-park-mail-ru/chatLayout
+    
+    added deleting chat
+
+[33mcommit d5eff9ab9cf8c5527f2d79f221d86d7d768f1a32[m
+Author: 4Marvin2 <mumeu222@mail.ru>
+Date:   Sun Nov 28 19:21:33 2021 +0300
+
+    added deleting chat
+
+[33mcommit 28a56245f4f1acb15d8ff290576e1603436f3216[m
+Author: perlinleo <perlinleo@github.com>
+Date:   Sun Nov 28 13:34:20 2021 +0000
+
+    logout button
+
+[33mcommit c4a0756cd08b1d94580cc59b941a97f387371507[m
+Author: perlinleo <perlinleo@github.com>
+Date:   Sun Nov 28 01:17:18 2021 +0000
+
+    edit styles / tag styles
+
+[33mcommit 08c2c1a9ad1a246e303c5e091c0c0d48d663c8f1[m
+Merge: 0b39197 d5b06eb
+Author: 4Marvin2 <42600546+4Marvin2@users.noreply.github.com>
+Date:   Sun Nov 28 01:47:07 2021 +0300
+
+    Merge pull request #73 from frontend-park-mail-ru/chatLayout
+    
+    Chat layout
+
+[33mcommit d5b06ebfe3e3e474a9d432f271428aec1385e387[m
+Merge: d539305 0b39197
+Author: 4Marvin2 <mumeu222@mail.ru>
+Date:   Sun Nov 28 01:40:52 2021 +0300
+
+    merged
+
+[33mcommit d53930589ce5a9af61972658c35e2ec14d468d37[m
+Author: 4Marvin2 <mumeu222@mail.ru>
+Date:   Sun Nov 28 01:24:20 2021 +0300
+
+    added profile in chat
+
+[33mcommit 0b3919787c99a8eb52646632ed932484edf8f7ff[m
+Merge: 8b2e99c 516837e
+Author: Владимир <55690448+VladimirLunkin@users.noreply.github.com>
+Date:   Sun Nov 28 00:56:55 2021 +0300
+
+    Merge pull request #71 from frontend-park-mail-ru/api_error
+    
+    Api error
+
+[33mcommit 516837e7d25f1c62f58ada048b53957d6ef5994d[m[33m ([m[1;31morigin/api_error[m[33m)[m
+Author: Vladimir Lunkin <vova.gold.201427@gmail.com>
+Date:   Sun Nov 28 00:55:09 2021 +0300
+
+    old style
+
+[33mcommit fbc0646c7086ca68cf89b552e4a0272c948c6508[m
+Author: Vladimir Lunkin <vova.gold.201427@gmail.com>
+Date:   Sun Nov 28 00:32:51 2021 +0300
+
+    style for error
+
+[33mcommit da95d8f360726426e89b4278a58276cbe47f505c[m
+Author: Vladimir Lunkin <vova.gold.201427@gmail.com>
+Date:   Sun Nov 28 00:22:20 2021 +0300
+
+    refacoring
+
+[33mcommit 3afa107a4e8fe773e6b5d4935e2afff78558a5fc[m
+Author: Vladimir Lunkin <vova.gold.201427@gmail.com>
+Date:   Sat Nov 27 23:57:59 2021 +0300
+
+    new dir constants in utils
+
+[33mcommit fc12f7788b2c2c50571d051e60430460308f06ed[m
+Author: Vladimir Lunkin <vova.gold.201427@gmail.com>
+Date:   Sat Nov 27 23:45:04 2021 +0300
+
+    new logic request
+
+[33mcommit a8e2da0c736de7670c52607b18f7f46dca8befc7[m
+Author: Vladimir Lunkin <vova.gold.201427@gmail.com>
+Date:   Sat Nov 27 23:17:34 2021 +0300
+
+    rename requests: added Request at the end
+
+[33mcommit 43647da73b6efe954122d78136e089964a32e975[m
+Author: Vladimir Lunkin <vova.gold.201427@gmail.com>
+Date:   Sat Nov 27 23:11:59 2021 +0300
+
+    error in requests
+
+[33mcommit 89fe6331ecb06bb8d1468b061285b192978ec544[m
+Author: Vladimir Lunkin <vova.gold.201427@gmail.com>
+Date:   Sat Nov 27 22:50:16 2021 +0300
+
+    rename component file
+
+[33mcommit 8b2e99c90cd59536938ed4733b05023fde7c5e1d[m
+Merge: 6cd8db1 78ff6f6
+Author: 4Marvin2 <42600546+4Marvin2@users.noreply.github.com>
+Date:   Sat Nov 27 22:37:35 2021 +0300
+
+    Merge pull request #70 from frontend-park-mail-ru/chatLayout
+    
+    Chat layout
+
+[33mcommit 78ff6f6f51710300c24375aab67fc315000c8741[m
+Merge: ed9f4db 6cd8db1
+Author: 4Marvin2 <42600546+4Marvin2@users.noreply.github.com>
+Date:   Sat Nov 27 22:37:11 2021 +0300
+
+    Merge branch 'experimental' into chatLayout
+
+[33mcommit ed9f4dbf97d16a246e51a02d171230ce921f481b[m
+Author: 4Marvin2 <mumeu222@mail.ru>
+Date:   Sat Nov 27 22:35:14 2021 +0300
+
+    fixed linters
+
+[33mcommit 878f76165c776fdb7c07c5b21cbb420a2ecebcac[m
+Author: 4Marvin2 <mumeu222@mail.ru>
+Date:   Sat Nov 27 22:32:36 2021 +0300
+
+    started profile in chat
+
+[33mcommit 6cd8db1136c10402a80e2eb368ed02b0c9a8375b[m
+Merge: 811430b 8803081
+Author: Владимир <55690448+VladimirLunkin@users.noreply.github.com>
+Date:   Sat Nov 27 22:31:32 2021 +0300
+
+    Merge pull request #69 from frontend-park-mail-ru/api_error
+    
+    Api error
+
+[33mcommit 88030818be853bf94b307f5d63d4673c75d7f6fd[m
+Author: Vladimir Lunkin <vova.gold.201427@gmail.com>
+Date:   Sat Nov 27 22:24:53 2021 +0300
+
+    eslint
+
+[33mcommit a08fde803e205ccb1f317997342c2021c27cb6fa[m
+Author: Vladimir Lunkin <vova.gold.201427@gmail.com>
+Date:   Sat Nov 27 22:12:39 2021 +0300
+
+    request push error
+
+[33mcommit 42cdc85964b7611e70a11bae3997b6d157a5028e[m
+Author: 4Marvin2 <mumeu222@mail.ru>
+Date:   Sat Nov 27 20:46:31 2021 +0300
+
+    fixed date in message
+
+[33mcommit 9a71b91dcfd5fa8651622511a1d232beaae32d20[m
+Merge: a9fb1fe 811430b
+Author: 4Marvin2 <mumeu222@mail.ru>
+Date:   Sat Nov 27 20:19:40 2021 +0300
+
+    merged
+
+[33mcommit a9fb1fefd6e8e728a1260122423c3ae09f8806ca[m
+Author: 4Marvin2 <mumeu222@mail.ru>
+Date:   Sat Nov 27 20:15:46 2021 +0300
+
+    added scroll, focus & fixed icon position
+
+[33mcommit 09a87ff06586c0f5f91e8d2c76bc846c2b6668d7[m
+Author: Vladimir Lunkin <vova.gold.201427@gmail.com>
+Date:   Sat Nov 27 20:02:47 2021 +0300
+
+    views

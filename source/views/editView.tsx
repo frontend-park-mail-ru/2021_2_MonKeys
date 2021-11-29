@@ -15,7 +15,7 @@ import {
 } from '../constants/errorMsg.js';
 import { Errors } from '../components/error/errors.js';
 import { ProfileActions } from '../components/profileActions.js';
-import router from '../route/router.js'
+import router from '../route/router.js';
 
 export default class EditView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -171,7 +171,6 @@ export default class EditView extends ViewBase {
                 class: 'view-contant__dislike',
                 onclick: () => {
                     EventBus.dispatch<string>('profile:logout-button');
-
                 },
             },
         },
