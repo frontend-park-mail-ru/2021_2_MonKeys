@@ -5,6 +5,7 @@ import TapbarStore from '../store/tapbarStore.js';
 import { resetCarousel } from '../modules/carousel.js';
 
 const drawLocation = (route, parent) => {
+    console.log(route.tapbar);
     TapbarStore.set({
         activeItem: route.tapbar,
     });
@@ -12,6 +13,7 @@ const drawLocation = (route, parent) => {
     window.document.title = route.name;
     currentView.render();
 };
+
 
 class Router {
     private routes: route[];

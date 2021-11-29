@@ -22,18 +22,21 @@ export const Routes = {
         name: 'Drip',
         auth: userStatus.notLoggedIn,
         view: LoginView,
+        tapbarHidden: true,
     },
     '/login': {
         name: 'Вход',
         path: '/login',
         auth: userStatus.notLoggedIn,
         view: LoginView,
+        tapbarHidden: true,
     },
     '/signup': {
         name: 'Регистрация',
         path: '/signup',
         auth: userStatus.notLoggedIn,
         view: SignupView,
+        tapbarHidden: true,
     },
     '/edit': {
         name: 'Редактирование',
@@ -41,12 +44,14 @@ export const Routes = {
         auth: userStatus.loggedIn,
         view: EditView,
         tapbar: 'profile',
+        tapbarHidden: true,
     },
     '/signup-edit': {
         name: 'Редактирование',
         path: '/signup-edit',
         auth: userStatus.Signup,
         view: SignupEditView,
+        tapbarHidden: true,
     },
     '/feed': {
         name: 'Лента',
@@ -54,6 +59,7 @@ export const Routes = {
         auth: userStatus.loggedIn,
         view: FeedView,
         tapbar: 'feed',
+        tapbarHidden: false,
     },
     '/likes': {
         name: 'Лайки',
@@ -61,6 +67,7 @@ export const Routes = {
         auth: userStatus.loggedIn,
         view: LikesView,
         tapbar: 'likes',
+        tapbarHidden: false,
     },
     '/profile': {
         name: 'Профиль',
@@ -68,6 +75,7 @@ export const Routes = {
         auth: userStatus.loggedIn,
         view: ProfileView,
         tapbar: 'profile',
+        tapbarHidden: false,
     },
     '/chats': {
         name: 'Чаты',
@@ -75,6 +83,7 @@ export const Routes = {
         auth: userStatus.loggedIn,
         view: ChatsView,
         tapbar: 'chats',
+        tapbarHidden: false,
     },
     '/chat': {
         name: 'Чат',
@@ -82,6 +91,7 @@ export const Routes = {
         auth: userStatus.loggedIn,
         view: ChatView,
         tapbar: 'chats',
+        tapbarHidden: true,
     },
     '/404': {
         name: 'Страница не найдена',

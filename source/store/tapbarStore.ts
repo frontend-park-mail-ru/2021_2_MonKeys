@@ -1,7 +1,7 @@
 import BaseStore from './storeBase.js';
 
 export interface TapbarData {
-    activeItem: string;
+    activeItem: string;   
 }
 
 const TapbarStore = new BaseStore<TapbarData>();

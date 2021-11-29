@@ -110,7 +110,7 @@ export default class FeedView extends ViewBase {
             return (
                 <div class='flex_box_column_center overflow-hidden'>
                     {CardExpended(data.cardData)}
-                    {Tapbar(data.tapbar)}
+                    {Tapbar(TapbarStore.get())}
                     {Errors(data.error)}
                 </div>
             );

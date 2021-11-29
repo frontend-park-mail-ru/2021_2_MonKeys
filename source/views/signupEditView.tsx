@@ -14,7 +14,6 @@ import {
 } from '../constants/errorMsg.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { Errors } from '../components/error/errors.js';
-
 export default class SignupEditView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
@@ -121,8 +120,10 @@ export default class SignupEditView extends ViewBase {
     };
 
     _createTmpl(data) {
+
         return (
             <div class='signup-container'>
+
                 {EditForm(data.editForm)}
                 {Errors(data.error)}
             </div>

@@ -1,6 +1,5 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import { Tapbar } from '../components/tapbar/tapbar.js';
 import { EditForm } from '../components/editForm.js';
 import { EditStore } from '../store/editStore.js';
 import { ProfileStore } from '../store/profileStore.js';
@@ -15,6 +14,8 @@ import {
     errorPreferMsg,
 } from '../constants/errorMsg.js';
 import { Errors } from '../components/error/errors.js';
+import { ProfileActions } from '../components/profileActions.js';
+import router from '../route/router.js'
 
 export default class EditView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -157,14 +158,31 @@ export default class EditView extends ViewBase {
         'tapbar': {
             class: 'menu-icon',
         },
+        actions: {
+            'logoutButton': {
+                src: 'icons/back.svg',
+                class: 'view-contant__dislike',
+                onclick: () => {
+                    router.go('/profile');
+                },
+            },
+            'settingButtons': {
+                src: 'icons/exit.svg',
+                class: 'view-contant__dislike',
+                onclick: () => {
+                    EventBus.dispatch<string>('profile:logout-button');
+
+                },
+            },
+        },
         error: errorManager.error,
     };
 
     _createTmpl(data) {
         return (
-            <div class='card-container'>
+            <div class='signup-container'>
+                {ProfileActions(data.actions)}
                 {EditForm(data.editForm)}
-                {Tapbar(data.tapbar)}
                 {Errors(data.error)}
             </div>
         );
