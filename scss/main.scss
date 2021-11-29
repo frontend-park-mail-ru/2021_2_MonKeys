@@ -49,3 +49,7 @@ html {
   overflow: hidden;
   transition: all 1s;
 }
+
+::-webkit-scrollbar {
+    display: none;
+}

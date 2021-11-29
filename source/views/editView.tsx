@@ -179,11 +179,12 @@ export default class EditView extends ViewBase {
 
     _createTmpl(data) {
         return (
-          // <div class='view-contant view-content__scroll-y'>
-            <div class='signup-container'>
-                {ProfileActions(data.actions)}
-                {EditForm(data.editForm)}
-                {Errors(data.error)}
+            <div class='view-contant view-content__scroll-y'>
+                <div class='signup-container'>
+                    {ProfileActions(data.actions)}
+                    {EditForm(data.editForm)}
+                    {Errors(data.error)}
+                </div>
             </div>
         );
     }

@@ -65,7 +65,7 @@ export default class ChatView extends ViewBase {
         view.render();
 
         if (!view._data.chat || !view._data.chat.profile || !view._data.chat.isOpenedProfile) {
-            const _chatSpace = document.getElementsByClassName('view-contant__message-space')[0];
+            const _chatSpace = document.getElementsByClassName('view-content__message-space')[0];
             if (_chatSpace) {
                 _chatSpace.scrollTop = _chatSpace.scrollHeight;
             }
