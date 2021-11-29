@@ -1,13 +1,13 @@
-import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import EventBus from '../dispatcher/eventBus.js';
+import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
+import EventBus from '../../dispatcher/eventBus.js';
 
-import { Tag } from './tag.js';
+import { Tag } from '../common/tag.js';
 
-import { ProfileData } from '../store/profileStore.js';
+import { ProfileData } from '../../store/profileStore.js';
 
 import { ImgCard } from './imgCard.js';
-import { Button } from './button.js';
-import { ReportWindow } from './reportWindow.js';
+import { Button } from '../common/button.jsx';
+import { ReportWindow } from '../report/reportWindow.js';
 
 export interface CardExpendedProps {
     userData: ProfileData;

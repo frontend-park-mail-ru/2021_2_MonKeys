@@ -1,11 +1,11 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { Tapbar } from '../components/tapbar/tapbar.js';
-import { ImgCard } from '../components/imgCard.js';
+import { ImgCard } from '../components/card/imgCard.js';
 import LikesStore from '../store/likesStore.js';
 import ReportsStore from '../store/reportsStore.js';
 import TapbarStore from '../store/tapbarStore.js';
-import { CardExpended } from '../components/cardExpended.js';
+import { CardExpended } from '../components/card/cardExpended.js';
 import { userLikesRequset } from '../requests/likesRequest.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { Errors } from '../components/error/errors.js';

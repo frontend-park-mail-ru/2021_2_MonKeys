@@ -1,5 +1,5 @@
-import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import { IconButton } from './iconButton.js';
+import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
+import { IconButton } from '../common/iconButton.js';
 
 export const ProfileActions = (props) => {
     return (

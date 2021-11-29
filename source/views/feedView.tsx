@@ -1,13 +1,13 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { Tapbar } from '../components/tapbar/tapbar.js';
-import { CardFeed } from '../components/cardFeed.js';
-import { CardExpended } from '../components/cardExpended.js';
+import { CardFeed } from '../components/card/cardFeed.js';
+import { CardExpended } from '../components/card/cardExpended.js';
 import feedStore from '../store/feedStore.js';
 import eventBus from '../dispatcher/eventBus.js';
 import TapbarStore from '../store/tapbarStore.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
-import { dropsBackground } from '../components/dropsBackground.js';
+import { dropsBackground } from '../components/common/dropsBackground.js';
 import { Errors } from '../components/error/errors.js';
 
 export default class FeedView extends ViewBase {

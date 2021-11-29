@@ -6,7 +6,7 @@ import { MatchesStore } from '../store/matchStore.js';
 import TapbarStore from '../store/tapbarStore.js';
 import { Chats } from '../components/chats/chats.js';
 import { ChatsStore, chatsManager } from '../store/chatsStore.js';
-import { SearchField } from '../components/searchField.js';
+import { SearchField } from '../components/common/searchField.js';
 import { matchRequest } from '../requests/matchRequest.js';
 import { Errors } from '../components/error/errors.js';
 import { Matches } from '../components/chats/matches.js';

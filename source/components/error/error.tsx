@@ -1,5 +1,5 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
-import { Button } from '../button.js';
+import { Button } from '../common/button.js';
 import EventBus from '../../dispatcher/eventBus.js';
 
 export interface ErrorData {

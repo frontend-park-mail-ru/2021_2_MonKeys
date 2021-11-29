@@ -1,4 +1,4 @@
-import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
+import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 
 export const OutOfCards = () => {
     return (

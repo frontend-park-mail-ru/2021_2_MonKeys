@@ -1,5 +1,5 @@
-import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import ViewBase from '../views/viewBase.js';
+import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
+import ViewBase from '../../views/viewBase.js';
 
 export interface IconButtonProps {
     type: string;

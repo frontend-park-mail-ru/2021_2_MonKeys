@@ -1,7 +1,7 @@
-import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import eventBus from '../dispatcher/eventBus.js';
+import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
+import eventBus from '../../dispatcher/eventBus.js';
 
-import { Reports } from '../store/reportsStore.js';
+import { Reports } from '../../store/reportsStore.js';
 
 export interface reportRadioButtonProps {
     report: Reports;

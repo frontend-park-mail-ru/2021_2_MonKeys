@@ -1,6 +1,6 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import { EditForm } from '../components/editForm.js';
+import { EditForm } from '../components/edit/editForm.js';
 import { EditStore } from '../store/editStore.js';
 import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
@@ -14,7 +14,7 @@ import {
     errorPreferMsg,
 } from '../constants/errorMsg.js';
 import { Errors } from '../components/error/errors.js';
-import { ProfileActions } from '../components/profileActions.js';
+import { ProfileActions } from '../components/profile/profileActions.js';
 import router from '../route/router.js';
 
 export default class EditView extends ViewBase {

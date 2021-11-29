@@ -1,5 +1,5 @@
-import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import eventBus from '../dispatcher/eventBus.js';
+import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
+import eventBus from '../../dispatcher/eventBus.js';
 
 export const SearchField = () => {
     const searchEvent = () => {

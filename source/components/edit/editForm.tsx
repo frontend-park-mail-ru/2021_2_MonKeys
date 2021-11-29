@@ -1,7 +1,7 @@
-import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import { FormField } from './formField.js';
-import { ErrorMsg } from './errorMsg.js';
-import { Button } from './button.js';
+import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
+import { FormField } from '../common/formField.js';
+import { ErrorMsg } from '../common/errorMsg.jsx';
+import { Button } from '../common/button.jsx';
 import { ImgField } from './imgField.js';
 import { ItemList } from './itemList.js';
 import { DescriptionField } from './descriptionField.js';

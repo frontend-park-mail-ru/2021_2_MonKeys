@@ -1,4 +1,4 @@
-import { ItemListProps } from 'components/itemList.js';
+import { ItemListProps } from '../components/edit/itemList.js';
 import BaseStore from './storeBase.js';
 
 export interface EditData {

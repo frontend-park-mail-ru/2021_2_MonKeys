@@ -1,7 +1,7 @@
-import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import ViewBase from '../views/viewBase.js';
-import { IconButton } from './iconButton.js';
-import EventBus from '../dispatcher/eventBus.js';
+import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
+import ViewBase from '../../views/viewBase.jsx';
+import { IconButton } from '../common/iconButton.js';
+import EventBus from '../../dispatcher/eventBus.js';
 
 export interface ButtonProps {
     class: string;

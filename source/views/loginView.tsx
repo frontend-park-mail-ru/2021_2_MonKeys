@@ -1,15 +1,15 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import { FormField } from '../components/formField.js';
-import { Button } from '../components/button.js';
-import { ErrorMsg } from '../components/errorMsg.js';
+import { FormField } from '../components/common/formField.js';
+import { Button } from '../components/common/button.js';
+import { ErrorMsg } from '../components/common/errorMsg.js';
 import { errorEmailMsg, errorPasswordMsg, errorLoginFormMsg } from '../constants/errorMsg.js';
 import EventBus from '../dispatcher/eventBus.js';
 import { LoginStore } from '../store/loginStore.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 
 import router from '../route/router.js';
-import { dropsBackground } from '../components/dropsBackground.js';
+import { dropsBackground } from '../components/common/dropsBackground.js';
 import { Errors } from '../components/error/errors.js';
 
 export default class LoginView extends ViewBase {

@@ -1,8 +1,8 @@
-import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import { IconButton } from './iconButton.js';
+import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
+import { IconButton } from '../common/iconButton.js';
 import { ImgCarousel } from './imgCarousel.js';
-import { ProfileData } from '../store/profileStore.js';
-import eventBus from '../dispatcher/eventBus.js';
+import { ProfileData } from '../../store/profileStore.js';
+import eventBus from '../../dispatcher/eventBus.js';
 
 export interface CardFeedProps {
     userData: ProfileData;

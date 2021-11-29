@@ -1,13 +1,13 @@
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { Tapbar } from '../components/tapbar/tapbar.js';
-import { CardExpended } from '../components/cardExpended.js';
+import { CardExpended } from '../components/card/cardExpended.js';
 import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
 import TapbarStore from '../store/tapbarStore.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { Errors } from '../components/error/errors.js';
-import { ProfileActions } from '../components/profileActions.js';
+import { ProfileActions } from '../components/profile/profileActions.js';
 
 export default class ProfileView extends ViewBase {
     constructor(parent: HTMLElement) {
