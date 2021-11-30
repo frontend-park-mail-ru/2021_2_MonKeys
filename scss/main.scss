@@ -2,6 +2,7 @@
 @import './abstracts/mixins';
 @import './core/typography';
 @import './core/margin';
+@import './core/reset.scss';
 
 @import './abstracts/colors';
 
@@ -35,8 +36,6 @@
 @import './layout/flex_column_center';
 @import './layout/view-contant';
 @import './layout/app';
-
-@import './core/reset.scss';
 
 @import './animations/droplet';
 @import './animations/feed_animations';

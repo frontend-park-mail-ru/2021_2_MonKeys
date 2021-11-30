@@ -1,6 +1,8 @@
 @import './typography';
 
 
+$max-width: 400px;
+
 textarea:focus,
 input:focus {
   outline: none;

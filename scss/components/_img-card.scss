@@ -79,7 +79,7 @@ $report-status-max-width: 96px;
 .img-card__bottom-panel_size_small{
   width: $img-card-small-width;
   height: 96px;
-  top: 342px;
+  margin-top: -96px;
 }
 
 .img-card__bottom-panel_size_medium{
