@@ -11,14 +11,15 @@ $card-expanded-img-default-height: 100%;
 .card-expended {
   height: 100%;
   width: 100%;
-  flex: 1 0 auto;
+  flex: 1 1 auto;
 }
 
 .card-expended__profile {
   // position: relative;
   height: 100%;
-  display: flex;
-  flex-direction: column;
+  overflow-y: scroll;
+  // display: flex;
+  // flex-direction: column;
 
   // overflow-x: hidden;
   // overflow-y: scroll;
@@ -30,8 +31,6 @@ $card-expanded-img-default-height: 100%;
 }
 
 .card-expended__description {
-  width: calc($card-expanded-default-width - 24px);
-
   margin-bottom: 6px;
   margin-left: 12px;
   margin-right: 12px;

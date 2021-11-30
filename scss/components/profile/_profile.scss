@@ -1,4 +1,12 @@
-$manager-height: 48px;
+.profile-in-chat {
+  height: 100%;
+  width: 100%;
+  max-width: $max-width;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
 
 .profile {
   height: 100%;
@@ -11,7 +19,6 @@ $manager-height: 48px;
 }
 
 .profile__manager {
-  max-height: $manager-height;
   flex: 0 0 auto;
 
   display: flex;
@@ -27,9 +34,8 @@ $manager-height: 48px;
 }
 
 .profile__card {
-  max-height: calc(100% - $manager-height - $tapbar-height);
   width: 100%;
-  flex: 1 0 auto;
+  flex: 1 1 auto;
 
   margin: 0px $margin-small;
 

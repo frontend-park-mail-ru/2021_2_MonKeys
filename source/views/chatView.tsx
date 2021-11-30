@@ -40,15 +40,19 @@ export default class ChatView extends ViewBase {
         } else {
             return (
                 <div class='app__content--align-center'>
-                    {CardExpended({
-                        userData: data.chat.profile,
-                        withActions: false,
-                        withReports: true,
-                        withBackButton: true,
-                        reports: data.reports,
-                        reported: data.reportsActive,
-                    })}
-                    {Errors(data.error)}
+                    <div class='profile'>
+                        <div class='profile__card'>
+                            {CardExpended({
+                                userData: data.chat.profile,
+                                withActions: false,
+                                withReports: true,
+                                withBackButton: true,
+                                reports: data.reports,
+                                reported: data.reportsActive,
+                            })}
+                        </div>
+                        {Errors(data.error)}
+                    </div>
                 </div>
             );
         }

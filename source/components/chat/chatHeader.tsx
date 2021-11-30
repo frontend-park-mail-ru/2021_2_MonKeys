@@ -12,6 +12,7 @@ export const ChatHeader = (props: ChatHeaderProps) => {
         EventBus.dispatch<number>('chat:back-button', props.chatID);
     };
     const profileClick = () => {
+        console.log(' вы нажали на заголовок чата');
         EventBus.dispatch<number>('chat:open-profile', props.chatID);
     };
 
