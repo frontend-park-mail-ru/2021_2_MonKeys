@@ -1,8 +1,7 @@
 $span-line-height: 42px;
 $max-width: 400px;
 
-$search-min-height: 56px;
-$match-min-height: 156px;
+$match-min-height: 114px;
 
 .chats {
   height: 100%;
@@ -16,7 +15,6 @@ $match-min-height: 156px;
 
 .chats__search {
   width: 100%;
-  min-width: $search-min-height;
   flex: 0 0 auto;
 }
 
@@ -26,7 +24,6 @@ $match-min-height: 156px;
 
 .chats__matches {
   width: 100%;
-  min-height: $match-min-height;
   flex: 0 0 auto;
 }
 
@@ -40,6 +37,7 @@ $match-min-height: 156px;
 }
 
 .chats__matches-profiles {
+  min-height: $match-min-height;
   display: flex;
   flex-direction: row;
 
@@ -50,12 +48,14 @@ $match-min-height: 156px;
 
 .chats__chats {
   width: 100%;
-  flex: 1 0 auto;
+  flex: 1 1 auto;
   min-height: $span-line-height;
-  max-height: calc(100% - $search-min-height - $match-min-height - $tapbar-height);
+  display: flex;
+  flex-direction: column;
 }
 
 .chats__chats-header {
+  flex: 0 0 auto;
   font-size: $font-size-medium;
   line-height: $span-line-height;
 
@@ -65,9 +65,8 @@ $match-min-height: 156px;
 }
 
 .chats__chats-list {
-  flex: 1 0 auto;
+  flex: 1 1 auto;
   overflow-y: scroll;
-  max-height: calc(100% - $span-line-height);
 }
 
 .chats__tapbar {

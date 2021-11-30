@@ -181,7 +181,7 @@ export default class EditView extends ViewBase {
         return (
             <div class='view-contant view-content__scroll-y'>
                 <div class='signup-container'>
-                    {ProfileActions(data.actions)}
+                    {ProfileActions()}
                     {EditForm(data.editForm)}
                     {Errors(data.error)}
                 </div>
