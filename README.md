@@ -16,6 +16,9 @@
 [![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/community/file/1018614506626829179/Drip-v.0.3)
 
 ## Team Monkeys🐒🐒🐒
+
+## Тимлид: Леонид Перлин 
+
 | Имя              |    Роль      |
 |------------------|--------------|
 | [Леонид Перлин](https://github.com/perlinleo)     🥵 | Fullstack |
