@@ -1,5 +1,5 @@
-@import '../abstracts/variables';
-@import './form_field';
+@import '../../abstracts/variables';
+@import '../form_field';
 
 .add-img-box {
   @include form-field($field-valid-color);

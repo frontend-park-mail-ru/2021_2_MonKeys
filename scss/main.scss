@@ -12,11 +12,12 @@
 @import './components/header';
 @import './components/button';
 @import './components/form_error';
-@import './components/form_item_list';
-@import './components/form_add_img';
-@import './components/card-actions';
+@import './components/edit/form_item_list';
+@import './components/edit/form_add_img';
+@import './components/edit/edit';
+@import './components/card/card-actions';
 @import './components/card/card-expended';
-@import './components/img-card';
+@import './components/card/img-card';
 @import './components/card/report-window';
 @import './components/card/report-radio-button';
 @import './components/tapbar';

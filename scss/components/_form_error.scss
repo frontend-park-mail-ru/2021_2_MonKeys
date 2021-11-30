@@ -9,6 +9,7 @@
     @include errorText();
       color: $light-grey;
     opacity: 0;
+    margin-top: 6px;
 }
 
 .error-hidden {
@@ -20,6 +21,7 @@
     @include errorText();
     color: $red;
     opacity: 1;
+    margin-top: 6px;
 }
 
 .error-hint {

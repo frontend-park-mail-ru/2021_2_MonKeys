@@ -37,7 +37,7 @@ export default class ProfileView extends ViewBase {
         return (
             <div class='app__content--align-center'>
                 <div class='profile'>
-                        {ProfileActions()}
+                    {ProfileActions()}
                     <div class='profile__card'>
                         {CardExpended({ userData: data.cardData.userData, withActions: false, withReports: false })}
                     </div>

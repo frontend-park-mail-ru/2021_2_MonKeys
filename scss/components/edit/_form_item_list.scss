@@ -1,9 +1,10 @@
-@import './form_field';
+@import '../form_field';
 
 .form__item__list-valid{
     @include form-field($field-valid-color);
     flex-direction: column;
     height: auto;
+    padding-top: 12px;
 }
 
 @mixin listItem($deselected: false){

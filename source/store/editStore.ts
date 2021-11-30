@@ -80,27 +80,27 @@ const initData = {
         alignCenter: true,
         items: [
             {
-                value: 'anime',
+                value: 'аниме',
                 selected: false,
                 clickEvent: 'edit:tag-click',
             },
             {
-                value: 'music',
+                value: 'музыка',
                 selected: false,
                 clickEvent: 'edit:tag-click',
             },
             {
-                value: 'gaming',
+                value: 'игры',
                 selected: false,
                 clickEvent: 'edit:tag-click',
             },
             {
-                value: 'science',
+                value: 'наука',
                 selected: false,
                 clickEvent: 'edit:tag-click',
             },
             {
-                value: 'sport',
+                value: 'спорт',
                 selected: false,
                 clickEvent: 'edit:tag-click',
             },
