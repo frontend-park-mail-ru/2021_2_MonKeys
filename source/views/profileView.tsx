@@ -37,8 +37,8 @@ export default class ProfileView extends ViewBase {
         return (
             <div class='app__content--align-center'>
                 <div class='profile'>
-                    <div class='profile__card'>
                         {ProfileActions()}
+                    <div class='profile__card'>
                         {CardExpended({ userData: data.cardData.userData, withActions: false, withReports: false })}
                     </div>
                     <div class='profile__tapbar'>{Tapbar(TapbarStore.get())}</div>
