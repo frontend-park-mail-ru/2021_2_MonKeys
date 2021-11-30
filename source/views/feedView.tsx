@@ -120,13 +120,10 @@ export default class FeedView extends ViewBase {
                 },
             };
             return (
-                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
-                    <div
-                        class='view-contant view-contant_align_center
-                  view-content_scroll-banned view-content__max-height'
-                    >
-                        {CardExpended(data.cardData)}
-                        {Tapbar(data.tapbar)}
+                <div class='app__content--align-center'>
+                    <div class='feed'>
+                        <div class='profile__card feed__profile'>{CardExpended(data.cardData)}</div>
+                        <div class='feed__tapbar'>{Tapbar(TapbarStore.get())}</div>
                         {Errors(data.error)}
                     </div>
                 </div>
