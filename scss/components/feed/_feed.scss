@@ -10,6 +10,9 @@
 .feed__card {
     flex: 1 1 auto;
     margin: $margin-small;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .feed__profile {

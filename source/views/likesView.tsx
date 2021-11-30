@@ -62,10 +62,10 @@ export default class LikesView extends ViewBase {
             return (
                 <div class='app__content--align-center'>
                     <div class='likes'>
-                        <div class='likes__likes-header'>
-                            <div class='likes-view-header'>Вы понравились нескольким людям</div>
-                        </div>
                         <div class='likes__likes-profile'>
+                            <div class='likes__likes-header'>
+                                <div class='likes-view-header'>Вы понравились нескольким людям</div>
+                            </div>
                             <div class='likes-view-cards'>
                                 {Object.keys(data.likes).map((item) =>
                                     ImgCard({
