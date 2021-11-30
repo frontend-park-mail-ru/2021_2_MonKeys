@@ -42,8 +42,6 @@ export default class ChatsView extends ViewBase {
     };
 
     _createTmpl(data) {
-        console.log(data.matches);
-        console.log(data.chats);
         if (!data.matches[0] && !data.chats[0]) {
             return (
                 <div class='view-contant view-contant_align_center view-content_scroll-banned'>

@@ -78,7 +78,6 @@ export const CardExpended = (props: CardExpendedProps) => {
         <div></div>
     );
     const backProfileButtonClick = () => {
-        console.log('backProfileButtonClick');
         EventBus.dispatch<number>('chat:back-to-chat-button', props.userData.id);
     };
     const backProfileButton = props.withBackButton ? (

@@ -1,8 +1,6 @@
-
 const domain = '192.168.1.12';
 export const serverAddress = `http://${domain}`;
 export const wsURL = `ws://${domain}/api/v1/apiws`;
-
 
 export const profileURL = '/api/v1/profile';
 export const tagsURL = '/api/v1/tags';
