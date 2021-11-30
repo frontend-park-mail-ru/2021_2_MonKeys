@@ -256,6 +256,16 @@ export const EditEventRegister = () => {
     });
 
     EventBus.register('edit:img-input', (event) => {
+        console.log('1');
+        const userData = ProfileStore.get();
+        if (!userData.imgs) {
+            const ps = ProfileStore.get();
+            ps.imgs = [];
+            ProfileStore.set(ps);
+        }
+        userData.imgs.push('icons/loading-buffering.gif');
+        ProfileStore.set(userData);
+
         const files = event.target.files;
 
         const photo = files[0];
@@ -275,6 +285,7 @@ export const EditEventRegister = () => {
                 ps.imgs = [];
                 ProfileStore.set(ps);
             }
+            userData.imgs.pop();
             userData.imgs.push(data.body.photo);
             ProfileStore.set(userData);
             const editStoreData = EditStore.get();

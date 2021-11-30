@@ -21,6 +21,15 @@
     flex-wrap: wrap;
 }
 
+.flex_box_row_center {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 90%;
+    flex-wrap: wrap;
+}
+
 .overflow-hidden {
     position: absolute;
     height: 100%;

@@ -44,6 +44,26 @@ export const CardFeed = (props: CardFeedProps) => {
                     window.offsetY = diffY;
                     eventBus.dispatch('swipe:move', { diffX, diffY });
                 }}
+                onmousedown={(event) => {
+                    if (!window.startX) {
+                        window.startX = 0;
+                        window.startY = 0;
+                    }
+                    window.startX = event.clientX;
+                    window.startY = event.clientY;
+                }}
+                onmousemove={(event) => {
+                    if (event.buttons === 1) {
+                        const diffX = event.clientX - window.startX;
+                        const diffY = event.clientY - window.startY;
+                        window.offsetX = diffX;
+                        window.offsetY = diffY;
+                        eventBus.dispatch('swipe:move', { diffX, diffY });
+                    }
+                }}
+                onmouseup={() => {
+                    eventBus.dispatch('swipe:end');
+                }}
                 ontouchend={() => {
                     eventBus.dispatch('swipe:end');
                 }}

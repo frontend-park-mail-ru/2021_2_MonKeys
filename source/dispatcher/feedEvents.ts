@@ -11,7 +11,7 @@ const animationThanLikeAndReset = () => {
     EventBus.dispatch('feed:reaction', reactions.like);
     let card = document.querySelectorAll<HTMLElement>('.card')[0];
     if (!card) {
-        card = document.querySelectorAll<HTMLElement>('.card-expended')[0];
+        card = document.querySelectorAll<HTMLElement>('.card-profile')[0];
         card.style.transform = '';
         card.style.animation = '';
         card.style.opacity = '1';
@@ -40,7 +40,7 @@ const animationThanDislikeAndReset = () => {
     EventBus.dispatch('feed:reaction', reactions.like);
     let card = document.querySelectorAll<HTMLElement>('.card')[0];
     if (!card) {
-        card = document.querySelectorAll<HTMLElement>('.card-expended')[0];
+        card = document.querySelectorAll<HTMLElement>('.card-profile')[0];
         card.style.transform = '';
         card.style.animation = '';
         card.style.opacity = '1';
@@ -69,7 +69,7 @@ export const FeedEventsRegister = () => {
     EventBus.register('feed:like-button', () => {
         let card = document.querySelectorAll<HTMLElement>('.card')[0];
         if (!card) {
-            card = document.querySelectorAll<HTMLElement>('.card-expended')[0];
+            card = document.querySelectorAll<HTMLElement>('.card-profile')[0];
         }
         card.style.animation = 'swipedRight 1s ease 1';
         card.addEventListener('animationend', animationThanLikeAndReset);
@@ -77,7 +77,7 @@ export const FeedEventsRegister = () => {
     EventBus.register('feed:dislike-button', () => {
         let card = document.querySelectorAll<HTMLElement>('.card')[0];
         if (!card) {
-            card = document.querySelectorAll<HTMLElement>('.card-expended')[0];
+            card = document.querySelectorAll<HTMLElement>('.card-profile')[0];
         }
         card.style.animation = 'swipedLeft 1s ease 1';
         card.addEventListener('animationend', animationThanDislikeAndReset);
@@ -104,6 +104,7 @@ export const FeedEventsRegister = () => {
     EventBus.register('feed:reaction', (reactionID) => {
         resetCarousel();
         const data = feedStore.get();
+        data.expanded = false;
         likesRequest(data.profiles[data.counter].id, reactionID).then((likesData) => {
             if (likesData.status !== HTTPSuccess) {
                 throw 'bad response';

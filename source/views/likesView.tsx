@@ -38,6 +38,26 @@ export default class LikesView extends ViewBase {
     };
 
     _createTmpl(data) {
+        if (!LikesStore.get().profiles[0]) {
+            return (
+                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                    <div
+                        class='view-contant view-contant_align_center
+                  view-content_scroll-banned view-content__max-height'
+                    >
+                        <div class='likes-view-text-big'>У вас пока нет новых лайков</div>
+
+                        <div class='view-content__dummy-image-container'>
+                            <img src='icons/like_gradient.svg' class='view-content__dummy-image'></img>
+                        </div>
+                        <div class='likes-view-text-small'>Лайкайте карточки в ленте и возвращайтесь</div>
+
+                        {Tapbar(TapbarStore.get())}
+                        {Errors(data.error)}
+                    </div>
+                </div>
+            );
+        }
         if (!LikesStore.get().expended) {
             return (
                 <div class='app__content--align-center'>

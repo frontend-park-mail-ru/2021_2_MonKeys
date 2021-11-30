@@ -122,7 +122,7 @@ export default class LoginView extends ViewBase {
 
                 {FormField(data.fields.password)}
                 {ErrorMsg(data.errorMsgs.passwordError)}
-                {/* {ErrorMsg(data.errorMsgs.formError)} */}
+                {ErrorMsg(data.errorMsgs.formError)}
                 {Button(data.buttons.loginButton)}
                 {Button(data.buttons.signupButton)}
                 {Errors(data.error)}

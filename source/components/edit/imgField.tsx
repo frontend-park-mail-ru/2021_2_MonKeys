@@ -19,17 +19,23 @@ const imgSequence = (imgs: string[]) => {
         return <div class='add-img__no-photo-text'>Нет фото</div>;
     }
     imgs.forEach((element) => {
+        let deleteButton;
+        if (element !== 'icons/loading-buffering.gif') {
+            deleteButton = IconButton({
+                type: 'button',
+                class: 'add-img-delete',
+                src: 'icons/remove_img.svg',
+                onclick: () => {
+                    EventBus.dispatch('edit:img-delete', element);
+                },
+            });
+        } else {
+            deleteButton = <div></div>;
+        }
         items.push(
             <div class='add-img-item'>
-                <img src={element} class='add-img-item' alt='' />
-                {IconButton({
-                    type: 'button',
-                    class: 'add-img-delete',
-                    src: 'icons/remove_img.svg',
-                    onclick: () => {
-                        EventBus.dispatch('edit:img-delete', element);
-                    },
-                })}
+                <img src={element} class='add-img-img' alt='' />
+                {deleteButton}
             </div>
         );
     });
@@ -38,16 +44,22 @@ const imgSequence = (imgs: string[]) => {
 
 export const ImgField = (fieldProps: FieldProps, buttonProps: ButtonProps) => {
     return (
-        <div class={fieldProps.class}>
-            {imgSequence(buttonProps.imgs)}
-            <label for={'AddImg'} class={'add'} />
-            <input
-                id={'AddImg'}
-                type={'file'}
-                onchange={buttonProps.onchange}
-                style={'visibility: hidden;'}
-                accept={'.gif, .jpeg, .jpg, .png, .webp'}
-            />
+        <div>
+            <div class={fieldProps.class}>
+                {imgSequence(buttonProps.imgs)}
+
+                <input
+                    class={fieldProps.class + '__input-field'}
+                    id={'AddImg'}
+                    type={'file'}
+                    onchange={buttonProps.onchange}
+                    style={'visibility: hidden;'}
+                    accept={'.gif, .jpeg, .jpg, .png, .webp'}
+                />
+                <label for='AddImg'>
+                    <div class='add'></div>
+                </label>
+            </div>
         </div>
     );
 };

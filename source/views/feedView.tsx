@@ -26,10 +26,10 @@ export default class FeedView extends ViewBase {
             this._template = this._createTmpl(this._data, cardData.expanded);
         } else {
             this._template = (
-                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                <div class='view-contant view-contant_align_center view-content_scroll'>
                     <div
                         class='view-contant view-contant_align_center
-                  view-content_scroll-banned view-content__max-height'
+                  view-content_scroll view-content__max-height'
                     >
                         {dropsBackground()}
                         <div class='view-content__card'>
@@ -99,10 +99,10 @@ export default class FeedView extends ViewBase {
             };
 
             return (
-                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                <div class='view-contant view-contant_align_center view-content_scroll'>
                     <div
                         class='view-contant view-contant_align_center
-                  view-content_scroll-banned view-content__max-height'
+                  view-content_scroll view-content__max-height'
                     >
                         {CardFeed(data.cardData)}
                         {Tapbar(TapbarStore.get())}
@@ -120,10 +120,10 @@ export default class FeedView extends ViewBase {
                 },
             };
             return (
-                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                <div class='view-contant view-contant_align_center view-content_scroll'>
                     <div
                         class='view-contant view-contant_align_center
-                  view-content_scroll-banned view-content__max-height'
+                  view-content_scroll view-content__max-height'
                     >
                         {CardExpended(data.cardData)}
                         {Tapbar(data.tapbar)}
