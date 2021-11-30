@@ -60,15 +60,12 @@ export default class LikesView extends ViewBase {
         }
         if (!LikesStore.get().expended) {
             return (
-                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
-                    <div
-                        class='view-contant view-contant_align_center
-                  view-content_scroll-banned view-content__max-height'
-                    >
-                        <div class='view-content__likes-header'>
+                <div class='app__content--align-center'>
+                    <div class='likes'>
+                        <div class='likes__likes-header'>
                             <div class='likes-view-header'>Вы понравились нескольким людям</div>
                         </div>
-                        <div class='view-content__likes-profile'>
+                        <div class='likes__likes-profile'>
                             <div class='likes-view-cards'>
                                 {Object.keys(data.likes).map((item) =>
                                     ImgCard({
@@ -80,26 +77,25 @@ export default class LikesView extends ViewBase {
                                 )}
                             </div>
                         </div>
-                        {Tapbar(TapbarStore.get())}
+                        <div class='likes__tapbar'>{Tapbar(TapbarStore.get())}</div>
                         {Errors(data.error)}
                     </div>
                 </div>
             );
         } else {
             return (
-                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
-                    <div
-                        class='view-contant view-contant_align_center
-                  view-content_scroll-banned view-content__max-height'
-                    >
-                        {CardExpended({
-                            userData: data.likes[LikesStore.get().userIndex],
-                            withActions: true,
-                            withReports: true,
-                            reports: data.reports,
-                            reported: data.reportsActive,
-                        })}
-                        {Tapbar(TapbarStore.get())}
+                <div class='app__content--align-center'>
+                    <div class='likes'>
+                        <div class='profile__card likes__profile'>
+                            {CardExpended({
+                                userData: data.likes[LikesStore.get().userIndex],
+                                withActions: true,
+                                withReports: true,
+                                reports: data.reports,
+                                reported: data.reportsActive,
+                            })}
+                        </div>
+                        <div class='likes__tapbar'>{Tapbar(TapbarStore.get())}</div>
                         {Errors(data.error)}
                     </div>
                 </div>

@@ -10,6 +10,7 @@ export const ChatsEventsRegister = () => {
         chatsManager.switchChat(chatID);
 
         router.go(`/chat`);
+        window.history.replaceState('', '', '/chats');
 
         const messageID = chatsManager.getFirstMessageID(chatID);
         getChatRequest(chatID, messageID).then((data) => {
@@ -47,5 +48,6 @@ export const ChatsEventsRegister = () => {
         }
 
         router.go('/chat');
+        window.history.replaceState('', '', '/chats');
     });
 };

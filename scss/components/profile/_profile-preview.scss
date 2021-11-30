@@ -1,0 +1,30 @@
+$profile-preview-img-size: 48px;
+
+$profile-preview-img-border-radius: 27px;
+
+.profile-preview {
+    display: flex;
+    align-items: center;
+}
+
+.profile-preview__img {
+    min-width: $profile-preview-img-size;
+    width: $profile-preview-img-size;
+    height: $profile-preview-img-size;
+  
+    border-radius: $profile-preview-img-border-radius;
+  
+    object-fit: cover;
+    -o-object-fit: cover;
+}
+
+.profile-preview__name {
+    font-size: $font-size-small;
+    line-height: 24px;
+  
+    color: #FFFFFF;
+  
+    margin-left: $margin-small;
+
+    width: 100%;
+}

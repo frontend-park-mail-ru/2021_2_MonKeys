@@ -11,12 +11,10 @@ export const Chat = (chat: ChatData) => {
         return;
     }
     return (
-        <div class='view-contant view-contant_align_center view-contant_scroll-y_banned'>
-            <div class='view-content__header'>
-                {ChatHeader({ chatID: chat.fromUserID, userName: chat.name, userImg: chat.img })}
-            </div>
-            <div class='view-content__message-space'>{chat.messages.map((msg) => Message(msg))}</div>
-            <div class='view-content__input-message'>{InputMessage(chat)}</div>
+        <div class='chat'>
+            {ChatHeader({ chatID: chat.fromUserID, userName: chat.name, userImg: chat.img })}
+            <div class='chat__messages'>{chat.messages.map((msg) => Message(msg))}</div>
+            {InputMessage(chat)}
         </div>
     );
 };

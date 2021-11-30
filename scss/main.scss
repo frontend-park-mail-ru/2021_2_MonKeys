@@ -2,13 +2,11 @@
 @import './abstracts/mixins';
 @import './core/typography';
 @import './core/margin';
+@import './core/reset.scss';
 
 @import './abstracts/colors';
 
 @import './pages/likes';
-@import './pages/profile';
-@import './pages/chats';
-// @import './pages/chat';
 
 @import './components/form_field';
 @import './components/header';
@@ -17,7 +15,7 @@
 @import './components/form_item_list';
 @import './components/form_add_img';
 @import './components/card-actions';
-@import './components/card-expended';
+@import './components/card/card-expended';
 @import './components/img-card';
 @import './components/report-window';
 @import './components/report-radio-button';
@@ -28,17 +26,17 @@
 @import './components/chats/chats-preview';
 @import './components/chats/match-profile';
 @import './components/chats/search-form';
-@import './components/chat/chat';
-@import './components/chat/chat-header';
 @import './components/chat/input-message';
+@import './components/profile/profile-preview';
 @import './components/chat/message';
+@import './components/chat/chat';
+@import './components/profile/profile';
 @import './components/error_api';
 @import './components/dummy';
 
 @import './layout/flex_column_center';
 @import './layout/view-contant';
-
-@import './core/reset.scss';
+@import './layout/app';
 
 @import './animations/droplet';
 @import './animations/feed_animations';

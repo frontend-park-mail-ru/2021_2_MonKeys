@@ -65,12 +65,12 @@ export default class ChatsView extends ViewBase {
             );
         }
         return (
-            <div class='view-contant view-contant_align_center view-content_scroll-banned'>
-                <div class='view-contant view-contant_align_center view-content_scroll-banned view-content__max-height'>
+            <div class='app__content--align-center'>
+                <div class='chats'>
                     {SearchField()}
                     {Matches(data.matches)}
                     {Chats(data.chats)}
-                    {Tapbar(TapbarStore.get())}
+                    <div class='chats__tapbar'>{Tapbar(TapbarStore.get())}</div>
                     {Errors(data.error)}
                 </div>
             </div>

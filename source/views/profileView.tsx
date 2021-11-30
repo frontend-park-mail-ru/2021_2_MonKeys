@@ -3,7 +3,6 @@ import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { Tapbar } from '../components/tapbar/tapbar.js';
 import { CardExpended } from '../components/card/cardExpended.js';
 import { ProfileStore } from '../store/profileStore.js';
-import EventBus from '../dispatcher/eventBus.js';
 import TapbarStore from '../store/tapbarStore.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { Errors } from '../components/error/errors.js';
@@ -19,7 +18,7 @@ export default class ProfileView extends ViewBase {
     }
 
     _data = {
-        'cardData': {
+        cardData: {
             'userData': {
                 name: ProfileStore.get().name,
                 age: ProfileStore.get().age,
@@ -27,24 +26,8 @@ export default class ProfileView extends ViewBase {
                 imgs: ProfileStore.get().imgs,
                 tags: ProfileStore.get().tags,
             },
-            'actions': {
-                'logoutButton': {
-                    src: 'icons/exit.svg',
-                    class: 'view-contant__dislike',
-                    onclick: () => {
-                        EventBus.dispatch<string>('profile:logout-button');
-                    },
-                },
-                'settingButtons': {
-                    src: 'icons/settings.svg',
-                    class: 'view-contant__dislike',
-                    onclick: () => {
-                        EventBus.dispatch<string>('profile:edit-button');
-                    },
-                },
-            },
         },
-        'tapbar': {
+        tapbar: {
             class: 'menu-icon',
         },
         error: errorManager.error,
@@ -52,11 +35,13 @@ export default class ProfileView extends ViewBase {
 
     _createTmpl(data) {
         return (
-            <div class='view-contant view-contant_align_center view-content_scroll-banned'>
-                <div class='view-contant view-contant_align_center view-content_scroll-banned view-content__max-height'>
-                    {ProfileActions(data.cardData.actions)}
-                    {CardExpended({ userData: data.cardData.userData, withActions: false, withReports: false })}
-                    {Tapbar(TapbarStore.get())}
+            <div class='app__content--align-center'>
+                <div class='profile'>
+                    {ProfileActions()}
+                    <div class='profile__card'>
+                        {CardExpended({ userData: data.cardData.userData, withActions: false, withReports: false })}
+                    </div>
+                    <div class='profile__tapbar'>{Tapbar(TapbarStore.get())}</div>
                     {Errors(data.error)}
                 </div>
             </div>

@@ -44,7 +44,7 @@ export const ChatEventsRegister = () => {
 
         chatsManager.saveNewMessage(message);
 
-        const _chatSpace = document.getElementsByClassName('view-content__message-space')[0];
+        const _chatSpace = document.getElementsByClassName('chat__messages')[0];
         if (_chatSpace) {
             _chatSpace.scrollTop = _chatSpace.scrollHeight;
         }

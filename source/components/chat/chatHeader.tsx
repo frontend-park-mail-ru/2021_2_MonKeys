@@ -12,15 +12,16 @@ export const ChatHeader = (props: ChatHeaderProps) => {
         EventBus.dispatch<number>('chat:back-button', props.chatID);
     };
     const profileClick = () => {
+        console.log(' вы нажали на заголовок чата');
         EventBus.dispatch<number>('chat:open-profile', props.chatID);
     };
 
     return (
-        <div class='chat-header'>
-            <img class='chat-header__button-back' src='icons/back.svg' onclick={backButtonClick} />
-            <div class='chat-header__profile' onclick={profileClick}>
-                <img class='chat-header__user-img' src={props.userImg} />
-                <span class='chat-header__user-name'>{props.userName}</span>
+        <div class='chat__header'>
+            <img class='chat__button-back' src='icons/back.svg' onclick={backButtonClick} />
+            <div class='profile-preview chat__profile-preview' onclick={profileClick}>
+                <img class='profile-preview__img' src={props.userImg} />
+                <span class='profile-preview__name'>{props.userName}</span>
             </div>
         </div>
     );

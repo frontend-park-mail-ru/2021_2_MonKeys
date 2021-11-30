@@ -4,7 +4,7 @@ $chats-preview-height: 66px;
 $chat-img-size: 54px;
 $chat-img-border-radius: 27px;
 
-.chats-preview{
+.chats-preview {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -19,7 +19,7 @@ $chat-img-border-radius: 27px;
   border-radius: 12px;
 }
 
-.chats-preview__user-img{
+.chats-preview__user-img {
   width: $chat-img-size;
   height: $chat-img-size;
 
@@ -31,7 +31,7 @@ $chat-img-border-radius: 27px;
   margin-left: 12px;
 }
 
-.chats-preview__user-info{
+.chats-preview__user-info {
   display: flex;
   flex-direction: column;
 
@@ -40,14 +40,14 @@ $chat-img-border-radius: 27px;
   overflow: hidden;
 }
 
-.chats-preview__user-name{
+.chats-preview__user-name {
   font-size: $font-size-small;
   line-height: 24px;
 
   color: #FFFFFF;
 }
 
-.chats-preview__last-message{
+.chats-preview__last-message {
   font-size: $font-size-tiny;
   line-height: 24px;
 

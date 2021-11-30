@@ -78,6 +78,7 @@ export const CardExpended = (props: CardExpendedProps) => {
         <div></div>
     );
     const backProfileButtonClick = () => {
+        console.log('backProfileButtonClick');
         EventBus.dispatch<number>('chat:back-to-chat-button', props.userData.id);
     };
     const backProfileButton = props.withBackButton ? (
@@ -94,9 +95,9 @@ export const CardExpended = (props: CardExpendedProps) => {
     );
 
     return (
-        <div class='view-content__card-expended'>
+        <div class='card-expended'>
             {reportWindowTmpl}
-            <div class='card-profile'>
+            <div class='card-expended__profile'>
                 {imgTmpl}
                 {descField}
                 {tagField}

@@ -19,17 +19,17 @@ export const InputMessage = (chat: ChatData) => {
 
     const inputValue = chat.draftMessage === undefined || chat.draftMessage === '' ? '' : chat.draftMessage;
     return (
-        <form class='input-message'>
+        <form class='message-input chat__message-input'>
             <input
                 type='text'
-                class='input-message__field'
+                class='message-input__field'
                 placeholder='Сообщение'
                 oninput={inputEvent}
                 onkeypress={enterSendEvent}
                 value={inputValue}
             />
-            <button class='input-message__button-send' type='reset' onclick={buttonSendEvent}>
-                <img class='input-message__icon-send' src='icons/send.svg' />
+            <button class='message-input__button-send' type='reset' onclick={buttonSendEvent}>
+                <img class='message-input__icon-send' src='icons/send.svg' />
             </button>
         </form>
     );

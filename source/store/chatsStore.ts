@@ -219,6 +219,7 @@ class ChatsManager {
         const chatsData = ChatsStore.get();
         chatsData.chats[chatIdx].isOpenedProfile = true;
         ChatsStore.set(chatsData);
+        console.log('jopaaaaaaaaaaaaaaaaaaaa');
     }
 
     disableProfile(chatID: number) {
