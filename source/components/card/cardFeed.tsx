@@ -11,7 +11,7 @@ export interface CardFeedProps {
 
 export const CardFeed = (props: CardFeedProps) => {
     return (
-        <div class='view-content__card'>
+        <div class='feed__card'>
             <div
                 class='card'
                 ontouchstart={(event) => {

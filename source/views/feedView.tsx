@@ -99,11 +99,8 @@ export default class FeedView extends ViewBase {
             };
 
             return (
-                <div class='view-contant view-contant_align_center view-content_scroll'>
-                    <div
-                        class='view-contant view-contant_align_center
-                  view-content_scroll view-content__max-height'
-                    >
+                <div class='app__content--align-center'>
+                    <div class='feed'>
                         {CardFeed(data.cardData)}
                         {Tapbar(TapbarStore.get())}
                         {Errors(data.error)}
@@ -120,20 +117,10 @@ export default class FeedView extends ViewBase {
                 },
             };
             return (
-<<<<<<< HEAD
                 <div class='app__content--align-center'>
                     <div class='feed'>
                         <div class='profile__card feed__profile'>{CardExpended(data.cardData)}</div>
                         <div class='feed__tapbar'>{Tapbar(TapbarStore.get())}</div>
-=======
-                <div class='view-contant view-contant_align_center view-content_scroll'>
-                    <div
-                        class='view-contant view-contant_align_center
-                  view-content_scroll view-content__max-height'
-                    >
-                        {CardExpended(data.cardData)}
-                        {Tapbar(data.tapbar)}
->>>>>>> bca133f7ce207b5238b5329e9f9de77d3a8ab813
                         {Errors(data.error)}
                     </div>
                 </div>
