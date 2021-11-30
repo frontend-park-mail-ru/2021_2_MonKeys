@@ -6,7 +6,6 @@
 @import './abstracts/colors';
 
 @import './pages/likes';
-@import './pages/profile';
 
 @import './components/form_field';
 @import './components/header';
@@ -15,7 +14,7 @@
 @import './components/form_item_list';
 @import './components/form_add_img';
 @import './components/card-actions';
-@import './components/card-expended';
+@import './components/card/card-expended';
 @import './components/img-card';
 @import './components/report-window';
 @import './components/report-radio-button';
@@ -30,6 +29,7 @@
 @import './components/profile/profile-preview';
 @import './components/chat/message';
 @import './components/chat/chat';
+@import './components/profile/profile';
 @import './components/error_api';
 
 @import './layout/flex_column_center';

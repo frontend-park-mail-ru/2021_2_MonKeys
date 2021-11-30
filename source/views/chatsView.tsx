@@ -44,7 +44,7 @@ export default class ChatsView extends ViewBase {
     _createTmpl(data) {
         return (
             <div class='app__content--align-center'>
-                <div class='chats '>
+                <div class='chats'>
                     {SearchField()}
                     {Matches(data.matches)}
                     {Chats(data.chats)}

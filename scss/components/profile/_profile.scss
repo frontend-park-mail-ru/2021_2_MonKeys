@@ -1,0 +1,42 @@
+$manager-height: 48px;
+
+.profile {
+  height: 100%;
+  width: 100%;
+  max-width: $max-width;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.profile__manager {
+  max-height: $manager-height;
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  margin: $margin-small $margin-medium;
+}
+
+.profile__action {
+  width: 24px;
+  height: 24px;
+}
+
+.profile__card {
+  max-height: calc(100% - $manager-height - $tapbar-height);
+  width: 100%;
+  flex: 1 0 auto;
+
+  margin: 0px $margin-small;
+
+  overflow: scroll;
+}
+
+.profile__tapbar {
+  width: 100%;
+  flex: 0 0 auto;
+}
