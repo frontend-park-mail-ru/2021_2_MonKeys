@@ -1,4 +1,5 @@
 import ViewBase from './viewBase.js';
+import { viewSizes } from '../constants/viewParams.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { Tapbar } from '../components/tapbar/tapbar.js';
 import { ImgCard } from '../components/card/imgCard.js';
@@ -13,6 +14,7 @@ import { Errors } from '../components/error/errors.js';
 export default class LikesView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
+        this.viewSize = viewSizes.slim;
         LikesStore.subscribe(this.subscribtionCallback, this);
         ReportsStore.subscribe(this.reportsSubscribtionCallback, this);
         ErrorStore.unsubscribe(this.errorStoreUpdatesView);

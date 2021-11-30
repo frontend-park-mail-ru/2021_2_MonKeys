@@ -47,6 +47,17 @@
   overflow-y: scroll;
 }
 
+.chat__messages-side {
+  height: 85vh;
+}
+
 .chat__message-input {
   flex: 0 0 auto;
+}
+
+.chat__side__container {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  flex-direction: column;
 }

@@ -1,4 +1,5 @@
 import ViewBase from './viewBase.js';
+import { viewSizes } from '../constants/viewParams.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { EditForm } from '../components/edit/editForm.js';
 import { EditStore } from '../store/editStore.js';
@@ -19,6 +20,7 @@ import router from '../route/router.js';
 export default class EditView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
+        this.viewSize = viewSizes.anyone;
         EditStore.subscribe(this.subcribtionCallbackEdit, this);
         ProfileStore.subscribe(this.subcribtionCallbackProfile, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
@@ -181,7 +183,6 @@ export default class EditView extends ViewBase {
         return (
             <div class='view-contant view-content__scroll-y'>
                 <div class='signup-container'>
-
                     {EditForm(data.editForm, data.actions.logoutButton)}
 
                     {Errors(data.error)}

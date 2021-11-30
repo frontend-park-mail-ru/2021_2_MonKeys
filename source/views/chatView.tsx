@@ -1,4 +1,5 @@
 import ViewBase from './viewBase.js';
+import { viewSizes } from '../constants/viewParams.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { Chat } from '../components/chat/chat.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
@@ -10,6 +11,7 @@ import { Errors } from '../components/error/errors.js';
 export default class ChatView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
+        this.viewSize = viewSizes.slim;
         ChatsStore.subscribe(this.chatUpdatesView, this);
         ReportsStore.subscribe(this.reportsSubscribtionCallback, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
@@ -31,9 +33,10 @@ export default class ChatView extends ViewBase {
 
     _createTmpl(data) {
         if (!data.chat || !data.chat.profile || !data.chat.isOpenedProfile) {
+            console.log(data);
             return (
                 <div class='app__content--align-center'>
-                    {Chat(data.chat)}
+                    {Chat(data.chat, false)}
                     {Errors(data.error)}
                 </div>
             );

@@ -1,8 +1,6 @@
-
 const domain = 'api.monkeys.team';
 export const serverAddress = `https://${domain}`;
 export const wsURL = `wss://${domain}/api/v1/apiws`;
-
 
 export const profileURL = '/api/v1/profile';
 export const tagsURL = '/api/v1/tags';

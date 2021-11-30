@@ -11,11 +11,13 @@ import { SearchField } from '../components/common/searchField.js';
 import { matchRequest } from '../requests/matchRequest.js';
 import { Errors } from '../components/error/errors.js';
 import { Matches } from '../components/chats/matches.js';
+import { Chat } from '../components/chat/chat.js';
 
-export default class ChatsView extends ViewBase {
+export default class ChatsWideView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
-        this.viewSize = viewSizes.slim;
+        // chatsManager.switchChat(ChatsStore.get().chats[0].fromUserID);
+        this.viewSize = viewSizes.wide;
         ChatsStore.subscribe(this.chatsStoreUpdatesView, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
         MatchesStore.subscribe(this.subscribtionCallback, this);
@@ -41,6 +43,7 @@ export default class ChatsView extends ViewBase {
         error: errorManager.error,
         matches: MatchesStore.get().matches,
         matchesSearched: MatchesStore.get().matchesSearched,
+        chat: chatsManager.chat,
     };
 
     _createTmpl(data) {
@@ -53,7 +56,7 @@ export default class ChatsView extends ViewBase {
                         class='view-contant view-contant_align_center
                   view-content_scroll-banned view-content__max-height'
                     >
-                        <div class='likes-view-text-big'>Здесь будут ваши пары и чаты</div>
+                        <div class='likes-view-text-big'>Здесь будут ваши пары и широкие чаты</div>
 
                         <div class='view-content__dummy-image-container'>
                             <img src='icons/chat_gradient.svg' class='view-content__dummy-image'></img>
@@ -66,25 +69,61 @@ export default class ChatsView extends ViewBase {
                 </div>
             );
         }
+        if (!data.chat)
+            return (
+                <div style='display: flex;'>
+                    {Tapbar(TapbarStore.get(), true)}
+                    <div class='chats'>
+                        {SearchField()}
+                        {Matches(data.matches)}
+                        {Chats(data.chats)}
+                    </div>
+                    <div class='chat'>
+                        <div class='app__content--align-center'>{Errors(data.error)}</div>
+                    </div>
+                </div>
+            );
         return (
-            <div class='app__content--align-center'>
+            <div style='display: flex;'>
+                {Tapbar(TapbarStore.get(), true)}
                 <div class='chats'>
                     {SearchField()}
                     {Matches(data.matches)}
                     {Chats(data.chats)}
-                    <div class='chats__tapbar'>{Tapbar(TapbarStore.get())}</div>
-                    {Errors(data.error)}
+                </div>
+                <div class='chat__side__container'>
+                    <div class='chat'>
+                        {Chat(data.chat, true)};{Errors(data.error)}
+                    </div>
                 </div>
             </div>
         );
     }
 
     private chatsStoreUpdatesView(data, view) {
+        console.log(data);
+
+        view._data.chat = chatsManager.chat;
         view._data.chats = chatsManager.chatsWithMessages;
 
         view._template = view._createTmpl(view._data);
 
         view.render();
+        if (!view._data.chat || !view._data.chat.profile || !view._data.chat.isOpenedProfile) {
+            const _chatSpace = document.getElementsByClassName('chat__messages')[0];
+            if (_chatSpace) {
+                _chatSpace.scrollTop = _chatSpace.scrollHeight;
+            }
+            const _inputMsg = document.getElementsByTagName('input')[1];
+            if (_inputMsg) {
+                _inputMsg.focus();
+            }
+        } else {
+            const _cardProfile = document.getElementsByClassName('card-profile')[0];
+            if (_cardProfile) {
+                _cardProfile.scrollTop = 0;
+            }
+        }
     }
 
     private errorStoreUpdatesView(data, view) {

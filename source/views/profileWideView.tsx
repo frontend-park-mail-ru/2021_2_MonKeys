@@ -7,12 +7,12 @@ import { ProfileStore } from '../store/profileStore.js';
 import TapbarStore from '../store/tapbarStore.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { Errors } from '../components/error/errors.js';
-import { ProfileActions } from '../components/profile/profileActions.js';
 
-export default class ProfileView extends ViewBase {
+export default class ProfileWideView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
-        this.viewSize = viewSizes.slim;
+        this.viewSize = viewSizes.wide;
+
         ProfileStore.subscribe(this.subcribtionCallback, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
         this._template = this._createTmpl(this._data);
@@ -36,14 +36,15 @@ export default class ProfileView extends ViewBase {
 
     _createTmpl(data) {
         return (
-            <div class='app__content--align-center'>
-                <div class='profile'>
-                    {ProfileActions()}
-                    <div class='profile__card'>
-                        {CardExpended({ userData: data.cardData.userData, withActions: false, withReports: false })}
+            <div style='display: flex;'>
+                {Tapbar(TapbarStore.get(), true)}
+                <div class='app__content--align-center'>
+                    <div class='profile'>
+                        <div class='profile__card'>
+                            {CardExpended({ userData: data.cardData.userData, withActions: false, withReports: false })}
+                        </div>
+                        {Errors(data.error)}
                     </div>
-                    <div class='profile__tapbar'>{Tapbar(TapbarStore.get())}</div>
-                    {Errors(data.error)}
                 </div>
             </div>
         );

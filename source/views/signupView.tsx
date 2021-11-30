@@ -1,4 +1,5 @@
 import ViewBase from './viewBase.js';
+import { viewSizes } from '../constants/viewParams.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { FormField } from '../components/common/formField.js';
 import { Button } from '../components/common/button.js';
@@ -15,6 +16,7 @@ import { Errors } from '../components/error/errors.js';
 export default class SignupView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
+        this.viewSize = viewSizes.anyone;
         SignupStore.subscribe(this.subscribtionCallback, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
         this._template = this._createTmpl();

@@ -8,6 +8,7 @@ import { ProfileData } from '../store/profileStore.js';
 export const ChatsEventsRegister = () => {
     EventBus.register('chats:preview-chat', (chatID: number) => {
         chatsManager.switchChat(chatID);
+        console.log(chatID);
 
         router.go(`/chat`);
         window.history.replaceState('', '', '/chats');
