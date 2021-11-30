@@ -1,0 +1,18 @@
+@keyframes dummy-endless {
+  0% {
+    filter: hue-rotate(0deg);
+    width: 250px;
+    height: 250px;
+    transform: translate3d();
+  }
+  50% {
+    filter: hue-rotate(45deg);
+    width: 150px;
+    height: 150px;
+  }
+  100% {
+    filter: hue-rotate(0deg);
+    width: 250px;
+    height: 250px;
+  }
+}

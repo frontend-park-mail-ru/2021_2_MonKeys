@@ -35,6 +35,7 @@ export namespace MonkeysVirtualDOM {
         }
 
         const rootElement = document.createElement(virtualNode.type);
+
         // rootElement.style.transition = '1s';
         if (virtualNode.type === 'img') {
             rootElement.addEventListener(
@@ -52,6 +53,9 @@ export namespace MonkeysVirtualDOM {
         }
         virtualNode.props &&
             Object.keys(virtualNode.props).forEach((key) => {
+                if (key === 'name' && (virtualNode.props[key] === 'error' || virtualNode.props[key] === 'tag')) {
+                    rootElement.style.transition = '1s';
+                }
                 if (/^on/.test(key)) {
                     rootElement.addEventListener(key.slice(2), virtualNode.props[key]);
                 } else {

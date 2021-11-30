@@ -10,6 +10,7 @@ export const DescriptionField = (props) => {
                 placeholder={props.placeholder}
                 class={props.class}
                 autocomplete='chrome-off'
+                maxlength='1000'
             >
                 {props.value}
             </textarea>
@@ -23,6 +24,7 @@ export const DescriptionField = (props) => {
                 placeholder={props.placeholder}
                 class={props.class}
                 autocomplete='chrome-off'
+                maxlength='1000'
             ></textarea>
         );
     }

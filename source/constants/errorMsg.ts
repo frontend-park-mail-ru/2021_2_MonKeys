@@ -1,6 +1,6 @@
 const errorEmailMsg = 'Введите почту в формате example@drip.com';
 const errorPasswordMsg = 'Пароль должен состоять из A-Z, a-z и 0-9';
-const errorLoginFormMsg = 'Такой пользователь еще не зарегистрирован';
+const errorLoginFormMsg = 'Неверная почта или пароль';
 const errorSignupFormMsg = 'Пользователь с такой почтой уже зарегистрирован';
 const errorRepeatPasswordMsg = 'Пароли не совпадают';
 const errorNameMsg = 'Введите свое настоящее имя';
