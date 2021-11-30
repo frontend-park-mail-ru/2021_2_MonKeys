@@ -51,6 +51,11 @@ export const ReportsEventsRegister = () => {
                 const reportsData = ReportsStore.get();
                 reportsData.active = false;
                 ReportsStore.set(reportsData);
+                for (let i = 0; i < reportsData.reportsCount; i++) {
+                    reportsData.reports[i].isActive = false;
+                }
+                reportsData.choosedReport = '';
+                ReportsStore.set(reportsData);
                 EventBus.dispatch<string>('user:cookie-requests');
             });
         }

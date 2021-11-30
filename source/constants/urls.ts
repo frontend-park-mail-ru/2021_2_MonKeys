@@ -1,4 +1,4 @@
-const domain = '192.168.1.12';
+const domain = 'localhost';
 export const serverAddress = `http://${domain}`;
 export const wsURL = `ws://${domain}/api/v1/apiws`;
 
