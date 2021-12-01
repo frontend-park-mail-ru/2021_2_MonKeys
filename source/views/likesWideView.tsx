@@ -42,22 +42,20 @@ export default class LikesWideView extends ViewBase {
     _createTmpl(data) {
         if (!LikesStore.get().profiles[0]) {
             return (
-                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
-                    <div
-                        class='view-contant view-contant_align_center
-                  view-content_scroll-banned view-content__max-height'
-                    >
-                        <div class='likes-view-text-big'>У вас пока нет новых лайков</div>
+                <div style='display: flex;width: 100%; height: 100%'>
+                    {Tapbar(TapbarStore.get(), true)}
+                    <div style='width: 100%;  display: flex; justify-content: center; align-items:center;'>
+                        <div style=' display: flex; flex-direction: column; height: 610px;'>
+                            <div class='likes-view-text-big'>У вас пока нет новых лайков</div>
 
-                        <div class='view-content__dummy-image-container'>
-                            <img src='icons/like_gradient.svg' class='view-content__dummy-image'></img>
+                            <div class='view-content__dummy-image-container' style='min-height: 250px;'>
+                                <img src='icons/like_gradient.svg' class='view-content__dummy-image'></img>
+                            </div>
+                            <div class='likes-view-text-small'>Лайкайте карточки в ленте и возвращайтесь</div>
                         </div>
-                        <div class='likes-view-text-small'>Лайкайте карточки в ленте и возвращайтесь</div>
-
-                        {Tapbar(TapbarStore.get())}
-                        {Errors(data.error)}
                     </div>
                 </div>
+
             );
         }
         if (!LikesStore.get().expended) {
@@ -88,19 +86,23 @@ export default class LikesWideView extends ViewBase {
             );
         } else {
             return (
-                <div class='app__content--align-center'>
-                    <div class='likes'>
-                        <div class='profile__card likes__profile'>
-                            {CardExpended({
-                                userData: data.likes[LikesStore.get().userIndex],
-                                withActions: true,
-                                withReports: true,
-                                reports: data.reports,
-                                reported: data.reportsActive,
-                            })}
+                <div style='display: flex;height: 100%; width: 100%;'>
+                    {Tapbar(TapbarStore.get(), true)}
+                    <div style='width: 100%; display: flex; justify-content: center; align-items: center;'>
+                        <div style='width:100%; max-width: 400px; display: flex; flex-direction: column; height: 610px;'>
+                            <div class='profile'>
+                                <div class='profile__card'>
+                                    {CardExpended({
+                                        userData: data.likes[LikesStore.get().userIndex],
+                                        withActions: true,
+                                        withReports: true,
+                                        reports: data.reports,
+                                        reported: data.reportsActive,
+                                    })}
+                                </div>
+                                {Errors(data.error)}
+                            </div>
                         </div>
-                        <div class='likes__tapbar'>{Tapbar(TapbarStore.get())}</div>
-                        {Errors(data.error)}
                     </div>
                 </div>
             );

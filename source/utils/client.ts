@@ -15,10 +15,16 @@ export const startClientAspectRatio = () => {
     window.isWidescreen = window.innerWidth / window.innerHeight > aspectRatioWidesceenEdge;
 };
 
+const wideMinWidth = 400;
+
+const detectPC = (aspectRatio, width: number) => {
+    return aspectRatio > aspectRatioWidesceenEdge && width > wideMinWidth;
+};
+
 export const getClientAspectRatio = (width: number, height: number) => {
     const aspectRatio = width / height;
 
-    if (window.isWidescreen != aspectRatio > aspectRatioWidesceenEdge) {
+    if (window.isWidescreen != detectPC(aspectRatio, width)) {
         window.isWidescreen = !window.isWidescreen;
         if (window.currentView) {
             if (window.currentView.viewSize === viewSizes.anyone) {

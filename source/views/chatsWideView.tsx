@@ -80,20 +80,17 @@ export default class ChatsWideView extends ViewBase {
 
         if (!data.matches[0] && !data.chats[0]) {
             return (
-                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
-                    <div
-                        class='view-contant view-contant_align_center
-                  view-content_scroll-banned view-content__max-height'
-                    >
-                        <div class='likes-view-text-big'>Здесь будут ваши пары и широкие чаты</div>
+                <div style='display: flex;width: 100%; height: 100%'>
+                    {Tapbar(TapbarStore.get(), true)}
+                    <div style='width: 100%;  display: flex; justify-content: center; align-items:center;'>
+                        <div style=' display: flex; flex-direction: column; height: 610px;'>
+                            <div class='likes-view-text-big'>Здесь будут ваши пары и чаты</div>
 
-                        <div class='view-content__dummy-image-container'>
-                            <img src='icons/chat_gradient.svg' class='view-content__dummy-image'></img>
+                            <div class='view-content__dummy-image-container' style='min-height: 250px;'>
+                                <img src='icons/chat_gradient.svg' class='view-content__dummy-image'></img>
+                            </div>
+                            <div class='likes-view-text-small'>Лайкайте карточки в ленте и возвращайтесь</div>
                         </div>
-                        <div class='likes-view-text-small'>Лайкайте карточки в ленте и возвращайтесь</div>
-
-                        {Tapbar(TapbarStore.get())}
-                        {Errors(data.error)}
                     </div>
                 </div>
             );

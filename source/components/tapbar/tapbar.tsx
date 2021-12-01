@@ -7,6 +7,8 @@ export interface tapbarProps {
 }
 
 export const Tapbar = (props: tapbarProps, vertical?: boolean) => {
+    console.log(props);
+    console.log(props.activeItem === 'profile');
     if (vertical) {
         const items: tapbarItemProps[] = [
             {
@@ -31,20 +33,26 @@ export const Tapbar = (props: tapbarProps, vertical?: boolean) => {
             },
             {
                 route: '/edit',
-                src: props.activeItem === 'edit' ? 'icons/settings.svg' : 'icons/settings.svg',
-                name: 'Редактирование',
+                src: 'icons/settings_unselected.svg',
+                name: 'Настройки',
             },
             {
                 route: '/login',
                 action: () => {
                     eventBus.dispatch('profile:logout-button');
                 },
-                src: props.activeItem === 'profile' ? 'icons/exit.svg' : 'icons/exit.svg',
+                src: 'icons/exit.svg',
                 name: 'Выход',
             },
         ];
 
-        return <div class='tapbar tapbar-vertical'>{items.map((props) => TapbarItem(props))}</div>;
+        return (
+
+            <div class='tapbar tapbar-vertical'>
+                <img src='icons/logo.svg' height='120' width='180' />
+                {items.map((props) => TapbarItem(props))}
+            </div>
+        );
     }
     const items: tapbarItemProps[] = [
         {

@@ -23,14 +23,26 @@ $report-status-max-width: 96px;
   flex-direction: column;
 }
 
-.img-card_size_small{
+
+@media (max-aspect-ratio: 10/10){
+  .img-card_size_small{
   min-width: 85%;
   width: $img-card-small-width;
   height: $img-card-small-height;
 
   margin-right: 12px;
 }
+}
 
+
+@media (min-aspect-ratio: 10/10) {
+  .img-card_size_small{
+  min-width: 300px;
+  height: 55vh;
+
+  margin-right: 12px;
+}
+}
 .img-card_size_medium{
   width: $img-card-medium-width;
   height: 60%;

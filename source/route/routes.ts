@@ -44,7 +44,7 @@ export const Routes = {
         tapbarHidden: true,
     },
     '/edit': {
-        name: 'Редактирование',
+        name: 'Настройки',
         path: '/edit',
         auth: userStatus.loggedIn,
         view: EditView,
@@ -52,7 +52,7 @@ export const Routes = {
         tapbarHidden: true,
     },
     '/signup-edit': {
-        name: 'Редактирование',
+        name: 'Настройки',
         path: '/signup-edit',
         auth: userStatus.Signup,
         view: SignupEditView,

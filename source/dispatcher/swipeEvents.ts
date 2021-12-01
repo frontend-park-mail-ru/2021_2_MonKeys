@@ -83,7 +83,10 @@ export const SwipeEvenetsRegister = () => {
         card.style.transform += `rotate(${cardMoveOffset.diffX / rotationScale}deg)`;
     });
     EventBus.register('swipe:end', () => {
-        const card = document.querySelectorAll<HTMLElement>('.card')[0];
+        let card = document.querySelectorAll<HTMLElement>('.card')[0];
+        if (!card) {
+            card = document.querySelectorAll<HTMLElement>('card-expended')[0];
+        }
         if (window.offsetX > swipesAnimation.likeXThreshhold) {
             window.startX = 0;
             eventBus.dispatch('feed:like-button');

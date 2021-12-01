@@ -20,7 +20,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
+  width: 95vw;
   position: absolute;
   top: 25%;
 }
@@ -67,9 +67,13 @@
 }
 
 .carousel-button-right {
-  padding-right: $margin-small;
+  padding: $margin-small;
+  width: 24px;
+  height: 24px
 }
 
 .carousel-button-left {
-  padding-left: $margin-small;
+  padding: $margin-small;
+  width: 24px;
+  height: 24px
 }

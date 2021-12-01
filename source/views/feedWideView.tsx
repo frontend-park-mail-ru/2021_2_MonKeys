@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import ViewBase from './viewBase.js';
 import { viewSizes } from '../constants/viewParams.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
@@ -103,11 +104,13 @@ export default class FeedWideView extends ViewBase {
             };
 
             return (
-                <div style='display: flex;height: 100%;'>
+                <div style='display: flex;height: 100%; width: 100%;'>
                     {Tapbar(TapbarStore.get(), true)}
-                    <div style='display:flex; justify-content: center; width: 100%'>
-                        {CardFeed(data.cardData, true)}
-                        {Errors(data.error)}
+                    <div style='width: 100%; display: flex; justify-content: center;'>
+                        <div class='feed'>
+                            {CardFeed(data.cardData, false)}
+                            {Errors(data.error)}
+                        </div>
                     </div>
                 </div>
             );
@@ -121,16 +124,14 @@ export default class FeedWideView extends ViewBase {
                 },
             };
             return (
-                <div style='display: flex;'>
+                <div style='display: flex;height: 100%; width: 100%;'>
                     {Tapbar(data.tapbar, true)}
-                    <div class='view-contant view-contant_align_center view-content_scroll'>
-                        <div
-                            class='view-contant view-contant_align_center
-                  view-content_scroll view-content__max-height'
-                        >
-                            {CardExpended(data.cardData)}
-
-                            {Errors(data.error)}
+                    <div style='width: 100%; display: flex; justify-content: center; align-items: center;'>
+                        <div style='width:100%; max-width: 400px; display: flex; flex-direction: column; height: 610px;'>
+                            <div class='feed'>
+                                {CardExpended(data.cardData)}
+                                {Errors(data.error)}
+                            </div>
                         </div>
                     </div>
                 </div>
