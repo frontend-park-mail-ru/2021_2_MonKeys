@@ -4,6 +4,7 @@ export default class ViewBase {
     _parent;
     _template;
     _data;
+    viewSize: number;
 
     constructor(parent: HTMLElement) {
         this._parent = parent;

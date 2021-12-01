@@ -2,16 +2,16 @@ import { route, Routes } from './routes.js';
 import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
 import TapbarStore from '../store/tapbarStore.js';
-
-const userLoggedIn = () => {
-    return AuthStore.get().loggedIn === userStatus.loggedIn;
-};
+import { resetCarousel } from '../modules/carousel.js';
 
 const drawLocation = (route, parent) => {
     TapbarStore.set({
         activeItem: route.tapbar,
     });
-    const currentView = new route.view(parent);
+    let currentView = new route.view(parent);
+    if (route.wideView && window.isWidescreen) {
+        currentView = new route.wideView(parent);
+    }
     window.document.title = route.name;
     currentView.render();
 };
@@ -25,9 +25,8 @@ class Router {
     move(route: string) {
         const $root = document.getElementById('app');
         const location = route;
+        resetCarousel();
         if (this.routes[location]) {
-            let currentView;
-
             const user = AuthStore.get().loggedIn;
 
             if (this.routes[location].auth === user) {
@@ -42,7 +41,7 @@ class Router {
                         drawLocation(this.routes['/signup-edit'], $root);
                         break;
                     }
-                    case userStatus.notlLoggedIn: {
+                    case userStatus.notLoggedIn: {
                         drawLocation(this.routes['/login'], $root);
                         break;
                     }

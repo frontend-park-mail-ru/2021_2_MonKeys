@@ -1,24 +1,73 @@
 import ViewBase from './viewBase.js';
+import { viewSizes } from '../constants/viewParams.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
-import { Tapbar } from '../components/tapbar.js';
-import { EditForm } from '../components/editForm.js';
+import { EditForm } from '../components/edit/editForm.js';
 import { EditStore } from '../store/editStore.js';
 import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
-import { CritError } from '../components/critError.js';
-import { errorNameMsg, errorAgeMsg, errorImgMsg, errorEditFormMsg } from '../constants/errorMsg.js';
+import { errorManager, ErrorStore } from '../store/errorStore.js';
+import {
+    errorNameMsg,
+    errorAgeMsg,
+    errorImgMsg,
+    errorEditFormMsg,
+    errorGenderMsg,
+    errorPreferMsg,
+} from '../constants/errorMsg.js';
+import { Errors } from '../components/error/errors.js';
+import router from '../route/router.js';
+import { Button } from '../components/common/button.js';
+import { IconButton } from '../components/common/iconButton.js';
 
 export default class EditView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
+        this.viewSize = viewSizes.anyone;
         EditStore.subscribe(this.subcribtionCallbackEdit, this);
         ProfileStore.subscribe(this.subcribtionCallbackProfile, this);
+        ErrorStore.subscribe(this.errorStoreUpdatesView, this);
+
+        const storeData = ProfileStore.get();
+        const editStore = EditStore.get();
+        switch (storeData.gender) {
+            case 'male':
+                editStore.genderField.items[0].selected = true;
+                editStore.genderField.items[1].selected = false;
+                break;
+            case 'female':
+                editStore.genderField.items[1].selected = true;
+                editStore.genderField.items[0].selected = false;
+                break;
+        }
+        switch (storeData.prefer) {
+            case 'male':
+                editStore.preferField.items[0].selected = true;
+                editStore.preferField.items[1].selected = false;
+                editStore.preferField.items[2].selected = false;
+                break;
+            case 'female':
+                editStore.preferField.items[0].selected = false;
+                editStore.preferField.items[1].selected = true;
+                editStore.preferField.items[2].selected = false;
+                break;
+            default:
+                editStore.preferField.items[0].selected = false;
+                editStore.preferField.items[1].selected = false;
+                editStore.preferField.items[2].selected = true;
+                break;
+        }
+
+        EditStore.set(editStore);
+
         this._template = this._createTmpl(this._data);
     }
 
     _data = {
-        'editForm': {
+        editForm: {
             'fields': {
+                'genderField': EditStore.get().genderField,
+                'tagsField': EditStore.get().tagsField,
+                'preferField': EditStore.get().preferField,
                 'name': {
                     tag: 'textarea',
                     placeholder: 'Имя',
@@ -38,6 +87,7 @@ export default class EditView extends ViewBase {
                     value: ProfileStore.get().date,
                     class: EditStore.get().birthDateFieldClass,
                     name: 'birthDate',
+                    iconSrc: 'icons/calendar.svg',
                     oninput: () => {
                         EventBus.dispatch<string>('edit:birth-date-input');
                     },
@@ -50,19 +100,18 @@ export default class EditView extends ViewBase {
                     placeholder: 'Расскажите о себе',
                     value: ProfileStore.get().description,
                     name: 'description',
-                    class: 'form-field-edit text-desc',
+                    class: 'form__field-valid form__field-valid-desc',
                 },
                 'img': {
                     class: EditStore.get().imgFieldClass,
                 },
             },
-            'tags': EditStore.get().tags,
             'buttons': {
                 'tagsButton': {
                     type: 'button',
                     text: 'tags',
                     class: 'tags-button',
-                    src: '../icons/button_expand_white.svg',
+                    src: 'icons/expand_big.svg',
                     onclick: () => {
                         EventBus.dispatch<string>('edit:open-tags');
                     },
@@ -77,7 +126,7 @@ export default class EditView extends ViewBase {
                 'saveButton': {
                     type: 'button',
                     text: 'Сохранить',
-                    class: 'edit',
+                    class: 'button-default edit__save-button',
                     onclick: () => {
                         EventBus.dispatch<string>('edit:save-button');
                     },
@@ -92,6 +141,14 @@ export default class EditView extends ViewBase {
                     text: errorAgeMsg,
                     class: EditStore.get().birthDateErrorClass,
                 },
+                'genderError': {
+                    text: errorGenderMsg,
+                    class: EditStore.get().genderErrorClass,
+                },
+                'preferError': {
+                    text: errorPreferMsg,
+                    class: EditStore.get().preferErrorClass,
+                },
                 'imgError': {
                     text: errorImgMsg,
                     class: EditStore.get().imgErrorClass,
@@ -102,21 +159,36 @@ export default class EditView extends ViewBase {
                 },
             },
         },
-        'tapbar': {
-            class: 'menu-icon',
+        actions: {
+            'logoutButton': {
+                src: 'icons/back.svg',
+                class: 'edit__back',
+                onclick: () => {
+                    router.go('/profile');
+                },
+            },
+            'settingButtons': {
+                src: 'icons/exit.svg',
+                class: 'edit__back',
+                onclick: () => {
+                    EventBus.dispatch<string>('profile:logout-button');
+                },
+            },
         },
-        'critError': {
-            text: 'API не отвечает',
-            loading: EditStore.get().apiErrorLoadCondition,
-        },
+        error: errorManager.error,
     };
-
     _createTmpl(data) {
         return (
-            <div class='card-container'>
-                {EditForm(data.editForm)}
-                {Tapbar(data.tapbar)}
-                {CritError(data.critError)}
+            <div class='app__content--align-center'>
+                <div class='edit'>
+                    <div class='edit__header'>
+                        {IconButton(data.actions.logoutButton)}
+                        <span class='header-text edit__header-text'>Настройки</span>
+                    </div>
+                    {EditForm(data.editForm)}
+                    <div class='edit__manager'>{Button(data.editForm.buttons.saveButton)}</div>
+                    {Errors(data.error)}
+                </div>
             </div>
         );
     }
@@ -124,6 +196,7 @@ export default class EditView extends ViewBase {
     public unsubscribe() {
         EditStore.unsubscribe(this.subcribtionCallbackEdit);
         ProfileStore.unsubscribe(this.subcribtionCallbackProfile);
+        ErrorStore.unsubscribe(this.errorStoreUpdatesView);
     }
 
     private subcribtionCallbackEdit(data, view) {
@@ -135,14 +208,27 @@ export default class EditView extends ViewBase {
         view._data.editForm.errorMsgs.imgError.class = data.imgErrorClass;
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
         view._data.editForm.tags = data.tags;
-        view._data.critError.loading = data.apiErrorLoadCondition;
         view._data.editForm.fields.name.value = ProfileStore.get().name;
         view._data.editForm.fields.birthDate.value = ProfileStore.get().date;
         view._data.editForm.fields.description.value = ProfileStore.get().description;
+
+        view._data.editForm.fields.genderField = data.genderField;
+        view._data.editForm.fields.preferField = data.preferField;
+        view._data.editForm.fields.tagsField = data.tagsField;
+        view._data.editForm.errorMsgs.genderError.class = data.genderErrorClass;
+        view._data.editForm.errorMsgs.preferError.class = data.preferErrorClass;
+
         view._template = view._createTmpl(view._data);
 
         view.render();
     }
+
+    private errorStoreUpdatesView(data, view) {
+        view._data.error = errorManager.error;
+        view._template = view._createTmpl(view._data);
+        view.render();
+    }
+
     private subcribtionCallbackProfile(data, view) {
         view._data.editForm.buttons.imgAddButton.imgs = ProfileStore.get().imgs;
         view._template = view._createTmpl(view._data);

@@ -1,19 +1,45 @@
 import { profilePhotoURL } from '../constants/urls.js';
 import http from '../utils/http.js';
+import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
+import { errorManager } from '../store/errorStore.js';
 
-const addPhotoToProfile = (photo) => {
+const addPhotoToProfileRequest = (photo) => {
     const body = new FormData();
     body.append('photo', photo);
 
-    return http.post(profilePhotoURL, body);
+    return http
+        .post(profilePhotoURL, body)
+        .then((response) => {
+            if (response.status !== HTTPSuccess) {
+                throw 'server internal error';
+            }
+
+            return response.data;
+        })
+        .catch((err) => {
+            errorManager.pushAPIError();
+            throw err;
+        });
 };
 
-const deleteProfilePhoto = (photo) => {
+const deleteProfilePhotoRequest = (photo) => {
     const body = JSON.stringify({
         photo: photo,
     });
 
-    return http.delete(profilePhotoURL, body);
+    return http
+        .delete(profilePhotoURL, body)
+        .then((response) => {
+            if (response.status !== HTTPSuccess) {
+                throw 'server internal error';
+            }
+
+            return response.data;
+        })
+        .catch((err) => {
+            errorManager.pushAPIError();
+            throw err;
+        });
 };
 
-export { addPhotoToProfile, deleteProfilePhoto };
+export { addPhotoToProfileRequest, deleteProfilePhotoRequest };

@@ -1,0 +1,67 @@
+@import '../../abstracts/colors';
+
+$card-expanded-default-width: 100%;
+$card-expanded-default-height: 100%;
+$card-expanded-img-default-height: 100%;
+
+
+.card-expended {
+  height: 100%;
+  max-height: $max-height;
+  width: 100%;
+  flex: 1 1 auto;
+  position: relative;
+}
+
+.card-expended-chats-wide{
+  display: flex;
+  align-items: center;
+  width: 300px;
+}
+
+.card-expended__profile {
+  height: 100%;
+  overflow-y: scroll;
+
+  background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.4) 0%, rgba(0, 44, 65, 0) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: $border-radius-default;
+
+  margin: 0 $margin-small;
+}
+
+.card-expended__profile-chats-wide {
+  height: 70vh;
+  width: 90%;
+}
+
+.card-expended__description {
+  margin-bottom: 6px;
+  margin-left: 12px;
+  margin-right: 12px;
+  margin-top: 6px;
+
+  font-size: $font-size-tiny;
+  line-height: 24px;
+
+  color: #FFFFFF;
+}
+
+.card-expended__back-button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.card-expended__report-button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.report-window__problems-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

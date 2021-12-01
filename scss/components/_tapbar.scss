@@ -1,19 +1,24 @@
-@media (max-width: 500px) {
-  .tapbar-container {
+$tapbar-height: 66.4px;
+
+.tapbar {
     display: flex;
-    justify-content: space-around;
-    position: absolute;
-    bottom: 24px;
-    width: 240px;
-  }
+    justify-content: center;
+    width: 100%;
 }
 
-@media (min-width: 500px) {
-  .tapbar-container {
-    display: flex;
-    justify-content: space-around;
-    position: absolute;
-    bottom: 24px;
-    width: 240px;
-  }
+.tapbar_item {
+    height: 36px;
+    width: 36px;
+    margin: 12px
+}
+
+.tapbar-vertical {
+    flex-direction: column;
+    width: 360px;
+    justify-content: start;
+}
+
+.tapbar_item-small {
+    height: 24px;
+    width: 24px;
 }

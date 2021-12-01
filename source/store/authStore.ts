@@ -8,7 +8,7 @@ export interface AuthData {
 const AuthStore = new BaseStore<AuthData>();
 
 AuthStore.set({
-    loggedIn: userStatus.notlLoggedIn,
+    loggedIn: userStatus.notLoggedIn,
 });
 
 export default AuthStore;

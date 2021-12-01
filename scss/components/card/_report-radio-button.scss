@@ -1,0 +1,28 @@
+@import '../../abstracts/colors';
+
+.report-radio-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 80%;
+  min-height: 36px;
+
+  border: 1px solid $white;
+  border-radius: $border-radius-default;
+
+  margin-bottom: 36px;
+}
+
+.report-radio-button_on{
+    background-color: $red ;
+}
+
+.report-radio-button__input{
+  display: none;
+}
+
+.report-radio-button__label{
+  display: flex;
+  margin: $margin-smallest;
+}

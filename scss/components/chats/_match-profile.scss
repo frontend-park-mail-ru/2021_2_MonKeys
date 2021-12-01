@@ -1,0 +1,29 @@
+$profile-photo-size: 96px;
+$profile-size: 114px;
+
+.match-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: $profile-photo-size;
+  height: $profile-size;
+
+  margin-right: $margin-small;
+}
+
+.match-profile__match-img {
+  width: $profile-photo-size;
+  height: $profile-photo-size;
+
+  -o-object-fit: cover;
+  object-fit: cover;
+
+  border-radius: $border-radius-default;
+}
+
+.match-profile__match-name {
+  font-size: $font-size-tiny;
+    
+  color: #FFFFFF;
+}

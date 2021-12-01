@@ -1,23 +1,23 @@
 import BaseStore from './storeBase.js';
 
 export interface ProfileData {
-    id?: string;
+    id?: number;
     name?: string;
+    gender?: string;
+    prefer?: string;
     age?: string;
     date?: string;
     description?: string;
     imgs?: string[];
     tags?: Set<string>;
-
-    apiErrorLoadCondition?: boolean;
+    reportStatus?: string;
 }
 
 const ProfileStore = new BaseStore<ProfileData>();
 
 ProfileStore.set({
     imgs: [],
-
-    apiErrorLoadCondition: false,
+    prefer: '',
 });
 
 export { ProfileStore };

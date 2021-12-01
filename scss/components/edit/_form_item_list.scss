@@ -1,0 +1,31 @@
+@import '../form_field';
+
+.form__item__list-valid{
+    @include form-field($field-valid-color);
+    flex-direction: column;
+    height: auto;
+    padding-top: 12px;
+}
+
+@mixin listItem($deselected: false){
+    width: 60px;
+    border: 1px solid white;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 12px;
+    margin: 12px;
+    @if $deselected {
+        color: #CDCDCD;
+        border-color: #CDCDCD;
+    }
+    padding: 6px;
+}
+
+.list-item-selected{
+    @include listItem();
+}
+
+
+.list-item-deselected{
+    @include listItem(true);
+}

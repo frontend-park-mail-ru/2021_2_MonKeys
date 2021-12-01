@@ -1,29 +1,94 @@
 import EventBus from './eventBus.js';
 import feedStore from '../store/feedStore.js';
-import LikesStore from '../store/likesStore.js';
 import reactions from '../constants/reactions.js';
 import { likesRequest } from '../requests/likesRequest.js';
-import { matchRequest } from '../requests/matchRequest.js';
 import { feedRequest } from '../requests/feedRequest.js';
-import { HTTPSuccess } from '../constants/HTTPStatus.js';
+import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { requestMoreCardsThreshold } from '../constants/feed.js';
+import { resetCarousel } from '../modules/carousel.js';
+
+const animationThanLikeAndReset = () => {
+    EventBus.dispatch('feed:reaction', reactions.like);
+    let card = document.querySelectorAll<HTMLElement>('.card')[0];
+    if (!card) {
+        card = document.querySelectorAll<HTMLElement>('.card-profile')[0];
+        card.style.transform = '';
+        card.style.animation = '';
+        card.style.opacity = '1';
+        card.removeEventListener('animationend', animationThanLikeAndReset);
+        return;
+    }
+    card.style.transform = '';
+    card.style.animation = '';
+    card.style.opacity = '1';
+    const heart = document.querySelector<HTMLElement>('img[alt="like"]');
+    const dislike = document.querySelector<HTMLElement>('img[alt="dislike"]');
+    dislike.style.width = `36px`;
+    dislike.style.height = `36px`;
+    dislike.style.transform = ``;
+    dislike.style.opacity = `1`;
+    dislike.style.animation = '';
+    heart.style.width = `36px`;
+    heart.style.height = `36px`;
+    heart.style.transform = ``;
+    heart.style.opacity = `1`;
+    heart.style.animation = '';
+    card.removeEventListener('animationend', animationThanLikeAndReset);
+};
+
+const animationThanDislikeAndReset = () => {
+    EventBus.dispatch('feed:reaction', reactions.like);
+    let card = document.querySelectorAll<HTMLElement>('.card')[0];
+    if (!card) {
+        card = document.querySelectorAll<HTMLElement>('.card-profile')[0];
+        card.style.transform = '';
+        card.style.animation = '';
+        card.style.opacity = '1';
+        card.removeEventListener('animationend', animationThanDislikeAndReset);
+        return;
+    }
+    card.style.transform = '';
+    card.style.animation = '';
+    card.style.opacity = '1';
+    const heart = document.querySelector<HTMLElement>('img[alt="like"]');
+    const dislike = document.querySelector<HTMLElement>('img[alt="dislike"]');
+    dislike.style.width = `36px`;
+    dislike.style.height = `36px`;
+    dislike.style.transform = ``;
+    dislike.style.opacity = `1`;
+    dislike.style.animation = '';
+    heart.style.width = `36px`;
+    heart.style.height = `36px`;
+    heart.style.transform = ``;
+    heart.style.opacity = `1`;
+    heart.style.animation = '';
+    card.removeEventListener('animationend', animationThanDislikeAndReset);
+};
 
 export const FeedEventsRegister = () => {
     EventBus.register('feed:like-button', () => {
-        EventBus.dispatch('feed:reaction', reactions.like);
+        let card = document.querySelectorAll<HTMLElement>('.card')[0];
+        if (!card) {
+            card = document.querySelectorAll<HTMLElement>('.card-profile')[0];
+        }
+        card.style.animation = 'swipedRight 1s ease 1';
+        card.addEventListener('animationend', animationThanLikeAndReset);
     });
     EventBus.register('feed:dislike-button', () => {
-        EventBus.dispatch('feed:reaction', reactions.dislike);
+        let card = document.querySelectorAll<HTMLElement>('.card')[0];
+        if (!card) {
+            card = document.querySelectorAll<HTMLElement>('.card-profile')[0];
+        }
+        card.style.animation = 'swipedLeft 1s ease 1';
+        card.addEventListener('animationend', animationThanDislikeAndReset);
     });
     EventBus.register('feed:expand-button', () => {
         const data = feedStore.get();
-        data.apiErrorLoadCondition = false;
         data.expanded = true;
         feedStore.set(data);
     });
     EventBus.register('feed:shrink-button', () => {
         const data = feedStore.get();
-        data.apiErrorLoadCondition = false;
         data.expanded = false;
         feedStore.set(data);
     });
@@ -37,72 +102,54 @@ export const FeedEventsRegister = () => {
         //...
     });
     EventBus.register('feed:reaction', (reactionID) => {
+        resetCarousel();
         const data = feedStore.get();
-        data.apiErrorLoadCondition = false;
+        data.expanded = false;
+        likesRequest(data.profiles[data.counter].id, reactionID).then((likesData) => {
+            if (likesData.status !== HTTPSuccess) {
+                throw 'bad response';
+            }
 
-        likesRequest(data.profiles[data.counter].id, reactionID)
-            .then((response) => {
-                if (response.status === HTTPSuccess) {
-                    if (response.data.status === HTTPSuccess) {
-                        if (response.data.body.match) {
-                            matchRequest().then((matchResponse) => {
-                                const likesData = LikesStore.get();
-                                likesData.profiles = matchResponse.data.body.allUsers;
-                                likesData.mathesCount = matchResponse.data.body.matchesCount;
-                                LikesStore.set(likesData);
-                            });
-                        }
-                    } else {
-                        throw '400';
+            if (likesData.body.match) {
+                // matchRequest().then((matchResponse) => {
+                //     const likesData = LikesStore.get();
+                //     likesData.profiles = matchResponse.data.body.allUsers;
+                //     likesData.mathesCount = matchResponse.data.body.matchesCount;
+                //     LikesStore.set(likesData);
+                // });
+            }
+
+            data.counter++;
+
+            if (data.counter === requestMoreCardsThreshold) {
+                feedRequest().then((feedData) => {
+                    if (feedData.status !== HTTPSuccess) {
+                        throw 'bad response';
                     }
-                } else {
-                    const feedData = feedStore.get();
-                    feedData.apiErrorLoadCondition = true;
-                    feedStore.set(feedData);
-                }
 
-                data.counter++;
+                    if (feedData.body !== null) {
+                        data.profiles = feedData.body;
+                    } else {
+                        data.profiles = [];
+                        data.outOfCards = true;
+                    }
+                    data.counter = 0;
 
-                if (data.counter === requestMoreCardsThreshold) {
-                    feedRequest().then((response) => {
-                        if (response.status === HTTPSuccess) {
-                            if (response.data.status === HTTPSuccess) {
-                                if (response.data.body !== null) {
-                                    data.profiles = response.data.body;
-                                } else {
-                                    data.profiles = [];
-                                    data.outOfCards = true;
-                                }
-                                data.counter = 0;
-
-                                if (data.profiles[data.counter]) {
-                                    data.outOfCards = false;
-                                } else {
-                                    data.outOfCards = true;
-                                }
-                                feedStore.set(data);
-                            } else {
-                                throw '400';
-                            }
-                        } else {
-                            const feedData = feedStore.get();
-                            feedData.apiErrorLoadCondition = true;
-                            feedStore.set(feedData);
-                        }
-                    });
-                } else {
                     if (data.profiles[data.counter]) {
                         data.outOfCards = false;
                     } else {
                         data.outOfCards = true;
                     }
                     feedStore.set(data);
+                });
+            } else {
+                if (data.profiles[data.counter]) {
+                    data.outOfCards = false;
+                } else {
+                    data.outOfCards = true;
                 }
-            })
-            .catch(() => {
-                const feedData = feedStore.get();
-                feedData.apiErrorLoadCondition = true;
-                feedStore.set(feedData);
-            });
+                feedStore.set(data);
+            }
+        });
     });
 };

@@ -7,7 +7,12 @@ import LikesView from '../views/likesView.js';
 import FeedView from '../views/feedView.js';
 import ChatView from '../views/chatView.js';
 import PageNotFoundView from '../views/pageNotFoundView.js';
+import ChatsWideView from '../views/chatsWideView.js';
+import FeedWideView from '../views/feedWideView.js';
+import LikesWideView from '../views/likesWideView.js';
+import ProfileWideView from '../views/profileWideView.js';
 import { userStatus } from '../constants/userStatus.js';
+import ChatsView from '../views/chatsView.js';
 
 export interface route {
     readonly name: string;
@@ -19,20 +24,24 @@ export interface route {
 export const Routes = {
     '/': {
         name: 'Drip',
-        auth: userStatus.notlLoggedIn,
+        auth: userStatus.notLoggedIn,
         view: LoginView,
+        wideView: LoginView,
+        tapbarHidden: true,
     },
     '/login': {
         name: 'Вход',
         path: '/login',
-        auth: userStatus.notlLoggedIn,
+        auth: userStatus.notLoggedIn,
         view: LoginView,
+        tapbarHidden: true,
     },
     '/signup': {
         name: 'Регистрация',
         path: '/signup',
-        auth: userStatus.notlLoggedIn,
+        auth: userStatus.notLoggedIn,
         view: SignupView,
+        tapbarHidden: true,
     },
     '/edit': {
         name: 'Редактирование',
@@ -40,12 +49,14 @@ export const Routes = {
         auth: userStatus.loggedIn,
         view: EditView,
         tapbar: 'profile',
+        tapbarHidden: true,
     },
     '/signup-edit': {
         name: 'Редактирование',
         path: '/signup-edit',
         auth: userStatus.Signup,
         view: SignupEditView,
+        tapbarHidden: true,
     },
     '/feed': {
         name: 'Лента',
@@ -53,13 +64,17 @@ export const Routes = {
         auth: userStatus.loggedIn,
         view: FeedView,
         tapbar: 'feed',
+        wideView: FeedWideView,
+        tapbarHidden: false,
     },
-    '/matches': {
-        name: 'Мэтчи',
-        path: '/matches',
+    '/likes': {
+        name: 'Лайки',
+        path: '/likes',
         auth: userStatus.loggedIn,
         view: LikesView,
-        tapbar: 'matches',
+        wideView: LikesWideView,
+        tapbar: 'likes',
+        tapbarHidden: false,
     },
     '/profile': {
         name: 'Профиль',
@@ -67,13 +82,26 @@ export const Routes = {
         auth: userStatus.loggedIn,
         view: ProfileView,
         tapbar: 'profile',
+        wideView: ProfileWideView,
+        tapbarHidden: false,
+    },
+    '/chats': {
+        name: 'Чаты',
+        path: '/chats',
+        auth: userStatus.loggedIn,
+        view: ChatsView,
+        tapbar: 'chats',
+        wideView: ChatsWideView,
+        tapbarHidden: false,
     },
     '/chat': {
-        name: 'Чаты',
+        name: 'Чат',
         path: '/chat',
         auth: userStatus.loggedIn,
         view: ChatView,
-        tapbar: 'chat',
+        tapbar: 'chats',
+        wideView: ChatsWideView,
+        tapbarHidden: true,
     },
     '/404': {
         name: 'Страница не найдена',

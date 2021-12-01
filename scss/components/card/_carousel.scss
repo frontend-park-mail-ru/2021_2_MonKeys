@@ -1,0 +1,75 @@
+.carousel-track {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.carousel-slide {
+  position: absolute;
+  height: 95%;
+  width: 95%;
+}
+.carousel-slide-expand {
+  position: absolute;
+  height: 80%;
+  width: 95%;
+}
+
+.carousel-nav__arrows{
+  height:30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+  top: 25%;
+}
+
+.side-big {
+  top: 50%;
+}
+
+.side-small {
+  top: 20%;
+}
+.carousel-button-nav {
+  height: 6px;
+  top: 50%;
+  background: black;
+  flex-grow: 1;
+  border-radius: 12px;
+  filter: invert(1) grayscale(1) brightness(0.5);
+  margin: 0 3px;
+}
+
+.carousel-button-nav.current-slide {
+  height: 6px;
+  top: 50%;
+  background: black;
+  filter: invert(1) grayscale(1) brightness(1);
+}
+
+.carousel-nav {
+  position: absolute;
+  top: 0;
+  left: 3px;
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  margin: 6px;
+}
+
+.card__img {
+  object-fit: cover;
+  width: 100%;
+  border-radius: 12px;
+  height: 100%;
+}
+
+.carousel-button-right {
+  padding-right: $margin-small;
+}
+
+.carousel-button-left {
+  padding-left: $margin-small;
+}
