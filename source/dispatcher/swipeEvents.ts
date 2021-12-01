@@ -83,7 +83,6 @@ export const SwipeEvenetsRegister = () => {
         card.style.transform += `rotate(${cardMoveOffset.diffX / rotationScale}deg)`;
     });
     EventBus.register('swipe:end', () => {
-        console.log(window.offsetX - swipesAnimation.likeXThreshhold);
         const card = document.querySelectorAll<HTMLElement>('.card')[0];
         if (window.offsetX > swipesAnimation.likeXThreshhold) {
             window.startX = 0;

@@ -9,9 +9,10 @@ export interface CardFeedProps {
     buttons;
 }
 
-export const CardFeed = (props: CardFeedProps) => {
+export const CardFeed = (props: CardFeedProps, wide: boolean) => {
+    const mainClass = wide ? 'card-wide' : 'view-content__card';
     return (
-        <div class='view-content__card'>
+        <div class={mainClass}>
             <div
                 class='card'
                 ontouchstart={(event) => {

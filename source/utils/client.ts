@@ -21,16 +21,12 @@ export const getClientAspectRatio = (width: number, height: number) => {
     if (window.isWidescreen != aspectRatio > aspectRatioWidesceenEdge) {
         window.isWidescreen = !window.isWidescreen;
         if (window.currentView) {
-            console.log(window.currentView.viewSize);
             if (window.currentView.viewSize === viewSizes.anyone) {
-                console.log('1');
                 return;
             }
             if (window.currentView.viewSize === viewSizes.slim && window.isWidescreen) {
-                console.log('redrawing to big');
                 router.go(window.location.pathname);
             } else if (window.currentView.viewSize === viewSizes.wide && !window.isWidescreen) {
-                console.log('redrawing to small');
                 router.go(window.location.pathname);
             }
         }

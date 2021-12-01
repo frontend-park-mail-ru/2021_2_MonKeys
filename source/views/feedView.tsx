@@ -107,7 +107,7 @@ export default class FeedView extends ViewBase {
                         class='view-contant view-contant_align_center
                   view-content_scroll view-content__max-height'
                     >
-                        {CardFeed(data.cardData)}
+                        {CardFeed(data.cardData, false)}
                         {Tapbar(TapbarStore.get())}
                         {Errors(data.error)}
                     </div>

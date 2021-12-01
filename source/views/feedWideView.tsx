@@ -103,16 +103,11 @@ export default class FeedWideView extends ViewBase {
             };
 
             return (
-                <div style='display: flex;'>
+                <div style='display: flex;height: 100%;'>
                     {Tapbar(TapbarStore.get(), true)}
-                    <div class='view-contant view-contant_align_center view-content_scroll'>
-                        <div
-                            class='view-contant view-contant_align_center
-                  view-content_scroll view-content__max-height'
-                        >
-                            {CardFeed(data.cardData)}
-                            {Errors(data.error)}
-                        </div>
+                    <div style='display:flex; justify-content: center; width: 100%'>
+                        {CardFeed(data.cardData, true)}
+                        {Errors(data.error)}
                     </div>
                 </div>
             );

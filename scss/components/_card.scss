@@ -10,6 +10,11 @@ $card-expanded-img-default-height: 384px;
   max-height: calc(100vh - 66.4px);
 }
 
+.card-wide {
+    display: flex;
+    align-items: center;
+}
+
 .card{
   position: relative;
   display: flex;

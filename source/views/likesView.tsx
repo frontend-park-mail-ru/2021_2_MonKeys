@@ -117,7 +117,6 @@ export default class LikesView extends ViewBase {
         view.render();
     }
     forceRender() {
-        console.log('dsds');
         this._data = {
             'likesCount': LikesStore.get().likesCount,
             'likes': LikesStore.get().profiles,

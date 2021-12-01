@@ -256,7 +256,6 @@ export const EditEventRegister = () => {
     });
 
     EventBus.register('edit:img-input', (event) => {
-        console.log('1');
         const userData = ProfileStore.get();
         if (!userData.imgs) {
             const ps = ProfileStore.get();

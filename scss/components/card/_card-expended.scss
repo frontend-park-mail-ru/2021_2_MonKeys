@@ -11,6 +11,12 @@ $card-expanded-img-default-height: 100%;
   flex: 1 1 auto;
 }
 
+.card-expended-chats-wide{
+  display: flex;
+  align-items: center;
+  width: 300px;
+}
+
 .card-expended__profile {
   height: 100%;
   overflow-y: scroll;
@@ -21,6 +27,11 @@ $card-expanded-img-default-height: 100%;
   border-radius: $border-radius-default;
 
   margin: 0 $margin-small;
+}
+
+.card-expended__profile-chats-wide {
+  height: 70vh;
+  width: 90%;
 }
 
 .card-expended__description {

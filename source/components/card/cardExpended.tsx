@@ -16,7 +16,7 @@ export interface CardExpendedProps {
     withReports: boolean;
     withBackButton?: boolean;
     feed?: boolean;
-
+    chats?: boolean;
     reports?: string[];
     reported?: boolean;
 }
@@ -78,14 +78,13 @@ export const CardExpended = (props: CardExpendedProps) => {
         <div></div>
     );
     const backProfileButtonClick = () => {
-        console.log('backProfileButtonClick');
         EventBus.dispatch<number>('chat:back-to-chat-button', props.userData.id);
     };
     const backProfileButton = props.withBackButton ? (
         <div class='card-expended__back-button'>
             {Button({
                 type: 'button',
-                text: 'Назад',
+                text: 'Скрыть',
                 class: 'button-white-big',
                 onclick: backProfileButtonClick,
             })}
@@ -93,7 +92,20 @@ export const CardExpended = (props: CardExpendedProps) => {
     ) : (
         <div></div>
     );
-
+    if (props.chats) {
+        return (
+            <div class='card-expended card-expended-chats-wide'>
+                {reportWindowTmpl}
+                <div class='card-expended__profile card-expended__profile-chats-wide'>
+                    {imgTmpl}
+                    {descField}
+                    {tagField}
+                    {backProfileButton}
+                    {reportButtonTmpl}
+                </div>
+            </div>
+        );
+    }
     return (
         <div class='card-expended'>
             {reportWindowTmpl}

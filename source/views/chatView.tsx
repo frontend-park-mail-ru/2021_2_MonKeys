@@ -33,7 +33,6 @@ export default class ChatView extends ViewBase {
 
     _createTmpl(data) {
         if (!data.chat || !data.chat.profile || !data.chat.isOpenedProfile) {
-            console.log(data);
             return (
                 <div class='app__content--align-center'>
                     {Chat(data.chat, false)}

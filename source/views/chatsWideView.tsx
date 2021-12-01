@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import ViewBase from './viewBase.js';
 import { viewSizes } from '../constants/viewParams.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
@@ -11,7 +12,9 @@ import { SearchField } from '../components/common/searchField.js';
 import { matchRequest } from '../requests/matchRequest.js';
 import { Errors } from '../components/error/errors.js';
 import { Matches } from '../components/chats/matches.js';
+import { CardExpended } from '../components/card/cardExpended.js';
 import { Chat } from '../components/chat/chat.js';
+import ReportsStore from '../store/reportsStore.js';
 
 export default class ChatsWideView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -21,6 +24,7 @@ export default class ChatsWideView extends ViewBase {
         ChatsStore.subscribe(this.chatsStoreUpdatesView, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
         MatchesStore.subscribe(this.subscribtionCallback, this);
+        ReportsStore.subscribe(this.reportsSubscribtionCallback, this);
 
         this._template = this._createTmpl(this._data);
 
@@ -36,6 +40,7 @@ export default class ChatsWideView extends ViewBase {
         ChatsStore.unsubscribe(this.chatsStoreUpdatesView);
         ErrorStore.unsubscribe(this.errorStoreUpdatesView);
         MatchesStore.unsubscribe(this.subscribtionCallback);
+        ReportsStore.unsubscribe(this.reportsSubscribtionCallback);
     }
 
     _data = {
@@ -44,11 +49,35 @@ export default class ChatsWideView extends ViewBase {
         matches: MatchesStore.get().matches,
         matchesSearched: MatchesStore.get().matchesSearched,
         chat: chatsManager.chat,
+        reports: ReportsStore.get().reports,
+        reportsActive: ReportsStore.get().active,
     };
 
     _createTmpl(data) {
-        console.log(data.matches);
-        console.log(data.chats);
+        // const profile = data.chat.isOpenedProfile ?
+        //     (<div>
+        //         открыто
+        //     </div>) :
+        //     (<div>
+        //         закрыто
+        //     </div>)
+        let profile = <div></div>;
+        if (data.chat && data.chat.profile && data.chat.isOpenedProfile) {
+            profile = (
+                <div>
+                    {CardExpended({
+                        userData: data.chat.profile,
+                        withActions: false,
+                        withReports: true,
+                        withBackButton: true,
+                        reports: data.reports,
+                        reported: data.reportsActive,
+                        chats: true,
+                    })}
+                </div>
+            );
+        }
+
         if (!data.matches[0] && !data.chats[0]) {
             return (
                 <div class='view-contant view-contant_align_center view-content_scroll-banned'>
@@ -71,15 +100,18 @@ export default class ChatsWideView extends ViewBase {
         }
         if (!data.chat)
             return (
-                <div style='display: flex;'>
+                <div style='display: flex; height: 100%;'>
                     {Tapbar(TapbarStore.get(), true)}
                     <div class='chats'>
                         {SearchField()}
                         {Matches(data.matches)}
                         {Chats(data.chats)}
                     </div>
-                    <div class='chat'>
-                        <div class='app__content--align-center'>{Errors(data.error)}</div>
+                    <div class='chat__side__container'>
+                        <div style='display: flex; flex-direction: column; height: 100%; justify-content: center; align-items: center;'>
+                            <div style='margin-bottom: 36px; font-size: 24px'>Выберите чат</div>
+                            <img src='icons/chat_gradient.svg' class='view-content__dummy-image'></img>
+                        </div>
                     </div>
                 </div>
             );
@@ -96,13 +128,12 @@ export default class ChatsWideView extends ViewBase {
                         {Chat(data.chat, true)};{Errors(data.error)}
                     </div>
                 </div>
+                {profile}
             </div>
         );
     }
 
     private chatsStoreUpdatesView(data, view) {
-        console.log(data);
-
         view._data.chat = chatsManager.chat;
         view._data.chats = chatsManager.chatsWithMessages;
 
@@ -135,6 +166,13 @@ export default class ChatsWideView extends ViewBase {
     private subscribtionCallback(data, view) {
         view._data.matches = data.matches;
         view._data.matchesSearched = data.matchesSearched;
+        view._template = view._createTmpl(view._data);
+        view.render();
+    }
+
+    private reportsSubscribtionCallback(data, view) {
+        view._data.reports = data.reports;
+        view._data.reportsActive = data.active;
         view._template = view._createTmpl(view._data);
         view.render();
     }
