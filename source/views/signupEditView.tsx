@@ -14,6 +14,9 @@ import {
 } from '../constants/errorMsg.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { Errors } from '../components/error/errors.js';
+import { Button } from '../components/common/button.js';
+
+
 export default class SignupEditView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
@@ -83,7 +86,7 @@ export default class SignupEditView extends ViewBase {
                 'saveButton': {
                     type: 'button',
                     text: 'Сохранить',
-                    class: 'button-white-big',
+                    class: 'button-default edit__save-button',
                     onclick: () => {
                         EventBus.dispatch<string>('edit:save-button');
                     },
@@ -121,9 +124,13 @@ export default class SignupEditView extends ViewBase {
 
     _createTmpl(data) {
         return (
-            <div class='view-contant view-content__scroll-y'>
-                <div class='signup-container'>
+            <div class='app__content--align-center'>
+                <div class='edit'>
+                    <div class='edit__header'>
+                        <span class='header-text'>Настройки</span>
+                    </div>
                     {EditForm(data.editForm)}
+                    <div class='edit__manager'>{Button(data.editForm.buttons.saveButton)}</div>
                     {Errors(data.error)}
                 </div>
             </div>

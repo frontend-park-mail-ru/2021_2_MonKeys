@@ -181,7 +181,7 @@ export default class EditView extends ViewBase {
                 <div class='edit'>
                     <div class='edit__header'>
                         {IconButton(data.actions.logoutButton)}
-                        <span class='edit__header-text'>Настройки</span>
+                        <span class='header-text edit__header-text'>Настройки</span>
                     </div>
                     {EditForm(data.editForm)}
                     <div class='edit__manager'>{Button(data.editForm.buttons.saveButton)}</div>
