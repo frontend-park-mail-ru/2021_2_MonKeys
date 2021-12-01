@@ -1,9 +1,9 @@
 const config = {
-    staticCacheItemsRegExp: /^[^.]+.(min.js|js|css|svg|jpg|png|gif|woff|ico)$/,
+    staticCacheItemsRegExp: /^[^]+.(min.js|js|css|svg|jpg|png|gif|woff|ico)$/,
     mediaCacheItemsRegExp: /media/,
     numbersRegExp: /\d+/,
     versionStaticRegExp: /static\d+/,
-    apiUrlRegExp: /[http|https]:\/\/\w+.\w+\/api\/v\d\/\w+/,
+    apiUrlRegExp: /https:\/\/api.monkeys.team\/api*/,
 };
 
 self.addEventListener('install', (event) => {

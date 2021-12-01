@@ -15,7 +15,11 @@
   width: 95%;
 }
 
-.carousel-nav__arrows{
+
+
+
+@media (max-aspect-ratio: 10/10){
+ .carousel-nav__arrows{
   height:30px;
   display: flex;
   flex-direction: row;
@@ -24,6 +28,21 @@
   position: absolute;
   top: 25%;
 }
+}
+
+
+@media (min-aspect-ratio: 10/10) {
+  .carousel-nav__arrows{
+  height:30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 375px;
+  position: absolute;
+  top: 25%;
+}
+}
+
 
 .side-big {
   top: 50%;
