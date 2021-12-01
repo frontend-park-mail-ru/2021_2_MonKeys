@@ -9,13 +9,13 @@ import { ProfileData } from '../store/profileStore.js';
 
 export const ChatEventsRegister = () => {
     EventBus.register('chat:input-message', (chatID: number) => {
-        const _msgInput = document.getElementsByTagName('input')[0];
+        const _msgInput = document.querySelectorAll<HTMLInputElement>('.message-input__field')[0];
         const messageText = _msgInput.value.trim();
 
         chatsManager.saveDraftMessage(chatID, messageText);
     });
     EventBus.register('chat:send-button', (chatID: number) => {
-        const _msgInput = document.getElementsByTagName('input')[0];
+        const _msgInput = document.querySelectorAll<HTMLInputElement>('.message-input__field')[0];
         const messageText = _msgInput.value.trim();
 
         if (messageText !== '') {
@@ -44,7 +44,7 @@ export const ChatEventsRegister = () => {
 
         chatsManager.saveNewMessage(message);
 
-        const _chatSpace = document.getElementsByClassName('view-content__message-space')[0];
+        const _chatSpace = document.getElementsByClassName('chat__messages')[0];
         if (_chatSpace) {
             _chatSpace.scrollTop = _chatSpace.scrollHeight;
         }
@@ -60,7 +60,7 @@ export const ChatEventsRegister = () => {
         const searchTmpl = _searchInput.value.trim() + '%';
 
         searchMathesRequest(searchTmpl).then((data) => {
-            if (data.status === HTTPSuccess) {
+            if (data.status !== HTTPSuccess) {
                 throw 'bad response';
             }
 

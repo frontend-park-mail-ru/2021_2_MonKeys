@@ -1,22 +1,21 @@
-$input-message-width: 326px;
+$input-message-field-height: 30px;
+$input-message-height: $input-message-field-height + 2 * $margin-small;
 
-$input-message-field-width: 270px;
-$input-message-field-height:30px;
+.message-input {
+  width: 100%;
 
-.input-message{
-  position: relative;
-  width: $input-message-width;
-  height: $input-message-field-height;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-  margin-top: 12px;
-  margin-bottom: 12px;
+  margin: $margin-small 0px;
 
   background: $black;
   border-radius: 12px;
 }
 
-.input-message__field{
-  width: $input-message-field-width;
+.message-input__field {
+  width: calc(100% - 30px);
   height: $input-message-field-height;
 
   background: transparent;
@@ -29,14 +28,7 @@ $input-message-field-height:30px;
   color: $white;
 }
 
-.input-message__button-send{
-  position: absolute;
-  top: 5px;
-  left: 294px;
-
+.message-input__button-send {
   background: transparent;
-}
-
-.input-message__icon-send{
-
+  display: flex;
 }

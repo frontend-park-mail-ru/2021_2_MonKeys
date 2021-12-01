@@ -1,0 +1,61 @@
+.edit {
+  height: 100%;
+  width: 100%;
+  max-width: $max-width;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.edit__header {
+  flex: 0 0 auto;
+
+  margin-top: $margin-medium;
+  margin-left: $margin-small;
+  margin-right: $margin-small;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.edit__back {
+  flex: 0 0 auto;
+  padding: 0px 12px;
+}
+
+.header-text {
+  flex: 1 0 auto;
+  font-size: 36px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.edit__header-text {
+  margin-right: 36px;
+}
+
+.edit__scroll {
+  overflow-y: scroll;
+}
+
+.edit__form {
+  width: 100%;
+  flex: 1 1 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit__manager {
+  width: 100%;
+  flex: 0 0 auto;
+
+  display: flex;
+  justify-content: center;
+}
+
+.edit__save-button {
+    margin: $margin-small 0px;
+}

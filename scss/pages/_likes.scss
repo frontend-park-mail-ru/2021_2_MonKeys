@@ -1,12 +1,31 @@
-.view-content__likes-header{
+.likes {
+  height: 100%;
+  width: 100%;
+  max-width: $max-width;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.likes__profile {
+  margin-top: $margin-small;
+}
+
+.likes__likes-header{
   width: 100%;
   flex: 0 0 auto;
 }
 
-.view-content__likes-profile{
+.likes__likes-profile{
   width: 100%;
-  flex: 1 0 auto;
-  max-height: calc(100vh - 168px - 66.4px);
+  flex: 1 1 auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin-bottom: $margin-small;
 }
 
 .likes-view-header{
@@ -49,10 +68,17 @@
 }
 
 .likes-view-cards{
+  height: 100%;
+  max-height: $max-height;
   display: flex;
   flex-direction: row;
 
   overflow-x: scroll;
 
   margin-left: 24px;
+}
+
+.likes__tapbar {
+  width: 100%;
+  flex: 0 0 auto;
 }

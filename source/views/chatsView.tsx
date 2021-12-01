@@ -1,4 +1,5 @@
 import ViewBase from './viewBase.js';
+import { viewSizes } from '../constants/viewParams.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { Tapbar } from '../components/tapbar/tapbar.js';
@@ -14,6 +15,7 @@ import { Matches } from '../components/chats/matches.js';
 export default class ChatsView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
+        this.viewSize = viewSizes.slim;
         ChatsStore.subscribe(this.chatsStoreUpdatesView, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
         MatchesStore.subscribe(this.subscribtionCallback, this);
@@ -42,8 +44,6 @@ export default class ChatsView extends ViewBase {
     };
 
     _createTmpl(data) {
-        console.log(data.matches);
-        console.log(data.chats);
         if (!data.matches[0] && !data.chats[0]) {
             return (
                 <div class='view-contant view-contant_align_center view-content_scroll-banned'>
@@ -65,12 +65,12 @@ export default class ChatsView extends ViewBase {
             );
         }
         return (
-            <div class='view-contant view-contant_align_center view-content_scroll-banned'>
-                <div class='view-contant view-contant_align_center view-content_scroll-banned view-content__max-height'>
+            <div class='app__content--align-center'>
+                <div class='chats'>
                     {SearchField()}
                     {Matches(data.matches)}
                     {Chats(data.chats)}
-                    {Tapbar(TapbarStore.get())}
+                    <div class='chats__tapbar'>{Tapbar(TapbarStore.get())}</div>
                     {Errors(data.error)}
                 </div>
             </div>

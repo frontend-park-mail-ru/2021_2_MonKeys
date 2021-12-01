@@ -6,10 +6,10 @@ export const SearchField = () => {
         eventBus.dispatch('chat:search');
     };
     return (
-        <div class='view-content__search'>
-            <form class='search-form'>
-                <input oninput={searchEvent} type='text' placeholder='Поиск' class='search-form__input' />
-                <img src='icons/search.svg' class='search-form__icon' />
+        <div class='chats__search'>
+            <form class='search-form chats__search-form'>
+                <input class='search-form__input' oninput={searchEvent} type='text' placeholder='Поиск' />
+                <img class='search-form__icon' src='icons/search.svg' />
             </form>
         </div>
     );

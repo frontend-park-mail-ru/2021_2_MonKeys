@@ -1,4 +1,5 @@
 import ViewBase from './viewBase.js';
+import { viewSizes } from '../constants/viewParams.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { EditForm } from '../components/edit/editForm.js';
 import { EditStore } from '../store/editStore.js';
@@ -15,10 +16,13 @@ import {
 } from '../constants/errorMsg.js';
 import { Errors } from '../components/error/errors.js';
 import router from '../route/router.js';
+import { Button } from '../components/common/button.js';
+import { IconButton } from '../components/common/iconButton.js';
 
 export default class EditView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
+        this.viewSize = viewSizes.anyone;
         EditStore.subscribe(this.subcribtionCallbackEdit, this);
         ProfileStore.subscribe(this.subcribtionCallbackProfile, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
@@ -59,7 +63,7 @@ export default class EditView extends ViewBase {
     }
 
     _data = {
-        'editForm': {
+        editForm: {
             'fields': {
                 'genderField': EditStore.get().genderField,
                 'tagsField': EditStore.get().tagsField,
@@ -96,7 +100,7 @@ export default class EditView extends ViewBase {
                     placeholder: 'Расскажите о себе',
                     value: ProfileStore.get().description,
                     name: 'description',
-                    class: 'form__field-valid',
+                    class: 'form__field-valid form__field-valid-desc',
                 },
                 'img': {
                     class: EditStore.get().imgFieldClass,
@@ -122,7 +126,7 @@ export default class EditView extends ViewBase {
                 'saveButton': {
                     type: 'button',
                     text: 'Сохранить',
-                    class: 'button-white-big',
+                    class: 'button-default edit__save-button',
                     onclick: () => {
                         EventBus.dispatch<string>('edit:save-button');
                     },
@@ -155,20 +159,17 @@ export default class EditView extends ViewBase {
                 },
             },
         },
-        'tapbar': {
-            class: 'menu-icon',
-        },
         actions: {
             'logoutButton': {
                 src: 'icons/back.svg',
-                class: 'view-contant__dislike',
+                class: 'edit__back',
                 onclick: () => {
                     router.go('/profile');
                 },
             },
             'settingButtons': {
                 src: 'icons/exit.svg',
-                class: 'view-contant__dislike',
+                class: 'edit__back',
                 onclick: () => {
                     EventBus.dispatch<string>('profile:logout-button');
                 },
@@ -176,12 +177,16 @@ export default class EditView extends ViewBase {
         },
         error: errorManager.error,
     };
-
     _createTmpl(data) {
         return (
-            <div class='view-contant view-content__scroll-y'>
-                <div class='signup-container'>
-                    {EditForm(data.editForm, data.actions.logoutButton)}
+            <div class='app__content--align-center'>
+                <div class='edit'>
+                    <div class='edit__header'>
+                        {IconButton(data.actions.logoutButton)}
+                        <span class='header-text edit__header-text'>Настройки</span>
+                    </div>
+                    {EditForm(data.editForm)}
+                    <div class='edit__manager'>{Button(data.editForm.buttons.saveButton)}</div>
                     {Errors(data.error)}
                 </div>
             </div>

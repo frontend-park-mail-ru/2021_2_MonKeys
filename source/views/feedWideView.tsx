@@ -10,10 +10,10 @@ import TapbarStore from '../store/tapbarStore.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { Errors } from '../components/error/errors.js';
 
-export default class FeedView extends ViewBase {
+export default class FeedWideView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
-        this.viewSize = viewSizes.slim;
+        this.viewSize = viewSizes.wide;
         const cardData = feedStore.get();
         this.updateDataTemaplate(cardData);
         feedStore.subscribe(this.subscribtionCallback, this);
@@ -26,19 +26,20 @@ export default class FeedView extends ViewBase {
             this._template = this._createTmpl(this._data, cardData.expanded);
         } else {
             this._template = (
-                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
-                    <div
-                        class='view-contant view-contant_align_center
-                  view-content_scroll-banned view-content__max-height'
-                    >
-                        <div class='likes-view-text-big'>Пока нет новых карточек</div>
+                <div style='display: flex;'>
+                    {Tapbar(TapbarStore.get(), true)}
+                    <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                        <div
+                            class='view-contant view-contant_align_center
+                                view-content_scroll-banned view-content__max-height'
+                        >
+                            <div class='likes-view-text-big'>Пока нет новых карточек</div>
 
-                        <div class='view-content__dummy-image-container'>
-                            <img src='icons/drip_gradient.svg' class='view-content__dummy-image'></img>
+                            <div class='view-content__dummy-image-container'>
+                                <img src='icons/drip_gradient.svg' class='view-content__dummy-image'></img>
+                            </div>
+                            <div class='likes-view-text-big'>Возвращайтесь позже!</div>
                         </div>
-                        <div class='likes-view-text-big'>Возвращайтесь позже!</div>
-
-                        {Tapbar(TapbarStore.get())}
                     </div>
                 </div>
             );
@@ -102,10 +103,10 @@ export default class FeedView extends ViewBase {
             };
 
             return (
-                <div class='app__content--align-center'>
-                    <div class='feed'>
-                        {CardFeed(data.cardData, false)}
-                        {Tapbar(TapbarStore.get())}
+                <div style='display: flex;height: 100%;'>
+                    {Tapbar(TapbarStore.get(), true)}
+                    <div style='display:flex; justify-content: center; width: 100%'>
+                        {CardFeed(data.cardData, true)}
                         {Errors(data.error)}
                     </div>
                 </div>
@@ -120,11 +121,17 @@ export default class FeedView extends ViewBase {
                 },
             };
             return (
-                <div class='app__content--align-center'>
-                    <div class='feed'>
-                        <div class='profile__card feed__profile'>{CardExpended(data.cardData)}</div>
-                        <div class='feed__tapbar'>{Tapbar(TapbarStore.get())}</div>
-                        {Errors(data.error)}
+                <div style='display: flex;'>
+                    {Tapbar(data.tapbar, true)}
+                    <div class='view-contant view-contant_align_center view-content_scroll'>
+                        <div
+                            class='view-contant view-contant_align_center
+                  view-content_scroll view-content__max-height'
+                        >
+                            {CardExpended(data.cardData)}
+
+                            {Errors(data.error)}
+                        </div>
                     </div>
                 </div>
             );

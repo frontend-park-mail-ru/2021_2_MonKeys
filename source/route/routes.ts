@@ -7,6 +7,10 @@ import LikesView from '../views/likesView.js';
 import FeedView from '../views/feedView.js';
 import ChatView from '../views/chatView.js';
 import PageNotFoundView from '../views/pageNotFoundView.js';
+import ChatsWideView from '../views/chatsWideView.js';
+import FeedWideView from '../views/feedWideView.js';
+import LikesWideView from '../views/likesWideView.js';
+import ProfileWideView from '../views/profileWideView.js';
 import { userStatus } from '../constants/userStatus.js';
 import ChatsView from '../views/chatsView.js';
 
@@ -22,6 +26,7 @@ export const Routes = {
         name: 'Drip',
         auth: userStatus.notLoggedIn,
         view: LoginView,
+        wideView: LoginView,
         tapbarHidden: true,
     },
     '/login': {
@@ -59,6 +64,7 @@ export const Routes = {
         auth: userStatus.loggedIn,
         view: FeedView,
         tapbar: 'feed',
+        wideView: FeedWideView,
         tapbarHidden: false,
     },
     '/likes': {
@@ -66,6 +72,7 @@ export const Routes = {
         path: '/likes',
         auth: userStatus.loggedIn,
         view: LikesView,
+        wideView: LikesWideView,
         tapbar: 'likes',
         tapbarHidden: false,
     },
@@ -75,6 +82,7 @@ export const Routes = {
         auth: userStatus.loggedIn,
         view: ProfileView,
         tapbar: 'profile',
+        wideView: ProfileWideView,
         tapbarHidden: false,
     },
     '/chats': {
@@ -83,6 +91,7 @@ export const Routes = {
         auth: userStatus.loggedIn,
         view: ChatsView,
         tapbar: 'chats',
+        wideView: ChatsWideView,
         tapbarHidden: false,
     },
     '/chat': {
@@ -91,6 +100,7 @@ export const Routes = {
         auth: userStatus.loggedIn,
         view: ChatView,
         tapbar: 'chats',
+        wideView: ChatsWideView,
         tapbarHidden: true,
     },
     '/404': {

@@ -5,11 +5,13 @@ import TapbarStore from '../store/tapbarStore.js';
 import { resetCarousel } from '../modules/carousel.js';
 
 const drawLocation = (route, parent) => {
-    console.log(route.tapbar);
     TapbarStore.set({
         activeItem: route.tapbar,
     });
-    const currentView = new route.view(parent);
+    let currentView = new route.view(parent);
+    if (route.wideView && window.isWidescreen) {
+        currentView = new route.wideView(parent);
+    }
     window.document.title = route.name;
     currentView.render();
 };

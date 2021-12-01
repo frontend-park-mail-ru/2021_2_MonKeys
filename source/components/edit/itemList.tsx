@@ -80,7 +80,7 @@ export const ItemList = (props: ItemListProps) => {
                 {conditionalRendering(
                     <img
                         src={conditionalReturn('icons/shrink.svg', 'icons/expand_big.svg', props.open)}
-                        class='form__field__icon form__field__icon_small-padding-top'
+                        class='form__field__icon'
                         onclick={() => {
                             eventBus.dispatch(props.buttonEvent);
                         }}

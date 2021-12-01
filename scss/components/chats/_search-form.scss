@@ -1,16 +1,12 @@
 $icon-size-small: 18px;
 
-.view-content__search{
-  width: 100%;
-  flex: 0 0 auto;
-}
-
-.search-form{
+.search-form {
   display: flex;
   margin-left: 24px;
   margin-top: 24px;
 }
-.search-form__input{
+
+.search-form__input {
   position: relative;
   width: 312px;
   height: 30px;
@@ -26,7 +22,8 @@ $icon-size-small: 18px;
   color:white;
   font-size: $font-size-tiny;
 }
-.search-form__icon{
+
+.search-form__icon {
   position: relative;
 
   width: $icon-size-small;
