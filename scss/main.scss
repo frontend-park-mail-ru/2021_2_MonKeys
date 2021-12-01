@@ -12,16 +12,17 @@
 @import './components/header';
 @import './components/button';
 @import './components/form_error';
-@import './components/form_item_list';
-@import './components/form_add_img';
-@import './components/card-actions';
+@import './components/edit/form_item_list';
+@import './components/edit/form_add_img';
+@import './components/edit/edit';
+@import './components/card/card-actions';
 @import './components/card/card-expended';
-@import './components/img-card';
-@import './components/report-window';
-@import './components/report-radio-button';
+@import './components/card/img-card';
+@import './components/card/report-window';
+@import './components/card/report-radio-button';
 @import './components/tapbar';
-@import './components/card';
-@import './components/carousel';
+@import './components/card/card';
+@import './components/card/carousel';
 @import './components/chats/chats';
 @import './components/chats/chats-preview';
 @import './components/chats/match-profile';
@@ -31,6 +32,7 @@
 @import './components/chat/message';
 @import './components/chat/chat';
 @import './components/profile/profile';
+@import './components/feed/feed';
 @import './components/error_api';
 @import './components/dummy';
 
@@ -53,4 +55,5 @@ html {
 
 ::-webkit-scrollbar {
     display: none;
+    scroll-behavior: smooth;
 }

@@ -1,14 +1,12 @@
-@import '../core/typography';
+@import '../../core/typography';
 
-$card-expanded-default-width: 360px;
-$card-expanded-default-height: 600px;
-$card-expanded-img-default-height: 384px;
+// $card-expanded-default-width: 360px;
+// $card-expanded-default-height: 600px;
+// $card-expanded-img-default-height: 384px;
 
-.view-content__card{
-  width: 100%;
-  flex: 1 0 auto;
-  max-height: calc(100vh - 66.4px);
-}
+$card-expanded-default-width: 100%;
+$card-expanded-default-height: 100%;
+$card-expanded-img-default-height: 100%;
 
 .card-wide {
     display: flex;
@@ -16,13 +14,12 @@ $card-expanded-img-default-height: 384px;
 }
 
 .card{
+  max-height: $max-height;
   position: relative;
   display: flex;
   flex-direction: column;
   width: $card-expanded-default-width;
   height: $card-expanded-default-height;
-
-  margin-top: 6px;
 
   background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.4) 0%, rgba(0, 44, 65, 0) 100%);
   backdrop-filter: blur(20px);

@@ -20,6 +20,12 @@
 .likes__likes-profile{
   width: 100%;
   flex: 1 1 auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin-bottom: $margin-small;
 }
 
 .likes-view-header{
@@ -63,6 +69,7 @@
 
 .likes-view-cards{
   height: 100%;
+  max-height: $max-height;
   display: flex;
   flex-direction: row;
 

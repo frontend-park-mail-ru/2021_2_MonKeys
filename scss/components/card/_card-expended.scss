@@ -7,8 +7,10 @@ $card-expanded-img-default-height: 100%;
 
 .card-expended {
   height: 100%;
+  max-height: $max-height;
   width: 100%;
   flex: 1 1 auto;
+  position: relative;
 }
 
 .card-expended-chats-wide{

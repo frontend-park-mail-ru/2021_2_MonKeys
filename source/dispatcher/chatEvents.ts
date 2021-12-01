@@ -60,7 +60,7 @@ export const ChatEventsRegister = () => {
         const searchTmpl = _searchInput.value.trim() + '%';
 
         searchMathesRequest(searchTmpl).then((data) => {
-            if (data.status === HTTPSuccess) {
+            if (data.status !== HTTPSuccess) {
                 throw 'bad response';
             }
 

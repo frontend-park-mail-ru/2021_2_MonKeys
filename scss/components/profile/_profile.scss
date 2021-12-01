@@ -38,6 +38,10 @@
   flex: 1 1 auto;
 
   overflow: scroll;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 

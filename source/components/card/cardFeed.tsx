@@ -10,7 +10,7 @@ export interface CardFeedProps {
 }
 
 export const CardFeed = (props: CardFeedProps, wide: boolean) => {
-    const mainClass = wide ? 'card-wide' : 'view-content__card';
+    const mainClass = wide ? 'card-wide' : 'feed__card';
     return (
         <div class={mainClass}>
             <div

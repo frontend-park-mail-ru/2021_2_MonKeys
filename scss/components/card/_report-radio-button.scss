@@ -1,12 +1,12 @@
-@import '../abstracts/colors';
+@import '../../abstracts/colors';
 
 .report-radio-button{
   display: flex;
   justify-content: center;
   align-items: center;
 
-  width: 300px;
-  height: 36px;
+  width: 80%;
+  min-height: 36px;
 
   border: 1px solid $white;
   border-radius: $border-radius-default;
@@ -24,4 +24,5 @@
 
 .report-radio-button__label{
   display: flex;
+  margin: $margin-smallest;
 }
