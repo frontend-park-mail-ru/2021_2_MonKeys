@@ -16,7 +16,6 @@ import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { Errors } from '../components/error/errors.js';
 import { Button } from '../components/common/button.js';
 
-
 export default class SignupEditView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
