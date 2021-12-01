@@ -1,4 +1,5 @@
 import ViewBase from './viewBase.js';
+import { viewSizes } from '../constants/viewParams.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { EditForm } from '../components/edit/editForm.js';
 import EventBus from '../dispatcher/eventBus.js';
@@ -19,6 +20,7 @@ import { Button } from '../components/common/button.js';
 export default class SignupEditView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
+        this.viewSize = viewSizes.anyone;
         EditStore.subscribe(this.subscribtionCallback, this);
         ProfileStore.subscribe(this.subcribtionCallbackProfile, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);

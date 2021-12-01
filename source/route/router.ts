@@ -8,7 +8,10 @@ const drawLocation = (route, parent) => {
     TapbarStore.set({
         activeItem: route.tapbar,
     });
-    const currentView = new route.view(parent);
+    let currentView = new route.view(parent);
+    if (route.wideView && window.isWidescreen) {
+        currentView = new route.wideView(parent);
+    }
     window.document.title = route.name;
     currentView.render();
 };

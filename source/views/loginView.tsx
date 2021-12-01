@@ -1,4 +1,5 @@
 import ViewBase from './viewBase.js';
+import { viewSizes } from '../constants/viewParams.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { FormField } from '../components/common/formField.js';
 import { Button } from '../components/common/button.js';
@@ -38,6 +39,7 @@ export default class LoginView extends ViewBase {
 
     constructor(parent: HTMLElement) {
         super(parent);
+        this.viewSize = viewSizes.anyone;
         LoginStore.subscribe(this.subscribtionCallback, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
         this._template = this._createTmpl(this._data);

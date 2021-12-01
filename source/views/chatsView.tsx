@@ -1,4 +1,5 @@
 import ViewBase from './viewBase.js';
+import { viewSizes } from '../constants/viewParams.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { Tapbar } from '../components/tapbar/tapbar.js';
@@ -14,6 +15,7 @@ import { Matches } from '../components/chats/matches.js';
 export default class ChatsView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
+        this.viewSize = viewSizes.slim;
         ChatsStore.subscribe(this.chatsStoreUpdatesView, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
         MatchesStore.subscribe(this.subscribtionCallback, this);

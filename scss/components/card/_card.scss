@@ -8,6 +8,11 @@ $card-expanded-default-width: 100%;
 $card-expanded-default-height: 100%;
 $card-expanded-img-default-height: 100%;
 
+.card-wide {
+    display: flex;
+    align-items: center;
+}
+
 .card{
   max-height: $max-height;
   position: relative;

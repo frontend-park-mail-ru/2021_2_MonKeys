@@ -9,13 +9,13 @@ import { ProfileData } from '../store/profileStore.js';
 
 export const ChatEventsRegister = () => {
     EventBus.register('chat:input-message', (chatID: number) => {
-        const _msgInput = document.getElementsByTagName('input')[0];
+        const _msgInput = document.querySelectorAll<HTMLInputElement>('.message-input__field')[0];
         const messageText = _msgInput.value.trim();
 
         chatsManager.saveDraftMessage(chatID, messageText);
     });
     EventBus.register('chat:send-button', (chatID: number) => {
-        const _msgInput = document.getElementsByTagName('input')[0];
+        const _msgInput = document.querySelectorAll<HTMLInputElement>('.message-input__field')[0];
         const messageText = _msgInput.value.trim();
 
         if (messageText !== '') {
