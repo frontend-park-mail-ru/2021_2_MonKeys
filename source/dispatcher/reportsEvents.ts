@@ -5,9 +5,10 @@ import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import ReportsStore from '../store/reportsStore.js';
 import { reportsRequest, newReportRequest } from '../requests/reportsRequest.js';
 import { deleteChatRequest } from '../requests/chatRequest.js';
+import { EVENTS } from './events.js';
 
 export const ReportsEventsRegister = () => {
-    EventBus.register('reports:report-button', () => {
+    EventBus.register(EVENTS.REPORTS_REPORT_BUTTON, () => {
         const reportsData = ReportsStore.get();
         reportsData.active = true;
         ReportsStore.set(reportsData);
@@ -25,7 +26,7 @@ export const ReportsEventsRegister = () => {
             });
         }
     });
-    EventBus.register('reports:back-button', () => {
+    EventBus.register(EVENTS.REPORTS_BACK_BUTTON, () => {
         const reportsData = ReportsStore.get();
         reportsData.active = false;
         ReportsStore.set(reportsData);
@@ -35,7 +36,7 @@ export const ReportsEventsRegister = () => {
         reportsData.choosedReport = '';
         ReportsStore.set(reportsData);
     });
-    EventBus.register('reports:declare-button', (userID) => {
+    EventBus.register(EVENTS.REPORTS_DECLARE_BUTTON, (userID) => {
         if (ReportsStore.get().choosedReport !== '') {
             newReportRequest(userID, ReportsStore.get().choosedReport).then((data) => {
                 if (data.status !== HTTPSuccess) {
@@ -56,11 +57,11 @@ export const ReportsEventsRegister = () => {
                 }
                 reportsData.choosedReport = '';
                 ReportsStore.set(reportsData);
-                EventBus.dispatch<string>('user:cookie-requests');
+                EventBus.dispatch<string>(EVENTS.USER_COOKIE_REQUESTS);
             });
         }
     });
-    EventBus.register('reports:choose-report-type', (problemName: string) => {
+    EventBus.register(EVENTS.REPORTS_CHOOSE_REPORT_TYPE, (problemName: string) => {
         const reportsData = ReportsStore.get();
         reportsData.choosedReport = problemName;
         for (let i = 0; i < reportsData.reportsCount; i++) {

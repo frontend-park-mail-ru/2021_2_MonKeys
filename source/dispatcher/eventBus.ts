@@ -5,16 +5,16 @@ export interface Register {
 }
 
 export interface Callable {
-    [key: string]: { (data, view?: ViewBase): void };
+    [key: number]: { (data, view?: ViewBase): void };
 }
 
 export interface Subscriber {
-    [key: string]: Callable;
+    [key: number]: Callable;
 }
 
 export interface IEventBus {
-    dispatch<T>(event: string, payload?: T): void;
-    register(event: string, callback: { (data, view?: ViewBase): void }): Register;
+    dispatch<T>(event: number, payload?: T): void;
+    register(event: number, callback: { (data, view?: ViewBase): void }): Register;
 }
 
 class EventBus implements IEventBus {
@@ -25,7 +25,7 @@ class EventBus implements IEventBus {
         this.subscribers = {};
     }
 
-    public dispatch<T>(event: string, payload?: T): void {
+    public dispatch<T>(event: number, payload?: T): void {
         const subscriber = this.subscribers[event];
 
         if (!subscriber) {
@@ -35,7 +35,7 @@ class EventBus implements IEventBus {
         Object.keys(subscriber).forEach((key) => subscriber[key](payload));
     }
 
-    public register(event: string, callback: { (data, view?: ViewBase): void }): Register {
+    public register(event: number, callback: { (data, view?: ViewBase): void }): Register {
         const id = this.getNextId();
 
         if (!this.subscribers[event]) this.subscribers[event] = {};

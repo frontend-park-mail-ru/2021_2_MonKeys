@@ -8,6 +8,7 @@ import { ProfileData } from '../../store/profileStore.js';
 import { ImgCard } from './imgCard.js';
 import { Button } from '../common/button.js';
 import { ReportWindow } from '../report/reportWindow.js';
+import { EVENTS } from '../../dispatcher/events.js';
 
 export interface CardExpendedProps {
     userData: ProfileData;
@@ -58,7 +59,7 @@ export const CardExpended = (props: CardExpendedProps) => {
         });
     }
     const reportButtonAction = () => {
-        EventBus.dispatch<string>('reports:report-button');
+        EventBus.dispatch<string>(EVENTS.REPORTS_REPORT_BUTTON);
     };
     const reportButtonTmpl = props.withReports ? (
         <div class='card-expended__report-button'>
@@ -78,7 +79,7 @@ export const CardExpended = (props: CardExpendedProps) => {
         <div></div>
     );
     const backProfileButtonClick = () => {
-        EventBus.dispatch<number>('chat:back-to-chat-button', props.userData.id);
+        EventBus.dispatch<number>(EVENTS.CHAT_BACK_TO_CHAT_BUTTON, props.userData.id);
     };
     const backProfileButton = props.withBackButton ? (
         <div class='card-expended__back-button'>

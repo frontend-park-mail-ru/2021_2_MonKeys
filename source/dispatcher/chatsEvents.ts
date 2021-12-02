@@ -4,9 +4,10 @@ import { chatsManager } from '../store/chatsStore.js';
 import { getChatRequest } from '../requests/chatRequest.js';
 import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { ProfileData } from '../store/profileStore.js';
+import { EVENTS } from './events.js';
 
 export const ChatsEventsRegister = () => {
-    EventBus.register('chats:preview-chat', (chatID: number) => {
+    EventBus.register(EVENTS.CHATS_PREVIEW_CHAT, (chatID: number) => {
         chatsManager.switchChat(chatID);
 
         router.go(`/chat`);
@@ -23,7 +24,7 @@ export const ChatsEventsRegister = () => {
         });
     });
 
-    EventBus.register('chats:new-chat', (profile: ProfileData) => {
+    EventBus.register(EVENTS.CHATS_NEW_CHAT, (profile: ProfileData) => {
         if (profile == null) {
             return;
         }

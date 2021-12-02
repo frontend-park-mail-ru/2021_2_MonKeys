@@ -1,7 +1,7 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import eventBus from '../../dispatcher/eventBus.js';
 import { ProfileData } from '../../store/profileStore.js';
-
+import { EVENTS } from '../../dispatcher/events.js';
 export interface MatchProfileProps {
     userData: ProfileData;
 }
@@ -9,7 +9,7 @@ export interface MatchProfileProps {
 export const MatchProfile = (props: MatchProfileProps) => {
     const profile = props.userData;
     const profileClick = () => {
-        eventBus.dispatch('chats:new-chat', profile);
+        eventBus.dispatch(EVENTS.CHATS_NEW_CHAT, profile);
     };
     return (
         <div class='match-profile' onclick={profileClick}>

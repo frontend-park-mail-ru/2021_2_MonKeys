@@ -18,6 +18,7 @@ import { Errors } from '../components/error/errors.js';
 import router from '../route/router.js';
 import { Button } from '../components/common/button.js';
 import { IconButton } from '../components/common/iconButton.js';
+import { EVENTS } from '../dispatcher/events.js';
 
 export default class EditView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -75,10 +76,10 @@ export default class EditView extends ViewBase {
                     name: 'userName',
                     class: EditStore.get().nameFieldClass,
                     oninput: () => {
-                        EventBus.dispatch<string>('edit:name-input');
+                        EventBus.dispatch<string>(EVENTS.EDIT_NAME_INPUT);
                     },
                     onfocusout: () => {
-                        EventBus.dispatch<string>('edit:name-focusout');
+                        EventBus.dispatch<string>(EVENTS.EDIT_NAME_FOCUSOUT);
                     },
                 },
                 'birthDate': {
@@ -89,10 +90,10 @@ export default class EditView extends ViewBase {
                     name: 'birthDate',
                     iconSrc: 'icons/calendar.svg',
                     oninput: () => {
-                        EventBus.dispatch<string>('edit:birth-date-input');
+                        EventBus.dispatch<string>(EVENTS.EDIT_BIRTH_DATE_INPUT);
                     },
                     onfocusout: () => {
-                        EventBus.dispatch<string>('edit:birth-date-focusout');
+                        EventBus.dispatch<string>(EVENTS.EDIT_BIRTH_DATE_FOCUSOUT);
                     },
                 },
                 'description': {
@@ -113,13 +114,13 @@ export default class EditView extends ViewBase {
                     class: 'tags-button',
                     src: 'icons/expand_big.svg',
                     onclick: () => {
-                        EventBus.dispatch<string>('edit:open-tags');
+                        EventBus.dispatch<string>(EVENTS.EDIT_OPEN_TAGS);
                     },
                 },
                 'imgAddButton': {
                     class: EditStore.get().imgFieldClass,
                     onchange: (event) => {
-                        EventBus.dispatch<string>('edit:img-input', event);
+                        EventBus.dispatch<string>(EVENTS.EDIT_IMG_INPUT, event);
                     },
                     imgs: ProfileStore.get().imgs,
                 },
@@ -128,7 +129,7 @@ export default class EditView extends ViewBase {
                     text: 'Сохранить',
                     class: 'button-default edit__save-button',
                     onclick: () => {
-                        EventBus.dispatch<string>('edit:save-button');
+                        EventBus.dispatch<string>(EVENTS.EDIT_SAVE_BUTTON);
                     },
                 },
             },
@@ -171,7 +172,7 @@ export default class EditView extends ViewBase {
                 src: 'icons/exit.svg',
                 class: 'edit__back',
                 onclick: () => {
-                    EventBus.dispatch<string>('profile:logout-button');
+                    EventBus.dispatch<string>(EVENTS.PROFILE_LOGOUT_BUTTON);
                 },
             },
         },

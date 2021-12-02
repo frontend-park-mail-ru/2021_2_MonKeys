@@ -12,7 +12,7 @@ import { errorManager, ErrorStore } from '../store/errorStore.js';
 import router from '../route/router.js';
 import { dropsBackground } from '../components/common/dropsBackground.js';
 import { Errors } from '../components/error/errors.js';
-
+import { EVENTS } from '../dispatcher/events.js';
 export default class LoginView extends ViewBase {
     public unsubscribe() {
         LoginStore.unsubscribe(this.subscribtionCallback);
@@ -56,10 +56,10 @@ export default class LoginView extends ViewBase {
                 class: LoginStore.get().emailFieldClass,
                 pass: false,
                 oninput: () => {
-                    EventBus.dispatch<string>('login:email-input');
+                    EventBus.dispatch<string>(EVENTS.LOGIN_EMAIL_INPUT);
                 },
                 onfocusout: () => {
-                    EventBus.dispatch<string>('login:email-focusout');
+                    EventBus.dispatch<string>(EVENTS.LOGIN_EMAIL_FOCUSOUT);
                 },
             },
             'password': {
@@ -71,10 +71,10 @@ export default class LoginView extends ViewBase {
                 class: LoginStore.get().passwordFieldClass,
                 pass: false,
                 oninput: () => {
-                    EventBus.dispatch<string>('login:password-input');
+                    EventBus.dispatch<string>(EVENTS.LOGIN_PASSWORD_INPUT);
                 },
                 onfocusout: () => {
-                    EventBus.dispatch<string>('login:password-focusout');
+                    EventBus.dispatch<string>(EVENTS.LOGIN_PASSWORD_FOCUSOUT);
                 },
             },
         },
@@ -84,7 +84,7 @@ export default class LoginView extends ViewBase {
                 text: 'Войти',
                 class: 'button-white-small',
                 onclick: () => {
-                    EventBus.dispatch<string>('login:button-white');
+                    EventBus.dispatch<string>(EVENTS.LOGIN_BUTTON_WHITE);
                 },
             },
             'signupButton': {

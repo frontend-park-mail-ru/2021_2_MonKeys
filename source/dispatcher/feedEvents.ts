@@ -6,9 +6,10 @@ import { feedRequest } from '../requests/feedRequest.js';
 import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { requestMoreCardsThreshold } from '../constants/feed.js';
 import { resetCarousel } from '../modules/carousel.js';
+import { EVENTS } from './events.js';
 
 const animationThanLikeAndReset = () => {
-    EventBus.dispatch('feed:reaction', reactions.like);
+    EventBus.dispatch(EVENTS.FEED_REACTION, reactions.like);
     let card = document.querySelectorAll<HTMLElement>('.card')[0];
 
     if (!card) {
@@ -38,7 +39,7 @@ const animationThanLikeAndReset = () => {
 };
 
 const animationThanDislikeAndReset = () => {
-    EventBus.dispatch('feed:reaction', reactions.like);
+    EventBus.dispatch(EVENTS.FEED_REACTION, reactions.like);
     let card = document.querySelectorAll<HTMLElement>('.card')[0];
     if (!card) {
         card = document.querySelectorAll<HTMLElement>('.card-expended')[0];
@@ -67,7 +68,7 @@ const animationThanDislikeAndReset = () => {
 };
 
 export const FeedEventsRegister = () => {
-    EventBus.register('feed:like-button', () => {
+    EventBus.register(EVENTS.FEED_LIKE_BUTTON, () => {
         let card = document.querySelectorAll<HTMLElement>('.card')[0];
         if (!card) {
             card = document.querySelectorAll<HTMLElement>('.card-expended')[0];
@@ -75,7 +76,7 @@ export const FeedEventsRegister = () => {
         card.style.animation = 'swipedRight 1s ease 1';
         card.addEventListener('animationend', animationThanLikeAndReset);
     });
-    EventBus.register('feed:dislike-button', () => {
+    EventBus.register(EVENTS.FEED_DISLIKE_BUTTON, () => {
         let card = document.querySelectorAll<HTMLElement>('.card')[0];
         if (!card) {
             card = document.querySelectorAll<HTMLElement>('.card-expended')[0];
@@ -83,26 +84,18 @@ export const FeedEventsRegister = () => {
         card.style.animation = 'swipedLeft 1s ease 1';
         card.addEventListener('animationend', animationThanDislikeAndReset);
     });
-    EventBus.register('feed:expand-button', () => {
+    EventBus.register(EVENTS.FEED_EXPAND_BUTTON, () => {
         const data = feedStore.get();
         data.expanded = true;
         feedStore.set(data);
     });
-    EventBus.register('feed:shrink-button', () => {
+    EventBus.register(EVENTS.FEED_SHRINK_BUTTON, () => {
         const data = feedStore.get();
         data.expanded = false;
         feedStore.set(data);
     });
-    EventBus.register('feed:swipe-start', () => {
-        //...
-    });
-    EventBus.register('feed:swipe-move', () => {
-        //...
-    });
-    EventBus.register('feed:swipe-end', () => {
-        //...
-    });
-    EventBus.register('feed:reaction', (reactionID) => {
+
+    EventBus.register(EVENTS.FEED_REACTION, (reactionID) => {
         resetCarousel();
         const data = feedStore.get();
         data.expanded = false;
@@ -112,12 +105,7 @@ export const FeedEventsRegister = () => {
             }
 
             if (likesData.body.match) {
-                // matchRequest().then((matchResponse) => {
-                //     const likesData = LikesStore.get();
-                //     likesData.profiles = matchResponse.data.body.allUsers;
-                //     likesData.mathesCount = matchResponse.data.body.matchesCount;
-                //     LikesStore.set(likesData);
-                // });
+                // ..
             }
 
             data.counter++;

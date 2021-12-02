@@ -8,9 +8,10 @@ import { tagsRequest } from '../requests/tagsRequest.js';
 import { EditStore } from '../store/editStore.js';
 import { validDate, validImgType } from '../validation/edit.js';
 import { nameRegExp } from '../constants/validation.js';
+import { EVENTS } from './events.js';
 
 export const EditEventRegister = () => {
-    EventBus.register('edit:save-button', () => {
+    EventBus.register(EVENTS.EDIT_SAVE_BUTTON, () => {
         const _nameInput = document.getElementsByTagName('input')[0];
         const _dateInput = document.getElementsByTagName('input')[1];
         const _descriptionInput = document.getElementsByTagName('textarea')[0];
@@ -107,12 +108,12 @@ export const EditEventRegister = () => {
                 throw 'bad response';
             }
 
-            EventBus.dispatch<string>('user:cookie-requests');
+            EventBus.dispatch<string>(EVENTS.USER_COOKIE_REQUESTS);
             router.go('/profile');
         });
     });
 
-    EventBus.register('edit:open-tags', () => {
+    EventBus.register(EVENTS.EDIT_OPEN_TAGS, () => {
         tagsRequest().then((data) => {
             if (data.status !== HTTPSuccess) {
                 throw 'bad response';
@@ -123,7 +124,10 @@ export const EditEventRegister = () => {
             Object.keys(storeData.tags.allTags).map(
                 (item) =>
                     (storeData.tags.allTags[item].onchange = () => {
-                        EventBus.dispatch<string>('edit:change-tag-condition', storeData.tags.allTags[item].tagText);
+                        EventBus.dispatch<string>(
+                            EVENTS.EDIT_CHANGE_TAG_CONDITION,
+                            storeData.tags.allTags[item].tagText
+                        );
                     })
             );
             EditStore.set(storeData);
@@ -146,7 +150,7 @@ export const EditEventRegister = () => {
         });
     });
 
-    EventBus.register('edit:change-tag-condition', (payload?: string) => {
+    EventBus.register(EVENTS.EDIT_CHANGE_TAG_CONDITION, (payload?: string) => {
         const userData = ProfileStore.get();
         const tagsSet = new Set<string>();
         if (userData && userData.tags) {
@@ -172,22 +176,19 @@ export const EditEventRegister = () => {
         }
     });
 
-    EventBus.register('edit:name-input', () => {
+    EventBus.register(EVENTS.EDIT_NAME_INPUT, () => {
         const _nameInput = document.getElementsByTagName('input')[0];
 
         const storeData = EditStore.get();
 
         const test = _nameInput.value.length !== 0 && nameRegExp.test(_nameInput.value);
-        if (!test || !_nameInput.value) {
-            // storeData.namePass = false;
-        }
+
         test ? (storeData.nameFieldClass = 'form__field-valid') : (storeData.nameFieldClass = 'form__field-invalid');
         if (!test && storeData.nameErrorClass !== 'error-active') {
             storeData.nameErrorClass = 'error-hint';
         }
         if (test && (storeData.nameErrorClass === 'error-active' || storeData.nameErrorClass === 'error-hint')) {
             storeData.nameErrorClass = 'error-inactive';
-            // if (_nameInput.value) storeData.namePass = true;
         }
 
         if (storeData.nameErrorClass === 'error-active' || storeData.nameErrorClass === 'error-hint') {
@@ -197,7 +198,7 @@ export const EditEventRegister = () => {
         EditStore.set(storeData);
     });
 
-    EventBus.register('edit:name-focusout', () => {
+    EventBus.register(EVENTS.EDIT_NAME_FOCUSOUT, () => {
         const _nameInput = document.getElementsByTagName('input')[0];
 
         const storeData = EditStore.get();
@@ -215,7 +216,7 @@ export const EditEventRegister = () => {
         EditStore.set(storeData);
     });
 
-    EventBus.register('edit:birth-date-input', () => {
+    EventBus.register(EVENTS.EDIT_BIRTH_DATE_INPUT, () => {
         const _dateInput = document.getElementsByTagName('input')[1];
 
         const storeData = EditStore.get();
@@ -237,7 +238,7 @@ export const EditEventRegister = () => {
         EditStore.set(storeData);
     });
 
-    EventBus.register('edit:birth-date-focusout', () => {
+    EventBus.register(EVENTS.EDIT_BIRTH_DATE_FOCUSOUT, () => {
         const _dateInput = document.getElementsByTagName('input')[1];
 
         const storeData = EditStore.get();
@@ -255,7 +256,7 @@ export const EditEventRegister = () => {
         EditStore.set(storeData);
     });
 
-    EventBus.register('edit:img-input', (event) => {
+    EventBus.register(EVENTS.EDIT_IMG_INPUT, (event) => {
         const userData = ProfileStore.get();
         if (!userData.imgs) {
             const ps = ProfileStore.get();
@@ -297,7 +298,7 @@ export const EditEventRegister = () => {
         });
     });
 
-    EventBus.register('edit:img-delete', (imgPath) => {
+    EventBus.register(EVENTS.EDIT_IMG_DELETE, (imgPath) => {
         deleteProfilePhotoRequest(imgPath).then((data) => {
             if (data.status !== HTTPSuccess) {
                 throw 'bad response';
@@ -313,7 +314,7 @@ export const EditEventRegister = () => {
         });
     });
 
-    EventBus.register('edit:tags-click', () => {
+    EventBus.register(EVENTS.EDIT_TAGS_CLICK, () => {
         const storeData = EditStore.get();
         if (ProfileStore.get().tags) {
             const tags = [];
@@ -328,7 +329,7 @@ export const EditEventRegister = () => {
         EditStore.set(storeData);
     });
 
-    EventBus.register('edit:tag-click', (payload?: string) => {
+    EventBus.register(EVENTS.EDIT_TAG_CLICK, (payload?: string) => {
         const storeData = EditStore.get();
 
         storeData.tagsField.items.filter((element) => {
@@ -340,7 +341,7 @@ export const EditEventRegister = () => {
         });
     });
 
-    EventBus.register('edit:gender-male-click', () => {
+    EventBus.register(EVENTS.EDIT_GENDER_MALE_CLICK, () => {
         const storeData = EditStore.get();
         storeData.genderField.items[0].selected = true;
         storeData.genderField.items[1].selected = false;
@@ -348,7 +349,7 @@ export const EditEventRegister = () => {
         EditStore.set(storeData);
     });
 
-    EventBus.register('edit:gender-female-click', () => {
+    EventBus.register(EVENTS.EDIT_GENDER_FEMALE_CLICK, () => {
         const storeData = EditStore.get();
         storeData.genderField.items[0].selected = false;
         storeData.genderField.items[1].selected = true;
@@ -356,7 +357,7 @@ export const EditEventRegister = () => {
         EditStore.set(storeData);
     });
 
-    EventBus.register('edit:prefer-male-click', () => {
+    EventBus.register(EVENTS.EDIT_PREFER_MALE_CLICK, () => {
         const storeData = EditStore.get();
         storeData.preferField.items[0].selected = true;
         storeData.preferField.items[1].selected = false;
@@ -365,7 +366,7 @@ export const EditEventRegister = () => {
         EditStore.set(storeData);
     });
 
-    EventBus.register('edit:prefer-female-click', () => {
+    EventBus.register(EVENTS.EDIT_PREFER_FEMALE_CLICK, () => {
         const storeData = EditStore.get();
         storeData.preferField.items[0].selected = false;
         storeData.preferField.items[1].selected = true;
@@ -374,7 +375,7 @@ export const EditEventRegister = () => {
         EditStore.set(storeData);
     });
 
-    EventBus.register('edit:prefer-any-click', () => {
+    EventBus.register(EVENTS.EDIT_PREFER_ANY_CLICK, () => {
         const storeData = EditStore.get();
         storeData.preferField.items[0].selected = false;
         storeData.preferField.items[1].selected = false;

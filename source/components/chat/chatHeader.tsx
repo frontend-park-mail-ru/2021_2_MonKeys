@@ -1,6 +1,6 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import EventBus from '../../dispatcher/eventBus.js';
-
+import { EVENTS } from '../../dispatcher/events.js';
 export interface ChatHeaderProps {
     chatID: number;
     userName: string;
@@ -9,10 +9,10 @@ export interface ChatHeaderProps {
 
 export const ChatHeader = (props: ChatHeaderProps) => {
     const backButtonClick = () => {
-        EventBus.dispatch<number>('chat:back-button', props.chatID);
+        EventBus.dispatch<number>(EVENTS.CHAT_BACK_BUTTON, props.chatID);
     };
     const profileClick = () => {
-        EventBus.dispatch<number>('chat:open-profile', props.chatID);
+        EventBus.dispatch<number>(EVENTS.CHAT_OPEN_PROFILE, props.chatID);
     };
 
     return (

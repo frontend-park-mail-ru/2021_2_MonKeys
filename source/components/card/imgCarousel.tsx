@@ -2,13 +2,14 @@ import eventBus from '../../dispatcher/eventBus.js';
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import { IconButton } from '../common/iconButton.js';
 import { conditionalRendering } from '../../utils/tsxTools/jsxTools.js';
+import { EVENTS } from '../../dispatcher/events.js';
 
 const LButtonProps = {
     type: 'button',
     class: 'carousel-button-left',
     src: 'icons/carousel_left.svg',
     onclick: () => {
-        eventBus.dispatch('carousel:previous');
+        eventBus.dispatch(EVENTS.CAROUSEL_PREVIOUS);
     },
 };
 
@@ -17,7 +18,7 @@ const RButtonProps = {
     class: 'carousel-button-right',
     src: 'icons/carousel_right.svg',
     onclick: () => {
-        eventBus.dispatch('carousel:next');
+        eventBus.dispatch(EVENTS.CAROUSEL_NEXT);
     },
 };
 

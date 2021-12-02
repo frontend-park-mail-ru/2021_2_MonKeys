@@ -1,6 +1,7 @@
 import eventBus from './eventBus.js';
 import EventBus from './eventBus.js';
 import { swipesAnimation } from '../constants/animations.js';
+import { EVENTS } from './events.js';
 export interface cardMoveOffset {
     offsetX: number;
     offsetY: number;
@@ -16,10 +17,10 @@ declare global {
 }
 
 export const SwipeEvenetsRegister = () => {
-    EventBus.register('swipe:start', () => {
+    EventBus.register(EVENTS.SWIPE_START, () => {
         //...
     });
-    EventBus.register('swipe:move', (cardMoveOffset) => {
+    EventBus.register(EVENTS.SWIPE_MOVE, (cardMoveOffset) => {
         const card = document.querySelectorAll<HTMLElement>('.card')[0];
 
         const heart = document.querySelector<HTMLElement>('img[alt="like"]');
@@ -72,7 +73,6 @@ export const SwipeEvenetsRegister = () => {
         }px)`;
         dislike.style.width = `${Math.round(swipesAnimation.iconDefaultWidth - cardMoveOffset.diffX / 2)}px`;
         dislike.style.height = `${Math.round(swipesAnimation.iconDefaultWidth - cardMoveOffset.diffX / 2)}px`;
-        // dislike.style.opacity = `${1 + cardMoveOffset.diffX / 300}`;
 
         card.style.transform = `translate(${cardMoveOffset.diffX}px, ${cardMoveOffset.diffY}px)`;
 
@@ -82,20 +82,20 @@ export const SwipeEvenetsRegister = () => {
         dislike.style.transform += `rotate(${-cardMoveOffset.diffX / rotationScale}deg)`;
         card.style.transform += `rotate(${cardMoveOffset.diffX / rotationScale}deg)`;
     });
-    EventBus.register('swipe:end', () => {
+    EventBus.register(EVENTS.SWIPE_END, () => {
         let card = document.querySelectorAll<HTMLElement>('.card')[0];
         if (!card) {
             card = document.querySelectorAll<HTMLElement>('card-expended')[0];
         }
         if (window.offsetX > swipesAnimation.likeXThreshhold) {
             window.startX = 0;
-            eventBus.dispatch('feed:like-button');
+            eventBus.dispatch(EVENTS.FEED_LIKE_BUTTON);
             return;
         }
 
         if (window.offsetX < -swipesAnimation.likeXThreshhold) {
             window.startX = 0;
-            eventBus.dispatch('feed:dislike-button');
+            eventBus.dispatch(EVENTS.FEED_DISLIKE_BUTTON);
             return;
         }
         const heart = document.querySelector<HTMLElement>('img[alt="like"]');

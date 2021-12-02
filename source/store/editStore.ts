@@ -1,6 +1,6 @@
 import { ItemListProps } from '../components/edit/itemList.js';
 import BaseStore from './storeBase.js';
-
+import { EVENTS } from '../dispatcher/events.js';
 export interface EditData {
     nameFieldClass: string;
     nameErrorClass: string;
@@ -38,15 +38,15 @@ const initData = {
             {
                 value: 'Мужчина',
                 selected: false,
-                clickEvent: 'edit:gender-male-click',
+                clickEvent: EVENTS.EDIT_GENDER_MALE_CLICK,
             },
             {
                 value: 'Женщина',
                 selected: false,
-                clickEvent: 'edit:gender-female-click',
+                clickEvent: EVENTS.EDIT_GENDER_FEMALE_CLICK,
             },
         ],
-        buttonEvent: 'edit:gender-click',
+        buttonEvent: 99999999,
     },
     preferField: {
         title: 'Кого вы ищите',
@@ -57,20 +57,20 @@ const initData = {
             {
                 value: 'Мужчину',
                 selected: false,
-                clickEvent: 'edit:prefer-male-click',
+                clickEvent: EVENTS.EDIT_PREFER_MALE_CLICK,
             },
             {
                 value: 'Женщину',
                 selected: false,
-                clickEvent: 'edit:prefer-female-click',
+                clickEvent: EVENTS.EDIT_PREFER_FEMALE_CLICK,
             },
             {
                 value: 'Не важно',
                 selected: false,
-                clickEvent: 'edit:prefer-any-click',
+                clickEvent: EVENTS.EDIT_PREFER_ANY_CLICK,
             },
         ],
-        buttonEvent: 'edit:prefer-click',
+        buttonEvent: 999999999999,
     },
     tagsField: {
         title: 'Интересы',
@@ -82,30 +82,30 @@ const initData = {
             {
                 value: 'аниме',
                 selected: false,
-                clickEvent: 'edit:tag-click',
+                clickEvent: EVENTS.EDIT_TAG_CLICK,
             },
             {
                 value: 'музыка',
                 selected: false,
-                clickEvent: 'edit:tag-click',
+                clickEvent: EVENTS.EDIT_TAG_CLICK,
             },
             {
                 value: 'игры',
                 selected: false,
-                clickEvent: 'edit:tag-click',
+                clickEvent: EVENTS.EDIT_TAG_CLICK,
             },
             {
                 value: 'наука',
                 selected: false,
-                clickEvent: 'edit:tag-click',
+                clickEvent: EVENTS.EDIT_TAG_CLICK,
             },
             {
                 value: 'спорт',
                 selected: false,
-                clickEvent: 'edit:tag-click',
+                clickEvent: EVENTS.EDIT_TAG_CLICK,
             },
         ],
-        buttonEvent: 'edit:tags-click',
+        buttonEvent: EVENTS.EDIT_TAGS_CLICK,
     },
 };
 

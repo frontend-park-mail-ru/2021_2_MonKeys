@@ -1,6 +1,7 @@
 import eventBus from '../../dispatcher/eventBus.js';
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import { TapbarItem, tapbarItemProps } from './tapbarItem.js';
+import { EVENTS } from '../../dispatcher/events.js';
 
 export interface tapbarProps {
     activeItem: string;
@@ -39,7 +40,7 @@ export const Tapbar = (props: tapbarProps, vertical?: boolean) => {
             {
                 route: '/login',
                 action: () => {
-                    eventBus.dispatch('profile:logout-button');
+                    eventBus.dispatch(EVENTS.PROFILE_LOGOUT_BUTTON);
                 },
                 src: 'icons/exit.svg',
                 name: 'Выход',

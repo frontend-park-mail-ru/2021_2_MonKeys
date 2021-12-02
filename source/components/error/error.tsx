@@ -1,7 +1,7 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import { Button } from '../common/button.js';
 import EventBus from '../../dispatcher/eventBus.js';
-
+import { EVENTS } from '../../dispatcher/events.js';
 export interface ErrorData {
     title: string;
     text: string;
@@ -13,7 +13,7 @@ export const Error = (error: ErrorData) => {
         text: 'OK',
         class: 'crit-error-button',
         onclick: () => {
-            EventBus.dispatch<string>('error:ok-button');
+            EventBus.dispatch<string>(EVENTS.ERROR_OK_BUTTON);
         },
     };
 

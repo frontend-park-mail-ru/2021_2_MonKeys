@@ -19,7 +19,6 @@ import ReportsStore from '../store/reportsStore.js';
 export default class ChatsWideView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
-        // chatsManager.switchChat(ChatsStore.get().chats[0].fromUserID);
         this.viewSize = viewSizes.wide;
         ChatsStore.subscribe(this.chatsStoreUpdatesView, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
@@ -54,13 +53,7 @@ export default class ChatsWideView extends ViewBase {
     };
 
     _createTmpl(data) {
-        // const profile = data.chat.isOpenedProfile ?
-        //     (<div>
-        //         открыто
-        //     </div>) :
-        //     (<div>
-        //         закрыто
-        //     </div>)
+
         let profile = <div></div>;
         if (data.chat && data.chat.profile && data.chat.isOpenedProfile) {
             profile = (

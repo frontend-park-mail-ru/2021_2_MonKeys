@@ -1,9 +1,10 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import eventBus from '../../dispatcher/eventBus.js';
+import { EVENTS } from '../../dispatcher/events.js';
 
 export const SearchField = () => {
     const searchEvent = () => {
-        eventBus.dispatch('chat:search');
+        eventBus.dispatch(EVENTS.CHAT_SEARCH);
     };
     return (
         <div class='chats__search'>

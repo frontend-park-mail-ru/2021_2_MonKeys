@@ -3,6 +3,7 @@ import { IconButton } from '../common/iconButton.js';
 import { ImgCarousel } from './imgCarousel.js';
 import { ProfileData } from '../../store/profileStore.js';
 import eventBus from '../../dispatcher/eventBus.js';
+import { EVENTS } from '../../dispatcher/events.js';
 
 export interface CardFeedProps {
     userData: ProfileData;
@@ -23,7 +24,7 @@ export const CardFeed = (props: CardFeedProps, wide: boolean) => {
                     }
                     window.startX = touches[0].clientX;
                     window.startY = touches[0].clientY;
-                    eventBus.dispatch('swipe:start');
+                    eventBus.dispatch(EVENTS.SWIPE_START);
                 }}
                 ontouchmove={(event) => {
                     if (!window.startX || !window.startY) {
@@ -43,7 +44,7 @@ export const CardFeed = (props: CardFeedProps, wide: boolean) => {
                     const diffY = y - window.startY;
                     window.offsetX = diffX;
                     window.offsetY = diffY;
-                    eventBus.dispatch('swipe:move', { diffX, diffY });
+                    eventBus.dispatch(EVENTS.SWIPE_MOVE, { diffX, diffY });
                 }}
                 onmousedown={(event) => {
                     if (!window.startX) {
@@ -59,14 +60,14 @@ export const CardFeed = (props: CardFeedProps, wide: boolean) => {
                         const diffY = event.clientY - window.startY;
                         window.offsetX = diffX;
                         window.offsetY = diffY;
-                        eventBus.dispatch('swipe:move', { diffX, diffY });
+                        eventBus.dispatch(EVENTS.SWIPE_MOVE, { diffX, diffY });
                     }
                 }}
                 onmouseup={() => {
-                    eventBus.dispatch('swipe:end');
+                    eventBus.dispatch(EVENTS.SWIPE_END);
                 }}
                 ontouchend={() => {
-                    eventBus.dispatch('swipe:end');
+                    eventBus.dispatch(EVENTS.SWIPE_END);
                 }}
             >
                 {ImgCarousel(props.userData.imgs, 'card-img')}
