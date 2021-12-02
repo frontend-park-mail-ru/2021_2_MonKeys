@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import ViewBase from './viewBase.js';
 import { viewSizes } from '../constants/viewParams.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
@@ -42,7 +43,11 @@ export default class ProfileWideView extends ViewBase {
                     <div style='width:100%; max-width: 400px; display: flex; flex-direction: column; height: 610px;'>
                         <div class='profile'>
                             <div class='profile__card'>
-                                {CardExpended({ userData: data.cardData.userData, withActions: false, withReports: false })}
+                                {CardExpended({
+                                    userData: data.cardData.userData,
+                                    withActions: false,
+                                    withReports: false,
+                                })}
                             </div>
                             {Errors(data.error)}
                         </div>

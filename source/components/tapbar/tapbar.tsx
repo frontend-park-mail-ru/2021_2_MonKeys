@@ -48,7 +48,6 @@ export const Tapbar = (props: tapbarProps, vertical?: boolean) => {
         ];
 
         return (
-
             <div class='tapbar tapbar-vertical'>
                 <img src='icons/logo.svg' height='120' width='180' />
                 {items.map((props) => TapbarItem(props))}

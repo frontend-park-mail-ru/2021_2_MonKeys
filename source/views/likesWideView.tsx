@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import ViewBase from './viewBase.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { viewSizes } from '../constants/viewParams.js';
@@ -55,7 +56,6 @@ export default class LikesWideView extends ViewBase {
                         </div>
                     </div>
                 </div>
-
             );
         }
         if (!LikesStore.get().expended) {

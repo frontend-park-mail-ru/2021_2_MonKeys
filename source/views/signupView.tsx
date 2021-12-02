@@ -14,7 +14,6 @@ import { dropsBackground } from '../components/common/dropsBackground.js';
 import { Errors } from '../components/error/errors.js';
 import { EVENTS } from '../dispatcher/events.js';
 
-
 export default class SignupView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);

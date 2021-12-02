@@ -53,7 +53,6 @@ export default class ChatsWideView extends ViewBase {
     };
 
     _createTmpl(data) {
-
         let profile = <div></div>;
         if (data.chat && data.chat.profile && data.chat.isOpenedProfile) {
             profile = (
