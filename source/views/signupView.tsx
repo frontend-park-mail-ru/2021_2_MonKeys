@@ -10,7 +10,6 @@ import { SignupStore } from '../store/signupStore.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 
 import router from '../route/router.js';
-import { dropsBackground } from '../components/common/dropsBackground.js';
 import { Errors } from '../components/error/errors.js';
 import { EVENTS } from '../dispatcher/events.js';
 
@@ -118,7 +117,6 @@ export default class SignupView extends ViewBase {
     _createTmpl() {
         return (
             <div class='flex_box_column_center'>
-                {dropsBackground()}
                 <div class='header-medium'>Регистрация</div>
                 {FormField(this._data.fields.email)}
                 {ErrorMsg(this._data.errorMsgs.emailError)}

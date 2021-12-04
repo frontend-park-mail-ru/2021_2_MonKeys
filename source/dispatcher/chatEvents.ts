@@ -7,6 +7,7 @@ import { searchMathesRequest } from '../requests/matchRequest.js';
 import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { ProfileData } from '../store/profileStore.js';
 import { EVENTS } from './events.js';
+import { throttle } from '../utils/throttle.js';
 
 export const ChatEventsRegister = () => {
     EventBus.register(EVENTS.CHAT_INPUT_MESSAGE, (chatID: number) => {
@@ -55,24 +56,29 @@ export const ChatEventsRegister = () => {
         chatsManager.closeChat(chatID);
         router.go('/chats');
     });
+    const chatSearchThreshhold = 1000;
+    EventBus.register(
+        EVENTS.CHAT_SEARCH,
 
-    EventBus.register(EVENTS.CHAT_SEARCH, () => {
-        const _searchInput = document.getElementsByTagName('input')[0];
-        const searchTmpl = _searchInput.value.trim() + '%';
+        throttle(() => {
+            console.log('searching');
+            const _searchInput = document.getElementsByTagName('input')[0];
+            const searchTmpl = _searchInput.value.trim() + '%';
 
-        searchMathesRequest(searchTmpl).then((data) => {
-            if (data.status !== HTTPSuccess) {
-                throw 'bad response';
-            }
+            searchMathesRequest(searchTmpl).then((data) => {
+                if (data.status !== HTTPSuccess) {
+                    throw 'bad response';
+                }
 
-            if (data.body.allUsers) {
-                const matchesData = MatchesStore.get();
-                matchesData.matches = data.body.allUsers;
-                matchesData.matchesTotal = data.body.matchesCount;
-                MatchesStore.set(matchesData);
-            }
-        });
-    });
+                if (data.body.allUsers) {
+                    const matchesData = MatchesStore.get();
+                    matchesData.matches = data.body.allUsers;
+                    matchesData.matchesTotal = data.body.matchesCount;
+                    MatchesStore.set(matchesData);
+                }
+            });
+        }, chatSearchThreshhold)
+    );
     EventBus.register(EVENTS.CHAT_OPEN_PROFILE, (userID: number) => {
         if (!chatsManager.withProfile(userID)) {
             const matchesData = MatchesStore.get();

@@ -10,7 +10,6 @@ import { LoginStore } from '../store/loginStore.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 
 import router from '../route/router.js';
-import { dropsBackground } from '../components/common/dropsBackground.js';
 import { Errors } from '../components/error/errors.js';
 import { EVENTS } from '../dispatcher/events.js';
 export default class LoginView extends ViewBase {
@@ -116,7 +115,6 @@ export default class LoginView extends ViewBase {
     _createTmpl(data) {
         return (
             <div class='flex_box_column_center'>
-                {dropsBackground()}
                 <div class='header-big'>Drip</div>
 
                 {FormField(data.fields.email)}
