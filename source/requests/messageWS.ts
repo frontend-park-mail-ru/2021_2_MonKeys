@@ -4,6 +4,7 @@ import eventBus from '../dispatcher/eventBus.js';
 import { Message } from '../store/chatsStore.js';
 import { errorManager } from '../store/errorStore.js';
 import { browserErr } from '../utils/constants/errorWS.js';
+import { EVENTS } from '../dispatcher/events.js';
 
 const ws = new WebSocketManager(wsURL);
 
@@ -21,7 +22,7 @@ const initWS = () => {
         const message = JSON.parse(response.data);
         message.date = new Date(message.date);
 
-        eventBus.dispatch<Message>('chat:new-message', message);
+        eventBus.dispatch<Message>(EVENTS.CHAT_NEW_MESSAGE, message);
     };
 };
 

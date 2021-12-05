@@ -1,20 +1,21 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import { Chat as ChatData } from '../../store/chatsStore.js';
 import EventBus from '../../dispatcher/eventBus.js';
+import { EVENTS } from '../../dispatcher/events.js';
 
 export const InputMessage = (chat: ChatData) => {
     const inputEvent = () => {
-        EventBus.dispatch<number>('chat:input-message', chat.fromUserID);
+        EventBus.dispatch<number>(EVENTS.CHAT_INPUT_MESSAGE, chat.fromUserID);
     };
     const enterSendEvent = (event) => {
         const enterKeyCode = 13;
         if (event.keyCode === enterKeyCode) {
             event.preventDefault();
-            EventBus.dispatch<number>('chat:send-button', chat.fromUserID);
+            EventBus.dispatch<number>(EVENTS.CHAT_SEND_BUTTON, chat.fromUserID);
         }
     };
     const buttonSendEvent = () => {
-        EventBus.dispatch<number>('chat:send-button', chat.fromUserID);
+        EventBus.dispatch<number>(EVENTS.CHAT_SEND_BUTTON, chat.fromUserID);
     };
 
     const inputValue = chat.draftMessage === undefined || chat.draftMessage === '' ? '' : chat.draftMessage;

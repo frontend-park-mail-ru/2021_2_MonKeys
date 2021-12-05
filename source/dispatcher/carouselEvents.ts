@@ -1,14 +1,15 @@
 import EventBus from './eventBus.js';
+import { EVENTS } from './events.js';
 
 export const CarouselEventsRegister = () => {
-    EventBus.register('carousel:next', () => {
+    EventBus.register(EVENTS.CAROUSEL_NEXT, () => {
         if (window.currentSelectedCarouselItem < window.currentCarouselSize) {
             window.currentSelectedCarouselItem++;
         }
 
         window.currentView.forceRender();
     });
-    EventBus.register('carousel:previous', () => {
+    EventBus.register(EVENTS.CAROUSEL_PREVIOUS, () => {
         if (window.currentSelectedCarouselItem > 0) {
             window.currentSelectedCarouselItem--;
         }

@@ -6,15 +6,17 @@ import { MatchesStore } from '../store/matchStore.js';
 import { searchMathesRequest } from '../requests/matchRequest.js';
 import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { ProfileData } from '../store/profileStore.js';
+import { EVENTS } from './events.js';
+import { throttle } from '../utils/throttle.js';
 
 export const ChatEventsRegister = () => {
-    EventBus.register('chat:input-message', (chatID: number) => {
+    EventBus.register(EVENTS.CHAT_INPUT_MESSAGE, (chatID: number) => {
         const _msgInput = document.querySelectorAll<HTMLInputElement>('.message-input__field')[0];
         const messageText = _msgInput.value.trim();
 
         chatsManager.saveDraftMessage(chatID, messageText);
     });
-    EventBus.register('chat:send-button', (chatID: number) => {
+    EventBus.register(EVENTS.CHAT_SEND_BUTTON, (chatID: number) => {
         const _msgInput = document.querySelectorAll<HTMLInputElement>('.message-input__field')[0];
         const messageText = _msgInput.value.trim();
 
@@ -26,7 +28,7 @@ export const ChatEventsRegister = () => {
                 .catch((err) => console.log(err));
         }
     });
-    EventBus.register('chat:new-message', (message: Message) => {
+    EventBus.register(EVENTS.CHAT_NEW_MESSAGE, (message: Message) => {
         const chatID = chatsManager.getChatIDByMessage(message);
         if (!chatsManager.hasChat(chatID)) {
             let profile: ProfileData;
@@ -50,29 +52,33 @@ export const ChatEventsRegister = () => {
         }
     });
 
-    EventBus.register('chat:back-button', (chatID: number) => {
+    EventBus.register(EVENTS.CHAT_BACK_BUTTON, (chatID: number) => {
         chatsManager.closeChat(chatID);
         router.go('/chats');
     });
+    const chatSearchThreshhold = 1000;
+    EventBus.register(
+        EVENTS.CHAT_SEARCH,
 
-    EventBus.register('chat:search', () => {
-        const _searchInput = document.getElementsByTagName('input')[0];
-        const searchTmpl = _searchInput.value.trim() + '%';
+        throttle(() => {
+            const _searchInput = document.getElementsByTagName('input')[0];
+            const searchTmpl = _searchInput.value.trim() + '%';
 
-        searchMathesRequest(searchTmpl).then((data) => {
-            if (data.status !== HTTPSuccess) {
-                throw 'bad response';
-            }
+            searchMathesRequest(searchTmpl).then((data) => {
+                if (data.status !== HTTPSuccess) {
+                    throw 'bad response';
+                }
 
-            if (data.body.allUsers) {
-                const matchesData = MatchesStore.get();
-                matchesData.matches = data.body.allUsers;
-                matchesData.matchesTotal = data.body.matchesCount;
-                MatchesStore.set(matchesData);
-            }
-        });
-    });
-    EventBus.register('chat:open-profile', (userID: number) => {
+                if (data.body.allUsers) {
+                    const matchesData = MatchesStore.get();
+                    matchesData.matches = data.body.allUsers;
+                    matchesData.matchesTotal = data.body.matchesCount;
+                    MatchesStore.set(matchesData);
+                }
+            });
+        }, chatSearchThreshhold)
+    );
+    EventBus.register(EVENTS.CHAT_OPEN_PROFILE, (userID: number) => {
         if (!chatsManager.withProfile(userID)) {
             const matchesData = MatchesStore.get();
             let profile: ProfileData;
@@ -85,7 +91,7 @@ export const ChatEventsRegister = () => {
         }
         chatsManager.activateProfile(userID);
     });
-    EventBus.register('chat:back-to-chat-button', (userID: number) => {
+    EventBus.register(EVENTS.CHAT_BACK_TO_CHAT_BUTTON, (userID: number) => {
         chatsManager.disableProfile(userID);
     });
 };

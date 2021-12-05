@@ -9,6 +9,7 @@ import eventBus from '../dispatcher/eventBus.js';
 import TapbarStore from '../store/tapbarStore.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { Errors } from '../components/error/errors.js';
+import { EVENTS } from '../dispatcher/events.js';
 
 export default class FeedView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -54,7 +55,7 @@ export default class FeedView extends ViewBase {
                     alt: 'dislike',
                     class: 'card-bottom-panel_actions_action',
                     onclick: () => {
-                        eventBus.dispatch('feed:dislike-button');
+                        eventBus.dispatch(EVENTS.FEED_DISLIKE_BUTTON);
                     },
                 },
                 expandButton: {
@@ -62,7 +63,7 @@ export default class FeedView extends ViewBase {
                     src: 'icons/expand_big.svg',
                     class: 'card-bottom-panel_actions_action',
                     onclick: () => {
-                        eventBus.dispatch('feed:expand-button');
+                        eventBus.dispatch(EVENTS.FEED_EXPAND_BUTTON);
                     },
                 },
                 likeButton: {
@@ -71,7 +72,7 @@ export default class FeedView extends ViewBase {
                     alt: 'like',
                     class: 'card-bottom-panel_actions_action',
                     onclick: () => {
-                        eventBus.dispatch('feed:like-button');
+                        eventBus.dispatch(EVENTS.FEED_LIKE_BUTTON);
                     },
                 },
             },
@@ -97,7 +98,7 @@ export default class FeedView extends ViewBase {
                 src: 'icons/expand_big.svg',
                 class: 'card-bottom-panel_actions_action',
                 onclick: () => {
-                    eventBus.dispatch('feed:expand-button');
+                    eventBus.dispatch(EVENTS.FEED_EXPAND_BUTTON);
                 },
             };
 
@@ -116,7 +117,7 @@ export default class FeedView extends ViewBase {
                 src: 'icons/button_shrink_white.svg',
                 class: 'card-bottom-panel_actions_action',
                 onclick: () => {
-                    eventBus.dispatch('feed:shrink-button');
+                    eventBus.dispatch(EVENTS.FEED_SHRINK_BUTTON);
                 },
             };
             return (

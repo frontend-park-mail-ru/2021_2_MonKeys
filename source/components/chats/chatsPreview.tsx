@@ -1,6 +1,7 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import { Chat } from '../../store/chatsStore.js';
 import EventBus from '../../dispatcher/eventBus.js';
+import { EVENTS } from '../../dispatcher/events.js';
 
 export const chatsPreview = (chat: Chat) => {
     const lastMsgIdx = chat.messages.length - 1;
@@ -9,7 +10,7 @@ export const chatsPreview = (chat: Chat) => {
     const ChatID = chat.fromUserID;
 
     function onclick() {
-        EventBus.dispatch<number>('chats:preview-chat', ChatID);
+        EventBus.dispatch<number>(EVENTS.CHATS_PREVIEW_CHAT, ChatID);
     }
 
     return (

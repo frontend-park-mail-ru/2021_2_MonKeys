@@ -8,14 +8,14 @@ export interface ItemListProps {
     open: boolean;
     openable: boolean;
     valid: boolean;
-    buttonEvent: string;
+    buttonEvent: number;
     alignCenter?: boolean;
 }
 
 export interface ListItem {
     value: string;
     selected: boolean;
-    clickEvent: string;
+    clickEvent: number;
 }
 
 const classMap = (valid: boolean) => {

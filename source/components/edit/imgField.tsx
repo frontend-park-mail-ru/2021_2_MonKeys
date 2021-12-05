@@ -2,7 +2,7 @@ import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import ViewBase from '../../views/viewBase.js';
 import { IconButton } from '../common/iconButton.js';
 import EventBus from '../../dispatcher/eventBus.js';
-
+import { EVENTS } from '../../dispatcher/events.js';
 export interface ButtonProps {
     class: string;
     onchange: { (data, view?: ViewBase): void };
@@ -26,7 +26,7 @@ const imgSequence = (imgs: string[]) => {
                 class: 'add-img-delete',
                 src: 'icons/remove_img.svg',
                 onclick: () => {
-                    EventBus.dispatch('edit:img-delete', element);
+                    EventBus.dispatch(EVENTS.EDIT_IMG_DELETE, element);
                 },
             });
         } else {

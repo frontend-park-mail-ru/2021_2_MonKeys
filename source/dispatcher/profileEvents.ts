@@ -6,13 +6,14 @@ import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
 import { ProfileStore } from '../store/profileStore.js';
 import feedStore from '../store/feedStore.js';
+import { EVENTS } from './events.js';
 
 export const ProfileEventsRegister = () => {
-    EventBus.register('profile:edit-button', () => {
+    EventBus.register(EVENTS.PROFILE_EDIT_BUTTON, () => {
         router.go('/edit');
     });
 
-    EventBus.register('profile:logout-button', () => {
+    EventBus.register(EVENTS.PROFILE_LOGOUT_BUTTON, () => {
         AuthStore.set({
             loggedIn: userStatus.notLoggedIn,
         });

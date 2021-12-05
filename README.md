@@ -10,7 +10,7 @@
 ![alt text](badges/eslint-badge.svg)
 ## Deployment🚀🚀🚀
 ![PingPong uptime (last 30 days)](https://img.shields.io/pingpong/uptime/sp_09c2d5875746479fa2811f672e67bf72?style=flat-square)
-[![Figma](https://img.shields.io/badge/https%3A%2F%2Fijia.me-up-green)](https://ijia.me)
+[![Figma](https://img.shields.io/badge/https%3A%2F%2Fdrip.monkeys.team-up-green)](https://drip.monkeys.team)
 
 ## Design💧💧💧
 [![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/community/file/1018614506626829179/Drip-v.0.3)

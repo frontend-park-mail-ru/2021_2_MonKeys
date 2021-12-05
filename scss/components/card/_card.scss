@@ -13,19 +13,38 @@ $card-expanded-img-default-height: 100%;
     align-items: center;
 }
 
-.card{
-  max-height: $max-height;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: $card-expanded-default-width;
-  height: $card-expanded-default-height;
 
-  background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.4) 0%, rgba(0, 44, 65, 0) 100%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: $border-radius-default;
+@media (max-height: 960px) {
+    .card{
+    max-height: 70vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: $card-expanded-default-width;
+    height: $card-expanded-default-height;
+
+    background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.4) 0%, rgba(0, 44, 65, 0) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: $border-radius-default;
+    }
 }
+@media (min-height: 960px) {
+    .card{
+    max-height: 720px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: $card-expanded-default-width;
+    height: $card-expanded-default-height;
+
+    background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.4) 0%, rgba(0, 44, 65, 0) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: $border-radius-default;
+    }
+}
+
 
 .card-bottom-panel{
     position: absolute;

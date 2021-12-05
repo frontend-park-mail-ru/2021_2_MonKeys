@@ -15,15 +15,34 @@
   width: 95%;
 }
 
-.carousel-nav__arrows{
+
+
+
+@media (max-aspect-ratio: 10/10){
+ .carousel-nav__arrows{
   height:30px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
+  width: 95vw;
   position: absolute;
   top: 25%;
 }
+}
+
+
+@media (min-aspect-ratio: 10/10) {
+  .carousel-nav__arrows{
+  height:30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 375px;
+  position: absolute;
+  top: 25%;
+}
+}
+
 
 .side-big {
   top: 50%;
@@ -67,9 +86,13 @@
 }
 
 .carousel-button-right {
-  padding-right: $margin-small;
+  padding: $margin-small;
+  width: 24px;
+  height: 24px
 }
 
 .carousel-button-left {
-  padding-left: $margin-small;
+  padding: $margin-small;
+  width: 24px;
+  height: 24px
 }

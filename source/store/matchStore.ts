@@ -3,10 +3,6 @@ import BaseStore from './storeBase.js';
 
 export type MatchProfile = ProfileData;
 
-// export interface MatchProfile extends ProfileData {
-//     matchDate: string;
-// }
-
 export interface MatchData {
     matches: Map<number, MatchProfile>;
     matchesSearched: MatchProfile[];

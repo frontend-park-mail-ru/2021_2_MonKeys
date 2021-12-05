@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import ViewBase from './viewBase.js';
 import { viewSizes } from '../constants/viewParams.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
@@ -36,14 +37,20 @@ export default class ProfileWideView extends ViewBase {
 
     _createTmpl(data) {
         return (
-            <div style='display: flex;'>
+            <div class='flex-full'>
                 {Tapbar(TapbarStore.get(), true)}
-                <div class='app__content--align-center'>
-                    <div class='profile'>
-                        <div class='profile__card'>
-                            {CardExpended({ userData: data.cardData.userData, withActions: false, withReports: false })}
+                <div class='flex-wide-view-center'>
+                    <div class='flex-wide-feed'>
+                        <div class='profile'>
+                            <div class='profile__card'>
+                                {CardExpended({
+                                    userData: data.cardData.userData,
+                                    withActions: false,
+                                    withReports: false,
+                                })}
+                            </div>
+                            {Errors(data.error)}
                         </div>
-                        {Errors(data.error)}
                     </div>
                 </div>
             </div>

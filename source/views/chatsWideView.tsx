@@ -19,7 +19,6 @@ import ReportsStore from '../store/reportsStore.js';
 export default class ChatsWideView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
-        // chatsManager.switchChat(ChatsStore.get().chats[0].fromUserID);
         this.viewSize = viewSizes.wide;
         ChatsStore.subscribe(this.chatsStoreUpdatesView, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
@@ -54,13 +53,6 @@ export default class ChatsWideView extends ViewBase {
     };
 
     _createTmpl(data) {
-        // const profile = data.chat.isOpenedProfile ?
-        //     (<div>
-        //         открыто
-        //     </div>) :
-        //     (<div>
-        //         закрыто
-        //     </div>)
         let profile = <div></div>;
         if (data.chat && data.chat.profile && data.chat.isOpenedProfile) {
             profile = (
@@ -80,27 +72,24 @@ export default class ChatsWideView extends ViewBase {
 
         if (!data.matches[0] && !data.chats[0]) {
             return (
-                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
-                    <div
-                        class='view-contant view-contant_align_center
-                  view-content_scroll-banned view-content__max-height'
-                    >
-                        <div class='likes-view-text-big'>Здесь будут ваши пары и широкие чаты</div>
+                <div class='flex-full-height'>
+                    {Tapbar(TapbarStore.get(), true)}
+                    <div class='flex-wide-view-center'>
+                        <div class='flex-wide-view-content'>
+                            <div class='likes-view-text-big'>Здесь будут ваши пары и чаты</div>
 
-                        <div class='view-content__dummy-image-container'>
-                            <img src='icons/chat_gradient.svg' class='view-content__dummy-image'></img>
+                            <div class='view-content__dummy-image-container' style='min-height: 250px;'>
+                                <img src='icons/chat_gradient.svg' class='view-content__dummy-image'></img>
+                            </div>
+                            <div class='likes-view-text-small'>Лайкайте карточки в ленте и возвращайтесь</div>
                         </div>
-                        <div class='likes-view-text-small'>Лайкайте карточки в ленте и возвращайтесь</div>
-
-                        {Tapbar(TapbarStore.get())}
-                        {Errors(data.error)}
                     </div>
                 </div>
             );
         }
         if (!data.chat)
             return (
-                <div style='display: flex; height: 100%;'>
+                <div class='flex-full-height'>
                     {Tapbar(TapbarStore.get(), true)}
                     <div class='chats'>
                         {SearchField()}
@@ -108,7 +97,7 @@ export default class ChatsWideView extends ViewBase {
                         {Chats(data.chats)}
                     </div>
                     <div class='chat__side__container'>
-                        <div style='display: flex; flex-direction: column; height: 100%; justify-content: center; align-items: center;'>
+                        <div class='flex-center-column'>
                             <div style='margin-bottom: 36px; font-size: 24px'>Выберите чат</div>
                             <img src='icons/chat_gradient.svg' class='view-content__dummy-image'></img>
                         </div>
@@ -116,7 +105,8 @@ export default class ChatsWideView extends ViewBase {
                 </div>
             );
         return (
-            <div style='display: flex;'>
+            // broken mb
+            <div class='flex-full-height'>
                 {Tapbar(TapbarStore.get(), true)}
                 <div class='chats'>
                     {SearchField()}
@@ -125,7 +115,8 @@ export default class ChatsWideView extends ViewBase {
                 </div>
                 <div class='chat__side__container'>
                     <div class='chat'>
-                        {Chat(data.chat, true)};{Errors(data.error)}
+                        {Chat(data.chat, true)}
+                        {Errors(data.error)}
                     </div>
                 </div>
                 {profile}

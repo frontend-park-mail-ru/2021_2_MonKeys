@@ -3,6 +3,7 @@ import eventBus from '../../dispatcher/eventBus.js';
 
 import { Button } from '../common/button.js';
 import { ReportRadioButton } from './reportRadioButton.js';
+import { EVENTS } from '../../dispatcher/events.js';
 
 export interface reportWindowProps {
     reports: string[];
@@ -13,10 +14,10 @@ export interface reportWindowProps {
 export const ReportWindow = (props: reportWindowProps) => {
     const reportedWindowModificator = !props.visible ? ' report-window_hidden' : '';
     const backButtonAction = () => {
-        eventBus.dispatch('reports:back-button');
+        eventBus.dispatch(EVENTS.REPORTS_BACK_BUTTON);
     };
     const submitButtonAction = () => {
-        eventBus.dispatch('reports:declare-button', props.reportedUserID);
+        eventBus.dispatch(EVENTS.REPORTS_DECLARE_BUTTON, props.reportedUserID);
     };
 
     return (

@@ -1,6 +1,7 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import eventBus from '../../dispatcher/eventBus.js';
 import reactions from '../../constants/reactions.js';
+import { EVENTS } from '../../dispatcher/events.js';
 
 export interface CardActionsProps {
     userID: number;
@@ -10,34 +11,34 @@ export interface CardActionsProps {
 
 export const CardActions = (props: CardActionsProps) => {
     let dislikeClick = () => {
-        eventBus.dispatch('likes:reaction', { userID: props.userID, reactionType: reactions.dislike });
+        eventBus.dispatch(EVENTS.LIKES_REACTION, { userID: props.userID, reactionType: reactions.dislike });
     };
     let likeClick = () => {
-        eventBus.dispatch('likes:reaction', { userID: props.userID, reactionType: reactions.like });
+        eventBus.dispatch(EVENTS.LIKES_REACTION, { userID: props.userID, reactionType: reactions.like });
     };
     let arrowTmpl;
     if (props.expend) {
         const expandClick = () => {
-            eventBus.dispatch('likes:expand-button', props.userID);
+            eventBus.dispatch(EVENTS.LIKES_EXPAND_BUTTON, props.userID);
         };
         arrowTmpl = <img src='icons/expand_big.svg' class='actions__button-expand' onclick={expandClick} />;
     } else {
         const shrinkClick = () => {
-            eventBus.dispatch('likes:shrink-button', props.userID);
+            eventBus.dispatch(EVENTS.LIKES_SHRINK_BUTTON, props.userID);
         };
         arrowTmpl = <img src='icons/shrink.svg' class='actions__button-shrink' onclick={shrinkClick} />;
     }
 
     if (props.feed) {
         const shrinkClick = () => {
-            eventBus.dispatch('feed:shrink-button', props.userID);
+            eventBus.dispatch(EVENTS.FEED_SHRINK_BUTTON, props.userID);
         };
         arrowTmpl = <img src='icons/shrink.svg' class='actions__button-shrink' onclick={shrinkClick} />;
         dislikeClick = () => {
-            eventBus.dispatch('feed:dislike-button', { userID: props.userID, reactionType: reactions.dislike });
+            eventBus.dispatch(EVENTS.FEED_DISLIKE_BUTTON, { userID: props.userID, reactionType: reactions.dislike });
         };
         likeClick = () => {
-            eventBus.dispatch('feed:like-button', { userID: props.userID, reactionType: reactions.like });
+            eventBus.dispatch(EVENTS.FEED_LIKE_BUTTON, { userID: props.userID, reactionType: reactions.like });
         };
     }
     return (

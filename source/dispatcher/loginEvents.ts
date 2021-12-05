@@ -3,9 +3,10 @@ import { emailRegExp, passwordRegExp } from '../constants/validation.js';
 import { HTTPNotFound, HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { loginRequest } from '../requests/sessionRequest.js';
 import { LoginStore } from '../store/loginStore.js';
+import { EVENTS } from './events.js';
 
 export const LoginEventRegister = () => {
-    EventBus.register('login:button-white', () => {
+    EventBus.register(EVENTS.LOGIN_BUTTON_WHITE, () => {
         const _emailInput = document.getElementsByTagName('input')[0];
         const _passwordInput = document.getElementsByTagName('input')[1];
 
@@ -39,7 +40,7 @@ export const LoginEventRegister = () => {
 
         loginRequest(_email, _password).then((data) => {
             if (data.status === HTTPSuccess) {
-                EventBus.dispatch<string>('user:cookie-requests');
+                EventBus.dispatch<string>(EVENTS.USER_COOKIE_REQUESTS);
             } else if (data.status === HTTPNotFound) {
                 storeData.formErrorClass = 'error-active';
                 LoginStore.set(storeData);
@@ -47,7 +48,7 @@ export const LoginEventRegister = () => {
         });
     });
 
-    EventBus.register('login:email-input', () => {
+    EventBus.register(EVENTS.LOGIN_EMAIL_INPUT, () => {
         const _emailInput = document.getElementsByTagName('input')[0];
 
         const storeData = LoginStore.get();
@@ -75,7 +76,7 @@ export const LoginEventRegister = () => {
         LoginStore.set(storeData);
     });
 
-    EventBus.register('login:email-focusout', () => {
+    EventBus.register(EVENTS.LOGIN_EMAIL_FOCUSOUT, () => {
         const _emailInput = document.getElementsByTagName('input')[0];
 
         const storeData = LoginStore.get();
@@ -92,7 +93,7 @@ export const LoginEventRegister = () => {
         LoginStore.set(storeData);
     });
 
-    EventBus.register('login:password-input', () => {
+    EventBus.register(EVENTS.LOGIN_PASSWORD_INPUT, () => {
         const _passwordInput = document.getElementsByTagName('input')[1];
         if (!_passwordInput) {
             console.log('Error, trying to read _emailInput on wrong view');
@@ -125,7 +126,7 @@ export const LoginEventRegister = () => {
         LoginStore.set(storeData);
     });
 
-    EventBus.register('login:password-focusout', () => {
+    EventBus.register(EVENTS.LOGIN_PASSWORD_FOCUSOUT, () => {
         const _passwordInput = document.getElementsByTagName('input')[1];
 
         const storeData = LoginStore.get();

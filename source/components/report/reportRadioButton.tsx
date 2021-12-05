@@ -2,14 +2,14 @@ import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import eventBus from '../../dispatcher/eventBus.js';
 
 import { Reports } from '../../store/reportsStore.js';
-
+import { EVENTS } from '../../dispatcher/events.js';
 export interface reportRadioButtonProps {
     report: Reports;
 }
 
 export const ReportRadioButton = (props: reportRadioButtonProps) => {
     const radioButtonAction = () => {
-        eventBus.dispatch('reports:choose-report-type', props.report.reportDesc);
+        eventBus.dispatch(EVENTS.REPORTS_CHOOSE_REPORT_TYPE, props.report.reportDesc);
     };
     const classModificator = props.report.isActive ? ' report-radio-button_on' : '';
 

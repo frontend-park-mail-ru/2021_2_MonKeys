@@ -10,8 +10,8 @@ import { SignupStore } from '../store/signupStore.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 
 import router from '../route/router.js';
-import { dropsBackground } from '../components/common/dropsBackground.js';
 import { Errors } from '../components/error/errors.js';
+import { EVENTS } from '../dispatcher/events.js';
 
 export default class SignupView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -32,10 +32,10 @@ export default class SignupView extends ViewBase {
                 iconSrc: 'icons/email.svg',
                 class: SignupStore.get().emailFieldClass,
                 oninput: () => {
-                    EventBus.dispatch<string>('signup:email-input');
+                    EventBus.dispatch<string>(EVENTS.SIGNUP_EMAIL_INPUT);
                 },
                 onfocusout: () => {
-                    EventBus.dispatch<string>('signup:email-focusout');
+                    EventBus.dispatch<string>(EVENTS.SIGNUP_EMAIL_FOCUSOUT);
                 },
             },
             'password': {
@@ -46,10 +46,10 @@ export default class SignupView extends ViewBase {
                 iconSrc: 'icons/password.svg',
                 class: SignupStore.get().passwordFieldClass,
                 oninput: () => {
-                    EventBus.dispatch<string>('signup:password-input');
+                    EventBus.dispatch<string>(EVENTS.SIGNUP_PASSWORD_INPUT);
                 },
                 onfocusout: () => {
-                    EventBus.dispatch<string>('signup:password-focusout');
+                    EventBus.dispatch<string>(EVENTS.SIGNUP_PASSWORD_FOCUSOUT);
                 },
             },
             'repeatPassword': {
@@ -60,10 +60,10 @@ export default class SignupView extends ViewBase {
                 iconSrc: 'icons/password.svg',
                 class: SignupStore.get().repeatPasswordFieldClass,
                 oninput: () => {
-                    EventBus.dispatch<string>('signup:repeat-password-input');
+                    EventBus.dispatch<string>(EVENTS.SIGNUP_REPEAT_PASSWORD_INPUT);
                 },
                 onfocusout: () => {
-                    EventBus.dispatch<string>('signup:repeat-password-focusout');
+                    EventBus.dispatch<string>(EVENTS.SIGNUP_REPEAT_PASSWORD_FOCUSOUT);
                 },
             },
         },
@@ -73,7 +73,7 @@ export default class SignupView extends ViewBase {
                 text: 'Регистрация',
                 class: 'button-white-big',
                 onclick: () => {
-                    EventBus.dispatch<string>('signup:signup-button');
+                    EventBus.dispatch<string>(EVENTS.SIGNUP_SIGNUP_BUTTON);
                 },
             },
             'loginButton': {
@@ -117,7 +117,6 @@ export default class SignupView extends ViewBase {
     _createTmpl() {
         return (
             <div class='flex_box_column_center'>
-                {dropsBackground()}
                 <div class='header-medium'>Регистрация</div>
                 {FormField(this._data.fields.email)}
                 {ErrorMsg(this._data.errorMsgs.emailError)}

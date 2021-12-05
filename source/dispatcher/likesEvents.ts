@@ -6,9 +6,10 @@ import LikesStore from '../store/likesStore.js';
 import feedStore from '../store/feedStore.js';
 import { MatchesStore } from '../store/matchStore.js';
 import { matchRequest } from '../requests/matchRequest.js';
+import { EVENTS } from './events.js';
 
 export const LikesEventsRegister = () => {
-    EventBus.register('likes:expand-button', (userID) => {
+    EventBus.register(EVENTS.LIKES_EXPAND_BUTTON, (userID) => {
         const storeData = LikesStore.get();
         storeData.expended = true;
         let index: number;
@@ -23,12 +24,12 @@ export const LikesEventsRegister = () => {
             LikesStore.set(storeData);
         }
     });
-    EventBus.register('likes:shrink-button', () => {
+    EventBus.register(EVENTS.LIKES_SHRINK_BUTTON, () => {
         const storeData = LikesStore.get();
         storeData.expended = false;
         LikesStore.set(storeData);
     });
-    EventBus.register('likes:reaction', (payload) => {
+    EventBus.register(EVENTS.LIKES_REACTION, (payload) => {
         const storeData = LikesStore.get();
         storeData.expended = false;
         LikesStore.set(storeData);

@@ -1,15 +1,20 @@
 const config = {
-    staticCacheItemsRegExp: /^[^.]+.(min.js|js|css|svg|jpg|png|gif|woff|ico)$/,
+    staticCacheItemsRegExp: /^[^]+.(min.js|js|css|svg|jpg|png|gif|woff|ico)$/,
     mediaCacheItemsRegExp: /media/,
     numbersRegExp: /\d+/,
     versionStaticRegExp: /static\d+/,
-    apiUrlRegExp: /[http|https]:\/\/\w+.\w+\/api\/v\d\/\w+/,
+    apiUrlRegExp: /https:\/\/drip.monkeys.team\/api*/,
 };
 
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open('offline').then((cache) => {
             return cache.addAll(['/offline/offline.html', '/offline/offline.js']);
+        })
+    );
+    event.waitUntil(
+        caches.open('static').then((cache) => {
+            return cache.add('/icons/error.svg');
         })
     );
 });

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import ViewBase from './viewBase.js';
 import { viewSizes } from '../constants/viewParams.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
@@ -9,7 +10,7 @@ import eventBus from '../dispatcher/eventBus.js';
 import TapbarStore from '../store/tapbarStore.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { Errors } from '../components/error/errors.js';
-
+import { EVENTS } from '../dispatcher/events.js';
 export default class FeedWideView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
@@ -26,19 +27,22 @@ export default class FeedWideView extends ViewBase {
             this._template = this._createTmpl(this._data, cardData.expanded);
         } else {
             this._template = (
-                <div style='display: flex;'>
+                // mb broken
+                <div class='flex-full'>
                     {Tapbar(TapbarStore.get(), true)}
-                    <div class='view-contant view-contant_align_center view-content_scroll-banned'>
-                        <div
-                            class='view-contant view-contant_align_center
+                    <div class='flex-wide-view-center'>
+                        <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                            <div
+                                class='view-contant view-contant_align_center
                                 view-content_scroll-banned view-content__max-height'
-                        >
-                            <div class='likes-view-text-big'>Пока нет новых карточек</div>
+                            >
+                                <div class='likes-view-text-big'>Пока нет новых карточек</div>
 
-                            <div class='view-content__dummy-image-container'>
-                                <img src='icons/drip_gradient.svg' class='view-content__dummy-image'></img>
+                                <div class='view-content__dummy-image-container'>
+                                    <img src='icons/drip_gradient.svg' class='view-content__dummy-image'></img>
+                                </div>
+                                <div class='likes-view-text-big'>Возвращайтесь позже!</div>
                             </div>
-                            <div class='likes-view-text-big'>Возвращайтесь позже!</div>
                         </div>
                     </div>
                 </div>
@@ -55,7 +59,7 @@ export default class FeedWideView extends ViewBase {
                     alt: 'dislike',
                     class: 'card-bottom-panel_actions_action',
                     onclick: () => {
-                        eventBus.dispatch('feed:dislike-button');
+                        eventBus.dispatch(EVENTS.FEED_DISLIKE_BUTTON);
                     },
                 },
                 expandButton: {
@@ -63,7 +67,7 @@ export default class FeedWideView extends ViewBase {
                     src: 'icons/expand_big.svg',
                     class: 'card-bottom-panel_actions_action',
                     onclick: () => {
-                        eventBus.dispatch('feed:expand-button');
+                        eventBus.dispatch(EVENTS.FEED_EXPAND_BUTTON);
                     },
                 },
                 likeButton: {
@@ -72,7 +76,7 @@ export default class FeedWideView extends ViewBase {
                     alt: 'like',
                     class: 'card-bottom-panel_actions_action',
                     onclick: () => {
-                        eventBus.dispatch('feed:like-button');
+                        eventBus.dispatch(EVENTS.FEED_LIKE_BUTTON);
                     },
                 },
             },
@@ -98,16 +102,18 @@ export default class FeedWideView extends ViewBase {
                 src: 'icons/expand_big.svg',
                 class: 'card-bottom-panel_actions_action',
                 onclick: () => {
-                    eventBus.dispatch('feed:expand-button');
+                    eventBus.dispatch(EVENTS.FEED_EXPAND_BUTTON);
                 },
             };
 
             return (
-                <div style='display: flex;height: 100%;'>
+                <div class='flex-full'>
                     {Tapbar(TapbarStore.get(), true)}
-                    <div style='display:flex; justify-content: center; width: 100%'>
-                        {CardFeed(data.cardData, true)}
-                        {Errors(data.error)}
+                    <div class='flex-wide-view-center'>
+                        <div class='feed'>
+                            {CardFeed(data.cardData, false)}
+                            {Errors(data.error)}
+                        </div>
                     </div>
                 </div>
             );
@@ -117,20 +123,18 @@ export default class FeedWideView extends ViewBase {
                 src: 'icons/button_shrink_white.svg',
                 class: 'card-bottom-panel_actions_action',
                 onclick: () => {
-                    eventBus.dispatch('feed:shrink-button');
+                    eventBus.dispatch(EVENTS.FEED_SHRINK_BUTTON);
                 },
             };
             return (
-                <div style='display: flex;'>
+                <div class='flex-full'>
                     {Tapbar(data.tapbar, true)}
-                    <div class='view-contant view-contant_align_center view-content_scroll'>
-                        <div
-                            class='view-contant view-contant_align_center
-                  view-content_scroll view-content__max-height'
-                        >
-                            {CardExpended(data.cardData)}
-
-                            {Errors(data.error)}
+                    <div class='flex-wide-view-center'>
+                        <div class='flex-wide-feed'>
+                            <div class='feed'>
+                                {CardExpended(data.cardData)}
+                                {Errors(data.error)}
+                            </div>
                         </div>
                     </div>
                 </div>
