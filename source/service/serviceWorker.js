@@ -12,6 +12,11 @@ self.addEventListener('install', (event) => {
             return cache.addAll(['/offline/offline.html', '/offline/offline.js']);
         })
     );
+    event.waitUntil(
+        caches.open('static').then((cache) => {
+            return cache.add('/icons/error.svg');
+        })
+    )
 });
 
 self.addEventListener('activate', (event) => {
