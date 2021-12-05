@@ -3,7 +3,7 @@ const config = {
     mediaCacheItemsRegExp: /media/,
     numbersRegExp: /\d+/,
     versionStaticRegExp: /static\d+/,
-    apiUrlRegExp: /https:\/\/api.monkeys.team\/api*/,
+    apiUrlRegExp: /https:\/\/drip.monkeys.team\/api*/,
 };
 
 self.addEventListener('install', (event) => {

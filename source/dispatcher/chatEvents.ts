@@ -61,7 +61,6 @@ export const ChatEventsRegister = () => {
         EVENTS.CHAT_SEARCH,
 
         throttle(() => {
-            console.log('searching');
             const _searchInput = document.getElementsByTagName('input')[0];
             const searchTmpl = _searchInput.value.trim() + '%';
 

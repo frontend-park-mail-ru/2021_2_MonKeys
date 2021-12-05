@@ -8,8 +8,6 @@ export interface tapbarProps {
 }
 
 export const Tapbar = (props: tapbarProps, vertical?: boolean) => {
-    console.log(props);
-    console.log(props.activeItem === 'profile');
     if (vertical) {
         const items: tapbarItemProps[] = [
             {
