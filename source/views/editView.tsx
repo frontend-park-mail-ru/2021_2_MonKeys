@@ -119,7 +119,7 @@ export default class EditView extends ViewBase {
                 },
                 'imgAddButton': {
                     class: EditStore.get().imgFieldClass,
-                    onchange: (event) => {
+                    onclick: (event) => {
                         EventBus.dispatch<string>(EVENTS.EDIT_IMG_INPUT, event);
                     },
                     imgs: ProfileStore.get().imgs,

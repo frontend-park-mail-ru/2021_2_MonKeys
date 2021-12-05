@@ -3,7 +3,11 @@ import { maxYear, minYear } from '../constants/validation.js';
 const imgTypes = ['image/gif', 'image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 
 export const validImgType = (Img) => {
-    return imgTypes.includes(Img.type);
+    if (Img && Img.type) {
+        return imgTypes.includes(Img.type);
+    } else {
+        return false;
+    }
 };
 
 export const validDate = (dateInput) => {

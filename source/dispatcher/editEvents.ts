@@ -9,6 +9,7 @@ import { EditStore } from '../store/editStore.js';
 import { validDate, validImgType } from '../validation/edit.js';
 import { nameRegExp } from '../constants/validation.js';
 import { EVENTS } from './events.js';
+import { ErrorStore } from '../store/errorStore.js';
 
 export const EditEventRegister = () => {
     EventBus.register(EVENTS.EDIT_SAVE_BUTTON, () => {
@@ -257,6 +258,7 @@ export const EditEventRegister = () => {
     });
 
     EventBus.register(EVENTS.EDIT_IMG_INPUT, (event) => {
+        console.log('photo upload');
         const userData = ProfileStore.get();
         if (!userData.imgs) {
             const ps = ProfileStore.get();
@@ -271,31 +273,47 @@ export const EditEventRegister = () => {
         const photo = files[0];
 
         if (!validImgType(photo)) {
-            return;
+            userData.imgs.pop();
+            console.log('не удалось загрузить фотографию');
+            console.log(ErrorStore.get());
+            ProfileStore.set(userData);
+            throw 'photo not uploaded';
         }
 
-        addPhotoToProfileRequest(photo).then((data) => {
-            if (data.status !== HTTPSuccess) {
-                throw 'photo not uploaded';
-            }
+        addPhotoToProfileRequest(photo)
+            .then((data) => {
+                console.log(data);
 
-            const userData = ProfileStore.get();
-            if (!userData.imgs) {
-                const ps = ProfileStore.get();
-                ps.imgs = [];
-                ProfileStore.set(ps);
-            }
-            userData.imgs.pop();
-            userData.imgs.push(data.body.photo);
-            ProfileStore.set(userData);
-            const editStoreData = EditStore.get();
-            editStoreData.imgFieldClass = 'add-img-box';
-            if (editStoreData.imgErrorClass === 'error-active') {
-                editStoreData.imgErrorClass = 'error-inactive';
-            }
-            editStoreData.formErrorClass = 'error-inactive';
-            EditStore.set(editStoreData);
-        });
+                const userData = ProfileStore.get();
+                if (data.status !== HTTPSuccess) {
+                    userData.imgs.pop();
+                    ProfileStore.set(userData);
+                    throw 'photo not uploaded';
+                }
+
+                if (!userData.imgs) {
+                    const ps = ProfileStore.get();
+                    ps.imgs = [];
+                    ProfileStore.set(ps);
+                }
+                userData.imgs.pop();
+                userData.imgs.push(data.body.photo);
+                ProfileStore.set(userData);
+                const editStoreData = EditStore.get();
+                editStoreData.imgFieldClass = 'add-img-box';
+                if (editStoreData.imgErrorClass === 'error-active') {
+                    editStoreData.imgErrorClass = 'error-inactive';
+                }
+                editStoreData.formErrorClass = 'error-inactive';
+                EditStore.set(editStoreData);
+                const previousPhoto = document.querySelector<HTMLInputElement>('input[id="AddImg"]');
+                previousPhoto.value = '';
+            })
+            .catch((error) => {
+                userData.imgs.pop();
+                ProfileStore.set(userData);
+                throw error;
+            });
     });
 
     EventBus.register(EVENTS.EDIT_IMG_DELETE, (imgPath) => {
