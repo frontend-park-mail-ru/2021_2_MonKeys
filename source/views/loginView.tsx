@@ -117,7 +117,6 @@ export default class LoginView extends ViewBase {
             <div class='flex_box_column_center'>
                 <div class='header-big'>
                     <img src='icons/logo.svg' height='120' width='180' />
-
                 </div>
 
                 {FormField(data.fields.email)}

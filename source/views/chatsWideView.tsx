@@ -115,7 +115,8 @@ export default class ChatsWideView extends ViewBase {
                 </div>
                 <div class='chat__side__container'>
                     <div class='chat'>
-                        {Chat(data.chat, true)}{Errors(data.error)}
+                        {Chat(data.chat, true)}
+                        {Errors(data.error)}
                     </div>
                 </div>
                 {profile}
