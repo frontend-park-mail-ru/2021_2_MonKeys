@@ -37,10 +37,10 @@ export default class ProfileWideView extends ViewBase {
 
     _createTmpl(data) {
         return (
-            <div style='display: flex;height: 100%; width: 100%;'>
+            <div class='flex-full'>
                 {Tapbar(TapbarStore.get(), true)}
-                <div style='width: 100%; display: flex; justify-content: center; align-items: center;'>
-                    <div style='width:100%; max-width: 400px; display: flex; flex-direction: column; height: 610px;'>
+                <div class='flex-wide-view-center'>
+                    <div class='flex-wide-feed'>
                         <div class='profile'>
                             <div class='profile__card'>
                                 {CardExpended({

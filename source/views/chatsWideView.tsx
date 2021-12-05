@@ -72,10 +72,10 @@ export default class ChatsWideView extends ViewBase {
 
         if (!data.matches[0] && !data.chats[0]) {
             return (
-                <div style='display: flex;width: 100%; height: 100%'>
+                <div class='flex-full-height'>
                     {Tapbar(TapbarStore.get(), true)}
-                    <div style='width: 100%;  display: flex; justify-content: center; align-items:center;'>
-                        <div style=' display: flex; flex-direction: column; height: 610px;'>
+                    <div class='flex-wide-view-center'>
+                        <div class='flex-wide-view-content'>
                             <div class='likes-view-text-big'>Здесь будут ваши пары и чаты</div>
 
                             <div class='view-content__dummy-image-container' style='min-height: 250px;'>
@@ -89,7 +89,7 @@ export default class ChatsWideView extends ViewBase {
         }
         if (!data.chat)
             return (
-                <div style='display: flex; height: 100%;'>
+                <div class='flex-full-height'>
                     {Tapbar(TapbarStore.get(), true)}
                     <div class='chats'>
                         {SearchField()}
@@ -97,7 +97,7 @@ export default class ChatsWideView extends ViewBase {
                         {Chats(data.chats)}
                     </div>
                     <div class='chat__side__container'>
-                        <div style='display: flex; flex-direction: column; height: 100%; justify-content: center; align-items: center;'>
+                        <div class='flex-center-column'>
                             <div style='margin-bottom: 36px; font-size: 24px'>Выберите чат</div>
                             <img src='icons/chat_gradient.svg' class='view-content__dummy-image'></img>
                         </div>
@@ -105,7 +105,8 @@ export default class ChatsWideView extends ViewBase {
                 </div>
             );
         return (
-            <div style='display: flex;'>
+            // broken mb
+            <div class='flex-full-height'>
                 {Tapbar(TapbarStore.get(), true)}
                 <div class='chats'>
                     {SearchField()}
@@ -114,7 +115,7 @@ export default class ChatsWideView extends ViewBase {
                 </div>
                 <div class='chat__side__container'>
                     <div class='chat'>
-                        {Chat(data.chat, true)};{Errors(data.error)}
+                        {Chat(data.chat, true)}{Errors(data.error)}
                     </div>
                 </div>
                 {profile}

@@ -9,7 +9,7 @@ export interface tapbarItemProps {
 
 export const TapbarItem = (props: tapbarItemProps) => {
     const icon = props.name ? (
-        <div style='display: flex; align-items:center;' onclick={props.action}>
+        <div class='flex-center' onclick={props.action}>
             <img src={props.src} class='tapbar_item tapbar_item-small' alt='' />
 
             <div>{props.name}</div>

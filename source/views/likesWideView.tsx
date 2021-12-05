@@ -43,10 +43,10 @@ export default class LikesWideView extends ViewBase {
     _createTmpl(data) {
         if (!LikesStore.get().profiles[0]) {
             return (
-                <div style='display: flex;width: 100%; height: 100%'>
+                <div class='flex-full'>
                     {Tapbar(TapbarStore.get(), true)}
-                    <div style='width: 100%;  display: flex; justify-content: center; align-items:center;'>
-                        <div style=' display: flex; flex-direction: column; height: 610px;'>
+                    <div class='flex-wide-view-center'>
+                        <div class='flex-wide-likes'>
                             <div class='likes-view-text-big'>У вас пока нет новых лайков</div>
 
                             <div class='view-content__dummy-image-container' style='min-height: 250px;'>
@@ -60,7 +60,8 @@ export default class LikesWideView extends ViewBase {
         }
         if (!LikesStore.get().expended) {
             return (
-                <div style='display: flex;'>
+                //mb broken
+                <div class='flex-full-height'>
                     {Tapbar(TapbarStore.get(), true)}
                     <div class='app__content--align-center'>
                         <div class='likes'>
@@ -86,10 +87,10 @@ export default class LikesWideView extends ViewBase {
             );
         } else {
             return (
-                <div style='display: flex;height: 100%; width: 100%;'>
+                <div class='flex-full'>
                     {Tapbar(TapbarStore.get(), true)}
-                    <div style='width: 100%; display: flex; justify-content: center; align-items: center;'>
-                        <div style='width:100%; max-width: 400px; display: flex; flex-direction: column; height: 610px;'>
+                    <div class='flex-wide-view-center'>
+                        <div class='flex-wide-feed'>
                             <div class='profile'>
                                 <div class='profile__card'>
                                     {CardExpended({

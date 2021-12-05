@@ -22,7 +22,7 @@ export const SwipeEvenetsRegister = () => {
         //...
     });
 
-    const OneFrameTime = 16;
+    const OneFrameTime = 10;
     EventBus.register(
         EVENTS.SWIPE_MOVE,
 

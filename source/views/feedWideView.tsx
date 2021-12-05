@@ -27,19 +27,22 @@ export default class FeedWideView extends ViewBase {
             this._template = this._createTmpl(this._data, cardData.expanded);
         } else {
             this._template = (
-                <div style='display: flex;'>
+                // mb broken
+                <div class='flex-full'>
                     {Tapbar(TapbarStore.get(), true)}
-                    <div class='view-contant view-contant_align_center view-content_scroll-banned'>
-                        <div
-                            class='view-contant view-contant_align_center
+                    <div class='flex-wide-view-center'>
+                        <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                            <div
+                                class='view-contant view-contant_align_center
                                 view-content_scroll-banned view-content__max-height'
-                        >
-                            <div class='likes-view-text-big'>Пока нет новых карточек</div>
+                            >
+                                <div class='likes-view-text-big'>Пока нет новых карточек</div>
 
-                            <div class='view-content__dummy-image-container'>
-                                <img src='icons/drip_gradient.svg' class='view-content__dummy-image'></img>
+                                <div class='view-content__dummy-image-container'>
+                                    <img src='icons/drip_gradient.svg' class='view-content__dummy-image'></img>
+                                </div>
+                                <div class='likes-view-text-big'>Возвращайтесь позже!</div>
                             </div>
-                            <div class='likes-view-text-big'>Возвращайтесь позже!</div>
                         </div>
                     </div>
                 </div>
@@ -104,9 +107,9 @@ export default class FeedWideView extends ViewBase {
             };
 
             return (
-                <div style='display: flex;height: 100%; width: 100%;'>
+                <div class='flex-full'>
                     {Tapbar(TapbarStore.get(), true)}
-                    <div style='width: 100%; display: flex; justify-content: center;'>
+                    <div class='flex-wide-view-center'>
                         <div class='feed'>
                             {CardFeed(data.cardData, false)}
                             {Errors(data.error)}
@@ -124,10 +127,10 @@ export default class FeedWideView extends ViewBase {
                 },
             };
             return (
-                <div style='display: flex;height: 100%; width: 100%;'>
+                <div class='flex-full'>
                     {Tapbar(data.tapbar, true)}
-                    <div style='width: 100%; display: flex; justify-content: center; align-items: center;'>
-                        <div style='width:100%; max-width: 400px; display: flex; flex-direction: column; height: 610px;'>
+                    <div class='flex-wide-view-center'>
+                        <div class='flex-wide-feed'>
                             <div class='feed'>
                                 {CardExpended(data.cardData)}
                                 {Errors(data.error)}
