@@ -16,7 +16,7 @@ self.addEventListener('install', (event) => {
         caches.open('static').then((cache) => {
             return cache.add('/icons/error.svg');
         })
-    )
+    );
 });
 
 self.addEventListener('activate', (event) => {
