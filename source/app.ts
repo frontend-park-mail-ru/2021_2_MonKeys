@@ -3,7 +3,7 @@ import router from './route/router.js';
 import { InitBus } from './dispatcher/events.js';
 import ViewBase from './views/viewBase.js';
 import { isWidescreen, startClientAspectRatio } from './utils/client.js';
-import registerServiceWorker from './service/serviceWorkerRegister.js';
+import { registerServiceWorker } from './service/serviceWorkerRegister.js';
 import { EVENTS } from './dispatcher/events.js';
 
 startClientAspectRatio();
