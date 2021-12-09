@@ -55,6 +55,9 @@ export namespace MonkeysVirtualDOM {
                 if (key === 'name' && (virtualNode.props[key] === 'error' || virtualNode.props[key] === 'tag')) {
                     rootElement.style.transition = '1s';
                 }
+                if (key === 'type' && virtualNode.props[key] === 'date') {
+                    console.log(rootElement);
+                }
                 if (/^on/.test(key)) {
                     rootElement.addEventListener(key.slice(2), virtualNode.props[key]);
                 } else {

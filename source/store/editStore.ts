@@ -65,7 +65,7 @@ const initData = {
                 clickEvent: EVENTS.EDIT_PREFER_FEMALE_CLICK,
             },
             {
-                value: 'Не важно',
+                value: 'Все равно',
                 selected: false,
                 clickEvent: EVENTS.EDIT_PREFER_ANY_CLICK,
             },

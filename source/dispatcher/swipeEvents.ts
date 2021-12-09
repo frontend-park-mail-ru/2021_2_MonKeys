@@ -22,11 +22,11 @@ export const SwipeEvenetsRegister = () => {
         //...
     });
 
-    const OneFrameTime = 10;
+    const OneFrameTime = 5;
     EventBus.register(
         EVENTS.SWIPE_MOVE,
 
-        throttle((cardMoveOffset) => {
+        (cardMoveOffset) => {
             const card = document.querySelectorAll<HTMLElement>('.card')[0];
 
             const heart = document.querySelector<HTMLElement>('img[alt="like"]');
@@ -90,7 +90,7 @@ export const SwipeEvenetsRegister = () => {
             heart.style.transform += `rotate(${-cardMoveOffset.diffX / rotationScale}deg)`;
             dislike.style.transform += `rotate(${-cardMoveOffset.diffX / rotationScale}deg)`;
             card.style.transform += `rotate(${cardMoveOffset.diffX / rotationScale}deg)`;
-        }, OneFrameTime)
+        }
     );
     EventBus.register(EVENTS.SWIPE_END, () => {
         let card = document.querySelectorAll<HTMLElement>('.card')[0];
