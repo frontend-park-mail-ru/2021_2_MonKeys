@@ -42,7 +42,11 @@ self.addEventListener('fetch', (event) => {
                 return response;
             } else {
                 if (!config.apiUrlRegExp.test(event.request.url) && !config.mediaUrlRegExp.test(event.request.url)) {
-                    console.log(event.request.url, !config.apiUrlRegExp.test(event.request.url), !config.mediaUrlRegExp.test(event.request.url))
+                    console.log(
+                        event.request.url,
+                        !config.apiUrlRegExp.test(event.request.url),
+                        !config.mediaUrlRegExp.test(event.request.url)
+                    );
                     const requsetForCache = event.request.clone();
                     fetch(requsetForCache)
                         .then((networkResponse) => {
