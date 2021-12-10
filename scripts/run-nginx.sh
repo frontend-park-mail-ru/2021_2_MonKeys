@@ -14,7 +14,6 @@ sudo cp $CONFIG_NAME /etc/nginx/nginx.conf
 sudo service nginx start
 sudo nginx -t
 sudo apt-get install lolcat -y
-clear
 echo "      __   _
     _(  )_( )_
    (_   _    _)

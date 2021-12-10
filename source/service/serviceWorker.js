@@ -1,8 +1,8 @@
 const config = {
     staticCacheItemsRegExp: /^[^]+.(min.js|js|css|svg|jpg|png|gif|woff|ico)$/,
-    mediaCacheItemsRegExp: /media/,
     numbersRegExp: /\d+/,
     versionStaticRegExp: /static\d+/,
+    mediaUrlRegExp: /https:\/\/drip.monkeys.team\/media*/,
     apiUrlRegExp: /https:\/\/drip.monkeys.team\/api*/,
 };
 
@@ -17,6 +17,7 @@ self.addEventListener('install', (event) => {
             return cache.add('/icons/error.svg');
         })
     );
+    self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
@@ -31,6 +32,7 @@ self.addEventListener('activate', (event) => {
             );
         });
     });
+    event.waitUntil(self.clients.claim());
 });
 
 self.addEventListener('fetch', (event) => {
@@ -39,14 +41,11 @@ self.addEventListener('fetch', (event) => {
             if (response) {
                 return response;
             } else {
-                if (!config.apiUrlRegExp.test(event.request.url)) {
+                if (!config.apiUrlRegExp.test(event.request.url) && !config.mediaUrlRegExp.test(event.request.url)) {
                     const requsetForCache = event.request.clone();
                     fetch(requsetForCache)
                         .then((networkResponse) => {
-                            if (
-                                config.staticCacheItemsRegExp.test(networkResponse.url) &&
-                                !config.mediaCacheItemsRegExp.test(networkResponse.url)
-                            ) {
+                            if (config.staticCacheItemsRegExp.test(networkResponse.url)) {
                                 if (
                                     networkResponse.url.indexOf('main') != -1 ||
                                     networkResponse.url.indexOf('app') != -1

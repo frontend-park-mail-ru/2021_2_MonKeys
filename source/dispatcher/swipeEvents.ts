@@ -2,7 +2,6 @@ import eventBus from './eventBus.js';
 import EventBus from './eventBus.js';
 import { swipesAnimation } from '../constants/animations.js';
 import { EVENTS } from './events.js';
-import { throttle } from '../utils/throttle.js';
 export interface cardMoveOffset {
     offsetX: number;
     offsetY: number;
@@ -22,11 +21,10 @@ export const SwipeEvenetsRegister = () => {
         //...
     });
 
-    const OneFrameTime = 10;
     EventBus.register(
         EVENTS.SWIPE_MOVE,
 
-        throttle((cardMoveOffset) => {
+        (cardMoveOffset) => {
             const card = document.querySelectorAll<HTMLElement>('.card')[0];
 
             const heart = document.querySelector<HTMLElement>('img[alt="like"]');
@@ -90,7 +88,7 @@ export const SwipeEvenetsRegister = () => {
             heart.style.transform += `rotate(${-cardMoveOffset.diffX / rotationScale}deg)`;
             dislike.style.transform += `rotate(${-cardMoveOffset.diffX / rotationScale}deg)`;
             card.style.transform += `rotate(${cardMoveOffset.diffX / rotationScale}deg)`;
-        }, OneFrameTime)
+        }
     );
     EventBus.register(EVENTS.SWIPE_END, () => {
         let card = document.querySelectorAll<HTMLElement>('.card')[0];
