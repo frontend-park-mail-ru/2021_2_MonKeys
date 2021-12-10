@@ -17,6 +17,8 @@
 }
 .add-img-box-novalid {
   @include form-field($field-invalid-color);
+  display: flex;
+  flex-wrap: wrap;
   min-height: 72px;
   height: auto;
   display: flex;

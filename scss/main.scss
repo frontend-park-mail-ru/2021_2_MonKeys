@@ -55,6 +55,10 @@ html {
   transition: all 1s;
 }
 
+input {
+  font-family: sans-serif;
+}
+
 ::-webkit-scrollbar {
     display: none;
     scroll-behavior: smooth;
