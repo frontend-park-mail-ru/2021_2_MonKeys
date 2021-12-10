@@ -128,6 +128,13 @@ export default class EditView extends ViewBase {
                     type: 'button',
                     text: 'Сохранить',
                     class: 'button-default edit__save-button',
+                    onkeypress: (event) => {
+                        const enterKeyCode = 13;
+                        if (event.keyCode === enterKeyCode) {
+                            event.preventDefault();
+                            EventBus.dispatch<number>(EVENTS.EDIT_SAVE_BUTTON);
+                        }
+                    },
                     onclick: () => {
                         EventBus.dispatch<string>(EVENTS.EDIT_SAVE_BUTTON);
                     },

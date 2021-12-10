@@ -82,6 +82,13 @@ export default class LoginView extends ViewBase {
                 type: 'button',
                 text: 'Войти',
                 class: 'button-white-small',
+                onkeypress: (event) => {
+                    const enterKeyCode = 13;
+                    if (event.keyCode === enterKeyCode) {
+                        event.preventDefault();
+                        EventBus.dispatch<number>(EVENTS.LOGIN_BUTTON_WHITE);
+                    }
+                },
                 onclick: () => {
                     EventBus.dispatch<string>(EVENTS.LOGIN_BUTTON_WHITE);
                 },
