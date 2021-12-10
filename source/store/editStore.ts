@@ -49,7 +49,7 @@ const initData = {
         buttonEvent: 99999999,
     },
     preferField: {
-        title: 'Кого вы ищите',
+        title: 'Кого вы ищете',
         valid: true,
         open: true,
         openable: false,
