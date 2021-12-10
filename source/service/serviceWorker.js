@@ -2,10 +2,10 @@ const config = {
     staticCacheItemsRegExp: /^[^]+.(min.js|js|css|svg|jpg|png|gif|woff|ico)$/,
     numbersRegExp: /\d+/,
     versionStaticRegExp: /static\d+/,
-    mediaUrlRegExp: /http:\/\/localhost\/media*/,
-    apiUrlRegExp: /http:\/\/localhost\/api*/,
-    // mediaUrlRegExp: /https:\/\/drip.monkeys.team\/media*/,
-    // apiUrlRegExp: /https:\/\/drip.monkeys.team\/api*/,
+    // mediaUrlRegExp: /http:\/\/localhost\/media*/,
+    // apiUrlRegExp: /http:\/\/localhost\/api*/,
+    mediaUrlRegExp: /https:\/\/drip.monkeys.team\/media*/,
+    apiUrlRegExp: /https:\/\/drip.monkeys.team\/api*/,
 };
 
 self.addEventListener('install', (event) => {
