@@ -9,7 +9,7 @@ import { EditStore } from '../store/editStore.js';
 import { validDate, validImgType } from '../validation/edit.js';
 import { nameRegExp } from '../constants/validation.js';
 import { EVENTS } from './events.js';
-import { ErrorStore } from '../store/errorStore.js';
+import { errorManager, ErrorStore } from '../store/errorStore.js';
 
 export const EditEventRegister = () => {
     EventBus.register(EVENTS.EDIT_SAVE_BUTTON, () => {
@@ -273,10 +273,10 @@ export const EditEventRegister = () => {
         const photo = files[0];
 
         if (!validImgType(photo)) {
-            userData.imgs.pop();
+            // userData.imgs.pop();
             console.log('не удалось загрузить фотографию');
             console.log(ErrorStore.get());
-            ProfileStore.set(userData);
+            // ProfileStore.set(userData);
             throw 'photo not uploaded';
         }
 
@@ -286,8 +286,8 @@ export const EditEventRegister = () => {
 
                 const userData = ProfileStore.get();
                 if (data.status !== HTTPSuccess) {
-                    userData.imgs.pop();
-                    ProfileStore.set(userData);
+                    // userData.imgs.pop();
+                    // ProfileStore.set(userData);
                     throw 'photo not uploaded';
                 }
 
@@ -312,6 +312,7 @@ export const EditEventRegister = () => {
             .catch((error) => {
                 userData.imgs.pop();
                 ProfileStore.set(userData);
+                errorManager.pushAPIErrorPhotoLoad();
                 throw error;
             });
     });

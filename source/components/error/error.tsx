@@ -11,19 +11,19 @@ export const Error = (error: ErrorData) => {
     const okButton = {
         type: 'button',
         text: 'OK',
-        class: 'crit-error-button',
+        class: 'error-window__button-ok',
         onclick: () => {
             EventBus.dispatch<string>(EVENTS.ERROR_OK_BUTTON);
         },
     };
 
     return (
-        <div class={'crit-error-container-active'}>
-            <div class={'crit-error-header'}>
-                <img src='icons/error.svg' class='menu-icon crit-error-icon' />
-                <h1 class='crit-error-title'>{error.title}</h1>
+        <div class='error-window'>
+            <div class='error-window__header'>
+                <img src='icons/error.svg' class='error-window__icon' />
+                <h1 class='error-window__title'>{error.title}</h1>
             </div>
-            <div class='crit-error-message'>{error.text}</div>
+            <div class='error-window__text'>{error.text}</div>
             {Button(okButton)}
         </div>
     );

@@ -63,7 +63,7 @@ export default class SignupEditView extends ViewBase {
                     tag: 'textarea',
                     placeholder: 'Расскажите о себе',
                     name: 'description',
-                    class: 'form__field-valid',
+                    class: 'form__field-valid form__field-valid-desc',
                 },
                 'img': {
                     class: EditStore.get().imgFieldClass,
@@ -89,6 +89,13 @@ export default class SignupEditView extends ViewBase {
                     type: 'button',
                     text: 'Сохранить',
                     class: 'button-default edit__save-button',
+                    onkeypress: (event) => {
+                        const enterKeyCode = 13;
+                        if (event.keyCode === enterKeyCode) {
+                            event.preventDefault();
+                            EventBus.dispatch<number>(EVENTS.EDIT_SAVE_BUTTON);
+                        }
+                    },
                     onclick: () => {
                         EventBus.dispatch<string>(EVENTS.EDIT_SAVE_BUTTON);
                     },
