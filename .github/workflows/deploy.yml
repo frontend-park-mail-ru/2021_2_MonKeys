@@ -26,6 +26,7 @@ jobs:
     - run: echo "${{ secrets.DEPLOYMENT_KEY }}" > "$HOME/.ssh/key"
     - run: chmod 600 "$HOME/.ssh/key"
 
+    
     - run: npm ci
     - run: npm run build
     - run: cd static && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . clown@drip.monkeys.team:/var/www/drip.monkeys.team/html/
