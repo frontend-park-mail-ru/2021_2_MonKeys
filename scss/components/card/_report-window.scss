@@ -1,13 +1,19 @@
 $icon-size-big: 36px;
 
-.report-window{
+.report-window {
   position: absolute;
   z-index: 1;
 
   width: 94%;
   height: 100%;
 
-  background: linear-gradient(110.48deg, rgba(219, 0, 255, 0.7) 1.23%, rgba(255, 143, 244, 0.7) 8.85%, rgba(0, 133, 255, 0) 91.43%, rgba(0, 126, 187, 0) 98.8%);
+  background: linear-gradient(
+    110.48deg,
+    rgba(219, 0, 255, 0.7) 1.23%,
+    rgba(255, 143, 244, 0.7) 8.85%,
+    rgba(0, 133, 255, 0) 91.43%,
+    rgba(0, 126, 187, 0) 98.8%
+  );
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 
@@ -17,11 +23,11 @@ $icon-size-big: 36px;
   overflow-y: scroll;
 }
 
-.report-window_hidden{
+.report-window_hidden {
   visibility: hidden;
 }
 
-.report-window__button-back{
+.report-window__button-back {
   width: $icon-size-big;
   height: $icon-size-big;
 
@@ -29,6 +35,6 @@ $icon-size-big: 36px;
   margin-top: 36px;
 }
 
-.report-window__problems-buttons{
-    margin-top: 12px;
+.report-window__problems-buttons {
+  margin-top: 12px;
 }

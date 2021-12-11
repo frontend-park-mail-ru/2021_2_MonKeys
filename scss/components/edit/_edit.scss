@@ -2,7 +2,7 @@
   height: 100%;
   width: 100%;
   max-width: $max-width;
-  
+
   display: flex;
   flex-direction: column;
 }
@@ -57,5 +57,5 @@
 }
 
 .edit__save-button {
-    margin: $margin-small 0px;
+  margin: $margin-small 0px;
 }

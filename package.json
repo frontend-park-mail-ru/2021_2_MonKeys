@@ -5,13 +5,11 @@
     "main": "app.js",
     "scripts": {
         "build": "bash scripts/build.sh",
-        "serve": "bash scripts/serve.sh",
         "eslint": "eslint --max-warnings=0 source/**/*.{ts,tsx}",
         "prettier": "prettier --write \"source/**/*.+(js|jsx|ts|tsx|json)\"",
         "prettier-check": "prettier --check \"source/**/*.+(js|jsx|ts|tsx|json)\"",
-        "prettier-scss": "prettier --write --tab-width 2 \"scss/**/*.+(scss)\"",
+        "prettier-scss": "prettier --check --tab-width 2 \"scss/**/*.+(scss)\"",
         "deploy": "bash scripts/docker-nginx-ssl.sh",
-        "serve-nginx": "bash scripts/run-nginx.sh",
         "rollup": "npx rollup --config rollup.config.js --configPlugin typescript"
     },
     "repository": {

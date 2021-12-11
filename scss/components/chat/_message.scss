@@ -1,20 +1,20 @@
 @import '../../abstracts/colors';
 
-.message-container{
+.message-container {
   display: flex;
 
   width: 100%;
 }
 
-.message-container_my-message{
+.message-container_my-message {
   justify-content: flex-end;
 }
 
-.message-container_not-my-message{
+.message-container_not-my-message {
   justify-content: flex-start;
 }
 
-.message-container__message{
+.message-container__message {
   display: flex;
 
   max-width: 80%;
@@ -34,7 +34,7 @@
   border-radius: 12px 12px 12px 1px;
 }
 
-.message-container__text{
+.message-container__text {
   display: flex;
 
   font-size: $font-size-tiny;
@@ -45,7 +45,7 @@
   word-break: break-all;
 }
 
-.message-container__date{
+.message-container__date {
   font-size: 8px;
   line-height: 8px;
 

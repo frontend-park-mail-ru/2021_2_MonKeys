@@ -27,7 +27,7 @@ jobs:
 
     - name: Build
       run: |
-        npm install
+        npm ci
         npm run build
 
   build:
@@ -71,7 +71,7 @@ jobs:
 
     - name: Build
       run: |
-        npm install
+        npm ci
         npm run eslint
         npm run prettier-check
   

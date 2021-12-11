@@ -1,6 +1,6 @@
 @import '../../abstracts/colors';
 
-.report-radio-button{
+.report-radio-button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,15 +14,15 @@
   margin-bottom: 36px;
 }
 
-.report-radio-button_on{
-    background-color: $red ;
+.report-radio-button_on {
+  background-color: $red;
 }
 
-.report-radio-button__input{
+.report-radio-button__input {
   display: none;
 }
 
-.report-radio-button__label{
+.report-radio-button__label {
   display: flex;
   margin: $margin-smallest;
 }

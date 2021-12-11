@@ -1,36 +1,38 @@
 @keyframes returnToDefault {
-    0% {}
-    100% {
-        transform: translate(0px, 0px);
-    }
+  0% {
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
 }
 
 @keyframes returnToDefaultAction {
-    0% {}
-    100% {
-        transform: translate(0px, 0px);
-        opacity: 1;
-        width: 36px;
-        height: 36px;
-    }
+  0% {
+  }
+  100% {
+    transform: translate(0px, 0px);
+    opacity: 1;
+    width: 36px;
+    height: 36px;
+  }
 }
 
 @keyframes swipedRight {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        transform: translate(400px,0px) rotate(20deg);
-        opacity: 0.01;
-    }
+  0% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(400px, 0px) rotate(20deg);
+    opacity: 0.01;
+  }
 }
 
 @keyframes swipedLeft {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        transform: translate(-400px,0px) rotate(-20deg);
-        opacity: 0.01;
-    }
+  0% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-400px, 0px) rotate(-20deg);
+    opacity: 0.01;
+  }
 }

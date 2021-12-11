@@ -2,17 +2,17 @@
   height: 100%;
   width: 100%;
   max-width: $max-width;
-  
+
   display: flex;
   flex-direction: column;
 }
 
 .feed__card {
-    flex: 1 1 auto;
-    margin: $margin-small;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  flex: 1 1 auto;
+  margin: $margin-small;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .feed__profile {

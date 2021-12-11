@@ -1,42 +1,41 @@
 $view-max-width: 375px;
 
-.view-contant{
+.view-contant {
   display: flex;
   flex-direction: column;
 }
 
-.view-contant_align_center{
+.view-contant_align_center {
   align-items: center;
 }
 
-.view-content_scroll-banned{
+.view-content_scroll-banned {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
 }
 
-.view-content_scroll{
+.view-content_scroll {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
-  user-select: none; 
+  user-select: none;
 }
 
-
-.view-contant_scroll-y_banned{
+.view-contant_scroll-y_banned {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
   overflow-y: hidden;
 }
 
-.view-contant_scroll-x_banned{
+.view-contant_scroll-x_banned {
   overflow-x: hidden;
 }
 
-.view-content__max-height{
+.view-content__max-height {
   max-width: $view-max-width;
 }
 
-.view-content__scroll-y{
+.view-content__scroll-y {
   height: 100vh;
   overflow-y: scroll;
 }
