@@ -10,6 +10,11 @@ import { CardExpended } from '../components/card/cardExpended.js';
 import { userLikesRequset } from '../requests/likesRequest.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { Errors } from '../components/error/errors.js';
+import { ProfileStore } from '../store/profileStore.js';
+import { PaymentCard } from '../components/common/paymentCard.js';
+import { Button } from '../components/common/button.js';
+import eventBus from '../dispatcher/eventBus.js';
+import { EVENTS } from '../dispatcher/events.js';
 
 export default class LikesView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -37,9 +42,38 @@ export default class LikesView extends ViewBase {
         'reports': ReportsStore.get().reports,
         'reportsActive': ReportsStore.get().active,
         error: errorManager.error,
+        paymentButton: {
+            type: 'button',
+            text: 'Оплатить',
+            class: 'button-white-small',
+            onclick: () => {
+                eventBus.dispatch<string>(EVENTS.LIKES_PAYMENT);
+            },
+        },
     };
 
     _createTmpl(data) {
+        // нет подписки
+        // if (!ProfileStore.get().payment) {
+        return (
+            <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                <div
+                    class='view-contant view-contant_align_center
+                  view-content_scroll-banned view-content__max-height'
+                >
+                    <div class='likes-view-text-big'>Вы можете оформить подписку, чтобы видеть кому вы понравились</div>
+                    <div class='view-content__dummy-image-container'>
+                        {PaymentCard({ period: 1, price: 150, class: LikesStore.get().card150Class })}
+                        {PaymentCard({ period: 3, price: 350, class: LikesStore.get().card350Class })}
+                        {PaymentCard({ period: 6, price: 650, class: LikesStore.get().card650Class })}
+                    </div>
+                    {Button(data.paymentButton)}
+                    {Tapbar(TapbarStore.get())}
+                    {Errors(data.error)}
+                </div>
+            </div>
+        );
+        // }
         if (!LikesStore.get().profiles[0]) {
             return (
                 <div class='view-contant view-contant_align_center view-content_scroll-banned'>
@@ -75,6 +109,8 @@ export default class LikesView extends ViewBase {
                                         size: 'small',
                                         withActions: true,
                                         expanded: true,
+                                        // получаем из запроса на профиль (подписка)
+                                        hidden: true,
                                     })
                                 )}
                             </div>
@@ -123,6 +159,14 @@ export default class LikesView extends ViewBase {
             'reports': ReportsStore.get().reports,
             'reportsActive': ReportsStore.get().active,
             error: errorManager.error,
+            paymentButton: {
+                type: 'button',
+                text: 'Оплатить',
+                class: '',
+                onclick: () => {
+                    eventBus.dispatch<string>(EVENTS.LIKES_PAYMENT);
+                },
+            },
         };
         this._template = this._createTmpl(this._data);
         this.render();

@@ -97,6 +97,12 @@ export default class LoginView extends ViewBase {
                 type: 'button',
                 text: 'Регистрация',
                 class: 'button-black-big',
+                onkeypress: (event) => {
+                    const enterKeyCode = 13;
+                    if (event.keyCode === enterKeyCode) {
+                        event.preventDefault();
+                    }
+                },
                 onclick: () => {
                     router.go('/signup');
                 },

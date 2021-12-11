@@ -1,9 +1,9 @@
-const domain = 'drip.monkeys.team';
-export const serverAddress = `https://${domain}`;
-export const wsURL = `wss://${domain}/api/v1/apiws`;
-// const domain = 'localhost';
-// export const serverAddress = `http://${domain}`;
-// export const wsURL = `ws://${domain}/api/v1/apiws`;
+// const domain = 'drip.monkeys.team';
+// export const serverAddress = `https://${domain}`;
+// export const wsURL = `wss://${domain}/api/v1/apiws`;
+const domain = 'localhost';
+export const serverAddress = `http://${domain}`;
+export const wsURL = `ws://${domain}/api/v1/apiws`;
 
 export const profileURL = '/api/v1/profile';
 export const tagsURL = '/api/v1/tags';
@@ -18,3 +18,6 @@ export const userLikesURL = '/api/v1/user/likes';
 export const reportsURL = '/api/v1/reports';
 export const authProfileURL = '/api/v1/auth/profile';
 export const authSessionURL = '/api/v1/auth/session';
+export const paymentURL = '/api/v1/payment';
+
+// export const paymentURL = 'https://api.yookassa.ru/v3/payments';
