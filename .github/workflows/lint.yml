@@ -1,0 +1,26 @@
+name: Linter/Formatter
+
+on:
+  push:
+  pull_request:
+
+eslint-prettier:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Build
+      run: |
+        npm ci
+        npm run eslint
+        npm run prettier-check

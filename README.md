@@ -5,7 +5,8 @@
 ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/frontend-park-mail-ru/2021_2_MonKeys/development)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![TypeScript](https://badgen.net/badge/icon/typescript?icon=typescript&label)](https://typescriptlang.org)
-
+![CI](https://github.com/frontend-park-mail-ru/2021_2_MonKeys/workflows/Build/badge.svg)
+![CD](https://github.com/frontend-park-mail-ru/2021_2_MonKeys/workflows/Deploy/badge.svg)
 
 ![alt text](badges/eslint-badge.svg)
 ## Deployment🚀🚀🚀
@@ -16,6 +17,9 @@
 [![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/community/file/1018614506626829179/Drip-v.0.3)
 
 ## Team Monkeys🐒🐒🐒
+
+## Тимлид: Леонид Перлин 
+
 | Имя              |    Роль      |
 |------------------|--------------|
 | [Леонид Перлин](https://github.com/perlinleo)     🥵 | Fullstack |
