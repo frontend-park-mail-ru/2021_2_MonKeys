@@ -14,7 +14,8 @@ export interface LikesData {
     card150Class: string;
     card350Class: string;
     card650Class: string;
-    choosedSubscription: number;
+    choosedSubscriptionAmount: number;
+    choosedSubscriptionPeriod: number;
 }
 
 const LikesStore = new BaseStore<LikesData>();
@@ -28,7 +29,8 @@ LikesStore.set({
     card150Class: 'payment-card',
     card350Class: 'payment-card',
     card650Class: 'payment-card',
-    choosedSubscription: 0,
+    choosedSubscriptionAmount: 0,
+    choosedSubscriptionPeriod: 0,
 });
 
 export default LikesStore;

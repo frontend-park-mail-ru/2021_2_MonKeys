@@ -15,6 +15,7 @@ import { PaymentCard } from '../components/common/paymentCard.js';
 import { Button } from '../components/common/button.js';
 import eventBus from '../dispatcher/eventBus.js';
 import { EVENTS } from '../dispatcher/events.js';
+import { bigPeriod, bigPeriodPrice, mediumPeriod, mediumPeriodPrice, smallPeriod, smallPeriodPrice } from '../constants/payment.js';
 
 export default class LikesView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -61,11 +62,11 @@ export default class LikesView extends ViewBase {
                     class='view-contant view-contant_align_center
                   view-content_scroll-banned view-content__max-height'
                 >
-                    <div class='likes-view-text-big'>Вы можете оформить подписку, чтобы видеть кому вы понравились</div>
+                    <div class='likes-view-text-big'>Вы можете оформить подписку, чтобы видеть, кому вы понравились</div>
                     <div class='view-content__dummy-image-container'>
-                        {PaymentCard({ period: 1, price: 150, class: LikesStore.get().card150Class })}
-                        {PaymentCard({ period: 3, price: 350, class: LikesStore.get().card350Class })}
-                        {PaymentCard({ period: 6, price: 650, class: LikesStore.get().card650Class })}
+                        {PaymentCard({ period: smallPeriod, price: smallPeriodPrice, class: LikesStore.get().card150Class })}
+                        {PaymentCard({ period: mediumPeriod, price: mediumPeriodPrice, class: LikesStore.get().card350Class })}
+                        {PaymentCard({ period: bigPeriod, price: bigPeriodPrice, class: LikesStore.get().card650Class })}
                     </div>
                     {Button(data.paymentButton)}
                     {Tapbar(TapbarStore.get())}

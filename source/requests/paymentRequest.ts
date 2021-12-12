@@ -3,7 +3,7 @@ import http from '../utils/http.js';
 import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { errorManager } from '../store/errorStore.js';
 
-const paymentRequest = (amount: string) => {
+const paymentRequest = (amount: string, period: string) => {
     const body = JSON.stringify({
         amount: amount,
     });
