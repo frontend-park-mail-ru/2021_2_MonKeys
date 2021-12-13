@@ -5,6 +5,7 @@ import ViewBase from './views/viewBase.js';
 import { isWidescreen, startClientAspectRatio } from './utils/client.js';
 import { registerServiceWorker } from './service/serviceWorkerRegister.js';
 import { EVENTS } from './dispatcher/events.js';
+import '../scss/main.scss';
 
 startClientAspectRatio();
 window.addEventListener('resize', isWidescreen);
