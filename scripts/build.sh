@@ -29,6 +29,7 @@ mv static/css/main.css static/css/main$curDate.css
 mv static/js/app.min.js static/js/app$curDate.min.js
 
 #update file name in index.html
+
 sed -e "s/$cssFileName/main$curDate/; s/$jsFileName/app$curDate/" ./static/index.html > ./static/index.html.tmp && mv ./static/index.html.tmp ./static/index.html
 
 #print version
