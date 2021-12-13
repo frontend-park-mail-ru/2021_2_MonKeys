@@ -1,7 +1,7 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import eventBus from '../../dispatcher/eventBus.js';
 import { EVENTS } from '../../dispatcher/events.js';
-import { fourMonth, oneMonth, threeMonth, twoMonth } from '../constants/subscriptionPeriod.js';
+import { fourMonth, oneMonth, threeMonth, twoMonth } from '../../constants/subscriptionPeriod.js';
 
 export interface PaymentCardProps {
     period: number;
