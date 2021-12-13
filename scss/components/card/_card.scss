@@ -9,13 +9,12 @@ $card-expanded-default-height: 100%;
 $card-expanded-img-default-height: 100%;
 
 .card-wide {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
-
 @media (max-height: 960px) {
-    .card{
+  .card {
     max-height: 70vh;
     position: relative;
     display: flex;
@@ -27,10 +26,10 @@ $card-expanded-img-default-height: 100%;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-radius: $border-radius-default;
-    }
+  }
 }
 @media (min-height: 960px) {
-    .card{
+  .card {
     max-height: 720px;
     position: relative;
     display: flex;
@@ -42,55 +41,54 @@ $card-expanded-img-default-height: 100%;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-radius: $border-radius-default;
-    }
+  }
 }
 
-
-.card-bottom-panel{
-    position: absolute;
-    height: 144px;
-    width: 100%;
-    bottom: 0px;
-    backdrop-filter: blur(20px);
-    background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.2) 0%, rgba(0, 165, 245, 0) 100%);
-    -webkit-backdrop-filter: blur(20px);
-    display: flex;
-    flex-direction: column;
-    border-radius: 12px;
+.card-bottom-panel {
+  position: absolute;
+  height: 144px;
+  width: 100%;
+  bottom: 0px;
+  backdrop-filter: blur(20px);
+  background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.2) 0%, rgba(0, 165, 245, 0) 100%);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
 }
 
-.card-img{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 12px;
+.card-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 12px;
 }
 
 .card-bottom-panel__name {
-    display: flex;
-    justify-content: start;
-    gap: 12px;
-    margin-left: 12px;
-    align-items: baseline;
+  display: flex;
+  justify-content: start;
+  gap: 12px;
+  margin-left: 12px;
+  align-items: baseline;
 }
 
 .card-bottom-panel__name__name {
-    font-size: $font-size-big;
-    font-weight: bold;
+  font-size: $font-size-big;
+  font-weight: bold;
 }
 
 .card-bottom-panel__name__age {
-    font-size: $font-size-medium;
+  font-size: $font-size-medium;
 }
 
 .card-bottom-panel_actions {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .card-bottom-panel_actions_action {
-    margin: 12px;
-    height: 36px;
-    width: 36px;
+  margin: 12px;
+  height: 36px;
+  width: 36px;
 }

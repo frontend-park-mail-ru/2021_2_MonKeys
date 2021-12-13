@@ -4,7 +4,6 @@ $card-expanded-default-width: 100%;
 $card-expanded-default-height: 100%;
 $card-expanded-img-default-height: 100%;
 
-
 .card-expended {
   height: 100%;
   max-height: $max-height;
@@ -13,7 +12,7 @@ $card-expanded-img-default-height: 100%;
   position: relative;
 }
 
-.card-expended-chats-wide{
+.card-expended-chats-wide {
   display: flex;
   align-items: center;
   width: 300px;
@@ -45,7 +44,7 @@ $card-expanded-img-default-height: 100%;
   font-size: $font-size-tiny;
   line-height: 24px;
 
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .card-expended__back-button {

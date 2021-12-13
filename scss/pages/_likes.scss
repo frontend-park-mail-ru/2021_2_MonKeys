@@ -1,38 +1,36 @@
-
-
-@media (max-aspect-ratio: 10/10){
+@media (max-aspect-ratio: 10/10) {
   .likes {
-  height: 100%;
-  width: 100%;
-  max-width: $max-width;
+    height: 100%;
+    width: 100%;
+    max-width: $max-width;
 
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
 }
 
 @media (min-aspect-ratio: 10/10) {
   .likes {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
 }
 
 .likes__profile {
   margin-top: $margin-small;
 }
 
-.likes__likes-header{
+.likes__likes-header {
   width: 100%;
   flex: 0 0 auto;
 }
 
-.likes__likes-profile{
+.likes__likes-profile {
   width: 100%;
   flex: 1 1 auto;
 
@@ -43,71 +41,67 @@
   margin-bottom: $margin-small;
 }
 
-.likes-view-header{
+.likes-view-header {
   width: 288px;
 
   font-size: $font-size-medium;
   line-height: 42px;
 
-  color: #FFFFFF;
+  color: #ffffff;
 
   margin-top: 48px;
   margin-bottom: 36px;
   margin-left: 24px;
 }
 
-
-.likes-view-text-big{
+.likes-view-text-big {
   width: 288px;
   text-align: center;
 
   font-size: 18px;
 
-  color: #FFFFFF;
+  color: #ffffff;
 
   margin-top: 48px;
   margin-bottom: 36px;
 }
 
-
-.likes-view-text-small{
+.likes-view-text-small {
   width: 288px;
   text-align: center;
 
   font-size: 14px;
 
-  color: #FFFFFF;
+  color: #ffffff;
 
   margin-top: 48px;
   margin-bottom: 36px;
 }
 
-
-
 @media (max-height: 960px) {
-    .likes-view-cards{
-  height: 100%;
-  max-height: 55vh;
-  display: flex;
-  flex-direction: row;
+  .likes-view-cards {
+    height: 100%;
+    max-height: 55vh;
+    display: flex;
+    flex-direction: row;
 
-  overflow-x: scroll;
-  overflow-y: hidden;
-  margin-left: 24px;
-}
+    overflow-x: scroll;
+    overflow-y: hidden;
+    margin-left: 24px;
+  }
 }
 @media (min-height: 960px) {
-    .likes-view-cards{
-  height: 100%;
-  max-height: $max-height;
-  display: flex;
-  flex-direction: row;
+  .likes-view-cards {
+    height: 100%;
+    max-height: $max-height;
+    display: flex;
+    flex-direction: row;
 
-  overflow-x: scroll;
-  overflow-y: hidden;
+    overflow-x: scroll;
+    overflow-y: hidden;
 
-  margin-left: 24px;
-}
+    margin-left: 24px;
+  }
 }
 
 .likes__tapbar {

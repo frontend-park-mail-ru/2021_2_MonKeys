@@ -1,6 +1,5 @@
 @import './typography';
 
-
 $max-width: 400px;
 $max-height: 720px;
 
@@ -9,7 +8,7 @@ input:focus {
   outline: none;
 }
 
-textarea{
+textarea {
   resize: none;
   color: white;
   font-size: 18px;

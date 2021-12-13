@@ -8,35 +8,31 @@ $form-field-input-max-width: 204px;
 
 $form-field-icon-size: 24px;
 
-
-$field-valid-color: radial-gradient(
-    112.16% 418.59% at 0% 0%,
-     rgba(226, 246, 255, 0.4) 0%,
-      rgba(0, 165, 245, 0) 100%);
+$field-valid-color: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.4) 0%, rgba(0, 165, 245, 0) 100%);
 
 $field-invalid-color: radial-gradient(
-    112.16% 418.59% at 0% 0%,
-    rgba(226, 246, 255, 0.4) 0%,
-    rgba(255, 0, 0, 0.289583) 25.52%,
-    rgba(0, 165, 245, 0) 100%
+  112.16% 418.59% at 0% 0%,
+  rgba(226, 246, 255, 0.4) 0%,
+  rgba(255, 0, 0, 0.289583) 25.52%,
+  rgba(0, 165, 245, 0) 100%
 );
 
 @mixin form-field($color) {
-    margin-top: $form-field-margin;
-    width: $form-field-width;
-    height: $form-field-height;
-    background: $color;
-    backdrop-filter: blur(20px);
-    border-radius: $border-radius-default;
-    display: flex;
-    align-items: center;
+  margin-top: $form-field-margin;
+  width: $form-field-width;
+  height: $form-field-height;
+  background: $color;
+  backdrop-filter: blur(20px);
+  border-radius: $border-radius-default;
+  display: flex;
+  align-items: center;
 }
 
-.form__field-no-error-compensator{
-    margin-bottom: 12px;
+.form__field-no-error-compensator {
+  margin-bottom: 12px;
 }
 .form__field-valid {
-    @include form-field($field-valid-color);
+  @include form-field($field-valid-color);
 }
 
 .form__field-valid-desc {
@@ -44,33 +40,32 @@ $field-invalid-color: radial-gradient(
 }
 
 .form__field-invalid {
-    @include form-field($field-invalid-color);
+  @include form-field($field-invalid-color);
 }
 
 .form__field__input {
-    font-weight: bold;
-    color:white;
-    font-size: $font-size-small;
-    max-width: $form-field-input-max-width;
-    padding-left: 12px;
-    padding-top: 3px;
+  font-weight: bold;
+  color: white;
+  font-size: $font-size-small;
+  max-width: $form-field-input-max-width;
+  padding-left: 12px;
+  padding-top: 3px;
 }
 
 .form__field__input::-webkit-calendar-picker-indicator {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: auto;
-    height: auto;
-    color: transparent;
-    background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+  color: transparent;
+  background: transparent;
 }
 
-
 .form__field__icon {
-    margin-left: 12px;
-    width: $form-field-icon-size;
-    height: $form-field-icon-size;
+  margin-left: 12px;
+  width: $form-field-icon-size;
+  height: $form-field-icon-size;
 }
