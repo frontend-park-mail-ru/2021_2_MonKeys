@@ -7,6 +7,15 @@ import feedStore from '../store/feedStore.js';
 import { MatchesStore } from '../store/matchStore.js';
 import { matchRequest } from '../requests/matchRequest.js';
 import { EVENTS } from './events.js';
+import {
+    smallPeriodPrice,
+    mediumPeriodPrice,
+    bigPeriodPrice,
+    smallPeriod,
+    mediumPeriod,
+    bigPeriod,
+} from '../constants/payment.js';
+import { paymentRequest } from '../requests/paymentRequest.js';
 
 export const LikesEventsRegister = () => {
     EventBus.register(EVENTS.LIKES_EXPAND_BUTTON, (userID) => {
@@ -82,6 +91,42 @@ export const LikesEventsRegister = () => {
                 }
                 feedStore.set(feedData);
             });
+        });
+    });
+    EventBus.register(EVENTS.LIKES_CHOICE_PAYMENT, (cost: number) => {
+        const likesData = LikesStore.get();
+        switch (cost) {
+            case smallPeriodPrice:
+                likesData.card150Class = 'payment-card payment-card_active';
+                likesData.card350Class = 'payment-card';
+                likesData.card650Class = 'payment-card';
+                likesData.choosedSubscriptionAmount = smallPeriodPrice;
+                likesData.choosedSubscriptionPeriod = smallPeriod;
+                LikesStore.set(likesData);
+                break;
+            case mediumPeriodPrice:
+                likesData.card350Class = 'payment-card payment-card_active';
+                likesData.card150Class = 'payment-card';
+                likesData.card650Class = 'payment-card';
+                likesData.choosedSubscriptionAmount = mediumPeriodPrice;
+                likesData.choosedSubscriptionPeriod = mediumPeriod;
+                LikesStore.set(likesData);
+                break;
+            case bigPeriodPrice:
+                likesData.card650Class = 'payment-card payment-card_active';
+                likesData.card150Class = 'payment-card';
+                likesData.card350Class = 'payment-card';
+                likesData.choosedSubscriptionAmount = bigPeriodPrice;
+                likesData.choosedSubscriptionPeriod = bigPeriod;
+                LikesStore.set(likesData);
+                break;
+        }
+    });
+    EventBus.register(EVENTS.LIKES_PAYMENT, () => {
+        const subscriptionAmount = LikesStore.get().choosedSubscriptionAmount;
+        const subscriptionPeriod = LikesStore.get().choosedSubscriptionPeriod;
+        paymentRequest(subscriptionAmount.toString(), subscriptionPeriod).then((response) => {
+            window.location.href = response.body.redirectUrl;
         });
     });
 };

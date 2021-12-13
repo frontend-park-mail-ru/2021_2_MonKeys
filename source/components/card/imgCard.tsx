@@ -10,6 +10,8 @@ export interface ProfileCardProps {
     withActions: boolean;
     expanded: boolean;
     feed?: boolean;
+
+    hidden?: boolean;
 }
 
 export const ImgCard = (props: ProfileCardProps) => {
@@ -38,10 +40,8 @@ export const ImgCard = (props: ProfileCardProps) => {
     ) : (
         <div></div>
     );
-
     return (
         <div class={'img-card img-card' + sizeModificator}>
-            {/* {ImgCarousel(props.userData.imgs, true)} */}
             {ImgCarousel(props.userData.imgs, 'img-card__img img-card__img' + sizeModificator)}
             <div class={'img-card__bottom-panel img-card__bottom-panel' + sizeModificator}>
                 <div class={'img-card__short-desc img-card__short-desc' + sizeModificator}>
@@ -49,8 +49,8 @@ export const ImgCard = (props: ProfileCardProps) => {
                     {ReportTmpl}
                 </div>
                 {cardActionsTmpl}
-                {/* {CardActions({ userID: props.userData.id, expend: props.expanded, feed: props.feed })} */}
             </div>
+            {/* {blurTmpl} */}
         </div>
     );
 };

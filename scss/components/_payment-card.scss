@@ -1,0 +1,43 @@
+.payment-card{
+  width: 114px;
+  height: 192px;
+  
+  background: radial-gradient(112.16% 418.59% at 0% 0%, 
+                            rgba(226, 246, 255, 0.4) 0%, 
+                            rgba(0, 165, 245, 0) 100%);
+  backdrop-filter: blur(20px);
+  
+  border-radius: 12px;
+
+  margin: 0px 3px;
+}
+
+.payment-card_active{
+  background: linear-gradient(93.2deg, 
+                            rgba(255, 6, 0, 0.6) -13.16%, 
+                            rgba(167, 0, 199, 0.6) 4.16%, 
+                            rgba(37, 65, 219, 0.6) 72.87%, 
+                            rgba(74, 147, 255, 0.6) 90.72%);
+}
+
+.payment-card__period{
+  text-align: center;
+
+  font-size: 14px;
+
+  color: #FFFFFF;
+
+  margin-top: 48px;
+  margin-bottom: 36px;
+}
+
+.payment-card__price{
+  text-align: center;
+
+  font-size: 14px;
+
+  color: #FFFFFF;
+
+  margin-top: 48px;
+  margin-bottom: 36px;
+}

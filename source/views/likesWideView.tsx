@@ -76,6 +76,8 @@ export default class LikesWideView extends ViewBase {
                                             size: 'small',
                                             withActions: true,
                                             expanded: true,
+                                            // получаем из запроса на профиль (подписка)
+                                            hidden: true,
                                         })
                                     )}
                                 </div>

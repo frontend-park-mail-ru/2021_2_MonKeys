@@ -56,6 +56,7 @@
 
 .likes-view-text-big {
   width: 288px;
+  text-align: center;
 
   font-size: 18px;
 
@@ -63,11 +64,11 @@
 
   margin-top: 48px;
   margin-bottom: 36px;
-  margin-left: 24px;
 }
 
 .likes-view-text-small {
   width: 288px;
+  text-align: center;
 
   font-size: 14px;
 
@@ -75,7 +76,6 @@
 
   margin-top: 48px;
   margin-bottom: 36px;
-  margin-left: 24px;
 }
 
 @media (max-height: 960px) {

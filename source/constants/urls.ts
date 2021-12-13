@@ -18,3 +18,5 @@ export const userLikesURL = '/api/v1/user/likes';
 export const reportsURL = '/api/v1/reports';
 export const authProfileURL = '/api/v1/auth/profile';
 export const authSessionURL = '/api/v1/auth/session';
+export const paymentURL = '/api/v1/payment';
+export const subscriptionURL = '/api/v1/subscription';
