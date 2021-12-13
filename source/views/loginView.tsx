@@ -80,7 +80,7 @@ export default class LoginView extends ViewBase {
         'buttons': {
             'loginButton': {
                 type: 'button',
-                text: 'Войти',
+                text: 'check',
                 class: 'button-white-small',
                 onkeypress: (event) => {
                     const enterKeyCode = 13;
