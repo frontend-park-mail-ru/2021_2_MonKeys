@@ -40,7 +40,6 @@ export const ImgCard = (props: ProfileCardProps) => {
     ) : (
         <div></div>
     );
-    const blurTmpl = props.hidden ? <div class='img-card__blur'></div> : <div></div>;
     return (
         <div class={'img-card img-card' + sizeModificator}>
             {ImgCarousel(props.userData.imgs, 'img-card__img img-card__img' + sizeModificator)}

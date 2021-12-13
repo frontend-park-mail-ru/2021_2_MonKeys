@@ -1,7 +1,7 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
-import { ProfileData } from '../../store/profileStore.js';
 import eventBus from '../../dispatcher/eventBus.js';
 import { EVENTS } from '../../dispatcher/events.js';
+import { fourMonth, oneMonth, threeMonth, twoMonth } from '../constants/subscriptionPeriod.js';
 
 export interface PaymentCardProps {
     period: number;
@@ -11,9 +11,9 @@ export interface PaymentCardProps {
 
 export const PaymentCard = (props: PaymentCardProps) => {
     let monthText: string;
-    if (props.period === 1) {
+    if (props.period === oneMonth) {
         monthText = ' месяц';
-    } else if (props.period === 2 || props.period === 3 || props.period === 4) {
+    } else if (props.period === twoMonth || props.period === threeMonth || props.period === fourMonth) {
         monthText = ' месяца';
     } else {
         monthText = ' месяцев';

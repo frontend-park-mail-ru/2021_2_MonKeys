@@ -1,16 +1,11 @@
-import { paymentURL } from '../constants/urls.js';
+import { subscriptionURL } from '../constants/urls.js';
 import http from '../utils/http.js';
 import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { errorManager } from '../store/errorStore.js';
 
-const paymentRequest = (amount: string, period: number) => {
-    const body = JSON.stringify({
-        amount: amount,
-        period: period,
-    });
-
+const subscriptionRequest = () => {
     return http
-        .post(paymentURL, body)
+        .get(subscriptionURL)
         .then((response) => {
             if (response.status !== HTTPSuccess) {
                 throw 'server internal error';
@@ -24,4 +19,4 @@ const paymentRequest = (amount: string, period: number) => {
         });
 };
 
-export { paymentRequest };
+export { subscriptionRequest };

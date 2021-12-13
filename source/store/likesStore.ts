@@ -6,6 +6,7 @@ export type LikeCardData = ProfileData;
 export interface LikesData {
     profiles: LikeCardData[];
     likesCount: number;
+    active: boolean;
 
     expended: boolean;
     userIndex: number;
@@ -23,6 +24,7 @@ const LikesStore = new BaseStore<LikesData>();
 LikesStore.set({
     profiles: [],
     likesCount: 0,
+    active: false,
     expended: false,
     userIndex: 0,
     reported: false,

@@ -125,7 +125,7 @@ export const LikesEventsRegister = () => {
     EventBus.register(EVENTS.LIKES_PAYMENT, () => {
         const subscriptionAmount = LikesStore.get().choosedSubscriptionAmount;
         const subscriptionPeriod = LikesStore.get().choosedSubscriptionPeriod;
-        paymentRequest(subscriptionAmount.toString(), subscriptionPeriod.toString()).then((response) => {
+        paymentRequest(subscriptionAmount.toString(), subscriptionPeriod).then((response) => {
             window.location.href = response.body.redirectUrl;
         });
     });

@@ -16,32 +16,6 @@ $report-status-max-width: 96px;
 }
 
 @media (max-aspect-ratio: 10/10){
-  .img-card__blur{
-    position: absolute;
-    min-width: 85%;
-    width: $img-card-small-width;
-    height: $img-card-small-height;
-
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
-}
-
-@media (min-aspect-ratio: 10/10) {
-  .img-card_blur{
-    position: absolute;
-    min-width: 300px;
-    height: 55vh;
-    width: 300px;
-
-    margin-right: 12px;
-
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
-}
-
-@media (max-aspect-ratio: 10/10){
   .img-card_size_small{
   min-width: 85%;
   width: $img-card-small-width;
