@@ -51,4 +51,8 @@ export const ChatsEventsRegister = () => {
         router.go('/chat');
         window.history.replaceState('', '', '/chats');
     });
+
+    EventBus.register(EVENTS.CHATS_NEW_MATCH, (profile: ProfileData) => {
+        console.log(profile);
+    });
 };

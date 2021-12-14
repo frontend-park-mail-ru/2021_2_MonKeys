@@ -28,6 +28,7 @@ import { chatsManager } from '../store/chatsStore.js';
 import { ReportsEventsRegister } from './reportsEvents.js';
 import { SwipeEvenetsRegister } from './swipeEvents.js';
 import { ConnectWS, initWS } from '../requests/messageWS.js';
+import { initNotifications, Notifications } from '../requests/notifications.js';
 
 export const enum EVENTS {
     CAROUSEL_NEXT,
@@ -91,6 +92,7 @@ export const enum EVENTS {
     FEED_EXPAND_BUTTON,
     FEED_SHRINK_BUTTON,
     FEED_REACTION,
+    CHATS_NEW_MATCH,
 }
 
 export const InitBus = () => {
@@ -165,6 +167,13 @@ export const InitBus = () => {
                 console.log(err);
                 throw err;
             });
+
+        Notifications()
+          .then(initNotifications)
+          .catch((err) => {
+              console.log(err);
+              throw err;
+          });
     });
     LoginEventRegister();
     SignupEventRegister();

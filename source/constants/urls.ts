@@ -1,9 +1,10 @@
-const domain = 'drip.monkeys.team';
-export const serverAddress = `https://${domain}`;
-export const wsURL = `https://api.monkeys.team:8001/api/v1/apiws`;
-// const domain = 'localhost';
-// export const serverAddress = `http://${domain}`;
-// export const wsURL = `ws://${domain}/api/v1/apiws`;
+// const domain = 'drip.monkeys.team';
+// export const serverAddress = `https://${domain}`;
+// export const wsURL = `https://api.monkeys.team:8001/api/v1/apiws`;
+const domain = 'localhost';
+export const serverAddress = `http://${domain}`;
+export const wsURL = `ws://${domain}/api/v1/apiws`;
+export const notificationsURL = `ws://${domain}/api/v1/notifications`;
 
 export const profileURL = '/api/v1/profile';
 export const tagsURL = '/api/v1/tags';
