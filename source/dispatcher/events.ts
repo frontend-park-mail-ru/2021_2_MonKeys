@@ -141,8 +141,8 @@ export const InitBus = () => {
 
         feedRequest().then((data) => {
             const feed = feedStore.get();
-            if (data.body !== null) {
-                feed.profiles = data.body;
+            if (data.body.Users !== null) {
+                feed.profiles = data.body.Users;
             } else {
                 feed.outOfCards = true;
             }
@@ -156,7 +156,7 @@ export const InitBus = () => {
         });
 
         getChatsRequest().then((data) => {
-            chatsManager.chats = data.body;
+            chatsManager.chats = data.body.Chats;
         });
 
         ConnectWS()
