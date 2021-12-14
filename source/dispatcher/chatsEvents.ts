@@ -20,7 +20,7 @@ export const ChatsEventsRegister = () => {
             }
 
             chatsManager.openChat(chatID);
-            chatsManager.updateChatMessages(chatID, data.body);
+            chatsManager.updateChatMessages(chatID, data.body.Messages);
         });
     });
 
