@@ -103,72 +103,69 @@ export default class LikesView extends ViewBase {
                     </div>
                 </div>
             );
+        }
+        if (!LikesStore.get().profiles[0]) {
+            return (
+                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
+                    <div
+                        class='view-contant view-contant_align_center
+                view-content_scroll-banned view-content__max-height'
+                    >
+                        <div class='likes-view-text-big'>У вас пока нет новых лайков</div>
+
+                        <div class='view-content__dummy-image-container'>
+                            <img src='icons/like_gradient.svg' class='view-content__dummy-image'></img>
+                        </div>
+                        <div class='likes-view-text-small'>Лайкайте карточки в ленте и возвращайтесь</div>
+
+                        {Tapbar(TapbarStore.get())}
+                        {Errors(data.error)}
+                    </div>
+                </div>
+            );
+        }
+        if (!LikesStore.get().expended) {
+            return (
+                <div class='app__content--align-center'>
+                    <div class='likes'>
+                        <div class='likes__likes-profile'>
+                            <div class='likes__likes-header'>
+                                <div class='likes-view-header'>Вы понравились нескольким людям</div>
+                            </div>
+                            <div class='likes-view-cards'>
+                                {Object.keys(data.likes).map((item) =>
+                                    ImgCard({
+                                        userData: data.likes[item],
+                                        size: 'small',
+                                        withActions: true,
+                                        expanded: true,
+                                    })
+                                )}
+                            </div>
+                        </div>
+                        <div class='likes__tapbar'>{Tapbar(TapbarStore.get())}</div>
+                        {Errors(data.error)}
+                    </div>
+                </div>
+            );
         } else {
-            if (!LikesStore.get().profiles[0]) {
-                return (
-                    <div class='view-contant view-contant_align_center view-content_scroll-banned'>
-                        <div
-                            class='view-contant view-contant_align_center
-                    view-content_scroll-banned view-content__max-height'
-                        >
-                            <div class='likes-view-text-big'>У вас пока нет новых лайков</div>
-
-                            <div class='view-content__dummy-image-container'>
-                                <img src='icons/like_gradient.svg' class='view-content__dummy-image'></img>
-                            </div>
-                            <div class='likes-view-text-small'>Лайкайте карточки в ленте и возвращайтесь</div>
-
-                            {Tapbar(TapbarStore.get())}
-                            {Errors(data.error)}
+            return (
+                <div class='app__content--align-center'>
+                    <div class='likes'>
+                        <div class='profile__card likes__profile'>
+                            {CardExpended({
+                                userData: data.likes[LikesStore.get().userIndex],
+                                withActions: true,
+                                withReports: true,
+                                reports: data.reports,
+                                reported: data.reportsActive,
+                            })}
                         </div>
+                        <div class='likes__tapbar'>{Tapbar(TapbarStore.get())}</div>
+                        {Errors(data.error)}
                     </div>
-                );
-            }
-            if (!LikesStore.get().expended) {
-                return (
-                    <div class='app__content--align-center'>
-                        <div class='likes'>
-                            <div class='likes__likes-profile'>
-                                <div class='likes__likes-header'>
-                                    <div class='likes-view-header'>Вы понравились нескольким людям</div>
-                                </div>
-                                <div class='likes-view-cards'>
-                                    {Object.keys(data.likes).map((item) =>
-                                        ImgCard({
-                                            userData: data.likes[item],
-                                            size: 'small',
-                                            withActions: true,
-                                            expanded: true,
-                                            // получаем из запроса на профиль (подписка)
-                                            hidden: true,
-                                        })
-                                    )}
-                                </div>
-                            </div>
-                            <div class='likes__tapbar'>{Tapbar(TapbarStore.get())}</div>
-                            {Errors(data.error)}
-                        </div>
-                    </div>
-                );
-            } else {
-                return (
-                    <div class='app__content--align-center'>
-                        <div class='likes'>
-                            <div class='profile__card likes__profile'>
-                                {CardExpended({
-                                    userData: data.likes[LikesStore.get().userIndex],
-                                    withActions: true,
-                                    withReports: true,
-                                    reports: data.reports,
-                                    reported: data.reportsActive,
-                                })}
-                            </div>
-                            <div class='likes__tapbar'>{Tapbar(TapbarStore.get())}</div>
-                            {Errors(data.error)}
-                        </div>
-                    </div>
-                );
-            }
+                </div>
+            );
         }
     }
 

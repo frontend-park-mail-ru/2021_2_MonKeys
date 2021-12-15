@@ -10,8 +10,6 @@ export interface ProfileCardProps {
     withActions: boolean;
     expanded: boolean;
     feed?: boolean;
-
-    hidden?: boolean;
 }
 
 export const ImgCard = (props: ProfileCardProps) => {
