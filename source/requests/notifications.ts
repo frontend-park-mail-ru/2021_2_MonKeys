@@ -21,7 +21,7 @@ const initNotifications = () => {
   ws.onmessage = function (response) {
     const notification = JSON.parse(response.data);
 
-    eventBus.dispatch<ProfileData>(EVENTS.CHAT_NEW_MESSAGE, notification);
+    eventBus.dispatch<ProfileData>(EVENTS.CHATS_NEW_MATCH, notification);
   };
 };
 
