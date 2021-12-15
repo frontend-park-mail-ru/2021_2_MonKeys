@@ -18,6 +18,14 @@ const Notifications = () => {
 };
 
 const initNotifications = () => {
+  if (!("Notification" in window)) {
+    return;
+  }
+
+  if (Notification.permission !== "denied") {
+    Notification.requestPermission().then((permission) => console.log(permission));
+  }
+
   ws.onmessage = function (response) {
     const notification = JSON.parse(response.data);
 
