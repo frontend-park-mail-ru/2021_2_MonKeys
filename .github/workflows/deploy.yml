@@ -30,5 +30,13 @@ jobs:
     - run: npm ci
     - run: npm run build
     - run: cd static && sudo rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --omit-dir-times --no-perms --delete . clown@drip.monkeys.team:~/../fro/static/
-
+    
+    - name: send telegram message on push
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+            Backend redeployed on https://drip.monkeys.team
+            Deploy job: https://github.com/frontend-park-mail-ru/2021_2_MonKeys/runs/${{github.run_id}}
   
