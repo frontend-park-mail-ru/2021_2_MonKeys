@@ -13,7 +13,7 @@ const getChatsRequest = () => {
             }
 
             if (response.data.body && response.data.body.length !== 0) {
-                response.data.body.forEach((chat: Chat) => {
+                response.data.body.Chats.forEach((chat: Chat) => {
                     chat.messages.forEach((message: Message) => {
                         message.date = new Date(message.date);
                     });

@@ -13,7 +13,7 @@ const getChatRequest = (fromUserID, lastMessageID) => {
             }
 
             if (response.data.body && response.data.body.length !== 0) {
-                response.data.body.forEach((message: Message) => {
+                response.data.body.Messages.forEach((message: Message) => {
                     message.date = new Date(message.date);
                 });
             }
