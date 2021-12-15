@@ -1,0 +1,18 @@
+<svg width="360" height="360" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient y2="0.615608" x2="0.923523" y1="0.59102" x1="-0.172014" id="paint0_linear_461_12275">
+   <stop stop-color="#DB00FF"/>
+   <stop stop-color="#A700C7" offset="0.166667"/>
+   <stop stop-color="#2541DB" offset="0.828125"/>
+   <stop stop-color="#4A93FF" offset="1"/>
+  </linearGradient>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="362" width="362" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_1" fill="url(#paint0_linear_461_12275)" d="m196.783145,0c-99.2957,83.581 -178.2363,225.294 -97.307,325.403c59.243,55.031 148.544,43.428 181.792,-27.796c60.347,-131.691 -115.11,-170.451 -84.481,-297.60622l-0.004,-0.00078z"/>
+ </g>
+</svg>
