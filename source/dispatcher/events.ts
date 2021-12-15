@@ -169,11 +169,11 @@ export const InitBus = () => {
             });
 
         Notifications()
-          .then(initNotifications)
-          .catch((err) => {
-              console.log(err);
-              throw err;
-          });
+            .then(initNotifications)
+            .catch((err) => {
+                console.log(err);
+                throw err;
+            });
     });
     LoginEventRegister();
     SignupEventRegister();

@@ -9,28 +9,28 @@ import { ProfileData } from '../store/profileStore.js';
 const ws = new WebSocketManager(notificationsURL);
 
 const Notifications = () => {
-  return ws.CreateConnect().catch((err) => {
-    if (err === browserErr) {
-      errorManager.pushAPIError();
-      throw err;
-    }
-  });
+    return ws.CreateConnect().catch((err) => {
+        if (err === browserErr) {
+            errorManager.pushAPIError();
+            throw err;
+        }
+    });
 };
 
 const initNotifications = () => {
-  if (!("Notification" in window)) {
-    return;
-  }
+    if (!('Notification' in window)) {
+        return;
+    }
 
-  if (Notification.permission !== "denied") {
-    Notification.requestPermission().then((permission) => console.log(permission));
-  }
+    if (Notification.permission !== 'denied') {
+        Notification.requestPermission().then((permission) => console.log(permission));
+    }
 
-  ws.onmessage = function (response) {
-    const notification = JSON.parse(response.data);
+    ws.onmessage = function (response) {
+        const notification = JSON.parse(response.data);
 
-    eventBus.dispatch<ProfileData>(EVENTS.CHATS_NEW_MATCH, notification);
-  };
+        eventBus.dispatch<ProfileData>(EVENTS.CHATS_NEW_MATCH, notification);
+    };
 };
 
 export { Notifications, initNotifications };

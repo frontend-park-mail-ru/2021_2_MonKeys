@@ -26,7 +26,7 @@ window.onpopstate = () => {
 EventBus.dispatch<string>(EVENTS.USER_COOKIE_REQUESTS);
 window.history.pushState('', '', window.location.pathname);
 
-// registerServiceWorker();
+registerServiceWorker();
 
 const percent = 0.01;
 const vh = window.innerHeight * percent;

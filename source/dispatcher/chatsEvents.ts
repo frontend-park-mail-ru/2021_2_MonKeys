@@ -56,15 +56,15 @@ export const ChatsEventsRegister = () => {
         console.log(profile);
 
         const notifyMe = (profile: ProfileData) => {
-            new Notification ("Это любофь!!!", {
+            new Notification('Это любофь!!!', {
                 body: `Взаимная симпатия с ${profile.name}`,
-                icon: "icons/drip.svg",
+                icon: 'icons/drip.svg',
                 image: profile.imgs[0],
                 vibrate: 500,
             });
-        }
+        };
 
-        if (Notification.permission === "granted") {
+        if (Notification.permission === 'granted') {
             notifyMe(profile);
         }
     });
