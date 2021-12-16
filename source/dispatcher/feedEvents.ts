@@ -116,8 +116,8 @@ export const FeedEventsRegister = () => {
                         throw 'bad response';
                     }
 
-                    if (feedData.body !== null) {
-                        data.profiles = feedData.body;
+                    if (feedData.body.Users !== null) {
+                        data.profiles = feedData.body.Users;
                     } else {
                         data.profiles = [];
                         data.outOfCards = true;
