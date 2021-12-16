@@ -13,11 +13,13 @@ const getChatsRequest = () => {
             }
 
             if (response.data.body && response.data.body.length !== 0) {
-                response.data.body.Chats.forEach((chat: Chat) => {
-                    chat.messages.forEach((message: Message) => {
-                        message.date = new Date(message.date);
+                if (response.data.body.Chats) {
+                    response.data.body.Chats.forEach((chat: Chat) => {
+                        chat.messages.forEach((message: Message) => {
+                            message.date = new Date(message.date);
+                        });
                     });
-                });
+                }
             }
 
             return response.data;
