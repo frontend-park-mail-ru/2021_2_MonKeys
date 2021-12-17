@@ -37,6 +37,10 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-            Backend redeployed on https://drip.monkeys.team
-            Deploy job: https://github.com/frontend-park-mail-ru/2021_2_MonKeys/runs/${{github.run_id}}
+            Commit message: ${{ github.event.commits[0].message }}
+              
+              Repository: ${{ github.repository }}
+              Continious deployment of ${{ github.event.commits[0].message }} ended
+              GitHub checks: https://github.com/go-park-mail-ru/2021_2_MonKeys/commit/${{github.sha}}/checks
+              Deploy link: https://drip.monkeys.team
   
