@@ -37,13 +37,18 @@ if __name__ == "__main__":
 
     <head>
         <meta name="google-site-verification" content="svHOuSQfBAcUYt7xCVKGRkTxwLrHgAzxCFBOHugby8w" />
+        <meta name="description" 
+            content="На данный момент в Drip образовано 55 миллиардов пар, 
+            что делает его самым популярным приложением для знакомств в мире."
+        />
+        <link rel="icon" href="/favicon.ico">
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
         <link href=\""""
     output=output.rstrip()+cssBundle
     output=output.rstrip()+"""\" rel="stylesheet">
-        <title>Feed</title>
+        <title>Сервис Знакомств Drip!</title>
     </head>
 
     <body>
