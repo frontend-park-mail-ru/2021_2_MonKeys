@@ -82,8 +82,10 @@ export const CardExpended = (props: CardExpendedProps) => {
                 {reportWindowTmpl}
                 <div class='card-expended__profile card-expended__profile-chats-wide'>
                     {imgTmpl}
-                    {descField}
-                    {tagField}
+                    <div class='card-expended__profilie-data'>
+                        {descField}
+                        {tagField}
+                    </div>
                     {reportButtonTmpl}
                 </div>
             </div>
@@ -94,8 +96,10 @@ export const CardExpended = (props: CardExpendedProps) => {
             {reportWindowTmpl}
             <div class='card-expended__profile'>
                 {imgTmpl}
-                {descField}
-                {tagField}
+                <div class='card-expended__profilie-data'>
+                    {descField}
+                    {tagField}
+                </div>
                 {reportButtonTmpl}
             </div>
         </div>

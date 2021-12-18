@@ -1,16 +1,9 @@
 .report-button {
-  display: flex;
-  flex-direction: column;
   align-items: center;
 
   width: 100%;
 
   background: transparent;
-
-  border-top: 2px solid $light-grey;
-  border-bottom: 2px solid $light-grey;
-
-  margin-top: 72px;
 }
 
 .report-button__text {
