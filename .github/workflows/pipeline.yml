@@ -86,7 +86,6 @@ jobs:
     if:
       contains('
           refs/heads/development
-          refs/heads/deployment/docker-br-ngx
         ', github.ref)
     steps:
     - uses: actions/checkout@v2
