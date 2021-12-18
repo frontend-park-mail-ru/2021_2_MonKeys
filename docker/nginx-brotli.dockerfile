@@ -209,8 +209,8 @@ RUN \
 
 COPY nginx-ssl.conf /etc/nginx/nginx.conf
 #  -v "$PWD/star.monkeys.team.crt":/etc/nginx/localhost.crt:ro \
-COPY /etc/nginx/star.monkeys.team.crt /etc/nginx/star.monkeys.team.crt
-COPY /etc/nginx/star.monkeys.team.key /etc/nginx/star.monkeys.team.key
+COPY star.monkeys.team.crt /etc/nginx/star.monkeys.team.crt
+COPY star.monkeys.team.key /etc/nginx/star.monkeys.team.key
 
 
 # -v "$PWD/star.monkeys.team.crt":/etc/nginx/localhost.crt:ro \
