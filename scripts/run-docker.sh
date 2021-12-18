@@ -5,4 +5,4 @@ docker run --rm \
   -p 0.0.0.0:443:443/udp \
   -v "$PWD/static":/usr/share/nginx/html/ \
  --name nginx-brotli \
-  -t nginx-brotli
+  -t nginx-brotli -d
