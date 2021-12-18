@@ -104,7 +104,7 @@ jobs:
     
     - run: npm ci
     - run: npm run build
-    - run: sudo rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --omit-dir-times --no-perms --delete . clown@drip.monkeys.team:~/../fro/static/
+    - run: sudo rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --omit-dir-times --no-perms --delete . root@drip.monkeys.team:~/../home/fro/
     
     - name: send telegram message on push
       uses: appleboy/telegram-action@master
