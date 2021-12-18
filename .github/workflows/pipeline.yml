@@ -100,11 +100,19 @@ jobs:
            mkdir "$HOME/.ssh" &&
            echo "${{ secrets.DEPLOYMENT_KEY }}" > "$HOME/.ssh/key" &&
            chmod 600 "$HOME/.ssh/key"
-
     
-    - run: npm ci
-    - run: npm run build
-    - run: sudo rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --omit-dir-times --no-perms --delete . root@drip.monkeys.team:~/../home/fro/
+    - name: Update SSL keys
+      run: echo "${{secrets.SSL_KEY}}" > star.monkeys.team.key &&
+           echo "${{secrets.SSL_CRT}}" > star.monkeys.team.crt
+  
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build
+      run: npm run build
+    
+    - name: Send to server
+      run: sudo rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --omit-dir-times --no-perms --delete . root@drip.monkeys.team:~/../home/fro/
     
     - name: send telegram message on push
       uses: appleboy/telegram-action@master
