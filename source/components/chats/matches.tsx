@@ -1,3 +1,4 @@
+import { MatchesStore } from 'store/matchStore.js';
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import { MatchProfile } from './matchProfile.js';
 

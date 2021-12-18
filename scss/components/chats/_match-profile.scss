@@ -1,5 +1,5 @@
 $profile-photo-size: 96px;
-$profile-size: 114px;
+$profile-size: 126px;
 
 .match-profile {
   display: flex;
@@ -22,8 +22,14 @@ $profile-size: 114px;
   border-radius: $border-radius-default;
 }
 
+.match-profile__match-img_bordered {
+  border: 3px solid #f25f5c;
+}
+
 .match-profile__match-name {
   font-size: $font-size-tiny;
 
   color: #ffffff;
+
+  margin-top: 6px;
 }

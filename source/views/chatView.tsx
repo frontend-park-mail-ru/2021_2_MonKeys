@@ -7,6 +7,8 @@ import { ChatsStore, chatsManager } from '../store/chatsStore.js';
 import ReportsStore from '../store/reportsStore.js';
 import { CardExpended } from '../components/card/cardExpended.js';
 import { Errors } from '../components/error/errors.js';
+import { EVENTS } from '../dispatcher/events.js';
+import EventBus from '../dispatcher/eventBus.js';
 
 export default class ChatView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -44,6 +46,10 @@ export default class ChatView extends ViewBase {
                 <div class='app__content--align-center'>
                     <div class='profile'>
                         <div class='profile__card'>
+                            <button type='button' onclick={() => {EventBus.dispatch<number>(EVENTS.CHAT_BACK_TO_CHAT_BUTTON, data.chat.profile.id);}} class='back-button'>
+                                <img src='icons/back.svg' class='back-button__icon-medium' />
+                                <span class='back-button__text'>Назад</span>
+                            </button>
                             {CardExpended({
                                 userData: data.chat.profile,
                                 withActions: false,

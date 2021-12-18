@@ -15,6 +15,8 @@ import { Matches } from '../components/chats/matches.js';
 import { CardExpended } from '../components/card/cardExpended.js';
 import { Chat } from '../components/chat/chat.js';
 import ReportsStore from '../store/reportsStore.js';
+import { EVENTS } from '../dispatcher/events.js';
+import EventBus from '../dispatcher/eventBus.js';
 
 export default class ChatsWideView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -30,6 +32,17 @@ export default class ChatsWideView extends ViewBase {
         matchRequest().then((data) => {
             const matchesData = MatchesStore.get();
             matchesData.matches = data.body.allUsers;
+            for (let key in matchesData.matches) {
+                matchesData.matches[key].isNew = true;
+            }
+            const chatsData = ChatsStore.get();
+            for (let i = 0; i < chatsData.chats.length; i++) {
+                for (let key in matchesData.matches) {
+                    if (matchesData.matches[key].id === chatsData.chats[i].fromUserID) {
+                        matchesData.matches[key].isNew = false;
+                    }
+                }
+            }
             matchesData.matchesTotal = data.body.matchesCount;
             MatchesStore.set(matchesData);
         });
@@ -57,6 +70,10 @@ export default class ChatsWideView extends ViewBase {
         if (data.chat && data.chat.profile && data.chat.isOpenedProfile) {
             profile = (
                 <div>
+                    <button type='button' onclick={() => {EventBus.dispatch<number>(EVENTS.CHAT_BACK_TO_CHAT_BUTTON, data.chat.profile.id);}} class='back-button'>
+                        <img src='icons/dislike.svg' class='back-button__icon-small' />
+                        <span class='back-button__text'>Скрыть</span>
+                    </button>
                     {CardExpended({
                         userData: data.chat.profile,
                         withActions: false,

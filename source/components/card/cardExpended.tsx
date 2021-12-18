@@ -62,14 +62,9 @@ export const CardExpended = (props: CardExpendedProps) => {
         EventBus.dispatch<string>(EVENTS.REPORTS_REPORT_BUTTON);
     };
     const reportButtonTmpl = props.withReports ? (
-        <div class='card-expended__report-button'>
-            {Button({
-                type: 'button',
-                text: 'Пожаловаться',
-                class: 'button-black-big button-black-big_margin-bottom',
-                onclick: reportButtonAction,
-            })}
-        </div>
+        <button type='button' onclick={reportButtonAction} class='report-button'>
+            <span class='report-button__text'>Пожаловаться</span>
+        </button>
     ) : (
         <div></div>
     );
@@ -81,18 +76,6 @@ export const CardExpended = (props: CardExpendedProps) => {
     const backProfileButtonClick = () => {
         EventBus.dispatch<number>(EVENTS.CHAT_BACK_TO_CHAT_BUTTON, props.userData.id);
     };
-    const backProfileButton = props.withBackButton ? (
-        <div class='card-expended__back-button'>
-            {Button({
-                type: 'button',
-                text: 'Скрыть',
-                class: 'button-white-big',
-                onclick: backProfileButtonClick,
-            })}
-        </div>
-    ) : (
-        <div></div>
-    );
     if (props.chats) {
         return (
             <div class='card-expended card-expended-chats-wide'>
@@ -101,7 +84,6 @@ export const CardExpended = (props: CardExpendedProps) => {
                     {imgTmpl}
                     {descField}
                     {tagField}
-                    {backProfileButton}
                     {reportButtonTmpl}
                 </div>
             </div>
@@ -114,7 +96,6 @@ export const CardExpended = (props: CardExpendedProps) => {
                 {imgTmpl}
                 {descField}
                 {tagField}
-                {backProfileButton}
                 {reportButtonTmpl}
             </div>
         </div>

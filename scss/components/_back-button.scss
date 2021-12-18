@@ -1,0 +1,28 @@
+.back-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  margin-left: 12px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+
+  background: transparent;
+}
+
+.back-button__icon-medium{
+  max-height: 24px;
+  max-height: 24px;
+}
+
+.back-button__icon-small {
+  max-width: 18px;
+  max-height: 18px;
+}
+
+.back-button__text {
+  font-size: $font-size-small;
+  color: $white;
+
+  margin-left: 6px;
+}

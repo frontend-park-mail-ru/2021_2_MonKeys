@@ -10,6 +10,7 @@ $card-expanded-img-default-height: 100%;
   width: 100%;
   flex: 1 1 auto;
   position: relative;
+  margin-bottom: 12px;
 }
 
 .card-expended-chats-wide {
@@ -47,20 +48,14 @@ $card-expanded-img-default-height: 100%;
   color: #ffffff;
 }
 
-.card-expended__back-button {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
+// .card-expended__back-button {
+//   display: flex;
+//   justify-content: center;
+//   width: 100%;
+// }
 
 .card-expended__report-button {
   display: flex;
   justify-content: center;
   width: 100%;
-}
-
-.report-window__problems-buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }

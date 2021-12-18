@@ -52,7 +52,7 @@ export namespace MonkeysVirtualDOM {
         }
         virtualNode.props &&
             Object.keys(virtualNode.props).forEach((key) => {
-                if (key === 'name' && (virtualNode.props[key] === 'error' || virtualNode.props[key] === 'tag')) {
+                if (key === 'name' && virtualNode.props[key] === 'tag') {
                     rootElement.style.transition = '1s';
                 }
                 if (key === 'type' && virtualNode.props[key] === 'date') {
