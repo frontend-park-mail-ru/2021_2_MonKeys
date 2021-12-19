@@ -3,7 +3,7 @@ import { viewSizes } from '../constants/viewParams.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { Tapbar } from '../components/tapbar/tapbar.js';
-import { MatchesStore, MatchesProfile } from '../store/matchStore.js';
+import { MatchesStore } from '../store/matchStore.js';
 import TapbarStore from '../store/tapbarStore.js';
 import { Chats } from '../components/chats/chats.js';
 import { ChatsStore, chatsManager } from '../store/chatsStore.js';
@@ -25,12 +25,12 @@ export default class ChatsView extends ViewBase {
         matchRequest().then((data) => {
             const matchesData = MatchesStore.get();
             matchesData.matches = data.body.allUsers;
-            for (let key in matchesData.matches) {
+            for (const key in matchesData.matches) {
                 matchesData.matches[key].isNew = true;
             }
             const chatsData = ChatsStore.get();
             for (let i = 0; i < chatsData.chats.length; i++) {
-                for (let key in matchesData.matches) {
+                for (const key in matchesData.matches) {
                     if (matchesData.matches[key].id === chatsData.chats[i].fromUserID) {
                         matchesData.matches[key].isNew = false;
                     }

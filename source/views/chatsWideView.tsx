@@ -32,12 +32,12 @@ export default class ChatsWideView extends ViewBase {
         matchRequest().then((data) => {
             const matchesData = MatchesStore.get();
             matchesData.matches = data.body.allUsers;
-            for (let key in matchesData.matches) {
+            for (const key in matchesData.matches) {
                 matchesData.matches[key].isNew = true;
             }
             const chatsData = ChatsStore.get();
             for (let i = 0; i < chatsData.chats.length; i++) {
-                for (let key in matchesData.matches) {
+                for (const key in matchesData.matches) {
                     if (matchesData.matches[key].id === chatsData.chats[i].fromUserID) {
                         matchesData.matches[key].isNew = false;
                     }
@@ -70,7 +70,13 @@ export default class ChatsWideView extends ViewBase {
         if (data.chat && data.chat.profile && data.chat.isOpenedProfile) {
             profile = (
                 <div>
-                    <button type='button' onclick={() => {EventBus.dispatch<number>(EVENTS.CHAT_BACK_TO_CHAT_BUTTON, data.chat.profile.id);}} class='back-button'>
+                    <button
+                        type='button'
+                        onclick={() => {
+                            EventBus.dispatch<number>(EVENTS.CHAT_BACK_TO_CHAT_BUTTON, data.chat.profile.id);
+                        }}
+                        class='back-button'
+                    >
                         <img src='icons/dislike.svg' class='back-button__icon-small' />
                         <span class='back-button__text'>Скрыть</span>
                     </button>

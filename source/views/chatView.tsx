@@ -46,7 +46,13 @@ export default class ChatView extends ViewBase {
                 <div class='app__content--align-center'>
                     <div class='profile'>
                         <div class='profile__card'>
-                            <button type='button' onclick={() => {EventBus.dispatch<number>(EVENTS.CHAT_BACK_TO_CHAT_BUTTON, data.chat.profile.id);}} class='back-button'>
+                            <button
+                                type='button'
+                                onclick={() => {
+                                    EventBus.dispatch<number>(EVENTS.CHAT_BACK_TO_CHAT_BUTTON, data.chat.profile.id);
+                                }}
+                                class='back-button'
+                            >
                                 <img src='icons/back.svg' class='back-button__icon-medium' />
                                 <span class='back-button__text'>Назад</span>
                             </button>

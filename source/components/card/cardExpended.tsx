@@ -6,7 +6,6 @@ import { Tag } from '../common/tag.js';
 import { ProfileData } from '../../store/profileStore.js';
 
 import { ImgCard } from './imgCard.js';
-import { Button } from '../common/button.js';
 import { ReportWindow } from '../report/reportWindow.js';
 import { EVENTS } from '../../dispatcher/events.js';
 
@@ -73,9 +72,6 @@ export const CardExpended = (props: CardExpendedProps) => {
     ) : (
         <div></div>
     );
-    const backProfileButtonClick = () => {
-        EventBus.dispatch<number>(EVENTS.CHAT_BACK_TO_CHAT_BUTTON, props.userData.id);
-    };
     if (props.chats) {
         return (
             <div class='card-expended card-expended-chats-wide'>
