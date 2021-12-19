@@ -86,18 +86,21 @@ export default class LikesView extends ViewBase {
                                 price: smallPeriodPrice,
                                 class: LikesStore.get().card150Class,
                                 iconSrc: 'icons/heart_gradient.svg',
+                                iconSize: 'small',
                             })}
                             {PaymentCard({
                                 period: mediumPeriod,
                                 price: mediumPeriodPrice,
                                 class: LikesStore.get().card350Class,
                                 iconSrc: 'icons/several_hearts_gradient.svg',
+                                iconSize: 'medium',
                             })}
                             {PaymentCard({
                                 period: bigPeriod,
                                 price: bigPeriodPrice,
                                 class: LikesStore.get().card650Class,
                                 iconSrc: 'icons/lot_hearts_gradient.svg',
+                                iconSize: 'big',
                             })}
                             {Button(data.paymentButton)}
                         </div>

@@ -20,6 +20,7 @@ $profile-size: 126px;
   object-fit: cover;
 
   border-radius: $border-radius-default;
+  border: 3px solid transparent;
 }
 
 .match-profile__match-img_bordered {
