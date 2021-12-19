@@ -26,3 +26,37 @@
   margin: 0 $margin-small;
   padding: 0;
 }
+
+.field-gender {
+  display: flex;
+  align-items: center;
+}
+
+.field-gender__title {
+  color: white;
+  font-size: 18px;
+  white-space: nowrap;
+
+  margin: 0 $margin-small;
+}
+
+.field-gender__tag {
+  width: 60px;
+  margin: $margin-small;
+}
+
+.field-description {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-description__text {
+  height: 144px;
+  width: calc(100% - 2 * $margin-small);
+  font-weight: bold;
+  color: white;
+  font-size: $font-size-tiny;
+
+  margin: $margin-small;
+  padding: 0;
+}

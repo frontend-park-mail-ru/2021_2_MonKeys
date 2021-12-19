@@ -35,13 +35,11 @@
   margin-right: 36px;
 }
 
-.edit__scroll {
-  overflow-y: scroll;
-}
-
 .edit__form {
   width: 100%;
   flex: 1 1 auto;
+
+  overflow-y: scroll;
 
   display: flex;
   flex-direction: column;

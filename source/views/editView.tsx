@@ -2,18 +2,11 @@ import ViewBase from './viewBase.js';
 import { viewSizes } from '../constants/viewParams.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { EditForm } from '../components/edit/editForm.js';
-import { EditStore } from '../store/editStore.js';
+import { EditStore, Gender } from '../store/editStore.js';
 import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
-import {
-    errorNameMsg,
-    errorAgeMsg,
-    errorImgMsg,
-    errorEditFormMsg,
-    errorGenderMsg,
-    errorPreferMsg,
-} from '../constants/errorMsg.js';
+import { errorImgMsg, errorEditFormMsg, errorPreferMsg } from '../constants/errorMsg.js';
 import { Errors } from '../components/error/errors.js';
 import router from '../route/router.js';
 import { Button } from '../components/common/button.js';
@@ -32,12 +25,10 @@ export default class EditView extends ViewBase {
         const editStore = EditStore.get();
         switch (storeData.gender) {
             case 'male':
-                editStore.genderField.items[0].selected = true;
-                editStore.genderField.items[1].selected = false;
+                editStore.gender = Gender.Male;
                 break;
             case 'female':
-                editStore.genderField.items[1].selected = true;
-                editStore.genderField.items[0].selected = false;
+                editStore.gender = Gender.Female;
                 break;
         }
         switch (storeData.prefer) {
@@ -70,30 +61,19 @@ export default class EditView extends ViewBase {
                     name: ProfileStore.get().name,
                     status: EditStore.get().nameFieldStatus,
                 },
-                'genderField': EditStore.get().genderField,
+                dateField: {
+                    date: ProfileStore.get().date,
+                    status: EditStore.get().birthDateFieldStatus,
+                },
+                genderField: {
+                    gender: EditStore.get().gender,
+                    status: EditStore.get().genderFieldStatus,
+                },
+                descriptionField: {
+                    description: ProfileStore.get().description,
+                },
                 'tagsField': EditStore.get().tagsField,
                 'preferField': EditStore.get().preferField,
-                'birthDate': {
-                    tag: 'input',
-                    type: 'date',
-                    value: ProfileStore.get().date,
-                    class: EditStore.get().birthDateFieldClass,
-                    name: 'birthDate',
-                    iconSrc: 'icons/calendar.svg',
-                    oninput: () => {
-                        EventBus.dispatch<string>(EVENTS.EDIT_BIRTH_DATE_INPUT);
-                    },
-                    onfocusout: () => {
-                        EventBus.dispatch<string>(EVENTS.EDIT_BIRTH_DATE_FOCUSOUT);
-                    },
-                },
-                'description': {
-                    tag: 'textarea',
-                    placeholder: 'Расскажите о себе',
-                    value: ProfileStore.get().description,
-                    name: 'description',
-                    class: 'form__field-valid form__field-valid-desc',
-                },
                 'img': {
                     class: EditStore.get().imgFieldClass,
                 },
@@ -132,14 +112,6 @@ export default class EditView extends ViewBase {
                 },
             },
             'errorMsgs': {
-                'ageError': {
-                    text: errorAgeMsg,
-                    class: EditStore.get().birthDateErrorClass,
-                },
-                'genderError': {
-                    text: errorGenderMsg,
-                    class: EditStore.get().genderErrorClass,
-                },
                 'preferError': {
                     text: errorPreferMsg,
                     class: EditStore.get().preferErrorClass,
@@ -198,19 +170,21 @@ export default class EditView extends ViewBase {
         view._data.editForm.fields.nameField.name = ProfileStore.get().name;
         view._data.editForm.fields.nameField.status = EditStore.get().nameFieldStatus;
 
-        view._data.editForm.fields.birthDate.class = data.birthDateFieldClass;
+        view._data.editForm.fields.dateField.date = ProfileStore.get().date;
+        view._data.editForm.fields.dateField.status = EditStore.get().birthDateFieldStatus;
+
+        view._data.editForm.fields.genderField.gender = EditStore.get().gender;
+        view._data.editForm.fields.genderField.status = EditStore.get().genderFieldStatus;
+
+        view._data.editForm.fields.descriptionField.description = ProfileStore.get().description;
+
         view._data.editForm.fields.img.class = data.imgFieldClass;
-        view._data.editForm.errorMsgs.ageError.class = data.birthDateErrorClass;
         view._data.editForm.errorMsgs.imgError.class = data.imgErrorClass;
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
         view._data.editForm.tags = data.tags;
-        view._data.editForm.fields.birthDate.value = ProfileStore.get().date;
-        view._data.editForm.fields.description.value = ProfileStore.get().description;
 
-        view._data.editForm.fields.genderField = data.genderField;
         view._data.editForm.fields.preferField = data.preferField;
         view._data.editForm.fields.tagsField = data.tagsField;
-        view._data.editForm.errorMsgs.genderError.class = data.genderErrorClass;
         view._data.editForm.errorMsgs.preferError.class = data.preferErrorClass;
 
         view._template = view._createTmpl(view._data);

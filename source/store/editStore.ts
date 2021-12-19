@@ -4,15 +4,11 @@ import { EVENTS } from '../dispatcher/events.js';
 export interface EditData {
     nameFieldStatus: number;
     birthDateFieldStatus: number;
+    genderFieldStatus: number;
     imgFieldStatus: number;
 
-    birthDateFieldClass: string;
-    birthDateErrorClass: string;
-    formErrorClass: string;
-    imgFieldClass: string;
-    imgErrorClass: string;
-    genderField?: ItemListProps;
-    genderErrorClass?: string;
+    gender: number;
+
     preferField?: ItemListProps;
     preferErrorClass?: string;
     tagsField?: ItemListProps;
@@ -27,37 +23,20 @@ export namespace FieldStatus {
     export const Error = 2;
 }
 
+export namespace Gender {
+    export const NotSelected = 0;
+    export const Male = 1;
+    export const Female = 2;
+}
+
 const initData = {
     nameFieldStatus: FieldStatus.Correct,
     birthDateFieldStatus: FieldStatus.Correct,
+    genderFieldStatus: FieldStatus.Correct,
     imgFieldStatus: FieldStatus.Correct,
 
-    birthDateFieldClass: 'form__field-valid',
-    birthDateErrorClass: 'error-inactive',
-    imgFieldClass: 'add-img-box',
-    imgErrorClass: 'error-inactive',
-    genderErrorClass: 'error-inactive',
-    preferErrorClass: 'error-inactive',
-    formErrorClass: 'error-inactive',
-    genderField: {
-        title: 'Ваш пол',
-        valid: true,
-        open: true,
-        openable: false,
-        items: [
-            {
-                value: 'Мужчина',
-                selected: false,
-                clickEvent: EVENTS.EDIT_GENDER_MALE_CLICK,
-            },
-            {
-                value: 'Женщина',
-                selected: false,
-                clickEvent: EVENTS.EDIT_GENDER_FEMALE_CLICK,
-            },
-        ],
-        buttonEvent: 99999999,
-    },
+    gender: Gender.NotSelected,
+
     preferField: {
         title: 'Кого вы ищете',
         valid: true,
