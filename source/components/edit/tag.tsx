@@ -5,22 +5,22 @@ export interface TagData {
     selected: boolean;
     value: string;
     clickEvent: number;
-    class: string;
+    class?: string;
 }
 
 export const Tag = (data: TagData) => {
     const props = {
         class: data.selected ? 'list-item-selected' : 'list-item-deselected',
         onclick: () => {
-            eventBus.dispatch(data.clickEvent);
+            eventBus.dispatch(data.clickEvent, data.value);
         },
     };
 
     props.class += ' ' + data.class;
 
     return (
-        <span name='tag' class={props.class} onclick={props.onclick}>
+        <div name='tag' class={props.class} onclick={props.onclick}>
             {data.value}
-        </span>
+        </div>
     );
 };

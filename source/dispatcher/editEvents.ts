@@ -147,26 +147,17 @@ export const EditEventRegister = () => {
         }
     });
     EventBus.register(EVENTS.EDIT_TAGS_CLICK, () => {
-        const storeData = EditStore.get();
-        if (ProfileStore.get().tags) {
-            const tags = [];
-            ProfileStore.get().tags.forEach((v) => tags.push(v));
-            storeData.tagsField.items.filter((element) => {
-                if (tags.indexOf(element.value) !== -1) {
-                    element.selected = true;
-                }
-            });
-        }
-        storeData.tagsField.open = !storeData.tagsField.open;
-        EditStore.set(storeData);
+        const editStore = EditStore.get();
+        editStore.tagsField.open = !editStore.tagsField.open;
+        EditStore.set(editStore);
     });
-    EventBus.register(EVENTS.EDIT_TAG_CLICK, (payload?: string) => {
-        const storeData = EditStore.get();
+    EventBus.register(EVENTS.EDIT_TAG_CLICK, (tag: string) => {
+        const editStore = EditStore.get();
 
-        storeData.tagsField.items.filter((element) => {
-            if (element.value === payload) {
+        editStore.tagsField.tags.forEach((element) => {
+            if (element.tag === tag) {
                 element.selected = !element.selected;
-                EditStore.set(storeData);
+                EditStore.set(editStore);
                 return;
             }
         });

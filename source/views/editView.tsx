@@ -21,9 +21,9 @@ export default class EditView extends ViewBase {
         ProfileStore.subscribe(this.subcribtionCallbackProfile, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
 
-        const storeData = ProfileStore.get();
+        const profileStore = ProfileStore.get();
         const editStore = EditStore.get();
-        switch (storeData.gender) {
+        switch (profileStore.gender) {
             case 'male':
                 editStore.gender = Gender.Male;
                 break;
@@ -31,7 +31,16 @@ export default class EditView extends ViewBase {
                 editStore.gender = Gender.Female;
                 break;
         }
-        switch (storeData.prefer) {
+        editStore.tagsField.tags.forEach((tag) => {
+            tag.selected = false;
+            profileStore.tags.forEach((activeTag) => {
+                if (tag.tag === activeTag) {
+                    tag.selected = true;
+                }
+            });
+        });
+
+        switch (profileStore.prefer) {
             case 'male':
                 editStore.preferField.items[0].selected = true;
                 editStore.preferField.items[1].selected = false;
@@ -72,7 +81,9 @@ export default class EditView extends ViewBase {
                 descriptionField: {
                     description: ProfileStore.get().description,
                 },
-                'tagsField': EditStore.get().tagsField,
+                tagsField: {
+                    tags: EditStore.get().tagsField,
+                },
                 'preferField': EditStore.get().preferField,
                 'img': {
                     class: EditStore.get().imgFieldClass,

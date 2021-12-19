@@ -1,5 +1,8 @@
 
 .form__element {
+  margin: $margin-small 0;
+
+  transition: all 1s;
 }
 
 @mixin form-field($color) {
@@ -34,11 +37,12 @@
 
 .field-gender__title {
   color: white;
-  font-size: 18px;
+  font-size: $font-size-small;
   white-space: nowrap;
 
   margin: 0 $margin-small;
 }
+
 
 .field-gender__tag {
   width: 60px;
@@ -59,4 +63,37 @@
 
   margin: $margin-small;
   padding: 0;
+}
+
+.field-tags {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-tags__title {
+  margin: $margin-small;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.field-tags__title-text {
+  font-size: $font-size-small;
+}
+
+.field-tags__expend-icon {
+  height: 18px;
+  width: 18px;
+}
+
+.field-tags__tags {
+  margin: 0 $margin-small $margin-small;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.field-tags__tag {
+  margin: $margin-smallest;
 }

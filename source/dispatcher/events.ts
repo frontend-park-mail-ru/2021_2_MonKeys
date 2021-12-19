@@ -110,6 +110,12 @@ export const InitBus = () => {
                 AuthStore.set({
                     loggedIn: userStatus.loggedIn,
                 });
+                if (!profile.tags) {
+                    profile.tags = new Set(); // TODO почему бэк не возвращает тэги??
+                    profile.tags.add('аниме');
+                    profile.tags.add('спорт');
+                    profile.tags.add('игры');
+                }
                 ProfileStore.set(profile);
 
                 eventBus.dispatch(EVENTS.USER_DATA_REQUESTS);

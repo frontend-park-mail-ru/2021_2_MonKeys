@@ -1,6 +1,7 @@
 import { ItemListProps } from '../components/edit/itemList.js';
 import BaseStore from './storeBase.js';
 import { EVENTS } from '../dispatcher/events.js';
+
 export interface EditData {
     nameFieldStatus: number;
     birthDateFieldStatus: number;
@@ -9,9 +10,16 @@ export interface EditData {
 
     gender: number;
 
+    tagsField: {
+        open: boolean;
+        tags: {
+            tag: string;
+            selected: boolean;
+        }[];
+    };
+
     preferField?: ItemListProps;
     preferErrorClass?: string;
-    tagsField?: ItemListProps;
     tags?;
 }
 
@@ -37,6 +45,32 @@ const initData = {
 
     gender: Gender.NotSelected,
 
+    tagsField: {
+        open: false,
+        tags: [
+            {
+                tag: 'аниме',
+                selected: false,
+            },
+            {
+                tag: 'музыка',
+                selected: false,
+            },
+            {
+                tag: 'игры',
+                selected: false,
+            },
+            {
+                tag: 'наука',
+                selected: false,
+            },
+            {
+                tag: 'спорт',
+                selected: false,
+            },
+        ],
+    },
+
     preferField: {
         title: 'Кого вы ищете',
         valid: true,
@@ -60,41 +94,6 @@ const initData = {
             },
         ],
         buttonEvent: 999999999999,
-    },
-    tagsField: {
-        title: 'Интересы',
-        valid: true,
-        open: false,
-        openable: true,
-        alignCenter: true,
-        items: [
-            {
-                value: 'аниме',
-                selected: false,
-                clickEvent: EVENTS.EDIT_TAG_CLICK,
-            },
-            {
-                value: 'музыка',
-                selected: false,
-                clickEvent: EVENTS.EDIT_TAG_CLICK,
-            },
-            {
-                value: 'игры',
-                selected: false,
-                clickEvent: EVENTS.EDIT_TAG_CLICK,
-            },
-            {
-                value: 'наука',
-                selected: false,
-                clickEvent: EVENTS.EDIT_TAG_CLICK,
-            },
-            {
-                value: 'спорт',
-                selected: false,
-                clickEvent: EVENTS.EDIT_TAG_CLICK,
-            },
-        ],
-        buttonEvent: EVENTS.EDIT_TAGS_CLICK,
     },
 };
 

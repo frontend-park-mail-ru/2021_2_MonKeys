@@ -1,4 +1,5 @@
 import BaseStore from './storeBase.js';
+import * as stream from 'stream';
 
 export interface ProfileData {
     id?: number;
@@ -17,7 +18,10 @@ const ProfileStore = new BaseStore<ProfileData>();
 
 ProfileStore.set({
     imgs: [],
+    tags: new Set(),
     prefer: '',
 });
+
+console.log(ProfileStore);
 
 export { ProfileStore };

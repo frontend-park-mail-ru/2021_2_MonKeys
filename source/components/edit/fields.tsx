@@ -1,11 +1,12 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import { FormFieldInput, FormFieldInputProps } from './formFieldInput.js';
 import { ErrorMsg } from '../common/errorMsg.js';
-import { errorAgeMsg, errorGenderMsg, errorNameMsg } from '../../constants/errorMsg.js';
+import { errorAgeMsg, errorGenderMsg, errorNameMsg, notError } from '../../constants/errorMsg.js';
 import EventBus from '../../dispatcher/eventBus.js';
 import { EVENTS } from '../../dispatcher/events.js';
 import { FieldStatus, Gender } from '../../store/editStore.js';
 import { Tag } from './tag.js';
+import eventBus from '../../dispatcher/eventBus.js';
 
 export const NameField = (data) => {
     const nameProps: FormFieldInputProps = {
@@ -23,12 +24,12 @@ export const NameField = (data) => {
 
     const errorProps = {
         text: errorNameMsg,
-        class: 'error-inactive',
+        class: 'error-hidden',
     };
 
     switch (data.status) {
         case FieldStatus.Correct:
-            errorProps.class = 'error-inactive';
+            errorProps.text = '';
             break;
         case FieldStatus.Hint:
             errorProps.class = 'error-hint';
@@ -63,12 +64,12 @@ export const DateField = (data) => {
 
     const errorProps = {
         text: errorAgeMsg,
-        class: 'error-inactive',
+        class: 'error-hidden',
     };
 
     switch (data.status) {
         case FieldStatus.Correct:
-            errorProps.class = 'error-inactive';
+            errorProps.text = '';
             break;
         case FieldStatus.Hint:
             errorProps.class = 'error-hint';
@@ -104,12 +105,12 @@ export const GenderField = (data) => {
 
     const errorProps = {
         text: errorGenderMsg,
-        class: 'error-inactive',
+        class: 'error-hidden',
     };
 
     switch (data.status) {
         case FieldStatus.Correct:
-            errorProps.class = 'error-inactive';
+            errorProps.text = '';
             break;
         case FieldStatus.Hint:
             errorProps.class = 'error-hint';
@@ -141,11 +142,6 @@ export const DescriptionField = (data) => {
         class: 'form__field',
     };
 
-    const errorProps = {
-        text: 'необязательное поле',
-        class: 'error-inactive',
-    };
-
     return (
         <div class='form__element'>
             <div class='form__field field-description'>
@@ -159,7 +155,43 @@ export const DescriptionField = (data) => {
                     {data.description}
                 </textarea>
             </div>
-            {ErrorMsg(errorProps)}
+        </div>
+    );
+};
+
+export const TagsField = (data) => {
+    const tags = data.tags.map((tag) => {
+        return {
+            value: tag.tag,
+            selected: tag.selected,
+            clickEvent: EVENTS.EDIT_TAG_CLICK,
+            class: 'field-tags__tag',
+        };
+    });
+
+    const props = {
+        expend: {
+            src: data.open ? 'icons/shrink.svg' : 'icons/expand_big.svg',
+            onclick: () => {
+                eventBus.dispatch(EVENTS.EDIT_TAGS_CLICK);
+            },
+        },
+    };
+
+    let tagsTmpl = <div></div>;
+    if (data.open) {
+        tagsTmpl = <div class='field-tags__tags'>{tags.map((tag) => Tag(tag))}</div>;
+    }
+
+    return (
+        <div class='form__element'>
+            <div class='form__field field-tags'>
+                <div class='field-tags__title'>
+                    <span class='field-tags__title-text'>Интересы</span>
+                    <img class='field-tags__expend-icon' src={props.expend.src} onclick={props.expend.onclick} />
+                </div>
+                {tagsTmpl}
+            </div>
         </div>
     );
 };
