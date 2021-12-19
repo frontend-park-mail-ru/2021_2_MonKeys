@@ -65,23 +65,14 @@ export default class EditView extends ViewBase {
 
     _data = {
         editForm: {
-            'fields': {
+            fields: {
+                nameField: {
+                    name: ProfileStore.get().name,
+                    status: EditStore.get().nameFieldStatus,
+                },
                 'genderField': EditStore.get().genderField,
                 'tagsField': EditStore.get().tagsField,
                 'preferField': EditStore.get().preferField,
-                'name': {
-                    tag: 'textarea',
-                    placeholder: 'Имя',
-                    value: ProfileStore.get().name,
-                    name: 'userName',
-                    class: EditStore.get().nameFieldClass,
-                    oninput: () => {
-                        EventBus.dispatch<string>(EVENTS.EDIT_NAME_INPUT);
-                    },
-                    onfocusout: () => {
-                        EventBus.dispatch<string>(EVENTS.EDIT_NAME_FOCUSOUT);
-                    },
-                },
                 'birthDate': {
                     tag: 'input',
                     type: 'date',
@@ -141,10 +132,6 @@ export default class EditView extends ViewBase {
                 },
             },
             'errorMsgs': {
-                'nameError': {
-                    text: errorNameMsg,
-                    class: EditStore.get().nameErrorClass,
-                },
                 'ageError': {
                     text: errorAgeMsg,
                     class: EditStore.get().birthDateErrorClass,
@@ -193,7 +180,7 @@ export default class EditView extends ViewBase {
                         {IconButton(data.actions.logoutButton)}
                         <span class='header-text edit__header-text'>Настройки</span>
                     </div>
-                    {EditForm(data.editForm)}
+                    {EditForm(data.editForm.fields)}
                     <div class='edit__manager'>{Button(data.editForm.buttons.saveButton)}</div>
                     {Errors(data.error)}
                 </div>
@@ -208,15 +195,15 @@ export default class EditView extends ViewBase {
     }
 
     private subcribtionCallbackEdit(data, view) {
-        view._data.editForm.fields.name.class = data.nameFieldClass;
+        view._data.editForm.fields.nameField.name = ProfileStore.get().name;
+        view._data.editForm.fields.nameField.status = EditStore.get().nameFieldStatus;
+
         view._data.editForm.fields.birthDate.class = data.birthDateFieldClass;
         view._data.editForm.fields.img.class = data.imgFieldClass;
-        view._data.editForm.errorMsgs.nameError.class = data.nameErrorClass;
         view._data.editForm.errorMsgs.ageError.class = data.birthDateErrorClass;
         view._data.editForm.errorMsgs.imgError.class = data.imgErrorClass;
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
         view._data.editForm.tags = data.tags;
-        view._data.editForm.fields.name.value = ProfileStore.get().name;
         view._data.editForm.fields.birthDate.value = ProfileStore.get().date;
         view._data.editForm.fields.description.value = ProfileStore.get().description;
 

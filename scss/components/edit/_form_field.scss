@@ -1,0 +1,28 @@
+
+.form__element {
+}
+
+@mixin form-field($color) {
+  width: $form-field-width;
+  background: $color;
+  border-radius: 12px;
+}
+
+.form__field {
+  @include form-field($field-valid-color);
+}
+
+.form__field__invalid {
+  @include form-field($field-invalid-color);
+}
+
+.field__input {
+  font-weight: bold;
+  color: white;
+  font-size: $font-size-small;
+
+  height: 36px;
+
+  margin: 0 $margin-small;
+  padding: 0;
+}

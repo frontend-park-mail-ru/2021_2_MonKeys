@@ -5,7 +5,7 @@ import router from '../route/router.js';
 import { addPhotoToProfileRequest, deleteProfilePhotoRequest } from '../requests/profilePhotoRequest.js';
 import { editProfileRequest } from '../requests/profileRequest.js';
 import { tagsRequest } from '../requests/tagsRequest.js';
-import { EditStore } from '../store/editStore.js';
+import { EditStore, FieldStatus } from '../store/editStore.js';
 import { validDate, validImgType } from '../validation/edit.js';
 import { nameRegExp } from '../constants/validation.js';
 import { EVENTS } from './events.js';
@@ -19,41 +19,40 @@ export const EditEventRegister = () => {
 
         const testName = _nameInput.value.length !== 0 && nameRegExp.test(_nameInput.value);
 
-        const storeData = EditStore.get();
+        const editStore = EditStore.get();
 
         if (!testName) {
-            storeData.nameFieldClass = 'form__field-invalid';
-            storeData.nameErrorClass = 'error-active';
-            EditStore.set(storeData);
+            editStore.nameFieldStatus = FieldStatus.Error;
+            EditStore.set(editStore);
         }
 
         if (!validDate(_dateInput)) {
-            storeData.birthDateFieldClass = 'form__field-invalid';
-            storeData.birthDateErrorClass = 'error-active';
-            EditStore.set(storeData);
+            editStore.birthDateFieldClass = 'form__field-invalid';
+            editStore.birthDateErrorClass = 'error-active';
+            EditStore.set(editStore);
         }
 
-        const genderValid = !storeData.genderField.items[0].selected && !storeData.genderField.items[1].selected;
+        const genderValid = !editStore.genderField.items[0].selected && !editStore.genderField.items[1].selected;
         const preferValid =
-            !storeData.preferField.items[0].selected &&
-            !storeData.preferField.items[1].selected &&
-            !storeData.preferField.items[2].selected;
+            !editStore.preferField.items[0].selected &&
+            !editStore.preferField.items[1].selected &&
+            !editStore.preferField.items[2].selected;
 
         if (genderValid) {
-            storeData.genderErrorClass = 'error-active';
-            EditStore.set(storeData);
+            editStore.genderErrorClass = 'error-active';
+            EditStore.set(editStore);
         }
 
         if (preferValid) {
-            storeData.preferErrorClass = 'error-active';
-            EditStore.set(storeData);
+            editStore.preferErrorClass = 'error-active';
+            EditStore.set(editStore);
         }
 
         const photoPaths = ProfileStore.get().imgs;
 
         if (photoPaths == undefined || photoPaths.length === 0) {
-            storeData.imgFieldClass = 'add-img-box-novalid';
-            storeData.imgErrorClass = 'error-active';
+            editStore.imgFieldClass = 'add-img-box-novalid';
+            editStore.imgErrorClass = 'error-active';
         }
 
         if (
@@ -64,21 +63,19 @@ export const EditEventRegister = () => {
             genderValid ||
             preferValid
         ) {
-            storeData.formErrorClass = 'error-active';
-            EditStore.set(storeData);
+            editStore.formErrorClass = 'error-active';
+            EditStore.set(editStore);
             return;
         }
 
-        storeData.nameFieldClass = 'form__field-valid';
-        storeData.nameErrorClass = 'error-inactive';
-        storeData.birthDateFieldClass = 'form__field-valid';
-        storeData.birthDateErrorClass = 'error-inactive';
-        storeData.imgFieldClass = 'add-img-box';
-        storeData.imgErrorClass = 'error-inactive';
-        storeData.formErrorClass = 'error-inactive';
-        storeData.genderErrorClass = 'error-inactive';
-        storeData.preferErrorClass = 'error-inactive';
-        EditStore.set(storeData);
+        editStore.birthDateFieldClass = 'form__field-valid';
+        editStore.birthDateErrorClass = 'error-inactive';
+        editStore.imgFieldClass = 'add-img-box';
+        editStore.imgErrorClass = 'error-inactive';
+        editStore.formErrorClass = 'error-inactive';
+        editStore.genderErrorClass = 'error-inactive';
+        editStore.preferErrorClass = 'error-inactive';
+        EditStore.set(editStore);
 
         const name = _nameInput.value.trim();
         const date = _dateInput.value.trim();
@@ -86,21 +83,21 @@ export const EditEventRegister = () => {
         let userPrefer = '';
         const description = _descriptionInput.value.trim();
         const tags = new Array<string>();
-        storeData.tagsField.items.filter((element) => {
+        editStore.tagsField.items.filter((element) => {
             if (element.selected) {
                 tags.push(element.value);
             }
         });
 
-        if (storeData.genderField.items[0].selected) {
+        if (editStore.genderField.items[0].selected) {
             userGender = 'male';
         } else {
             userGender = 'female';
         }
 
-        if (storeData.preferField.items[0].selected) {
+        if (editStore.preferField.items[0].selected) {
             userPrefer = 'male';
-        } else if (storeData.preferField.items[1].selected) {
+        } else if (editStore.preferField.items[1].selected) {
             userPrefer = 'female';
         }
 
@@ -180,41 +177,33 @@ export const EditEventRegister = () => {
     EventBus.register(EVENTS.EDIT_NAME_INPUT, () => {
         const _nameInput = document.getElementsByTagName('input')[0];
 
-        const storeData = EditStore.get();
+        const editStore = EditStore.get();
 
         const test = _nameInput.value.length !== 0 && nameRegExp.test(_nameInput.value);
 
-        test ? (storeData.nameFieldClass = 'form__field-valid') : (storeData.nameFieldClass = 'form__field-invalid');
-        if (!test && storeData.nameErrorClass !== 'error-active') {
-            storeData.nameErrorClass = 'error-hint';
-        }
-        if (test && (storeData.nameErrorClass === 'error-active' || storeData.nameErrorClass === 'error-hint')) {
-            storeData.nameErrorClass = 'error-inactive';
+        if (!test) {
+            editStore.nameFieldStatus = FieldStatus.Hint;
+        } else {
+            editStore.nameFieldStatus = FieldStatus.Correct;
         }
 
-        if (storeData.nameErrorClass === 'error-active' || storeData.nameErrorClass === 'error-hint') {
-            storeData.formErrorClass = 'error-inactive';
-        }
-
-        EditStore.set(storeData);
+        EditStore.set(editStore);
     });
 
     EventBus.register(EVENTS.EDIT_NAME_FOCUSOUT, () => {
         const _nameInput = document.getElementsByTagName('input')[0];
 
-        const storeData = EditStore.get();
+        const editStore = EditStore.get();
 
         const test = _nameInput.value.length !== 0 && nameRegExp.test(_nameInput.value);
 
-        if (test) {
-            storeData.nameFieldClass = 'form__field-valid';
-            storeData.nameErrorClass = 'error-inactive';
+        if (!test) {
+            editStore.nameFieldStatus = FieldStatus.Error;
         } else {
-            storeData.nameFieldClass = 'form__field-invalid';
-            storeData.nameErrorClass = 'error-active';
+            editStore.nameFieldStatus = FieldStatus.Correct;
         }
 
-        EditStore.set(storeData);
+        EditStore.set(editStore);
     });
 
     EventBus.register(EVENTS.EDIT_BIRTH_DATE_INPUT, () => {

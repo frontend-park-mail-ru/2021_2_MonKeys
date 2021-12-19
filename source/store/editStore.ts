@@ -2,8 +2,10 @@ import { ItemListProps } from '../components/edit/itemList.js';
 import BaseStore from './storeBase.js';
 import { EVENTS } from '../dispatcher/events.js';
 export interface EditData {
-    nameFieldClass: string;
-    nameErrorClass: string;
+    nameFieldStatus: number;
+    birthDateFieldStatus: number;
+    imgFieldStatus: number;
+
     birthDateFieldClass: string;
     birthDateErrorClass: string;
     formErrorClass: string;
@@ -19,9 +21,17 @@ export interface EditData {
 
 const EditStore = new BaseStore<EditData>();
 
+export namespace FieldStatus {
+    export const Correct = 0;
+    export const Hint = 1;
+    export const Error = 2;
+}
+
 const initData = {
-    nameFieldClass: 'form__field-valid',
-    nameErrorClass: 'error-inactive',
+    nameFieldStatus: FieldStatus.Correct,
+    birthDateFieldStatus: FieldStatus.Correct,
+    imgFieldStatus: FieldStatus.Correct,
+
     birthDateFieldClass: 'form__field-valid',
     birthDateErrorClass: 'error-inactive',
     imgFieldClass: 'add-img-box',
