@@ -60,7 +60,7 @@ export default class LikesView extends ViewBase {
         paymentButton: {
             type: 'button',
             text: 'Оплатить',
-            class: 'button-white-small likes-payment__button',
+            class: 'button-white-big',
             onclick: () => {
                 eventBus.dispatch<string>(EVENTS.LIKES_PAYMENT);
             },

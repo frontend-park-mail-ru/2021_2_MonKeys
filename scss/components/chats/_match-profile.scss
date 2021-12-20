@@ -39,7 +39,9 @@ $profile-size: 126px;
   margin-top: 6px;
 }
 
-@keyframes anim {
+
+@media (min-height: 960px) {
+  @keyframes anim {
 	0%,
 	100% {
 		border-radius: 30% 70% 70% 30% / 30% 52% 48% 70%;
@@ -80,4 +82,21 @@ $profile-size: 126px;
 	90% {
 		border-radius: 20% 80% 20% 80% / 20% 80% 20% 80%;
 	}
+}
+}
+@media (max-height: 960px) {
+ @keyframes anim {
+	0%,
+	100% {
+		border-radius: 30% 70% 70% 30% / 30% 52% 48% 70%;
+	}
+
+	
+
+	50% {
+		border-radius: 100%;
+	}
+
+	
+}
 }

@@ -76,7 +76,6 @@ jobs:
     - name: Build
       run: tsc
   deploy:
-    needs: [build-rollup]
 
     runs-on: ubuntu-latest
 
