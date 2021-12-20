@@ -1,5 +1,4 @@
 import BaseStore from './storeBase.js';
-import * as stream from 'stream';
 
 export interface ProfileData {
     id?: number;

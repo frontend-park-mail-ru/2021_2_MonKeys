@@ -1,6 +1,4 @@
-import { ItemListProps } from '../components/edit/itemList.js';
 import BaseStore from './storeBase.js';
-import { EVENTS } from '../dispatcher/events.js';
 
 export interface EditData {
     nameFieldStatus: number;
