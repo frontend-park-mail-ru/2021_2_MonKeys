@@ -4,7 +4,7 @@ declare global {
     }
 }
 
-const baseURL = 'http://localhost/';
+const baseURL = 'https://drip.monkeys.team/';
 
 export const preloadImage = (imgURL: string) => {
     const img = new Image();
