@@ -14,7 +14,7 @@ const notError = {
     status: FieldStatus.Correct,
 };
 
-const BaseField = ({ fieldTmpl, classField = '', error = notError }) => {
+const BaseField = ({ fieldTmpl, classField = '', error = notError, anchor = '' }) => {
     const errorProps = {
         text: error.text,
         class: 'error-hidden',
@@ -36,7 +36,7 @@ const BaseField = ({ fieldTmpl, classField = '', error = notError }) => {
     }
 
     return (
-        <div class='form__element'>
+        <div class='form__element' id={anchor}>
             <div class={classField}>{fieldTmpl}</div>
             {ErrorMsg(errorProps)}
         </div>
@@ -44,6 +44,7 @@ const BaseField = ({ fieldTmpl, classField = '', error = notError }) => {
 };
 
 export const NameField = (data) => {
+    console.log(data);
     const nameProps: FormFieldInputProps = {
         oninput: () => {
             EventBus.dispatch<string>(EVENTS.EDIT_NAME_INPUT);
@@ -67,6 +68,7 @@ export const NameField = (data) => {
         fieldTmpl: FormFieldInput(nameProps),
         classField: '',
         error: error,
+        anchor: 'name',
     });
 };
 
@@ -94,6 +96,7 @@ export const DateField = (data) => {
         fieldTmpl: FormFieldInput(dateProps),
         classField: '',
         error: error,
+        anchor: 'date',
     });
 };
 
@@ -126,10 +129,12 @@ export const GenderField = (data) => {
         fieldTmpl: genderTmpl,
         classField: 'field-gender',
         error: error,
+        anchor: 'gender',
     });
 };
 
 export const DescriptionField = (data) => {
+    data.description = '';
     const descriptionTmpl = (
         <textarea
             class='field-description__text'
@@ -190,6 +195,7 @@ export const PreferField = (data) => {
             bodyClass: 'field__prefers',
         }),
         error: error,
+        anchor: 'prefer',
     });
 };
 
@@ -202,5 +208,6 @@ export const ImgsField = (data) => {
     return BaseField({
         fieldTmpl: ImgField(data.imgs),
         error: error,
+        anchor: 'imgs',
     });
 };

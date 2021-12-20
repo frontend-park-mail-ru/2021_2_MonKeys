@@ -11,8 +11,7 @@ export interface FormFieldInputProps {
 }
 
 export const FormFieldInput = (props: FormFieldInputProps) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const optionalValue = props.value ? `value=${props.value}` : '';
+    const optionalValue = props.value ? props.value : '';
     return (
         <input
             class={props.class}
@@ -21,7 +20,7 @@ export const FormFieldInput = (props: FormFieldInputProps) => {
             name={props.name}
             type={props.type}
             placeholder={props.placeholder}
-            optionalValue
+            value={optionalValue}
             autocomplete='off'
         />
     );

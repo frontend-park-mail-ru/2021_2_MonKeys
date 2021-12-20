@@ -7,6 +7,8 @@ import { validDate, validImgType } from '../validation/edit.js';
 import { nameRegExp } from '../constants/validation.js';
 import { EVENTS } from './events.js';
 import { errorManager } from '../store/errorStore.js';
+import { editProfileRequest } from '../requests/profileRequest.js';
+import router from '../route/router.js';
 
 export const EditEventRegister = () => {
     EventBus.register(EVENTS.EDIT_NAME_INPUT, () => {
@@ -74,11 +76,13 @@ export const EditEventRegister = () => {
     EventBus.register(EVENTS.EDIT_GENDER_MALE_CLICK, () => {
         const editData = EditStore.get();
         editData.gender = Gender.Male;
+        editData.genderFieldStatus = FieldStatus.Correct;
         EditStore.set(editData);
     });
     EventBus.register(EVENTS.EDIT_GENDER_FEMALE_CLICK, () => {
         const editData = EditStore.get();
         editData.gender = Gender.Female;
+        editData.genderFieldStatus = FieldStatus.Correct;
         EditStore.set(editData);
     });
 
@@ -127,6 +131,7 @@ export const EditEventRegister = () => {
                 prefer.selected = false;
             }
         });
+        editStore.preferFieldStatus = FieldStatus.Correct;
         EditStore.set(editStore);
     });
 
@@ -184,90 +189,103 @@ export const EditEventRegister = () => {
         });
     });
 
-    /*   EventBus.register(EVENTS.EDIT_SAVE_BUTTON, () => {
-        const _nameInput = document.getElementsByTagName('input')[0];
-        const _dateInput = document.getElementsByTagName('input')[1];
-        const _descriptionInput = document.getElementsByTagName('textarea')[0];
-
-        const testName = _nameInput.value.length !== 0 && nameRegExp.test(_nameInput.value);
-
+    EventBus.register(EVENTS.EDIT_SAVE_BUTTON, () => {
         const editStore = EditStore.get();
+        let validForm = true;
+        let goto = '';
+        const updateGoto = (anchor) => {
+            if (goto === '') goto = anchor;
+        };
 
+        // Name
+        const _nameInput = document.getElementsByTagName('input')[0];
+        const testName = _nameInput.value.length !== 0 && nameRegExp.test(_nameInput.value);
         if (!testName) {
             editStore.nameFieldStatus = FieldStatus.Error;
             EditStore.set(editStore);
+            validForm = false;
+            updateGoto('#name');
         }
+        const name = _nameInput.value.trim();
+        // ----
 
+        // Date
+        const _dateInput = document.getElementsByTagName('input')[1];
         if (!validDate(_dateInput)) {
             editStore.birthDateFieldStatus = FieldStatus.Error;
             EditStore.set(editStore);
+            validForm = false;
+            updateGoto('#date');
         }
-
-        const genderValid = !editStore.genderField.items[0].selected && !editStore.genderField.items[1].selected;
-        const preferValid =
-            !editStore.preferField.items[0].selected &&
-            !editStore.preferField.items[1].selected &&
-            !editStore.preferField.items[2].selected;
-
-        if (genderValid) {
-            editStore.genderErrorClass = 'error-active';
-            EditStore.set(editStore);
-        }
-
-        if (preferValid) {
-            editStore.preferErrorClass = 'error-active';
-            EditStore.set(editStore);
-        }
-
-        const photoPaths = ProfileStore.get().imgs;
-
-        if (photoPaths == undefined || photoPaths.length === 0) {
-            editStore.imgFieldClass = 'add-img-box-novalid';
-            editStore.imgErrorClass = 'error-active';
-        }
-
-        if (
-            !testName ||
-            !validDate(_dateInput) ||
-            photoPaths == undefined ||
-            photoPaths.length === 0 ||
-            genderValid ||
-            preferValid
-        ) {
-            editStore.formErrorClass = 'error-active';
-            EditStore.set(editStore);
-            return;
-        }
-
-        editStore.imgFieldClass = 'add-img-box';
-        editStore.imgErrorClass = 'error-inactive';
-        editStore.formErrorClass = 'error-inactive';
-        editStore.genderErrorClass = 'error-inactive';
-        editStore.preferErrorClass = 'error-inactive';
-        EditStore.set(editStore);
-
-        const name = _nameInput.value.trim();
         const date = _dateInput.value.trim();
+        // ----
+
+        // Gender
         let userGender = '';
-        let userPrefer = '';
+        switch (editStore.gender) {
+            case Gender.NotSelected:
+                editStore.genderFieldStatus = FieldStatus.Error;
+                EditStore.set(editStore);
+                validForm = false;
+                updateGoto('#gender');
+                break;
+            case Gender.Male:
+                userGender = 'male';
+                break;
+            case Gender.Female:
+                userGender = 'female';
+                break;
+        }
+        // ----
+
+        // Description
+        const _descriptionInput = document.getElementsByTagName('textarea')[0];
         const description = _descriptionInput.value.trim();
+        // ----
+
+        // Tags
         const tags = new Array<string>();
-        editStore.tagsField.items.filter((element) => {
-            if (element.selected) {
-                tags.push(element.value);
+        editStore.tagsField.tags.forEach((tag) => {
+            if (tag.selected) {
+                tags.push(tag.tag);
+            }
+        });
+        // ----
+
+        // Prefer
+        let userPrefer = '';
+        let preferValid = false;
+        editStore.preferField.prefers.forEach((prefer) => {
+            if (prefer.selected) {
+                preferValid = true;
+                userPrefer = prefer.value;
             }
         });
 
-        if (editStore.genderField.items[0].selected) {
-            userGender = 'male';
-        } else {
-            userGender = 'female';
+        if (!preferValid) {
+            editStore.preferFieldStatus = FieldStatus.Error;
+            EditStore.set(editStore);
+            validForm = false;
+            updateGoto('#prefer');
         }
+        // ----
 
-        if (editStore.preferField.items[0].selected) {
-            userPrefer = 'male';
-        } else if (editStore.preferField.items[1].selected) {
-            userPrefer = 'female';
+        // Imgs
+        const photoPaths = ProfileStore.get().imgs;
+        if (photoPaths == undefined || photoPaths.length === 0) {
+            editStore.imgFieldStatus = FieldStatus.Error;
+            EditStore.set(editStore);
+            validForm = false;
+            updateGoto('#imgs');
+        }
+        // ----
+
+        if (!validForm) {
+            document.querySelector(goto).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+            });
+            return;
         }
 
         editProfileRequest(name, userGender, userPrefer, date, description, photoPaths, tags).then((data) => {
@@ -275,8 +293,8 @@ export const EditEventRegister = () => {
                 throw 'bad response';
             }
 
-            EventBus.dispatch<string>(EVENTS.USER_COOKIE_REQUESTS);
+            EventBus.dispatch(EVENTS.USER_COOKIE_REQUESTS);
             router.go('/profile');
         });
-    });*/
+    });
 };

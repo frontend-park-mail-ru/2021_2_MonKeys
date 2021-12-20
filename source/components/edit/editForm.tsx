@@ -1,7 +1,7 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import { DateField, DescriptionField, GenderField, ImgsField, NameField, PreferField, TagsField } from './fields.js';
 
-export interface EditFormProps {
+export interface EditFormState {
     nameField;
     dateField;
     genderField;
@@ -11,16 +11,16 @@ export interface EditFormProps {
     imgsField;
 }
 
-export const EditForm = (props: EditFormProps) => {
+export const EditForm = (state: EditFormState) => {
     return (
         <form class='edit__form'>
-            {NameField(props.nameField)}
-            {DateField(props.dateField)}
-            {GenderField(props.genderField)}
-            {DescriptionField(props.descriptionField)}
-            {TagsField(props.tagsField)}
-            {PreferField(props.preferField)}
-            {ImgsField(props.imgsField)}
+            {NameField(state.nameField)}
+            {DateField(state.dateField)}
+            {GenderField(state.genderField)}
+            {DescriptionField(state.descriptionField)}
+            {TagsField(state.tagsField)}
+            {PreferField(state.preferField)}
+            {ImgsField(state.imgsField)}
             <div class='edit__save-button-space'></div>
         </form>
     );
