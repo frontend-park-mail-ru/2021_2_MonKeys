@@ -60,7 +60,7 @@ export default class LikesView extends ViewBase {
         paymentButton: {
             type: 'button',
             text: 'Оплатить',
-            class: 'button-white-small',
+            class: 'button-white-small likes-payment__button',
             onclick: () => {
                 eventBus.dispatch<string>(EVENTS.LIKES_PAYMENT);
             },
@@ -71,15 +71,12 @@ export default class LikesView extends ViewBase {
         // нет подписки
         if (!LikesStore.get().active) {
             return (
-                <div class='view-contant view-contant_align_center view-content_scroll-banned'>
-                    <div
-                        class='view-contant view-contant_align_center
-                    view-content_scroll-banned view-content__max-height'
-                    >
+                <div class='app__content--align-center'>
+                    <div class='likes-payment'>
                         <div class='likes-view-text-big'>
                             Вы можете оформить подписку, чтобы видеть, кому вы понравились
                         </div>
-                        <div class='view-content__dummy-payment-container'>
+                        <div class='likes__dummy-payment-container'>
                             {PaymentCard({
                                 period: smallPeriod,
                                 price: smallPeriodPrice,

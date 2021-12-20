@@ -21,6 +21,16 @@
   }
 }
 
+.likes-payment {
+  height: 100%;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: center;
+}
+
 .likes__profile {
   margin-top: $margin-small;
 }
