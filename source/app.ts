@@ -6,12 +6,18 @@ import { isWidescreen, startClientAspectRatio } from './utils/client.js';
 import { registerServiceWorker } from './service/serviceWorkerRegister.js';
 import { EVENTS } from './dispatcher/events.js';
 import '../scss/main.scss';
+import LoadingView from './views/loadingView.js';
+import { cacheInit } from './modules/cache.js';
 
 startClientAspectRatio();
 window.addEventListener('resize', isWidescreen);
 
 InitBus();
+cacheInit();
 
+const $root = document.getElementById('app');
+const currentView = new LoadingView($root);
+currentView.render();
 declare global {
     interface Window {
         currentDOM;
@@ -26,7 +32,7 @@ window.onpopstate = () => {
 EventBus.dispatch<string>(EVENTS.USER_COOKIE_REQUESTS);
 window.history.pushState('', '', window.location.pathname);
 
-registerServiceWorker();
+// registerServiceWorker();
 
 const percent = 0.01;
 const vh = window.innerHeight * percent;

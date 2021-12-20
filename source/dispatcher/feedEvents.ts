@@ -7,6 +7,7 @@ import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { requestMoreCardsThreshold } from '../constants/feed.js';
 import { resetCarousel } from '../modules/carousel.js';
 import { EVENTS } from './events.js';
+import { unloadImageList } from '../modules/cache.js';
 
 const animationThanLikeAndReset = () => {
     EventBus.dispatch(EVENTS.FEED_REACTION, reactions.like);
@@ -39,7 +40,7 @@ const animationThanLikeAndReset = () => {
 };
 
 const animationThanDislikeAndReset = () => {
-    EventBus.dispatch(EVENTS.FEED_REACTION, reactions.like);
+    EventBus.dispatch(EVENTS.FEED_REACTION, reactions.dislike);
     let card = document.querySelectorAll<HTMLElement>('.card')[0];
     if (!card) {
         card = document.querySelectorAll<HTMLElement>('.card-expended')[0];
@@ -73,7 +74,7 @@ export const FeedEventsRegister = () => {
         if (!card) {
             card = document.querySelectorAll<HTMLElement>('.card-expended')[0];
         }
-        card.style.animation = 'swipedRight 1s ease 1';
+        card.style.animation = 'swipedRight 0.5s ease 1';
         card.addEventListener('animationend', animationThanLikeAndReset);
     });
     EventBus.register(EVENTS.FEED_DISLIKE_BUTTON, () => {
@@ -81,24 +82,60 @@ export const FeedEventsRegister = () => {
         if (!card) {
             card = document.querySelectorAll<HTMLElement>('.card-expended')[0];
         }
-        card.style.animation = 'swipedLeft 1s ease 1';
+        card.style.animation = 'swipedLeft 0.5s ease 1';
         card.addEventListener('animationend', animationThanDislikeAndReset);
     });
     EventBus.register(EVENTS.FEED_EXPAND_BUTTON, () => {
         const data = feedStore.get();
-        data.expanded = true;
-        feedStore.set(data);
+        const cardImg = document.querySelectorAll<HTMLElement>('.card')[0];
+        const expand = document.querySelector<HTMLElement>('img[alt="expand"]');
+        expand.style.animation = 'rotate180 0.3s ease 1';
+        cardImg.style.animation = 'shrinkCardImg 0.3s ease 1';
+        cardImg.addEventListener('animationend', () => {
+            const cardImg = document.querySelectorAll<HTMLElement>('.card')[0];
+            const expand = document.querySelector<HTMLElement>('img[alt="expand"]');
+            if (expand) {
+                expand.style.animation = '';
+            }
+            if (cardImg) {
+                cardImg.style.animation = '';
+            }
+
+            data.expanded = true;
+            feedStore.set(data);
+        });
     });
     EventBus.register(EVENTS.FEED_SHRINK_BUTTON, () => {
         const data = feedStore.get();
-        data.expanded = false;
-        feedStore.set(data);
+        const shrink = document.querySelectorAll<HTMLElement>('.actions__button-shrink')[0];
+        const card = document.querySelectorAll<HTMLElement>('.img-card_size_medium')[0];
+        console.log(card);
+        card.style.animation = 'expandCardImg 0.3s ease 1';
+        shrink.style.animation = 'rotate180 0.3s ease 1';
+        card.addEventListener('animationend', () => {
+            const cardImg = document.querySelectorAll<HTMLElement>('.actions__button-shrink')[0];
+            const expand = document.querySelectorAll<HTMLElement>('.img-card_size_medium')[0];
+            if (expand) {
+                expand.style.animation = '';
+            }
+            if (cardImg) {
+                cardImg.style.animation = '';
+            }
+            data.expanded = false;
+            feedStore.set(data);
+        });
     });
 
     EventBus.register(EVENTS.FEED_REACTION, (reactionID) => {
         resetCarousel();
+        console.log(reactionID);
+        console.log(reactions.dislike);
         const data = feedStore.get();
         data.expanded = false;
+        if (reactionID === reactions.dislike) {
+            unloadImageList(data.profiles[data.counter].imgs);
+            console.log(data.profiles[data.counter].imgs);
+        }
         likesRequest(data.profiles[data.counter].id, reactionID).then((likesData) => {
             if (likesData.status !== HTTPSuccess) {
                 throw 'bad response';

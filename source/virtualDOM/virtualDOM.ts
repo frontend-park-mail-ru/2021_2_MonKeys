@@ -150,6 +150,16 @@ export namespace MonkeysVirtualDOM {
                 case 'updateProps': {
                     manipulation.oldChildVirtual.props &&
                         Object.keys(manipulation.oldChildVirtual.props).forEach((key) => {
+                            if (key === 'src') {
+                                console.log('SDASADASDAS');
+                                console.log(manipulation);
+                                if (
+                                    key === 'src' &&
+                                    manipulation.oldChildVirtual.props['src'] === manipulation.newChild.props['src']
+                                ) {
+                                    return;
+                                }
+                            }
                             if (key === 'route') {
                                 manipulation.oldChild.removeEventListener('click', () => {
                                     router.go(manipulation.oldChildVirtual.props[key]);

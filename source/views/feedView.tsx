@@ -62,6 +62,7 @@ export default class FeedView extends ViewBase {
                     type: 'button',
                     src: 'icons/expand_big.svg',
                     class: 'card-bottom-panel_actions_action',
+                    alt: 'expand',
                     onclick: () => {
                         eventBus.dispatch(EVENTS.FEED_EXPAND_BUTTON);
                     },
@@ -100,6 +101,7 @@ export default class FeedView extends ViewBase {
                 onclick: () => {
                     eventBus.dispatch(EVENTS.FEED_EXPAND_BUTTON);
                 },
+                alt: 'expand',
             };
 
             return (
@@ -119,6 +121,7 @@ export default class FeedView extends ViewBase {
                 onclick: () => {
                     eventBus.dispatch(EVENTS.FEED_SHRINK_BUTTON);
                 },
+                alt: 'shrink',
             };
             return (
                 <div class='app__content--align-center'>

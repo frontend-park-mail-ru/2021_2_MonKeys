@@ -66,6 +66,7 @@ export default class FeedWideView extends ViewBase {
                     type: 'button',
                     src: 'icons/expand_big.svg',
                     class: 'card-bottom-panel_actions_action',
+                    alt: 'expand',
                     onclick: () => {
                         eventBus.dispatch(EVENTS.FEED_EXPAND_BUTTON);
                     },
@@ -101,6 +102,7 @@ export default class FeedWideView extends ViewBase {
                 type: 'button',
                 src: 'icons/expand_big.svg',
                 class: 'card-bottom-panel_actions_action',
+                alt: 'expand',
                 onclick: () => {
                     eventBus.dispatch(EVENTS.FEED_EXPAND_BUTTON);
                 },
@@ -122,6 +124,7 @@ export default class FeedWideView extends ViewBase {
                 type: 'button',
                 src: 'icons/button_shrink_white.svg',
                 class: 'card-bottom-panel_actions_action',
+                alt: 'expand',
                 onclick: () => {
                     eventBus.dispatch(EVENTS.FEED_SHRINK_BUTTON);
                 },
@@ -130,7 +133,7 @@ export default class FeedWideView extends ViewBase {
                 <div class='flex-full'>
                     {Tapbar(data.tapbar, true)}
                     <div class='flex-wide-view-center'>
-                        <div class='flex-wide-feed'>
+                        <div class='flex-wide-view-center'>
                             <div class='feed'>
                                 {CardExpended(data.cardData)}
                                 {Errors(data.error)}
