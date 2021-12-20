@@ -137,6 +137,7 @@ export const InitBus = () => {
             matchesData.matchesTotal = data.body.matchesCount;
             MatchesStore.set(matchesData);
         });
+
         userLikesRequset().then((data) => {
             const likesData = LikesStore.get();
             likesData.profiles = data.body.allUsers;
