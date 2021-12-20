@@ -1,4 +1,26 @@
-.loading-bubble{
+
+
+.loading-container {
+	display: grid;
+	height: 100vh;
+	place-items: center; 
+}
+
+@media (max-height: 960px) {
+  .loading-bubble{
+    animation: loading_anim 2s infinite;
+	background: radial-gradient(circle at 0% 0%, hotpink, slateblue);
+	border-radius: 30% 70% 53% 47% / 26% 46% 54% 74%;
+	box-shadow: 0 -2vmin 4vmin LightPink inset, 0 1vmin 4vmin MediumPurple inset,
+		0 -2vmin 7vmin purple inset;
+	content: "";
+	
+	height: 50vmin;
+	width: 50vmin;
+}
+}
+@media (min-height: 960px) {
+  .loading-bubble{
     animation: loading_anim 2s infinite;
 	background: radial-gradient(circle at 0% 0%, hotpink, slateblue);
 	border-radius: 30% 70% 53% 47% / 26% 46% 54% 74%;
@@ -11,11 +33,7 @@
 	height: 50vmin;
 	width: 50vmin;
 }
-
-.loading-container {
-	display: grid;
-	height: 100vh;
-	place-items: center; 
+	
 }
 
 
