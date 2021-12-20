@@ -10,7 +10,6 @@ import { EVENTS } from './dispatcher/events.js';
 import LoadingView from './views/loadingView.js';
 import { cacheInit } from './modules/cache.js';
 
-
 startClientAspectRatio();
 window.addEventListener('resize', isWidescreen);
 
