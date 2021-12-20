@@ -81,13 +81,15 @@ export const LoginEventRegister = () => {
 
         const storeData = LoginStore.get();
 
-        const test = _emailInput.value.length === 0 || emailRegExp.test(_emailInput.value);
-        if (test) {
-            storeData.emailFieldClass = 'form__field-valid';
-            storeData.emailErrorClass = 'error-inactive';
-        } else {
-            storeData.emailFieldClass = 'form__field-invalid';
-            storeData.emailErrorClass = 'error-active';
+        if (_emailInput.value.length !== 0) {
+            const test = emailRegExp.test(_emailInput.value);
+            if (test) {
+                storeData.emailFieldClass = 'form__field-valid';
+                storeData.emailErrorClass = 'error-inactive';
+            } else {
+                storeData.emailFieldClass = 'form__field-invalid';
+                storeData.emailErrorClass = 'error-active';
+            }
         }
 
         LoginStore.set(storeData);
@@ -131,14 +133,16 @@ export const LoginEventRegister = () => {
 
         const storeData = LoginStore.get();
 
-        const test = _passwordInput.value.length === 0 || passwordRegExp.test(_passwordInput.value);
-        if (test) {
-            storeData.passwordFieldClass = 'form__field-valid';
-            storeData.passwordErrorClass = 'error-inactive';
-            storeData.passwordPass = true;
-        } else {
-            storeData.passwordFieldClass = 'form__field-invalid';
-            storeData.passwordErrorClass = 'error-active';
+        if (_passwordInput.value.length !== 0) {
+            const test = passwordRegExp.test(_passwordInput.value);
+            if (test) {
+                storeData.passwordFieldClass = 'form__field-valid';
+                storeData.passwordErrorClass = 'error-inactive';
+                storeData.passwordPass = true;
+            } else {
+                storeData.passwordFieldClass = 'form__field-invalid';
+                storeData.passwordErrorClass = 'error-active';
+            }
         }
 
         LoginStore.set(storeData);

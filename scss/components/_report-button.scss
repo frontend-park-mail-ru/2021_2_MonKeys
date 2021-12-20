@@ -1,0 +1,14 @@
+.report-button {
+  align-items: center;
+
+  width: 100%;
+
+  background: transparent;
+}
+
+.report-button__text {
+  font-size: $font-size-small;
+  color: $light-grey;
+
+  padding: 12px 0px;
+}

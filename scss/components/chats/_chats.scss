@@ -1,6 +1,6 @@
 $span-line-height: 42px;
 
-$match-min-height: 114px;
+$match-min-height: 138px;
 
 .chats {
   height: 100%;
@@ -38,10 +38,12 @@ $match-min-height: 114px;
   min-height: $match-min-height;
   display: flex;
   flex-direction: row;
+  align-items: center;
 
   overflow-x: scroll;
 
   margin-left: $margin-medium;
+  padding-left: 6px;
 }
 
 .chats__chats {

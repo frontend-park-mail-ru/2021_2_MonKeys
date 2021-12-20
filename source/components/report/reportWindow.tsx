@@ -22,7 +22,6 @@ export const ReportWindow = (props: reportWindowProps) => {
 
     return (
         <div class={'report-window' + reportedWindowModificator}>
-            <img src='icons/back.svg' class='report-window__button-back' onclick={backButtonAction} />
             <form class='report-window__problems-buttons'>
                 {Object.keys(props.reports).map((item) => ReportRadioButton({ report: props.reports[item] }))}
                 {Button({
@@ -30,6 +29,12 @@ export const ReportWindow = (props: reportWindowProps) => {
                     text: 'Заявить',
                     class: 'button-white-big',
                     onclick: submitButtonAction,
+                })}
+                {Button({
+                    type: 'button',
+                    text: 'Отмена',
+                    class: 'button-black-big',
+                    onclick: backButtonAction,
                 })}
             </form>
         </div>

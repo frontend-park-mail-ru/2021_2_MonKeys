@@ -20,3 +20,13 @@
   flex: 1 0 auto;
   max-height: calc(100vh - 168px - 66.4px);
 }
+
+.view-content__dummy-payment-container {
+  width: 100%;
+  flex: 1 0 auto;
+  max-height: calc(100vh - 168px - 66.4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

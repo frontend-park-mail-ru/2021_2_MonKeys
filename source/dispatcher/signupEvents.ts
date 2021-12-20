@@ -93,13 +93,15 @@ export const SignupEventRegister = () => {
 
         const storeData = SignupStore.get();
 
-        const test = _emailInput.value.length === 0 || emailRegExp.test(_emailInput.value);
-        if (test) {
-            storeData.emailFieldClass = 'form__field-valid';
-            storeData.emailErrorClass = 'error-inactive';
-        } else {
-            storeData.emailFieldClass = 'form__field-invalid';
-            storeData.emailErrorClass = 'error-active';
+        if (_emailInput.value.length !== 0) {
+            const test = emailRegExp.test(_emailInput.value);
+            if (test) {
+                storeData.emailFieldClass = 'form__field-valid';
+                storeData.emailErrorClass = 'error-inactive';
+            } else {
+                storeData.emailFieldClass = 'form__field-invalid';
+                storeData.emailErrorClass = 'error-active';
+            }
         }
 
         SignupStore.set(storeData);
@@ -107,6 +109,7 @@ export const SignupEventRegister = () => {
 
     EventBus.register(EVENTS.SIGNUP_PASSWORD_INPUT, () => {
         const _passwordInput = document.getElementsByTagName('input')[1];
+        const _repeatPasswordInput = document.getElementsByTagName('input')[2];
 
         const storeData = SignupStore.get();
 
@@ -132,6 +135,34 @@ export const SignupEventRegister = () => {
             storeData.formErrorClass = 'error-inactive';
         }
 
+        const testRepeat =
+            _passwordInput.value === _repeatPasswordInput.value || _repeatPasswordInput.value.length === 0;
+        console.log('test', testRepeat);
+        if (!testRepeat || !_repeatPasswordInput.value) {
+            storeData.repeatPasswordPass = false;
+        }
+        testRepeat
+            ? (storeData.repeatPasswordFieldClass = 'form__field-valid')
+            : (storeData.repeatPasswordFieldClass = 'form__field-invalid');
+        if (!testRepeat && storeData.repeatPasswordErrorClass !== 'error-active') {
+            storeData.repeatPasswordErrorClass = 'error-hint';
+        }
+        if (
+            testRepeat &&
+            (storeData.repeatPasswordErrorClass === 'error-active' ||
+                storeData.repeatPasswordErrorClass === 'error-hint')
+        ) {
+            storeData.repeatPasswordErrorClass = 'error-inactive';
+            if (_passwordInput.value) storeData.repeatPasswordPass = true;
+        }
+
+        if (
+            storeData.repeatPasswordErrorClass === 'error-active' ||
+            storeData.repeatPasswordErrorClass === 'error-hint'
+        ) {
+            storeData.formErrorClass = 'error-inactive';
+        }
+
         SignupStore.set(storeData);
     });
 
@@ -140,13 +171,15 @@ export const SignupEventRegister = () => {
 
         const storeData = SignupStore.get();
 
-        const test = _passwordInput.value.length === 0 || passwordRegExp.test(_passwordInput.value);
-        if (test) {
-            storeData.passwordFieldClass = 'form__field-valid';
-            storeData.passwordErrorClass = 'error-inactive';
-        } else {
-            storeData.passwordFieldClass = 'form__field-invalid';
-            storeData.passwordErrorClass = 'error-active';
+        if (_passwordInput.value.length !== 0) {
+            const test = passwordRegExp.test(_passwordInput.value);
+            if (test) {
+                storeData.passwordFieldClass = 'form__field-valid';
+                storeData.passwordErrorClass = 'error-inactive';
+            } else {
+                storeData.passwordFieldClass = 'form__field-invalid';
+                storeData.passwordErrorClass = 'error-active';
+            }
         }
 
         SignupStore.set(storeData);
@@ -193,13 +226,15 @@ export const SignupEventRegister = () => {
 
         const storeData = SignupStore.get();
 
-        const test = _passwordInput.value === _repeatPasswordInput.value;
-        if (test) {
-            storeData.repeatPasswordFieldClass = 'form__field-valid';
-            storeData.repeatPasswordErrorClass = 'error-inactive';
-        } else {
-            storeData.repeatPasswordFieldClass = 'form__field-invalid';
-            storeData.repeatPasswordErrorClass = 'error-active';
+        if (_repeatPasswordInput.value.length !== 0) {
+            const test = _passwordInput.value === _repeatPasswordInput.value;
+            if (test) {
+                storeData.repeatPasswordFieldClass = 'form__field-valid';
+                storeData.repeatPasswordErrorClass = 'error-inactive';
+            } else {
+                storeData.repeatPasswordFieldClass = 'form__field-invalid';
+                storeData.repeatPasswordErrorClass = 'error-active';
+            }
         }
 
         SignupStore.set(storeData);

@@ -7,6 +7,8 @@ export interface PaymentCardProps {
     period: number;
     price: number;
     class: string;
+    iconSrc: string;
+    iconSize: string;
 }
 
 export const PaymentCard = (props: PaymentCardProps) => {
@@ -23,8 +25,11 @@ export const PaymentCard = (props: PaymentCardProps) => {
     };
     return (
         <div class={props.class} onclick={paymentClick} name={props.price}>
-            <div class='payment-card__period'>{props.period + monthText}</div>
-            <div class='payment-card__price'>{props.price + ' рублей'}</div>
+            <div class='payment-card__desciption'>
+                <div class='payment-card__period'>{props.period + monthText}</div>
+                <div class='payment-card__price'>{props.price + ' рублей'}</div>
+            </div>
+            <img src={props.iconSrc} class={'payment-card__img-' + props.iconSize} />
         </div>
     );
 };
