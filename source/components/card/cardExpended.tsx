@@ -26,7 +26,7 @@ export const CardExpended = (props: CardExpendedProps) => {
     let tagField: HTMLCollection;
     if (tagsExists) {
         tagField = (
-            <div class='flex_box_row_left'>
+            <div class='card-expended__tags'>
                 {Object.keys(props.userData.tags).map((item) => Tag(props.userData.tags[item]))}
             </div>
         );

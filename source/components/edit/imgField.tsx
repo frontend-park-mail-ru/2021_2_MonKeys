@@ -3,6 +3,7 @@ import ViewBase from '../../views/viewBase.js';
 import { IconButton } from '../common/iconButton.js';
 import EventBus from '../../dispatcher/eventBus.js';
 import { EVENTS } from '../../dispatcher/events.js';
+
 export interface ButtonProps {
     class: string;
     onchange: { (data, view?: ViewBase): void };
@@ -16,7 +17,7 @@ export interface FieldProps {
 const imgSequence = (imgs: string[]) => {
     const items = [];
     if (imgs === undefined || imgs.length === 0) {
-        return <div class='add-img__no-photo-text'>Нет фото</div>;
+        return <div class='form__field-title img__title'>Добавьте фото</div>;
     }
     imgs.forEach((element, _, imgsArr) => {
         let deleteButton;
@@ -42,24 +43,25 @@ const imgSequence = (imgs: string[]) => {
     return items;
 };
 
-export const ImgField = (fieldProps: FieldProps, buttonProps: ButtonProps) => {
-    return (
-        <div>
-            <div class={fieldProps.class}>
-                {imgSequence(buttonProps.imgs)}
+export const ImgField = (imgs) => {
+    const uploadPhoto = (event) => {
+        EventBus.dispatch(EVENTS.EDIT_IMG_INPUT, event);
+    };
 
-                <input
-                    class={fieldProps.class + '__input-field'}
-                    id={'AddImg'}
-                    type={'file'}
-                    onchange={buttonProps.onchange}
-                    style={'visibility: hidden;'}
-                    accept={'.gif, .jpeg, .jpg, .png, .webp'}
-                />
-                <label for='AddImg'>
-                    <div class='add'></div>
-                </label>
-            </div>
+    return (
+        <div class='add-img-box'>
+            {imgSequence(imgs)}
+            <input
+                class={'add-img-box__input-field'}
+                id={'AddImg'}
+                type={'file'}
+                onchange={uploadPhoto}
+                style={'visibility: hidden;'}
+                accept={'.gif, .jpeg, .jpg, .png, .webp'}
+            />
+            <label for='AddImg'>
+                <div class='add'></div>
+            </label>
         </div>
     );
 };

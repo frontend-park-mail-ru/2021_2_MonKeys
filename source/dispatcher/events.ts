@@ -37,6 +37,7 @@ export const enum EVENTS {
     CHAT_INPUT_MESSAGE,
     CHAT_SEND_BUTTON,
     CHAT_NEW_MESSAGE,
+    CHAT_GET_MESSAGES,
     CHAT_BACK_BUTTON,
     CHAT_SEARCH,
     CHAT_OPEN_PROFILE,
@@ -56,9 +57,7 @@ export const enum EVENTS {
     EDIT_TAG_CLICK,
     EDIT_GENDER_MALE_CLICK,
     EDIT_GENDER_FEMALE_CLICK,
-    EDIT_PREFER_MALE_CLICK,
-    EDIT_PREFER_FEMALE_CLICK,
-    EDIT_PREFER_ANY_CLICK,
+    EDIT_PREFER_CLICK,
     ERROR_OK_BUTTON,
     USER_COOKIE_REQUESTS,
     USER_DATA_REQUESTS,
@@ -110,6 +109,15 @@ export const InitBus = () => {
                 AuthStore.set({
                     loggedIn: userStatus.loggedIn,
                 });
+                if (!profile.tags) {
+                    profile.tags = new Set(); // TODO почему бэк не возвращает тэги??
+                    profile.tags.add('аниме');
+                    profile.tags.add('спорт');
+                    profile.tags.add('игры');
+                }
+                if (!profile.prefer) {
+                    profile.prefer = 'Все равно'; // TODO почему бэк не возвращает тэги??
+                }
                 ProfileStore.set(profile);
 
                 eventBus.dispatch(EVENTS.USER_DATA_REQUESTS);

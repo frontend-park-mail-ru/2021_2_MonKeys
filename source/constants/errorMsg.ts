@@ -8,6 +8,7 @@ const errorAgeMsg = 'Вы должны быть старше 18 лет и мол
 const errorGenderMsg = 'Укажите свой пол';
 const errorPreferMsg = 'Укажите свои предпочтения';
 const errorImgMsg = 'Добавьте хотя бы 1 фотографию';
+const notError = 'Нет ошибки';
 const errorEditFormMsg = 'Заполните все обязательные поля';
 
 export {
@@ -21,5 +22,6 @@ export {
     errorGenderMsg,
     errorPreferMsg,
     errorImgMsg,
+    notError,
     errorEditFormMsg,
 };

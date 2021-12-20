@@ -1,3 +1,4 @@
+
 import EventBus from './dispatcher/eventBus.js';
 import router from './route/router.js';
 import { InitBus } from './dispatcher/events.js';
@@ -34,7 +35,7 @@ window.onpopstate = () => {
 EventBus.dispatch<string>(EVENTS.USER_COOKIE_REQUESTS);
 window.history.pushState('', '', window.location.pathname);
 
-// registerServiceWorker();
+registerServiceWorker();
 
 const percent = 0.01;
 const vh = window.innerHeight * percent;
@@ -44,3 +45,4 @@ window.addEventListener('resize', () => {
     const vh = window.innerHeight * percent;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
 });
+
