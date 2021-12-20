@@ -110,13 +110,10 @@ export const InitBus = () => {
                     loggedIn: userStatus.loggedIn,
                 });
                 if (!profile.tags) {
-                    profile.tags = new Set(); // TODO почему бэк не возвращает тэги??
-                    profile.tags.add('аниме');
-                    profile.tags.add('спорт');
-                    profile.tags.add('игры');
+                    profile.tags = new Set();
                 }
                 if (!profile.prefer) {
-                    profile.prefer = 'Все равно'; // TODO почему бэк не возвращает тэги??
+                    profile.prefer = '';
                 }
                 ProfileStore.set(profile);
 
