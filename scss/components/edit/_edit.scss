@@ -54,6 +54,11 @@
   justify-content: center;
 }
 
+.edit__save-button-space {
+  min-height: 70px;
+}
+
 .edit__save-button {
-  margin: $margin-small 0px;
+  margin: -50px 0px;
+  z-index: 1;
 }

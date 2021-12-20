@@ -163,29 +163,17 @@ export const EditEventRegister = () => {
         });
     });
 
-    EventBus.register(EVENTS.EDIT_PREFER_MALE_CLICK, () => {
-        const storeData = EditStore.get();
-        storeData.preferField.items[0].selected = true;
-        storeData.preferField.items[1].selected = false;
-        storeData.preferField.items[2].selected = false;
-        storeData.preferErrorClass = 'error-inactive';
-        EditStore.set(storeData);
-    });
-    EventBus.register(EVENTS.EDIT_PREFER_FEMALE_CLICK, () => {
-        const storeData = EditStore.get();
-        storeData.preferField.items[0].selected = false;
-        storeData.preferField.items[1].selected = true;
-        storeData.preferField.items[2].selected = false;
-        storeData.preferErrorClass = 'error-inactive';
-        EditStore.set(storeData);
-    });
-    EventBus.register(EVENTS.EDIT_PREFER_ANY_CLICK, () => {
-        const storeData = EditStore.get();
-        storeData.preferField.items[0].selected = false;
-        storeData.preferField.items[1].selected = false;
-        storeData.preferField.items[2].selected = true;
-        storeData.preferErrorClass = 'error-inactive';
-        EditStore.set(storeData);
+    EventBus.register(EVENTS.EDIT_PREFER_CLICK, (payload: string) => {
+        const editStore = EditStore.get();
+
+        editStore.preferField.prefers.forEach((prefer) => {
+            if (prefer.value === payload) {
+                prefer.selected = true;
+            } else {
+                prefer.selected = false;
+            }
+        });
+        EditStore.set(editStore);
     });
 
     EventBus.register(EVENTS.EDIT_IMG_INPUT, (event) => {

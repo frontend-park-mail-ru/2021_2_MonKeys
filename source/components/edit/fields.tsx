@@ -1,7 +1,7 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import { FormFieldInput, FormFieldInputProps } from './formFieldInput.js';
 import { ErrorMsg } from '../common/errorMsg.js';
-import { errorAgeMsg, errorGenderMsg, errorNameMsg, notError } from '../../constants/errorMsg.js';
+import { errorAgeMsg, errorGenderMsg, errorNameMsg, errorPreferMsg } from '../../constants/errorMsg.js';
 import EventBus from '../../dispatcher/eventBus.js';
 import { EVENTS } from '../../dispatcher/events.js';
 import { FieldStatus, Gender } from '../../store/editStore.js';
@@ -165,7 +165,7 @@ export const TagsField = (data) => {
             value: tag.tag,
             selected: tag.selected,
             clickEvent: EVENTS.EDIT_TAG_CLICK,
-            class: 'field-tags__tag',
+            class: 'field-with-title__tag',
         };
     });
 
@@ -180,18 +180,58 @@ export const TagsField = (data) => {
 
     let tagsTmpl = <div></div>;
     if (data.open) {
-        tagsTmpl = <div class='field-tags__tags'>{tags.map((tag) => Tag(tag))}</div>;
+        tagsTmpl = <div class='field-with-title__tags'>{tags.map((tag) => Tag(tag))}</div>;
     }
 
     return (
         <div class='form__element'>
-            <div class='form__field field-tags'>
-                <div class='field-tags__title'>
-                    <span class='field-tags__title-text'>Интересы</span>
-                    <img class='field-tags__expend-icon' src={props.expend.src} onclick={props.expend.onclick} />
+            <div class='form__field field-with-title'>
+                <div class='field-with-title__title'>
+                    <span class='field-with-title__title-text'>Интересы</span>
+                    <img class='field-with-title__expend-icon' src={props.expend.src} onclick={props.expend.onclick} />
                 </div>
                 {tagsTmpl}
             </div>
+        </div>
+    );
+};
+
+export const PreferField = (data) => {
+    console.log(data.prefers);
+    const items = data.prefers.map((prefer) => {
+        return {
+            value: prefer.value,
+            selected: prefer.selected,
+            clickEvent: EVENTS.EDIT_PREFER_CLICK,
+        };
+    });
+
+    const errorProps = {
+        text: errorPreferMsg,
+        class: 'error-hidden',
+    };
+
+    switch (data.status) {
+        case FieldStatus.Correct:
+            errorProps.text = '';
+            break;
+        case FieldStatus.Hint:
+            errorProps.class = 'error-hint';
+            break;
+        case FieldStatus.Error:
+            errorProps.class = 'error-active';
+            break;
+    }
+
+    return (
+        <div class='form__element'>
+            <div class='form__field field-with-title'>
+                <div class='field-with-title__title'>
+                    <span class='field-with-title__title-text'>Кого вы ищете</span>
+                </div>
+                <div class='field-with-title__prefers'>{items.map((item) => Tag(item))}</div>
+            </div>
+            {ErrorMsg(errorProps)}
         </div>
     );
 };

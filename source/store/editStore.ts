@@ -6,6 +6,7 @@ export interface EditData {
     nameFieldStatus: number;
     birthDateFieldStatus: number;
     genderFieldStatus: number;
+    preferFieldStatus: number;
     imgFieldStatus: number;
 
     gender: number;
@@ -18,9 +19,12 @@ export interface EditData {
         }[];
     };
 
-    preferField?: ItemListProps;
-    preferErrorClass?: string;
-    tags?;
+    preferField: {
+        prefers: {
+            value: string;
+            selected: boolean;
+        }[];
+    };
 }
 
 const EditStore = new BaseStore<EditData>();
@@ -41,6 +45,7 @@ const initData = {
     nameFieldStatus: FieldStatus.Correct,
     birthDateFieldStatus: FieldStatus.Correct,
     genderFieldStatus: FieldStatus.Correct,
+    preferFieldStatus: FieldStatus.Correct,
     imgFieldStatus: FieldStatus.Correct,
 
     gender: Gender.NotSelected,
@@ -72,28 +77,20 @@ const initData = {
     },
 
     preferField: {
-        title: 'Кого вы ищете',
-        valid: true,
-        open: true,
-        openable: false,
-        items: [
+        prefers: [
             {
                 value: 'Мужчину',
                 selected: false,
-                clickEvent: EVENTS.EDIT_PREFER_MALE_CLICK,
             },
             {
                 value: 'Женщину',
                 selected: false,
-                clickEvent: EVENTS.EDIT_PREFER_FEMALE_CLICK,
             },
             {
                 value: 'Все равно',
                 selected: false,
-                clickEvent: EVENTS.EDIT_PREFER_ANY_CLICK,
             },
         ],
-        buttonEvent: 999999999999,
     },
 };
 

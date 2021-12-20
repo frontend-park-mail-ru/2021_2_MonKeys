@@ -6,7 +6,7 @@ import { EditStore, Gender } from '../store/editStore.js';
 import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
-import { errorImgMsg, errorEditFormMsg, errorPreferMsg } from '../constants/errorMsg.js';
+import { errorImgMsg, errorEditFormMsg } from '../constants/errorMsg.js';
 import { Errors } from '../components/error/errors.js';
 import router from '../route/router.js';
 import { Button } from '../components/common/button.js';
@@ -40,23 +40,14 @@ export default class EditView extends ViewBase {
             });
         });
 
-        switch (profileStore.prefer) {
-            case 'male':
-                editStore.preferField.items[0].selected = true;
-                editStore.preferField.items[1].selected = false;
-                editStore.preferField.items[2].selected = false;
-                break;
-            case 'female':
-                editStore.preferField.items[0].selected = false;
-                editStore.preferField.items[1].selected = true;
-                editStore.preferField.items[2].selected = false;
-                break;
-            default:
-                editStore.preferField.items[0].selected = false;
-                editStore.preferField.items[1].selected = false;
-                editStore.preferField.items[2].selected = true;
-                break;
-        }
+        editStore.preferField.prefers.forEach((prefer) => {
+            if (prefer.value === profileStore.prefer) {
+                prefer.selected = true;
+            } else {
+                prefer.selected = false;
+            }
+        });
+        console.log(profileStore.prefer);
 
         EditStore.set(editStore);
 
@@ -84,21 +75,15 @@ export default class EditView extends ViewBase {
                 tagsField: {
                     tags: EditStore.get().tagsField,
                 },
-                'preferField': EditStore.get().preferField,
+                preferField: {
+                    prefers: EditStore.get().preferField,
+                    status: EditStore.get().preferFieldStatus,
+                },
                 'img': {
                     class: EditStore.get().imgFieldClass,
                 },
             },
             'buttons': {
-                'tagsButton': {
-                    type: 'button',
-                    text: 'tags',
-                    class: 'tags-button',
-                    src: 'icons/expand_big.svg',
-                    onclick: () => {
-                        EventBus.dispatch<string>(EVENTS.EDIT_OPEN_TAGS);
-                    },
-                },
                 'imgAddButton': {
                     class: EditStore.get().imgFieldClass,
                     onchange: (event) => {
@@ -123,10 +108,6 @@ export default class EditView extends ViewBase {
                 },
             },
             'errorMsgs': {
-                'preferError': {
-                    text: errorPreferMsg,
-                    class: EditStore.get().preferErrorClass,
-                },
                 'imgError': {
                     text: errorImgMsg,
                     class: EditStore.get().imgErrorClass,
@@ -189,14 +170,15 @@ export default class EditView extends ViewBase {
 
         view._data.editForm.fields.descriptionField.description = ProfileStore.get().description;
 
+        view._data.editForm.fields.tagsField = data.tagsField;
+
+        view._data.editForm.fields.preferField = data.preferField;
+        view._data.editForm.fields.preferField.status = EditStore.get().preferFieldStatus;
+
         view._data.editForm.fields.img.class = data.imgFieldClass;
         view._data.editForm.errorMsgs.imgError.class = data.imgErrorClass;
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
         view._data.editForm.tags = data.tags;
-
-        view._data.editForm.fields.preferField = data.preferField;
-        view._data.editForm.fields.tagsField = data.tagsField;
-        view._data.editForm.errorMsgs.preferError.class = data.preferErrorClass;
 
         view._template = view._createTmpl(view._data);
 

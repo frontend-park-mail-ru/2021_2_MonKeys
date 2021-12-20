@@ -56,9 +56,7 @@ export const enum EVENTS {
     EDIT_TAG_CLICK,
     EDIT_GENDER_MALE_CLICK,
     EDIT_GENDER_FEMALE_CLICK,
-    EDIT_PREFER_MALE_CLICK,
-    EDIT_PREFER_FEMALE_CLICK,
-    EDIT_PREFER_ANY_CLICK,
+    EDIT_PREFER_CLICK,
     ERROR_OK_BUTTON,
     USER_COOKIE_REQUESTS,
     USER_DATA_REQUESTS,
@@ -115,6 +113,9 @@ export const InitBus = () => {
                     profile.tags.add('аниме');
                     profile.tags.add('спорт');
                     profile.tags.add('игры');
+                }
+                if (!profile.prefer) {
+                    profile.prefer = 'Все равно'; // TODO почему бэк не возвращает тэги??
                 }
                 ProfileStore.set(profile);
 
