@@ -6,7 +6,6 @@ import { Tag } from '../common/tag.js';
 import { ProfileData } from '../../store/profileStore.js';
 
 import { ImgCard } from './imgCard.js';
-import { Button } from '../common/button.js';
 import { ReportWindow } from '../report/reportWindow.js';
 import { EVENTS } from '../../dispatcher/events.js';
 
@@ -62,34 +61,14 @@ export const CardExpended = (props: CardExpendedProps) => {
         EventBus.dispatch<string>(EVENTS.REPORTS_REPORT_BUTTON);
     };
     const reportButtonTmpl = props.withReports ? (
-        <div class='card-expended__report-button'>
-            {Button({
-                type: 'button',
-                text: 'Пожаловаться',
-                class: 'button-black-big button-black-big_margin-bottom',
-                onclick: reportButtonAction,
-            })}
-        </div>
+        <button type='button' onclick={reportButtonAction} class='report-button'>
+            <span class='report-button__text'>Пожаловаться</span>
+        </button>
     ) : (
         <div></div>
     );
     const reportWindowTmpl = props.withReports ? (
         ReportWindow({ reports: props.reports, reportedUserID: props.userData.id, visible: props.reported })
-    ) : (
-        <div></div>
-    );
-    const backProfileButtonClick = () => {
-        EventBus.dispatch<number>(EVENTS.CHAT_BACK_TO_CHAT_BUTTON, props.userData.id);
-    };
-    const backProfileButton = props.withBackButton ? (
-        <div class='card-expended__back-button'>
-            {Button({
-                type: 'button',
-                text: 'Скрыть',
-                class: 'button-white-big',
-                onclick: backProfileButtonClick,
-            })}
-        </div>
     ) : (
         <div></div>
     );
@@ -99,9 +78,10 @@ export const CardExpended = (props: CardExpendedProps) => {
                 {reportWindowTmpl}
                 <div class='card-expended__profile card-expended__profile-chats-wide'>
                     {imgTmpl}
-                    {descField}
-                    {tagField}
-                    {backProfileButton}
+                    <div class='card-expended__profilie-data'>
+                        {descField}
+                        {tagField}
+                    </div>
                     {reportButtonTmpl}
                 </div>
             </div>
@@ -112,9 +92,10 @@ export const CardExpended = (props: CardExpendedProps) => {
             {reportWindowTmpl}
             <div class='card-expended__profile'>
                 {imgTmpl}
-                {descField}
-                {tagField}
-                {backProfileButton}
+                <div class='card-expended__profilie-data'>
+                    {descField}
+                    {tagField}
+                </div>
                 {reportButtonTmpl}
             </div>
         </div>

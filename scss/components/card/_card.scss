@@ -15,7 +15,7 @@ $card-expanded-img-default-height: 100%;
 
 @media (max-height: 960px) {
   .card {
-    max-height: 70vh;
+    max-height: 720px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -46,7 +46,7 @@ $card-expanded-img-default-height: 100%;
 
 .card-bottom-panel {
   position: absolute;
-  height: 144px;
+  height: 102px;
   width: 100%;
   bottom: 0px;
   backdrop-filter: blur(20px);
@@ -88,7 +88,7 @@ $card-expanded-img-default-height: 100%;
 }
 
 .card-bottom-panel_actions_action {
-  margin: 12px;
+  margin: 0px 12px;
   height: 36px;
   width: 36px;
 }

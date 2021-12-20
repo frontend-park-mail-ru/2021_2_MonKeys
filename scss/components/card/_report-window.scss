@@ -36,5 +36,9 @@ $icon-size-big: 36px;
 }
 
 .report-window__problems-buttons {
-  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 96px;
 }
