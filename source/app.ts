@@ -1,4 +1,3 @@
-
 import EventBus from './dispatcher/eventBus.js';
 import router from './route/router.js';
 import { InitBus } from './dispatcher/events.js';
@@ -7,7 +6,7 @@ import { isWidescreen, startClientAspectRatio } from './utils/client.js';
 import { registerServiceWorker } from './service/serviceWorkerRegister.js';
 import { EVENTS } from './dispatcher/events.js';
 
-import '../scss/main.scss';
+// import '../scss/main.scss';
 import LoadingView from './views/loadingView.js';
 import { cacheInit } from './modules/cache.js';
 
@@ -35,7 +34,7 @@ window.onpopstate = () => {
 EventBus.dispatch<string>(EVENTS.USER_COOKIE_REQUESTS);
 window.history.pushState('', '', window.location.pathname);
 
-registerServiceWorker();
+// registerServiceWorker();
 
 const percent = 0.01;
 const vh = window.innerHeight * percent;
@@ -45,4 +44,3 @@ window.addEventListener('resize', () => {
     const vh = window.innerHeight * percent;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
 });
-
