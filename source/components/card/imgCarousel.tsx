@@ -58,7 +58,6 @@ export const ImgCarousel = (props: string[], sizeClass: string) => {
                         ondragstart={() => {
                             return false;
                         }}
-                        alt=''
                     />
                 }
             </div>
@@ -73,7 +72,6 @@ export const ImgCarousel = (props: string[], sizeClass: string) => {
                     ondragstart={() => {
                         return false;
                     }}
-                    alt=''
                 />
             }
             <div class='carousel-nav__arrows'>

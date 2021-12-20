@@ -52,12 +52,12 @@ export namespace MonkeysVirtualDOM {
         }
         virtualNode.props &&
             Object.keys(virtualNode.props).forEach((key) => {
-                if (key === 'name' && virtualNode.props[key] === 'tag') {
-                    rootElement.style.transition = '1s';
+
+                if (key === 'name' && (virtualNode.props[key] === 'error' || virtualNode.props[key] === 'tag')) {
+                    rootElement.style.transition = '0.2s';
+
                 }
-                if (key === 'type' && virtualNode.props[key] === 'date') {
-                    console.log(rootElement);
-                }
+
                 if (/^on/.test(key)) {
                     rootElement.addEventListener(key.slice(2), virtualNode.props[key]);
                 } else {
@@ -150,6 +150,14 @@ export namespace MonkeysVirtualDOM {
                 case 'updateProps': {
                     manipulation.oldChildVirtual.props &&
                         Object.keys(manipulation.oldChildVirtual.props).forEach((key) => {
+                            if (key === 'src') {
+                                if (
+                                    key === 'src' &&
+                                    manipulation.oldChildVirtual.props['src'] === manipulation.newChild.props['src']
+                                ) {
+                                    return;
+                                }
+                            }
                             if (key === 'route') {
                                 manipulation.oldChild.removeEventListener('click', () => {
                                     router.go(manipulation.oldChildVirtual.props[key]);

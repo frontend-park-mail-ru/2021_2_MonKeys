@@ -282,8 +282,6 @@ export const EditEventRegister = () => {
 
         addPhotoToProfileRequest(photo)
             .then((data) => {
-                console.log(data);
-
                 const userData = ProfileStore.get();
                 if (data.status !== HTTPSuccess) {
                     // userData.imgs.pop();
