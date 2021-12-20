@@ -1,4 +1,3 @@
-
 import EventBus from './dispatcher/eventBus.js';
 import router from './route/router.js';
 import { InitBus } from './dispatcher/events.js';
@@ -10,7 +9,6 @@ import { EVENTS } from './dispatcher/events.js';
 import '../scss/main.scss';
 import LoadingView from './views/loadingView.js';
 import { cacheInit } from './modules/cache.js';
-
 
 startClientAspectRatio();
 window.addEventListener('resize', isWidescreen);
@@ -45,4 +43,3 @@ window.addEventListener('resize', () => {
     const vh = window.innerHeight * percent;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
 });
-
