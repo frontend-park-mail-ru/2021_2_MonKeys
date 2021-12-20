@@ -29,6 +29,7 @@ import { ReportsEventsRegister } from './reportsEvents.js';
 import { SwipeEvenetsRegister } from './swipeEvents.js';
 import { ConnectWS, initWS } from '../requests/messageWS.js';
 import { initNotifications, Notifications } from '../requests/notifications.js';
+import { preloadImageList } from '../modules/cache.js';
 
 export const enum EVENTS {
     CAROUSEL_NEXT,
@@ -145,6 +146,13 @@ export const InitBus = () => {
             const feed = feedStore.get();
             if (data.body.Users !== null) {
                 feed.profiles = data.body.Users;
+                const imgsToCache = [];
+                feed.profiles.map((profile) => {
+                    profile.imgs.map((img) => {
+                        imgsToCache.push(img);
+                    });
+                });
+                preloadImageList(imgsToCache);
             } else {
                 feed.outOfCards = true;
             }

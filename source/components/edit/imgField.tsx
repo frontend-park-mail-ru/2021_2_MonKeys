@@ -19,7 +19,6 @@ const imgSequence = (imgs: string[]) => {
         return <div class='add-img__no-photo-text'>Нет фото</div>;
     }
     imgs.forEach((element, _, imgsArr) => {
-        console.log(element);
         let deleteButton;
         if (element !== 'icons/loading-buffering.gif' && imgsArr.length > 1) {
             deleteButton = IconButton({

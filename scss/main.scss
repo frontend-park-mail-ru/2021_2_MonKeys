@@ -36,6 +36,7 @@
 @import './components/dummy';
 @import './components/error_window';
 @import './components/payment-card';
+@import './components/loading';
 
 @import './layout/flex_column_center';
 @import './layout/view-contant';
@@ -47,7 +48,7 @@
 
 html {
   @include background;
-  font-family: sans-serif;
+  font-family: $font-default, sans-serif;
   // font-family: $font-default 'sans';
   color: $white;
   width: 100%;
@@ -57,7 +58,7 @@ html {
 }
 
 input {
-  font-family: sans-serif;
+  font-family: $font-default, sans-serif;
 }
 
 ::-webkit-scrollbar {
