@@ -259,6 +259,14 @@ export const EditEventRegister = () => {
             if (prefer.selected) {
                 preferValid = true;
                 userPrefer = prefer.value;
+                switch (prefer.value) {
+                    case 'Мужчину':
+                        userPrefer = 'male';
+                        break;
+                    case 'Женщину':
+                        userPrefer = 'female';
+                        break;
+                }
             }
         });
 
