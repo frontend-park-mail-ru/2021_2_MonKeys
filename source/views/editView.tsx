@@ -40,7 +40,7 @@ export default class EditView extends ViewBase {
         });
 
         editStore.preferField.prefers.forEach((prefer) => {
-            if (prefer.value === profileStore.prefer) {
+            if (prefer.tag === profileStore.prefer) {
                 prefer.selected = true;
             } else {
                 prefer.selected = false;

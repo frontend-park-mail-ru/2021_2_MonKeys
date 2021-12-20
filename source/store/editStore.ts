@@ -20,6 +20,7 @@ export interface EditData {
     preferField: {
         prefers: {
             value: string;
+            tag: string;
             selected: boolean;
         }[];
     };
@@ -106,14 +107,17 @@ const initData = {
         prefers: [
             {
                 value: 'Мужчину',
+                tag: 'male',
                 selected: false,
             },
             {
                 value: 'Женщину',
+                tag: 'female',
                 selected: false,
             },
             {
                 value: 'Все равно',
+                tag: '',
                 selected: false,
             },
         ],

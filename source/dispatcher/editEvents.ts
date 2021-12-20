@@ -258,14 +258,7 @@ export const EditEventRegister = () => {
         editStore.preferField.prefers.forEach((prefer) => {
             if (prefer.selected) {
                 preferValid = true;
-                switch (prefer.value) {
-                    case 'Мужчину':
-                        userPrefer = 'male';
-                        break;
-                    case 'Женщину':
-                        userPrefer = 'female';
-                        break;
-                }
+                userPrefer = prefer.tag;
             }
         });
 
