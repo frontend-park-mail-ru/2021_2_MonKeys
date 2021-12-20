@@ -6,7 +6,7 @@ import { EditStore, FieldStatus, Gender } from '../store/editStore.js';
 import { validDate, validImgType } from '../validation/edit.js';
 import { nameRegExp } from '../constants/validation.js';
 import { EVENTS } from './events.js';
-import { errorManager, ErrorStore } from '../store/errorStore.js';
+import { errorManager } from '../store/errorStore.js';
 
 export const EditEventRegister = () => {
     EventBus.register(EVENTS.EDIT_NAME_INPUT, () => {
@@ -131,58 +131,39 @@ export const EditEventRegister = () => {
     });
 
     EventBus.register(EVENTS.EDIT_IMG_INPUT, (event) => {
-        console.log('photo upload');
-        const userData = ProfileStore.get();
-        if (!userData.imgs) {
-            const ps = ProfileStore.get();
-            ps.imgs = [];
-            ProfileStore.set(ps);
-        }
-        userData.imgs.push('icons/loading-buffering.gif');
-        ProfileStore.set(userData);
-
         const files = event.target.files;
 
         const photo = files[0];
 
         if (!validImgType(photo)) {
-            // userData.imgs.pop();
-            console.log('не удалось загрузить фотографию');
-            console.log(ErrorStore.get());
-            // ProfileStore.set(userData);
-            throw 'photo not uploaded';
+            throw 'photo not uploaded: bad file';
         }
+
+        const profileStore = ProfileStore.get();
+        profileStore.imgs.push('icons/loading-buffering.gif');
+        ProfileStore.set(profileStore);
 
         addPhotoToProfileRequest(photo)
             .then((data) => {
-                console.log(data);
-
                 const userData = ProfileStore.get();
                 if (data.status !== HTTPSuccess) {
-                    // userData.imgs.pop();
-                    // ProfileStore.set(userData);
                     throw 'photo not uploaded';
                 }
 
-                if (!userData.imgs) {
-                    const ps = ProfileStore.get();
-                    ps.imgs = [];
-                    ProfileStore.set(ps);
-                }
                 userData.imgs.pop();
                 userData.imgs.push(data.body.photo);
                 ProfileStore.set(userData);
+
                 const editStoreData = EditStore.get();
-                if (editStoreData.imgFieldStatus === FieldStatus.Error) {
-                    editStoreData.imgFieldStatus = FieldStatus.Correct;
-                }
+                editStoreData.imgFieldStatus = FieldStatus.Correct;
                 EditStore.set(editStoreData);
+
                 const previousPhoto = document.querySelector<HTMLInputElement>('input[id="AddImg"]');
                 previousPhoto.value = '';
             })
             .catch((error) => {
-                userData.imgs.pop();
-                ProfileStore.set(userData);
+                profileStore.imgs.pop();
+                ProfileStore.set(profileStore);
                 errorManager.pushAPIErrorPhotoLoad();
                 throw error;
             });

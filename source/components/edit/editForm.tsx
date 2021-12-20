@@ -20,7 +20,7 @@ export const EditForm = (props: EditFormProps) => {
             {DescriptionField(props.descriptionField)}
             {TagsField(props.tagsField)}
             {PreferField(props.preferField)}
-            {ImgsField(props.preferField)}
+            {ImgsField(props.imgsField)}
             <div class='edit__save-button-space'></div>
         </form>
     );

@@ -17,10 +17,9 @@ export interface FieldProps {
 const imgSequence = (imgs: string[]) => {
     const items = [];
     if (imgs === undefined || imgs.length === 0) {
-        return <div class='form__field-title img__title'>Добавьте фотографии</div>;
+        return <div class='form__field-title img__title'>Добавьте фото</div>;
     }
     imgs.forEach((element, _, imgsArr) => {
-        console.log(element);
         let deleteButton;
         if (element !== 'icons/loading-buffering.gif' && imgsArr.length > 1) {
             deleteButton = IconButton({
@@ -45,22 +44,18 @@ const imgSequence = (imgs: string[]) => {
 };
 
 export const ImgField = (imgs) => {
-    const props = {
-        addImg: {
-            onchange: (event) => {
-                EventBus.dispatch(EVENTS.EDIT_IMG_INPUT, event);
-            },
-        },
+    const uploadPhoto = (event) => {
+        EventBus.dispatch(EVENTS.EDIT_IMG_INPUT, event);
     };
 
     return (
         <div class='add-img-box'>
             {imgSequence(imgs)}
             <input
-                class='add-img-box__input-field'
+                class={'add-img-box__input-field'}
                 id={'AddImg'}
                 type={'file'}
-                onchange={props.addImg.onchange}
+                onchange={uploadPhoto}
                 style={'visibility: hidden;'}
                 accept={'.gif, .jpeg, .jpg, .png, .webp'}
             />
