@@ -1,10 +1,7 @@
 import EventBus from './eventBus.js';
 import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { ProfileStore } from '../store/profileStore.js';
-import router from '../route/router.js';
 import { addPhotoToProfileRequest, deleteProfilePhotoRequest } from '../requests/profilePhotoRequest.js';
-import { editProfileRequest } from '../requests/profileRequest.js';
-import { tagsRequest } from '../requests/tagsRequest.js';
 import { EditStore, FieldStatus, Gender } from '../store/editStore.js';
 import { validDate, validImgType } from '../validation/edit.js';
 import { nameRegExp } from '../constants/validation.js';
@@ -85,42 +82,6 @@ export const EditEventRegister = () => {
         EditStore.set(editData);
     });
 
-    EventBus.register(EVENTS.EDIT_OPEN_TAGS, () => {
-        tagsRequest().then((data) => {
-            if (data.status !== HTTPSuccess) {
-                throw 'bad response';
-            }
-
-            const storeData = EditStore.get();
-            storeData.tags = data.body;
-            Object.keys(storeData.tags.allTags).map(
-                (item) =>
-                    (storeData.tags.allTags[item].onchange = () => {
-                        EventBus.dispatch<string>(
-                            EVENTS.EDIT_CHANGE_TAG_CONDITION,
-                            storeData.tags.allTags[item].tagText
-                        );
-                    })
-            );
-            EditStore.set(storeData);
-
-            if (ProfileStore.get() !== undefined) {
-                const userTags = ProfileStore.get().tags;
-                if (userTags === undefined) {
-                    return;
-                }
-                const storeData = EditStore.get();
-                for (const tag of userTags) {
-                    for (let j = 0; j < data.body.tagsCount; j++) {
-                        if (tag === storeData.tags.allTags[j].tagText) {
-                            storeData.tags.allTags[j].isActive = true;
-                            EditStore.set(storeData);
-                        }
-                    }
-                }
-            }
-        });
-    });
     EventBus.register(EVENTS.EDIT_CHANGE_TAG_CONDITION, (payload?: string) => {
         const userData = ProfileStore.get();
         const tagsSet = new Set<string>();
@@ -136,15 +97,8 @@ export const EditEventRegister = () => {
             tagsSet.add(payload);
         }
 
-        if (userData === undefined) {
-            const newUserData = {
-                tags: tagsSet,
-            };
-            ProfileStore.set(newUserData);
-        } else {
-            userData.tags = tagsSet;
-            ProfileStore.set(userData);
-        }
+        userData.tags = tagsSet;
+        ProfileStore.set(userData);
     });
     EventBus.register(EVENTS.EDIT_TAGS_CLICK, () => {
         const editStore = EditStore.get();
@@ -219,11 +173,9 @@ export const EditEventRegister = () => {
                 userData.imgs.push(data.body.photo);
                 ProfileStore.set(userData);
                 const editStoreData = EditStore.get();
-                editStoreData.imgFieldClass = 'add-img-box';
-                if (editStoreData.imgErrorClass === 'error-active') {
-                    editStoreData.imgErrorClass = 'error-inactive';
+                if (editStoreData.imgFieldStatus === FieldStatus.Error) {
+                    editStoreData.imgFieldStatus = FieldStatus.Correct;
                 }
-                editStoreData.formErrorClass = 'error-inactive';
                 EditStore.set(editStoreData);
                 const previousPhoto = document.querySelector<HTMLInputElement>('input[id="AddImg"]');
                 previousPhoto.value = '';
@@ -251,7 +203,7 @@ export const EditEventRegister = () => {
         });
     });
 
-    EventBus.register(EVENTS.EDIT_SAVE_BUTTON, () => {
+    /*   EventBus.register(EVENTS.EDIT_SAVE_BUTTON, () => {
         const _nameInput = document.getElementsByTagName('input')[0];
         const _dateInput = document.getElementsByTagName('input')[1];
         const _descriptionInput = document.getElementsByTagName('textarea')[0];
@@ -345,5 +297,5 @@ export const EditEventRegister = () => {
             EventBus.dispatch<string>(EVENTS.USER_COOKIE_REQUESTS);
             router.go('/profile');
         });
-    });
+    });*/
 };

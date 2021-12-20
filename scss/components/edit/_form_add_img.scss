@@ -2,13 +2,13 @@
 @import '../form_field';
 
 .add-img-box {
-  @include form-field($field-valid-color);
   display: flex;
   flex-wrap: wrap;
   min-height: 72px;
-  height: auto;
 
   padding-bottom: 12px;
+
+  margin: 0;
 }
 .add-img__no-photo-text {
   font-size: 24px;
@@ -77,4 +77,8 @@ $px_img: $px_big * 2;
 
 .add-img-box__input-field {
   height: 0;
+}
+
+.img__title {
+  margin: $margin-small;
 }

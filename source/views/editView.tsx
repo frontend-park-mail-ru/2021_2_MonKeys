@@ -6,9 +6,8 @@ import { EditStore, Gender } from '../store/editStore.js';
 import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
-import { errorImgMsg, errorEditFormMsg } from '../constants/errorMsg.js';
+import { errorEditFormMsg } from '../constants/errorMsg.js';
 import { Errors } from '../components/error/errors.js';
-import router from '../route/router.js';
 import { Button } from '../components/common/button.js';
 import { IconButton } from '../components/common/iconButton.js';
 import { EVENTS } from '../dispatcher/events.js';
@@ -47,7 +46,6 @@ export default class EditView extends ViewBase {
                 prefer.selected = false;
             }
         });
-        console.log(profileStore.prefer);
 
         EditStore.set(editStore);
 
@@ -72,25 +70,17 @@ export default class EditView extends ViewBase {
                 descriptionField: {
                     description: ProfileStore.get().description,
                 },
-                tagsField: {
-                    tags: EditStore.get().tagsField,
-                },
+                tagsField: EditStore.get().tagsField,
                 preferField: {
-                    prefers: EditStore.get().preferField,
+                    prefers: EditStore.get().preferField.prefers,
                     status: EditStore.get().preferFieldStatus,
                 },
-                'img': {
-                    class: EditStore.get().imgFieldClass,
+                imgsField: {
+                    imgs: ProfileStore.get().imgs,
+                    status: EditStore.get().imgFieldStatus,
                 },
             },
             'buttons': {
-                'imgAddButton': {
-                    class: EditStore.get().imgFieldClass,
-                    onchange: (event) => {
-                        EventBus.dispatch<string>(EVENTS.EDIT_IMG_INPUT, event);
-                    },
-                    imgs: ProfileStore.get().imgs,
-                },
                 'saveButton': {
                     type: 'button',
                     text: 'Сохранить',
@@ -108,24 +98,13 @@ export default class EditView extends ViewBase {
                 },
             },
             'errorMsgs': {
-                'imgError': {
-                    text: errorImgMsg,
-                    class: EditStore.get().imgErrorClass,
-                },
                 'formError': {
                     text: errorEditFormMsg,
-                    class: EditStore.get().formErrorClass,
+                    // class: EditStore.get().formErrorClass,
                 },
             },
         },
         actions: {
-            'logoutButton': {
-                src: 'icons/back.svg',
-                class: 'edit__back',
-                onclick: () => {
-                    router.go('/profile');
-                },
-            },
             'settingButtons': {
                 src: 'icons/exit.svg',
                 class: 'edit__back',
@@ -136,6 +115,7 @@ export default class EditView extends ViewBase {
         },
         error: errorManager.error,
     };
+
     _createTmpl(data) {
         return (
             <div class='app__content--align-center'>
@@ -170,29 +150,29 @@ export default class EditView extends ViewBase {
 
         view._data.editForm.fields.descriptionField.description = ProfileStore.get().description;
 
-        view._data.editForm.fields.tagsField = data.tagsField;
+        view._data.editForm.fields.tagsField = EditStore.get().tagsField;
 
-        view._data.editForm.fields.preferField = data.preferField;
+        view._data.editForm.fields.preferField.prefers = EditStore.get().preferField.prefers;
         view._data.editForm.fields.preferField.status = EditStore.get().preferFieldStatus;
 
-        view._data.editForm.fields.img.class = data.imgFieldClass;
-        view._data.editForm.errorMsgs.imgError.class = data.imgErrorClass;
+        view._data.editForm.fields.imgsField.imgs = ProfileStore.get().imgs;
+        view._data.editForm.fields.imgsField.status = EditStore.get().imgFieldStatus;
+
         view._data.editForm.errorMsgs.formError.class = data.formErrorClass;
-        view._data.editForm.tags = data.tags;
 
         view._template = view._createTmpl(view._data);
 
+        view.render();
+    }
+
+    private subcribtionCallbackProfile(data, view) {
+        view._data.editForm.fields.imgsField.imgs = ProfileStore.get().imgs;
+        view._template = view._createTmpl(view._data);
         view.render();
     }
 
     private errorStoreUpdatesView(data, view) {
         view._data.error = errorManager.error;
-        view._template = view._createTmpl(view._data);
-        view.render();
-    }
-
-    private subcribtionCallbackProfile(data, view) {
-        view._data.editForm.buttons.imgAddButton.imgs = ProfileStore.get().imgs;
         view._template = view._createTmpl(view._data);
         view.render();
     }

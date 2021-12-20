@@ -1,12 +1,47 @@
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
 import { FormFieldInput, FormFieldInputProps } from './formFieldInput.js';
 import { ErrorMsg } from '../common/errorMsg.js';
-import { errorAgeMsg, errorGenderMsg, errorNameMsg, errorPreferMsg } from '../../constants/errorMsg.js';
+import { errorAgeMsg, errorGenderMsg, errorImgMsg, errorNameMsg, errorPreferMsg } from '../../constants/errorMsg.js';
 import EventBus from '../../dispatcher/eventBus.js';
 import { EVENTS } from '../../dispatcher/events.js';
 import { FieldStatus, Gender } from '../../store/editStore.js';
 import { Tag } from './tag.js';
-import eventBus from '../../dispatcher/eventBus.js';
+import { ImgField } from './imgField.js';
+import { Box, OpeningBox } from './Box.js';
+
+const notError = {
+    text: '',
+    status: FieldStatus.Correct,
+};
+
+const BaseField = ({ fieldTmpl, classField = '', error = notError }) => {
+    const errorProps = {
+        text: error.text,
+        class: 'error-hidden',
+    };
+
+    switch (error.status) {
+        case FieldStatus.Hint:
+            errorProps.class = 'error-hint';
+            classField += ' form__field';
+            break;
+        case FieldStatus.Error:
+            errorProps.class = 'error-active';
+            classField += ' form__field__invalid';
+            break;
+        default:
+            errorProps.text = '';
+            classField += ' form__field';
+            break;
+    }
+
+    return (
+        <div class='form__element'>
+            <div class={classField}>{fieldTmpl}</div>
+            {ErrorMsg(errorProps)}
+        </div>
+    );
+};
 
 export const NameField = (data) => {
     const nameProps: FormFieldInputProps = {
@@ -19,32 +54,20 @@ export const NameField = (data) => {
         name: 'userName',
         placeholder: 'Имя',
         value: data.name,
-        class: data.status === FieldStatus.Error ? 'form__field__invalid' : 'form__field',
+        class: 'field__input',
+        type: 'text',
     };
 
-    const errorProps = {
+    const error = {
         text: errorNameMsg,
-        class: 'error-hidden',
+        status: data.status,
     };
 
-    switch (data.status) {
-        case FieldStatus.Correct:
-            errorProps.text = '';
-            break;
-        case FieldStatus.Hint:
-            errorProps.class = 'error-hint';
-            break;
-        case FieldStatus.Error:
-            errorProps.class = 'error-active';
-            break;
-    }
-
-    return (
-        <div class='form__element'>
-            {FormFieldInput(nameProps)}
-            {ErrorMsg(errorProps)}
-        </div>
-    );
+    return BaseField({
+        fieldTmpl: FormFieldInput(nameProps),
+        classField: '',
+        error: error,
+    });
 };
 
 export const DateField = (data) => {
@@ -59,32 +82,19 @@ export const DateField = (data) => {
         // iconSrc: 'icons/calendar.svg', TODO date
         type: 'date',
         value: data.date,
-        class: data.status === FieldStatus.Error ? 'form__field__invalid' : 'form__field',
+        class: 'field__input',
     };
 
-    const errorProps = {
+    const error = {
         text: errorAgeMsg,
-        class: 'error-hidden',
+        status: data.status,
     };
 
-    switch (data.status) {
-        case FieldStatus.Correct:
-            errorProps.text = '';
-            break;
-        case FieldStatus.Hint:
-            errorProps.class = 'error-hint';
-            break;
-        case FieldStatus.Error:
-            errorProps.class = 'error-active';
-            break;
-    }
-
-    return (
-        <div class='form__element'>
-            {FormFieldInput(dateProps)}
-            {ErrorMsg(errorProps)}
-        </div>
-    );
+    return BaseField({
+        fieldTmpl: FormFieldInput(dateProps),
+        classField: '',
+        error: error,
+    });
 };
 
 export const GenderField = (data) => {
@@ -103,60 +113,39 @@ export const GenderField = (data) => {
         },
     ];
 
-    const errorProps = {
+    const error = {
         text: errorGenderMsg,
-        class: 'error-hidden',
+        status: data.status,
     };
 
-    switch (data.status) {
-        case FieldStatus.Correct:
-            errorProps.text = '';
-            break;
-        case FieldStatus.Hint:
-            errorProps.class = 'error-hint';
-            break;
-        case FieldStatus.Error:
-            errorProps.class = 'error-active';
-            break;
-    }
+    const genderTmpl = [];
+    genderTmpl.push(<span class='form__field-title field-gender__title'>Ваш пол</span>);
+    items.forEach((item) => genderTmpl.push(Tag(item)));
 
-    return (
-        <div class='form__element'>
-            <div class='form__field field-gender'>
-                <span class='field-gender__title'>Ваш пол</span>
-                {items.map((item) => Tag(item))}
-            </div>
-            {ErrorMsg(errorProps)}
-        </div>
-    );
+    return BaseField({
+        fieldTmpl: genderTmpl,
+        classField: 'field-gender',
+        error: error,
+    });
 };
 
 export const DescriptionField = (data) => {
-    if (!data.description) {
-        data.description = '';
-    }
-
-    const props = {
-        name: 'description',
-        placeholder: 'Расскажите о себе',
-        class: 'form__field',
-    };
-
-    return (
-        <div class='form__element'>
-            <div class='form__field field-description'>
-                <textarea
-                    class='field-description__text'
-                    name={props.name}
-                    placeholder={props.placeholder}
-                    autocomplete='chrome-off'
-                    maxlength='1000'
-                >
-                    {data.description}
-                </textarea>
-            </div>
-        </div>
+    const descriptionTmpl = (
+        <textarea
+            class='field-description__text'
+            name='description'
+            placeholder='Расскажите о себе'
+            autocomplete='chrome-off'
+            maxlength='1000'
+        >
+            {data.description}
+        </textarea>
     );
+
+    return BaseField({
+        fieldTmpl: descriptionTmpl,
+        classField: 'field-description',
+    });
 };
 
 export const TagsField = (data) => {
@@ -165,39 +154,22 @@ export const TagsField = (data) => {
             value: tag.tag,
             selected: tag.selected,
             clickEvent: EVENTS.EDIT_TAG_CLICK,
-            class: 'field-with-title__tag',
+            class: 'field__tag',
         };
     });
 
-    const props = {
-        expend: {
-            src: data.open ? 'icons/shrink.svg' : 'icons/expand_big.svg',
-            onclick: () => {
-                eventBus.dispatch(EVENTS.EDIT_TAGS_CLICK);
-            },
-        },
-    };
-
-    let tagsTmpl = <div></div>;
-    if (data.open) {
-        tagsTmpl = <div class='field-with-title__tags'>{tags.map((tag) => Tag(tag))}</div>;
-    }
-
-    return (
-        <div class='form__element'>
-            <div class='form__field field-with-title'>
-                <div class='field-with-title__title'>
-                    <span class='field-with-title__title-text'>Интересы</span>
-                    <img class='field-with-title__expend-icon' src={props.expend.src} onclick={props.expend.onclick} />
-                </div>
-                {tagsTmpl}
-            </div>
-        </div>
-    );
+    return BaseField({
+        fieldTmpl: OpeningBox({
+            titleText: 'Интересы',
+            isOpen: data.open,
+            eventOpening: EVENTS.EDIT_TAGS_CLICK,
+            bodyItems: tags,
+            bodyClass: 'field__tags',
+        }),
+    });
 };
 
 export const PreferField = (data) => {
-    console.log(data.prefers);
     const items = data.prefers.map((prefer) => {
         return {
             value: prefer.value,
@@ -206,32 +178,29 @@ export const PreferField = (data) => {
         };
     });
 
-    const errorProps = {
+    const error = {
         text: errorPreferMsg,
-        class: 'error-hidden',
+        status: data.status,
     };
 
-    switch (data.status) {
-        case FieldStatus.Correct:
-            errorProps.text = '';
-            break;
-        case FieldStatus.Hint:
-            errorProps.class = 'error-hint';
-            break;
-        case FieldStatus.Error:
-            errorProps.class = 'error-active';
-            break;
-    }
+    return BaseField({
+        fieldTmpl: Box({
+            titleText: 'Кого вы ищете',
+            bodyItems: items,
+            bodyClass: 'field__prefers',
+        }),
+        error: error,
+    });
+};
 
-    return (
-        <div class='form__element'>
-            <div class='form__field field-with-title'>
-                <div class='field-with-title__title'>
-                    <span class='field-with-title__title-text'>Кого вы ищете</span>
-                </div>
-                <div class='field-with-title__prefers'>{items.map((item) => Tag(item))}</div>
-            </div>
-            {ErrorMsg(errorProps)}
-        </div>
-    );
+export const ImgsField = (data) => {
+    const error = {
+        text: errorImgMsg,
+        status: data.status,
+    };
+
+    return BaseField({
+        fieldTmpl: ImgField(data.imgs),
+        error: error,
+    });
 };

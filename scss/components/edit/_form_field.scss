@@ -36,13 +36,8 @@
 }
 
 .field-gender__title {
-  color: white;
-  font-size: $font-size-small;
-  white-space: nowrap;
-
   margin: 0 $margin-small;
 }
-
 
 .field-gender__tag {
   width: 60px;
@@ -65,42 +60,46 @@
   padding: 0;
 }
 
-.field-with-title {
+.box {
   display: flex;
   flex-direction: column;
 }
 
-.field-with-title__title {
+.box__title {
   margin: $margin-small;
 
   display: flex;
   justify-content: space-between;
 }
 
-.field-with-title__title-text {
+.box__title-text {
+  color: white;
   font-size: $font-size-small;
+  white-space: nowrap;
 }
 
-.field-with-title__expend-icon {
+.box__title-icon {
   height: 18px;
   width: 18px;
 }
 
-.field-with-title__tags {
+.box__body {
+  display: flex;
+}
+
+.field__tags {
   margin: 0 $margin-small $margin-small;
 
-  display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
 
-.field-with-title__tag {
+.field__tag {
   margin: $margin-smallest;
 }
 
-.field-with-title__prefers {
+.field__prefers {
   margin: 0 $margin-small $margin-small;
 
-  display: flex;
   justify-content: space-around;
 }
