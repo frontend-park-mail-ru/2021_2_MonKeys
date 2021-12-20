@@ -47,6 +47,13 @@ $card-expanded-img-default-height: 100%;
   color: #ffffff;
 }
 
+.card-expended__tags {
+  margin: $margin-small;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
 .card-expended__back-button {
   display: flex;
   justify-content: center;

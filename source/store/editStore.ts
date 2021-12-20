@@ -64,11 +64,39 @@ const initData = {
                 selected: false,
             },
             {
-                tag: 'наука',
+                tag: 'сериалы',
                 selected: false,
             },
             {
                 tag: 'спорт',
+                selected: false,
+            },
+            {
+                tag: 'еда',
+                selected: false,
+            },
+            {
+                tag: 'творчество',
+                selected: false,
+            },
+            {
+                tag: 'фото',
+                selected: false,
+            },
+            {
+                tag: 'прогулки',
+                selected: false,
+            },
+            {
+                tag: 'наука',
+                selected: false,
+            },
+            {
+                tag: 'зож',
+                selected: false,
+            },
+            {
+                tag: 'тусовки',
                 selected: false,
             },
         ],

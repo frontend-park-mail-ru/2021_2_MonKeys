@@ -2,7 +2,7 @@ import ViewBase from './viewBase.js';
 import { viewSizes } from '../constants/viewParams.js';
 import { MonkeysVirtualDOM } from '../virtualDOM/virtualDOM.js';
 import { EditForm } from '../components/edit/editForm.js';
-import { EditStore, Gender } from '../store/editStore.js';
+import { EditStore, FieldStatus, Gender } from '../store/editStore.js';
 import { ProfileStore } from '../store/profileStore.js';
 import EventBus from '../dispatcher/eventBus.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
@@ -46,6 +46,12 @@ export default class EditView extends ViewBase {
                 prefer.selected = false;
             }
         });
+
+        editStore.nameFieldStatus = FieldStatus.Correct;
+        editStore.birthDateFieldStatus = FieldStatus.Correct;
+        editStore.genderFieldStatus = FieldStatus.Correct;
+        editStore.preferFieldStatus = FieldStatus.Correct;
+        editStore.imgFieldStatus = FieldStatus.Correct;
 
         EditStore.set(editStore);
 
