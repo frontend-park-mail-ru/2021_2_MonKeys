@@ -19,7 +19,6 @@ export const cacheInit = () => {
 export const preloadImageList = (imgsURL: string[]) => {
     imgsURL.map((imgURL) => {
         preloadImage(imgURL);
-        console.log(imgURL);
     });
 };
 
@@ -27,16 +26,12 @@ export const unloadImageList = (imgsURL: string[]) => {
     imgsURL = imgsURL.map((url) => {
         return baseURL + url;
     });
-    console.log(imgsURL);
     window.imgCache = window.imgCache.filter((img) => {
-        console.log(img.src);
         if (imgsURL.includes(img.src)) {
-            console.log(img.src);
             img.src = '';
             img = null;
         } else {
             return img;
         }
     });
-    console.log(window.imgCache);
 };

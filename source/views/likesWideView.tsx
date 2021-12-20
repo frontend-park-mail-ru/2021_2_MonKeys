@@ -35,7 +35,6 @@ export default class LikesWideView extends ViewBase {
         this._template = this._createTmpl(this._data);
 
         subscriptionRequest().then((data) => {
-            console.log(data);
             const likesData = LikesStore.get();
             likesData.active = data.body.subscriptionActive;
             LikesStore.set(likesData);

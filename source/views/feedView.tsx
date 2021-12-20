@@ -10,6 +10,7 @@ import TapbarStore from '../store/tapbarStore.js';
 import { errorManager, ErrorStore } from '../store/errorStore.js';
 import { Errors } from '../components/error/errors.js';
 import { EVENTS } from '../dispatcher/events.js';
+import ReportsStore from '../store/reportsStore.js';
 
 export default class FeedView extends ViewBase {
     constructor(parent: HTMLElement) {
@@ -18,6 +19,7 @@ export default class FeedView extends ViewBase {
         const cardData = feedStore.get();
         this.updateDataTemaplate(cardData);
         feedStore.subscribe(this.subscribtionCallback, this);
+        ReportsStore.subscribe(this.reportsSubscribtionCallback, this);
         ErrorStore.subscribe(this.errorStoreUpdatesView, this);
     }
 
@@ -78,6 +80,9 @@ export default class FeedView extends ViewBase {
                 },
             },
             withActions: true,
+            withReports: true,
+            reports: ReportsStore.get().reports,
+            reported: ReportsStore.get().active,
             feed: true,
         },
         tapbar: {
@@ -88,8 +93,16 @@ export default class FeedView extends ViewBase {
 
     forceRender() {
         const cardData = feedStore.get();
+        this._data.cardData.reports = ReportsStore.get().reports;
+        this._data.cardData.reported = ReportsStore.get().active;
         this._template = this._createTmpl(this._data, cardData.expanded);
         this.render();
+    }
+    private reportsSubscribtionCallback(data, view) {
+        view._data.cardData.reports = data.reports;
+        view._data.cardData.reported = data.active;
+        view._template = view._createTmpl(view._data, true);
+        view.render();
     }
 
     _createTmpl(data, expanded: boolean) {

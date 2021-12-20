@@ -53,8 +53,6 @@ export const ChatsEventsRegister = () => {
     });
 
     EventBus.register(EVENTS.CHATS_NEW_MATCH, (profile: ProfileData) => {
-        console.log(profile);
-
         const notifyMe = (profile: ProfileData) => {
             new Notification('Это любофь!!!', {
                 body: `Взаимная симпатия с ${profile.name}`,

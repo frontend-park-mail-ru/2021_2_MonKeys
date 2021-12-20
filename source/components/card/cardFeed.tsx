@@ -4,6 +4,7 @@ import { ImgCarousel } from './imgCarousel.js';
 import { ProfileData } from '../../store/profileStore.js';
 import eventBus from '../../dispatcher/eventBus.js';
 import { EVENTS } from '../../dispatcher/events.js';
+import { conditionalRendering } from '../../utils/tsxTools/jsxTools.js';
 
 export interface CardFeedProps {
     userData: ProfileData;
@@ -78,6 +79,12 @@ export const CardFeed = (props: CardFeedProps, wide: boolean) => {
                             <div class='card-bottom-panel__name'>
                                 <div class='card-bottom-panel__name__name'>{props.userData.name}</div>
                                 <div class='card-bottom-panel__name__age'>{props.userData.age}</div>
+                                {conditionalRendering(
+                                    <div class={'img-card__report-status'}>
+                                        <span class={'img-card__report-text'}>{props.userData.reportStatus}</span>
+                                    </div>,
+                                    props.userData.reportStatus
+                                )}
                             </div>
                             <div class='card-bottom-panel_actions'>
                                 {Object.keys(props.buttons).map((item) => IconButton(props.buttons[item]))}

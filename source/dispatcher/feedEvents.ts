@@ -109,7 +109,6 @@ export const FeedEventsRegister = () => {
         const data = feedStore.get();
         const shrink = document.querySelectorAll<HTMLElement>('.actions__button-shrink')[0];
         const card = document.querySelectorAll<HTMLElement>('.img-card_size_medium')[0];
-        console.log(card);
         card.style.animation = 'expandCardImg 0.3s ease 1';
         shrink.style.animation = 'rotate180 0.3s ease 1';
         card.addEventListener('animationend', () => {
@@ -128,13 +127,10 @@ export const FeedEventsRegister = () => {
 
     EventBus.register(EVENTS.FEED_REACTION, (reactionID) => {
         resetCarousel();
-        console.log(reactionID);
-        console.log(reactions.dislike);
         const data = feedStore.get();
         data.expanded = false;
         if (reactionID === reactions.dislike) {
             unloadImageList(data.profiles[data.counter].imgs);
-            console.log(data.profiles[data.counter].imgs);
         }
         likesRequest(data.profiles[data.counter].id, reactionID).then((likesData) => {
             if (likesData.status !== HTTPSuccess) {

@@ -146,17 +146,13 @@ export const InitBus = () => {
             const feed = feedStore.get();
             if (data.body.Users !== null) {
                 feed.profiles = data.body.Users;
-                console.log('hello');
-                console.log(feed.profiles);
                 const imgsToCache = [];
                 feed.profiles.map((profile) => {
                     profile.imgs.map((img) => {
                         imgsToCache.push(img);
                     });
                 });
-                console.log(imgsToCache);
                 preloadImageList(imgsToCache);
-                console.log(window.imgCache);
             } else {
                 feed.outOfCards = true;
             }

@@ -7,20 +7,10 @@ export default class LoadingView extends ViewBase {
     constructor(parent: HTMLElement) {
         super(parent);
         this.viewSize = viewSizes.anyone;
-        this._template = this._createTmpl(this._data);
-        console.log("CHECK");
+        this._template = this._createTmpl();
     }
 
-
-    _createTmpl(data: any) {
-        return (
-            <div class="loading-container">
-                {Loading()}
-            </div>
-        )
-
+    _createTmpl() {
+        return <div class='loading-container'>{Loading()}</div>;
     }
-
-
-
 }
