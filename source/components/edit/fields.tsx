@@ -44,9 +44,6 @@ const BaseField = ({ fieldTmpl, classField = '', error = notError, anchor = '' }
 };
 
 export const NameField = (data) => {
-    if (!data.name) {
-        data.name = '';
-    }
     const nameProps: FormFieldInputProps = {
         oninput: () => {
             EventBus.dispatch<string>(EVENTS.EDIT_NAME_INPUT);

@@ -21,12 +21,11 @@
   max-height: calc(100vh - 168px - 66.4px);
 }
 
-.view-content__dummy-payment-container {
+.likes__dummy-payment-container {
   width: 100%;
-  flex: 1 0 auto;
-  max-height: calc(100vh - 168px - 66.4px);
+  flex: 1 1 auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
 }

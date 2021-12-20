@@ -11,17 +11,33 @@ export interface FormFieldInputProps {
 }
 
 export const FormFieldInput = (props: FormFieldInputProps) => {
-    const optionalValue = props.value ? props.value : '';
-    return (
-        <input
-            class={props.class}
-            oninput={props.oninput}
-            onfocusout={props.onfocusout}
-            name={props.name}
-            type={props.type}
-            placeholder={props.placeholder}
-            value={optionalValue}
-            autocomplete='off'
-        />
-    );
+    let tmpl;
+    if (props.value !== '') {
+        tmpl = (
+            <input
+                class={props.class}
+                oninput={props.oninput}
+                onfocusout={props.onfocusout}
+                name={props.name}
+                type={props.type}
+                placeholder={props.placeholder}
+                value={props.value}
+                autocomplete='off'
+            />
+        );
+    } else {
+        tmpl = (
+            <input
+                class={props.class}
+                oninput={props.oninput}
+                onfocusout={props.onfocusout}
+                name={props.name}
+                type={props.type}
+                placeholder={props.placeholder}
+                autocomplete='off'
+            />
+        );
+    }
+
+    return tmpl;
 };
