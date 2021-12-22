@@ -25,7 +25,7 @@ $profile-size: 126px;
 }
 
 .match-profile__match-img_bordered {
-  animation: anim 20s infinite;
+//   animation: anim 20s infinite;
   filter: drop-shadow(0 0 3px $dark-purple) drop-shadow(0 5px 4px $light-pink)
 		drop-shadow(2px -2px 5px $dark-blue)
 		drop-shadow(0 0 3px $light-blue);
