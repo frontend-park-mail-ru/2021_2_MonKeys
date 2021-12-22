@@ -8,6 +8,7 @@ import { HTTPSuccess } from '../utils/constants/HTTPStatus.js';
 import { ProfileData } from '../store/profileStore.js';
 import { EVENTS } from './events.js';
 import { throttle } from '../utils/throttle.js';
+import { getChatRequest } from '../requests/chatRequest.js';
 
 export const ChatEventsRegister = () => {
     EventBus.register(EVENTS.CHAT_INPUT_MESSAGE, (chatID: number) => {
@@ -52,14 +53,25 @@ export const ChatEventsRegister = () => {
         }
     });
 
+    EventBus.register(EVENTS.CHAT_GET_MESSAGES, (chatID: number) => {
+        const messageID = chatsManager.getFirstMessageID(chatID);
+        getChatRequest(chatID, messageID).then((data) => {
+            if (data.status !== HTTPSuccess) {
+                throw 'bad request';
+            }
+
+            chatsManager.updateChatMessages(chatID, data.body.Messages);
+        });
+    });
+
     EventBus.register(EVENTS.CHAT_BACK_BUTTON, (chatID: number) => {
         chatsManager.closeChat(chatID);
         router.go('/chats');
     });
+
     const chatSearchThreshhold = 1000;
     EventBus.register(
         EVENTS.CHAT_SEARCH,
-
         throttle(() => {
             const _searchInput = document.getElementsByTagName('input')[0];
             const searchTmpl = _searchInput.value.trim() + '%';

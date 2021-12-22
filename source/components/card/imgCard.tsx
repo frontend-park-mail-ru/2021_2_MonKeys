@@ -13,7 +13,7 @@ export interface ProfileCardProps {
 }
 
 export const ImgCard = (props: ProfileCardProps) => {
-    const nameAge = props.userData.name + ', ' + props.userData.age;
+    // const nameAge = props.userData.name + ', ' + props.userData.age;
     let sizeModificator: string;
     switch (props.size) {
         case 'small':
@@ -38,19 +38,21 @@ export const ImgCard = (props: ProfileCardProps) => {
     ) : (
         <div></div>
     );
-
     return (
         <div class={'img-card img-card' + sizeModificator}>
-            {/* {ImgCarousel(props.userData.imgs, true)} */}
             {ImgCarousel(props.userData.imgs, 'img-card__img img-card__img' + sizeModificator)}
             <div class={'img-card__bottom-panel img-card__bottom-panel' + sizeModificator}>
                 <div class={'img-card__short-desc img-card__short-desc' + sizeModificator}>
-                    <div class={'img-card__name-age img-card__name-age' + sizeModificator}>{nameAge}</div>
+                    {/* <div class={'img-card__name-age img-card__name-age' + sizeModificator}>{nameAge}</div> */}
+                    <div class='card-bottom-panel__name'>
+                        <div class='card-bottom-panel__name__name'>{props.userData.name}</div>
+                        <div class='card-bottom-panel__name__age'>{props.userData.age}</div>
+                    </div>
                     {ReportTmpl}
                 </div>
                 {cardActionsTmpl}
-                {/* {CardActions({ userID: props.userData.id, expend: props.expanded, feed: props.feed })} */}
             </div>
+            {/* {blurTmpl} */}
         </div>
     );
 };

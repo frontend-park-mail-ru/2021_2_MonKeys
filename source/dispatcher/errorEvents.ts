@@ -5,6 +5,7 @@ import { EVENTS } from './events.js';
 export const ErrorEventsRegister = () => {
     EventBus.register(EVENTS.ERROR_OK_BUTTON, () => {
         errorManager.deleteAPIError();
+        errorManager.deleteAPIErrorPhotoLoad();
         return;
     });
 };

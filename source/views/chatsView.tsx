@@ -25,6 +25,17 @@ export default class ChatsView extends ViewBase {
         matchRequest().then((data) => {
             const matchesData = MatchesStore.get();
             matchesData.matches = data.body.allUsers;
+            for (const key in matchesData.matches) {
+                matchesData.matches[key].isNew = true;
+            }
+            const chatsData = ChatsStore.get();
+            for (let i = 0; i < chatsData.chats.length; i++) {
+                for (const key in matchesData.matches) {
+                    if (matchesData.matches[key].id === chatsData.chats[i].fromUserID) {
+                        matchesData.matches[key].isNew = false;
+                    }
+                }
+            }
             matchesData.matchesTotal = data.body.matchesCount;
             MatchesStore.set(matchesData);
         });

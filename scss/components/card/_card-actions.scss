@@ -3,27 +3,27 @@
   height: 36px;
 }
 
-.actions{
+.actions {
   display: flex;
   justify-content: center;
 }
 
-.actions__button-dislike{
+.actions__button-dislike {
   @include icon-button();
 }
 
-.actions__button-expand{
+.actions__button-expand {
   @include icon-button();
 
-  margin: 0px 36px;
+  margin: 0px 24px;
 }
 
-.actions__button-shrink{
+.actions__button-shrink {
   @include icon-button();
 
-  margin: 0px 36px;
+  margin: 0px 24px;
 }
 
-.actions__button-like{
+.actions__button-like {
   @include icon-button();
 }

@@ -1,11 +1,13 @@
 import { ProfileData } from './profileStore.js';
 import BaseStore from './storeBase.js';
 
-export type MatchProfile = ProfileData;
+export interface MatchesProfile extends ProfileData {
+    isNew: boolean;
+}
 
 export interface MatchData {
-    matches: Map<number, MatchProfile>;
-    matchesSearched: MatchProfile[];
+    matches: Map<number, MatchesProfile>;
+    matchesSearched: MatchesProfile[];
     matchesTotal: number;
     searching: boolean;
 }
@@ -13,7 +15,7 @@ export interface MatchData {
 const MatchesStore = new BaseStore<MatchData>();
 
 MatchesStore.set({
-    matches: new Map<number, MatchProfile>(),
+    matches: new Map<number, MatchesProfile>(),
     matchesSearched: [],
     matchesTotal: 0,
     searching: false,

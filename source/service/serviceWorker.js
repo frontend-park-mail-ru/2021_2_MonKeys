@@ -2,8 +2,11 @@ const config = {
     staticCacheItemsRegExp: /^[^]+.(min.js|js|css|svg|jpg|png|gif|woff|ico)$/,
     numbersRegExp: /\d+/,
     versionStaticRegExp: /static\d+/,
+    // mediaUrlRegExp: /http:\/\/localhost\/media*/,
+    // apiUrlRegExp: /http:\/\/localhost\/api*/,
     mediaUrlRegExp: /https:\/\/drip.monkeys.team\/media*/,
     apiUrlRegExp: /https:\/\/drip.monkeys.team\/api*/,
+    apiWSUrlRegExp: /wss:\/\/drip.monkeys.team\/api*/,
 };
 
 self.addEventListener('install', (event) => {
@@ -41,7 +44,11 @@ self.addEventListener('fetch', (event) => {
             if (response) {
                 return response;
             } else {
-                if (!config.apiUrlRegExp.test(event.request.url) && !config.mediaUrlRegExp.test(event.request.url)) {
+                if (
+                    !config.apiUrlRegExp.test(event.request.url) &&
+                    !config.apiWSUrlRegExp.test(event.request.url) &&
+                    !config.mediaUrlRegExp.test(event.request.url)
+                ) {
                     const requsetForCache = event.request.clone();
                     fetch(requsetForCache)
                         .then((networkResponse) => {

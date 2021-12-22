@@ -1,0 +1,105 @@
+
+.form__element {
+  margin: $margin-small 0;
+
+  transition: all 1s;
+}
+
+@mixin form-field($color) {
+  width: $form-field-width;
+  background: $color;
+  border-radius: 12px;
+}
+
+.form__field {
+  @include form-field($field-valid-color);
+}
+
+.form__field__invalid {
+  @include form-field($field-invalid-color);
+}
+
+.field__input {
+  font-weight: bold;
+  color: white;
+  font-size: $font-size-small;
+
+  height: 36px;
+
+  margin: 0 $margin-small;
+  padding: 0;
+}
+
+.field-gender {
+  display: flex;
+  align-items: center;
+}
+
+.field-gender__title {
+  margin: 0 $margin-small;
+}
+
+.field-gender__tag {
+  width: 60px;
+  margin: $margin-small;
+}
+
+.field-description {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-description__text {
+  height: 144px;
+  width: calc(100% - 2 * $margin-small);
+  font-weight: bold;
+  color: white;
+  font-size: $font-size-tiny;
+
+  margin: $margin-small;
+  padding: 0;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+}
+
+.box__title {
+  margin: $margin-small;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.box__title-text {
+  color: white;
+  font-size: $font-size-small;
+  white-space: nowrap;
+}
+
+.box__title-icon {
+  height: 18px;
+  width: 18px;
+}
+
+.box__body {
+  display: flex;
+}
+
+.field__tags {
+  margin: 0 $margin-small $margin-small;
+
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.field__tag {
+  margin: $margin-smallest;
+}
+
+.field__prefers {
+  margin: 0 $margin-small $margin-small;
+
+  justify-content: space-around;
+}

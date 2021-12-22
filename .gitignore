@@ -4,13 +4,15 @@
 # Deplayoment keys
 ijia.me.crt
 ijia.me.key
+star.monkeys.team.crt
+star.monkeys.team.key
 .keys/
 
 # VSCode project settings
 .vscode
 
 # Node.js
-package-lock.json
+
 node_modules
 
 # Golang

@@ -2,6 +2,7 @@ import BaseStore from './storeBase.js';
 
 export namespace errorType {
     export const apiErrorLoadCondition = 0;
+    export const apiErrorPhotoLoad = 1;
 }
 
 export class ErrorType {
@@ -35,6 +36,13 @@ class ErrorManager {
     }
     deleteAPIError() {
         this.deleteError(errorType.apiErrorLoadCondition);
+    }
+
+    pushAPIErrorPhotoLoad() {
+        this.pushError(errorType.apiErrorPhotoLoad);
+    }
+    deleteAPIErrorPhotoLoad() {
+        this.deleteError(errorType.apiErrorPhotoLoad);
     }
 
     private pushError(error: number) {

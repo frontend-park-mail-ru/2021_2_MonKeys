@@ -108,9 +108,9 @@ export const SwipeEvenetsRegister = () => {
         }
         const heart = document.querySelector<HTMLElement>('img[alt="like"]');
         const dislike = document.querySelector<HTMLElement>('img[alt="dislike"]');
-        card.style.animation = 'returnToDefault 1s ease 1';
-        heart.style.animation = 'returnToDefaultAction 1s ease 1';
-        dislike.style.animation = 'returnToDefaultAction 1s ease 1';
+        card.style.animation = 'returnToDefault 0.5s ease 1';
+        heart.style.animation = 'returnToDefaultAction 0.5s ease 1';
+        dislike.style.animation = 'returnToDefaultAction 0.5s ease 1';
 
         card.addEventListener('animationend', () => {
             const card = document.querySelectorAll<HTMLElement>('.card')[0];

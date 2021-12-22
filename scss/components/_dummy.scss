@@ -1,24 +1,31 @@
 @import '../animations/dummy';
 
-
-.view-content__dummy-image-container{
-    width: 100%;
-    flex: 1 0 auto;
-    max-height: calc(100vh - 168px - 66.4px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.view-content__dummy-image-container {
+  width: 100%;
+  flex: 1 0 auto;
+  max-height: calc(100vh - 168px - 66.4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.view-content__dummy-image{
-    width: 150px;
-    height: 150px;
-    animation: dummy-endless 5s ease infinite;
+.view-content__dummy-image {
+  width: 150px;
+  height: 150px;
+  animation: dummy-endless 5s ease infinite;
 }
 
+.view-content__dummy-text {
+  width: 100%;
+  flex: 1 0 auto;
+  max-height: calc(100vh - 168px - 66.4px);
+}
 
-.view-content__dummy-text{
-    width: 100%;
-    flex: 1 0 auto;
-    max-height: calc(100vh - 168px - 66.4px);
+.likes__dummy-payment-container {
+  width: 100%;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
 }

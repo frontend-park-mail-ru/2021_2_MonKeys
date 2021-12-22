@@ -28,6 +28,8 @@ import { chatsManager } from '../store/chatsStore.js';
 import { ReportsEventsRegister } from './reportsEvents.js';
 import { SwipeEvenetsRegister } from './swipeEvents.js';
 import { ConnectWS, initWS } from '../requests/messageWS.js';
+import { initNotifications, Notifications } from '../requests/notifications.js';
+import { preloadImageList } from '../modules/cache.js';
 
 export const enum EVENTS {
     CAROUSEL_NEXT,
@@ -35,6 +37,7 @@ export const enum EVENTS {
     CHAT_INPUT_MESSAGE,
     CHAT_SEND_BUTTON,
     CHAT_NEW_MESSAGE,
+    CHAT_GET_MESSAGES,
     CHAT_BACK_BUTTON,
     CHAT_SEARCH,
     CHAT_OPEN_PROFILE,
@@ -54,15 +57,15 @@ export const enum EVENTS {
     EDIT_TAG_CLICK,
     EDIT_GENDER_MALE_CLICK,
     EDIT_GENDER_FEMALE_CLICK,
-    EDIT_PREFER_MALE_CLICK,
-    EDIT_PREFER_FEMALE_CLICK,
-    EDIT_PREFER_ANY_CLICK,
+    EDIT_PREFER_CLICK,
     ERROR_OK_BUTTON,
     USER_COOKIE_REQUESTS,
     USER_DATA_REQUESTS,
     LIKES_EXPAND_BUTTON,
     LIKES_SHRINK_BUTTON,
     LIKES_REACTION,
+    LIKES_CHOICE_PAYMENT,
+    LIKES_PAYMENT,
     LOGIN_BUTTON_WHITE,
     LOGIN_EMAIL_INPUT,
     LOGIN_EMAIL_FOCUSOUT,
@@ -89,6 +92,7 @@ export const enum EVENTS {
     FEED_EXPAND_BUTTON,
     FEED_SHRINK_BUTTON,
     FEED_REACTION,
+    CHATS_NEW_MATCH,
 }
 
 export const InitBus = () => {
@@ -105,6 +109,12 @@ export const InitBus = () => {
                 AuthStore.set({
                     loggedIn: userStatus.loggedIn,
                 });
+                if (!profile.tags) {
+                    profile.tags = new Set();
+                }
+                if (!profile.prefer) {
+                    profile.prefer = '';
+                }
                 ProfileStore.set(profile);
 
                 eventBus.dispatch(EVENTS.USER_DATA_REQUESTS);
@@ -127,6 +137,7 @@ export const InitBus = () => {
             matchesData.matchesTotal = data.body.matchesCount;
             MatchesStore.set(matchesData);
         });
+
         userLikesRequset().then((data) => {
             const likesData = LikesStore.get();
             likesData.profiles = data.body.allUsers;
@@ -139,8 +150,15 @@ export const InitBus = () => {
 
         feedRequest().then((data) => {
             const feed = feedStore.get();
-            if (data.body !== null) {
-                feed.profiles = data.body;
+            if (data.body.Users !== null) {
+                feed.profiles = data.body.Users;
+                const imgsToCache = [];
+                feed.profiles.map((profile) => {
+                    profile.imgs.map((img) => {
+                        imgsToCache.push(img);
+                    });
+                });
+                preloadImageList(imgsToCache);
             } else {
                 feed.outOfCards = true;
             }
@@ -154,11 +172,18 @@ export const InitBus = () => {
         });
 
         getChatsRequest().then((data) => {
-            chatsManager.chats = data.body;
+            chatsManager.chats = data.body.Chats;
         });
 
         ConnectWS()
             .then(initWS)
+            .catch((err) => {
+                console.log(err);
+                throw err;
+            });
+
+        Notifications()
+            .then(initNotifications)
             .catch((err) => {
                 console.log(err);
                 throw err;

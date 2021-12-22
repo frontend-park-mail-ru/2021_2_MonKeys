@@ -1,19 +1,12 @@
 @import './variables';
 @import './colors';
 
-@mixin default-gradient{
-  background: linear-gradient(150deg, 
-    $dark-blue 0%, 
-    $light-blue 10%, 
-    $light-pink 90%, 
-    $dark-purple 100%)
-    no-repeat center center fixed;
+@mixin default-gradient {
+  background: linear-gradient(150deg, $dark-blue 0%, $light-blue 10%, $light-pink 90%, $dark-purple 100%) no-repeat
+    center center fixed;
 }
 
 @mixin background() {
   @include default-gradient;
   background-size: cover;
 }
-
-
-

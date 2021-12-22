@@ -20,7 +20,7 @@ export const ChatsEventsRegister = () => {
             }
 
             chatsManager.openChat(chatID);
-            chatsManager.updateChatMessages(chatID, data.body);
+            chatsManager.updateChatMessages(chatID, data.body.Messages);
         });
     });
 
@@ -50,5 +50,20 @@ export const ChatsEventsRegister = () => {
 
         router.go('/chat');
         window.history.replaceState('', '', '/chats');
+    });
+
+    EventBus.register(EVENTS.CHATS_NEW_MATCH, (profile: ProfileData) => {
+        const notifyMe = (profile: ProfileData) => {
+            new Notification('Это любофь!!!', {
+                body: `Взаимная симпатия с ${profile.name}`,
+                icon: 'icons/drip.svg',
+                image: profile.imgs[0],
+                vibrate: 500,
+            });
+        };
+
+        if (Notification.permission === 'granted') {
+            notifyMe(profile);
+        }
     });
 };

@@ -2,7 +2,7 @@
   height: 100%;
   width: 100%;
   max-width: $max-width;
-  
+
   display: flex;
   flex-direction: column;
 }
@@ -13,6 +13,7 @@
   margin-top: $margin-medium;
   margin-left: $margin-small;
   margin-right: $margin-small;
+  margin-bottom: $margin-small;
 
   display: flex;
   flex-direction: row;
@@ -35,13 +36,11 @@
   margin-right: 36px;
 }
 
-.edit__scroll {
-  overflow-y: scroll;
-}
-
 .edit__form {
   width: 100%;
   flex: 1 1 auto;
+
+  overflow-y: scroll;
 
   display: flex;
   flex-direction: column;
@@ -56,6 +55,11 @@
   justify-content: center;
 }
 
+.edit__save-button-space {
+  min-height: 70px;
+}
+
 .edit__save-button {
-    margin: $margin-small 0px;
+  margin: -50px 0px;
+  z-index: 1;
 }

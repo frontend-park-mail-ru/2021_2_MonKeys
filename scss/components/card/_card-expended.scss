@@ -4,16 +4,16 @@ $card-expanded-default-width: 100%;
 $card-expanded-default-height: 100%;
 $card-expanded-img-default-height: 100%;
 
-
 .card-expended {
   height: 100%;
   max-height: $max-height;
   width: 100%;
   flex: 1 1 auto;
   position: relative;
+  margin-bottom: 12px;
 }
 
-.card-expended-chats-wide{
+.card-expended-chats-wide {
   display: flex;
   align-items: center;
   width: 300px;
@@ -22,6 +22,7 @@ $card-expanded-img-default-height: 100%;
 .card-expended__profile {
   height: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
 
   background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.4) 0%, rgba(0, 44, 65, 0) 100%);
   backdrop-filter: blur(20px);
@@ -34,6 +35,11 @@ $card-expanded-img-default-height: 100%;
 .card-expended__profile-chats-wide {
   height: 70vh;
   width: 90%;
+  overflow-x: hidden;
+}
+
+.card-expended__profilie-data {
+  min-height: 33%;
 }
 
 .card-expended__description {
@@ -45,7 +51,15 @@ $card-expanded-img-default-height: 100%;
   font-size: $font-size-tiny;
   line-height: 24px;
 
-  color: #FFFFFF;
+  color: #ffffff;
+}
+
+
+.card-expended__tags {
+  margin: $margin-small;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .card-expended__back-button {
@@ -54,14 +68,9 @@ $card-expanded-img-default-height: 100%;
   width: 100%;
 }
 
+
 .card-expended__report-button {
   display: flex;
   justify-content: center;
   width: 100%;
-}
-
-.report-window__problems-buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }

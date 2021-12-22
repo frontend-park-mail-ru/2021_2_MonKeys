@@ -1,0 +1,125 @@
+name: CI/CD
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+      - dev
+  workflow_dispatch:
+
+jobs:
+  eslint-prettier:
+      runs-on: ubuntu-latest
+
+      strategy:
+        matrix:
+          node-version: [16.x]
+
+      steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Build
+        run: |
+          npm ci
+          npm run eslint
+          npm run prettier-check
+
+  build-rollup:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Build
+      run: |
+        npm ci
+        npm run build
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    
+    - name: Install TypeScript
+      run: |
+           npm install -g typescript
+           tsc --version
+      
+
+    - name: Build
+      run: tsc
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+    if:
+      contains('
+          refs/heads/development
+        ', github.ref)
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Setup Deployment Key
+      run: set -eu &&
+           mkdir "$HOME/.ssh" &&
+           echo "${{ secrets.DEPLOYMENT_KEY }}" > "$HOME/.ssh/key" &&
+           chmod 600 "$HOME/.ssh/key"
+    
+    - name: Update SSL keys
+      run: echo "${{secrets.SSL_KEY}}" > star.monkeys.team.key &&
+           echo "${{secrets.SSL_CRT}}" > star.monkeys.team.crt
+  
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build
+      run: npm run build
+    
+    - name: Send to server
+      run: sudo rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --omit-dir-times --no-perms --delete . root@drip.monkeys.team:~/../home/fro/
+    
+    - name: send telegram message on push
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+            Commit message: ${{ github.event.commits[0].message }}
+            Repository: ${{ github.repository }}
+            Continious deployment of ${{ github.event.commits[0].message }} ended
+            GitHub checks: https://github.com/frontend-park-mail-ru/2021_2_MonKeys/commit/${{github.sha}}/checks
+            Deploy link: https://drip.monkeys.team

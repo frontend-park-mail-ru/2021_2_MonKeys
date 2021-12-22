@@ -72,6 +72,13 @@ export default class SignupView extends ViewBase {
                 type: 'button',
                 text: 'Регистрация',
                 class: 'button-white-big',
+                onkeypress: (event) => {
+                    const enterKeyCode = 13;
+                    if (event.keyCode === enterKeyCode) {
+                        event.preventDefault();
+                        EventBus.dispatch<number>(EVENTS.SIGNUP_SIGNUP_BUTTON);
+                    }
+                },
                 onclick: () => {
                     EventBus.dispatch<string>(EVENTS.SIGNUP_SIGNUP_BUTTON);
                 },

@@ -1,6 +1,6 @@
 $span-line-height: 42px;
 
-$match-min-height: 114px;
+$match-min-height: 138px;
 
 .chats {
   height: 100%;
@@ -18,7 +18,6 @@ $match-min-height: 114px;
 }
 
 .chats__search-form {
-
 }
 
 .chats__matches {
@@ -30,7 +29,7 @@ $match-min-height: 114px;
   font-size: $font-size-medium;
   line-height: $span-line-height;
 
-  color: #FFFFFF;
+  color: #ffffff;
 
   margin-left: $margin-medium;
 }
@@ -39,10 +38,12 @@ $match-min-height: 114px;
   min-height: $match-min-height;
   display: flex;
   flex-direction: row;
+  align-items: center;
 
   overflow-x: scroll;
 
   margin-left: $margin-medium;
+  padding-left: 6px;
 }
 
 .chats__chats {
@@ -58,7 +59,7 @@ $match-min-height: 114px;
   font-size: $font-size-medium;
   line-height: $span-line-height;
 
-  color: #FFFFFF;
+  color: #ffffff;
 
   margin-left: $margin-medium;
 }
