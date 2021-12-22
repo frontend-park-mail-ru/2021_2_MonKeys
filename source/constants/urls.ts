@@ -9,6 +9,7 @@ export const notificationsURL = `wss://${domain}/api/v1/notifications`;
 
 export const profileURL = '/api/v1/profile';
 export const tagsURL = '/api/v1/tags';
+
 export const sessionURL = '/api/v1/session';
 export const feedURL = '/api/v1/user/cards';
 export const likesURL = '/api/v1/likes';
