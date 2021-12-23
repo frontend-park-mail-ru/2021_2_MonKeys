@@ -72,18 +72,60 @@ export const NameField = (data) => {
 };
 
 export const DateField = (data) => {
-    const dateProps: FormFieldInputProps = {
+    const birthDate = data.date;
+    let birthDay = '';
+    let birthMonth = '';
+    let birthYear = '';
+    if (birthDate) {
+        const dates = birthDate.split('-');
+        birthYear = dates[0];
+        birthMonth = dates[1];
+        birthDay = dates[2];
+    }
+    const dayProps: FormFieldInputProps = {
         oninput: () => {
-            EventBus.dispatch<string>(EVENTS.EDIT_BIRTH_DATE_INPUT);
+            EventBus.dispatch<string>(EVENTS.EDIT_BIRTH_DAY_INPUT);
         },
         onfocusout: () => {
-            EventBus.dispatch<string>(EVENTS.EDIT_BIRTH_DATE_FOCUSOUT);
+            EventBus.dispatch<string>(EVENTS.EDIT_BIRTH_DAY_FOCUSOUT);
         },
-        name: 'birthDate',
-        // iconSrc: 'icons/calendar.svg', TODO date
-        type: 'date',
-        value: data.date,
-        class: 'field__input',
+        name: 'birthDay',
+        type: 'text',
+        value: birthDay,
+        placeholder: 'дд',
+        class: 'field__input field__input_small field__input_border-right field__input_align-center',
+        maxlength: 2,
+        pattern: 'd*',
+    };
+    const monthProps: FormFieldInputProps = {
+        oninput: () => {
+            EventBus.dispatch<string>(EVENTS.EDIT_BIRTH_MONTH_INPUT);
+        },
+        onfocusout: () => {
+            EventBus.dispatch<string>(EVENTS.EDIT_BIRTH_MONTH_FOCUSOUT);
+        },
+        name: 'birthMonth',
+        type: 'text',
+        value: birthMonth,
+        placeholder: 'мм',
+        class: 'field__input field__input_small field__input_border-right field__input_align-center',
+        maxlength: 2,
+        pattern: 'd*',
+    };
+    const yearProps: FormFieldInputProps = {
+        oninput: () => {
+            EventBus.dispatch<string>(EVENTS.EDIT_BIRTH_YEAR_INPUT);
+        },
+        onfocusout: () => {
+            EventBus.dispatch<string>(EVENTS.EDIT_BIRTH_YEAR_FOCUSOUT);
+        },
+        name: 'birthYear',
+        type: 'text',
+        value: birthYear,
+        placeholder: 'гггг',
+        class: 'field__input field__input_medium field__input_align-center',
+        maxlength: 4,
+        pattern: 'd*',
     };
 
     const error = {
@@ -92,7 +134,14 @@ export const DateField = (data) => {
     };
 
     return BaseField({
-        fieldTmpl: FormFieldInput(dateProps),
+        fieldTmpl: (
+            <div>
+                <img src='icons/calendar.svg' class='data-icon' />
+                {FormFieldInput(dayProps)}
+                {FormFieldInput(monthProps)}
+                {FormFieldInput(yearProps)}
+            </div>
+        ),
         classField: '',
         error: error,
         anchor: 'date',

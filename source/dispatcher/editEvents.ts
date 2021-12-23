@@ -42,23 +42,64 @@ export const EditEventRegister = () => {
         EditStore.set(editStore);
     });
 
-    EventBus.register(EVENTS.EDIT_BIRTH_DATE_INPUT, () => {
-        const _dateInput = document.getElementsByTagName('input')[1];
+    EventBus.register(EVENTS.EDIT_BIRTH_DAY_INPUT, () => {
+        const editStore = EditStore.get();
+        editStore.birthDateFieldStatus = FieldStatus.Hint;
+        EditStore.set(editStore);
+    });
+    EventBus.register(EVENTS.EDIT_BIRTH_DAY_FOCUSOUT, () => {
+        const _dayInput = document.getElementsByTagName('input')[1];
+        const _monthInput = document.getElementsByTagName('input')[2];
+        const _yearInput = document.getElementsByTagName('input')[3];
+        const _dateInput = _yearInput.value + '-' + _monthInput.value + '-' + _dayInput.value;
 
         const editStore = EditStore.get();
 
         const test = validDate(_dateInput);
 
         if (!test) {
-            editStore.birthDateFieldStatus = FieldStatus.Hint;
+            editStore.birthDateFieldStatus = FieldStatus.Error;
         } else {
             editStore.birthDateFieldStatus = FieldStatus.Correct;
         }
 
         EditStore.set(editStore);
     });
-    EventBus.register(EVENTS.EDIT_BIRTH_DATE_FOCUSOUT, () => {
-        const _dateInput = document.getElementsByTagName('input')[1];
+
+    EventBus.register(EVENTS.EDIT_BIRTH_MONTH_INPUT, () => {
+        const editStore = EditStore.get();
+        editStore.birthDateFieldStatus = FieldStatus.Hint;
+        EditStore.set(editStore);
+    });
+    EventBus.register(EVENTS.EDIT_BIRTH_MONTH_FOCUSOUT, () => {
+        const _dayInput = document.getElementsByTagName('input')[1];
+        const _monthInput = document.getElementsByTagName('input')[2];
+        const _yearInput = document.getElementsByTagName('input')[3];
+        const _dateInput = _yearInput.value + '-' + _monthInput.value + '-' + _dayInput.value;
+
+        const editStore = EditStore.get();
+
+        const test = validDate(_dateInput);
+
+        if (!test) {
+            editStore.birthDateFieldStatus = FieldStatus.Error;
+        } else {
+            editStore.birthDateFieldStatus = FieldStatus.Correct;
+        }
+
+        EditStore.set(editStore);
+    });
+
+    EventBus.register(EVENTS.EDIT_BIRTH_YEAR_INPUT, () => {
+        const editStore = EditStore.get();
+        editStore.birthDateFieldStatus = FieldStatus.Hint;
+        EditStore.set(editStore);
+    });
+    EventBus.register(EVENTS.EDIT_BIRTH_YEAR_FOCUSOUT, () => {
+        const _dayInput = document.getElementsByTagName('input')[1];
+        const _monthInput = document.getElementsByTagName('input')[2];
+        const _yearInput = document.getElementsByTagName('input')[3];
+        const _dateInput = _yearInput.value + '-' + _monthInput.value + '-' + _dayInput.value;
 
         const editStore = EditStore.get();
 
@@ -210,14 +251,17 @@ export const EditEventRegister = () => {
         // ----
 
         // Date
-        const _dateInput = document.getElementsByTagName('input')[1];
+        const _dayInput = document.getElementsByTagName('input')[1];
+        const _monthInput = document.getElementsByTagName('input')[2];
+        const _yearInput = document.getElementsByTagName('input')[3];
+        const _dateInput = _yearInput.value + '-' + _monthInput.value + '-' + _dayInput.value;
         if (!validDate(_dateInput)) {
             editStore.birthDateFieldStatus = FieldStatus.Error;
             EditStore.set(editStore);
             validForm = false;
             updateGoto('#date');
         }
-        const date = _dateInput.value.trim();
+        const date = _dateInput.trim();
         // ----
 
         // Gender

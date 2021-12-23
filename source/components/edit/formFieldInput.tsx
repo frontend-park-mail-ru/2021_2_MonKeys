@@ -8,10 +8,15 @@ export interface FormFieldInputProps {
     oninput?;
     onfocusout?;
     placeholder?: string;
+    maxlength?: number;
+    pattern?: string;
 }
 
 export const FormFieldInput = (props: FormFieldInputProps) => {
     let tmpl;
+    const defaultMaxLength = 20;
+    const maxLength = props.maxlength ? props.maxlength : defaultMaxLength;
+
     if (props.value !== '') {
         tmpl = (
             <input
@@ -23,6 +28,8 @@ export const FormFieldInput = (props: FormFieldInputProps) => {
                 placeholder={props.placeholder}
                 value={props.value}
                 autocomplete='off'
+                maxlength={maxLength}
+                pattern={props.pattern}
             />
         );
     } else {
@@ -35,6 +42,8 @@ export const FormFieldInput = (props: FormFieldInputProps) => {
                 type={props.type}
                 placeholder={props.placeholder}
                 autocomplete='off'
+                maxlength={maxLength}
+                pattern={props.pattern}
             />
         );
     }

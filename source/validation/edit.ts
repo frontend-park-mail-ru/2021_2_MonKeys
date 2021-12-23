@@ -11,7 +11,7 @@ export const validImgType = (Img) => {
 };
 
 export const validDate = (dateInput) => {
-    const dateStr = dateInput.value.toString() + 'T00:00:00.730Z';
+    const dateStr = dateInput + 'T00:00:00.730Z';
     const date = new Date(dateStr);
 
     const year = date.getFullYear();
