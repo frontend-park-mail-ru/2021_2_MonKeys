@@ -54,12 +54,20 @@ $card-expanded-img-default-height: 100%;
   color: #ffffff;
 }
 
-
 .card-expended__tags {
   margin: $margin-small;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: start;
+}
+
+.card-expended__tag {
+  border: 1px solid white;
+  font-size: 12px;
+  text-align: center;
+  border-radius: 12px;
+  padding: 6px;
+  margin: 6px;
 }
 
 .card-expended__back-button {
