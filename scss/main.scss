@@ -68,6 +68,14 @@ input {
   font-family: $font-default, sans-serif;
 }
 
+button {
+  cursor: pointer;
+}
+
+div {
+  cursor: default;
+}
+
 ::-webkit-scrollbar {
   display: none;
   scroll-behavior: smooth;

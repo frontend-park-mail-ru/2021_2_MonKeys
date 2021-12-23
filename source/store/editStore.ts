@@ -53,15 +53,15 @@ const initData = {
         open: false,
         tags: [
             {
-                tag: 'аниме',
-                selected: false,
-            },
-            {
                 tag: 'рок',
                 selected: false,
             },
             {
-                tag: 'игры',
+                tag: 'аниме',
+                selected: false,
+            },
+            {
+                tag: 'комедии',
                 selected: false,
             },
             {
@@ -72,6 +72,22 @@ const initData = {
                 tag: 'наука',
                 selected: false,
             },
+            {
+                tag: 'футбол',
+                selected: false,
+            },
+            {
+                tag: 'рэп',
+                selected: false,
+            },
+            {
+                tag: 'игры',
+                selected: false,
+            },
+            // {
+            //     tag: 'джаз',
+            //     selected: false,
+            // },
         ],
     },
 
