@@ -34,15 +34,15 @@ const nav = (length, selectedID) => {
 };
 
 export const CarouselButton = (props) => {
-  if (!props.alt) {
-    props.alt = 'untracked';
-  }
+    if (!props.alt) {
+        props.alt = 'untracked';
+    }
 
-  return (
-    <div class={`carousel-nav__${props.position}`} onclick={props.onclick} >
-      <img src={props.src} class={`carousel-button-${props.position}`} alt={props.alt} />
-    </div>
-  );
+    return (
+        <div class={`carousel-nav__${props.position}`} onclick={props.onclick}>
+            <img src={props.src} class={`carousel-button-${props.position}`} alt={props.alt} />
+        </div>
+    );
 };
 
 export const ImgCarousel = (props: string[], sizeClass: string) => {
@@ -62,31 +62,31 @@ export const ImgCarousel = (props: string[], sizeClass: string) => {
     if (sizeClass === 'img-card__img img-card__img_size_small') {
         return (
             <div class={sizeClass}>
-                    <img
-                        src={props[0]}
-                        class={sizeClass}
-                        ondragstart={() => {
-                            return false;
-                        }}
-                    />
+                <img
+                    src={props[0]}
+                    class={sizeClass}
+                    ondragstart={() => {
+                        return false;
+                    }}
+                />
             </div>
         );
     }
     return (
         <div class={sizeClass}>
             <div class='carousel-nav__arrows'>
-              {conditionalRendering(CarouselButton(LButtonProps), !firstCard)}
-              {conditionalRendering(CarouselButton(RButtonProps), !lastCard)}
+                {conditionalRendering(CarouselButton(LButtonProps), !firstCard)}
+                {conditionalRendering(CarouselButton(RButtonProps), !lastCard)}
             </div>
             <div class='carousel-nav'>
                 {conditionalRendering(nav(props.length, window.currentSelectedCarouselItem), !oneCard)}
             </div>
             <img
-              src={props[window.currentSelectedCarouselItem]}
-              class={sizeClass}
-              ondragstart={() => {
-                  return false;
-              }}
+                src={props[window.currentSelectedCarouselItem]}
+                class={sizeClass}
+                ondragstart={() => {
+                    return false;
+                }}
             />
         </div>
     );
