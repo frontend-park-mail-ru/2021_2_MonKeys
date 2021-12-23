@@ -17,13 +17,13 @@
 
 @media (max-aspect-ratio: 10/10) {
   .carousel-nav__arrows {
-    height: 30px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 95vw;
+    height: 60%;
+    width: 100%;
+
     position: absolute;
-    top: 25%;
+
+    display: flex;
+    justify-content: space-between;
   }
 }
 
@@ -46,8 +46,9 @@
 .side-small {
   top: 20%;
 }
+
 .carousel-button-nav {
-  height: 6px;
+  height: 3px;
   top: 50%;
   background: black;
   flex-grow: 1;
@@ -57,7 +58,7 @@
 }
 
 .carousel-button-nav.current-slide {
-  height: 6px;
+  height: 3px;
   top: 50%;
   background: black;
   filter: invert(1) grayscale(1) brightness(1);
@@ -73,6 +74,24 @@
   margin: 6px;
 }
 
+.carousel-nav__left {
+  height: 100%;
+  width: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.carousel-nav__right {
+  height: 100%;
+  width: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .card__img {
   object-fit: cover;
   width: 100%;
@@ -80,13 +99,13 @@
   height: 100%;
 }
 
-.carousel-button-right {
+.carousel-button-left {
   padding: $margin-small;
   width: 24px;
   height: 24px;
 }
 
-.carousel-button-left {
+.carousel-button-right {
   padding: $margin-small;
   width: 24px;
   height: 24px;

@@ -33,6 +33,7 @@ export const CardExpended = (props: CardExpendedProps) => {
     } else {
         tagField = <div class='flex_box_row_left'></div>;
     }
+
     const descExists = props.userData.description !== undefined ? true : false;
     let descField: HTMLCollection;
     if (descExists) {
@@ -40,6 +41,7 @@ export const CardExpended = (props: CardExpendedProps) => {
     } else {
         descField = <div class='card-expended__description'></div>;
     }
+
     let imgTmpl: HTMLAllCollection;
     if (props.feed) {
         imgTmpl = ImgCard({
@@ -57,6 +59,7 @@ export const CardExpended = (props: CardExpendedProps) => {
             expanded: false,
         });
     }
+
     const reportButtonAction = () => {
         EventBus.dispatch<string>(EVENTS.REPORTS_REPORT_BUTTON);
     };
@@ -67,11 +70,13 @@ export const CardExpended = (props: CardExpendedProps) => {
     ) : (
         <div></div>
     );
+
     const reportWindowTmpl = props.withReports ? (
         ReportWindow({ reports: props.reports, reportedUserID: props.userData.id, visible: props.reported })
     ) : (
         <div></div>
     );
+
     if (props.chats) {
         return (
             <div class='card-expended card-expended-chats-wide'>
@@ -92,7 +97,7 @@ export const CardExpended = (props: CardExpendedProps) => {
             {reportWindowTmpl}
             <div class='card-expended__profile'>
                 {imgTmpl}
-                <div class='card-expended__profilie-data'>
+                <div class='card-expended__profile-data'>
                     {descField}
                     {tagField}
                 </div>

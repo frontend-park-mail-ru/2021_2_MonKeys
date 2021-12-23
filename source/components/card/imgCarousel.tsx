@@ -1,12 +1,11 @@
 import eventBus from '../../dispatcher/eventBus.js';
 import { MonkeysVirtualDOM } from '../../virtualDOM/virtualDOM.js';
-import { IconButton } from '../common/iconButton.js';
 import { conditionalRendering } from '../../utils/tsxTools/jsxTools.js';
 import { EVENTS } from '../../dispatcher/events.js';
 
 const LButtonProps = {
+    position: 'left',
     type: 'button',
-    class: 'carousel-button-left',
     src: 'icons/carousel_left.svg',
     onclick: () => {
         eventBus.dispatch(EVENTS.CAROUSEL_PREVIOUS);
@@ -14,8 +13,8 @@ const LButtonProps = {
 };
 
 const RButtonProps = {
+    position: 'right',
     type: 'button',
-    class: 'carousel-button-right',
     src: 'icons/carousel_right.svg',
     onclick: () => {
         eventBus.dispatch(EVENTS.CAROUSEL_NEXT);
@@ -32,6 +31,18 @@ const nav = (length, selectedID) => {
         }
     }
     return items;
+};
+
+export const CarouselButton = (props) => {
+  if (!props.alt) {
+    props.alt = 'untracked';
+  }
+
+  return (
+    <div class={`carousel-nav__${props.position}`} onclick={props.onclick} >
+      <img src={props.src} class={`carousel-button-${props.position}`} alt={props.alt} />
+    </div>
+  );
 };
 
 export const ImgCarousel = (props: string[], sizeClass: string) => {
@@ -51,7 +62,6 @@ export const ImgCarousel = (props: string[], sizeClass: string) => {
     if (sizeClass === 'img-card__img img-card__img_size_small') {
         return (
             <div class={sizeClass}>
-                {
                     <img
                         src={props[0]}
                         class={sizeClass}
@@ -59,28 +69,25 @@ export const ImgCarousel = (props: string[], sizeClass: string) => {
                             return false;
                         }}
                     />
-                }
             </div>
         );
     }
     return (
         <div class={sizeClass}>
-            {
-                <img
-                    src={props[window.currentSelectedCarouselItem]}
-                    class={sizeClass}
-                    ondragstart={() => {
-                        return false;
-                    }}
-                />
-            }
             <div class='carousel-nav__arrows'>
-                {conditionalRendering(IconButton(LButtonProps), !firstCard)}
-                {conditionalRendering(IconButton(RButtonProps), !lastCard)}
+              {conditionalRendering(CarouselButton(LButtonProps), !firstCard)}
+              {conditionalRendering(CarouselButton(RButtonProps), !lastCard)}
             </div>
             <div class='carousel-nav'>
                 {conditionalRendering(nav(props.length, window.currentSelectedCarouselItem), !oneCard)}
             </div>
+            <img
+              src={props[window.currentSelectedCarouselItem]}
+              class={sizeClass}
+              ondragstart={() => {
+                  return false;
+              }}
+            />
         </div>
     );
 };

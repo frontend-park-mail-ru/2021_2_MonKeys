@@ -72,6 +72,10 @@ button {
   cursor: pointer;
 }
 
+div {
+  cursor: default;
+}
+
 ::-webkit-scrollbar {
   display: none;
   scroll-behavior: smooth;
