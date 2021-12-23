@@ -11,6 +11,10 @@ export interface ProfileData {
     imgs: string[];
     tags: Set<string>;
     reportStatus: string;
+
+    birthDay: string;
+    birthMonth: string;
+    birthYear: string;
 }
 
 const ProfileStore = new BaseStore<ProfileData>();
@@ -26,6 +30,10 @@ ProfileStore.set({
     imgs: [],
     tags: new Set(),
     reportStatus: '',
+
+    birthDay: '',
+    birthMonth: '',
+    birthYear: '',
 });
 
 export { ProfileStore };

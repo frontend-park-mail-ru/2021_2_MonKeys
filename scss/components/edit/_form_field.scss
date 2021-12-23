@@ -26,8 +26,32 @@
 
   height: 36px;
 
-  margin: 0 $margin-small;
+  // margin: 0 $margin-small;
+  margin-left: $margin-small;
   padding: 0;
+}
+
+.data-icon {
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.field__input_small {
+  margin-left: 6px;
+  width: 24px;
+}
+
+.field__input_medium {
+  margin-left: 6px;
+  width: 48px;
+}
+
+// .field__input_border-right {
+//   border-right: 2px solid $light-grey;
+// }
+
+.field__input_align-center {
+  text-align: center;
 }
 
 .field-gender {
