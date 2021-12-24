@@ -42,6 +42,6 @@ export const OpeningBox = ({ titleText, isOpen, eventOpening, bodyItems, bodyCla
         titleTmpl: titleTmpl,
         titleClass: '',
         bodyTmpl: itemsTmpl,
-        bodyClass: `box__body__slide ${ isOpen ? bodyClass : '' }`,
+        bodyClass: `box__body__slide ${isOpen ? bodyClass : ''}`,
     });
 };
