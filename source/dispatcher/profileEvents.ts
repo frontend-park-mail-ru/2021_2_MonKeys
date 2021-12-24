@@ -6,6 +6,8 @@ import AuthStore from '../store/authStore.js';
 import { userStatus } from '../constants/userStatus.js';
 import feedStore from '../store/feedStore.js';
 import { EVENTS } from './events.js';
+import { EditStore, FieldStatus, Gender } from '../store/editStore.js';
+import { ProfileStore } from '../store/profileStore.js';
 
 export const ProfileEventsRegister = () => {
     EventBus.register(EVENTS.PROFILE_EDIT_BUTTON, () => {
@@ -20,13 +22,98 @@ export const ProfileEventsRegister = () => {
             if (data.status !== HTTPSuccess) {
                 throw 'bad response';
             }
+
+            router.go('/login');
+
+            EditStore.set({
+                nameFieldStatus: FieldStatus.Correct,
+                birthDateFieldStatus: FieldStatus.Correct,
+                genderFieldStatus: FieldStatus.Correct,
+                preferFieldStatus: FieldStatus.Correct,
+                imgFieldStatus: FieldStatus.Correct,
+
+                gender: Gender.NotSelected,
+
+                tagsField: {
+                    open: false,
+                    tags: [
+                        {
+                            tag: 'рок',
+                            selected: false,
+                        },
+                        {
+                            tag: 'аниме',
+                            selected: false,
+                        },
+                        {
+                            tag: 'комедии',
+                            selected: false,
+                        },
+                        {
+                            tag: 'спорт',
+                            selected: false,
+                        },
+                        {
+                            tag: 'наука',
+                            selected: false,
+                        },
+                        {
+                            tag: 'футбол',
+                            selected: false,
+                        },
+                        {
+                            tag: 'рэп',
+                            selected: false,
+                        },
+                        {
+                            tag: 'игры',
+                            selected: false,
+                        },
+                    ],
+                },
+
+                preferField: {
+                    prefers: [
+                        {
+                            value: 'Мужчину',
+                            tag: 'male',
+                            selected: false,
+                        },
+                        {
+                            value: 'Женщину',
+                            tag: 'female',
+                            selected: false,
+                        },
+                        {
+                            value: 'Все равно',
+                            tag: '',
+                            selected: false,
+                        },
+                    ],
+                },
+            });
             feedStore.set({
                 profiles: undefined,
                 counter: 0,
                 outOfCards: false,
                 expanded: false,
             });
-            router.go('/login');
+            ProfileStore.set({
+                id: -1,
+                name: '',
+                gender: '',
+                prefer: '',
+                age: '',
+                date: '',
+                description: '',
+                imgs: [],
+                tags: new Set(),
+                reportStatus: '',
+
+                birthDay: '',
+                birthMonth: '',
+                birthYear: '',
+            });
         });
     });
 };

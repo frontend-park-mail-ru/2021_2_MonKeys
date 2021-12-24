@@ -84,10 +84,6 @@ const initData = {
                 tag: 'игры',
                 selected: false,
             },
-            // {
-            //     tag: 'джаз',
-            //     selected: false,
-            // },
         ],
     },
 
