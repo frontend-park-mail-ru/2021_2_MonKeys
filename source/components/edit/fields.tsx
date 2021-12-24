@@ -93,7 +93,7 @@ export const DateField = (data) => {
         type: 'text',
         value: birthDay,
         placeholder: 'дд',
-        class: 'field__input field__input_small field__input_border-right field__input_align-center',
+        class: 'field__input field-data__day',
         maxlength: 2,
         pattern: 'd*',
     };
@@ -108,7 +108,7 @@ export const DateField = (data) => {
         type: 'text',
         value: birthMonth,
         placeholder: 'мм',
-        class: 'field__input field__input_small field__input_border-right field__input_align-center',
+        class: 'field__input  field-data__month',
         maxlength: 2,
         pattern: 'd*',
     };
@@ -123,7 +123,7 @@ export const DateField = (data) => {
         type: 'text',
         value: birthYear,
         placeholder: 'гггг',
-        class: 'field__input field__input_medium field__input_align-center',
+        class: 'field__input field-data__year',
         maxlength: 4,
         pattern: 'd*',
     };
@@ -135,8 +135,8 @@ export const DateField = (data) => {
 
     return BaseField({
         fieldTmpl: (
-            <div>
-                <img src='icons/calendar.svg' class='data-icon' />
+            <div class='field-data'>
+                <img src='icons/calendar.svg' class='field-data__icon' />
                 {FormFieldInput(dayProps)}
                 {FormFieldInput(monthProps)}
                 {FormFieldInput(yearProps)}

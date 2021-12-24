@@ -55,6 +55,7 @@
   border-radius: 12px;
   filter: invert(1) grayscale(1) brightness(0.5);
   margin: 0 3px;
+  transition: filter 0.4s;
 }
 
 .carousel-button-nav.current-slide {

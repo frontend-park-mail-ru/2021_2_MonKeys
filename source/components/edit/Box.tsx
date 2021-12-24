@@ -24,13 +24,14 @@ export const Box = ({ titleText, bodyItems, bodyClass = '' }) => {
 
 export const OpeningBox = ({ titleText, isOpen, eventOpening, bodyItems, bodyClass = '' }) => {
     const src = isOpen ? 'icons/shrink.svg' : 'icons/expand_big.svg';
+    const classIcon = isOpen ? 'box__title-icon' : 'box__title-icon__shrink';
     const onclick = () => {
         eventBus.dispatch(eventOpening);
     };
 
     const titleTmpl = [];
     titleTmpl.push(<span class='box__title-text'>{titleText}</span>);
-    titleTmpl.push(<img class='box__title-icon' src={src} onclick={onclick} />);
+    titleTmpl.push(<img class={classIcon} src={src} onclick={onclick} />);
 
     const itemsTmpl = [];
     if (isOpen) {
@@ -41,6 +42,6 @@ export const OpeningBox = ({ titleText, isOpen, eventOpening, bodyItems, bodyCla
         titleTmpl: titleTmpl,
         titleClass: '',
         bodyTmpl: itemsTmpl,
-        bodyClass: isOpen ? bodyClass : '',
+        bodyClass: `box__body__slide ${ isOpen ? bodyClass : '' }`,
     });
 };
