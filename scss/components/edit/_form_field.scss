@@ -49,15 +49,15 @@
 }
 
 .field-data__day {
-  @include field-data(24px);
+  @include field-data(30px);
 }
 
 .field-data__month {
-  @include field-data(24px);
+  @include field-data(30px);
 }
 
 .field-data__year {
-  @include field-data(48px);
+  @include field-data(54px);
 }
 
 .field-gender {

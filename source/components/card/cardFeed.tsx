@@ -74,7 +74,7 @@ export const CardFeed = (props: CardFeedProps, wide: boolean) => {
                             eventBus.dispatch(EVENTS.SWIPE_END);
                         }}
                     >
-                        {ImgCarousel(props.userData.imgs, 'img-card__img img-card__img_size_medium')}
+                        {ImgCarousel(props.userData.imgs, 'img-card__img img-card__img_size_medium', true)}
                         <div class='card-bottom-panel'>
                             <div class='card-bottom-panel__name'>
                                 <div class='card-bottom-panel__name__name'>{props.userData.name}</div>

@@ -45,7 +45,7 @@ export const CarouselButton = (props) => {
     );
 };
 
-export const ImgCarousel = (props: string[], sizeClass: string) => {
+export const ImgCarousel = (props: string[], sizeClass: string, feed = false) => {
     if (!props) {
         return <img src='img/stare-dont-blink.gif' class='card-img' />;
     }
@@ -72,9 +72,10 @@ export const ImgCarousel = (props: string[], sizeClass: string) => {
             </div>
         );
     }
+    const feedCarouselClass = feed ? 'card__carousel-nav' : 'card-expended__carousel-nav';
     return (
         <div class={sizeClass}>
-            <div class='carousel-nav__arrows'>
+            <div class={feedCarouselClass + ' carousel-nav__arrows'}>
                 {conditionalRendering(CarouselButton(LButtonProps), !firstCard)}
                 {conditionalRendering(CarouselButton(RButtonProps), !lastCard)}
             </div>
