@@ -10,13 +10,12 @@
 .feed__card {
   flex: 1 1 auto;
   margin: $margin-small $margin-small 0;
-  max-height: 720px;
+  max-height: calc(100vh - 66.4px - 12px);
   display: flex;
   background: radial-gradient(112.16% 418.59% at 0% 0%, rgba(226, 246, 255, 0.4) 0%, rgba(0, 44, 65, 0) 100%);
   backdrop-filter: blur(20px);
   flex-direction: column;
   border-radius: 12px;
-  overflow: hidden;
 }
 
 .feed__profile {
