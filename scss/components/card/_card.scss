@@ -15,7 +15,6 @@ $card-expanded-img-default-height: 100%;
 
 @media (max-height: 960px) {
   .card {
-    max-height: 720px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -30,7 +29,6 @@ $card-expanded-img-default-height: 100%;
 }
 @media (min-height: 960px) {
   .card {
-    max-height: 720px;
     position: relative;
     display: flex;
     flex-direction: column;
